@@ -35,4 +35,13 @@ create table player_game_info
     player           bigint(20) references player(id)
 );
 
-
+drop table if exists history;
+create table history
+(
+    id          bigint(20) auto_increment primary key,
+    player      bigint(20) references player(id),
+    action_name varchar(30),
+    strike      int,
+    ball        int,
+    `out`       int
+);

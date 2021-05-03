@@ -2,20 +2,19 @@ package codesquad.baseball.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class TeamGameScore {
+public class Match {
     @Id
     private Long id;
 
-    private int inning;
+    private Long myTeamId;
 
-    private int score;
+    private Long counterTeamId;
 
+    private boolean isHome;
 }
