@@ -81,8 +81,9 @@
 			children = (
 				8872EBA0263FD2F900EDB038 /* AppDelegate.swift */,
 				8872EBA2263FD2F900EDB038 /* SceneDelegate.swift */,
-				8872EBA4263FD2F900EDB038 /* ViewController.swift */,
-				8872EBA6263FD2F900EDB038 /* Main.storyboard */,
+				8872EBD8263FDBA400EDB038 /* Data Layer */,
+				8872EBD9263FDBB000EDB038 /* Domain Layer */,
+				8872EBDA263FDBC300EDB038 /* Presentation Layer */,
 				8872EBA9263FD2FC00EDB038 /* Assets.xcassets */,
 				8872EBAB263FD2FC00EDB038 /* LaunchScreen.storyboard */,
 				8872EBAE263FD2FC00EDB038 /* Info.plist */,
@@ -97,6 +98,45 @@
 				8872EBB9263FD2FD00EDB038 /* Info.plist */,
 			);
 			path = ProBaseballTests;
+			sourceTree = "<group>";
+		};
+		8872EBD8263FDBA400EDB038 /* Data Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Layer";
+			sourceTree = "<group>";
+		};
+		8872EBD9263FDBB000EDB038 /* Domain Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Domain Layer";
+			sourceTree = "<group>";
+		};
+		8872EBDA263FDBC300EDB038 /* Presentation Layer */ = {
+			isa = PBXGroup;
+			children = (
+				8872EBDE263FE44E00EDB038 /* View */,
+				8872EBDD263FE43100EDB038 /* Controller */,
+			);
+			path = "Presentation Layer";
+			sourceTree = "<group>";
+		};
+		8872EBDD263FE43100EDB038 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8872EBA4263FD2F900EDB038 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8872EBDE263FE44E00EDB038 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8872EBA6263FD2F900EDB038 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
