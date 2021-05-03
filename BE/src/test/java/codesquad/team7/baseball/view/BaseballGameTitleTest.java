@@ -15,19 +15,32 @@ class BaseballGameTitleTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String GAME_ID = "gameId";
-    private final String HOME = "home";
-    private final String AWAY = "away";
+    private final String GAME_ID = "\"gameId\"";
+    private final String HOME = "\"home\"";
+    private final String AWAY = "\"away\"";
 
     @Test
     @DisplayName("BaseballGameTitle을 json 형태로 구성한다.")
     void testJson() throws JsonProcessingException {
-        assertThat(objectMapper.writeValueAsString(BaseballGameTitle.of(1L, "Marvel", "Captain")))
-                .contains(
-                        GAME_ID, "1",
-                        HOME, "Marvel",
-                        AWAY, "Captain"
-                );
+        BaseballGameTitle gameTitle = BaseballGameTitle.of(1L, "Marvel", "Captain");
+        assertThat(objectMapper.writeValueAsString(gameTitle))
+                .isEqualTo(serialized(gameTitle));
+    }
+
+    private String serialized(BaseballGameTitle gameTitle) {
+        return "{" +
+                GAME_ID +
+                ":" +
+                gameTitle.getGameId() +
+                "," +
+                HOME +
+                ":\"" +
+                gameTitle.getHome() +
+                "\"," +
+                AWAY +
+                ":\"" +
+                gameTitle.getAway() +
+                "\"}";
     }
 
 }
