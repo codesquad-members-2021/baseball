@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<String> postLogin(@RequestBody LoginRequest loginRequest) {
         logger.debug("{} {}", loginRequest.getId(), loginRequest.getPw());
         if (loginRequest.getId().equals("pyro") && loginRequest.getPw().equals("robin")) {

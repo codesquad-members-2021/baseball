@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSnackbar } from "notistack";
 import { loginService } from "../service";
 
 const useStyles = makeStyles((theme) => ({
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Login = () => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -22,8 +24,10 @@ export const Login = () => {
     // alert(`id: ${id}, pw: ${pw}`);
     loginService
       .postLogin({ id, pw })
-      .then((response) => alert(response.data))
-      .catch(() => alert("로그인에 실패했습니다."));
+      .then((response) =>
+        enqueueSnackbar(response.data, { variant: "success" })
+      )
+      .catch(() => enqueueSnackbar("로그인 실패", { variant: "error" }));
   };
 
   return (
