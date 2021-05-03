@@ -3,7 +3,10 @@
 
 ## team 04
 
-### member
-- hiro
-- hong
-- jeje
+### Member
+- Hiro
+- Hong
+- Jeje
+
+### Git Branching Strategy
+<img src="images/Git_Branching_Strategy.jpg" width="500"> 
