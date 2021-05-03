@@ -1,5 +1,5 @@
-import "./App.css";
 import { createGlobalStyle } from "styled-components";
+import Home from "Components/Home";
 
 export const GlobalStyle = createGlobalStyle`
   *{
@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
   body{
     font-family: 'Noto Sans KR';
     box-sizing:border-box;
-    
   }
   
   ol, ul {
@@ -19,8 +18,9 @@ export const GlobalStyle = createGlobalStyle`
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <GlobalStyle />
+      <Home />
     </div>
   );
 }
