@@ -1,6 +1,13 @@
 # baseball
 그룹프로젝트 #3
 
+
+- iOS
+  - ZG
+  - BMO
+- Backend
+  - K
+
 ## 브랜치 전략
 
 ```
