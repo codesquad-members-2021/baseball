@@ -56,14 +56,14 @@ const StyleList = styled.div`
     width: 0.875rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #777;
+    background-color: #999;
     border-radius: 0.375rem;
     &:hover {
-      background-color: #333;
+      background-color: #555;
     }
   }
   &::-webkit-scrollbar-track {
-    background-color: #eee;
+    background-color: rgba(0, 0, 0, 0);
   }
 `;
 
