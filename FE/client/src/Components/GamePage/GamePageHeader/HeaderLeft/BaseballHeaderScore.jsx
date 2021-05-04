@@ -1,6 +1,5 @@
 import React from 'react';
-import reactDom from 'react-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const BaseballHeaderScore = () => {
   return (
@@ -23,14 +22,23 @@ const TeamDiv = styled.div`
 `;
 
 const Team = styled.span`
+  ${({ player }) => player && css`
+    &::after{
+      content:"Player";
+      display: block;
+      color: red;
+      font-size:1.5rem;
+      text-align: center;
+    }
+  `}
 
 `;
 const Score = styled.span`
-`;
+  `;
 
 const VsSpan = styled.span`
-  color: #48474C;
-  font-weight:700;
+  color: #7D7D7D;
+  font-weight: 700;
 `;
 
 
