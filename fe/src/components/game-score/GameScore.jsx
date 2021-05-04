@@ -16,12 +16,13 @@ const GameScore = (props) => {
 };
 
 const StyleGameScore = styled.div`
-  width: 80%;
+  width: 70rem;
+  min-width: 63rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0;
+  padding: 2rem 0 0.8rem 0;
   margin: 3rem auto;
   color: #fff;
   border: 3px solid #fff;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoBaseballOutline } from 'react-icons/io5';
 
 const GameScoreList = ({ team, dataType, data, isPlayer }) => {
   const isRound = dataType === 'round';
@@ -21,7 +22,10 @@ const GameScoreList = ({ team, dataType, data, isPlayer }) => {
   return (
     <StyleScoreList isRound={isRound}>
       <div className='team-wrapper'>
-        <div className='team'>{team ? team : ''}</div>
+        <div className='team'>
+          {isPlayer && <IoBaseballOutline className='baseball' />}
+          <div>{team ? team : ''}</div>
+        </div>
         {isPlayer && <div className='turn'>player</div>}
       </div>
       <div className='score-list'>{scoreDivList}</div>
@@ -33,33 +37,40 @@ const StyleScoreList = styled.div`
   display: flex;
 
   .team-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin-right: 2rem;
     .team {
+      position: relative;
       width: 5rem;
       font-size: 1.5rem;
-      font-weight: 600;
+      font-weight: 700;
+      .baseball {
+        position: absolute;
+        top: 0.2rem;
+        left: -1.7rem;
+        margin-right: 0.2rem;
+      }
+      span {
+        text-align: center;
+      }
     }
     .turn {
       color: #ff4545;
       font-weight: 600;
+      text-align: center;
     }
   }
+
   .score-list {
     border-bottom: ${({ isRound }) => isRound && '3px solid #fff'};
-    /* margin-bottom: ${({ isRound }) => isRound && '1rem'}; */
+    margin-bottom: ${({ isRound }) => (isRound ? '1rem' : '0.3rem')};
   }
   .score {
     display: flex;
-    align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     font-weight: 700;
     width: 3rem;
-    height: 3rem;
+    height: ${({ isRound }) => (isRound ? '2.7rem' : '3rem')};
     margin-right: 1rem;
   }
   .last-score {
