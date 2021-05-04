@@ -19,14 +19,6 @@ public class Team {
         return id.equals(otherTeam.id);
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
     @Override
     public String toString() {
         return "Team{" +
