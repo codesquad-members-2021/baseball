@@ -1,6 +1,7 @@
 package com.baseball.controller;
 
 import com.baseball.dto.LoginRequest;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = {"Auth API"}, description = "로그인과 사용자 인증과 관련된 API")
 @RestController
 public class AuthController {
     Logger logger = LoggerFactory.getLogger(AuthController.class);
