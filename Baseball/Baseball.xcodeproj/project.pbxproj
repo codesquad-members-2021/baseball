@@ -14,6 +14,7 @@
 		A025C3362640E8E800C9B8C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A025C3342640E8E800C9B8C7 /* LaunchScreen.storyboard */; };
 		A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C3412640ECF100C9B8C7 /* GameListViewController.swift */; };
 		A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C3432640ED1C00C9B8C7 /* GameListCell.swift */; };
+		A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C34B2641164000C9B8C7 /* GroundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A025C3372640E8E800C9B8C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A025C3412640ECF100C9B8C7 /* GameListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewController.swift; sourceTree = "<group>"; };
 		A025C3432640ED1C00C9B8C7 /* GameListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCell.swift; sourceTree = "<group>"; };
+		A025C34B2641164000C9B8C7 /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		A025C33D2640EC4D00C9B8C7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A025C3472641160400C9B8C7 /* GamePlayView */,
 				A025C33E2640EC6200C9B8C7 /* GameListView */,
 			);
 			path = Presentation;
@@ -116,6 +119,30 @@
 				A025C3342640E8E800C9B8C7 /* LaunchScreen.storyboard */,
 			);
 			path = SupportingFile;
+			sourceTree = "<group>";
+		};
+		A025C3472641160400C9B8C7 /* GamePlayView */ = {
+			isa = PBXGroup;
+			children = (
+				A025C3482641160F00C9B8C7 /* ViewModel */,
+				A025C3492641161500C9B8C7 /* View */,
+			);
+			path = GamePlayView;
+			sourceTree = "<group>";
+		};
+		A025C3482641160F00C9B8C7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A025C3492641161500C9B8C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A025C34B2641164000C9B8C7 /* GroundView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */,
+				A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */,
 				A025C32A2640E8E700C9B8C7 /* AppDelegate.swift in Sources */,
 				A025C32C2640E8E700C9B8C7 /* SceneDelegate.swift in Sources */,
 				A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */,
