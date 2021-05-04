@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useReducer } from 'react';
+import { GlobalContext } from './util/context.js';
+import globalReducer from './util/reducer/globalReducer.js';
+
+import MainPage from './pages/MainPage/MainPage.js';
+import GamePage from './pages/GamePage/GamePage.js';
+
+const initialState = {
+  gameId: null,
+  playTeam: null,
+  home: null
+}
 
 function App() {
+  const [state, dispatch] = useReducer(globalReducer, initialState);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalContext.Provider value={{ dispatch }}>
+        {state.gameId ? <GamePage/> : <MainPage/>}
+      </GlobalContext.Provider>
     </div>
   );
 }

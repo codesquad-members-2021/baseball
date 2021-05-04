@@ -3,9 +3,11 @@ import { GlobalAction } from '../action.js';
 function globalReducer(state, { type, payload }) {
   switch (type) {
     case GlobalAction.SELECT_TEAM: {
-      // set gameId <- payload
-      // set playTeam <- payload
-      // set home <- payload
+      return {
+        gameId: payload.gameId,
+        playTeam: payload.playTeam,
+        home: payload.home
+      }
     }
   }
 };
