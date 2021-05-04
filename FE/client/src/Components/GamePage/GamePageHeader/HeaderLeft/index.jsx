@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import BaseballHeaderScore from 'Components/GamePage/GamePageHeader/HeaderLeft/BaseballHeaderScore';
+import React from "react";
+import styled from "styled-components";
+import BaseballHeaderScore from "Components/GamePage/GamePageHeader/HeaderLeft/BaseballHeaderScore";
 
 const HeaderLeft = () => {
   return (
@@ -12,12 +12,12 @@ const HeaderLeft = () => {
 };
 
 const HeaderLeftWrapper = styled.div`
-  margin:auto;
+  margin: auto;
 `;
 
 const Title = styled.div`
   font-size: 1.8rem;
-  font-weight:700;
+  font-weight: 700;
   text-align: center;
 `;
 
