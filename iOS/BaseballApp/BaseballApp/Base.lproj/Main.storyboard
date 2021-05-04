@@ -29,7 +29,7 @@
                                 <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="128" id="6g6-nx-YgT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GameTableViewCell" rowHeight="128" id="6g6-nx-YgT" customClass="GameTableViewCell" customModule="BaseballApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6g6-nx-YgT" id="cIk-9u-0ic">
@@ -79,6 +79,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="o9N-pS-lHc" secondAttribute="trailing" constant="10" id="z66-Ef-HsK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="awayTeamName" destination="XBy-H1-32O" id="Ga2-uZ-mVX"/>
+                                            <outlet property="gameNumber" destination="o9N-pS-lHc" id="O2D-Tk-QEi"/>
+                                            <outlet property="homeTeamName" destination="7xl-rW-OXe" id="ZD9-gE-LX1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
