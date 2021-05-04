@@ -1,5 +1,7 @@
+import HomeStyles from '@/Components/Home/HomeStyles';
+
 const Home = () => {
-  return <div>Home</div>;
+  return <HomeStyles>Home</HomeStyles>;
 };
 
 export default Home;
