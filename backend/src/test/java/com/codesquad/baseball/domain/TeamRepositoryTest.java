@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-//@Transactional
+@Transactional
 class TeamRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(TeamRepositoryTest.class);
@@ -46,17 +47,21 @@ class TeamRepositoryTest {
     @DisplayName("팀에 플레이어를 추가할 수 있어야 함")
     void testInsertPlayerIntoTeam() {
         Team team = createTeam(testTeamNames[0]);
-        List<Player> players = new ArrayList<>();
-        for (int i = 0; i < playerNames.length; i++) {
-            Player player = createHitter(playerNames[i], i + 3);
-            players.add(player);
-            team.addPlayer(player);
-        }
-
+        List<Player> players = createPlayers();
+        players.forEach(team::addPlayer);
         teamRepository.save(team);
         team = findTeamById(team.getId());
         assertThat(team.numberOfPlayer()).isEqualTo(players.size());
         logger.debug("team : {}", team);
+    }
+
+    private List<Player> createPlayers() {
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < playerNames.length; i++) {
+            Player player = createHitter(playerNames[i], i + 3);
+            players.add(player);
+        }
+        return players;
     }
 
     private void testCreateTeam(Team team, String teamName) {
