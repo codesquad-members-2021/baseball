@@ -1,10 +1,12 @@
-import styled from "styled-components";
-import background from "./images/background.png";
+import styled from 'styled-components';
+import GameList from './components/game-list/GameList';
+import background from './images/background.png';
 
 function App() {
   return (
     <>
       <StyleBackground src={background}></StyleBackground>
+      <GameList />
     </>
   );
 }
@@ -19,7 +21,7 @@ const StyleBackground = styled.div`
   z-index: -1;
   &:before {
     background-color: rgba(0, 0, 0, 0.8);
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
