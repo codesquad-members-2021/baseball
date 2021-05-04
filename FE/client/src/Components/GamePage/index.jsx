@@ -1,10 +1,9 @@
 import React from 'react';
+import GamePageHeader from "Components/GamePage/GamePageHeader"
 
 const GamePage = () => {
   return (
-    <div>
-      게임페이지
-    </div>
+    <GamePageHeader />
   );
 };
 
