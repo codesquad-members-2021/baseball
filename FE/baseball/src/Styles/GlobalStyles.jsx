@@ -25,8 +25,9 @@ const GlobalStyles = createGlobalStyle`
 		width:1440px;
 		height:1080px;
 		display: flex;
+		flex-direction:column;
 		justify-content: center;
-		// align-items: center;
+		align-items: center;
  }
 `;
 

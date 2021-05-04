@@ -6,11 +6,11 @@ import { GameHeader as S } from "@/Components/Game/GameStyles";
 const GameProgress = () => {
   return (
     <S.GameProgress.GameProgress>
-      <TeamName isCurrentPlayer={true} />
+      <TeamName teamName={"Swing"} isCurrentPlayer={true} />
       <Score score={1} />
       <VS />
       <Score score={5} />
-      <TeamName isCurrentPlayer={false} />
+      <TeamName teamName={"Raccoon"} isCurrentPlayer={false} />
     </S.GameProgress.GameProgress>
   );
 };
