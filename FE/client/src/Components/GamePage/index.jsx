@@ -7,7 +7,7 @@ import styled from "styled-components";
 const GamePage = () => {
   return (
     <GamePageBackground>
-     {/*<TopPopup />*/}
+      {/*<TopPopup />*/}
       <GamePageHeader />
       <MainContainer />
     </GamePageBackground>
