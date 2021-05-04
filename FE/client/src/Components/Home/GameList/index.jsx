@@ -6,6 +6,7 @@ import API from "utils/API";
 import { PageContext } from "Components/Page";
 
 const GameList = () => {
+<<<<<<< HEAD
   const { socket } = useContext(PageContext);
   const [selectedTeamState, setSelectTeamState] = useState([]);
   const [allTeamState, setAllTeamState] = useState([]);
@@ -33,6 +34,11 @@ const GameList = () => {
     setAllTeamState(allTeam);
   }, [data, selectedTeamState]);
 
+=======
+
+
+  const TeamData = Array.from({ length: 3 });
+>>>>>>> 1150e62... Add: Home페이지 css추가
   return (
     <GameBoxList>
       {loading && <>loading...</>}
