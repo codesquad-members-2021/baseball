@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const AttackDefendStatus = () => {
-  return (
-    <div>
-
-    </div>
-  );
+  return <div>1회차 공격</div>;
 };
 
 export default AttackDefendStatus;

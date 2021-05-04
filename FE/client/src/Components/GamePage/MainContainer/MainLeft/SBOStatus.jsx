@@ -57,8 +57,9 @@ const SBOCircle = styled.li`
   border-radius: 70%;
   width: 1rem;
   height: 1rem;
-  background: ${({ color }) => color};
+  /* background: ${({ color }) => color}; */
   list-style: none;
+  border: 0.1rem solid ${({ color }) => color};
 `;
 
 export default SBOStatus;

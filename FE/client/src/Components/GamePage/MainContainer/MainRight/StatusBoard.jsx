@@ -1,12 +1,8 @@
-import React from 'react';
-import StatusBoardItems from 'Components/GamePage/MainContainer/MainRight/StatusBoardItems';
+import React from "react";
+import StatusBoardItems from "Components/GamePage/MainContainer/MainRight/StatusBoardItems";
 
 const StatusBoard = () => {
-  return (
-    <div>
-
-    </div>
-  );
+  return <div>STATUS</div>;
 };
 
 export default StatusBoard;
