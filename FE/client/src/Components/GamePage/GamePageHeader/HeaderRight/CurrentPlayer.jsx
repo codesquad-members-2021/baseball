@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 const CurrentPlayer = (props) => {
   return (
-    <div>
+    <>
       <PlayerType>{props.type}</PlayerType>
       <PlayerNameDes>
         <PlayerName>{props.name}</PlayerName>
         <PlayerDescription>{props.description}</PlayerDescription>
       </PlayerNameDes>
-    </div>
+    </>
   );
 };
 

@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 const BaseballField = () => {
   return (
-    <BaseballFieldBackground>
+    <BaseballFieldWrapper>
       <div>Hi I'm field</div>
-    </BaseballFieldBackground>
+    </BaseballFieldWrapper>
   );
 };
 
-const BaseballFieldBackground = styled.div`
+const BaseballFieldWrapper = styled.div`
   color: white;
   padding: 2rem;
 `;
