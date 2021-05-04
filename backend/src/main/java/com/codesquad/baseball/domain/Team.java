@@ -7,9 +7,6 @@ public class Team {
     private Integer id;
     private String teamName;
 
-    protected Team() {
-    }
-
     public Team(String teamName) {
         this.teamName = teamName;
     }
