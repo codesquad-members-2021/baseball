@@ -25,6 +25,7 @@ const PlayerName = styled.div`
 
 const PlayerDescription = styled.span`
   color: #47abc4;
+  margin-right: 2rem;
 `;
 
 const PlayerNameDes = styled.div`

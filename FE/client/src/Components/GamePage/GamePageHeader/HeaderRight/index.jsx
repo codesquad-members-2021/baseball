@@ -26,7 +26,6 @@ const HeaderRightDiv = styled.div`
   border-left: #e2e2e2 0.1rem solid;
   padding: 0.5rem 1rem;
   justify-content: space-around;
-  width: 20rem;
 `;
 
 export default HeaderRight;

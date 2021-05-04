@@ -35,7 +35,7 @@ const SBOStatus = () => {
 const SBOBoard = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0 0 2rem;
+  padding: 2rem 2rem;
 `;
 
 const CircleListDiv = styled.div`

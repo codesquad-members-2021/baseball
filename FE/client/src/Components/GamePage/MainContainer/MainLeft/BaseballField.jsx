@@ -11,6 +11,7 @@ const BaseballField = () => {
 
 const BaseballFieldBackground = styled.div`
   color: white;
+  padding: 2rem;
 `;
 
 export default BaseballField;
