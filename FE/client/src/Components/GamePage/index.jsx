@@ -7,10 +7,13 @@ import styled from "styled-components";
 const GamePage = () => {
   return (
     <GamePageBackground>
+<<<<<<< HEAD
       <Popup />
+=======
+>>>>>>> d43f9b7... Feat. SBO circles styling
       <GamePageHeader />
       <MainContainer />
-    </GamePageBackground>
+    </GamePageBackground >
   );
 };
 
