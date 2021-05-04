@@ -17,6 +17,14 @@
 		829CFA572640434600D9F635 /* GameSelectViewControllerManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */; };
 		82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49E826404C76008B1EC0 /* InGameViewController.swift */; };
 		82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */; };
+		CEA103C726413962008BA763 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C626413962008BA763 /* Player.swift */; };
+		CEA103CA264139E5008BA763 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C9264139E5008BA763 /* Players.swift */; };
+		CEA103CD26413AF2008BA763 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103CC26413AF2008BA763 /* Team.swift */; };
+		CEA103D026413BE5008BA763 /* Pitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103CF26413BE5008BA763 /* Pitcher.swift */; };
+		CEA103D326413D02008BA763 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103D226413D02008BA763 /* Game.swift */; };
+		CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103D526413D8F008BA763 /* InningInfo.swift */; };
+		CEA103D926413E91008BA763 /* PitchingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103D826413E91008BA763 /* PitchingHistory.swift */; };
+		CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103DB26413F2C008BA763 /* InningScore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +40,14 @@
 		829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectViewControllerManageable.swift; sourceTree = "<group>"; };
 		82DB49E826404C76008B1EC0 /* InGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewController.swift; sourceTree = "<group>"; };
 		82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		CEA103C626413962008BA763 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = SOURCE_ROOT; };
+		CEA103C9264139E5008BA763 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = SOURCE_ROOT; };
+		CEA103CC26413AF2008BA763 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = SOURCE_ROOT; };
+		CEA103CF26413BE5008BA763 /* Pitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitcher.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D226413D02008BA763 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D526413D8F008BA763 /* InningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningInfo.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D826413E91008BA763 /* PitchingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistory.swift; sourceTree = SOURCE_ROOT; };
+		CEA103DB26413F2C008BA763 /* InningScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningScore.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +115,14 @@
 		829CFA52264041C400D9F635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEA103C626413962008BA763 /* Player.swift */,
+				CEA103C9264139E5008BA763 /* Players.swift */,
+				CEA103CC26413AF2008BA763 /* Team.swift */,
+				CEA103CF26413BE5008BA763 /* Pitcher.swift */,
+				CEA103D226413D02008BA763 /* Game.swift */,
+				CEA103D526413D8F008BA763 /* InningInfo.swift */,
+				CEA103D826413E91008BA763 /* PitchingHistory.swift */,
+				CEA103DB26413F2C008BA763 /* InningScore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,12 +205,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA103CA264139E5008BA763 /* Players.swift in Sources */,
 				82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */,
 				829CFA412640379B00D9F635 /* GameSelectViewController.swift in Sources */,
+				CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */,
 				829CFA3D2640379B00D9F635 /* AppDelegate.swift in Sources */,
 				829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */,
+				CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */,
+				CEA103C726413962008BA763 /* Player.swift in Sources */,
 				82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */,
+				CEA103D326413D02008BA763 /* Game.swift in Sources */,
 				829CFA572640434600D9F635 /* GameSelectViewControllerManageable.swift in Sources */,
+				CEA103CD26413AF2008BA763 /* Team.swift in Sources */,
+				CEA103D026413BE5008BA763 /* Pitcher.swift in Sources */,
+				CEA103D926413E91008BA763 /* PitchingHistory.swift in Sources */,
 				829CFA3F2640379B00D9F635 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,17 +366,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				DEVELOPMENT_TEAM = 7W8PDLZ6N2;
 				INFOPLIST_FILE = baseball/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jhPark.baseball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -353,17 +388,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TA9B4FGCP9;
+				DEVELOPMENT_TEAM = 7W8PDLZ6N2;
 				INFOPLIST_FILE = baseball/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jhPark.baseball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
