@@ -8,7 +8,8 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    @IBOutlet var teams: [UIButton]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
