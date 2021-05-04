@@ -8,5 +8,7 @@
 import UIKit
 
 class GroundView: UIView {
-
+    override func awakeFromNib() {
+        self.backgroundColor = .gray
+    }
 }

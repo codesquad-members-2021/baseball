@@ -22,6 +22,7 @@
 		E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320526412614006E294A /* CurrentPlayerView.swift */; };
 		E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */; };
 		E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */; };
+		E4BE32102641356C006E294A /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320F2641356C006E294A /* PlayViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		E4BE320526412614006E294A /* CurrentPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlayerView.swift; sourceTree = "<group>"; };
 		E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		E4BE320F2641356C006E294A /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				D03CF0442640E73F00C00729 /* Supporting Files */,
 				D03CF0152640E61900C00729 /* GamesViewController.swift */,
 				D03CF0172640E61900C00729 /* Main.storyboard */,
+				E4BE320F2641356C006E294A /* PlayViewController.swift */,
 				E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */,
 				E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */,
 				E4BE31FF26412390006E294A /* GroundView.swift */,
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4BE32102641356C006E294A /* PlayViewController.swift in Sources */,
 				D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */,
 				E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */,
 				E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */,

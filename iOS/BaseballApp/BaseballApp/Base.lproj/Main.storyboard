@@ -125,7 +125,7 @@
         <!--Play-->
         <scene sceneID="Mw2-jP-2LV">
             <objects>
-                <viewController id="xr9-Vc-vSI" sceneMemberID="viewController">
+                <viewController id="xr9-Vc-vSI" customClass="PlayViewController" customModule="BaseballApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0wf-Uc-gfG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -201,7 +201,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="MAh-l3-Y8B" secondAttribute="trailing" id="6lG-Xy-eeE"/>
+                                    <constraint firstItem="MAh-l3-Y8B" firstAttribute="width" secondItem="FLe-XI-hek" secondAttribute="width" id="BM7-CJ-2Z3"/>
                                     <constraint firstItem="MAh-l3-Y8B" firstAttribute="leading" secondItem="lwW-Zh-prc" secondAttribute="leading" id="EBR-xC-2aK"/>
+                                    <constraint firstItem="MAh-l3-Y8B" firstAttribute="height" secondItem="BsV-bF-Y0V" secondAttribute="height" id="Xyq-r0-DRb"/>
                                     <constraint firstItem="MAh-l3-Y8B" firstAttribute="top" secondItem="lwW-Zh-prc" secondAttribute="top" id="tym-zg-uEg"/>
                                     <constraint firstAttribute="bottom" secondItem="MAh-l3-Y8B" secondAttribute="bottom" id="wHa-XP-Rzi"/>
                                 </constraints>
@@ -219,6 +221,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Play" image="figure.walk" catalog="system" id="E7L-2f-ZEB"/>
+                    <connections>
+                        <outlet property="baseScrollView" destination="lwW-Zh-prc" id="Qxr-Dl-mY9"/>
+                        <outlet property="playInformationStackView" destination="Kju-Os-toV" id="nfE-Bi-PwT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIy-cE-Mkn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
