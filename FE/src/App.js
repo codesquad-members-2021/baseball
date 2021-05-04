@@ -1,5 +1,4 @@
-import { useContext, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GlobalStyle from './GlobalStyle';
 import Home from './components/Home/Home';
 import Intro from './components/Intro/Intro';
@@ -12,17 +11,17 @@ function App() {
       <Router>
         <GlobalStyle />
         <Switch>
-          <Route path="/intro">
+          <Route path='/intro'>
             <Intro />
           </Route>
-          <Route path="/ingame">
+          <Route path='/ingame'>
             <InGame />
           </Route>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Home />
           </Route>
-          <Route path="/image"></Route>
-          <Route path="*">
+          <Route path='/image'></Route>
+          <Route path='*'>
             <NoMatch />
           </Route>
         </Switch>
