@@ -25,11 +25,11 @@ class GameCell: UITableViewCell {
     
     func fill(state: Game) {
         self.gameIdLabel.text = "GAME \(state.id)"
-        self.awayTeamButton.setTitle(state.away, for: .normal)
-        self.homeTeamButton.setTitle(state.home, for: .normal)
+        self.awayTeamButton.setTitle(state.away.team, for: .normal)
+        self.homeTeamButton.setTitle(state.home.team, for: .normal)
         
-        self.awayTeam = state.away
-        self.homeTeam = state.home
+        self.awayTeam = state.away.team
+        self.homeTeam = state.home.team
     }
     
 }
