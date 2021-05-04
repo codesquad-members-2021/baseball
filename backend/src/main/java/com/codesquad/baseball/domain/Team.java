@@ -11,12 +11,16 @@ public class Team {
         this.teamName = teamName;
     }
 
-    public boolean isSameName(Team otherTeam) {
-        return teamName.equals(otherTeam.teamName);
+    public boolean isSameName(String teamName) {
+        return this.teamName.equals(teamName);
     }
 
     public boolean isSameId(Team otherTeam) {
         return id.equals(otherTeam.id);
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override
