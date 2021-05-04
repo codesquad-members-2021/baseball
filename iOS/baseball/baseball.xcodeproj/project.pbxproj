@@ -10,7 +10,7 @@
 		2242A67F2640DDF9000C555E /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2242A67E2640DDF9000C555E /* OctoKit */; };
 		2242A6842640DE51000C555E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6832640DE51000C555E /* MainViewController.swift */; };
 		2242A6912640DFEA000C555E /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6902640DFEA000C555E /* URL.swift */; };
-		22941A4B2641104D00598814 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22941A4A2641104D00598814 /* OAuthKeys.plist */; };
+		49CF0AC426412CC500BFDC11 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CF0AC326412CC500BFDC11 /* OAuthKeys.plist */; };
 		B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */; };
 		B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */; };
 		B32499D7263FF3B300D8DEA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D6263FF3B300D8DEA8 /* ViewController.swift */; };
@@ -42,7 +42,7 @@
 /* Begin PBXFileReference section */
 		2242A6832640DE51000C555E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2242A6902640DFEA000C555E /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		22941A4A2641104D00598814 /* OAuthKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthKeys.plist; sourceTree = "<group>"; };
+		49CF0AC326412CC500BFDC11 /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OAuthKeys.plist; path = ../../../../../Downloads/OAuthKeys.plist; sourceTree = "<group>"; };
 		B32499CF263FF3B300D8DEA8 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
 				B32499DB263FF3B400D8DEA8 /* Assets.xcassets */,
 				B32499DD263FF3B400D8DEA8 /* LaunchScreen.storyboard */,
+				49CF0AC326412CC500BFDC11 /* OAuthKeys.plist */,
 				B32499E0263FF3B400D8DEA8 /* Info.plist */,
-				22941A4A2641104D00598814 /* OAuthKeys.plist */,
 			);
 			path = baseball;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			files = (
 				B32499DF263FF3B400D8DEA8 /* LaunchScreen.storyboard in Resources */,
 				B32499DC263FF3B400D8DEA8 /* Assets.xcassets in Resources */,
-				22941A4B2641104D00598814 /* OAuthKeys.plist in Resources */,
+				49CF0AC426412CC500BFDC11 /* OAuthKeys.plist in Resources */,
 				B32499DA263FF3B300D8DEA8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,7 +406,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -461,7 +461,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
