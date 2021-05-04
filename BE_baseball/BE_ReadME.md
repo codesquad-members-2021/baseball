@@ -27,3 +27,15 @@
   - NginX와 tomcat을 연동하고 80포트만 외부에 개방
   - 8080 포트는 외부에 개방하지마라
     - 그러니까 쉽게말해서 프론트사이드 
+
+
+## 커밋 메시지 규칙
+> 원문 : http://karma-runner.github.io/5.0/dev/git-commit-msg.html
+
+- feat (new feature for the user, not a new feature for build script)
+- fix (bug fix for the user, not a fix to a build script)
+- docs (changes to the documentation)
+- style (formatting, missing semi colons, etc; no production code change)
+- refactor (refactoring production code, eg. renaming a variable)
+- test (adding missing tests, refactoring tests; no production code change)
+- chore (updating grunt tasks etc; no production code change)
