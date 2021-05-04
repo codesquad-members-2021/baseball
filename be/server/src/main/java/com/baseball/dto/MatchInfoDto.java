@@ -1,18 +1,20 @@
 package com.baseball.dto;
 
+import java.util.List;
+
 public class MatchInfoDto {
 
     private final ScoreDto scores;
     private final Integer strike;
     private final Integer ball;
     private final Integer outCount;
-    private final Boolean[] bases;
+    private final List<Boolean> bases;
     private final String inningInfo;
     private final PitcherDto pitcher;
     private final BatterDto batter;
-    private final Boolean[] pitcherInfo;
+    private final List<Boolean> pitcherInfo;
 
-    public MatchInfoDto(ScoreDto scores, Integer strike, Integer ball, Integer outCount, Boolean[] bases, String inningInfo, PitcherDto pitcher, BatterDto batter, Boolean[] pitcherInfo) {
+    public MatchInfoDto(ScoreDto scores, Integer strike, Integer ball, Integer outCount, List<Boolean> bases, String inningInfo, PitcherDto pitcher, BatterDto batter, List<Boolean> pitcherInfo) {
         this.scores = scores;
         this.strike = strike;
         this.ball = ball;
@@ -40,7 +42,7 @@ public class MatchInfoDto {
         return outCount;
     }
 
-    public Boolean[] getBases() {
+    public List<Boolean> getBases() {
         return bases;
     }
 
@@ -56,7 +58,7 @@ public class MatchInfoDto {
         return batter;
     }
 
-    public Boolean[] getPitcherInfo() {
+    public List<Boolean> getPitcherInfo() {
         return pitcherInfo;
     }
 }

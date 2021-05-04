@@ -22,13 +22,13 @@ public class BaseballService {
         ScoreDto score = new ScoreDto(3, 2);
         PitcherDto pitcher = new PitcherDto("김광현", 6, 1, 0, 2);
         BatterDto batter = new BatterDto("류현진", 2, 1, 1, 0.500F);
-        MatchInfoDto matchInfo = new MatchInfoDto(score, 2, 3, 1, new Boolean[]{true, true, false}, "3회 말 수비", pitcher, batter, new Boolean[]{true, false, false, true, false});
+        MatchInfoDto matchInfo = new MatchInfoDto(score, 2, 3, 1, Arrays.asList(true, true, false), "3회 말 수비", pitcher, batter, Arrays.asList(true, false, false, true, false));
         return matchInfo;
     }
 
     public GameInfoDto getGameInfo(String id) {
         ScoreDto score = new ScoreDto(3, 2);
-        InningsDto innings = new InningsDto(new Integer[]{1, 1, 1}, new Integer[]{1, 1});
+        InningsDto innings = new InningsDto(Arrays.asList(1, 1, 1), Arrays.asList(1, 1));
 
         PlayersDto awayPlayers = new PlayersDto(
                 Arrays.asList(new PitcherDto("김광현", 6, 1, 0, 2)),

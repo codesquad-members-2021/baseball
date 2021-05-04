@@ -1,20 +1,22 @@
 package com.baseball.dto;
 
+import java.util.List;
+
 public class InningsDto {
 
-    private final Integer[] away;
-    private final Integer[] home;
+    private final List<Integer> away;
+    private final List<Integer> home;
 
-    public InningsDto(Integer[] away, Integer[] home) {
+    public InningsDto(List<Integer> away, List<Integer> home) {
         this.away = away;
         this.home = home;
     }
 
-    public Integer[] getAway() {
+    public List<Integer> getAway() {
         return away;
     }
 
-    public Integer[] getHome() {
+    public List<Integer> getHome() {
         return home;
     }
 }
