@@ -18,5 +18,4 @@ const MatchInfoStyle = styled.div`
   flex-direction: column;
   align-items: center;
   width: 500px;
-  height: 600px;
 `;

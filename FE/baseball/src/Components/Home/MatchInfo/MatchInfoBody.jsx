@@ -21,7 +21,7 @@ export default MatchInfoBody;
 
 const MatchInfoBodyStyle = styled.div`
   width: 100%;
-  height: 500px;
+  height: 340px;
   padding: 0px 20px 0px 10px;
   overflow-y: scroll;
 
@@ -53,6 +53,5 @@ const MatchInfoBodyStyle = styled.div`
 
 const ScrollMask = styled.div`
   width: 100%;
-  height: 502px;
   border: 1px solid #ffa7c4;
 `;

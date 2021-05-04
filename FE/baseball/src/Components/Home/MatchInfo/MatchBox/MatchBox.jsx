@@ -1,7 +1,14 @@
 import styled from 'styled-components';
+import GameNumber from './GameNumber';
+import Match from './Match';
 
 const MatchBox = () => {
-  return <MatchBoxStyle>MatchBox</MatchBoxStyle>;
+  return (
+    <MatchBoxStyle>
+      <GameNumber />
+      <Match />
+    </MatchBoxStyle>
+  );
 };
 
 export default MatchBox;
