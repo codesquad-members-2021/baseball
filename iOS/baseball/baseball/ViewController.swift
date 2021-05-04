@@ -36,13 +36,45 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
             }
 
             self.config.handleOpenURL(url: successURL) { config in
+                guard let url = URL(string: "asdf"),
+                      let tokenData = config.accessToken?.data(using: .utf8) else { return }
+                self.postToken(url: url, tokenData: tokenData) { result in
+                    switch result {
+                    case .success(let userDTO):
+                        userDTO
+                    case .failure(let error):
+                        error
+                    }
+                }
                 //MARK: - server로 token 전송
             }
         })
-        
         webAuthSession?.presentationContextProvider = self
-        webAuthSession?.start()
+        
     }
+    
+    func postToken(url: URL, tokenData: Data, complete: @escaping (Result<UserDTO, Error>) -> Void) {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = tokenData
+
+        URLSession.init(configuration: .default).dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data else { return }
+            if let error = error {
+                complete(.failure(error))
+                return
+            }
+            do {
+                let decodingData = try JSONDecoder().decode(UserDTO.self, from: data)
+                complete(.success(decodingData))
+            } catch {
+                complete(.failure(error))
+                print(error.localizedDescription)
+            }
+            
+        }.resume()
+    }
+    
 
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return self.view.window ?? ASPresentationAnchor()
@@ -56,7 +88,7 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
     }
     
     @IBAction func touchGithubLogin(_ sender: UIButton) {
-        //MARK: - 눌렀을 때 OAuth 되도록
+        webAuthSession?.start()
     }
 }
 

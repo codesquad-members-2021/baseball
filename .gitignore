@@ -43,3 +43,5 @@ iOS/baseball/baseball/OAuthKeys.plist
 .DS_Store
 
 
+
+*.xcuserstate
