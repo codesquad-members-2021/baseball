@@ -10,7 +10,7 @@ const Home = () => {
       <div>
         this is home.
         <button>
-          <Link to="/intro">게임 인트로 보기</Link>
+          <Link to="/intro">팀 선택하기</Link>
         </button>
       </div>
       <button onClick={handleLoginClick}>로그인</button>

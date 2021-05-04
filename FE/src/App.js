@@ -21,6 +21,7 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/image"></Route>
           <Route path="*">
             <NoMatch />
           </Route>
@@ -34,16 +35,11 @@ export default App;
 
 const GlobalStyle = createGlobalStyle`
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url("https://content.api.news/v3/images/bin/85e6759097486d20c75d0f195b0e0913");
+    background-image: url("image/mlbground_edit.jpg");
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: 20rem 5rem;
     min-width: 1280px;
-    width: 1280px;
-    height: 720px;
-    margin: 5rem;
+    min-height: 720px;
   }
 
 `;
