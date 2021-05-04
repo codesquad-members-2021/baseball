@@ -1,20 +1,15 @@
-import './style/reset.css';
-import { createGlobalStyle } from 'styled-components';
+import './common/style/reset.css';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from './common/style/GlobalStyle';
+import theme from './common/style/theme';
 import TeamSelect from './components/teamSelect/TeamSelect';
-
-const GlobalStyle = createGlobalStyle`
-    body {
-        width: 1440px;
-        margin: 0 auto;
-    }
-`;
 
 const App = () => {
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <GlobalStyle />
             <TeamSelect />
-        </>
+        </ThemeProvider>
     );
 };
 
