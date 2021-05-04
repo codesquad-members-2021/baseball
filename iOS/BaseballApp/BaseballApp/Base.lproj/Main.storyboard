@@ -25,9 +25,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-Ne-zcX">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="J4u-Ne-zcX">
                                 <rect key="frame" x="0.0" y="104" width="414" height="758"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GameTableViewCell" rowHeight="128" id="6g6-nx-YgT" customClass="GameTableViewCell" customModule="BaseballApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="128"/>
@@ -36,23 +36,33 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFl-wy-tt2">
+                                                    <rect key="frame" x="10" y="10" width="394" height="108"/>
+                                                    <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1ga-ZD-daC">
-                                                    <rect key="frame" x="30" y="61" width="354" height="57"/>
+                                                    <rect key="frame" x="30" y="61" width="354" height="46"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBy-H1-32O">
-                                                            <rect key="frame" x="0.0" y="0.0" width="111.5" height="57"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="111.5" height="46"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sX3-Pl-yx6">
-                                                            <rect key="frame" x="121.5" y="0.0" width="111" height="57"/>
+                                                            <rect key="frame" x="121.5" y="0.0" width="111" height="46"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xl-rW-OXe">
-                                                            <rect key="frame" x="242.5" y="0.0" width="111.5" height="57"/>
+                                                            <rect key="frame" x="242.5" y="0.0" width="111.5" height="46"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -71,11 +81,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="o9N-pS-lHc" firstAttribute="leading" secondItem="cIk-9u-0ic" secondAttribute="leadingMargin" constant="10" id="EUg-Wu-2sW"/>
-                                                <constraint firstAttribute="bottom" secondItem="1ga-ZD-daC" secondAttribute="bottom" constant="10" id="HYq-c9-tbF"/>
+                                                <constraint firstAttribute="bottom" secondItem="YFl-wy-tt2" secondAttribute="bottom" constant="10" id="GfD-0i-Piv"/>
+                                                <constraint firstItem="1ga-ZD-daC" firstAttribute="leading" secondItem="cIk-9u-0ic" secondAttribute="leadingMargin" constant="10" id="I1y-Pc-6ob"/>
                                                 <constraint firstItem="o9N-pS-lHc" firstAttribute="top" secondItem="cIk-9u-0ic" secondAttribute="topMargin" constant="10" id="MnK-e2-wb7"/>
-                                                <constraint firstItem="1ga-ZD-daC" firstAttribute="top" secondItem="o9N-pS-lHc" secondAttribute="bottom" constant="20" id="Pu1-Bc-Iyv"/>
-                                                <constraint firstAttribute="trailing" secondItem="1ga-ZD-daC" secondAttribute="trailing" constant="30" id="TPa-aU-ubZ"/>
-                                                <constraint firstItem="1ga-ZD-daC" firstAttribute="leading" secondItem="cIk-9u-0ic" secondAttribute="leading" constant="30" id="qDf-tQ-wpF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1ga-ZD-daC" secondAttribute="trailing" constant="10" id="b1e-Ud-beD"/>
+                                                <constraint firstItem="YFl-wy-tt2" firstAttribute="leading" secondItem="cIk-9u-0ic" secondAttribute="leading" constant="10" id="c6k-dp-mdR"/>
+                                                <constraint firstAttribute="trailing" secondItem="YFl-wy-tt2" secondAttribute="trailing" constant="10" id="kdW-gT-6HR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1ga-ZD-daC" secondAttribute="bottom" constant="10" id="mcW-al-lZ3"/>
+                                                <constraint firstItem="1ga-ZD-daC" firstAttribute="top" secondItem="o9N-pS-lHc" secondAttribute="bottom" constant="20" id="uQk-BN-y7F"/>
+                                                <constraint firstItem="YFl-wy-tt2" firstAttribute="top" secondItem="cIk-9u-0ic" secondAttribute="top" constant="10" id="v2P-Cz-bjd"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="o9N-pS-lHc" secondAttribute="trailing" constant="10" id="z66-Ef-HsK"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -112,6 +126,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
