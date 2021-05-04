@@ -2,13 +2,25 @@ package com.codesquad.baseball.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Team {
     @Id
     private Integer id;
     private String teamName;
+    private Set<Player> players = new HashSet<>();
 
     public Team(String teamName) {
         this.teamName = teamName;
+    }
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public int numberOfPlayer() {
+        return players.size();
     }
 
     public boolean isSameName(String teamName) {
@@ -28,6 +40,7 @@ public class Team {
         return "Team{" +
                 "id=" + id +
                 ", teamName='" + teamName + '\'' +
+                ", players=" + players +
                 '}';
     }
 }

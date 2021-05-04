@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -21,6 +24,12 @@ class TeamRepositoryTest {
             "냥냥 라이온즈",
             "짹짹 이글스",
     };
+    private static final String[] playerNames = {
+            "댕현진",
+            "댕신수",
+            "댕찬호",
+    };
+
 
     @Autowired
     private TeamRepository teamRepository;
@@ -33,6 +42,23 @@ class TeamRepositoryTest {
             Team foundTeam = findTeamById(team.getId());
             testCreateTeam(foundTeam, teamName);
         }
+    }
+
+    @Test
+    @DisplayName("팀에 플레이어를 추가할 수 있어야 함")
+    void testInsertPlayerIntoTeam() {
+        Team team = createTeam(testTeamNames[0]);
+        List<Player> players = new ArrayList<>();
+        for (int i = 0; i < playerNames.length; i++) {
+            Player player = createHitter(playerNames[i], i + 3);
+            players.add(player);
+            team.addPlayer(player);
+        }
+
+        teamRepository.save(team);
+        team = findTeamById(team.getId());
+        assertThat(team.numberOfPlayer()).isEqualTo(players.size());
+        logger.debug("team : {}", team);
     }
 
     private void testCreateTeam(Team team, String teamName) {
@@ -49,4 +75,8 @@ class TeamRepositoryTest {
         return teamRepository.findById(id).orElseThrow(() -> new TeamNotFoundException(id));
     }
 
+    private Player createHitter(String playerName, int uniformNumber) {
+        Player.Builder builder = new Player.Builder();
+        return builder.playerName(playerName).uniformNumber(uniformNumber).role(PlayerRole.HITTER).build();
+    }
 }
