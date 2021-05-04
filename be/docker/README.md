@@ -24,7 +24,19 @@ docker-compose logs
 docker-compose down
 ```
 
-## 접속
+## API 접속
+
+뒤에 api 를 붙이면 8080 포트의 Spring API 와 연결된다.
+
+`http://localhost/api`
+
+## React 웹 접속
+
+api 를 붙이지 않은 일반 url 은 3000 포트의 React 앱과 연결된다.
+
+`http://localhost/login`
+
+## DB 접속
 
 ```sh
 mysql -h 127.0.0.1 -u root -p
