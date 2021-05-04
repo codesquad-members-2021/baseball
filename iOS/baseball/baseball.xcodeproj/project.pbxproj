@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2242A67F2640DDF9000C555E /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2242A67E2640DDF9000C555E /* OctoKit */; };
+		2242A6842640DE51000C555E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6832640DE51000C555E /* MainViewController.swift */; };
+		2242A6912640DFEA000C555E /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6902640DFEA000C555E /* URL.swift */; };
+		2242A69A2640E178000C555E /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2242A6992640E178000C555E /* OAuthKeys.plist */; };
 		B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */; };
 		B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */; };
 		B32499D7263FF3B300D8DEA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D6263FF3B300D8DEA8 /* ViewController.swift */; };
@@ -35,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2242A6832640DE51000C555E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2242A6902640DFEA000C555E /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		2242A6992640E178000C555E /* OAuthKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthKeys.plist; sourceTree = "<group>"; };
 		B32499CF263FF3B300D8DEA8 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2242A67F2640DDF9000C555E /* OctoKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2242A6952640DFF6000C555E /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				2242A6902640DFEA000C555E /* URL.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
 		B32499C6263FF3B300D8DEA8 = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +118,13 @@
 				B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */,
 				B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */,
 				B32499D6263FF3B300D8DEA8 /* ViewController.swift */,
+				2242A6832640DE51000C555E /* MainViewController.swift */,
+				2242A6952640DFF6000C555E /* extension */,
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
 				B32499DB263FF3B400D8DEA8 /* Assets.xcassets */,
 				B32499DD263FF3B400D8DEA8 /* LaunchScreen.storyboard */,
 				B32499E0263FF3B400D8DEA8 /* Info.plist */,
+				2242A6992640E178000C555E /* OAuthKeys.plist */,
 			);
 			path = baseball;
 			sourceTree = "<group>";
@@ -144,6 +163,9 @@
 			dependencies = (
 			);
 			name = baseball;
+			packageProductDependencies = (
+				2242A67E2640DDF9000C555E /* OctoKit */,
+			);
 			productName = baseball;
 			productReference = B32499CF263FF3B300D8DEA8 /* baseball.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +237,9 @@
 				Base,
 			);
 			mainGroup = B32499C6263FF3B300D8DEA8;
+			packageReferences = (
+				2242A67D2640DDF9000C555E /* XCRemoteSwiftPackageReference "octokit" */,
+			);
 			productRefGroup = B32499D0263FF3B300D8DEA8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,6 +258,7 @@
 			files = (
 				B32499DF263FF3B400D8DEA8 /* LaunchScreen.storyboard in Resources */,
 				B32499DC263FF3B400D8DEA8 /* Assets.xcassets in Resources */,
+				2242A69A2640E178000C555E /* OAuthKeys.plist in Resources */,
 				B32499DA263FF3B300D8DEA8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,9 +284,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2242A6912640DFEA000C555E /* URL.swift in Sources */,
 				B32499D7263FF3B300D8DEA8 /* ViewController.swift in Sources */,
 				B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */,
 				B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */,
+				2242A6842640DE51000C555E /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,6 +621,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2242A67D2640DDF9000C555E /* XCRemoteSwiftPackageReference "octokit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nerdishbynature/octokit.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2242A67E2640DDF9000C555E /* OctoKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2242A67D2640DDF9000C555E /* XCRemoteSwiftPackageReference "octokit" */;
+			productName = OctoKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B32499C7263FF3B300D8DEA8 /* Project object */;
 }
