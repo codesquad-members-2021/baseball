@@ -1,4 +1,4 @@
-import { GlobalAction } from '../action.js';
+import { GlobalAction } from 'util/action.js';
 
 function globalReducer(state, { type, payload }) {
   switch (type) {

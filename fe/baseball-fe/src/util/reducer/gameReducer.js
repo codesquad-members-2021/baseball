@@ -1,4 +1,4 @@
-import { GameAction } from '../action.js';
+import { GameAction } from 'util/action.js';
 
 function gameReducer(state, { type, payload }) {
   switch (type) {
