@@ -2,9 +2,9 @@ package com.baseball.dto;
 
 public class MatchDto {
 
-    private String home;
-    private String away;
-    private String id;
+    private final String home;
+    private final String away;
+    private final String id;
 
     public MatchDto(String home, String away, String id) {
         this.home = home;
@@ -16,23 +16,11 @@ public class MatchDto {
         return home;
     }
 
-    public void setHome(String home) {
-        this.home = home;
-    }
-
     public String getAway() {
         return away;
     }
 
-    public void setAway(String away) {
-        this.away = away;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

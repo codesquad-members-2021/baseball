@@ -2,8 +2,8 @@ package com.baseball.dto;
 
 public class InningsDto {
 
-    private Integer[] away;
-    private Integer[] home;
+    private final Integer[] away;
+    private final Integer[] home;
 
     public InningsDto(Integer[] away, Integer[] home) {
         this.away = away;
@@ -14,15 +14,7 @@ public class InningsDto {
         return away;
     }
 
-    public void setAway(Integer[] away) {
-        this.away = away;
-    }
-
     public Integer[] getHome() {
         return home;
-    }
-
-    public void setHome(Integer[] home) {
-        this.home = home;
     }
 }

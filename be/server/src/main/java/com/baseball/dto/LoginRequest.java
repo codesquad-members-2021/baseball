@@ -1,14 +1,12 @@
 package com.baseball.dto;
 
 public class LoginRequest {
-    private String id;
-    private String pw;
 
-    public void setId(String id) {
+    private final String id;
+    private final String pw;
+
+    public LoginRequest(String id, String pw) {
         this.id = id;
-    }
-
-    public void setPw(String pw) {
         this.pw = pw;
     }
 
