@@ -27,11 +27,11 @@ drop table if exists player_game_info;
 create table player_game_info
 (
     id               bigint(20) auto_increment primary key,
-    average          bigint(20),
     batting_order    int,
     plate_appearance int,
     hits             int,
     `out`            int,
+    average          bigint(20),
     player           bigint(20) references player(id)
 );
 
@@ -45,3 +45,14 @@ create table history
     ball        int,
     `out`       int
 );
+
+drop table if exists `match`;
+create table `match`
+(
+    id              bigint(20) auto_increment primary key,
+    my_team_id      bigint(20),
+    counter_team_id bigint(20),
+    is_home         boolean
+);
+
+

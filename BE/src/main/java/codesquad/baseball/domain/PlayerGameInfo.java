@@ -11,10 +11,11 @@ import org.springframework.data.annotation.Id;
 public class PlayerGameInfo {
     @Id
     private Long id;
-    private Long average;
+
     private int battingOrder;
     private int plateAppearance;
     private int hits;
     private int out;
+    private Long average;
 
 }

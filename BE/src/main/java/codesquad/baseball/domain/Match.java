@@ -1,20 +1,23 @@
 package codesquad.baseball.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class Match {
     @Id
     private Long id;
 
+    @NonNull
     private Long myTeamId;
 
+    @NonNull
     private Long counterTeamId;
 
+    @NonNull
     private boolean isHome;
+
 }
