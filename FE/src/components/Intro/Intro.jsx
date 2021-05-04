@@ -1,17 +1,28 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import styled from "styled-components";
+import TeamSelect from "./TeamSelect";
 
-const Intro = () => {
-  return (
-    <>
-      <div>here is intro</div>
-      <button>
-        <Link to="/ingame">인게임 입장</Link>
-      </button>
-      <button>
-        <Link to="/">메인으로</Link>
-      </button>
-    </>
-  );
-};
+const Intro = () => (
+	<Wrapper>
+		<Title>Baseball Game Online</Title>
+		<TeamSelect />
+	</Wrapper>
+);
+
+const Wrapper = styled.div`
+	width: 1280px;
+	height: 720px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+`;
+const Title = styled.div`
+	font-weight: 900;
+	font-size: 40px;
+	line-height: 58px;
+	letter-spacing: -0.04em;
+	text-transform: uppercase;
+	color: #fff;
+`;
 
 export default Intro;
