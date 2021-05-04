@@ -6,8 +6,9 @@ const HomeStyles = styled.div`
   height: 1080px;
   color: #fff;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  padding-top: 40px;
 `;
 
 export default HomeStyles;

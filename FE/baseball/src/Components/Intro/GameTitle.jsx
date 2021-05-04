@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const GameTitle = () => {
   return (
     <GameTitleStyle>
-      Team illy's Baseball game! <br />
+      Team illy'swing BASEBALL GAME!!! <br />
       comming soon...
     </GameTitleStyle>
   );

@@ -1,6 +1,6 @@
-import Home from '@/Components/Home/Home';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { Inrto } from '@/Routes/Intro';
+import { Home } from '@/Routes/Home';
 
 const Router = () => {
   return (
@@ -9,6 +9,7 @@ const Router = () => {
       <Switch>
         <Route path="/home" component={Home} />
         {/* <Route path="/game" component={Game} /> */}
+        <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>
   );

@@ -13,8 +13,8 @@ const GameStartButton = () => {
 export default GameStartButton;
 
 const GameStartButtonStyle = styled.div`
-  width: 600px;
-  height: 80px;
+  width: 650px;
+  height: 100px;
   padding: 20px;
   border: 1px solid #fff;
   border-radius: 10px;
