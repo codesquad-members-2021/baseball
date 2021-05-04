@@ -16,15 +16,15 @@ const testPayload = {
 }
 
 function MainPage() {
-  const { dispatch } = useContext(GlobalContext);
+  const { globalDispatch } = useContext(GlobalContext);
 
   return (
     <StyledMainPage>
-      <button onClick={() => dispatch({ type: GlobalAction.SELECT_TEAM, payload: testPayload })}>
+      <button onClick={() => globalDispatch({ type: GlobalAction.SELECT_TEAM, payload: testPayload })}>
         test
       </button>
     </StyledMainPage>
   )
 }
 
-export default MainPage
+export default MainPage;
