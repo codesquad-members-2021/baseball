@@ -30,20 +30,20 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPs-BN-Y7O">
-                                    <rect key="frame" x="165" y="50.5" width="17" height="18.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                    <rect key="frame" x="160" y="50.5" width="27" height="18.5"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v8-W2-lBm">
-                                    <rect key="frame" x="30.5" y="41.5" width="78" height="36"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                    <rect key="frame" x="53.5" y="41.5" width="83.5" height="36"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUA-29-OaP">
-                                    <rect key="frame" x="242" y="41.5" width="71" height="36"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                    <rect key="frame" x="213" y="41.5" width="77" height="36"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -54,14 +54,14 @@
                                 <constraint firstItem="ozx-EV-aGZ" firstAttribute="top" secondItem="oeL-6r-k8l" secondAttribute="top" constant="5" id="Gzd-ER-6kg"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="height" secondItem="oeL-6r-k8l" secondAttribute="height" multiplier="0.2" id="HXU-q1-2J5"/>
                                 <constraint firstItem="ozx-EV-aGZ" firstAttribute="leading" secondItem="oeL-6r-k8l" secondAttribute="leading" id="KQO-4m-VCe"/>
-                                <constraint firstItem="aUA-29-OaP" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="1.6" id="Pzg-Kp-CZb"/>
+                                <constraint firstItem="aUA-29-OaP" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="1.45" id="Pzg-Kp-CZb"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="centerY" secondItem="8v8-W2-lBm" secondAttribute="centerY" id="SR1-pd-Egl"/>
                                 <constraint firstAttribute="trailing" secondItem="ozx-EV-aGZ" secondAttribute="trailing" id="YZV-Lr-aW6"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" id="aeQ-9N-dDB"/>
-                                <constraint firstItem="8v8-W2-lBm" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="0.4" id="zoc-UO-kKA"/>
+                                <constraint firstItem="8v8-W2-lBm" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="0.55" id="zoc-UO-kKA"/>
                             </constraints>
                         </view>
-                        <blurEffect style="regular"/>
+                        <blurEffect style="prominent"/>
                     </visualEffectView>
                 </subviews>
             </view>
@@ -73,6 +73,12 @@
                 <constraint firstAttribute="trailing" secondItem="pka-vL-oif" secondAttribute="trailing" id="sBh-GC-XXp"/>
             </constraints>
             <size key="customSize" width="347" height="92"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="awayTeamLabel" destination="aUA-29-OaP" id="28h-PT-jaA"/>
                 <outlet property="gameNumberLabel" destination="ozx-EV-aGZ" id="XjV-vC-AEj"/>

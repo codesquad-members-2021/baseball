@@ -20,6 +20,7 @@ struct Inning {
 }
 
 struct Team {
+    var score: Int
     var isAttack: Bool
     var players: [Player]
     var currentPitcher: Player
@@ -31,6 +32,7 @@ struct Player {
     var plateAppearance: Int
     var numberOfPitches: Int
     var hitsNumber: Int
+    var accumulatedOutCount: Int
 }
 
 struct BallCount {
