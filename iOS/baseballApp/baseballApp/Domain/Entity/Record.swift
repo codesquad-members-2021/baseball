@@ -1,8 +1,8 @@
-//
-//  Record.swift
-//  baseballApp
-//
-//  Created by 김지선 on 2021/05/04.
-//
-
 import Foundation
+
+struct Record {
+    let hit: Int
+    let strike: Int
+    let ball: Int
+    let out: Int
+}

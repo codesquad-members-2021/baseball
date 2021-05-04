@@ -17,6 +17,8 @@
 		7650A1E126411A51006C1E5F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1E026411A51006C1E5F /* HomeViewController.swift */; };
 		7650A1E326411A6B006C1E5F /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1E226411A6B006C1E5F /* PlayViewController.swift */; };
 		7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1E426411A78006C1E5F /* ScoreViewController.swift */; };
+		7650A1E7264138A0006C1E5F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1E6264138A0006C1E5F /* Player.swift */; };
+		7650A1E92641418B006C1E5F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1E82641418B006C1E5F /* Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		7650A1E026411A51006C1E5F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7650A1E226411A6B006C1E5F /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		7650A1E426411A78006C1E5F /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		7650A1E6264138A0006C1E5F /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		7650A1E82641418B006C1E5F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +199,8 @@
 		7650A1DE26411A1D006C1E5F /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				7650A1E6264138A0006C1E5F /* Player.swift */,
+				7650A1E82641418B006C1E5F /* Record.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -340,6 +346,8 @@
 				7650A1A82640E3A8006C1E5F /* AppDelegate.swift in Sources */,
 				7650A1AA2640E3A8006C1E5F /* SceneDelegate.swift in Sources */,
 				7650A1E126411A51006C1E5F /* HomeViewController.swift in Sources */,
+				7650A1E92641418B006C1E5F /* Record.swift in Sources */,
+				7650A1E7264138A0006C1E5F /* Player.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
