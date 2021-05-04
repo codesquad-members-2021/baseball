@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from 'util/context.js';
 import { GlobalAction } from 'util/action.js';
 import styled from 'styled-components';

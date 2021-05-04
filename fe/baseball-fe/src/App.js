@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 import { GlobalContext } from './util/context.js';
 import globalReducer from './util/reducer/globalReducer.js';
 

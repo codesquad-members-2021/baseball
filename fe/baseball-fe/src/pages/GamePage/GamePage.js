@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer, useContext } from 'react';
 import styled from 'styled-components';
 import gameReducer from 'util/reducer/gameReducer.js';
 import { GameContext, GlobalContext } from 'util/context.js';
