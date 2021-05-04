@@ -15,5 +15,5 @@ public class TeamDTO {
     public TeamDTO(Team team) {
         this.name = team.getName();
         this.totalScore = team.getTotalScore();
-    }//jung 실험 중
+    }
 }

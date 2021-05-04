@@ -17,4 +17,5 @@ public class History {
     private int strike;
     private int ball;
     private int out;
+
 }

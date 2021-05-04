@@ -16,5 +16,9 @@ public class Player {
     private String name;
 
     private PlayerGameInfo playerGameInfo;
-//    private List<History> histories;
+    private List<History> historyList;
+
+    public void addHistory(History history) {
+        historyList.add(history);
+    }
 }

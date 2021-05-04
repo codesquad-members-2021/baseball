@@ -22,14 +22,14 @@ insert into team_game_score(inning, score, team)
 values (1, 4, 2);
 
 
-insert into player_game_info(batting_order, role, plate_appearance, hits, `out`, average, player)
-values (2, '타자', 5, 5, 0, 1, 2);
-insert into player_game_info(batting_order,  role, plate_appearance, hits, `out`, average, player)
-values (1, '투수', 2, 1, 2, 0.5, 1);
-insert into player_game_info(batting_order,  role, plate_appearance, hits, `out`, average, player)
-values (1, '타자', 4, 3, 1, 0.75, 3);
-insert into player_game_info(batting_order,  role, plate_appearance, hits, `out`, average, player)
-values (2, '투수', 2, 1, 2, 0.5, 4);
+insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)
+values (2, '타자', 0, 5, 5, 0, 1, 2);
+insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)
+values (1, '투수', 15, 2, 1, 2, 0.5, 1);
+insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)
+values (1, '타자', 0, 4, 3, 1, 0.75, 3);
+insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)
+values (2, '투수', 30, 2, 1, 2, 0.5, 4);
 
 insert into history(player, team, action_name, strike, ball, `out`)
 values (1, 1, 'S', 2, 2, 1);

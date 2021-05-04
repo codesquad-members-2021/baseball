@@ -11,7 +11,7 @@ create table team_game_score
     id       int auto_increment primary key,
     inning   int,
     score    int,
-    team     bigint(20) references team(id),
+    team     bigint(20) references team (id),
     team_key int
 );
 
@@ -30,11 +30,12 @@ create table player_game_info
     id               bigint(20) auto_increment primary key,
     batting_order    int,
     role             varchar(20),
+    pitch_count      int,
     plate_appearance int,
     hits             int,
     `out`            int,
     average          bigint(20),
-    player           bigint(20) references player(id)
+    player           bigint(20) references player (id)
 );
 
 drop table if exists history;
@@ -45,9 +46,10 @@ create table history
     strike      int,
     ball        int,
     `out`       int,
-    team        bigint(20) references team(id),
+    team        bigint(20) references team (id),
     team_key    int,
-    player      bigint(20) references player(id)
+    player      bigint(20) references player (id),
+    player_key int
 );
 
 drop table if exists `match`;
