@@ -95,9 +95,9 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
     
     func getOauthKey(of kind: OauthKeys) -> String {
-        guard let path = Bundle.main.path(forResource: "OAuthKeys", ofType: "plist") else { print("invalid bundle path"); return "" }
+        guard let path = Bundle.main.path(forResource: "OAuthKeys", ofType: "plist") else { return "" }
         let plist = NSDictionary(contentsOfFile: path)
-        guard let key = plist?.object(forKey: kind.description) as? String else { print("invalid key"); return "" }
+        guard let key = plist?.object(forKey: kind.description) as? String else { return "" }
         return key
     }
     

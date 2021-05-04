@@ -23,6 +23,8 @@
 		22941A8A2641304C00598814 /* TeamScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A892641304C00598814 /* TeamScore.swift */; };
 		22941A8F2641309500598814 /* PlayerScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A8E2641309500598814 /* PlayerScoreBoard.swift */; };
 		22941AA62641372600598814 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22941AA52641372600598814 /* OAuthKeys.plist */; };
+		22941AC7264141BF00598814 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941AC6264141BF00598814 /* GameViewController.swift */; };
+		22941ACC264141C900598814 /* ScoreBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941ACB264141C900598814 /* ScoreBoardViewController.swift */; };
 		B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */; };
 		B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */; };
 		B32499D7263FF3B300D8DEA8 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D6263FF3B300D8DEA8 /* OAuthViewController.swift */; };
@@ -67,6 +69,8 @@
 		22941A892641304C00598814 /* TeamScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamScore.swift; sourceTree = "<group>"; };
 		22941A8E2641309500598814 /* PlayerScoreBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreBoard.swift; sourceTree = "<group>"; };
 		22941AA52641372600598814 /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OAuthKeys.plist; path = ../../../../../../../Downloads/OAuthKeys.plist; sourceTree = "<group>"; };
+		22941AC6264141BF00598814 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		22941ACB264141C900598814 /* ScoreBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoardViewController.swift; sourceTree = "<group>"; };
 		B32499CF263FF3B300D8DEA8 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		22941AD0264141E100598814 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B32499D6263FF3B300D8DEA8 /* OAuthViewController.swift */,
+				2242A6832640DE51000C555E /* MainViewController.swift */,
+				22941AC6264141BF00598814 /* GameViewController.swift */,
+				22941ACB264141C900598814 /* ScoreBoardViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		B32499C6263FF3B300D8DEA8 = {
 			isa = PBXGroup;
 			children = (
@@ -163,8 +178,7 @@
 			children = (
 				B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */,
 				B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */,
-				B32499D6263FF3B300D8DEA8 /* OAuthViewController.swift */,
-				2242A6832640DE51000C555E /* MainViewController.swift */,
+				22941AD0264141E100598814 /* ViewController */,
 				22941A532641140000598814 /* Model */,
 				2242A6952640DFF6000C555E /* extension */,
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
@@ -339,6 +353,8 @@
 				B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */,
 				22941A5D26412D5800598814 /* Player.swift in Sources */,
 				B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */,
+				22941ACC264141C900598814 /* ScoreBoardViewController.swift in Sources */,
+				22941AC7264141BF00598814 /* GameViewController.swift in Sources */,
 				22941A8026412F9800598814 /* PlayingTeam.swift in Sources */,
 				22941A6C26412DF100598814 /* Game.swift in Sources */,
 				22941A5826412D1B00598814 /* PlayerList.swift in Sources */,
