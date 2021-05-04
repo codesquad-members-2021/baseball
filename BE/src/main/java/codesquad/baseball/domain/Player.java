@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import java.util.*;
 
 @Getter
 @Setter
@@ -14,5 +15,6 @@ public class Player {
 
     private String name;
 
-    private Long teamId;
+    private PlayerGameInfo playerGameInfo;
+//    private List<History> histories;
 }

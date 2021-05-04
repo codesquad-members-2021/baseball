@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Match {
     @Id

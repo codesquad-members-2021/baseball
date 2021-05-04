@@ -19,5 +19,17 @@ public class Team {
 
     private String name;
 
+    private List<History> historyList = new ArrayList<>();
+
    private List<TeamGameScore> teamGameScoreList = new ArrayList<>();
+
+   private List<Player> playerList = new ArrayList<>();
+
+   public int getTotalScore() {
+       int total=0;
+       for(TeamGameScore teamGameScore: teamGameScoreList) {
+           total += teamGameScore.getScore();
+       }
+       return total;
+   }//jung 실험 중
 }
