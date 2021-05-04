@@ -32,5 +32,12 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-extension ViewController: UICollectionViewDelegate {}
+extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.bounds.width - 10
+        let height = (collectionView.bounds.height) / 5 - 10
+        
+        return CGSize(width: width, height: height)
+    }
+}
 

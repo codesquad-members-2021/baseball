@@ -21,7 +21,7 @@
                         <rect key="frame" x="5" y="5" width="370" height="90"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdg-1w-1Q6">
-                                <rect key="frame" x="173.5" y="58" width="23" height="21"/>
+                                <rect key="frame" x="173.5" y="53" width="23" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Captin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS1-fF-03U">
-                                <rect key="frame" x="40" y="48" width="93.5" height="36"/>
+                                <rect key="frame" x="40" y="43" width="93.5" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93.5" id="kMo-XG-BmV"/>
                                 </constraints>
@@ -42,7 +42,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Captin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPC-h9-AhS">
-                                <rect key="frame" x="236.5" y="48" width="93.5" height="36"/>
+                                <rect key="frame" x="236.5" y="43" width="93.5" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93.5" id="aXh-dh-5dF"/>
                                 </constraints>
@@ -55,9 +55,9 @@
                         <constraints>
                             <constraint firstItem="Pdg-1w-1Q6" firstAttribute="centerX" secondItem="Xo0-Xs-yAd" secondAttribute="centerX" id="0PX-Wh-6In"/>
                             <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="wPC-h9-AhS" secondAttribute="trailing" constant="40" id="9md-q0-s89"/>
-                            <constraint firstItem="wPC-h9-AhS" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="20" id="9wi-mU-aDq"/>
-                            <constraint firstItem="Pdg-1w-1Q6" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="30" id="F43-EF-yN7"/>
-                            <constraint firstItem="GS1-fF-03U" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="20" id="Fzg-Cz-YPc"/>
+                            <constraint firstItem="wPC-h9-AhS" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="15" id="9wi-mU-aDq"/>
+                            <constraint firstItem="Pdg-1w-1Q6" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="25" id="F43-EF-yN7"/>
+                            <constraint firstItem="GS1-fF-03U" firstAttribute="top" secondItem="t9f-BZ-NAb" secondAttribute="bottom" constant="15" id="Fzg-Cz-YPc"/>
                             <constraint firstAttribute="trailing" secondItem="t9f-BZ-NAb" secondAttribute="trailing" id="HcF-IC-b1T"/>
                             <constraint firstItem="t9f-BZ-NAb" firstAttribute="top" secondItem="Xo0-Xs-yAd" secondAttribute="top" constant="10" id="V8v-E4-KTE"/>
                             <constraint firstItem="wPC-h9-AhS" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Pdg-1w-1Q6" secondAttribute="trailing" constant="40" id="dHK-fY-2wd"/>
