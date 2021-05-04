@@ -18,6 +18,8 @@
 		8872EBE82640EB0C00EDB038 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBE72640EB0C00EDB038 /* ScoreViewController.swift */; };
 		8872EBED2640EFED00EDB038 /* GameListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBEB2640EFED00EDB038 /* GameListCollectionViewCell.swift */; };
 		8872EBEE2640EFED00EDB038 /* GameListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8872EBEC2640EFED00EDB038 /* GameListCollectionViewCell.xib */; };
+		8872EBF826412C4700EDB038 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBF726412C4700EDB038 /* Game.swift */; };
+		8872EBFC26412C6600EDB038 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBFB26412C6600EDB038 /* GameList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		8872EBE72640EB0C00EDB038 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		8872EBEB2640EFED00EDB038 /* GameListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8872EBEC2640EFED00EDB038 /* GameListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameListCollectionViewCell.xib; sourceTree = "<group>"; };
+		8872EBF726412C4700EDB038 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		8872EBFB26412C6600EDB038 /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,8 @@
 		8872EBD8263FDBA400EDB038 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8872EBF726412C4700EDB038 /* Game.swift */,
+				8872EBFB26412C6600EDB038 /* GameList.swift */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -254,10 +260,12 @@
 			files = (
 				8872EBED2640EFED00EDB038 /* GameListCollectionViewCell.swift in Sources */,
 				8872EBE42640EAF300EDB038 /* PlayViewController.swift in Sources */,
+				8872EBF826412C4700EDB038 /* Game.swift in Sources */,
 				8872EBA5263FD2F900EDB038 /* GameListViewController.swift in Sources */,
 				8872EBE82640EB0C00EDB038 /* ScoreViewController.swift in Sources */,
 				8872EBA1263FD2F900EDB038 /* AppDelegate.swift in Sources */,
 				8872EBA3263FD2F900EDB038 /* SceneDelegate.swift in Sources */,
+				8872EBFC26412C6600EDB038 /* GameList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
