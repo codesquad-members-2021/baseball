@@ -15,13 +15,37 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게임 목록" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQN-OZ-BLp">
+                                <rect key="frame" x="50" y="94" width="314" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="nB1-Ck-R83"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jog-NH-wd1">
+                                <rect key="frame" x="30" y="154" width="354" height="708"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jog-NH-wd1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="8B6-qb-0nD"/>
+                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Isw-Eo-EL8"/>
+                            <constraint firstItem="Jog-NH-wd1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="MNC-me-kam"/>
+                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="SWr-kQ-SaU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jog-NH-wd1" secondAttribute="trailing" constant="30" id="nNd-h4-ade"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hQN-OZ-BLp" secondAttribute="trailing" constant="50" id="nw3-64-wzB"/>
+                            <constraint firstItem="Jog-NH-wd1" firstAttribute="top" secondItem="hQN-OZ-BLp" secondAttribute="bottom" id="uuX-Bt-7Rk"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109" y="119"/>
+            <point key="canvasLocation" x="108.69565217391305" y="118.52678571428571"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="9GR-ne-mMK">
