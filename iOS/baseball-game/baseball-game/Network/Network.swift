@@ -32,7 +32,7 @@ enum EndPoint {
 
 class NetworkManager {
     
-    func request<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
+    static func request<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
         
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
