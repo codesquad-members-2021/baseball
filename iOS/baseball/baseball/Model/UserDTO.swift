@@ -8,6 +8,8 @@
 import Foundation
 
 struct UserDTO: Codable {
-    let userID: String
-    let userEmail: String
+    let name: String
+    let email: String
+    let userId: String
+    let token: String
 }

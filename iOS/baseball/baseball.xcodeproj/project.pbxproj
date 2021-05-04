@@ -10,7 +10,19 @@
 		2242A67F2640DDF9000C555E /* OctoKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2242A67E2640DDF9000C555E /* OctoKit */; };
 		2242A6842640DE51000C555E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6832640DE51000C555E /* MainViewController.swift */; };
 		2242A6912640DFEA000C555E /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2242A6902640DFEA000C555E /* URL.swift */; };
-		49CF0AC426412CC500BFDC11 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CF0AC326412CC500BFDC11 /* OAuthKeys.plist */; };
+		22941A4B2641104D00598814 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22941A4A2641104D00598814 /* OAuthKeys.plist */; };
+		22941A5826412D1B00598814 /* PlayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A5726412D1B00598814 /* PlayerList.swift */; };
+		22941A5D26412D5800598814 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A5C26412D5800598814 /* Player.swift */; };
+		22941A6226412D8000598814 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A6126412D8000598814 /* GameList.swift */; };
+		22941A6726412DC200598814 /* PairTeams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A6626412DC200598814 /* PairTeams.swift */; };
+		22941A6C26412DF100598814 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A6B26412DF100598814 /* Game.swift */; };
+		22941A7126412E5500598814 /* RoundInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A7026412E5500598814 /* RoundInfo.swift */; };
+		22941A7626412F0D00598814 /* Picher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A7526412F0D00598814 /* Picher.swift */; };
+		22941A7B26412F3800598814 /* Hitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A7A26412F3800598814 /* Hitter.swift */; };
+		22941A8026412F9800598814 /* PlayingTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A7F26412F9800598814 /* PlayingTeam.swift */; };
+		22941A852641302800598814 /* ScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A842641302800598814 /* ScoreBoard.swift */; };
+		22941A8A2641304C00598814 /* TeamScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A892641304C00598814 /* TeamScore.swift */; };
+		22941A8F2641309500598814 /* PlayerScoreBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A8E2641309500598814 /* PlayerScoreBoard.swift */; };
 		B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */; };
 		B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */; };
 		B32499D7263FF3B300D8DEA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D6263FF3B300D8DEA8 /* ViewController.swift */; };
@@ -42,7 +54,19 @@
 /* Begin PBXFileReference section */
 		2242A6832640DE51000C555E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2242A6902640DFEA000C555E /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
-		49CF0AC326412CC500BFDC11 /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OAuthKeys.plist; path = ../../../../../Downloads/OAuthKeys.plist; sourceTree = "<group>"; };
+		22941A4A2641104D00598814 /* OAuthKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = OAuthKeys.plist; sourceTree = "<group>"; };
+		22941A5726412D1B00598814 /* PlayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerList.swift; sourceTree = "<group>"; };
+		22941A5C26412D5800598814 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		22941A6126412D8000598814 /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
+		22941A6626412DC200598814 /* PairTeams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairTeams.swift; sourceTree = "<group>"; };
+		22941A6B26412DF100598814 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		22941A7026412E5500598814 /* RoundInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundInfo.swift; sourceTree = "<group>"; };
+		22941A7526412F0D00598814 /* Picher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picher.swift; sourceTree = "<group>"; };
+		22941A7A26412F3800598814 /* Hitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitter.swift; sourceTree = "<group>"; };
+		22941A7F26412F9800598814 /* PlayingTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingTeam.swift; sourceTree = "<group>"; };
+		22941A842641302800598814 /* ScoreBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBoard.swift; sourceTree = "<group>"; };
+		22941A892641304C00598814 /* TeamScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamScore.swift; sourceTree = "<group>"; };
+		22941A8E2641309500598814 /* PlayerScoreBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreBoard.swift; sourceTree = "<group>"; };
 		B32499CF263FF3B300D8DEA8 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +122,18 @@
 			isa = PBXGroup;
 			children = (
 				B3249A102640F15500D8DEA8 /* UserDTO.swift */,
+				22941A5726412D1B00598814 /* PlayerList.swift */,
+				22941A5C26412D5800598814 /* Player.swift */,
+				22941A6126412D8000598814 /* GameList.swift */,
+				22941A6626412DC200598814 /* PairTeams.swift */,
+				22941A6B26412DF100598814 /* Game.swift */,
+				22941A7F26412F9800598814 /* PlayingTeam.swift */,
+				22941A7026412E5500598814 /* RoundInfo.swift */,
+				22941A7526412F0D00598814 /* Picher.swift */,
+				22941A7A26412F3800598814 /* Hitter.swift */,
+				22941A842641302800598814 /* ScoreBoard.swift */,
+				22941A892641304C00598814 /* TeamScore.swift */,
+				22941A8E2641309500598814 /* PlayerScoreBoard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,10 +333,22 @@
 			files = (
 				B3249A112640F15500D8DEA8 /* UserDTO.swift in Sources */,
 				2242A6912640DFEA000C555E /* URL.swift in Sources */,
+				22941A8F2641309500598814 /* PlayerScoreBoard.swift in Sources */,
 				B32499D7263FF3B300D8DEA8 /* ViewController.swift in Sources */,
+				22941A7B26412F3800598814 /* Hitter.swift in Sources */,
 				B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */,
+				22941A5D26412D5800598814 /* Player.swift in Sources */,
 				B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */,
+				22941A8026412F9800598814 /* PlayingTeam.swift in Sources */,
+				22941A6C26412DF100598814 /* Game.swift in Sources */,
+				22941A5826412D1B00598814 /* PlayerList.swift in Sources */,
+				22941A6226412D8000598814 /* GameList.swift in Sources */,
+				22941A6726412DC200598814 /* PairTeams.swift in Sources */,
+				22941A8A2641304C00598814 /* TeamScore.swift in Sources */,
+				22941A7626412F0D00598814 /* Picher.swift in Sources */,
+				22941A7126412E5500598814 /* RoundInfo.swift in Sources */,
 				2242A6842640DE51000C555E /* MainViewController.swift in Sources */,
+				22941A852641302800598814 /* ScoreBoard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
