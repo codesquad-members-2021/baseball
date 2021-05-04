@@ -45,7 +45,7 @@ const GameScoreWrapper = styled.div`
   position: fixed;
   display:flex;
   height: 20rem;
-  width: 90%;
+  width: 75%;
   margin: 0 auto;
   padding: 2rem 5rem 2rem 0;
   border: .2rem solid #fff;
