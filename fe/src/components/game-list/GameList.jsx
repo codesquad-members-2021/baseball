@@ -6,7 +6,7 @@ const GameList = (props) => {
   const TITLE = 'BASEBALL GAME ONLINE';
   const DESCRIPTION = '참가할 게임을 선택하세요!';
   const gameList = game_list.map(({ home, away, game_id }, idx) => (
-    <GameListItem key={game_id} {...{ home, away, game_id, idx }} />
+    <GameListItem key={idx} {...{ home, away, game_id, idx }} />
   ));
 
   return (
@@ -56,14 +56,14 @@ const StyleList = styled.div`
     width: 0.875rem;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #777;
+    background-color: #999;
     border-radius: 0.375rem;
     &:hover {
-      background-color: #333;
+      background-color: #555;
     }
   }
   &::-webkit-scrollbar-track {
-    background-color: #eee;
+    background-color: transparent;
   }
 `;
 
