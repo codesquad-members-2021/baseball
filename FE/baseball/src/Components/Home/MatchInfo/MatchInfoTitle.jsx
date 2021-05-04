@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const MatchInfoTitle = () => {
-  return <MatchInfoTitleStyle>⚾︎ Choose the Game ⚾︎</MatchInfoTitleStyle>;
+  return <MatchInfoTitleStyle>⚾ Choose the Game ⚾︎</MatchInfoTitleStyle>;
 };
 
 export default MatchInfoTitle;

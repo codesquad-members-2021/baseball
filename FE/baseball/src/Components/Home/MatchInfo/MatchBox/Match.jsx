@@ -16,7 +16,9 @@ export default Match;
 
 const MatchStyle = styled.div`
   display: flex;
+  align-items: center;
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  padding: 0px 5px 5px 5px;
   justify-content: space-evenly;
 `;
