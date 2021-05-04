@@ -8,6 +8,7 @@ target 'baseball' do
   # Pods for baseball
   pod 'RxSwift', '~> 6.1.0'
   pod 'RxCocoa', '~> 6.1.0'
+  pod 'Alamofire', '~> 5.4.3'
 
   target 'baseballTests' do
     inherit! :search_paths
