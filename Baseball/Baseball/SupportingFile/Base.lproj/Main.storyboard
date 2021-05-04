@@ -82,9 +82,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="AwayTeamLabel" destination="taP-qy-ISh" id="cdB-XV-VOQ"/>
-                                            <outlet property="GameNumberLabel" destination="V50-So-gia" id="I2J-g0-oK4"/>
-                                            <outlet property="HomeTeamLabel" destination="AhQ-bK-WBl" id="I8b-IS-S3X"/>
+                                            <outlet property="awayTeamLabel" destination="taP-qy-ISh" id="O7o-bL-WvA"/>
+                                            <outlet property="gameNumberLabel" destination="V50-So-gia" id="IiU-92-Jid"/>
+                                            <outlet property="homeTeamLabel" destination="AhQ-bK-WBl" id="CbG-vp-0Mr"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

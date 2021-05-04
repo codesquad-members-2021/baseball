@@ -9,12 +9,14 @@ import UIKit
 
 class GameListCell: UICollectionViewCell {
     
-    @IBOutlet weak var GameNumberLabel: UILabel!
-    @IBOutlet weak var AwayTeamLabel: UILabel!
-    @IBOutlet weak var HomeTeamLabel: UILabel!
+    @IBOutlet weak var gameNumberLabel: UILabel!
+    @IBOutlet weak var awayTeamLabel: UILabel!
+    @IBOutlet weak var homeTeamLabel: UILabel!
     
-    func configure() {
-        self.contentView.layer.cornerRadius = 5
-        self.backgroundColor = .systemGray3
+    
+    func configure(game: MatchUp) {
+        gameNumberLabel.text = "Game"+"\(game.matchNumber)"
+        awayTeamLabel.text = game.awayTeam
+        homeTeamLabel.text = game.homeTeam
     }
 }
