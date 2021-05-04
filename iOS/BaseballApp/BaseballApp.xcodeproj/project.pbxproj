@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0112640E61900C00729 /* AppDelegate.swift */; };
 		D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0132640E61900C00729 /* SceneDelegate.swift */; };
-		D03CF0162640E61900C00729 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0152640E61900C00729 /* ViewController.swift */; };
+		D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0152640E61900C00729 /* GamesViewController.swift */; };
 		D03CF0192640E61900C00729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03CF0172640E61900C00729 /* Main.storyboard */; };
 		D03CF01B2640E61A00C00729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03CF01A2640E61A00C00729 /* Assets.xcassets */; };
 		D03CF01E2640E61A00C00729 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03CF01C2640E61A00C00729 /* LaunchScreen.storyboard */; };
@@ -38,7 +38,7 @@
 		D03CF00E2640E61900C00729 /* BaseballApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03CF0112640E61900C00729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D03CF0132640E61900C00729 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D03CF0152640E61900C00729 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D03CF0152640E61900C00729 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
 		D03CF0182640E61900C00729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D03CF01A2640E61A00C00729 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03CF01D2640E61A00C00729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,12 +99,9 @@
 		D03CF0102640E61900C00729 /* BaseballApp */ = {
 			isa = PBXGroup;
 			children = (
-				D03CF0112640E61900C00729 /* AppDelegate.swift */,
-				D03CF0132640E61900C00729 /* SceneDelegate.swift */,
-				D03CF0152640E61900C00729 /* ViewController.swift */,
+				D03CF0442640E73F00C00729 /* Supporting Files */,
+				D03CF0152640E61900C00729 /* GamesViewController.swift */,
 				D03CF0172640E61900C00729 /* Main.storyboard */,
-				D03CF01A2640E61A00C00729 /* Assets.xcassets */,
-				D03CF01C2640E61A00C00729 /* LaunchScreen.storyboard */,
 				D03CF01F2640E61A00C00729 /* Info.plist */,
 			);
 			path = BaseballApp;
@@ -126,6 +123,17 @@
 				D03CF0352640E61A00C00729 /* Info.plist */,
 			);
 			path = BaseballAppUITests;
+			sourceTree = "<group>";
+		};
+		D03CF0442640E73F00C00729 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D03CF0112640E61900C00729 /* AppDelegate.swift */,
+				D03CF0132640E61900C00729 /* SceneDelegate.swift */,
+				D03CF01A2640E61A00C00729 /* Assets.xcassets */,
+				D03CF01C2640E61A00C00729 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03CF0162640E61900C00729 /* ViewController.swift in Sources */,
+				D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */,
 				D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */,
 				D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */,
 			);
