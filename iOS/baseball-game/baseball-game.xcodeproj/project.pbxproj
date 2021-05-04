@@ -13,6 +13,7 @@
 		E4AA688A263FDDA500139BD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AA6888263FDDA500139BD6 /* Main.storyboard */; };
 		E4AA688C263FDDA800139BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4AA688B263FDDA800139BD6 /* Assets.xcassets */; };
 		E4AA688F263FDDA800139BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AA688D263FDDA800139BD6 /* LaunchScreen.storyboard */; };
+		E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E4AA688B263FDDA800139BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4AA688E263FDDA800139BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4AA6890263FDDA900139BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPitcherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				E4AA6896263FDDD400139BD6 /* AppCycle */,
 				E4AA6886263FDDA500139BD6 /* ViewController.swift */,
+				E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */,
 				E4AA6888263FDDA500139BD6 /* Main.storyboard */,
 				E4AA688B263FDDA800139BD6 /* Assets.xcassets */,
 				E4AA688D263FDDA800139BD6 /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			files = (
 				E4AA6887263FDDA500139BD6 /* ViewController.swift in Sources */,
 				E4AA6883263FDDA500139BD6 /* AppDelegate.swift in Sources */,
+				E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */,
 				E4AA6885263FDDA500139BD6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
