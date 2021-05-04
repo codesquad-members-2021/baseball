@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { createGlobalStyle } from 'styled-components';
+import GlobalStyle from './GlobalStyle';
 import Home from './components/Home/Home';
 import Intro from './components/Intro/Intro';
 import InGame from './components/InGame/InGame';
@@ -32,14 +32,3 @@ function App() {
 }
 
 export default App;
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-image: url("image/mlbground_edit.jpg");
-    background-repeat: no-repeat;
-    background-position: 20rem 5rem;
-    min-width: 1280px;
-    min-height: 720px;
-  }
-
-`;
