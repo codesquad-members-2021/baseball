@@ -15,7 +15,7 @@ enum NetworkingError: String, Error {
     case encodeError = "JSON encode가 잘못됐습니다."
 }
 
-class ViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+class OAuthViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
     enum OauthKeys: String, CustomStringConvertible {
         case ClientID
         case ClientSecret
@@ -27,7 +27,7 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
     
     var tokenConfig : TokenConfiguration? = nil
     lazy var config = OAuthConfiguration.init(token: self.getOauthKey(of: .ClientID),
-                                              secret: self.getOauthKey(of: .ClientSecret),
+                                              secret: "",
                                               scopes: ["user"])
     var webAuthSession: ASWebAuthenticationSession?
 
@@ -43,14 +43,18 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
             guard error == nil, let successURL = callBack else {
                 return
             }
-            guard let callBackURLCode = successURL.path.components(separatedBy: "=").last else { return }
-            guard let callBackURLCodeData = callBackURLCode.data(using: .utf8) else { return }
-            guard let url = URL(string: "asdf") else { return }
-            self.postCode(url: url, callBackURLCodeData: callBackURLCodeData) { (result) in
+            
+            guard let callBackURLCode = successURL.absoluteString.split(separator: "=").last else { return }
+            guard let url = URL(string: "http://3.36.217.168:8080/login?code=\(callBackURLCode)") else { return }
+            
+            self.postCode(url: url) { (result) in
                 switch result {
                 case .success(let userDTO):
-                    userDTO
-                    //MARK: - USERDTO 받아서 처리
+                    DispatchQueue.main.async {
+                        guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.identifier) as? MainViewController else { return }
+                        vc.user = userDTO
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -59,19 +63,19 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
         webAuthSession?.presentationContextProvider = self
     }
     
-    func postCode(url: URL, callBackURLCodeData data: Data, complete: @escaping (Result<UserDTO, Error>) -> Void) {
+    func postCode(url: URL, complete: @escaping (Result<UserDTO, Error>) -> Void) {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = data
 
         URLSession.init(configuration: .default).dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else { return }
+            guard let data = data else { print("HoHo"); return }
             if error != nil {
                 complete(.failure(NetworkingError.responseError))
                 return
             }
             
             let decodeResult = self.decodeData(typeOf: UserDTO.self, data: data)
+            
             complete(decodeResult)
         }.resume()
     }
@@ -91,9 +95,9 @@ class ViewController: UIViewController, ASWebAuthenticationPresentationContextPr
     }
     
     func getOauthKey(of kind: OauthKeys) -> String {
-        guard let path = Bundle.main.path(forResource: "OAuthKeys", ofType: "plist") else { return "" }
+        guard let path = Bundle.main.path(forResource: "OAuthKeys", ofType: "plist") else { print("invalid bundle path"); return "" }
         let plist = NSDictionary(contentsOfFile: path)
-        guard let key = plist?.object(forKey: kind.description) as? String else { return "" }
+        guard let key = plist?.object(forKey: kind.description) as? String else { print("invalid key"); return "" }
         return key
     }
     

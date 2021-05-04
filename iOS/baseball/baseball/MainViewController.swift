@@ -8,9 +8,12 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    static let identifier = "MainViewController"
     @IBOutlet var teams: [UIButton]!
+    var user: UserDTO!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 }
