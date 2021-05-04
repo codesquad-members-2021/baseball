@@ -16,6 +16,12 @@
 		D03CF0292640E61A00C00729 /* BaseballAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0282640E61A00C00729 /* BaseballAppTests.swift */; };
 		D03CF0342640E61A00C00729 /* BaseballAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0332640E61A00C00729 /* BaseballAppUITests.swift */; };
 		D03CF04F2640ED7600C00729 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */; };
+		E4BE320026412390006E294A /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE31FF26412390006E294A /* GroundView.swift */; };
+		E4BE32022641239A006E294A /* GroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE32012641239A006E294A /* GroundView.xib */; };
+		E4BE320426412604006E294A /* CurrentPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320326412604006E294A /* CurrentPlayerView.xib */; };
+		E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320526412614006E294A /* CurrentPlayerView.swift */; };
+		E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */; };
+		E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		D03CF0332640E61A00C00729 /* BaseballAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballAppUITests.swift; sourceTree = "<group>"; };
 		D03CF0352640E61A00C00729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		E4BE31FF26412390006E294A /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
+		E4BE32012641239A006E294A /* GroundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroundView.xib; sourceTree = "<group>"; };
+		E4BE320326412604006E294A /* CurrentPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPlayerView.xib; sourceTree = "<group>"; };
+		E4BE320526412614006E294A /* CurrentPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlayerView.swift; sourceTree = "<group>"; };
+		E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherHistoryTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +116,12 @@
 				D03CF0442640E73F00C00729 /* Supporting Files */,
 				D03CF0152640E61900C00729 /* GamesViewController.swift */,
 				D03CF0172640E61900C00729 /* Main.storyboard */,
+				E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */,
+				E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */,
+				E4BE31FF26412390006E294A /* GroundView.swift */,
+				E4BE32012641239A006E294A /* GroundView.xib */,
+				E4BE320526412614006E294A /* CurrentPlayerView.swift */,
+				E4BE320326412604006E294A /* CurrentPlayerView.xib */,
 				D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */,
 				D03CF01F2640E61A00C00729 /* Info.plist */,
 			);
@@ -242,8 +260,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4BE320426412604006E294A /* CurrentPlayerView.xib in Resources */,
 				D03CF01E2640E61A00C00729 /* LaunchScreen.storyboard in Resources */,
 				D03CF01B2640E61A00C00729 /* Assets.xcassets in Resources */,
+				E4BE32022641239A006E294A /* GroundView.xib in Resources */,
+				E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */,
 				D03CF0192640E61900C00729 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +291,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */,
+				E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */,
+				E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */,
+				E4BE320026412390006E294A /* GroundView.swift in Sources */,
 				D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */,
 				D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */,
 				D03CF04F2640ED7600C00729 /* GameTableViewCell.swift in Sources */,
