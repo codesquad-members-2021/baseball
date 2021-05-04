@@ -1,0 +1,6 @@
+framework module Pods_baseball_baseballUITests {
+  umbrella header "Pods-baseball-baseballUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
