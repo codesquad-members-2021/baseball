@@ -13,7 +13,6 @@ const Home = () => {
       <button>
         <Link to='/intro'>팀 선택하기</Link>
       </button>
-      <button onClick={handleLoginClick}>로그인</button>
       <GoogleLogin
         clientId='869491322305-t4abjiphkaprn12snvpsqqi1bf8bb3be.apps.googleusercontent.com'
         onSuccess={responseGoogle}
