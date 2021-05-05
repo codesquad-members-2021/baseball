@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import ScoreBoard from "./ScoreBoard";
+import ScoreBoard from "./ScoreBoard/ScoreBoard";
 
 const InGame = () => {
 	const [slideScoreBoard, toggleScoreBoard] = useState(false);

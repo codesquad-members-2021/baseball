@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Table from "./Table";
 
 const ScoreBoard = ({ slide, toggle, setDark }) => {
 	return (
@@ -20,19 +21,5 @@ const NearChecker = styled.div`
 	width: 1280px;
 	height: 100px;
 `;
-const Table = styled.div`
-	position: absolute;
-	border: 1px solid red;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 1100px;
-	height: 180px;
-	top: ${(props) => (props.slide ? "20px" : "-200px")};
-	left: 90px;
-	transition: 400ms;
-	z-index: 2;
-`;
-
 
 export default ScoreBoard;
