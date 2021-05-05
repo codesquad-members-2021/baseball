@@ -38,6 +38,12 @@ public class Game {
 
     private Integer base3UniformNumber;
 
+    private int strikeCount;
+
+    private int ballCount;
+
+    private int outCount;
+
     @MappedCollection(idColumn = "game_id", keyColumn = "key_in_game")
     private Map<String, BattingHistory> battingHistoryMap = new HashMap<>();
 
