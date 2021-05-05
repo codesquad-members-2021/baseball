@@ -1,24 +1,15 @@
-import styled from 'styled-components';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 import TeamName from './TeamName';
 import VS from './VS';
 
 const Match = () => {
   return (
-    <MatchStyle>
+    <S.Match>
       <TeamName />
       <VS />
       <TeamName />
-    </MatchStyle>
+    </S.Match>
   );
 };
 
 export default Match;
-
-const MatchStyle = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0px 5px 5px 5px;
-  justify-content: space-evenly;
-`;

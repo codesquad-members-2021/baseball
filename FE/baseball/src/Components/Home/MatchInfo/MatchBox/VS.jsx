@@ -1,14 +1,7 @@
-import styled from 'styled-components';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 
 const VS = () => {
-  return <VSStyle>VS</VSStyle>;
+  return <S.VS>VS</S.VS>;
 };
 
 export default VS;
-
-const VSStyle = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 900;
-  font-size: 14px;
-`;

@@ -1,13 +1,7 @@
-import styled from 'styled-components';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 
 const MatchInfoTitle = () => {
-  return <MatchInfoTitleStyle>⚾ Choose the Game ⚾︎</MatchInfoTitleStyle>;
+  return <S.MatchInfoTitle>⚾ Choose the Game ⚾︎</S.MatchInfoTitle>;
 };
 
 export default MatchInfoTitle;
-
-const MatchInfoTitleStyle = styled.div`
-  padding: 40px 40px 20px 40px;
-  font-size: 24px;
-  letter-spacing: 3px;
-`;

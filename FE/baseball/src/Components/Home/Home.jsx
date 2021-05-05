@@ -1,13 +1,13 @@
-import HomeStyles from '@/Components/Home/HomeStyles';
 import HomeTitle from '@/Components/Home/HomeTitle';
 import MatchInfo from './MatchInfo/MatchInfo';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 
 const Home = () => {
   return (
-    <HomeStyles>
+    <S.Home>
       <HomeTitle />
       <MatchInfo />
-    </HomeStyles>
+    </S.Home>
   );
 };
 

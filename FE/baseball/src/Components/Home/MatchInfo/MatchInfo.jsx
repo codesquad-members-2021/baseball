@@ -1,21 +1,14 @@
-import styled from 'styled-components';
 import MatchInfoBody from './MatchInfoBody';
 import MatchInfoTitle from './MatchInfoTitle';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 
 const MatchInfo = () => {
   return (
-    <MatchInfoStyle>
+    <S.MatchInfo>
       <MatchInfoTitle />
       <MatchInfoBody />
-    </MatchInfoStyle>
+    </S.MatchInfo>
   );
 };
 
 export default MatchInfo;
-
-const MatchInfoStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px;
-`;

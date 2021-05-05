@@ -1,14 +1,7 @@
-import styled from 'styled-components';
+import { HomeStyles as S } from '@/Components/Home/HomeStyles';
 
 const HomeTitle = () => {
-  return <HomeTitleStyle>Team illy'swing BASEBALL</HomeTitleStyle>;
+  return <S.HomeTitle>Team illy'swing BASEBALL</S.HomeTitle>;
 };
 
 export default HomeTitle;
-
-const HomeTitleStyle = styled.div`
-  font-size: 36px;
-  font-weight: 700;
-  padding: 20px;
-  margin-bottom: 10px;
-`;
