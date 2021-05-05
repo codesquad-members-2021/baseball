@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlayerScoreBoard: Codable {
+struct PlayerScoreBoard: Codable, Hashable {
     let id: Int
     let name: String
     let TPA: Int
