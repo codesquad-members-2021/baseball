@@ -1,0 +1,22 @@
+{
+    "game_list" : [
+    {
+      "home" : "captain",
+      "away" : "marvel",
+      "isStart" : true,
+      "game_id" : 0
+    },
+    {
+      "home" : "twins",
+      "away" : "tigers",
+      "isStart" : false,
+      "game_id" : 1
+    },
+    {
+      "home" : "rockets",
+      "away" : "dodgers",
+      "isStart" : false,
+      "game_id" : 2
+    }
+  ]
+}
