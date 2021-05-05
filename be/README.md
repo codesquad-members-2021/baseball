@@ -7,6 +7,8 @@
 ### Spring
 
 ```sh
+kill -kill `lsof -t -i tcp:8080`
+
 ./gradlew build
 
 nohup java -jar ./build/libs/파일명.jar
