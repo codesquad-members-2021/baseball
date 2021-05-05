@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct RoomResponse {
+struct RoomResponse: Decodable {
     let rooms: [Room]
 }
 
-struct Room {
+struct Room: Decodable {
     let id: Int
     let title: String
     let away: String

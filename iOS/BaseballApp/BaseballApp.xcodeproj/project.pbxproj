@@ -25,6 +25,7 @@
 		E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */; };
 		E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */; };
 		E4BE32102641356C006E294A /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320F2641356C006E294A /* PlayViewController.swift */; };
+		E4BE321226425878006E294A /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321126425878006E294A /* APIRequestManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		E4BE320F2641356C006E294A /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		E4BE321126425878006E294A /* APIRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				D03CF0592641490D00C00729 /* Views */,
 				D03CF01F2640E61A00C00729 /* Info.plist */,
 				D03CF0662641494000C00729 /* Entity */,
+				E4BE321126425878006E294A /* APIRequestManager.swift */,
 			);
 			path = BaseballApp;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */,
 				E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */,
 				E4BE320026412390006E294A /* GroundView.swift in Sources */,
+				E4BE321226425878006E294A /* APIRequestManager.swift in Sources */,
 				D03CF0622641493C00C00729 /* Room.swift in Sources */,
 				D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */,
 				D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */,
