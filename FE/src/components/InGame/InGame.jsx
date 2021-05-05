@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
 import LineUp from "./LineUp/LineUp";
+import Ground from "./Ground/Ground"
 
 const InGame = () => {
 	const [slideScoreBoard, toggleScoreBoard] = useState(false);
@@ -34,10 +35,9 @@ const StyledInGame = styled.div`
 const Main = styled.div`
 	height: 720px;
 	filter: ${({ isDark }) => (isDark ? "brightness(20%)" : "")};
-	transition: 400ms;
+	transition: filter 400ms;
 
 	font-size: 5rem;
 	color: white;
 `;
-const Ground = styled.div``;
 const Record = styled.div``;

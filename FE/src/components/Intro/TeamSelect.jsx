@@ -11,7 +11,7 @@ const TeamSelect = () => {
 			.then((res) => res.json())
 			.then((json) => setGameList(() => json))
 			.catch((res) => console.log("loading error in TeamSelect : ", res));
-	});
+	}, []);
 
 	return (
 		<Wrapper>
