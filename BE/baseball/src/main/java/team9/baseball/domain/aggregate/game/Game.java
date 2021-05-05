@@ -71,4 +71,34 @@ public class Game {
             this.battingHistoryMap.put(battingHistory.getKeyInGame(), battingHistory);
         }
     }
+
+    private void goToNextInning(Team homeTeam, Team awayTeam) {
+        //카운트 초기화
+        this.strikeCount = 0;
+        this.ballCount = 0;
+        this.outCount = 0;
+
+        //다음 이닝으로 변경
+        this.currentInning += 1;
+        this.currentHalves = currentHalves == Halves.TOP ? Halves.BOTTOM : Halves.TOP;
+        Inning inning = new Inning(currentInning, currentHalves);
+        this.inningMap.put(inning.getKeyInGame(), inning);
+
+        //현재 이닝의 공격팀 수비팀 설정
+        Team attackTeam;
+        Team defenseTeam;
+        if (currentHalves == Halves.TOP) {
+            attackTeam = awayTeam;
+            defenseTeam = homeTeam;
+        } else {
+            attackTeam = homeTeam;
+            defenseTeam = awayTeam;
+        }
+
+        //공격팀의 타자, 수비팀의 타자 설정
+        int nextPitcherUniformNumber = defenseTeam.getNextPlayer(this.batterUniformNumber).getUniformNumber();
+        int nextBatterUniformNumber = attackTeam.getNextPlayer(this.pitcherUniformNumber).getUniformNumber();
+        this.pitcherUniformNumber = nextPitcherUniformNumber;
+        this.batterUniformNumber = nextBatterUniformNumber;
+    }
 }
