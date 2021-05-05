@@ -9,7 +9,6 @@ const Intro = () => (
 );
 
 const Wrapper = styled.div`
-	width: 1280px;
 	height: 720px;
 	display: flex;
 	flex-direction: column;

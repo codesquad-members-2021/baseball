@@ -4,6 +4,7 @@ import Game from "./Game";
 
 const TeamSelect = () => {
 	const [gameList, setGameList] = useState([]);
+	const [isHover, setHover] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("참가할 게임을 선택해주세요");
 	useEffect(() => {
 		fetch("https://baseball-ahpuh.herokuapp.com/games")
@@ -15,7 +16,9 @@ const TeamSelect = () => {
 	return (
 		<Wrapper>
 			<Alert>{alertMessage}</Alert>
-			<GameList>{gameList ? gameList.map((el, i) => <Game {...el} key={i} index={i} />) : "loading..."}</GameList>
+			<GameList isHover={isHover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+				{gameList ? gameList.map((el, i) => <Game {...el} key={i} index={i} />) : "loading..."}
+			</GameList>
 		</Wrapper>
 	);
 };
@@ -31,11 +34,22 @@ const Alert = styled.div`
 	color: #fff;
 `;
 const GameList = styled.ul`
-	height: 400px;
+	position: relative;
+	left: 15px;
+	height: 386px;
+	width: 745px;
 	overflow-y: scroll;
-	--ms-overflow-style: none;
 	::-webkit-scrollbar {
-		display: none;
+		background-color: #a6a7ab;
+		width: 13px;
+		border-radius: 10px;
+		display: ${(props) => (props.isHover ? "" : "none")};
+	}
+	::-webkit-scrollbar-thumb:vertical {
+		background-color: #4c4c4c;
+		border-radius: 10px;
+		border: 2px solid transparent;
+		background-clip: padding-box;
 	}
 `;
 
