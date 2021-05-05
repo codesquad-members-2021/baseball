@@ -1,11 +1,11 @@
-import IntroStyles from '@/Components/Intro/IntroStyles';
+import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 import GameStartButton from '@/Components/Intro/GameStartButton';
 
 const Intro = () => {
   return (
-    <IntroStyles>
+    <S.Intro>
       <GameStartButton />
-    </IntroStyles>
+    </S.Intro>
   );
 };
 

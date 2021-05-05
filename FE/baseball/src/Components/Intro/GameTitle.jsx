@@ -1,16 +1,12 @@
-import styled from 'styled-components';
+import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 
 const GameTitle = () => {
   return (
-    <GameTitleStyle>
+    <S.GameTitle>
       Team illy'swing BASEBALL GAME!!! <br />
       comming soon...
-    </GameTitleStyle>
+    </S.GameTitle>
   );
 };
 
 export default GameTitle;
-
-const GameTitleStyle = styled.div`
-  text-align: center;
-`;
