@@ -25,6 +25,7 @@ typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Foo>
 class GameViewController: UIViewController {
     
     @IBOutlet weak var gameStory: UITableView!
+    @IBOutlet var tableViewHeight: NSLayoutConstraint!
     private lazy var dataSource = makeDataSource()
     var foos: [Foo] = [Foo(title: "aa"), Foo(title: "dd")]
     
@@ -32,6 +33,13 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         registerNib()
         applySnapshot()
+        configureTableViewHeight()
+    }
+    
+    func configureTableViewHeight() {
+        DispatchQueue.main.async {
+            self.tableViewHeight.constant = self.gameStory.contentSize.height
+        }
     }
     
     func registerNib() {
@@ -43,6 +51,7 @@ class GameViewController: UIViewController {
         let dataSource = Datasource(tableView: gameStory) { (tableView, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.identifier, for: indexPath) as? GameStoryTableViewCell
             cell?.countLabel.text = item.title
+            cell?.countImage.image = UIImage(systemName: "doc.fill")
             return cell
         }
         return dataSource
@@ -55,3 +64,4 @@ class GameViewController: UIViewController {
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
 }
+
