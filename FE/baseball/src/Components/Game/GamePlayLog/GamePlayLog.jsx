@@ -1,5 +1,5 @@
 import { GamePlayLog as S } from "@/Components/Game/GameStyles";
 
-const CurrentPlayer = () => {};
+const GamePlayLog = () => {};
 
-export default CurrentPlayer;
+export default GamePlayLog;
