@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import GameTitle from '@/Components/Intro/GameTitle';
+import { Link } from 'react-router-dom';
 
 const GameStartButton = () => {
   return (
-    <a href="/home">
+    <Link to="/home">
       <GameStartButtonStyle>
         <GameTitle />
       </GameStartButtonStyle>
-    </a>
+    </Link>
   );
 };
 export default GameStartButton;
