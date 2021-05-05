@@ -12,6 +12,13 @@ public class Record {
     private int outs;
     private double average;
 
+    public Record(Long id, int atBat, int hits, int outs, double average) {
+        this.id = id;
+        this.atBat = atBat;
+        this.hits = hits;
+        this.outs = outs;
+        this.average = average;
+    }
 
     public Long getId() {
         return id;

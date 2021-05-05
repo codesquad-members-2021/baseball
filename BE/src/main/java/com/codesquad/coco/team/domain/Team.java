@@ -7,11 +7,15 @@ import java.util.Set;
 
 public class Team {
 
-
     @Id
     private String name;
 
     private Set<Player> players;
+
+    public Team(String name, Set<Player> players) {
+        this.name = name;
+        this.players = players;
+    }
 
     public String getName() {
         return name;
@@ -21,4 +25,11 @@ public class Team {
         return players;
     }
 
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", players=" + players +
+                '}';
+    }
 }

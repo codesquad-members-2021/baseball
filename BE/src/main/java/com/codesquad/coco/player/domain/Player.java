@@ -11,6 +11,13 @@ public class Player {
     private String type;
     private Record record;
 
+    public Player(Long id, String name, String type, Record record) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.record = record;
+    }
+
     public Long getId() {
         return id;
     }
