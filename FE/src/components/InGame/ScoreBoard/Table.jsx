@@ -59,7 +59,7 @@ const Table = ({ slide }) => {
 
 const StyledTable = styled.table`
 	position: absolute;
-	border: 1px solid red;
+	border: 3px solid #fff;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -71,7 +71,7 @@ const StyledTable = styled.table`
 
 	z-index: 2;
 
-	background-color: rgba(0,0,0,0.6);
+	background-color: rgba(0, 0, 0, 0.8);
 
 	color: white;
 	text-align: center;
