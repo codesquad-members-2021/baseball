@@ -4,7 +4,6 @@ import java.util.List;
 
 public class InningScore {
 
-    private List<Integer> homeScore;
-    private List<Integer> awayScore;
+    private List<Integer> score;
 
 }
