@@ -1,8 +1,12 @@
 package com.dong.baseball.Controller;
 
+import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.SituationBoardDTO;
+import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
 import com.dong.baseball.Service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +24,15 @@ public class GameController {
     }
 
     @GetMapping("")
-    public List<Match> allMatches() {
-        return gameService.findAllMatches();
+    public List<MatchUpListDTO> allMatches() {
+        return gameService.matchList();
     }
 
     @GetMapping("/{matchId}")
-    public
+    public List<SituationBoardDTO> matchInfos(@PathVariable Long matchId) {
+        return gameService.matchInformations(matchId);
+    }
+
+
 
 }
