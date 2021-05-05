@@ -1,5 +1,9 @@
 import { GamePlayLog as S } from "@/Components/Game/GameStyles";
 
-const CurrentPlayer = () => {};
+const PlayerDescription = ({ playerDescription }) => {
+  return (
+    <S.CurrentPlayer.PlayerDescription>#38</S.CurrentPlayer.PlayerDescription>
+  );
+};
 
-export default CurrentPlayer;
+export default PlayerDescription;

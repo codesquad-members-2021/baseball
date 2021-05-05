@@ -1,5 +1,7 @@
 import { GamePlayLog as S } from "@/Components/Game/GameStyles";
 
-const CurrentPlayer = () => {};
+const Position = ({ position }) => {
+  return <S.CurrentPlayer.Position>투수</S.CurrentPlayer.Position>;
+};
 
-export default CurrentPlayer;
+export default Position;

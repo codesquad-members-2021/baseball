@@ -1,13 +1,19 @@
 import GameHeader from "./GameHeader/GameHeader";
 import GamePlayground from "./GamePlayground/GamePlayground";
-import { Game as SGame } from "@/Components/Game/GameStyles";
+import GamePlayLog from "./GamePlayLog/GamePlayLog";
+import { Game as S } from "@/Components/Game/GameStyles";
 
 const Game = () => {
   return (
-    <SGame>
-      <GameHeader />
-      <GamePlayground />
-    </SGame>
+    <S.Game>
+      <S.GameLeftSection>
+        <GameHeader />
+        <GamePlayground />
+      </S.GameLeftSection>
+      <S.GameRightSection>
+        <GamePlayLog />
+      </S.GameRightSection>
+    </S.Game>
   );
 };
 

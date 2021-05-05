@@ -1,5 +1,7 @@
 import { GamePlayLog as S } from "@/Components/Game/GameStyles";
 
-const CurrentPlayer = () => {};
+const PlayerName = ({ playerName }) => {
+  return <S.CurrentPlayer.PlayerName>최동원</S.CurrentPlayer.PlayerName>;
+};
 
-export default CurrentPlayer;
+export default PlayerName;

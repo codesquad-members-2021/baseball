@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
 	body{
 		color:#fff;
 		font-family: 'Orbitron', sans-serif;
-		font-size : 12px;
+		font-size : 16px;
 		background-color : rgba(20,20,20,1);
 		padding-top:100px;
 		display: flex;
