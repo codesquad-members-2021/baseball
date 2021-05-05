@@ -36,6 +36,8 @@
 		B34B59E126418F1C009105DC /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B34B59E026418F1C009105DC /* OAuthKeys.plist */; };
 		B34B59E926419634009105DC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B59E826419634009105DC /* GameView.swift */; };
 		B34B59F22641979B009105DC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B34B59F12641979B009105DC /* SnapKit */; };
+		B38653A926428B6E00DFC803 /* GameStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */; };
+		B38653AA26428B6E00DFC803 /* GameStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		B3249A102640F15500D8DEA8 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
 		B34B59E026418F1C009105DC /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OAuthKeys.plist; path = ../../../../../Downloads/OAuthKeys.plist; sourceTree = "<group>"; };
 		B34B59E826419634009105DC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStoryTableViewCell.swift; sourceTree = "<group>"; };
+		B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameStoryTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 				22941A532641140000598814 /* Model */,
 				2242A6952640DFF6000C555E /* extension */,
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
+				B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */,
+				B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */,
 				B32499DB263FF3B400D8DEA8 /* Assets.xcassets */,
 				B32499DD263FF3B400D8DEA8 /* LaunchScreen.storyboard */,
 				B34B59E026418F1C009105DC /* OAuthKeys.plist */,
@@ -327,6 +333,7 @@
 				B32499DF263FF3B400D8DEA8 /* LaunchScreen.storyboard in Resources */,
 				B32499DC263FF3B400D8DEA8 /* Assets.xcassets in Resources */,
 				B34B59E126418F1C009105DC /* OAuthKeys.plist in Resources */,
+				B38653AA26428B6E00DFC803 /* GameStoryTableViewCell.xib in Resources */,
 				B32499DA263FF3B300D8DEA8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +372,7 @@
 				22941A8026412F9800598814 /* PlayingTeam.swift in Sources */,
 				22941A6C26412DF100598814 /* Game.swift in Sources */,
 				22941A5826412D1B00598814 /* PlayerList.swift in Sources */,
+				B38653A926428B6E00DFC803 /* GameStoryTableViewCell.swift in Sources */,
 				B34B59E926419634009105DC /* GameView.swift in Sources */,
 				22941A6226412D8000598814 /* GameList.swift in Sources */,
 				22941A6726412DC200598814 /* PairTeams.swift in Sources */,
