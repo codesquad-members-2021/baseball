@@ -15,6 +15,7 @@ const Home = () => {
       </button>
       <GoogleLogin
         clientId='869491322305-t4abjiphkaprn12snvpsqqi1bf8bb3be.apps.googleusercontent.com'
+        buttonText='Login with google'
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
       />
