@@ -1,8 +1,10 @@
 package com.dong.baseball.Service;
 
 import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.SituationBoardDTO;
+import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
-import com.dong.baseball.Repository.GameRepository;
+import com.dong.baseball.Repository.BoardRepository;
 import com.dong.baseball.Repository.LeagueRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,11 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private final GameRepository gameRepository;
+    private final BoardRepository boardRepository;
     private final LeagueRepository leagueRepository;
 
-    public GameService(GameRepository gameRepository, LeagueRepository leagueRepository) {
-        this.gameRepository = gameRepository;
+    public GameService(BoardRepository boardRepository, LeagueRepository leagueRepository) {
+        this.boardRepository = boardRepository;
         this.leagueRepository = leagueRepository;
     }
 
@@ -28,6 +30,10 @@ public class GameService {
             dtoList.add(new MatchUpListDTO(match));
         }
         return dtoList;
+    }
+
+    public List<SituationBoardDTO> matchInformations() {
+        List<Board> matchBoards = leagueRepository.
     }
 }
 
