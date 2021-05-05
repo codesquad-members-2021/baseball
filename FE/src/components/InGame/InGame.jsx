@@ -1,23 +1,25 @@
 import { useState } from "react";
 import styled from "styled-components";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
+import LineUp from "./LineUp/LineUp";
 
 const InGame = () => {
 	const [slideScoreBoard, toggleScoreBoard] = useState(false);
+	const [slideLineUp, toggleLineUp] = useState(false);
 	const [isDark, setDark] = useState(false);
 	const clickMain = () => {
 		toggleScoreBoard(false);
+		toggleLineUp(false);
 		setDark(false);
 	};
 	return (
 		<StyledInGame>
-			<ScoreBoard slide={slideScoreBoard} toggle={toggleScoreBoard} setDark={setDark} />
+			<ScoreBoard slide={slideScoreBoard} toggle={toggleScoreBoard} isDark={isDark} setDark={setDark} />
+			<LineUp slide={slideLineUp} toggle={toggleLineUp} isDark={isDark} setDark={setDark} />
 			<Main onClick={clickMain} isDark={isDark}>
-				김 수한무 거북이와 두루미
 				<Ground />
 				<Record />
 			</Main>
-			<LineUp />
 		</StyledInGame>
 	);
 };
@@ -26,6 +28,8 @@ export default InGame;
 
 const StyledInGame = styled.div`
 	position: relative;
+	overflow: hidden;
+	margin-top: 30px;
 `;
 const Main = styled.div`
 	height: 720px;
@@ -37,4 +41,3 @@ const Main = styled.div`
 `;
 const Ground = styled.div``;
 const Record = styled.div``;
-const LineUp = styled.div``;

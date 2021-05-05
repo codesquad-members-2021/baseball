@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Table from "./Table";
 
-const ScoreBoard = ({ slide, toggle, isDark, setDark }) => {
+const LineUp = ({ slide, toggle, isDark, setDark }) => {
 	return (
-		<StyledScoreBoard>
+		<StyledLineUp>
 			<NearChecker
 				onMouseEnter={() => {
 					if (isDark) return;
@@ -12,14 +12,15 @@ const ScoreBoard = ({ slide, toggle, isDark, setDark }) => {
 				}}
 			/>
 			<Table slide={slide} />
-		</StyledScoreBoard>
+		</StyledLineUp>
 	);
 };
-const StyledScoreBoard = styled.div``;
+const StyledLineUp = styled.div``;
 const NearChecker = styled.div`
 	position: absolute;
 	width: 1280px;
 	height: 100px;
+	top: 620px;
 `;
 
-export default ScoreBoard;
+export default LineUp;
