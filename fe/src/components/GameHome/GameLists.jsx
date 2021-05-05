@@ -1,6 +1,7 @@
 import React from 'react'
 
 const GameLists = () => {
+    // data fetch
     return (
         <div>
             

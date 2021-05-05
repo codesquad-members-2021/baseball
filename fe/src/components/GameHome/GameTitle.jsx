@@ -8,5 +8,5 @@ export default GameTitle
 const Title = styled.h1`
   font-size: ${props => (props.size === 'L' ? '4rem' : '2rem')};
   font-weight: 750;
-  color: black;
+  color: #fff;
 `

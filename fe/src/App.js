@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "pages/Home";
 import Game from "pages/Game";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Switch>
