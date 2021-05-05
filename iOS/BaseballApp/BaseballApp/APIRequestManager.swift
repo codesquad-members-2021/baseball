@@ -7,8 +7,8 @@
 
 import Foundation
 import Combine
+
 class APIRequestManager {
-    @Published var rooms: RoomResponse = RoomResponse(rooms: [])
     var cancelBag = Set<AnyCancellable>()
     func fetch(url: URL, method: HTTPMethod, httpBody: Data? = nil) {
         var request = URLRequest(url: url)
@@ -18,12 +18,12 @@ class APIRequestManager {
             .map(\.data)
             .decode(type: RoomResponse.self, decoder: JSONDecoder())
             .replaceError(with: RoomResponse(rooms: []))
-            .assign(to: \.rooms, on: self)
+            .assign(to: \.rooms, on: RoomsViewModel())
             .store(in: &self.cancelBag)
     }
 }
 struct Endpoint {
-    func url(path: String, method: HTTPMethod) -> URL? {
+    static func url(path: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "api.github.com"

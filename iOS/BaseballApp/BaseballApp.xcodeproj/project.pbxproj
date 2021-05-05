@@ -26,6 +26,8 @@
 		E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */; };
 		E4BE32102641356C006E294A /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320F2641356C006E294A /* PlayViewController.swift */; };
 		E4BE321226425878006E294A /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321126425878006E294A /* APIRequestManager.swift */; };
+		E4BE321426425D41006E294A /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321326425D41006E294A /* RoomsViewModel.swift */; };
+		E4BE321626425E7C006E294A /* RoomsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321526425E7C006E294A /* RoomsUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		E4BE320F2641356C006E294A /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		E4BE321126425878006E294A /* APIRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		E4BE321326425D41006E294A /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
+		E4BE321526425E7C006E294A /* RoomsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 				D03CF01F2640E61A00C00729 /* Info.plist */,
 				D03CF0662641494000C00729 /* Entity */,
 				E4BE321126425878006E294A /* APIRequestManager.swift */,
+				E4BE321326425D41006E294A /* RoomsViewModel.swift */,
+				E4BE321526425E7C006E294A /* RoomsUseCase.swift */,
 			);
 			path = BaseballApp;
 			sourceTree = "<group>";
@@ -337,6 +343,8 @@
 				D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */,
 				D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */,
 				D03CF04F2640ED7600C00729 /* GameTableViewCell.swift in Sources */,
+				E4BE321626425E7C006E294A /* RoomsUseCase.swift in Sources */,
+				E4BE321426425D41006E294A /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
