@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0112640E61900C00729 /* AppDelegate.swift */; };
 		D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0132640E61900C00729 /* SceneDelegate.swift */; };
-		D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0152640E61900C00729 /* GamesViewController.swift */; };
+		D03CF0162640E61900C00729 /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0152640E61900C00729 /* LobbyViewController.swift */; };
 		D03CF0192640E61900C00729 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03CF0172640E61900C00729 /* Main.storyboard */; };
 		D03CF01B2640E61A00C00729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03CF01A2640E61A00C00729 /* Assets.xcassets */; };
 		D03CF01E2640E61A00C00729 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D03CF01C2640E61A00C00729 /* LaunchScreen.storyboard */; };
 		D03CF0292640E61A00C00729 /* BaseballAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0282640E61A00C00729 /* BaseballAppTests.swift */; };
 		D03CF0342640E61A00C00729 /* BaseballAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0332640E61A00C00729 /* BaseballAppUITests.swift */; };
-		D03CF04F2640ED7600C00729 /* GameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */; };
+		D03CF04F2640ED7600C00729 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF04E2640ED7600C00729 /* RoomTableViewCell.swift */; };
 		D03CF0622641493C00C00729 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0612641493C00C00729 /* Room.swift */; };
 		D03CF06B264149F000C00729 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF06A264149F000C00729 /* Game.swift */; };
+		D03CF07F264273E000C00729 /* GameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF07E264273E000C00729 /* GameUseCase.swift */; };
+		D03CF0842642781400C00729 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03CF0832642781400C00729 /* HeaderView.xib */; };
+		D03CF0892642782500C00729 /* ScoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0882642782500C00729 /* ScoreHeaderView.swift */; };
+		D03CF0A02642890000C00729 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF09F2642890000C00729 /* GameViewModel.swift */; };
 		E4BE320026412390006E294A /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE31FF26412390006E294A /* GroundView.swift */; };
 		E4BE32022641239A006E294A /* GroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE32012641239A006E294A /* GroundView.xib */; };
 		E4BE320426412604006E294A /* CurrentPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320326412604006E294A /* CurrentPlayerView.xib */; };
 		E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320526412614006E294A /* CurrentPlayerView.swift */; };
-		E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */; };
-		E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */; };
+		E4BE320926412F53006E294A /* PitcherRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320726412F53006E294A /* PitcherRecordTableViewCell.swift */; };
+		E4BE320A26412F53006E294A /* PitcherRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4BE320826412F53006E294A /* PitcherRecordTableViewCell.xib */; };
 		E4BE32102641356C006E294A /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE320F2641356C006E294A /* PlayViewController.swift */; };
 		E4BE321226425878006E294A /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321126425878006E294A /* APIRequestManager.swift */; };
 		E4BE321426425D41006E294A /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE321326425D41006E294A /* RoomsViewModel.swift */; };
@@ -51,7 +55,7 @@
 		D03CF00E2640E61900C00729 /* BaseballApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseballApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03CF0112640E61900C00729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D03CF0132640E61900C00729 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D03CF0152640E61900C00729 /* GamesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
+		D03CF0152640E61900C00729 /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		D03CF0182640E61900C00729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D03CF01A2640E61A00C00729 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03CF01D2640E61A00C00729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,15 +66,19 @@
 		D03CF02F2640E61A00C00729 /* BaseballAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BaseballAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03CF0332640E61A00C00729 /* BaseballAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballAppUITests.swift; sourceTree = "<group>"; };
 		D03CF0352640E61A00C00729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTableViewCell.swift; sourceTree = "<group>"; };
+		D03CF04E2640ED7600C00729 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		D03CF0612641493C00C00729 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		D03CF06A264149F000C00729 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		D03CF07E264273E000C00729 /* GameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUseCase.swift; sourceTree = "<group>"; };
+		D03CF0832642781400C00729 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HeaderView.xib; path = BaseballApp/Views/HeaderView.xib; sourceTree = SOURCE_ROOT; };
+		D03CF0882642782500C00729 /* ScoreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHeaderView.swift; sourceTree = "<group>"; };
+		D03CF09F2642890000C00729 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		E4BE31FF26412390006E294A /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
 		E4BE32012641239A006E294A /* GroundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroundView.xib; sourceTree = "<group>"; };
 		E4BE320326412604006E294A /* CurrentPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentPlayerView.xib; sourceTree = "<group>"; };
 		E4BE320526412614006E294A /* CurrentPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPlayerView.swift; sourceTree = "<group>"; };
-		E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		E4BE320726412F53006E294A /* PitcherRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherRecordTableViewCell.swift; sourceTree = "<group>"; };
+		E4BE320826412F53006E294A /* PitcherRecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitcherRecordTableViewCell.xib; sourceTree = "<group>"; };
 		E4BE320F2641356C006E294A /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		E4BE321126425878006E294A /* APIRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		E4BE321326425D41006E294A /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
@@ -130,9 +138,9 @@
 				D03CF0592641490D00C00729 /* Views */,
 				D03CF01F2640E61A00C00729 /* Info.plist */,
 				D03CF0662641494000C00729 /* Entity */,
-				E4BE321126425878006E294A /* APIRequestManager.swift */,
-				E4BE321326425D41006E294A /* RoomsViewModel.swift */,
-				E4BE321526425E7C006E294A /* RoomsUseCase.swift */,
+				D03CF090264281A600C00729 /* ViewModel */,
+				D03CF094264281B300C00729 /* UseCases */,
+				D03CF098264281C100C00729 /* Network */,
 			);
 			path = BaseballApp;
 			sourceTree = "<group>";
@@ -169,14 +177,16 @@
 		D03CF0592641490D00C00729 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D03CF0832642781400C00729 /* HeaderView.xib */,
+				D03CF0882642782500C00729 /* ScoreHeaderView.swift */,
 				D03CF0172640E61900C00729 /* Main.storyboard */,
-				E4BE320726412F53006E294A /* PitcherHistoryTableViewCell.swift */,
-				E4BE320826412F53006E294A /* PitcherHistoryTableViewCell.xib */,
+				E4BE320726412F53006E294A /* PitcherRecordTableViewCell.swift */,
+				E4BE320826412F53006E294A /* PitcherRecordTableViewCell.xib */,
 				E4BE31FF26412390006E294A /* GroundView.swift */,
 				E4BE32012641239A006E294A /* GroundView.xib */,
 				E4BE320526412614006E294A /* CurrentPlayerView.swift */,
 				E4BE320326412604006E294A /* CurrentPlayerView.xib */,
-				D03CF04E2640ED7600C00729 /* GameTableViewCell.swift */,
+				D03CF04E2640ED7600C00729 /* RoomTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,7 +194,7 @@
 		D03CF05D2641492800C00729 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D03CF0152640E61900C00729 /* GamesViewController.swift */,
+				D03CF0152640E61900C00729 /* LobbyViewController.swift */,
 				E4BE320F2641356C006E294A /* PlayViewController.swift */,
 			);
 			path = Controllers;
@@ -197,6 +207,32 @@
 				D03CF06A264149F000C00729 /* Game.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		D03CF090264281A600C00729 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E4BE321326425D41006E294A /* RoomsViewModel.swift */,
+				D03CF09F2642890000C00729 /* GameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D03CF094264281B300C00729 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				D03CF07E264273E000C00729 /* GameUseCase.swift */,
+				E4BE321526425E7C006E294A /* RoomsUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		D03CF098264281C100C00729 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E4BE321126425878006E294A /* APIRequestManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,8 +342,9 @@
 				D03CF01E2640E61A00C00729 /* LaunchScreen.storyboard in Resources */,
 				D03CF01B2640E61A00C00729 /* Assets.xcassets in Resources */,
 				E4BE32022641239A006E294A /* GroundView.xib in Resources */,
-				E4BE320A26412F53006E294A /* PitcherHistoryTableViewCell.xib in Resources */,
+				E4BE320A26412F53006E294A /* PitcherRecordTableViewCell.xib in Resources */,
 				D03CF0192640E61900C00729 /* Main.storyboard in Resources */,
+				D03CF0842642781400C00729 /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,15 +371,18 @@
 			files = (
 				E4BE32102641356C006E294A /* PlayViewController.swift in Sources */,
 				D03CF06B264149F000C00729 /* Game.swift in Sources */,
-				D03CF0162640E61900C00729 /* GamesViewController.swift in Sources */,
+				D03CF0162640E61900C00729 /* LobbyViewController.swift in Sources */,
 				E4BE320626412614006E294A /* CurrentPlayerView.swift in Sources */,
-				E4BE320926412F53006E294A /* PitcherHistoryTableViewCell.swift in Sources */,
+				D03CF0A02642890000C00729 /* GameViewModel.swift in Sources */,
+				E4BE320926412F53006E294A /* PitcherRecordTableViewCell.swift in Sources */,
 				E4BE320026412390006E294A /* GroundView.swift in Sources */,
 				E4BE321226425878006E294A /* APIRequestManager.swift in Sources */,
 				D03CF0622641493C00C00729 /* Room.swift in Sources */,
 				D03CF0122640E61900C00729 /* AppDelegate.swift in Sources */,
 				D03CF0142640E61900C00729 /* SceneDelegate.swift in Sources */,
-				D03CF04F2640ED7600C00729 /* GameTableViewCell.swift in Sources */,
+				D03CF0892642782500C00729 /* ScoreHeaderView.swift in Sources */,
+				D03CF04F2640ED7600C00729 /* RoomTableViewCell.swift in Sources */,
+				D03CF07F264273E000C00729 /* GameUseCase.swift in Sources */,
 				E4BE321626425E7C006E294A /* RoomsUseCase.swift in Sources */,
 				E4BE321426425D41006E294A /* RoomsViewModel.swift in Sources */,
 			);

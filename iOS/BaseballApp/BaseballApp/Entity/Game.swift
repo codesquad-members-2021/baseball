@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Game {
+struct Game: Decodable {
     let home: Team
     let away: Team
     let strike: Int
@@ -18,16 +18,20 @@ struct Game {
     let base1: String?
     let base2: String?
     let base3: String?
+    let pitcherHistory: [Record]
+}
+
+struct Record: Decodable {
+    let result: String
+    let pitchStrikeCount: String
     
     enum CodingKeys: String, CodingKey {
-        case home, away, strike, ball, out
-        case inning = "stage"
-        case myRole = "myRule"
-        case base1, base2, base3
+        case result
+        case pitchStrikeCount = "log"
     }
 }
 
-struct Team {
+struct Team: Decodable {
     let name: String
     let score: Int
     let position: String
@@ -35,24 +39,24 @@ struct Team {
     let playerStatus: String
 }
 
-struct GameHistory {
-    let home: TeamHistory
-    let away: TeamHistory
+struct Scoreboard: Decodable {
+    let home: Score
+    let away: Score
     let inning: String
 }
 
-struct TeamHistory {
-    let name: String
+struct Score: Decodable {
+    let teamName: String
     let total: Int
     let scores: [Int]
-    let battingStatics: [PlayerInformation] // 타율 리스트
+    let battingStats: [HitterInformation]
 }
 
-struct PlayerInformation {
+struct HitterInformation: Decodable {
     let id: Int
     let name: String
-    let plateAppearance: Int // 타석
-    let hits: Int // 안타
+    let plateAppearance: Int
+    let hits: Int
     let out: Int
     let average: Float
     let isPlaying: Bool

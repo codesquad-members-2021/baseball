@@ -9,11 +9,17 @@ import Foundation
 import Combine
 
 class APIRequestManager {
-    var cancelBag = Set<AnyCancellable>()
-    func fetch(url: URL, method: HTTPMethod, httpBody: Data? = nil) {
+    private var cancelBag = Set<AnyCancellable>()
+    
+    private func createRequest(url: URL, method: HTTPMethod, httpBody: Data? = nil) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.httpBody = httpBody
+        return request
+    }
+    
+    func fetchRooms(url: URL, method: HTTPMethod, httpBody: Data? = nil) {
+        let request = createRequest(url: url, method: method)
         URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
             .decode(type: RoomResponse.self, decoder: JSONDecoder())
@@ -21,7 +27,18 @@ class APIRequestManager {
             .assign(to: \.rooms, on: RoomsViewModel())
             .store(in: &self.cancelBag)
     }
+    
+    func fetchGame(url: URL, method: HTTPMethod, httpBody: Data? = nil) {
+        let request = createRequest(url: url, method: method)
+        URLSession.shared.dataTaskPublisher(for: request)
+            .map(\.data)
+            .decode(type: Game?.self, decoder: JSONDecoder())
+            .replaceError(with: nil)
+            .assign(to: \.game, on: GameViewModel())
+            .store(in: &self.cancelBag)
+    }
 }
+
 struct Endpoint {
     static func url(path: String) -> URL? {
         var components = URLComponents()
@@ -31,6 +48,7 @@ struct Endpoint {
         return components.url
     }
 }
+
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"

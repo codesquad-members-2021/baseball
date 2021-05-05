@@ -7,11 +7,11 @@
 
 import UIKit
 
-class GameTableViewCell: UITableViewCell {
+class RoomTableViewCell: UITableViewCell {
 
-    static let identifier = String(describing: GameTableViewCell.self)
+    static let identifier = String(describing: RoomTableViewCell.self)
     
-    @IBOutlet weak var gameNumber: UILabel!
+    @IBOutlet weak var roomNumber: UILabel!
     @IBOutlet weak var awayTeamName: UILabel!
     @IBOutlet weak var homeTeamName: UILabel!
 

@@ -13,7 +13,7 @@ struct RoomResponse: Decodable {
 
 struct Room: Decodable {
     let id: Int
-    let title: String
+    let number: String
     let away: String
     let home: String
     let available: Bool

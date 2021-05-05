@@ -12,6 +12,6 @@ class RoomsUseCase {
     let endpoint: Endpoint = Endpoint()
     
     func start(url: URL) {
-        apiRequestManager.fetch(url: url, method: .get)
+        apiRequestManager.fetchRooms(url: url, method: .get)
     }
 }

@@ -9,4 +9,5 @@ import UIKit
 
 class CurrentPlayerView: UIView {
 
+    static let identifier = String(describing: CurrentPlayerView.self)
 }

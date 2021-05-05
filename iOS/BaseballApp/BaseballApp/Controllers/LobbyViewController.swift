@@ -8,9 +8,9 @@
 import UIKit
 import Combine
 
-class GamesViewController: UIViewController {
+class LobbyViewController: UIViewController {
 
-    @IBOutlet weak var gamesTableView: UITableView!
+    @IBOutlet weak var roomsTableView: UITableView!
     var viewModel: RoomsViewModel?
     var cancelBag = Set<AnyCancellable>()
     
@@ -25,7 +25,7 @@ class GamesViewController: UIViewController {
         viewModel?.$rooms
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] _ in
-                self?.gamesTableView.reloadData()
+                self?.roomsTableView.reloadData()
             })
             .store(in: &self.cancelBag)
     }

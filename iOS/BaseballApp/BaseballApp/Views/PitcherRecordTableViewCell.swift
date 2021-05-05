@@ -7,9 +7,9 @@
 
 import UIKit
 
-class PitcherHistoryTableViewCell: UITableViewCell {
+class PitcherRecordTableViewCell: UITableViewCell {
     
-    static let identifier = String(describing: PitcherHistoryTableViewCell.self)
+    static let identifier = String(describing: PitcherRecordTableViewCell.self)
 
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
