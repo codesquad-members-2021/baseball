@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import GameSelect from ''
+import GameSelect from 'components/GameHome/GameSelect'
 
 const GameItem = ({ game_id, home, away, isStart }) => {
     
