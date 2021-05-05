@@ -8,8 +8,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.exception.NotFoundException;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -33,5 +36,20 @@ public class Team {
 
     public void addPlayer(Player player) {
         playerMap.put(player.getUniformNumber(), player);
+    }
+
+    public Player getNextPlayer(int currentUniformNumber) {
+        if (playerMap.size() == 0) {
+            throw new NotFoundException("팀에 속한 선수가 없습니다.");
+        }
+
+        List<Player> playerList = playerMap.values().stream().
+                sorted(Comparator.comparingInt(Player::getUniformNumber))
+                .collect(Collectors.toList());
+
+        int currentIndex = playerList.indexOf(currentUniformNumber);
+        int nextIndex = (currentIndex + 1) % playerList.size();
+
+        return playerList.get(nextIndex);
     }
 }
