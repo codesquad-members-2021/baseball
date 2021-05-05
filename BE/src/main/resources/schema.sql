@@ -8,8 +8,14 @@ drop table if exists score_board;
 drop table if exists innings;
 
 create table team(
-    id BIGINT auto_increment    primary key,
-    name varchar(20)            not null unique
+    name varchar(20)            primary key not null
+);
+
+create table player(
+    id BIGINT auto_increment     primary key,
+    name varchar(20)             not null,
+    type varchar(20)             not null,
+    team varchar(20) references team(name)
 );
 
 create table record(
@@ -17,30 +23,21 @@ create table record(
     at_bat  int                     not null,
     hits    int                     not null,
     outs     int                    not null,
-    average DECIMAL(3,3)            not null
+    average double(4,3)            not null,
+    player BIGINT references player(id)
 );
-
-create table player(
-    id BIGINT auto_increment     primary key,
-    name varchar(20)             not null,
-    type varchar(20)             not null,
-    team BIGINT references team(id),
-    record BIGINT references record(id)
-);
-
-
 
 create table game(
     id BIGINT auto_increment          primary key,
     user_type varchar(20)             not null,
-    away_id BIGINT references team(id),
-    home_id BIGINT references team(id)
+    away varchar(20) references team(name),
+    home varchar(20) references team(name)
 );
 
 create table score_board(
     id BIGINT auto_increment          primary key,
     game BIGINT references game(id),
-    team BIGINT references team(id)
+    team varchar(20) references team(name)
 );
 
 create table innings(
