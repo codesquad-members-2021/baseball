@@ -14,13 +14,15 @@ class SelectionViewController: UIViewController {
     
     let gradientLayer: CAGradientLayer = CAGradientLayer()
     
-    private var dataSource : UITableViewDiffableDataSource<Section, Game>!
+    private var viewModel = SelectViewModel()
+    private var dataSource: UITableViewDiffableDataSource<Section, Game>!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setBackground()
         
+        self.viewModel.request()
         self.registerNib()
         self.configureDataSource()
         self.createSnapshot()
@@ -51,7 +53,9 @@ extension SelectionViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Game>()
         
         snapshot.appendSections([.main])
-        snapshot.appendItems(games)
+        viewModel.didFetchData { games in
+            snapshot.appendItems(games)
+        }
         self.dataSource.apply(snapshot)
     }
 }
