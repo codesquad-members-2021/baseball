@@ -4,7 +4,7 @@ import org.springframework.data.relational.core.mapping.Column;
 
 public class Player {
 
-    @Column("PLAYER_NAME")
+    @Column("player_name")
     private final String name;
 
     public Player(String name) {

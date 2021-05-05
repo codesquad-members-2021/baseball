@@ -10,15 +10,15 @@ import java.util.List;
 public class Team {
 
     @Id
-    @Column("TEAM_ID")
+    @Column("team_id")
     private final Long id;
 
-    @Column("TEAM_NAME")
+    @Column("team_name")
     private final String name;
 
     private final Integer pitcherNumber;
 
-    @MappedCollection(idColumn = "TEAM_ID", keyColumn = "TEAM_PLAYERS_INDEX")
+    @MappedCollection(idColumn = "team_id", keyColumn = "team_players_index")
     private final List<Player> players;
 
     Team(Long id, String name, List<Player> players, Integer pitcherNumber) {
