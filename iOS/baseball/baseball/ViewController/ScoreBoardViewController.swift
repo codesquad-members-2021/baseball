@@ -8,22 +8,23 @@
 import UIKit
 
 class ScoreBoardViewController: UIViewController {
-
+    @IBOutlet weak var homeTotalScore: UILabel!
+    @IBOutlet weak var awayTotalScore: UILabel!
+    @IBOutlet var homeScores: [UILabel]!
+    @IBOutlet var awayScores: [UILabel]!
+    @IBOutlet weak var playerScoreTableView: UITableView!
+    @IBOutlet weak var teamControllBar: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        teamControllBar.setTitle("A~", forSegmentAt: 0)
+        teamControllBar.setTitle("B~", forSegmentAt: 1)
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension ScoreBoardViewController {
+    private func sumScore(of scores: [UILabel]) -> String{
+        return "\(scores.reduce(0, { $0 + (Int($1.text ?? "0") ?? 0)  }))"
     }
-    */
-
 }
