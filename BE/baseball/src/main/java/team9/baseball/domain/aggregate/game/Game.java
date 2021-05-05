@@ -85,20 +85,27 @@ public class Game {
         this.inningMap.put(inning.getKeyInGame(), inning);
 
         //현재 이닝의 공격팀 수비팀 설정
-        Team attackTeam;
-        Team defenseTeam;
-        if (currentHalves == Halves.TOP) {
-            attackTeam = awayTeam;
-            defenseTeam = homeTeam;
-        } else {
-            attackTeam = homeTeam;
-            defenseTeam = awayTeam;
-        }
+        Team attackTeam = getAttackTeam(awayTeam, homeTeam);
+        Team defenseTeam = getDefenseTeam(awayTeam, homeTeam);
 
         //공격팀의 타자, 수비팀의 타자 설정
         int nextPitcherUniformNumber = defenseTeam.getNextPlayer(this.batterUniformNumber).getUniformNumber();
         int nextBatterUniformNumber = attackTeam.getNextPlayer(this.pitcherUniformNumber).getUniformNumber();
         this.pitcherUniformNumber = nextPitcherUniformNumber;
         this.batterUniformNumber = nextBatterUniformNumber;
+    }
+
+    private Team getAttackTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return awayTeam;
+        }
+        return homeTeam;
+    }
+
+    private Team getDefenseTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return homeTeam;
+        }
+        return awayTeam;
     }
 }
