@@ -5,6 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Team {
@@ -34,6 +35,10 @@ public class Team {
 
     public void addPlayer(Player player) {
         players.add(player);
+    }
+
+    public void addPlayers(Player... players) {
+        this.players.addAll(Arrays.asList(players));
     }
 
     public Long getId() {

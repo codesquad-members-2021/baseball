@@ -1,10 +1,13 @@
 package codesquad.team7.baseball.game;
 
-import java.util.List;
+import org.springframework.data.annotation.Id;
 
 public class BaseballGameHistory {
 
-    private List<History> homeHistory;
-    private List<History> awayHistory;
+    @Id
+    private Long baseballGameHistory;
+    private Long gameId;
 
+    private Pictch pictch;
+    private String state;
 }
