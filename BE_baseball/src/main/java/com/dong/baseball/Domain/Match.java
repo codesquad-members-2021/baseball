@@ -2,12 +2,27 @@ package com.dong.baseball.Domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Match {
     @Id
-    Long matchId;
+    private Long matchId;
 
-    String home;
-    String away;
+    private String home;
+    private String away;
+
+    List<Board> gameBoards = new ArrayList<>();
+
+    public void addGameBoards(Board... boards) {
+        for (Board board : boards) {
+            this.gameBoards.add(board);
+        }
+    }
+
+    public List<Board> getGameBoards() {
+        return gameBoards;
+    }
 
     public Long getMatchId() {
         return matchId;
@@ -39,6 +54,7 @@ public class Match {
                 "matchId=" + matchId +
                 ", home='" + home + '\'' +
                 ", away='" + away + '\'' +
+                ", gameBoards=" + gameBoards +
                 '}';
     }
 }
