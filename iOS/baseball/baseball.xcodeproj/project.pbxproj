@@ -31,6 +31,7 @@
 		22B3033B26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3033926438EED001AB2E4 /* PlayerScoreFooterTableViewCell.swift */; };
 		22B3033C26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22B3033A26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.xib */; };
 		22B3034126439867001AB2E4 /* GameTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B3034026439867001AB2E4 /* GameTabBarViewController.swift */; };
+		22B3037B2643BE55001AB2E4 /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22B3037A2643BE54001AB2E4 /* OAuthKeys.plist */; };
 		B32499D3263FF3B300D8DEA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */; };
 		B32499D5263FF3B300D8DEA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */; };
 		B32499D7263FF3B300D8DEA8 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499D6263FF3B300D8DEA8 /* OAuthViewController.swift */; };
@@ -40,7 +41,6 @@
 		B32499EA263FF3B400D8DEA8 /* baseballTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499E9263FF3B400D8DEA8 /* baseballTests.swift */; };
 		B32499F5263FF3B400D8DEA8 /* baseballUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32499F4263FF3B400D8DEA8 /* baseballUITests.swift */; };
 		B3249A112640F15500D8DEA8 /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3249A102640F15500D8DEA8 /* UserDTO.swift */; };
-		B34B59E126418F1C009105DC /* OAuthKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = B34B59E026418F1C009105DC /* OAuthKeys.plist */; };
 		B34B59E926419634009105DC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34B59E826419634009105DC /* GameView.swift */; };
 		B34B59F22641979B009105DC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B34B59F12641979B009105DC /* SnapKit */; };
 		B38653A926428B6E00DFC803 /* GameStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */; };
@@ -88,6 +88,7 @@
 		22B3033926438EED001AB2E4 /* PlayerScoreFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreFooterTableViewCell.swift; sourceTree = "<group>"; };
 		22B3033A26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerScoreFooterTableViewCell.xib; sourceTree = "<group>"; };
 		22B3034026439867001AB2E4 /* GameTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTabBarViewController.swift; sourceTree = "<group>"; };
+		22B3037A2643BE54001AB2E4 /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = OAuthKeys.plist; sourceTree = "<group>"; };
 		B32499CF263FF3B300D8DEA8 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32499D2263FF3B300D8DEA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B32499D4263FF3B300D8DEA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		B32499F4263FF3B400D8DEA8 /* baseballUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseballUITests.swift; sourceTree = "<group>"; };
 		B32499F6263FF3B400D8DEA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3249A102640F15500D8DEA8 /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
-		B34B59E026418F1C009105DC /* OAuthKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = OAuthKeys.plist; path = ../../../../../Downloads/OAuthKeys.plist; sourceTree = "<group>"; };
 		B34B59E826419634009105DC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStoryTableViewCell.swift; sourceTree = "<group>"; };
 		B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameStoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 				B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */,
 				B32499DB263FF3B400D8DEA8 /* Assets.xcassets */,
 				B32499DD263FF3B400D8DEA8 /* LaunchScreen.storyboard */,
-				B34B59E026418F1C009105DC /* OAuthKeys.plist */,
+				22B3037A2643BE54001AB2E4 /* OAuthKeys.plist */,
 				B32499E0263FF3B400D8DEA8 /* Info.plist */,
 			);
 			path = baseball;
@@ -359,12 +359,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B3037B2643BE55001AB2E4 /* OAuthKeys.plist in Resources */,
 				B32499DF263FF3B400D8DEA8 /* LaunchScreen.storyboard in Resources */,
 				B32499DC263FF3B400D8DEA8 /* Assets.xcassets in Resources */,
-				B34B59E126418F1C009105DC /* OAuthKeys.plist in Resources */,
 				B38653AA26428B6E00DFC803 /* GameStoryTableViewCell.xib in Resources */,
 				226344132642CE0000211BC7 /* PlayerScoreHeaderTableViewCell.xib in Resources */,
-				22941AA62641372600598814 /* OAuthKeys.plist in Resources */,
 				B32499DA263FF3B300D8DEA8 /* Main.storyboard in Resources */,
 				226344202642CE9F00211BC7 /* PlayerScoreTableViewCell.xib in Resources */,
 				22B3033C26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.xib in Resources */,
