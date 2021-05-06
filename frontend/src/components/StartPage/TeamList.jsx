@@ -1,7 +1,41 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import API from '../Hook/API';
 import { theme } from '../Style/Theme';
+import { Redirect, Link } from 'react-router-dom';
+import useFetch from '../Hook/useFetch';
+const TeamList = () => {
+	//! USEfETCh _ Test
+	const [teamData, loadingTeamData, error1] = useFetch('get', 'teamList');
+	const teamListData = teamData.games;
+
+	const [currentID, setID] = useState(null);
+	const [occupiedState, loadingOccupiedState, error2] = useFetch(
+		'get',
+		'initData',
+		currentID,
+	);
+
+	return (
+		!loadingTeamData &&
+		teamListData.map((team, i) => (
+			<SingleList key={i}>
+				<div>{team.gameTitle}</div>
+				<GameTitle>
+					<TeamName onClick={() => setID(team.id)}>
+						{/* <Redirect
+							to={`/attack/${team.id}/${team.awayTeam.teamName}/${team.homeTeam.teamName}`}
+						></Redirect> */}
+						{team.awayTeam.teamName}
+					</TeamName>
+					<span>VS</span>
+					<TeamName>
+						<Link to="/defense">{team.homeTeam.teamName}</Link>
+					</TeamName>
+				</GameTitle>
+			</SingleList>
+		))
+	);
+};
 
 const TeamList = () => {
   const [teamList, setTeamLiset] = useState([]);
