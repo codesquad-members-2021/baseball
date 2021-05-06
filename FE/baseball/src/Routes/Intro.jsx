@@ -1,1 +1,1 @@
-export { default as Inrto } from '@/Components/Intro/Intro';
+export { default as Intro } from "@/Components/Intro/Intro";

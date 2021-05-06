@@ -1,5 +1,5 @@
-import Router from '@/Routes/Router';
-import GlobalStyles from '@/Styles/GlobalStyles';
+import GlobalStyles from "@/Styles/GlobalStyles"
+import Router from "@/Routes/Router"
 
 const App = () => {
   return (

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const BOX = {
   FLEX_ROW_BOX: styled.div`
