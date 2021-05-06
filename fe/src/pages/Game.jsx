@@ -1,10 +1,9 @@
+import Header from 'components/GamePlay/playHeader/Header'
 
 const Game = () => {
     return (
-        <div>
-            game
-        </div>
-    )
+        <Header />
+        )
 }
 
 export default Game
