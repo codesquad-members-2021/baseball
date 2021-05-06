@@ -24,7 +24,7 @@ const StyleGamePlay = styled.div``;
 
 const StyleGamePlayGrid = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr minmax(19.5rem, 1fr);
   grid-template-rows: minmax(14.5rem, 25vh) 75vh;
   & > div:nth-child(1),
   & > div:nth-child(3) {
@@ -34,6 +34,13 @@ const StyleGamePlayGrid = styled.div`
   & > div:nth-child(4) {
     border-left: 3px solid #bbb;
     padding: 1.5rem 2rem 0rem 2rem;
+  }
+  & > div:nth-child(1),
+  & > div:nth-child(2) {
+    border-bottom: 3px solid #bbb;
+    padding: 1.5rem 2rem;
+  }
+  & > div:nth-child(4) {
     overflow-y: scroll;
     &::-webkit-scrollbar {
       width: 0.875rem;
@@ -48,11 +55,6 @@ const StyleGamePlayGrid = styled.div`
     &::-webkit-scrollbar-track {
       background-color: transparent;
     }
-  }
-  & > div:nth-child(1),
-  & > div:nth-child(2) {
-    border-bottom: 3px solid #bbb;
-    padding: 1.5rem 2rem;
   }
 `;
 
