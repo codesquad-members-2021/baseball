@@ -8,6 +8,6 @@
 import Foundation
 
 struct ScoreBoard {
-    let homeTeam: TeamScore
-    let awayTeam: TeamScore
+    private let homeTeam: TeamScore
+    private let awayTeam: TeamScore
 }

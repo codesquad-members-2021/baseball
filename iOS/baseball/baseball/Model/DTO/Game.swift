@@ -8,9 +8,9 @@
 import Foundation
 
 struct Game: Codable {
-    let playTeam: String
-    let roundInfo: RoundInfo
-    let homeTeam: PlayingTeam
-    let awayTeam: PlayingTeam
-    let story: [String]
+    private let playTeam: String
+    private let roundInfo: RoundInfo
+    private let homeTeam: PlayingTeam
+    private let awayTeam: PlayingTeam
+    private let story: [String]
 }

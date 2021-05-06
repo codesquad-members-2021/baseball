@@ -8,9 +8,9 @@
 import Foundation
 
 struct PlayingTeam: Codable {
-    let teamName: String
-    let score: Int
-    let picher: Picher
-    let hitter: Hitter
-    let isOffense: Bool
+    private let teamName: String
+    private let score: Int
+    private let picher: Picher
+    private let hitter: Hitter
+    private let isOffense: Bool
 }

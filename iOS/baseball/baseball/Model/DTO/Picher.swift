@@ -8,6 +8,6 @@
 import Foundation
 
 struct Picher: Codable {
-    let name: String
-    let pit: Int
+    private let name: String
+    private let pit: Int
 }

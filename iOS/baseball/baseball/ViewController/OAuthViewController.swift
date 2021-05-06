@@ -10,8 +10,7 @@ import OctoKit
 import AuthenticationServices
 
 class OAuthViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
-    var tokenConfig : TokenConfiguration? = nil
-    lazy var config = OAuthConfiguration.init(token: self.getOauthKey(of: .ClientID),
+    lazy var config = OAuthConfiguration.init(token: self.getClientID(),
                                               secret: "",
                                               scopes: ["user"])
     var webAuthSession: ASWebAuthenticationSession?
@@ -33,7 +32,8 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
                 return
             }
             guard let successURL = callBack else { return }
-            guard let callBackURLCode = successURL.absoluteString.split(separator: "=").last else { return }
+            let callBackURLCode = successURL.extractCallbackURLCode()
+            
             self.gameManager.postLoginCode(callBackURLCode: String(callBackURLCode)) { (result) in
                 switch result {
                 case .success(let userDTO):

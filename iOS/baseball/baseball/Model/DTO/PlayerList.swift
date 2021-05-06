@@ -8,5 +8,5 @@
 import Foundation
 
 struct PlayerList: Codable {
-    let player: [Player]
+    private let player: [Player]
 }

@@ -189,6 +189,7 @@
 				22941ACB264141C900598814 /* ScoreBoardViewController.swift */,
 				B34B59E826419634009105DC /* GameView.swift */,
 				22B3034026439867001AB2E4 /* GameTabBarViewController.swift */,
+				2242A6952640DFF6000C555E /* extension */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -249,7 +250,6 @@
 				22187B0D26429E0D00816C7C /* View */,
 				22941AD0264141E100598814 /* ViewController */,
 				22941A532641140000598814 /* Model */,
-				2242A6952640DFF6000C555E /* extension */,
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
 				B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */,
 				B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */,

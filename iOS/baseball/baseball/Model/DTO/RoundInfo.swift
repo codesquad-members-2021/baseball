@@ -8,11 +8,11 @@
 import Foundation
 
 struct RoundInfo: Codable {
-    let round: Int
-    let strike: Int
-    let ball: Int
-    let out: Int
-    let firstBase: Int
-    let secondBase: Int
-    let thirdBase: Int
+    private let round: Int
+    private let strike: Int
+    private let ball: Int
+    private let out: Int
+    private let firstBase: Int
+    private let secondBase: Int
+    private let thirdBase: Int
 }

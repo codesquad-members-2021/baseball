@@ -17,8 +17,7 @@ class GameManager {
     }
     
     func postLoginCode(callBackURLCode: String, completion: @escaping (Result<UserDTO, NetworkingError>) -> ()) {
-        guard let url = URL(string: "http://3.36.217.168:8080/login?code=\(callBackURLCode)") else { return }
-        networkingCenter.post(url: url) { (result) in
+        networkingCenter.postLoginCode(callBackURLCode: callBackURLCode) { (result) in
             switch result {
             case .success(let data):
                 let decodeResult = self.jsonProcessCenter.decodeData(typeOf: UserDTO.self, data: data)

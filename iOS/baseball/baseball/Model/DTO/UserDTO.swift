@@ -8,8 +8,12 @@
 import Foundation
 
 struct UserDTO: Codable {
-    let name: String
-    let email: String
-    let userId: String
-    let token: String
+    private let name: String
+    private let email: String
+    private let userId: String
+    private let token: String
+    
+    func writeAuthorizationToken() -> String {
+        return "authorization: bearer \(token)"
+    }
 }
