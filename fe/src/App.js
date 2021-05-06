@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import GameList from './components/game-list/GameList';
+import GamePlay from './components/game-play/GamePlay';
+import GameScore from './components/game-score/GameScore';
+import GameRoster from './components/game-roster/GameRoster';
 import background from './images/background.png';
 
 function App() {
   return (
     <>
       <StyleBackground src={background}></StyleBackground>
-      <GameList />
+      {/* <GameList /> */}
+      <GamePlay />
+      {/* <GameScore /> */}
+      {/* <GameRoster /> */}
     </>
   );
 }
