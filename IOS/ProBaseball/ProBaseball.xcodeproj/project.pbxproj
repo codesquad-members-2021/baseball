@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ED6F9452643837300FEFADF /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6F9442643837300FEFADF /* PlayView.swift */; };
 		8872EBA1263FD2F900EDB038 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBA0263FD2F900EDB038 /* AppDelegate.swift */; };
 		8872EBA3263FD2F900EDB038 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBA2263FD2F900EDB038 /* SceneDelegate.swift */; };
 		8872EBA5263FD2F900EDB038 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBA4263FD2F900EDB038 /* GameListViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1ED6F9442643837300FEFADF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		8872EB9D263FD2F900EDB038 /* ProBaseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProBaseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8872EBA0263FD2F900EDB038 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8872EBA2263FD2F900EDB038 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				8872EBA6263FD2F900EDB038 /* Main.storyboard */,
 				8872EBEB2640EFED00EDB038 /* GameListCollectionViewCell.swift */,
 				8872EBEC2640EFED00EDB038 /* GameListCollectionViewCell.xib */,
+				1ED6F9442643837300FEFADF /* PlayView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				8872EBA5263FD2F900EDB038 /* GameListViewController.swift in Sources */,
 				8872EBE82640EB0C00EDB038 /* ScoreViewController.swift in Sources */,
 				8872EBA1263FD2F900EDB038 /* AppDelegate.swift in Sources */,
+				1ED6F9452643837300FEFADF /* PlayView.swift in Sources */,
 				8872EBA3263FD2F900EDB038 /* SceneDelegate.swift in Sources */,
 				8872EBFC26412C6600EDB038 /* GameList.swift in Sources */,
 			);
