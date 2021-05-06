@@ -16,8 +16,6 @@ const _initialState = {
   homeScore: 0,
   currPitcher: null,
   currHitter: null,
-
-
 }
 
 function GamePage() {

@@ -14,7 +14,7 @@ export const GameAction = {
   OUT: 'out',
 };
 
-export const InfoBoardAction = {
+export const SituationAction = {
 
 };
 
