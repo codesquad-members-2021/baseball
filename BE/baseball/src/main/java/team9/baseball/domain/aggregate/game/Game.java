@@ -72,6 +72,22 @@ public class Game {
         }
     }
 
+    private void sendBatterOnBase() {
+        String currentInningKey = Inning.getKeyInGame(currentInning, currentHalves);
+        Inning inning = inningMap.get(currentInningKey);
+
+        //3루에 주자가 있었다면 득점
+        if (this.base3UniformNumber != null) {
+            inning.plusScore();
+        }
+
+        //선수들 1루씩 이동
+        this.base3UniformNumber = this.base2UniformNumber;
+        this.base2UniformNumber = this.base1UniformNumber;
+        this.base1UniformNumber = this.batterUniformNumber;
+        this.batterUniformNumber = null;
+    }
+
     private void goToNextInning(Team homeTeam, Team awayTeam) {
         //아웃 카운트 초기화
         this.outCount = 0;
