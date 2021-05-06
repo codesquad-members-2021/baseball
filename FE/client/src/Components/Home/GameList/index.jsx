@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Game from "Components/Home/GameList/Game";
 import { gameDatas } from "utils/mockDatas";
 
 const GameList = () => {
-  const TeamData = Array.from({ length: 7 });
   return (
     <GameBoxList>
       {gameDatas.map((gameData) => {
