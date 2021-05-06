@@ -36,4 +36,8 @@ public class Member {
     public void setRecord(Record record) {
         this.record = record;
     }
+
+    public boolean hasRecord() {
+        return record != null;
+    }
 }
