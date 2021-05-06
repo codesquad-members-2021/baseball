@@ -28,10 +28,10 @@ public class BattingHistory {
     public BattingHistory(Integer batterTeamId, Integer batterUniformNumber) {
         this.batterTeamId = batterTeamId;
         this.batterUniformNumber = batterUniformNumber;
-        this.keyInGame = getKeyInGame(batterTeamId, batterUniformNumber);
+        this.keyInGame = acquireKeyInGame(batterTeamId, batterUniformNumber);
     }
 
-    public static String getKeyInGame(Integer batterTeamId, Integer batterUniformNumber) {
+    public static String acquireKeyInGame(Integer batterTeamId, Integer batterUniformNumber) {
         return batterTeamId + "_" + batterUniformNumber;
     }
 
