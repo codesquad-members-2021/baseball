@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { fitToContainer, drawField } from "utils/canvasUtils";
+import RunnerImage from 'Components/GamePage/MainContainer/MainLeft/RunnerImage';
 import PitchButton from "Components/GamePage/MainContainer/MainLeft/PitchButton";
 
 const BaseballField = () => {
@@ -15,16 +16,17 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
+      <RunnerImage />
       <PitchButton />
     </BaseballFieldWrapper>
   );
 };
 
 const BaseballFieldWrapper = styled.div`
+  position:relative;
   color: white;
   width: 65%;
   height: 100%;
-  position: relative;
 `;
 
 export default BaseballField;
