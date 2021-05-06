@@ -9,6 +9,6 @@ import Foundation
 
 struct Game: Codable {
     let id: Int
-    let homeTeam: String
-    let awayTeam: String
+    let home: String
+    let away: String
 }

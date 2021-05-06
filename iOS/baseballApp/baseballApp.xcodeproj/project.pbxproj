@@ -26,6 +26,10 @@
 		76619AB2264385BB004D31C6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AB1264385BB004D31C6 /* API.swift */; };
 		76619AB426439866004D31C6 /* GameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AB326439866004D31C6 /* GameDTO.swift */; };
 		76619AB626439ED4004D31C6 /* GameUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AB526439ED4004D31C6 /* GameUsecase.swift */; };
+		76619AB826439F64004D31C6 /* GameUsecasePort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AB726439F64004D31C6 /* GameUsecasePort.swift */; };
+		76619ABC2643A355004D31C6 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619ABB2643A355004D31C6 /* GameViewModel.swift */; };
+		76619ABE2643A360004D31C6 /* CommonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619ABD2643A360004D31C6 /* CommonViewModel.swift */; };
+		76619AC22643AE83004D31C6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AC12643AE83004D31C6 /* GameCell.swift */; };
 		F36C7CA9C029C0FB3B9C3E12 /* Pods_baseballApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D440DD687E5153149898B6E /* Pods_baseballApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +80,10 @@
 		76619AB1264385BB004D31C6 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		76619AB326439866004D31C6 /* GameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDTO.swift; sourceTree = "<group>"; };
 		76619AB526439ED4004D31C6 /* GameUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUsecase.swift; sourceTree = "<group>"; };
+		76619AB726439F64004D31C6 /* GameUsecasePort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUsecasePort.swift; sourceTree = "<group>"; };
+		76619ABB2643A355004D31C6 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		76619ABD2643A360004D31C6 /* CommonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonViewModel.swift; sourceTree = "<group>"; };
+		76619AC12643AE83004D31C6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		9D440DD687E5153149898B6E /* Pods_baseballApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE39EEDB49C05D5593DD150 /* Pods-baseballAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballAppTests.debug.xcconfig"; path = "Target Support Files/Pods-baseballAppTests/Pods-baseballAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2922330279C4AAA4D13C84B /* Pods-baseballApp-baseballAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballApp-baseballAppUITests.release.xcconfig"; path = "Target Support Files/Pods-baseballApp-baseballAppUITests/Pods-baseballApp-baseballAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -186,6 +194,8 @@
 		7650A1D92640F7CE006C1E5F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				76619ABB2643A355004D31C6 /* GameViewModel.swift */,
+				76619ABD2643A360004D31C6 /* CommonViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -203,6 +213,7 @@
 		7650A1DB26411736006C1E5F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				76619AC12643AE83004D31C6 /* GameCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				76619AB526439ED4004D31C6 /* GameUsecase.swift */,
+				76619AB726439F64004D31C6 /* GameUsecasePort.swift */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
@@ -516,12 +528,16 @@
 				7650A1E326411A6B006C1E5F /* PlayViewController.swift in Sources */,
 				76619AAA264376D4004D31C6 /* Endpoint.swift in Sources */,
 				7650A1A82640E3A8006C1E5F /* AppDelegate.swift in Sources */,
+				76619AC22643AE83004D31C6 /* GameCell.swift in Sources */,
 				7650A1AA2640E3A8006C1E5F /* SceneDelegate.swift in Sources */,
 				7650A1E126411A51006C1E5F /* HomeViewController.swift in Sources */,
+				76619ABC2643A355004D31C6 /* GameViewModel.swift in Sources */,
 				76619AB426439866004D31C6 /* GameDTO.swift in Sources */,
+				76619ABE2643A360004D31C6 /* CommonViewModel.swift in Sources */,
 				76619AB626439ED4004D31C6 /* GameUsecase.swift in Sources */,
 				7650A1E92641418B006C1E5F /* Record.swift in Sources */,
 				76619AB2264385BB004D31C6 /* API.swift in Sources */,
+				76619AB826439F64004D31C6 /* GameUsecasePort.swift in Sources */,
 				7650A1E7264138A0006C1E5F /* Player.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 				76619AA726437476004D31C6 /* Game.swift in Sources */,

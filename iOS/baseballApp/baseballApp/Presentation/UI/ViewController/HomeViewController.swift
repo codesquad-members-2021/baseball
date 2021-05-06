@@ -1,57 +1,25 @@
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
-    private var handler: ((Result<GameDTO, API.APIError>) -> Void)!
+ 
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBAction func buttonTouched(_ sender: Any) {
-        API.shared.get(completionHandler: handler)
-    }
-    
-   
-    
-    
+    private let viewModel = GameViewModel()
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        handler = { [weak self] result in
-            guard let self = self else {  return }
-            switch result {
-            case .success(let games):
-                self.setInfo(by: games)
-            case .failure(let error):
-                print("Error", error.localizedDescription)
-                self.setError()
-            }
-        }
+        bindCollectionView()
     }
     
-    private func setInfo(by data: GameDTO) {
-        DispatchQueue.main.async {
-            data.body.forEach { game in
-                print("""
-                 ID: \(game.id)\n
-                 HOME: \(game.homeTeam)\n
-                 AWAY: \(game.awayTeam)\n
-                 
-                """
-                )
-            }
-            
-        }
-        
-    }
-    
-    private func setError() {
-        DispatchQueue.main.async {
-            print("""
-                ID: Error\n
-                Title: Error\n
-                UserId: Error\n
-                Body: Error\n
-               """
-            )
-        }
+    private func bindCollectionView() {
+        viewModel.getGameInfo()
+        viewModel.games.bind(to: collectionView.rx.items(cellIdentifier: "GameCell", cellType: GameCell.self)) {
+            _, game, cell in
+            dump(game)
+            cell.configureCell(game: game)
+        }.disposed(by: disposeBag)
     }
 }
 

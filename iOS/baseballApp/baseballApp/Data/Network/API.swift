@@ -5,9 +5,14 @@ import Alamofire
 class API {
     static let shared: API = API()
 
-    func requestGames(from url: URL) -> Observable<GameDTO> {
+    func requestGames() -> Observable<GameDTO> {
+        guard  let url = URL(string: Endpoint.URL) else {
+            fatalError()
+        }
         return get(url)
     }
+    
+    
     
     func get<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in
@@ -25,5 +30,16 @@ class API {
             return Disposables.create()
         }
     }
-    
 }
+
+enum APIError: LocalizedError {
+       case urlNotSupport
+       case noData
+       
+       var errorDescription: String? {
+           switch self {
+           case .urlNotSupport: return "URL NOT Supported"
+           case .noData: return "Has No Data"
+           }
+       }
+   }
