@@ -39,6 +39,6 @@ const GameListLayout = styled.div`
   flex-direction: column;
   /* outline: blue solid; */
   overflow: scroll;
-  margin-top: 20%;
+  margin-top: 5%;
 `;
 export default GameList;

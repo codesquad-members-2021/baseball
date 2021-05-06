@@ -5,6 +5,13 @@ const GameMessage = () => {
 
 const GameMessageLayout = styled.div`
   color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  
+  display: flex;
+  justify-content: center;
+
+  padding-top: 10%;
 `;
 
 export default GameMessage;

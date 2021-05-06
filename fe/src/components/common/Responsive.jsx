@@ -11,7 +11,6 @@ const ResponsiveBlock = styled.div`
   height: 100vh;
   padding: 0 80px;
   margin: 0 auto; /* 중앙 정렬 */
-  background-color: #111;
   box-sizing: border-box;
 
   /* 브라우저 크기에 따라 가로 크기 변경 */
