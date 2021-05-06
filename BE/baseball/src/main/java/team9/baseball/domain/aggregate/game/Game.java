@@ -72,6 +72,21 @@ public class Game {
         }
     }
 
+    public void proceedHit(Team awayTeam, Team homeTeam) {
+        Team attackTeam = getAttackTeam(awayTeam, homeTeam);
+
+        //타자의 battingHistory 에 타수 카운트 추가
+        String battingHistoryKey = BattingHistory.getKeyInGame(attackTeam.getId(), batterUniformNumber);
+        BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
+        battingHistory.plusHits();
+
+        //타자 출루
+        sendBatterOnBase();
+
+        //타석에 다음 타자 등판
+        sendBatterOnPlate(attackTeam);
+    }
+
     private void sendBatterOnBase() {
         String currentInningKey = Inning.getKeyInGame(currentInning, currentHalves);
         Inning inning = inningMap.get(currentInningKey);
