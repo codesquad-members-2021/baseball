@@ -7,13 +7,18 @@
 
 import Foundation
 
-struct Game: Hashable, Decodable {
+struct Game: Hashable, Codable {
     let id: Int
     let home: Team
     let away: Team
 }
 
-struct Team: Hashable, Decodable {
+struct Team: Hashable, Codable {
     let team: String
     let status: String
+}
+
+struct Info: Codable {
+    let userID: String
+    let game: Game
 }

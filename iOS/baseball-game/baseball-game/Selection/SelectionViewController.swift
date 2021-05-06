@@ -12,9 +12,10 @@ class SelectionViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var gameListTableView: UITableView!
     
-    let gradientLayer: CAGradientLayer = CAGradientLayer()
+    private let gradientLayer: CAGradientLayer = CAGradientLayer()
     
     private var viewModel = SelectViewModel()
+    var gameInfo: Info!
     private var dataSource: UITableViewDiffableDataSource<Section, Game>!
     
     
