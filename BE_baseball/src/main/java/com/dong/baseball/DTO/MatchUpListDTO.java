@@ -9,7 +9,7 @@ public class MatchUpListDTO {
 
 
     public MatchUpListDTO(Match match) {
-        this.matchId = match.getMatchId();
+        this.matchId = match.getId();
         this.home = match.getHome();
         this.away = match.getAway();
     }
