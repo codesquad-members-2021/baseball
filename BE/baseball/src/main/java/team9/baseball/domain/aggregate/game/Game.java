@@ -72,6 +72,17 @@ public class Game {
         }
     }
 
+
+    public void proceedStrike(Team awayTeam, Team homeTeam) {
+        //카운트 증가
+        this.strikeCount++;
+
+        //삼진 아웃
+        if (strikeCount == 3) {
+            proceedOut(awayTeam, homeTeam);
+        }
+    }
+
     public void proceedHit(Team awayTeam, Team homeTeam) {
         Team attackTeam = getAttackTeam(awayTeam, homeTeam);
 
