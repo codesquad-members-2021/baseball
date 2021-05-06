@@ -8,26 +8,26 @@ const BaseballField = () => {
   useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
-    drawField(ctx);
+    fitToContainer(canvas);
+    drawField(ctx, canvas.offsetWidth, canvas.offsetHeight);
   }, []);
 
-  const drawField = (ctx) => {
+  const drawField = (ctx, x, y) => {
     ctx.strokeStyle = "white";
     ctx.lineWidth = "5";
-    ctx.moveTo(300, 70);
-    ctx.lineTo(50, 270);
-    ctx.lineTo(300, 470);
-    ctx.lineTo(550, 270);
-    ctx.lineTo(300, 70);
+    ctx.moveTo(350, 70);
+    ctx.lineTo(100, 270);
+    ctx.lineTo(350, 470);
+    ctx.lineTo(600, 270);
+    ctx.lineTo(350, 70);
     ctx.stroke();
-    drawBase(ctx, 300, 70);
-    drawBase(ctx, 50, 270);
-    drawBase(ctx, 550, 270);
-    drawHomeBase(ctx, 300, 470);
+    drawBase(ctx, 350, 70);
+    drawBase(ctx, 100, 270);
+    drawBase(ctx, 600, 270);
+    drawHomeBase(ctx, 350, 470);
   };
 
   const drawBase = (ctx, x, y) => {
-    //
     ctx.fillStyle = "white";
     ctx.beginPath();
     ctx.moveTo(x, y - 30);
@@ -50,16 +50,24 @@ const BaseballField = () => {
     ctx.fill();
   };
 
+  function fitToContainer(canvas) {
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
   return (
     <BaseballFieldWrapper>
-      <canvas ref={canvasRef} width={"600"} height={"540"} />
+      <canvas ref={canvasRef} />
     </BaseballFieldWrapper>
   );
 };
 
 const BaseballFieldWrapper = styled.div`
   color: white;
-  padding: 2rem;
+  width: 65%;
+  height: 100%;
 `;
 
 export default BaseballField;
