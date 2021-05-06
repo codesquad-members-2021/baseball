@@ -1,6 +1,6 @@
 package com.codesquad.coco.team.domain.DTO;
 
-import com.codesquad.coco.game.domain.model.PlayerDTO;
+import com.codesquad.coco.player.domain.PlayerDTO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.codesquad.coco.game.domain.model;
+package com.codesquad.coco.player.domain;
 
 public class PlayerDTO {
 

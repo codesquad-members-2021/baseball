@@ -1,4 +1,6 @@
-package com.codesquad.coco.team.domain.DTO;
+package com.codesquad.coco.game.domain.model;
+
+import com.codesquad.coco.team.domain.DTO.TeamDTO;
 
 public class GamePlayDTO {
 

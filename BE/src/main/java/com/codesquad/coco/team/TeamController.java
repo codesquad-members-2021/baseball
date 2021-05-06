@@ -2,7 +2,7 @@ package com.codesquad.coco.team;
 
 import com.codesquad.coco.game.GameService;
 import com.codesquad.coco.game.domain.model.Game;
-import com.codesquad.coco.team.domain.DTO.GamePlayDTO;
+import com.codesquad.coco.game.domain.model.GamePlayDTO;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
 import com.codesquad.coco.team.domain.DTO.TeamDTO;

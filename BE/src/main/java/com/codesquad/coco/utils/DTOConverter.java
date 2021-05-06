@@ -1,6 +1,6 @@
 package com.codesquad.coco.utils;
 
-import com.codesquad.coco.game.domain.model.PlayerDTO;
+import com.codesquad.coco.player.domain.PlayerDTO;
 import com.codesquad.coco.team.domain.DTO.TeamDTO;
 import com.codesquad.coco.team.domain.Team;
 
