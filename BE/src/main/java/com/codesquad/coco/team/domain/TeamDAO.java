@@ -1,5 +1,7 @@
 package com.codesquad.coco.team.domain;
 
+import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
+import com.codesquad.coco.team.domain.DTO.TeamNameDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +16,17 @@ public class TeamDAO {
         this.template = new JdbcTemplate(dataSource);
     }
 
-    public MainTeamDTO findAllName() {
+    public MainPageTeamDTO findAllName() {
         String sql = "select t.name from team t;";
 
-        MainTeamDTO mainTeamDTO = new MainTeamDTO();
+        MainPageTeamDTO mainPageTeamDTO = new MainPageTeamDTO();
 
         template.query(sql, (rs, rowNum) -> {
-            mainTeamDTO.addTeamDTO(new TeamDTO(
+            mainPageTeamDTO.addTeamDTO(new TeamNameDTO(
                     rs.getString("name")
             ));
             return null;
         });
-        return mainTeamDTO;
+        return mainPageTeamDTO;
     }
 }
