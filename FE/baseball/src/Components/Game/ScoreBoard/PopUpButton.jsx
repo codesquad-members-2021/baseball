@@ -1,8 +1,8 @@
 import { ScoreBoardStyles as S } from '@/Components/Game/ScoreBoard/ScoreBoardStyles';
 
-const PopUpButton = () => {
+const PopUpButton = ({ isHover }) => {
   return (
-    <S.PopUpButton>
+    <S.PopUpButton {...{ isHover }}>
       <div>
         <svg
           width="15px"

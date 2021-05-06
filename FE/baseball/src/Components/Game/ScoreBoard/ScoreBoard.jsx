@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PopUpButton from './PopUpButton';
 
 const ScoreBoard = () => {
-  const initialScoreBoardPosition = -158;
+  const initialScoreBoardPosition = -196;
   const [isHover, setIsHover] = useState(false);
   const [scoreBoardPosition, setScoreBoardPosition] = useState(
     initialScoreBoardPosition
@@ -12,7 +12,7 @@ const ScoreBoard = () => {
 
   const handleMouseEnter = () => {
     setIsHover((prev) => !prev);
-    setScoreBoardPosition(0);
+    setScoreBoardPosition(-3);
   };
 
   const handleMouseLeave = () => {
@@ -30,7 +30,7 @@ const ScoreBoard = () => {
         onMouseLeave={handleMouseLeave}
       >
         <ScoreTable />
-        <PopUpButton />
+        <PopUpButton {...{ isHover }} />
       </S.ScoreBoard>
     </>
   );

@@ -1,35 +1,61 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import * as CS from '@/Styles/CommonStyles';
 import { BLOCK, NONE } from '@/Utils/const';
+import theme from '@/Styles/theme';
+
+const ArrowFade = keyframes`
+0% {
+  top: 0px;
+  opacity: 0;
+}
+50% {
+  top: 2px;
+}
+100% {
+  top: 4px;
+}
+`;
 
 const ScoreBoardStyles = {
   ScoreBoard: styled(CS.BOX.FLEX_CENTER_BOX)`
     position: absolute;
     top: ${({ scoreBoardPosition }) => `${scoreBoardPosition}px`};
-    left: 350px;
-    width: fit-content;
+    left: 220px;
+    width: 1000px;
     font-weight: 900;
     font-size: 24px;
-    padding: 0 40px;
+    padding: 10px 40px;
     border: 1px solid #fff;
-    background: #222;
+    background: #111;
     transition: all ease-in-out 0.8s;
     cursor: pointer;
+    z-index: 20;
   `,
 
-  ScoreTable: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)`
-    display: flex;
-    justify-content: flex-end;
-  `,
+  ScoreTable: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)``,
 
   ScoreRow: styled(CS.BOX.FLEX_CENTER_BOX)``,
+
   ScoreRowHead: styled(CS.BOX.FLEX_CENTER_BOX)`
-    border-bottom: 3px solid #fff;
+    width: 100%;
+    margin-top: 10px;
+  `,
+  ScoreMiddleLine: styled.div`
+    width: 100%;
+    height: 1px;
+    border: 1px solid #fff;
+    margin-bottom: 10px;
   `,
 
   ScoreItem: styled(CS.BOX.FLEX_CENTER_BOX)`
     width: 50px;
     height: 50px;
+  `,
+
+  TeamNameBox: styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
   `,
 
   TeamName: styled.div`
@@ -50,34 +76,52 @@ const ScoreBoardStyles = {
     background: #222;
     opacity: 0.8;
     transition: display 1.5s;
+    z-index: 10;
   `,
   PopUpButton: styled.div`
-    display: ${({ isMouseOver }) => (isMouseOver ? NONE : BLOCK)};
     width: 100px;
     height: 30px;
     border-radius: 0px 0px 50% 50%;
     position: absolute;
     bottom: -30px;
-    right: 0px;
+    left: 750px;
     background: gray;
-    opacity: 0.5;
+    opacity: ${({ isHover }) => (isHover ? 1 : 0.5)};
     text-align: center;
     padding: 3px;
-    z-index: 99999;
+    z-index: 9999;
     border: 1px solid #fff;
     cursor: pointer;
-    &:hover {
-      opacity: 0.7;
-    }
+    transition: all ease-in-out 0.4s;
+
     div {
       position: absolute;
-      top: 3px;
+      color: #fff;
+      top: 2px;
       left: 43px;
+      animation: ${ArrowFade} 1s infinite ease-in alternate;
     }
   `,
 
-  AttackTeamTag: styled.div`
+  AttackTeamTag: styled(CS.BOX.FLEX_CENTER_BOX)`
+    width: 50px;
+    height: 50px;
+  `,
+
+  CurrentPlayerTag: styled.div`
+    width: fit-content;
+    font-size: 6px;
+    text-align: center;
+    font-weight: 500;
+    color: red;
+    border-radius: 8px;
     border: 1px solid red;
+    background: ${theme.COLOR.CURRENT_PLAYER_TAG};
+    padding: 3px;
+    margin: 3px;
+    position: absolute;
+    top: 33px;
+    left: 44px;
   `,
 };
 
