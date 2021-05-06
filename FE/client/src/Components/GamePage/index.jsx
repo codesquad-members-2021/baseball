@@ -1,13 +1,13 @@
 import React from "react";
 import GamePageHeader from "Components/GamePage/GamePageHeader";
 import MainContainer from "./MainContainer";
-import TopPopup from 'Components/GamePage/TopPopup';
+import Popup from 'Components/GamePage/Popup';
 import styled from "styled-components";
 
 const GamePage = () => {
   return (
     <GamePageBackground>
-      {/*<TopPopup />*/}
+      <Popup />
       <GamePageHeader />
       <MainContainer />
     </GamePageBackground>
