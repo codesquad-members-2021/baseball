@@ -27,6 +27,18 @@ class SelectionViewController: UIViewController {
         self.configureDataSource()
         self.createSnapshot()
     }
+    
+    //임시
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let gamePlayStoryboard = UIStoryboard.init(name: GamePlayViewController.ViewID.storyboard, bundle: nil)
+        
+        guard let nextVC = gamePlayStoryboard.instantiateViewController(identifier: GamePlayViewController.ViewID.controller) as? GamePlayViewController else { return }
+
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true, completion: nil)
+    }
 }
 
 

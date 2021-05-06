@@ -14,7 +14,7 @@
         <!--Game Play View Controller-->
         <scene sceneID="FaA-Jo-Kb5">
             <objects>
-                <viewController id="Vn8-LM-8qg" customClass="GamePlayViewController" customModule="baseball_game" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gamePlay" id="Vn8-LM-8qg" customClass="GamePlayViewController" customModule="baseball_game" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FZW-JU-hPR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

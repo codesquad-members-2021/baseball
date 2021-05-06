@@ -9,8 +9,12 @@ import Foundation
 
 class GameManager: Decodable {
     
-    var game: Turn
+    var turn: Turn
     
+    enum CodingKeys: String, CodingKey {
+        case turn = "game"
+    }
+
 }
 
 struct Turn: Decodable {
@@ -55,20 +59,6 @@ struct Turn: Decodable {
     
     var pitches: [Pitch]
     
-    struct Pitch: Decodable {
-        
-        let id = UUID()
-        
-        var result: String
-        
-        var log: String
-        
-        enum CodingKeys: String, CodingKey {
-            case result = "pitch"
-            case log = "status"
-        }
-    }
-    
     enum CodingKeys: String, CodingKey {
         case inning
         case home
@@ -76,5 +66,19 @@ struct Turn: Decodable {
         case ballCounts
         case baseInfo
         case pitches = "list"
+    }
+}
+
+struct Pitch: Decodable, Hashable {
+    
+    let id = UUID()
+    
+    var result: String
+    
+    var log: String
+    
+    enum CodingKeys: String, CodingKey {
+        case result = "pitch"
+        case log = "status"
     }
 }

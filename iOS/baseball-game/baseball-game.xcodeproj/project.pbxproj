@@ -21,8 +21,9 @@
 		E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */; };
 		E4FE76DA26412ACD00151B35 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76D926412ACD00151B35 /* GameManager.swift */; };
 		E4FE76DF26438ABC00151B35 /* PitchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */; };
-		E4FE76E12643B0AC00151B35 /* GamePlayStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4FE76E02643B0AC00151B35 /* GamePlayStoryboard.storyboard */; };
+		E4FE76E12643B0AC00151B35 /* GamePlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4FE76E02643B0AC00151B35 /* GamePlay.storyboard */; };
 		E4FE76E62643B57400151B35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4FE76E42643B57400151B35 /* Main.storyboard */; };
+		E4FE76EB2643BDA800151B35 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76EA2643BDA800151B35 /* GamePlayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +43,9 @@
 		E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPitcherViewController.swift; sourceTree = "<group>"; };
 		E4FE76D926412ACD00151B35 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchListTableViewCell.swift; sourceTree = "<group>"; };
-		E4FE76E02643B0AC00151B35 /* GamePlayStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GamePlayStoryboard.storyboard; sourceTree = "<group>"; };
+		E4FE76E02643B0AC00151B35 /* GamePlay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GamePlay.storyboard; sourceTree = "<group>"; };
 		E4FE76E52643B57400151B35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E4FE76EA2643BDA800151B35 /* GamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +122,10 @@
 		E4FE76E72643B5DD00151B35 /* GamePlay */ = {
 			isa = PBXGroup;
 			children = (
-				E4FE76E02643B0AC00151B35 /* GamePlayStoryboard.storyboard */,
+				E4FE76E02643B0AC00151B35 /* GamePlay.storyboard */,
 				E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */,
 				E4AA6886263FDDA500139BD6 /* GamePlayViewController.swift */,
+				E4FE76EA2643BDA800151B35 /* GamePlayViewModel.swift */,
 				E4FE76E92643B67000151B35 /* Model */,
 				E4FE76E82643B60B00151B35 /* SelectPitcher */,
 			);
@@ -204,7 +207,7 @@
 			files = (
 				E4AA688F263FDDA800139BD6 /* LaunchScreen.storyboard in Resources */,
 				E4FE76E62643B57400151B35 /* Main.storyboard in Resources */,
-				E4FE76E12643B0AC00151B35 /* GamePlayStoryboard.storyboard in Resources */,
+				E4FE76E12643B0AC00151B35 /* GamePlay.storyboard in Resources */,
 				E4AA688C263FDDA800139BD6 /* Assets.xcassets in Resources */,
 				AE5C79B02640E8710075EBC3 /* GameCell.xib in Resources */,
 			);
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4FE76EB2643BDA800151B35 /* GamePlayViewModel.swift in Sources */,
 				E4AA6887263FDDA500139BD6 /* GamePlayViewController.swift in Sources */,
 				E4FE76DA26412ACD00151B35 /* GameManager.swift in Sources */,
 				E4FE76DF26438ABC00151B35 /* PitchListTableViewCell.swift in Sources */,

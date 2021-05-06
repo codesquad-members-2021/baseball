@@ -14,6 +14,8 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var pitchButton: UIButton!
 
     enum ViewID {
+        static let storyboard = "GamePlay"
+        static let controller = "gamePlay"
         static let segue = "selectPitcher"
         static let cell = "pitchListCell"
     }
@@ -22,33 +24,45 @@ class GamePlayViewController: UIViewController {
         static let offense = "offense"
         static let defense = "defense"
     }
-
-    private var gameManager: GameManager?
+    
+    private var gamePlayViewModel: GamePlayViewModel!
+    private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
     private let isHome = true // 게임 선택 시 값을 지정해줄 수 있도록 한다 (prepare segue?)
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.gamePlayViewModel = GamePlayViewModel()
         self.pitchButton.isHidden = true
-        self.pitchListTableView.dataSource = self
-        
-        configureGame()
+        gamePlayViewModel.requestGame()
+        configureDataSource()
+        bind()
     }
     
-    private func configureGame() {
-        //viewModel이나 유즈케이스 분리가 필요하다.
-        NetworkManager.request(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
-            .sink { error in
-            print(error)
-        } receiveValue: { game in
-            self.gameManager = game
-            DispatchQueue.main.async {
-                self.pitchListTableView.reloadData()
-                self.updateLabels()
+    private func bind() {
+        gamePlayViewModel.$turn
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] turn in
+                guard let turn = turn else { return }
+                self?.updateLabels(from: turn)
             }
-        }.store(in: &cancelBag)
+            .store(in: &cancelBag)
+        
+        gamePlayViewModel.$pitches
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] pitches in
+                guard let pitches = pitches else { return }
+                self?.createSnapshot(from: pitches)
+            }
+            .store(in: &cancelBag)
+        
+        gamePlayViewModel.$error
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                guard let error = error else { return }
+                print(error) //사용자에게 에러 표시!
+            }.store(in: &cancelBag)
     }
 
     @IBAction func pitcherChangeTouched(_ sender: Any) {
@@ -74,8 +88,7 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var batterInfoLabel: UILabel!
     
     
-    private func updateLabels() {
-        guard let game = gameManager?.game else { return }
+    private func updateLabels(from game: Turn) {
         let homeInfo = game.home
         homeLabel.text = homeInfo.name
         homeScoreLabel.text = "\(homeInfo.score)"
@@ -112,31 +125,27 @@ class GamePlayViewController: UIViewController {
     }
 }
 
-//임시 코드
-extension GamePlayViewController: UITableViewDataSource {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let game = gameManager?.game {
-            return game.pitches.count
-        } else {
-            return 0
+extension GamePlayViewController {
+    
+    private func configureDataSource() {
+        self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) { (tableView, indexPath, pitch) -> UITableViewCell in
+            
+            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: ViewID.cell) as? PitchListTableViewCell else {
+                return PitchListTableViewCell()
+            }
+            
+            let index = indexPath.row
+            cell.updateLabels(count: index, result: pitch.result, log: pitch.log)
+            
+            return cell
         }
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        guard let game = gameManager?.game,
-              let cell = tableView.dequeueReusableCell(withIdentifier: ViewID.cell) as? PitchListTableViewCell else {
-            return PitchListTableViewCell()
-        }
-
-        let index = indexPath.row
-        let totalCount = game.pitches.count
-        let cellInfo = game.pitches[index]
+    
+    private func createSnapshot(from pitches: [Pitch]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Pitch>()
         
-        cell.updateLabels(count: totalCount - index, result: cellInfo.result, log: cellInfo.log)
-        
-        return cell
+        snapshot.appendSections([0])
+        snapshot.appendItems(pitches, toSection: 0)
+        self.dataSource.apply(snapshot)
     }
-
 }
