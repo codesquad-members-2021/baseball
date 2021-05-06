@@ -1,12 +1,33 @@
 package com.baseball.dto;
 
+import com.baseball.domain.Score;
+
 public class ScoreDto {
     private final Integer awayScore;
     private final Integer homeScore;
 
-    public ScoreDto(Integer awayScore, Integer homeScore) {
-        this.awayScore = awayScore;
-        this.homeScore = homeScore;
+    private ScoreDto(Builder builder) {
+        this.awayScore = builder.awayScore;
+        this.homeScore = builder.homeScore;
+    }
+
+    private static class Builder {
+        private Integer awayScore;
+        private Integer homeScore;
+
+        private Builder awayScore(Integer awayScore) {
+            this.awayScore = awayScore;
+            return this;
+        }
+
+        private Builder homeScore(Integer homeScore) {
+            this.homeScore = homeScore;
+            return this;
+        }
+
+        private ScoreDto build() {
+            return new ScoreDto(this);
+        }
     }
 
     public Integer getAwayScore() {
@@ -16,4 +37,12 @@ public class ScoreDto {
     public Integer getHomeScore() {
         return homeScore;
     }
+
+    public static ScoreDto from(Score score) {
+        Builder builder = new Builder()
+                .awayScore(score.getAwayScore())
+                .homeScore(score.getHomeScore());
+        return builder.build();
+    }
+
 }
