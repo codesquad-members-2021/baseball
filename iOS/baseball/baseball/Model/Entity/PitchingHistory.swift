@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct PitchingHistory {
+struct PitchingHistory:Decodable {
     private var pitch: String
     private var status: String
     

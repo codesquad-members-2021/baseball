@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Player {
+struct Player: Decodable {
     private let name: String
     private var atBat: Int
     private var hits: Int

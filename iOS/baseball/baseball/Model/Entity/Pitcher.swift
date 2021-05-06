@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Pitcher {
+struct Pitcher:Decodable {
     private var playerNumber: Int
     private var pitches: Int
     

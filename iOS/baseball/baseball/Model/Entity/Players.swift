@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Players {
+struct Players: Decodable {
     private var players: [Player]
     
     init() {

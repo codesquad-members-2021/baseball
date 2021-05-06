@@ -24,7 +24,7 @@ class PitchingHistoryDataSource {
     
     func applySnapshot(string: String) {
         var snapshot = self.dataSource.snapshot()
-        var items = snapshot.itemIdentifiers(inSection: "1")
+        let items = snapshot.itemIdentifiers(inSection: "1")
         if items.count == 0 {
             snapshot.appendItems([string], toSection: "1")
         } else {

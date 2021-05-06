@@ -15,9 +15,11 @@
 		829CFA492640379C00D9F635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 829CFA472640379C00D9F635 /* LaunchScreen.storyboard */; };
 		829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA532640421900D9F635 /* MatchUpCell.swift */; };
 		829CFA572640434600D9F635 /* GameSelectViewControllerManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */; };
+		82A9642A2643C6BA00E70A89 /* BaseballGameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A964292643C6BA00E70A89 /* BaseballGameDTO.swift */; };
 		82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49E826404C76008B1EC0 /* InGameViewController.swift */; };
 		82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */; };
 		82E20E1F2642692C006C80DF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20E1E2642692C006C80DF /* NetworkManager.swift */; };
+		82FD39E92643DB71002AD9A2 /* TeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD39E82643DB71002AD9A2 /* TeamDTO.swift */; };
 		CEA103C726413962008BA763 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C626413962008BA763 /* Player.swift */; };
 		CEA103CA264139E5008BA763 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C9264139E5008BA763 /* Players.swift */; };
 		CEA103CD26413AF2008BA763 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103CC26413AF2008BA763 /* Team.swift */; };
@@ -42,17 +44,19 @@
 		829CFA4A2640379C00D9F635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		829CFA532640421900D9F635 /* MatchUpCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUpCell.swift; sourceTree = "<group>"; };
 		829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectViewControllerManageable.swift; sourceTree = "<group>"; };
+		82A964292643C6BA00E70A89 /* BaseballGameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballGameDTO.swift; sourceTree = "<group>"; };
 		82DB49E826404C76008B1EC0 /* InGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewController.swift; sourceTree = "<group>"; };
 		82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		82E20E1E2642692C006C80DF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		CEA103C626413962008BA763 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = SOURCE_ROOT; };
-		CEA103C9264139E5008BA763 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = SOURCE_ROOT; };
-		CEA103CC26413AF2008BA763 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = SOURCE_ROOT; };
-		CEA103CF26413BE5008BA763 /* Pitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitcher.swift; sourceTree = SOURCE_ROOT; };
-		CEA103D226413D02008BA763 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = SOURCE_ROOT; };
-		CEA103D526413D8F008BA763 /* InningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningInfo.swift; sourceTree = SOURCE_ROOT; };
-		CEA103D826413E91008BA763 /* PitchingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistory.swift; sourceTree = SOURCE_ROOT; };
-		CEA103DB26413F2C008BA763 /* InningScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningScore.swift; sourceTree = SOURCE_ROOT; };
+		82FD39E82643DB71002AD9A2 /* TeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDTO.swift; sourceTree = "<group>"; };
+		CEA103C626413962008BA763 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Player.swift; path = baseball/Model/Entity/Player.swift; sourceTree = SOURCE_ROOT; };
+		CEA103C9264139E5008BA763 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Players.swift; path = baseball/Model/Entity/Players.swift; sourceTree = SOURCE_ROOT; };
+		CEA103CC26413AF2008BA763 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Team.swift; path = baseball/Model/Entity/Team.swift; sourceTree = SOURCE_ROOT; };
+		CEA103CF26413BE5008BA763 /* Pitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Pitcher.swift; path = baseball/Model/Entity/Pitcher.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D226413D02008BA763 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Game.swift; path = baseball/Model/Entity/Game.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D526413D8F008BA763 /* InningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InningInfo.swift; path = baseball/Model/Entity/InningInfo.swift; sourceTree = SOURCE_ROOT; };
+		CEA103D826413E91008BA763 /* PitchingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PitchingHistory.swift; path = baseball/Model/Entity/PitchingHistory.swift; sourceTree = SOURCE_ROOT; };
+		CEA103DB26413F2C008BA763 /* InningScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InningScore.swift; path = baseball/Model/Entity/InningScore.swift; sourceTree = SOURCE_ROOT; };
 		CEA5D6242643850700745C9D /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistoryDataSource.swift; sourceTree = "<group>"; };
 		CEA5D62A26438DA100745C9D /* testCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCell.swift; sourceTree = "<group>"; };
@@ -126,14 +130,8 @@
 		829CFA52264041C400D9F635 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEA103C626413962008BA763 /* Player.swift */,
-				CEA103C9264139E5008BA763 /* Players.swift */,
-				CEA103CC26413AF2008BA763 /* Team.swift */,
-				CEA103CF26413BE5008BA763 /* Pitcher.swift */,
-				CEA103D226413D02008BA763 /* Game.swift */,
-				CEA103D526413D8F008BA763 /* InningInfo.swift */,
-				CEA103D826413E91008BA763 /* PitchingHistory.swift */,
-				CEA103DB26413F2C008BA763 /* InningScore.swift */,
+				82A9642C2643CD6700E70A89 /* DTO */,
+				82A9642B2643CA5B00E70A89 /* Entity */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +142,30 @@
 				829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		82A9642B2643CA5B00E70A89 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				CEA103C626413962008BA763 /* Player.swift */,
+				CEA103C9264139E5008BA763 /* Players.swift */,
+				CEA103CC26413AF2008BA763 /* Team.swift */,
+				CEA103CF26413BE5008BA763 /* Pitcher.swift */,
+				CEA103D226413D02008BA763 /* Game.swift */,
+				CEA103D526413D8F008BA763 /* InningInfo.swift */,
+				CEA103D826413E91008BA763 /* PitchingHistory.swift */,
+				CEA103DB26413F2C008BA763 /* InningScore.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		82A9642C2643CD6700E70A89 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				82A964292643C6BA00E70A89 /* BaseballGameDTO.swift */,
+				82FD39E82643DB71002AD9A2 /* TeamDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		82E20E1D264267A0006C80DF /* Network */ = {
@@ -228,11 +250,13 @@
 				CEA103CA264139E5008BA763 /* Players.swift in Sources */,
 				82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */,
 				829CFA412640379B00D9F635 /* GameSelectViewController.swift in Sources */,
+				82A9642A2643C6BA00E70A89 /* BaseballGameDTO.swift in Sources */,
 				CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */,
 				82E20E1F2642692C006C80DF /* NetworkManager.swift in Sources */,
 				829CFA3D2640379B00D9F635 /* AppDelegate.swift in Sources */,
 				829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */,
 				CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */,
+				82FD39E92643DB71002AD9A2 /* TeamDTO.swift in Sources */,
 				CEA103C726413962008BA763 /* Player.swift in Sources */,
 				82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */,
 				CEA103D326413D02008BA763 /* Game.swift in Sources */,
