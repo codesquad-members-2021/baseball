@@ -19,8 +19,7 @@ public class Game {
 
     private String userType;
 
-    public Game(Long id, Team away, Team home, String userType) {
-        this.id = id;
+    public Game(Team away, Team home, String userType) {
         this.away = away;
         this.home = home;
         this.userType = userType;
