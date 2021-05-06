@@ -71,6 +71,41 @@ class GameTest {
         assertPlayerStatus(4, 2, null, null, null);
     }
 
+    @Test
+    @DisplayName("볼 테스트")
+    void ball() {
+        assertInning(1, Halves.TOP);
+        game.proceedBall(awayTeam, homeTeam);
+        assertCountStatus(0, 1, 0, 0, 0);
+        assertPlayerStatus(1, 1, null, null, null);
+        game.proceedBall(awayTeam, homeTeam);
+        assertCountStatus(0, 2, 0, 0, 0);
+        assertPlayerStatus(1, 1, null, null, null);
+        game.proceedBall(awayTeam, homeTeam);
+        assertCountStatus(0, 3, 0, 0, 0);
+        assertPlayerStatus(1, 1, null, null, null);
+        game.proceedBall(awayTeam, homeTeam);
+        assertCountStatus(0, 0, 0, 0, 0);
+        assertPlayerStatus(1, 2, 1, null, null);
+
+        for (int i = 0; i < 4; i++) {
+            game.proceedBall(awayTeam, homeTeam);
+        }
+        assertPlayerStatus(1, 3, 2, 1, null);
+
+        for (int i = 0; i < 4; i++) {
+            game.proceedBall(awayTeam, homeTeam);
+        }
+        assertPlayerStatus(1, 4, 3, 2, 1);
+
+        for (int i = 0; i < 4; i++) {
+            game.proceedBall(awayTeam, homeTeam);
+        }
+        assertPlayerStatus(1, 5, 4, 3, 2);
+        //득점 확인
+        assertCountStatus(0, 0, 0, 1, 0);
+    }
+
     void assertCountStatus(int strike, int ball, int out, int awayScore, int homeScore) {
         org.junit.jupiter.api.Assertions.assertAll(
                 () -> Assertions.assertThat(game.getStrikeCount()).isEqualTo(strike),
