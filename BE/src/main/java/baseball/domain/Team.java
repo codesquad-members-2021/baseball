@@ -11,6 +11,7 @@ public class Team {
 
     private String name;
     private Set<Member> members;
+    private Set<Score> scores;
 
     public Team(String name, Set<Member> members) {
         this.name = name;
@@ -27,5 +28,13 @@ public class Team {
 
     public Set<Member> getMembers() {
         return members;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScore(Score score) {
+        scores.add(score);
     }
 }
