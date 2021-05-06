@@ -87,6 +87,21 @@ public class Game {
         sendBatterOnPlate(attackTeam);
     }
 
+    private void proceedOut(Team awayTeam, Team homeTeam) {
+        //아웃 카운트 증가
+        this.outCount++;
+
+        //3회 아웃이면 다음이닝으로 변경
+        if (outCount == 3) {
+            goToNextInning(awayTeam, homeTeam);
+            return;
+        }
+
+        //타석에 다음 타자 등판
+        Team attackTeam = getAttackTeam(awayTeam, homeTeam);
+        sendBatterOnPlate(attackTeam);
+    }
+
     private void sendBatterOnBase() {
         String currentInningKey = Inning.getKeyInGame(currentInning, currentHalves);
         Inning inning = inningMap.get(currentInningKey);
