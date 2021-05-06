@@ -1,7 +1,6 @@
 package com.codesquad.baseball.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 
 public class PlayerParticipatingInGame {
     @Id

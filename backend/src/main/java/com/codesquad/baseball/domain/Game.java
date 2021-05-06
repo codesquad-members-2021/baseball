@@ -86,6 +86,23 @@ public class Game {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", gameTitle='" + gameTitle + '\'' +
+                ", currentInning=" + currentInning +
+                ", isTop=" + isTop +
+                ", currentStrikeCount=" + currentStrikeCount +
+                ", currentOutCount=" + currentOutCount +
+                ", currentBallCount=" + currentBallCount +
+                ", currentPitcher=" + currentPitcher +
+                ", currentHitter=" + currentHitter +
+                ", isOccupied=" + isOccupied +
+                ", teams=" + teams +
+                '}';
+    }
+
     public static class Builder {
         private Integer id;
         private String gameTitle;
@@ -163,22 +180,5 @@ public class Game {
         public Game build() {
             return new Game(this);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", gameTitle='" + gameTitle + '\'' +
-                ", currentInning=" + currentInning +
-                ", isTop=" + isTop +
-                ", currentStrikeCount=" + currentStrikeCount +
-                ", currentOutCount=" + currentOutCount +
-                ", currentBallCount=" + currentBallCount +
-                ", currentPitcher=" + currentPitcher +
-                ", currentHitter=" + currentHitter +
-                ", isOccupied=" + isOccupied +
-                ", teams=" + teams +
-                '}';
     }
 }

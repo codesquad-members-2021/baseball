@@ -26,6 +26,17 @@ public class Player {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", uniformNumber=" + uniformNumber +
+                ", playerName='" + playerName + '\'' +
+                ", role=" + role +
+                ", team=" + team +
+                '}';
+    }
+
     public static class Builder {
         private int id;
         private int uniformNumber;
@@ -61,16 +72,5 @@ public class Player {
         public Player build() {
             return new Player(this);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", uniformNumber=" + uniformNumber +
-                ", playerName='" + playerName + '\'' +
-                ", role=" + role +
-                ", team=" + team +
-                '}';
     }
 }
