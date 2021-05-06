@@ -33,6 +33,14 @@ public class Inning {
         this.inning = inning;
         this.halves = halves;
         this.score = 0;
-        this.keyInGame = inning + halves.toString();
+        this.keyInGame = acquireKeyInGame(inning, halves);
+    }
+
+    public void plusScore() {
+        this.score++;
+    }
+
+    public static String acquireKeyInGame(Integer inning, Halves halves) {
+        return inning + halves.toString();
     }
 }
