@@ -3,6 +3,7 @@ package com.codesquad.coco.game.domain.DAO;
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.player.domain.PlayerDAO;
+import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.Team;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -53,7 +54,7 @@ public class GameDAO {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, game.homeTeamName());
             ps.setString(2, game.awayTeamName());
-            ps.setString(3, game.getUserType());
+            ps.setString(3, game.getUserType().toString());
             return ps;
         }, keyHolder);
 
@@ -85,7 +86,7 @@ public class GameDAO {
                     homeTeam,
                     Collections.unmodifiableSet(new HashSet<>(
                             Arrays.asList(homeScoreBoard, awayScoreBoard))),
-                    rs.getString("user_type")
+                    UserType.valueOf(rs.getString("user_type"))
             );
 
             return game;

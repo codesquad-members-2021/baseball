@@ -3,6 +3,7 @@ package com.codesquad.coco;
 
 import com.codesquad.coco.game.domain.DAO.GameDAO;
 import com.codesquad.coco.game.domain.model.Game;
+import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.Team;
 import com.codesquad.coco.team.domain.TeamRepository;
 import org.assertj.core.api.Assertions;
@@ -32,7 +33,7 @@ public class GameTest {
         Team ssg = teamRepository.findTeamByName("SSG 랜더스").get();
         Team doSan = teamRepository.findTeamByName("두산 베어스").get();
 
-        Game bigMatch = new Game(ssg, doSan, "home");
+        Game bigMatch = new Game(ssg, doSan, UserType.HOME);
         Long gameId = gameDAO.save(bigMatch);
         Assertions.assertThat(gameId).isEqualTo(2L);
         //todo : 게임은 만들어 지면서 스코어 보드도 만들어야 한다.

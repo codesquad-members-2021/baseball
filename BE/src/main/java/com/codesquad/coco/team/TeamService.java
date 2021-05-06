@@ -3,6 +3,7 @@ package com.codesquad.coco.team;
 import com.codesquad.coco.game.domain.DAO.GameDAO;
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.player.domain.PlayerDAO;
+import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
 import com.codesquad.coco.team.domain.Team;
@@ -30,7 +31,7 @@ public class TeamService {
         Team playerTeam = getPlayerTeam(choiceDTO);
         Team opponentTeam = getOpponentTeam(choiceDTO);
 
-        Game game = new Game(opponentTeam, playerTeam, "home");
+        Game game = new Game(opponentTeam, playerTeam, UserType.HOME);
         return gameDAO.save(game);
     }
 
@@ -38,7 +39,7 @@ public class TeamService {
         Team playerTeam = getPlayerTeam(choiceDTO);
         Team opponentTeam = getOpponentTeam(choiceDTO);
 
-        Game game = new Game(playerTeam, opponentTeam, "away");
+        Game game = new Game(playerTeam, opponentTeam, UserType.AWAY);
         return gameDAO.save(game);
     }
 

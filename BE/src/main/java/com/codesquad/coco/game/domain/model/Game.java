@@ -1,5 +1,6 @@
 package com.codesquad.coco.game.domain.model;
 
+import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.Team;
 import org.springframework.data.annotation.Id;
 
@@ -17,15 +18,15 @@ public class Game {
 
     private Set<ScoreBoard> scoreBoard = new HashSet<>();
 
-    private String userType;
+    private UserType userType;
 
-    public Game(Team away, Team home, String userType) {
+    public Game(Team away, Team home, UserType userType) {
         this.away = away;
         this.home = home;
         this.userType = userType;
     }
 
-    public Game(Long id, Team away, Team home, Set<ScoreBoard> scoreBoard, String userType) {
+    public Game(Long id, Team away, Team home, Set<ScoreBoard> scoreBoard, UserType userType) {
         this.id = id;
         this.away = away;
         this.home = home;
@@ -45,7 +46,7 @@ public class Game {
         return home;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
