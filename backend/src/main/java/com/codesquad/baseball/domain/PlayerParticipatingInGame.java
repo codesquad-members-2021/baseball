@@ -13,6 +13,9 @@ public class PlayerParticipatingInGame {
     private int hitCount;
     private int outCount;
 
+    public PlayerParticipatingInGame() {
+    }
+
     public PlayerParticipatingInGame(int player) {
         this.player = player;
         this.plateAppearances = 0;

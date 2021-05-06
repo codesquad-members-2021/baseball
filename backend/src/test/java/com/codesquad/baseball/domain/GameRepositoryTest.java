@@ -7,13 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 class GameRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GameRepositoryTest.class);
@@ -47,7 +46,7 @@ class GameRepositoryTest {
         initTeam(teamA, aPlayers);
         initTeam(teamB, bPlayers);
 
-        Game game = Game.createGame(gameTitle, teamA.createGameParticipatingData(), teamB.createGameParticipatingData());
+        Game game = Game.createGame(gameTitle, teamA.createParticipantAsHomeTeam(), teamB.createParticipantAsAwayTeam());
         gameRepository.save(game);
         return findGameById(game.getId());
     }

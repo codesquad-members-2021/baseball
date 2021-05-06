@@ -2,6 +2,9 @@ package com.codesquad.baseball.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Game {
 
     @Id
@@ -15,8 +18,7 @@ public class Game {
     private int currentPitcher;
     private int currentHitter;
     private boolean isOccupied;
-    private int homeTeam;
-    private int awayTeam;
+    private Set<TeamParticipatingInGame> teams = new HashSet<>();
 
     protected Game() {
     }
@@ -32,8 +34,8 @@ public class Game {
         this.currentPitcher = builder.currentPitcher;
         this.currentHitter = builder.currentHitter;
         this.isOccupied = builder.isOccupied;
-        this.homeTeam = builder.homeTeam.getId();
-        this.awayTeam = builder.awayTeam.getId();
+        teams.add(builder.homeTeam);
+        teams.add(builder.awayTeam);
     }
 
     public static Game createGame(String gameTitle, TeamParticipatingInGame homeTeam, TeamParticipatingInGame awayTeam) {
@@ -149,8 +151,7 @@ public class Game {
                 ", currentPitcher=" + currentPitcher +
                 ", currentHitter=" + currentHitter +
                 ", isOccupied=" + isOccupied +
-                ", homeTeam=" + homeTeam +
-                ", awayTeam=" + awayTeam +
+                ", teams=" + teams +
                 '}';
     }
 }

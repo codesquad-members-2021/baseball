@@ -78,4 +78,3 @@ create table player_participating_in_game
     hit_count                  int not null,
     out_count                  int not null
 );
-

@@ -7,15 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeamParticipatingInGame {
+
     @Id
     private int id;
-    private int game;
     private int team;
     @MappedCollection(idColumn = "team_participating_in_game", keyColumn = "bat_order")
     private List<PlayerParticipatingInGame> players = new ArrayList<>();
+    private boolean isHomeTeam;
 
-    public TeamParticipatingInGame(int team) {
-        this.team = team;
+    protected TeamParticipatingInGame() {
+    }
+
+    public TeamParticipatingInGame(int id, boolean isHomeTeam) {
+        this.id = id;
+        this.isHomeTeam = isHomeTeam;
     }
 
     public void addPlayer(Player player) {
@@ -24,9 +29,5 @@ public class TeamParticipatingInGame {
 
     public int getId() {
         return id;
-    }
-
-    public void setGame(int game) {
-        this.game = game;
     }
 }
