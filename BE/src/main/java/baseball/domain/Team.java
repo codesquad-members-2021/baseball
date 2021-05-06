@@ -37,4 +37,13 @@ public class Team {
     public void setScore(Score score) {
         scores.add(score);
     }
+
+    public Member getMemberById(Long id) {
+        for (Member member : members) {
+            if (member.getId() == id) {
+                return member;
+            }
+        }
+        throw new NullPointerException();
+    }
 }
