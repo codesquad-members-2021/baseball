@@ -11,8 +11,9 @@ const PitchButton = () => {
 
 const PitchBtn = styled.button`
   position: absolute;
-  left: 37%;
-  top: 42%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   background: none;
   color: white;
   font-size: 1.5rem;
