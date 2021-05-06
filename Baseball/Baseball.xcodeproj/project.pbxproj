@@ -15,6 +15,7 @@
 		A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C3412640ECF100C9B8C7 /* GameListViewController.swift */; };
 		A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C3432640ED1C00C9B8C7 /* GameListCell.swift */; };
 		A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C34B2641164000C9B8C7 /* GroundView.swift */; };
+		A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06524AA2643B7C700CF375D /* PitchHistoryView.swift */; };
 		A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098D28B264383D700950F8F /* GamePlayViewController.swift */; };
 		FFDD3A8C2641371C0037622A /* GameScoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */; };
 		FFDD3A90264138800037622A /* MatchUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A8F264138800037622A /* MatchUp.swift */; };
@@ -32,6 +33,7 @@
 		A025C3412640ECF100C9B8C7 /* GameListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewController.swift; sourceTree = "<group>"; };
 		A025C3432640ED1C00C9B8C7 /* GameListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCell.swift; sourceTree = "<group>"; };
 		A025C34B2641164000C9B8C7 /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
+		A06524AA2643B7C700CF375D /* PitchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchHistoryView.swift; sourceTree = "<group>"; };
 		A098D28B264383D700950F8F /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
 		FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreHeader.xib; sourceTree = "<group>"; };
 		FFDD3A8F264138800037622A /* MatchUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUp.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				A025C34B2641164000C9B8C7 /* GroundView.swift */,
 				A098D28B264383D700950F8F /* GamePlayViewController.swift */,
+				A06524AA2643B7C700CF375D /* PitchHistoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */,
 				FFDD3A90264138800037622A /* MatchUp.swift in Sources */,
 				A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */,
+				A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */,
 				A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */,
 				A025C32A2640E8E700C9B8C7 /* AppDelegate.swift in Sources */,
 				A025C32C2640E8E700C9B8C7 /* SceneDelegate.swift in Sources */,

@@ -8,6 +8,11 @@
 import UIKit
 
 class GroundView: UIView {
+    
+    @IBOutlet weak var strikeHistoryView: PitchHistoryView!
+    @IBOutlet weak var ballHistoryView: PitchHistoryView!
+    @IBOutlet weak var outHistoryView: PitchHistoryView!
+
     private var centerPoint : CGPoint {
         return CGPoint(x: bounds.midX, y: bounds.midY)
     }
