@@ -4,9 +4,7 @@ import Game from "Components/Home/GameList/Game";
 import { gameDatas } from "utils/mockDatas";
 
 const GameList = () => {
-
-
-  const TeamData = Array.from({ length: 3 });
+  const TeamData = Array.from({ length: 7 });
   return (
     <GameBoxList>
       {gameDatas.map((gameData) => {
