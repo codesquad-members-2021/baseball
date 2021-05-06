@@ -17,6 +17,7 @@
 		D4A2CB8A2640E4FF0019AFB6 /* BaseballUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB892640E4FF0019AFB6 /* BaseballUITests.swift */; };
 		D4A2CB9C2640E5E60019AFB6 /* GameListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB9A2640E5E60019AFB6 /* GameListCell.swift */; };
 		D4A2CB9D2640E5E60019AFB6 /* GameListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */; };
+		D4A2CBA8264382B00019AFB6 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		D4A2CB8B2640E4FF0019AFB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4A2CB9A2640E5E60019AFB6 /* GameListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCell.swift; sourceTree = "<group>"; };
 		D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameListCell.xib; sourceTree = "<group>"; };
+		D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				D4A2CB692640E4FD0019AFB6 /* SceneDelegate.swift */,
 				D4A2CB6B2640E4FD0019AFB6 /* ViewController.swift */,
 				D4A2CB6D2640E4FD0019AFB6 /* Main.storyboard */,
+				D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */,
 				D4A2CB9A2640E5E60019AFB6 /* GameListCell.swift */,
 				D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */,
 				D4A2CB702640E4FF0019AFB6 /* Assets.xcassets */,
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4A2CB6C2640E4FD0019AFB6 /* ViewController.swift in Sources */,
+				D4A2CBA8264382B00019AFB6 /* ScoresViewController.swift in Sources */,
 				D4A2CB682640E4FD0019AFB6 /* AppDelegate.swift in Sources */,
 				D4A2CB6A2640E4FD0019AFB6 /* SceneDelegate.swift in Sources */,
 				D4A2CB9C2640E5E60019AFB6 /* GameListCell.swift in Sources */,
