@@ -37,10 +37,7 @@ class ScoreBoardViewController: UIViewController {
     private func tableViewCellRegisterNib() {
         let nib = UINib(nibName: PlayerScoreTableViewCell.identifier, bundle: nil)
         self.playerScoreTableView.register(nib, forCellReuseIdentifier: PlayerScoreTableViewCell.identifier)
-        let headerNib = UINib(nibName: PlayerScoreHeaderTableViewCell.identifier, bundle: nil)
-        self.playerScoreTableView.register(headerNib, forHeaderFooterViewReuseIdentifier: PlayerScoreHeaderTableViewCell.identifier)
-        let footerNib = UINib(nibName: PlayerScoreFooterTableViewCell.identifier, bundle: nil)
-        self.playerScoreTableView.register(footerNib, forHeaderFooterViewReuseIdentifier: PlayerScoreFooterTableViewCell.identifier)
+
     }
     
     private func itemListDidLoad() {
