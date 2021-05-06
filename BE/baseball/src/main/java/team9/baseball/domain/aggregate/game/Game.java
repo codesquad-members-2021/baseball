@@ -89,6 +89,25 @@ public class Game {
         }
     }
 
+    public void proceedBall(Team awayTeam, Team homeTeam) {
+        //카운트 증가
+        this.ballCount++;
+
+        //기록할 pitch history 생성
+        PitchHistory pitchHistory = new PitchHistory(getDefenseTeamId(), pitcherUniformNumber,
+                getAttackTeamId(), batterUniformNumber, PitchResult.BALL);
+        //현재 이닝에 pitch history 기록
+        getCurrentInning().pitchHistoryList.add(pitchHistory);
+
+        //볼넷일 경우 출루하고 다음 타자 등판
+        if (ballCount == 4) {
+            sendBatterOnBase();
+
+            Team attackTeam = getAttackTeam(awayTeam, homeTeam);
+            sendBatterOnPlate(attackTeam);
+        }
+    }
+
     public void proceedHit(Team awayTeam, Team homeTeam) {
         Team attackTeam = getAttackTeam(awayTeam, homeTeam);
 
