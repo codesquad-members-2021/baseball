@@ -37,8 +37,8 @@ const GameListLayout = styled.div`
   height: 33vh;
   display: flex;
   flex-direction: column;
+  margin-top: 5%;
   overflow: hidden;
-  margin-top: 20%;
 
   &:hover {
     overflow-y: scroll;

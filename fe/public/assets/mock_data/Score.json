@@ -1,0 +1,10 @@
+{
+  "statusCode": 200,
+  
+  "score" : {
+    "Captain_1": 1,
+    "Marvel_1": 5
+  },
+    
+ "player_team": "Marvel_1"
+}
