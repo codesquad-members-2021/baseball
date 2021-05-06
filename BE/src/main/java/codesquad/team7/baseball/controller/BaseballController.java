@@ -1,9 +1,12 @@
 package codesquad.team7.baseball.controller;
 
 import codesquad.team7.baseball.game.BaseballGame;
+import codesquad.team7.baseball.repository.BaseballGameRepository;
 import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;
+import codesquad.team7.baseball.team.TeamRepository;
 import codesquad.team7.baseball.view.BaseballGameTitle;
+import codesquad.team7.baseball.view.BaseballGameView;
 import codesquad.team7.baseball.view.BaseballGames;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +20,17 @@ import java.util.List;
 public class BaseballController {
 
     private final BaseballGames baseballGames;
-    private final BaseballGame baseballGame;
-    private final Team dinos;
-    private final Team eagles;
+    private BaseballGame baseballGame;
+    private Team dinos;
+    private Team eagles;
 
-    public BaseballController() {
+    private final BaseballGameRepository baseballGameRepository;
+    private final TeamRepository teamRepository;
+
+    public BaseballController(BaseballGameRepository baseballGameRepository, TeamRepository teamRepository) {
+        this.baseballGameRepository = baseballGameRepository;
+        this.teamRepository = teamRepository;
+
         List<BaseballGameTitle> games = new ArrayList<>();
         games.add(BaseballGameTitle.of(1L, "Marvel", "Captain"));
         games.add(BaseballGameTitle.of(2L, "Tigers", "Twins"));
@@ -39,6 +48,7 @@ public class BaseballController {
         dinos.addPlayer(new Player("김주원"));
         dinos.addPlayer(new Player("김기환"));
         dinos.addPlayer(new Player("최승민"));
+        dinos = teamRepository.save(dinos);
 
         eagles = Team.newTeam("Eagles", 2);
         eagles.addPlayer(new Player("조현진"));
@@ -50,8 +60,10 @@ public class BaseballController {
         eagles.addPlayer(new Player("강경학"));
         eagles.addPlayer(new Player("노시환"));
         eagles.addPlayer(new Player("박정현"));
+        eagles = teamRepository.save(eagles);
 
         baseballGame = BaseballGame.newGame(dinos, eagles);
+        baseballGame = baseballGameRepository.save(baseballGame);
     }
 
     @GetMapping
@@ -60,8 +72,8 @@ public class BaseballController {
     }
 
     @GetMapping("/3")
-    public BaseballGame baseballGame() {
-        return baseballGame;
+    public BaseballGameView baseballGame() {
+        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
     }
 
 }

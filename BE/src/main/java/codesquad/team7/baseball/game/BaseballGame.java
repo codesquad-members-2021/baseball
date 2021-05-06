@@ -27,7 +27,6 @@ public class BaseballGame {
     private String awayUser;
     private Integer awayHistoryIndex;
 
-
     @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
     private List<BatterInningHistory> history;
 
@@ -40,22 +39,6 @@ public class BaseballGame {
         this.history = history;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public TeamInformationMap getTeamInformation() {
-        return teamInformation;
-    }
-
-    public Inning getInning() {
-        return inning;
-    }
-
-    public List<BatterInningHistory> getHistory() {
-        return history;
-    }
-
     public static BaseballGame newGame(Team home, Team away) {
         return new BaseballGame(
                 null,
@@ -65,5 +48,49 @@ public class BaseballGame {
                 0,
                 new ArrayList<>()
         );
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BaseballGameTeamInformation getHomeTeamInformation() {
+        return teamInformation.getHome();
+    }
+
+    public BaseballGameTeamInformation getAwayTeamInformation() {
+        return teamInformation.getAway();
+    }
+
+    public Integer getInningOrdinal() {
+        return inning.getOrdinal();
+    }
+
+    public TeamEnum getInningAttackTeam() {
+        return inning.getAttackTeam();
+    }
+
+    public Integer getBatterNumber() {
+        return inning.getBatterNumber();
+    }
+
+    public Integer getStrike() {
+        return inning.getStrike();
+    }
+
+    public Integer getBall() {
+        return inning.getBall();
+    }
+
+    public Integer getOut() {
+        return inning.getOut();
+    }
+
+    public BaseState getBase() {
+        return inning.getBaseState();
+    }
+
+    public List<BatterInningHistory> getHistory() {
+        return history;
     }
 }

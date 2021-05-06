@@ -5,8 +5,8 @@ import org.springframework.data.relational.core.mapping.Embedded;
 public class Inning {
 
     private Integer ordinal;
-    private TeamEnum attacker;
-    private Integer attackerNumber;
+    private TeamEnum attackTeam;
+    private Integer batterNumber;
 
     private Integer strike;
     private Integer ball;
@@ -15,10 +15,10 @@ public class Inning {
     @Embedded.Empty
     private BaseState baseState;
 
-    Inning(Integer ordinal, TeamEnum attacker, Integer attackerNumber, Integer strike, Integer ball, Integer out, BaseState baseState) {
+    Inning(Integer ordinal, TeamEnum attackTeam, Integer batterNumber, Integer strike, Integer ball, Integer out, BaseState baseState) {
         this.ordinal = ordinal;
-        this.attacker = attacker;
-        this.attackerNumber = attackerNumber;
+        this.attackTeam = attackTeam;
+        this.batterNumber = batterNumber;
         this.strike = strike;
         this.ball = ball;
         this.out = out;
@@ -29,12 +29,12 @@ public class Inning {
         return ordinal;
     }
 
-    public TeamEnum getAttacker() {
-        return attacker;
+    public TeamEnum getAttackTeam() {
+        return attackTeam;
     }
 
-    public Integer getAttackerNumber() {
-        return attackerNumber;
+    public Integer getBatterNumber() {
+        return batterNumber;
     }
 
     public Integer getStrike() {

@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS baseball_game (
     game_id BIGINT AUTO_INCREMENT PRIMARY KEY,
 
     ordinal INT,
-    attacker CHAR(4),
-    attacker_number INT,
+    attack_team CHAR(4),
+    batter_number INT,
 
     strike INT,
     ball INT,

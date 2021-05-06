@@ -14,8 +14,8 @@ public class PlayersStatistics {
         this.players = players;
     }
 
-    public List<PlayerStatistics> getPlayers() {
-        return players;
+    public PlayerStatistics get(int i) {
+        return players.get(i);
     }
 
     public static PlayersStatistics newStatistics() {

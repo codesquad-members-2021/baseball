@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class BaseballGameTeamInformation {
 
     @Id
@@ -30,12 +33,12 @@ public class BaseballGameTeamInformation {
         this.teamScores = teamScores;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public Long getTeamId() {
         return teamId;
+    }
+
+    public Integer getTotalScore() {
+        return teamScores.getTotalScore();
     }
 
     public PlayersStatistics getPlayersStatistics() {
@@ -46,8 +49,10 @@ public class BaseballGameTeamInformation {
         return pitches;
     }
 
-    public TeamScores getTeamScores() {
-        return teamScores;
+    public List<Integer> getInningScore() {
+        return teamScores.getInningScore().stream()
+                .map(InningScore::getInningScore)
+                .collect(Collectors.toList());
     }
 
     public static BaseballGameTeamInformation newTeamInfo(Team team) {

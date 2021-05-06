@@ -15,8 +15,12 @@ public class TeamInformationMap {
         this.teamInformationMap = teamInformationMap;
     }
 
-    public Map<TeamEnum, BaseballGameTeamInformation> getTeamInformationMap() {
-        return teamInformationMap;
+    public BaseballGameTeamInformation getHome() {
+        return teamInformationMap.get(TeamEnum.HOME);
+    }
+
+    public BaseballGameTeamInformation getAway() {
+        return teamInformationMap.get(TeamEnum.AWAY);
     }
 
     public static TeamInformationMap newTeamInformation(Team home, Team away) {
