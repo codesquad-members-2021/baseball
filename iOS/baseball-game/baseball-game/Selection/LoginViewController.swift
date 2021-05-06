@@ -12,11 +12,10 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var IDTextField: UITextField!
     
     @IBAction func okButtonTouched(_ sender: UIButton) {
-        let tempGame = Game(id: -1, home: Team(team: "", status: ""), away: Team(team: "", status: ""))
-        let gameInfo = Info(userID: IDTextField.text ?? "", game: tempGame)
+        let gameInfo = GameInfo(userID: IDTextField.text ?? "", team: "")
         
         guard let nextVC = storyboard?.instantiateViewController(withIdentifier: "SelectionViewController") as? SelectionViewController else { return }
-        nextVC.gameInfo = gameInfo
+        nextVC.viewModel.setModel(with: gameInfo)
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     

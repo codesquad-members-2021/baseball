@@ -9,7 +9,15 @@ import Foundation
 import Combine
 
 class SelectViewModel {
+    private(set) var gameInfo: GameInfo!
     private var cancellable = Set<AnyCancellable>()
+    
+    
+    func setModel(with gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
+    }
+    
+    //MARK: GET
     
     func request() {
         NetworkManager.request(type: [Game].self, url: EndPoint.url(path: "")!)
@@ -33,6 +41,19 @@ class SelectViewModel {
                 completion(userInfo["games"] ?? [])
             }.store(in: &cancellable)
     }
+    
+    //MARK: POST
+    func postSelection(with gameInfo: GameInfo) {
+        NetworkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                print(error)
+            } receiveValue: { _ in
+                print("success")
+            }
+            .store(in: &cancellable)
+    }
+    
 }
 
 enum NotificationName {

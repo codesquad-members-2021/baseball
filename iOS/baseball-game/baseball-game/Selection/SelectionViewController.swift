@@ -14,8 +14,7 @@ class SelectionViewController: UIViewController {
     
     private let gradientLayer: CAGradientLayer = CAGradientLayer()
     
-    private var viewModel = SelectViewModel()
-    var gameInfo: Info!
+    var viewModel = SelectViewModel()
     private var dataSource: UITableViewDiffableDataSource<Section, Game>!
     
     
@@ -44,7 +43,7 @@ extension SelectionViewController {
         self.dataSource = UITableViewDiffableDataSource.init(tableView: self.gameListTableView) { (tableView, indexPath, game) -> UITableViewCell in
             
             let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as! GameCell
-            cell.fill(state: game)
+            cell.fill(self.viewModel, state: game)
             
             return cell
         }
