@@ -13,7 +13,3 @@ const API = {
 	post: {},
 };
 export default API;
-
-// fetch(url)
-//     .then(response => response.json())
-//     .then(jsondata => console.log(jsondata))
