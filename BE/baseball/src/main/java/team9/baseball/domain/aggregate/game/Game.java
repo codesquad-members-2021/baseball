@@ -157,7 +157,6 @@ public class Game {
         this.base3UniformNumber = this.base2UniformNumber;
         this.base2UniformNumber = this.base1UniformNumber;
         this.base1UniformNumber = this.batterUniformNumber;
-        this.batterUniformNumber = null;
     }
 
     private void goToNextInning(Team homeTeam, Team awayTeam) {
