@@ -33,6 +33,7 @@ class GameTest {
     @Test
     @DisplayName("스트라이크 테스트")
     void strike() {
+        assertInning(1, Halves.TOP);
         assertCountStatus(0, 0, 0, 0, 0);
         assertPlayerStatus(1, 1, null, null, null);
         game.proceedStrike(awayTeam, homeTeam);
@@ -59,6 +60,11 @@ class GameTest {
         game.proceedStrike(awayTeam, homeTeam);
         assertCountStatus(2, 0, 2, 0, 0);
         assertPlayerStatus(1, 3, null, null, null);
+
+        game.proceedStrike(awayTeam, homeTeam);
+        assertInning(1, Halves.BOTTOM);
+        assertCountStatus(0, 0, 0, 0, 0);
+        assertPlayerStatus(1, 2, null, null, null);
     }
 
     void assertCountStatus(int strike, int ball, int out, int awayScore, int homeScore) {
@@ -78,6 +84,13 @@ class GameTest {
                 () -> Assertions.assertThat(game.getBase1UniformNumber()).isEqualTo(base1UniformNumber),
                 () -> Assertions.assertThat(game.getBase2UniformNumber()).isEqualTo(base2UniformNumber),
                 () -> Assertions.assertThat(game.getBase3UniformNumber()).isEqualTo(base3UniformNumber)
+        );
+    }
+
+    void assertInning(int currentInning, Halves currentHavles) {
+        org.junit.jupiter.api.Assertions.assertAll(
+                () -> Assertions.assertThat(game.getCurrentInning()).isEqualTo(currentInning),
+                () -> Assertions.assertThat(game.getCurrentHalves()).isEqualTo(currentHavles)
         );
     }
 }
