@@ -1,28 +1,38 @@
-const loadData = async (setState, type, hash) => {
-	const getUrl = (type) => {
-		let url = 'https://890e124d-c97a-4c91-a91a-0d19d727c1d6.mock.pstmn.io/';
-		switch (type) {
-			case 'mainDish':
-				return (url += 'section/main');
-			case 'bestDish':
-				return (url += 'best');
-			case 'soupDish':
-				return (url += 'section/soup');
-			case 'sideDish':
-				return (url += 'section/side');
-			case 'detailDish':
-				return (url += `detail/${hash}`);
-			case 'details':
-				return (url += 'section/side');
-			default:
-				return;
+import { useState, useEffect } from 'react';
+import API from './API';
+function useFetch(method, type, value = null) {
+	console.log(method, type, value);
+	const [data, setData] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+
+	useEffect((value) => {
+		async function fetchUrl(value) {
+			setLoading(true);
+			try {
+				const res = await API[method][type](value ? value : '');
+				console.log('USE_FETCH', res);
+				// axios({ url, method, code });
+				setData(res);
+			} catch (err) {
+				setError(true);
+				console.error('요청주소에 문제가 있어요😯', err.response);
+				// if (error.response.status >= 400) {
+				// 	setData(error.response.status);
+				// 	;
+				// }
+			} finally {
+				setLoading(false);
+			}
 		}
-	};
+		fetchUrl();
+		return () => {
+			setData([]);
+			setLoading(true);
+			setError(false);
+		};
+	}, []);
 
-	const response = await fetch(getUrl(type));
-	const initialData = await response.json();
-	const dataBody = initialData.body;
-	setState(dataBody);
-};
-
-export default loadData;
+	return [data, loading, error];
+}
+export default useFetch;

@@ -1,7 +1,13 @@
 import React from 'react';
-
-const AttackMode = () => {
-  return <div></div>;
+import GamePage from '../GamePage';
+const AttackMode = ({ match }) => {
+	console.log(match.params);
+	return (
+		<>
+			<div>어택모드</div>
+			<GamePage data={match.params} />
+		</>
+	);
 };
 
 export default AttackMode;
