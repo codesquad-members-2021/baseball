@@ -17,6 +17,7 @@
 		829CFA572640434600D9F635 /* GameSelectViewControllerManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */; };
 		82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49E826404C76008B1EC0 /* InGameViewController.swift */; };
 		82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */; };
+		82E20E1F2642692C006C80DF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E20E1E2642692C006C80DF /* NetworkManager.swift */; };
 		CEA103C726413962008BA763 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C626413962008BA763 /* Player.swift */; };
 		CEA103CA264139E5008BA763 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103C9264139E5008BA763 /* Players.swift */; };
 		CEA103CD26413AF2008BA763 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103CC26413AF2008BA763 /* Team.swift */; };
@@ -40,6 +41,7 @@
 		829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSelectViewControllerManageable.swift; sourceTree = "<group>"; };
 		82DB49E826404C76008B1EC0 /* InGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameViewController.swift; sourceTree = "<group>"; };
 		82DB49EA26404C87008B1EC0 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		82E20E1E2642692C006C80DF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEA103C626413962008BA763 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = SOURCE_ROOT; };
 		CEA103C9264139E5008BA763 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = SOURCE_ROOT; };
 		CEA103CC26413AF2008BA763 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = SOURCE_ROOT; };
@@ -80,6 +82,7 @@
 		829CFA3B2640379B00D9F635 /* baseball */ = {
 			isa = PBXGroup;
 			children = (
+				82E20E1D264267A0006C80DF /* Network */,
 				829CFA552640432C00D9F635 /* Protocols */,
 				829CFA52264041C400D9F635 /* Model */,
 				829CFA51264041BF00D9F635 /* Controller */,
@@ -133,6 +136,14 @@
 				829CFA562640434600D9F635 /* GameSelectViewControllerManageable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		82E20E1D264267A0006C80DF /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				82E20E1E2642692C006C80DF /* NetworkManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +220,7 @@
 				82DB49EB26404C87008B1EC0 /* ScoreViewController.swift in Sources */,
 				829CFA412640379B00D9F635 /* GameSelectViewController.swift in Sources */,
 				CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */,
+				82E20E1F2642692C006C80DF /* NetworkManager.swift in Sources */,
 				829CFA3D2640379B00D9F635 /* AppDelegate.swift in Sources */,
 				829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */,
 				CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */,

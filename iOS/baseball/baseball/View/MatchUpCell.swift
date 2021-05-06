@@ -11,6 +11,7 @@ class MatchUpCell: UIView {
     
     @IBOutlet weak var homeLabel: UILabel!
     @IBOutlet weak var awayLabel: UILabel!
+    @IBOutlet weak var gameNumber: UILabel!
     
     private var delegate: GameSelectViewControllerManageable!
     
@@ -31,5 +32,11 @@ class MatchUpCell: UIView {
     
     @objc private func didTapCell(_ gesture: UITapGestureRecognizer) {
         self.delegate.moveToGameView()
+    }
+    
+    internal func updateCellLabel(homeTeam: String, awayTeam: String, gameNumber: String) {
+        self.homeLabel.text = homeTeam
+        self.awayLabel.text = awayTeam
+        self.gameNumber.text = gameNumber
     }
 }

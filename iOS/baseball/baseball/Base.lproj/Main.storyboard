@@ -78,6 +78,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="awayLabel" destination="o8f-b2-a5K" id="994-DK-LNg"/>
+                                            <outlet property="gameNumber" destination="BRB-ej-flD" id="iIe-6R-vxv"/>
                                             <outlet property="homeLabel" destination="vkN-x8-wNH" id="0Ux-dX-zmf"/>
                                         </connections>
                                     </view>
@@ -164,14 +165,6 @@
                                     <constraint firstItem="e3l-KG-pe3" firstAttribute="leading" secondItem="dpp-17-FPG" secondAttribute="trailing" priority="750" constant="29.5" id="pJI-Sf-d1g"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eZe-MX-mfn">
-                                <rect key="frame" x="142" y="189" width="131" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="92E-6T-7K8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
