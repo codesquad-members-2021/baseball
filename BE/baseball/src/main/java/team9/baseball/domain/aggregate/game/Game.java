@@ -161,7 +161,9 @@ public class Game {
     }
 
     private void goToNextInning(Team homeTeam, Team awayTeam) {
-        //아웃 카운트 초기화
+        //카운트 초기화
+        this.strikeCount = 0;
+        this.ballCount = 0;
         this.outCount = 0;
 
         //다음 이닝으로 변경
@@ -178,12 +180,12 @@ public class Game {
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
         Team defenseTeam = acquireDefenseTeam(awayTeam, homeTeam);
 
-        //수비팀의 투수 설정
-        int nextPitcherUniformNumber = defenseTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
+        //수비팀의 투수 설정 (직전 타자의 다음 순서가 투수가 됨)
+        int nextPitcherUniformNumber = defenseTeam.getNextPlayerUniformNumber(batterUniformNumber);
+        //공격팀 타자 설정 (직전 투수의 다음 등번호가 타자가 됨)
+        int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
-
-        //공격팀 타자 등판
-        sendBatterOnPlate(attackTeam);
+        this.batterUniformNumber = nextBatterUniformNumber;
     }
 
     private void sendBatterOnPlate(Team attackTeam) {
