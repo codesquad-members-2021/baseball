@@ -308,6 +308,68 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eJM-6t-Cta">
                                 <rect key="frame" x="20" y="574" width="374" height="234"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PitchHistoryCell" id="Sgv-Ty-nBG" customClass="PitchHistoryCell" customModule="Baseball" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="24.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sgv-Ty-nBG" id="vdf-Cr-T1U">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcQ-FI-LkX" customClass="PaddingLabel" customModule="Baseball" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="11" width="20.5" height="22"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="11"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                                            <real key="value" value="7"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                                            <real key="value" value="7"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4x-ed-cTS">
+                                                    <rect key="frame" x="38.5" y="7.5" width="104" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2-3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gaN-zj-PhG">
+                                                    <rect key="frame" x="330" y="7.5" width="39" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="t4x-ed-cTS" firstAttribute="leading" secondItem="bcQ-FI-LkX" secondAttribute="trailing" constant="10" id="5Lq-qU-bXT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="t4x-ed-cTS" firstAttribute="centerY" secondItem="Sgv-Ty-nBG" secondAttribute="centerY" id="Ezq-8A-Qvb"/>
+                                            <constraint firstAttribute="trailing" secondItem="gaN-zj-PhG" secondAttribute="trailing" constant="5" id="WBG-fz-W5W"/>
+                                            <constraint firstItem="gaN-zj-PhG" firstAttribute="centerY" secondItem="Sgv-Ty-nBG" secondAttribute="centerY" id="Z0P-ZI-OiY"/>
+                                            <constraint firstItem="bcQ-FI-LkX" firstAttribute="leading" secondItem="Sgv-Ty-nBG" secondAttribute="leading" constant="8" id="n4s-LC-IfG"/>
+                                            <constraint firstItem="bcQ-FI-LkX" firstAttribute="centerY" secondItem="Sgv-Ty-nBG" secondAttribute="centerY" id="qgD-cG-2Zo"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="numberLabel" destination="bcQ-FI-LkX" id="q0F-Nm-8HR"/>
+                                            <outlet property="pitchResultLabel" destination="t4x-ed-cTS" id="NYn-an-YCV"/>
+                                            <outlet property="pitchResultTotalLabel" destination="gaN-zj-PhG" id="OXI-5W-4qt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2AE-fm-cVZ"/>
@@ -330,6 +392,7 @@
                     <navigationItem key="navigationItem" id="WhE-Jq-ePL"/>
                     <connections>
                         <outlet property="groundView" destination="5cQ-GY-0hY" id="EqH-Fw-L16"/>
+                        <outlet property="pitchHistoryTableView" destination="eJM-6t-Cta" id="My2-fn-AfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBA-Vc-vAq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -371,6 +434,11 @@
             <point key="canvasLocation" x="365" y="14"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="bcQ-FI-LkX">
+            <size key="intrinsicContentSize" width="20.5" height="22"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="zCf-lH-0oq"/>
     </inferredMetricsTieBreakers>
