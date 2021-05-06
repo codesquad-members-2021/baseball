@@ -1,10 +1,11 @@
 import React from 'react';
 import GamePage from '../GamePage';
-const AttackMode = () => {
+const AttackMode = ({ match }) => {
+	console.log(match.params);
 	return (
 		<>
 			<div>어택모드</div>
-			<GamePage />
+			<GamePage data={match.params} />
 		</>
 	);
 };

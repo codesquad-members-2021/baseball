@@ -10,7 +10,7 @@ function App() {
 		<>
 			<GlobalStyle />
 			<StartPage />
-			<Route exact path="/attack" component={AttackMode} />
+			<Route exact path="/attack/:id/:away/:home" component={AttackMode} />
 			<Route path="/defense" component={DefenseMode} />
 		</>
 	);

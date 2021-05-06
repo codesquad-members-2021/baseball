@@ -5,14 +5,13 @@ const API = {
 			const response = await fetch(`${url}/games`);
 			return response.json();
 		},
-		initData: async () => {
-			const response = await fetch(`${url}/games/1`);
+		initData: async (gameId) => {
+			const response = await fetch(`${url}/games${gameId}`);
 			return response.json();
 		},
 	},
 	post: {},
 };
-
 export default API;
 
 // fetch(url)

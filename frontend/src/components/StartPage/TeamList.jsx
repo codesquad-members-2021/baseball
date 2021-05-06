@@ -24,12 +24,18 @@ const TeamList = () => {
 	}, []);
 
 	const List = () => {
+		console.log(teamList);
 		return teamList.map((team, i) => (
 			<SingleList key={i}>
 				<di>{team.gameTitle}</di>
 				<GameTitle>
 					<TeamName>
-						<Link to="/attack">{team.awayTeam.teamName}</Link>
+						{/* //occupied인지 체크하는 api요청 */}
+						<Link
+							to={`/attack/${team.id}/${team.awayTeam.teamName}/${team.homeTeam.teamName}`}
+						>
+							{team.awayTeam.teamName}
+						</Link>
 					</TeamName>
 					<span>VS</span>
 					<TeamName>
