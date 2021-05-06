@@ -16,7 +16,6 @@ export default TeamSelect;
 // --- Styled Components ---
 const StyledTeamSelect = styled.div`
     width: 60%;
-    height: 100%;
-    text-align: center;
     margin: 0 auto;
+    text-align: center;
 `;
