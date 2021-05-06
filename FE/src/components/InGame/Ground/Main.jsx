@@ -1,14 +1,16 @@
 import styled from "styled-components";
+import BallCount from "./BallCount"
 
 const Main = () => {
 	const gongSoo = "ATTACK";
+	const count = { ball: 2, strike: 1, out: 2 };
 	return (
 		<StyledMain>
-			<BallCount></BallCount>
-			<CurrentInning>9회초 수비</CurrentInning>
+			<BallCount count={count} />
+			<CurrentInning>8회초 수비</CurrentInning>
 			{gongSoo === "DEFENSE" && <PitchButton>Pitch</PitchButton>}
 			<Pitcher src="image/pitcher_eagles_heart.png" />
-			<Runner src="image/runner.png" />
+			<Runner src="image/runner_running.png" />
 			<RunnerWaiting src="image/runner_waiting.png" />
 			<Batter src="image/batter.png" />
 		</StyledMain>
@@ -20,7 +22,6 @@ const StyledMain = styled.div`
 	height: 540px;
 	background-image: url("image/base2.png");
 `;
-const BallCount = styled.div``;
 const CurrentInning = styled.div`
 	position: absolute;
 	top: 200px;
