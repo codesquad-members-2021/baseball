@@ -4,6 +4,7 @@ import theme from "@/Styles/theme";
 
 const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
+    position: relative;
     border: 3px solid #fff;
     width: 1440px;
     height: 1080px;
@@ -207,4 +208,52 @@ const GamePlayLog = {
   },
 };
 
-export { Game, GameHeader, GamePlayground, GamePlayLog };
+const SquadBoard = {
+  SquadBoard: styled.div`
+    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 70%;
+    height: 77%;
+    background: #222;
+    padding: 30px;
+    z-index: 999;
+  `,
+  PopUpBackground: styled.div`
+    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #222;
+    opacity: 0.7;
+    transition: display 1.5s;
+  `,
+  PopUpButton: styled.div`
+    display: ${({ isMouseOver }) => (isMouseOver ? "none" : "block")};
+    width: 100px;
+    height: 20px;
+    border-radius: 50% 50% 0px 0px;
+    position: absolute;
+    bottom: 0%;
+    left: 530px;
+    background: gray;
+    opacity: 0.5;
+    text-align: center;
+    padding: 3px;
+    z-index: 99999;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  `,
+  SquadTable: {
+    SquadTableHeaderRow: styled.div`
+      font-size: ${theme.FONTSIZE.S};
+    `,
+  },
+};
+
+export { Game, GameHeader, GamePlayground, GamePlayLog, SquadBoard };

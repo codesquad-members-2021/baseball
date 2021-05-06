@@ -1,6 +1,7 @@
 import GameHeader from "./GameHeader/GameHeader";
 import GamePlayground from "./GamePlayground/GamePlayground";
 import GamePlayLog from "./GamePlayLog/GamePlayLog";
+import SquadBoard from "./SquadBoard/SquadBoard";
 import { Game as S } from "@/Components/Game/GameStyles";
 
 const Game = () => {
@@ -13,6 +14,7 @@ const Game = () => {
       <S.GameRightSection>
         <GamePlayLog />
       </S.GameRightSection>
+      <SquadBoard />
     </S.Game>
   );
 };
