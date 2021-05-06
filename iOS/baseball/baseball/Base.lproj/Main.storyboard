@@ -300,7 +300,7 @@
         <!--Score Board View Controller-->
         <scene sceneID="Ioo-jt-Kl3">
             <objects>
-                <viewController id="pzc-gv-Hcw" userLabel="Score Board View Controller" customClass="ScoreBoardViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Scores" id="pzc-gv-Hcw" userLabel="Score Board View Controller" customClass="ScoreBoardViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vhM-ib-VkQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,9 +325,11 @@
                                                     <segment title="Marvel"/>
                                                 </segments>
                                             </segmentedControl>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PQ8-D6-5UJ">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PQ8-D6-5UJ">
                                                 <rect key="frame" x="0.0" y="173" width="414" height="516"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="516" id="BpX-YQ-z6i"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="delegate" destination="pzc-gv-Hcw" id="LY9-zo-NhN"/>
                                                 </connections>
@@ -724,8 +726,9 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="689" id="1g4-TQ-esD"/>
                                     <constraint firstItem="Eh8-iP-l6a" firstAttribute="width" secondItem="aX5-Hd-w5z" secondAttribute="width" id="8M1-Pn-F8n"/>
-                                    <constraint firstItem="Eh8-iP-l6a" firstAttribute="height" secondItem="aX5-Hd-w5z" secondAttribute="height" priority="750" id="9q7-tF-7iE"/>
+                                    <constraint firstItem="Eh8-iP-l6a" firstAttribute="height" secondItem="aX5-Hd-w5z" secondAttribute="height" priority="250" id="9q7-tF-7iE"/>
                                     <constraint firstItem="Eh8-iP-l6a" firstAttribute="top" secondItem="0L2-Y0-LbI" secondAttribute="top" id="FsA-PJ-7K3"/>
                                     <constraint firstItem="Eh8-iP-l6a" firstAttribute="trailing" secondItem="0L2-Y0-LbI" secondAttribute="trailing" id="REc-JH-Ma2"/>
                                     <constraint firstItem="0L2-Y0-LbI" firstAttribute="leading" secondItem="Eh8-iP-l6a" secondAttribute="leading" id="c0L-C8-8O7"/>
@@ -747,11 +750,12 @@
                             <constraint firstItem="s3O-eD-XqT" firstAttribute="top" secondItem="TkL-L2-fsd" secondAttribute="top" id="q8K-RX-eNA"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="OQt-Cj-LPT"/>
+                    <tabBarItem key="tabBarItem" title="Item 2" selectedImage="chart.bar.xaxis" catalog="system" id="OQt-Cj-LPT"/>
                     <connections>
                         <outlet property="awayTotalScore" destination="3W6-LW-jeS" id="2W6-lo-D4c"/>
                         <outlet property="homeTotalScore" destination="L2H-JO-mw4" id="KSw-tv-BQa"/>
                         <outlet property="playerScoreTableView" destination="PQ8-D6-5UJ" id="j0x-ao-6x2"/>
+                        <outlet property="tableViewHeight" destination="BpX-YQ-z6i" id="vpa-ts-cLu"/>
                         <outlet property="teamControllBar" destination="EzZ-yj-eq1" id="7Fr-Ra-Gzl"/>
                         <outletCollection property="homeScores" destination="Jwp-oQ-yrX" collectionClass="NSMutableArray" id="nqF-0M-2Gg"/>
                         <outletCollection property="homeScores" destination="n5c-mY-dx4" collectionClass="NSMutableArray" id="5vk-cf-VJp"/>
@@ -777,10 +781,10 @@
             </objects>
             <point key="canvasLocation" x="3764" y="513"/>
         </scene>
-        <!--Item 1-->
+        <!--Hello-->
         <scene sceneID="TBv-Ty-y4g">
             <objects>
-                <viewController id="Bq3-7k-h3K" customClass="GameViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Hello" id="Bq3-7k-h3K" customClass="GameViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jr7-kA-OcP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -807,14 +811,15 @@
             </objects>
             <point key="canvasLocation" x="3763.7681159420295" y="-202.23214285714286"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Game Tab Bar View Controller-->
         <scene sceneID="df1-AM-K2Q">
             <objects>
-                <tabBarController id="bno-0s-Dys" sceneMemberID="viewController">
+                <tabBarController id="bno-0s-Dys" customClass="GameTabBarViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fec-W4-3UN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="linkColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="Bq3-7k-h3K" kind="relationship" relationship="viewControllers" id="pc6-uq-epz"/>
@@ -845,6 +850,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chart.bar.xaxis" catalog="system" width="128" height="98"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
