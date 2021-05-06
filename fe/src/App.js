@@ -9,7 +9,7 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/game:team">
+        <Route path="/game">
           <Game />
         </Route>
       </Switch>

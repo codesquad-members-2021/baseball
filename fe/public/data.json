@@ -1,22 +1,40 @@
 {
   "game_list": [
     {
-      "home": "captain",
-      "away": "marvel",
+      "home": "Captain",
+      "away": "Marvel",
       "isStart": true,
       "game_id": 0
     },
     {
-      "home": "twins",
-      "away": "tigers",
+      "home": "Twins",
+      "away": "Tigers",
       "isStart": false,
       "game_id": 1
     },
     {
-      "home": "rockets",
-      "away": "dodgers",
+      "home": "Rockets",
+      "away": "Dodgers",
       "isStart": false,
       "game_id": 2
+    },
+    {
+      "home": "eamon",
+      "away": "Q",
+      "isStart": false,
+      "game_id": 3
+    },
+    {
+      "home": "noel",
+      "away": "eamon",
+      "isStart": false,
+      "game_id": 4
+    },
+    {
+      "home": "code",
+      "away": "squad",
+      "isStart": false,
+      "game_id": 5
     }
   ]
 }
