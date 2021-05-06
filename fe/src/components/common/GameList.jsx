@@ -37,8 +37,11 @@ const GameListLayout = styled.div`
   height: 33vh;
   display: flex;
   flex-direction: column;
-  /* outline: blue solid; */
-  overflow: scroll;
   margin-top: 5%;
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: scroll;
+  }
 `;
 export default GameList;
