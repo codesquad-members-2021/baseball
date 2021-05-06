@@ -35,7 +35,7 @@ public class BaseballController {
 
     @GetMapping("/progress/{id}")
     @ApiOperation(value = "야구 진행 조회", notes = "야구의 진행 상황에 관한 정보를 조회합니다.")
-    public ResponseEntity<MatchInfoDto> getProgress(@PathVariable String id) {
+    public ResponseEntity<MatchInfoDto> getProgress(@ApiParam("게임의 식별자") @PathVariable String id) {
         MatchInfoDto matchInfo = baseballService.getProgress(id);
         return ResponseEntity.ok().body(matchInfo);
     }
