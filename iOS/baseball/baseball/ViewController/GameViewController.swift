@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var gameStory: UITableView!
     @IBOutlet var tableViewHeight: NSLayoutConstraint!
     private lazy var dataSource = makeDataSource()
-    var foos: [Foo] = [Foo(title: "aa"), Foo(title: "dd")]
+    var foos: [Foo] = [Foo(title: "aa"), Foo(title: "dd"), Foo(title: "dc"), Foo(title: "ds"), Foo(title: "dsa"), Foo(title: "as")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ class GameViewController: UIViewController {
     func makeDataSource() -> Datasource {
         let dataSource = Datasource(tableView: gameStory) { (tableView, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.identifier, for: indexPath) as? GameStoryTableViewCell
-            cell?.countLabel.text = item.title
+            cell?.countLabel.text = "스트라이크"
             cell?.countImage.image = UIImage(systemName: "doc.fill")
             return cell
         }
