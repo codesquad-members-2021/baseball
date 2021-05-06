@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Team from "Components/Home/GameList/Team";
 
-const Game = () => {
+const Game = ({ gameData }) => {
   return (
     <GameBox>
-      <GameNumber>GAME 1</GameNumber>
+      <GameNumber>GAME {gameData.id}</GameNumber>
       <TeamDiv>
-        <Team />
+        <Team name={gameData.awayTeamName} />
         <VsSpan>VS</VsSpan>
-        <Team />
+        <Team name={gameData.homeTeamName} />
       </TeamDiv>
     </GameBox>
   );
