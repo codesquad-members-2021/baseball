@@ -17,6 +17,9 @@ import java.util.List;
 class GameRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GameRepositoryTest.class);
+    private static final String GAME_TITLE = "GAME 1";
+    private static final String A_TEAM_NAME = "aTeam";
+    private static final String B_TEAM_NAME = "bTeam";
 
     @Autowired
     private GameRepository gameRepository;
@@ -25,22 +28,25 @@ class GameRepositoryTest {
     private TeamRepository teamRepository;
 
     @Test
-    @DisplayName("게임을 생성할 수 있어야 함")
+    @DisplayName("게임을 생성할 수 있어야 하고, 생성된 게임의 제목은 입력한 제목이어야 함")
     void testCreateGame() {
-        Team teamA = createTeam("aTeam");
-        Team teamB = createTeam("bTeam");
-        List<Player> aPlayers = createPlayers("A-");
-        List<Player> bPlayers = createPlayers("B-");
+        Game game = createGame(GAME_TITLE);
+        logger.debug("game : {}", game);
+        game.isSameTitle(GAME_TITLE);
+    }
+
+    private Game createGame(String gameTitle) {
+        Team teamA = createTeam(A_TEAM_NAME);
+        Team teamB = createTeam(B_TEAM_NAME);
+        List<Player> aPlayers = createPlayers(A_TEAM_NAME + "-");
+        List<Player> bPlayers = createPlayers(B_TEAM_NAME + "-");
 
         initTeam(teamA, aPlayers);
         initTeam(teamB, bPlayers);
 
-        String gameTitle = "GAME 1";
         Game game = Game.createGame(gameTitle, teamA, teamB);
         gameRepository.save(game);
-        game = findGameById(game.getId());
-        logger.debug("game : {}", game);
-        game.isSameTitle(gameTitle);
+        return findGameById(game.getId());
     }
 
     private Game findGameById(int gameId) {
