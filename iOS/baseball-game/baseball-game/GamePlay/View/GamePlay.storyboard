@@ -323,13 +323,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9g-CZ-erd">
-                                                    <rect key="frame" x="44.5" y="14.5" width="95.5" height="26.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❶" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gv7-AQ-B5y">
-                                                    <rect key="frame" x="12" y="14.5" width="20.5" height="26.5"/>
+                                                    <rect key="frame" x="40.5" y="14.5" width="95.5" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -340,15 +334,38 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZp-4U-RgC">
+                                                    <rect key="frame" x="11" y="18" width="18.5" height="19"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gv7-AQ-B5y">
+                                                            <rect key="frame" x="6" y="2.5" width="6.5" height="14.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="labelColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="gv7-AQ-B5y" firstAttribute="centerY" secondItem="TZp-4U-RgC" secondAttribute="centerY" id="RQ7-G4-U0v"/>
+                                                        <constraint firstAttribute="width" secondItem="TZp-4U-RgC" secondAttribute="height" multiplier="1:1" id="Wdh-rl-UV3"/>
+                                                        <constraint firstItem="gv7-AQ-B5y" firstAttribute="centerX" secondItem="TZp-4U-RgC" secondAttribute="centerX" id="xPa-6j-WBL"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="gv7-AQ-B5y" firstAttribute="leading" secondItem="D9s-t6-3NR" secondAttribute="leading" constant="12" id="3Rb-45-IZG"/>
-                                                <constraint firstItem="A9g-CZ-erd" firstAttribute="leading" secondItem="gv7-AQ-B5y" secondAttribute="trailing" constant="12" id="FEo-SB-bl4"/>
                                                 <constraint firstAttribute="trailing" secondItem="fRp-py-16y" secondAttribute="trailing" constant="12" id="Fot-Yu-8gw"/>
                                                 <constraint firstItem="fRp-py-16y" firstAttribute="centerY" secondItem="D9s-t6-3NR" secondAttribute="centerY" id="Vh9-B1-PAT"/>
-                                                <constraint firstItem="gv7-AQ-B5y" firstAttribute="centerY" secondItem="D9s-t6-3NR" secondAttribute="centerY" id="ejM-tO-4sp"/>
+                                                <constraint firstItem="TZp-4U-RgC" firstAttribute="leading" secondItem="D9s-t6-3NR" secondAttribute="leading" constant="11" id="eEa-ee-EyC"/>
+                                                <constraint firstItem="TZp-4U-RgC" firstAttribute="centerY" secondItem="D9s-t6-3NR" secondAttribute="centerY" id="fDv-Cu-XMY"/>
+                                                <constraint firstItem="TZp-4U-RgC" firstAttribute="width" secondItem="D9s-t6-3NR" secondAttribute="width" multiplier="0.045" id="oYG-iv-fYu"/>
                                                 <constraint firstItem="A9g-CZ-erd" firstAttribute="centerY" secondItem="D9s-t6-3NR" secondAttribute="centerY" id="q4i-cc-0o3"/>
                                                 <constraint firstItem="fRp-py-16y" firstAttribute="leading" relation="lessThanOrEqual" secondItem="A9g-CZ-erd" secondAttribute="trailing" constant="1000" id="roJ-A8-UEm"/>
+                                                <constraint firstItem="A9g-CZ-erd" firstAttribute="leading" secondItem="TZp-4U-RgC" secondAttribute="trailing" constant="11" id="sKQ-0m-ciD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -392,7 +409,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kGO-aw-tW9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="589" y="149"/>
+            <point key="canvasLocation" x="588.40579710144937" y="148.66071428571428"/>
         </scene>
         <!--Select Pitcher View Controller-->
         <scene sceneID="yCS-Fi-Y8w">
@@ -495,6 +512,9 @@
     </scenes>
     <resources>
         <image name="arrow.2.squarepath" catalog="system" width="128" height="89"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
