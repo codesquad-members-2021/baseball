@@ -5,6 +5,8 @@ import theme from '@/Styles/theme';
 const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
     border: 3px solid #fff;
+    background: #111;
+    opacity: 0.8;
     width: 1440px;
     height: 1080px;
   `,
@@ -17,6 +19,16 @@ const Game = {
   GameRightSection: styled(CS.BOX.FLEX_COLUMN_BOX)`
     width: 20%;
     height: 100%;
+  `,
+
+  Background: styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    opacity: 0.4;
   `,
 };
 
