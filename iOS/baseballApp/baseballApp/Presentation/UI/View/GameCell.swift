@@ -41,7 +41,12 @@ private extension GameCell {
         
         tapGesture.rx.event
             .bind(onNext: { recognizer in
-                print(recognizer) //TestCode
+                API.shared.checkGameStatus()
+                    .subscribe(onNext: { value in
+                        print(value)
+                    }, onError: { error in
+                        print(error.localizedDescription)
+                    }).disposed(by: self.disposBag)
             })
             .disposed(by: disposBag)
     }
