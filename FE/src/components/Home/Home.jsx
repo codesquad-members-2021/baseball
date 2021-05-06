@@ -1,18 +1,21 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { githubProvider, googleProvider } from '../../config/authMethods';
+import socialMediaAuth from '../../service/auth';
 
+const handleOnClick = async (provider) => {
+  const res = await socialMediaAuth(provider);
+  console.log(res);
+};
 const Home = () => {
-  const [isLogin, setIsLogin] = useState(false);
-
-  const handleLoginClick = () => setIsLogin(true);
   return (
     <StyledHome>
       this is home.
       <button>
         <Link to="/intro">팀 선택하기</Link>
       </button>
-      <button onClick={handleLoginClick}>로그인</button>
+      <button onClick={() => handleOnClick(githubProvider)}>github</button>
+      <button onClick={() => handleOnClick(googleProvider)}>google</button>
     </StyledHome>
   );
 };
