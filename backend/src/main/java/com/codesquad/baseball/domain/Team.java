@@ -43,6 +43,10 @@ public class Team {
         return id;
     }
 
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
     @Override
     public String toString() {
         return "Team{" +

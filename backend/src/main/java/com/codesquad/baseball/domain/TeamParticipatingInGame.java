@@ -25,9 +25,32 @@ public class TeamParticipatingInGame {
 
     public void addPlayer(Player player) {
         PlayerParticipatingInGame participatingPlayer = new PlayerParticipatingInGame(player.getId());
+        players.add(participatingPlayer);
     }
 
     public int getId() {
         return id;
+    }
+
+    public boolean isHomeTeam() {
+        return isHomeTeam;
+    }
+
+    public boolean isAwayTeam() {
+        return !isHomeTeam;
+    }
+
+    public int sizeOfPlayer() {
+        return players.size();
+    }
+
+    @Override
+    public String toString() {
+        return "TeamParticipatingInGame{" +
+                "id=" + id +
+                ", team=" + team +
+                ", players=" + players +
+                ", isHomeTeam=" + isHomeTeam +
+                '}';
     }
 }

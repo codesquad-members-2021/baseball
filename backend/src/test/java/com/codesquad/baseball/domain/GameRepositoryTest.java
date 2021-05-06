@@ -7,12 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
-//@Transactional
+@Transactional
 class GameRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GameRepositoryTest.class);
@@ -26,15 +29,33 @@ class GameRepositoryTest {
     @Autowired
     private TeamRepository teamRepository;
 
-    @Autowired
-    private TeamParticipatingInGameRepository teamParticipatingInGameRepository;
-
     @Test
-    @DisplayName("게임을 생성할 수 있어야 하고, 생성된 게임의 제목은 입력한 제목이어야 함")
+    @DisplayName("게임을 생성할 수 있어야 합니다.")
     void testCreateGame() {
         Game game = createGame(GAME_TITLE);
-        logger.debug("game : {}", game);
-        game.isSameTitle(GAME_TITLE);
+        assertThat(game).isNotNull();
+    }
+
+    @Test
+    @DisplayName("생성할때 입력한 제목이 게임의 제목이어야 합니다")
+    void testGameTitle() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.isSameTitle(GAME_TITLE)).isTrue();
+    }
+
+    @Test
+    @DisplayName("양 팀은 입력한 만큼의 선수를 데리고 있어야 합니다")
+    void testSizeOfPlayer() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.sizeOfHomeTeam()).isEqualTo(9);
+        assertThat(game.sizeOfAwayTeam()).isEqualTo(9);
+    }
+
+    @Test
+    @DisplayName("생성된 게임의 초기상태의 occupied는 false여야 합니다")
+    void testOccupation() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.isAvailable()).isTrue();
     }
 
     private Game createGame(String gameTitle) {
@@ -46,7 +67,14 @@ class GameRepositoryTest {
         initTeam(teamA, aPlayers);
         initTeam(teamB, bPlayers);
 
-        Game game = Game.createGame(gameTitle, teamA.createParticipantAsHomeTeam(), teamB.createParticipantAsAwayTeam());
+        TeamParticipatingInGame aTeamParticipant = teamA.createParticipantAsHomeTeam();
+        TeamParticipatingInGame bTeamParticipant = teamB.createParticipantAsAwayTeam();
+
+        teamA.getPlayers().forEach(aTeamParticipant::addPlayer);
+        teamB.getPlayers().forEach(bTeamParticipant::addPlayer);
+
+        Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
+
         gameRepository.save(game);
         return findGameById(game.getId());
     }
@@ -68,7 +96,7 @@ class GameRepositoryTest {
     private List<Player> createPlayers(String prefix) {
         List<Player> players = new ArrayList<>();
         players.add(createPitcher(prefix + "pitcher", 1));
-        for (int i = 2; i <= 10; i++) {
+        for (int i = 1; i <= 8; i++) {
             players.add(createHitter(prefix + "hitter" + i, i));
         }
         return players;

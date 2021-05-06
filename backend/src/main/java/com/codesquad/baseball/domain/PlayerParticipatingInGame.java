@@ -22,4 +22,17 @@ public class PlayerParticipatingInGame {
         this.hitCount = 0;
         this.outCount = 0;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerParticipatingInGame{" +
+                "id=" + id +
+                ", team_participating_in_game=" + team_participating_in_game +
+                ", bat_order=" + bat_order +
+                ", player=" + player +
+                ", plateAppearances=" + plateAppearances +
+                ", hitCount=" + hitCount +
+                ", outCount=" + outCount +
+                '}';
+    }
 }

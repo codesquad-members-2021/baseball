@@ -1,5 +1,6 @@
 package com.codesquad.baseball.domain;
 
+import com.codesquad.baseball.exceptions.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
 
 import java.util.HashSet;
@@ -51,8 +52,34 @@ public class Game {
                 .build();
     }
 
+    public boolean isAvailable() {
+        return !isOccupied;
+    }
+
     public boolean isSameTitle(String title) {
         return this.gameTitle.equals(title);
+    }
+
+    public TeamParticipatingInGame homeTeam() {
+        return teams.stream()
+                .filter(TeamParticipatingInGame::isHomeTeam)
+                .findFirst()
+                .orElseThrow(() -> new TeamNotFoundException(TeamNotFoundException.HOME_TEAM_NOT_FOUND));
+    }
+
+    public TeamParticipatingInGame awayTeam() {
+        return teams.stream()
+                .filter(TeamParticipatingInGame::isAwayTeam)
+                .findFirst()
+                .orElseThrow(() -> new TeamNotFoundException(TeamNotFoundException.AWAY_TEAM_NOT_FOUND));
+    }
+
+    public int sizeOfHomeTeam() {
+        return homeTeam().sizeOfPlayer();
+    }
+
+    public int sizeOfAwayTeam() {
+        return awayTeam().sizeOfPlayer();
     }
 
     public Integer getId() {
