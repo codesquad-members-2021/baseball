@@ -9,11 +9,15 @@ import Foundation
 
 class GameManager: Decodable {
     
-    var game: Game
+    var game: Turn
+    
+    enum CodingKeys: String, CodingKey {
+        case game = "team"
+    }
     
 }
 
-struct Game: Decodable {
+struct Turn: Decodable {
     
     var inning: [Int] //2회말:[2,2] / 7회초:[7,1]
     
