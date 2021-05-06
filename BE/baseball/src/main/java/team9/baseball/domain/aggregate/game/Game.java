@@ -123,6 +123,10 @@ public class Game {
         sendBatterOnPlate(attackTeam);
     }
 
+    public int getTotalScore(Halves halves) {
+        return inningMap.values().stream().filter(x -> x.getHalves() == halves).mapToInt(x -> x.getScore()).sum();
+    }
+
     private void proceedOut(Team awayTeam, Team homeTeam) {
         //아웃 카운트 증가
         this.outCount++;
