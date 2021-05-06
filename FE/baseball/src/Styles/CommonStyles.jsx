@@ -20,6 +20,12 @@ const BOX = {
     flex-direction: column;
     align-items: center;
   `,
+
+  FLEX_CENTER_BOX: styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
 };
 
 export { BOX };

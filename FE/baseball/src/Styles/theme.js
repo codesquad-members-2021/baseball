@@ -23,7 +23,8 @@ const COLOR = {
 	PLAYER_NAME: "#a5d8ff",
 	PLAYER_DESCRIPTION: "#228be6",
 	LOG_END_ACTION: "#1098ad",
-	LOG_BALLCOUNT: "#adb5bd"
+	LOG_BALLCOUNT: "#adb5bd",
+	DEFAULT: '#fff'
 }
 
 const theme = {

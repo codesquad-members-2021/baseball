@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
 		text-decoration : none;
 		color:inherit;
 		cursor:pointer;
+		color: #fff;
 	}
 	*{
 		box-sizing:border-box;
@@ -28,7 +29,6 @@ const GlobalStyles = createGlobalStyle`
 		flex-direction:column;
 		justify-content: center;
 		align-items: center;
- }
 `;
 
 export default GlobalStyles;
