@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Game from "Components/Home/GameList/Game";
 import { gameDatas } from "utils/mockDatas";
