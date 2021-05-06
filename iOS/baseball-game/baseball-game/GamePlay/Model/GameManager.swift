@@ -9,76 +9,69 @@ import Foundation
 
 class GameManager: Decodable {
     
+    private var isUserHomeSide: Bool?
     var turn: Turn
     
+    init(isUserHomeSide: Bool, turn: Turn) {
+        self.isUserHomeSide = isUserHomeSide
+        self.turn = turn
+    }
+    
     enum CodingKeys: String, CodingKey {
+        case isUserHomeSide
         case turn = "game"
     }
-
-}
-
-struct Turn: Decodable {
     
-    var inning: [Int] //2회말:[2,2] / 7회초:[7,1]
-    
-    var home: Team
-    
-    var away: Team
-    
-    struct Team: Decodable {
-        
-        var name: String //Marvel
-        
-        var score: Int //5
-        
-        var role: String //offense나 defense
-        
-        var player: Player
-        
-        enum CodingKeys: String, CodingKey {
-            case name = "team"
-            case score
-            case role
-            case player
-        }
-        
-        struct Player: Decodable {
-            
-            var position: String //batter나 pitcher
-            
-            var name: String
-            
-            var info: String //#39, 1타석 0안타 등
-            
-        }
+    enum Side {
+        static let home = "home"
+        static let away = "away"
     }
     
-    var ballCounts: [Int] //Strike-Ball-Out 순서 [0, 1, 2]
-    
-    var baseInfo: [Bool] //3루에만 주자가 있는 경우 [false, false, true]
-    
-    var pitches: [Pitch]
-    
-    enum CodingKeys: String, CodingKey {
-        case inning
-        case home
-        case away
-        case ballCounts
-        case baseInfo
-        case pitches = "list"
+    enum Role {
+        static let offense = "offense"
+        static let defense = "defense"
     }
 }
 
-struct Pitch: Decodable, Hashable {
+extension GameManager: GameManagable {
     
-    let id = UUID()
+    func teams() -> [String: String] {
+        let homeTeam = turn.home.name
+        let awayTeam = turn.away.name
+        return [Side.home: homeTeam, Side.away: awayTeam]
+    }
     
-    var result: String
+    func scores() -> [String: Int] {
+        let homeScore = turn.home.score
+        let awayScore = turn.away.score
+        return [Side.home: homeScore, Side.away: awayScore]
+    }
     
-    var log: String
+    func inning() -> String {
+        let inningInfos = turn.inning
+        let topOrBottom = inningInfos[1] == 1 ? "초" : "말"
+        return "\(inningInfos[0])회 \(topOrBottom)"
+    }
+
+    func pitcher() -> Player {
+        return isHomeDefense() ? turn.home.player : turn.away.player
+    }
     
-    enum CodingKeys: String, CodingKey {
-        case result = "pitch"
-        case log = "status"
+    func batter() -> Player {
+        return isHomeDefense() ? turn.away.player : turn.home.player
+    }
+    
+    private func isHomeDefense() -> Bool {
+        return turn.home.role == Role.defense
+    }
+    
+    func isUserDefense() -> Bool? {
+        guard let isUserHomeSide = isUserHomeSide else { return nil }
+        
+        if isUserHomeSide {
+            return isHomeDefense()
+        } else {
+            return turn.away.role == Role.defense
+        }
     }
 }

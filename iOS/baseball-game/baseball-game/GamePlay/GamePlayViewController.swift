@@ -28,12 +28,12 @@ class GamePlayViewController: UIViewController {
     private var gamePlayViewModel: GamePlayViewModel!
     private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
-    private let isHome = true // 게임 선택 시 값을 지정해줄 수 있도록 한다 (prepare segue?)
+    private let isUserHomeSide = true // 게임 선택 시 값을 지정해줄 수 있도록 한다 (prepare segue?)
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gamePlayViewModel = GamePlayViewModel()
+        self.gamePlayViewModel = GamePlayViewModel(isUserHomeSide)
         self.pitchButton.isHidden = true
         gamePlayViewModel.requestGame()
         configureDataSource()
@@ -41,11 +41,11 @@ class GamePlayViewController: UIViewController {
     }
     
     private func bind() {
-        gamePlayViewModel.$turn
+        gamePlayViewModel.$gameManager
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] turn in
-                guard let turn = turn else { return }
-                self?.updateLabels(from: turn)
+            .sink { [weak self] gameManager in
+                guard let gameManager = gameManager else { return }
+                self?.updateLabels(with: gameManager)
             }
             .store(in: &cancelBag)
         
@@ -88,40 +88,36 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var batterInfoLabel: UILabel!
     
     
-    private func updateLabels(from game: Turn) {
-        let homeInfo = game.home
-        homeLabel.text = homeInfo.name
-        homeScoreLabel.text = "\(homeInfo.score)"
+    private func updateLabels(with gameManager: GameManagable) {
+        let teamInfo = gameManager.teams()
+        homeLabel.text = teamInfo[GameManager.Side.home]!
+        awayLabel.text = teamInfo[GameManager.Side.away]!
         
-        let awayInfo = game.away
-        awayLabel.text = awayInfo.name
-        awayScoreLabel.text = "\(awayInfo.score)"
+        let scoreInfo = gameManager.scores()
+        homeScoreLabel.text = "\(scoreInfo[GameManager.Side.home]!)"
+        awayScoreLabel.text = "\(scoreInfo[GameManager.Side.away]!)"
         
-        let inningInfos = game.inning
-        let topOrBottom = inningInfos[1] == 1 ? "초" : "말"
-        inningLabel.text = "\(inningInfos[0])회 \(topOrBottom)"
+        inningLabel.text = gameManager.inning()
         
-        let pitcherInfo = homeInfo.role == Role.defense ? homeInfo.player : awayInfo.player
-        
-        let batterInfo = homeInfo.role == Role.offense ? homeInfo.player : awayInfo.player
-        
+        let pitcherInfo = gameManager.pitcher()
         pitcherNameLabel.text = pitcherInfo.name
         pitherInfoLabel.text = pitcherInfo.info
         
+        let batterInfo = gameManager.batter()
         batterNameLabel.text = batterInfo.name
         batterInfoLabel.text = batterInfo.info
         
-        let myTeamInfo = isHome ? homeInfo : awayInfo
+        guard let isUserDefense = gameManager.isUserDefense() else { return }
         
-        if myTeamInfo.role == Role.defense {
+        if isUserDefense {
             self.pitchButton.isHidden = false
+            pitcherView.backgroundColor = .lightGray
+            batterView.backgroundColor = .white
+        } else {
+            self.pitchButton.isHidden = true
+            pitcherView.backgroundColor = .white
+            batterView.backgroundColor = .lightGray
         }
-        
-        let boldView = myTeamInfo.role == Role.defense ? pitcherView : batterView
-        let normalView = myTeamInfo.role == Role.defense ? batterView : pitcherView
-        
-        boldView?.backgroundColor = .lightGray
-        normalView?.backgroundColor = .white
     }
 }
 
