@@ -1,22 +1,55 @@
 package com.codesquad.coco.team;
 
-import com.codesquad.coco.team.domain.MainTeamDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.codesquad.coco.game.GameService;
+import com.codesquad.coco.game.domain.model.Game;
+import com.codesquad.coco.team.domain.DTO.GamePlayDTO;
+import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
+import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
+import com.codesquad.coco.team.domain.DTO.TeamDTO;
+import com.codesquad.coco.utils.DTOConverter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class TeamController {
 
     private TeamService teamService;
+    private GameService gameService;
 
-    public TeamController(TeamService teamService) {
+    public TeamController(TeamService teamService, GameService gameService) {
         this.teamService = teamService;
+        this.gameService = gameService;
     }
 
     @GetMapping("/main")
-    public MainTeamDTO mainPage() {
+    @ResponseStatus(HttpStatus.OK)
+    public MainPageTeamDTO mainPage() {
         return teamService.findMainTeams();
+    }
+
+    @PostMapping("/player/home")
+    @ResponseStatus(HttpStatus.CREATED)
+    public GamePlayDTO homeTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
+        Long gameId = teamService.makeHomeGame(choiceDTO);
+        Game game = gameService.choiceGame(gameId);
+
+        TeamDTO homeTeam = DTOConverter.teamToDTO(game.getHome());
+        TeamDTO awayTeam = DTOConverter.teamToDTO(game.getAway());
+
+        return new GamePlayDTO(gameId, homeTeam, awayTeam);
+
+    }
+
+    @PostMapping("/player/away")
+    @ResponseStatus(HttpStatus.CREATED)
+    public GamePlayDTO awayTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
+        Long gameId = teamService.makeAwayGame(choiceDTO);
+        Game game = gameService.choiceGame(gameId);
+
+        TeamDTO homeTeam = DTOConverter.teamToDTO(game.getHome());
+        TeamDTO awayTeam = DTOConverter.teamToDTO(game.getAway());
+
+        return new GamePlayDTO(gameId, awayTeam, homeTeam);
     }
 }
