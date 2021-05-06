@@ -1,7 +1,10 @@
-package com.codesquad.coco.game.domain;
+package com.codesquad.coco.game.domain.model;
 
 import com.codesquad.coco.team.domain.Team;
 import org.springframework.data.annotation.Id;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Game {
 
@@ -12,6 +15,8 @@ public class Game {
 
     private Team home;
 
+    private Set<ScoreBoard> scoreBoard = new HashSet<>();
+
     private String userType;
 
     public Game(Long id, Team away, Team home, String userType) {
@@ -21,6 +26,13 @@ public class Game {
         this.userType = userType;
     }
 
+    public Game(Long id, Team away, Team home, Set<ScoreBoard> scoreBoard, String userType) {
+        this.id = id;
+        this.away = away;
+        this.home = home;
+        this.scoreBoard = scoreBoard;
+        this.userType = userType;
+    }
 
     public Long getId() {
         return id;
@@ -46,12 +58,21 @@ public class Game {
         return home.getName();
     }
 
+    public void addScoreBoard(ScoreBoard board) {
+        scoreBoard.add(board);
+    }
+
+    public Set<ScoreBoard> getScoreBoard() {
+        return scoreBoard;
+    }
+
     @Override
     public String toString() {
         return "Game{" +
                 "id=" + id +
                 ", away=" + away +
                 ", home=" + home +
+                ", scoreBoard=" + scoreBoard +
                 ", userType='" + userType + '\'' +
                 '}';
     }
