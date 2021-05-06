@@ -7,12 +7,12 @@ import Log from './log/Log';
 const GamePlay = (props) => {
   const score = { home: data.home.score, away: data.away.score };
   const memberList = { home: data.home.member_list, away: data.home.member_list };
-  const pitcher = { home: data.home.pitcher, away: data.home.pitcher };
+  const pitchers = { home: data.home.pitcher, away: data.home.pitcher };
   return (
     <StyleGamePlay>
       <StyleGamePlayGrid>
         <Score teamName={teamName} score={score} turn={data.turn}></Score>
-        <Player memberList={memberList} turn={data.turn} pitcher={pitcher}></Player>
+        <Player memberList={memberList} turn={data.turn} pitchers={pitchers}></Player>
         <Board></Board>
         <Log></Log>
       </StyleGamePlayGrid>
@@ -44,7 +44,7 @@ const StyleGamePlayGrid = styled.div`
 
 //team 이름 props에서 받아온다고 가정
 const teamName = {
-  home: 'captin',
+  home: 'captain',
   away: 'marvel',
   game_id: 0,
 };
