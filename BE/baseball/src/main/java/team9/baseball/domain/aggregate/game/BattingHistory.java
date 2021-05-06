@@ -34,4 +34,16 @@ public class BattingHistory {
     public static String getKeyInGame(Integer batterTeamId, Integer batterUniformNumber) {
         return batterTeamId + "_" + batterUniformNumber;
     }
+
+    public void plusAppear() {
+        this.appear++;
+    }
+
+    public void plusHits() {
+        this.hits++;
+    }
+
+    public void plusOut() {
+        this.out++;
+    }
 }
