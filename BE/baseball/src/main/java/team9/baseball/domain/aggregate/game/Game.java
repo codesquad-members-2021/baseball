@@ -9,6 +9,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.domain.aggregate.team.Player;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.enums.Halves;
+import team9.baseball.domain.enums.PitchResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,12 +73,17 @@ public class Game {
         }
     }
 
-
     public void proceedStrike(Team awayTeam, Team homeTeam) {
         //카운트 증가
         this.strikeCount++;
 
-        //삼진 아웃
+        //기록할 pitch history 생성
+        PitchHistory pitchHistory = new PitchHistory(getDefenseTeamId(), pitcherUniformNumber,
+                getAttackTeamId(), batterUniformNumber, PitchResult.STRIKE);
+        //현재 이닝에 pitch history 기록
+        getCurrentInning().pitchHistoryList.add(pitchHistory);
+
+        //삼진 아웃 처리
         if (strikeCount == 3) {
             proceedOut(awayTeam, homeTeam);
         }
@@ -114,12 +120,9 @@ public class Game {
     }
 
     private void sendBatterOnBase() {
-        String currentInningKey = Inning.getKeyInGame(currentInning, currentHalves);
-        Inning inning = inningMap.get(currentInningKey);
-
         //3루에 주자가 있었다면 득점
         if (this.base3UniformNumber != null) {
-            inning.plusScore();
+            getCurrentInning().plusScore();
         }
 
         //선수들 1루씩 이동
@@ -183,5 +186,24 @@ public class Game {
             return homeTeam;
         }
         return awayTeam;
+    }
+
+    private Inning getCurrentInning() {
+        String currentInningKey = Inning.getKeyInGame(currentInning, currentHalves);
+        return inningMap.get(currentInningKey);
+    }
+
+    private int getAttackTeamId() {
+        if (currentHalves == Halves.TOP) {
+            return awayTeamId;
+        }
+        return homeTeamId;
+    }
+
+    private int getDefenseTeamId() {
+        if (currentHalves == Halves.TOP) {
+            return homeTeamId;
+        }
+        return awayTeamId;
     }
 }
