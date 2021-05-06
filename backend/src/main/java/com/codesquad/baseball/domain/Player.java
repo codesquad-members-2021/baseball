@@ -14,7 +14,7 @@ public class Player {
     protected Player() {
     }
 
-    public Player(Builder builder) {
+    private Player(Builder builder) {
         this.id = builder.id;
         this.uniformNumber = builder.uniformNumber;
         this.playerName = builder.playerName;

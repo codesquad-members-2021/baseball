@@ -79,8 +79,8 @@ class TeamRepositoryTest {
     }
 
     private Player createHitter(String playerName, int uniformNumber) {
-        Player.Builder builder = new Player.Builder();
-        return builder.playerName(playerName)
+        return new Player.Builder()
+                .playerName(playerName)
                 .uniformNumber(uniformNumber)
                 .role(PlayerRole.HITTER)
                 .build();

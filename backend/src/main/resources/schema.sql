@@ -11,9 +11,9 @@ drop table if exists player_participating_in_game;
 create table player
 (
     id             int primary key auto_increment,
-    uniform_number int unique  not null,
+    uniform_number int         not null,
     player_name    varchar(20) not null,
-    role           varchar(6),
+    role           varchar(10),
     team           int references team (id)
 );
 
@@ -28,13 +28,15 @@ create table game
     id                   int primary key auto_increment,
     game_title           varchar(30) not null,
     current_inning       int         not null,
-    isTop                bool        not null,
+    is_top               bool        not null,
     current_strike_count int         not null,
     current_out_count    int         not null,
     current_ball_count   int         not null,
-    currentPitcher       int references player (id),
-    currentHitter        int references player (id),
-    isOccupied           bool        not null
+    current_pitcher      int references player (id),
+    current_hitter       int references player (id),
+    is_occupied          bool        not null,
+    home_team            int references team (id),
+    away_team            int references team (id)
 );
 
 create table inning
@@ -58,13 +60,13 @@ create table history
     hitter       int references player (id)
 );
 
-create table team_participating_in_game
+/*create table team_participating_in_game
 (
     id     int primary key auto_increment,
     team   int references team (id),
     game   int references game (id),
     isHome bool not null
-);
+);*/
 
 create table player_participating_in_game
 (
