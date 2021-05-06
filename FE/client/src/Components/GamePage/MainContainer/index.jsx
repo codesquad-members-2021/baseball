@@ -15,7 +15,7 @@ const MainContainer = () => {
 const MainContainerDiv = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 78%;
   justify-content: space-between;
 `;
 

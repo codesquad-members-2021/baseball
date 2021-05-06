@@ -24,6 +24,7 @@ const MainLeftDiv = styled.div`
     url(${BackgroundImage});
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  height: 100%;
 `;
 
 export default MainLeft;
