@@ -81,9 +81,9 @@ public class GameDAO {
 
             Game game = new Game(
                     rs.getLong("id"),
-                    homeTeam,
                     awayTeam,
-                    Collections.unmodifiableSet(new HashSet<ScoreBoard>(
+                    homeTeam,
+                    Collections.unmodifiableSet(new HashSet<>(
                             Arrays.asList(homeScoreBoard, awayScoreBoard))),
                     rs.getString("user_type")
             );
