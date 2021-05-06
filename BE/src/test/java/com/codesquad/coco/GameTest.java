@@ -32,7 +32,7 @@ public class GameTest {
         Team ssg = teamRepository.findTeamByName("SSG 랜더스").get();
         Team doSan = teamRepository.findTeamByName("두산 베어스").get();
 
-        Game bigMatch = new Game(null, ssg, doSan, "home");
+        Game bigMatch = new Game(ssg, doSan, "home");
         Long gameId = gameDAO.save(bigMatch);
         Assertions.assertThat(gameId).isEqualTo(2L);
         //todo : 게임은 만들어 지면서 스코어 보드도 만들어야 한다.
