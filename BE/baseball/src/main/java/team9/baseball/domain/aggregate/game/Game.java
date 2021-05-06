@@ -127,6 +127,11 @@ public class Game {
         //아웃 카운트 증가
         this.outCount++;
 
+        //타자의 battingHistory 에 아웃 카운트 추가
+        String battingHistoryKey = BattingHistory.getKeyInGame(getAttackTeamId(), batterUniformNumber);
+        BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
+        battingHistory.plusOut();
+
         //3회 아웃이면 다음이닝으로 변경
         if (outCount == 3) {
             goToNextInning(awayTeam, homeTeam);
