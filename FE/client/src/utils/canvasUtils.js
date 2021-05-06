@@ -42,13 +42,4 @@ const fitToContainer = (canvas) => {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 };
-<<<<<<< HEAD
 export { fitToContainer, drawHomeBase, drawBase, drawField };
-=======
-<<<<<<< HEAD
-export { fitToContainer, drawHomeBase, drawBase, drawField };
-=======
-
-export { fitToContainer, drawHomeBase, base, drawBase, drawField };
->>>>>>> d7b33c2... Refactor. 캔버스 유틸 나누기
->>>>>>> ee680b7... Refactor. 캔버스 유틸 나누기
