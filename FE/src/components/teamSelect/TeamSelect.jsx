@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SelectTemplate from './selectTemplate/SelectTemplate';
-import Logo from './logo/Logo';
+import Logo from '../utilComponent/Logo';
 
 const TeamSelect = () => {
     return (

@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import Logo from "../../utilComponent/Logo";
+import GameScoreStatus from "./GameScoreStatus";
 
 const GameScore = () => {
     return (
         <StyledGameScore>
-            Game Score
+            <Logo>CPR BASSBALL GAME</Logo>
+            <GameScoreStatus />
         </StyledGameScore>
     );
 };
@@ -11,6 +14,9 @@ const GameScore = () => {
 export default GameScore;
 
 // --- Styled Components ---
-export const StyledGameScore = styled.div`
-
+const StyledGameScore = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
 `;

@@ -9,8 +9,8 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <GlobalStyle />
-            {/* <TeamSelect /> */}
-            <GamePlay />
+            <TeamSelect />
+            {/* <GamePlay /> */}
         </ThemeProvider>
     );
 };
