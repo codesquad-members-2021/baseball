@@ -26,6 +26,9 @@
 		CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103D526413D8F008BA763 /* InningInfo.swift */; };
 		CEA103D926413E91008BA763 /* PitchingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103D826413E91008BA763 /* PitchingHistory.swift */; };
 		CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA103DB26413F2C008BA763 /* InningScore.swift */; };
+		CEA5D6252643850700745C9D /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D6242643850700745C9D /* URLManager.swift */; };
+		CEA5D62826438B2100745C9D /* PitchingHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */; };
+		CEA5D62B26438DA100745C9D /* testCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D62A26438DA100745C9D /* testCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		CEA103D526413D8F008BA763 /* InningInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningInfo.swift; sourceTree = SOURCE_ROOT; };
 		CEA103D826413E91008BA763 /* PitchingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistory.swift; sourceTree = SOURCE_ROOT; };
 		CEA103DB26413F2C008BA763 /* InningScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningScore.swift; sourceTree = SOURCE_ROOT; };
+		CEA5D6242643850700745C9D /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
+		CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistoryDataSource.swift; sourceTree = "<group>"; };
+		CEA5D62A26438DA100745C9D /* testCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				829CFA532640421900D9F635 /* MatchUpCell.swift */,
+				CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */,
+				CEA5D62A26438DA100745C9D /* testCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				82E20E1E2642692C006C80DF /* NetworkManager.swift */,
+				CEA5D6242643850700745C9D /* URLManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -229,9 +238,12 @@
 				CEA103D326413D02008BA763 /* Game.swift in Sources */,
 				829CFA572640434600D9F635 /* GameSelectViewControllerManageable.swift in Sources */,
 				CEA103CD26413AF2008BA763 /* Team.swift in Sources */,
+				CEA5D6252643850700745C9D /* URLManager.swift in Sources */,
 				CEA103D026413BE5008BA763 /* Pitcher.swift in Sources */,
 				CEA103D926413E91008BA763 /* PitchingHistory.swift in Sources */,
 				829CFA3F2640379B00D9F635 /* SceneDelegate.swift in Sources */,
+				CEA5D62B26438DA100745C9D /* testCell.swift in Sources */,
+				CEA5D62826438B2100745C9D /* PitchingHistoryDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

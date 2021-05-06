@@ -25,9 +25,11 @@ class GameSelectViewController: UIViewController, GameSelectViewControllerManage
     override func loadView() {
         super.loadView()
         self.matchupCell.set(delegate: self)
-        self.networkManager.requestbaseballGame(url: .gameList, httpMethod: .get) { result in
+        self.networkManager.requestbaseballGame(url: URLManager.get(url: .gameList), httpMethod: .get) { result in
             print(result)
         }
+        playOpacityAnimation()
+        playMoveAnimation()
     }
     
     override func viewDidLoad() {
@@ -36,6 +38,44 @@ class GameSelectViewController: UIViewController, GameSelectViewControllerManage
     
     func moveToGameView() {
         self.performSegue(withIdentifier: "toInGame", sender: nil)
+    }
+    
+    private func playOpacityAnimation() -> Void {
+            let layerWidth = view.bounds.size.width / 4
+            let myCalayer : CALayer = {
+                let calayer = CALayer()
+                calayer.bounds = CGRect(x: 0, y: 0, width: layerWidth, height: layerWidth)
+                calayer.position = CGPoint(x: view.bounds.size.width / 2 , y: layerWidth)
+                calayer.backgroundColor = UIColor.black.cgColor
+                return calayer
+            }()
+            view.layer.addSublayer(myCalayer)
+            let animation: CABasicAnimation = CABasicAnimation(keyPath: "opacity")
+            animation.fromValue = 1
+            animation.toValue = 0
+            animation.duration = 1
+            animation.repeatCount = 10 //
+            myCalayer.add(animation, forKey: "GoRed")
+            myCalayer.opacity = 0
+        }
+        
+    private func playMoveAnimation() -> Void {
+        
+        let layerWidth = view.bounds.size.width / 4
+        let myCalayer : CALayer = {
+            let calayer = CALayer()
+            calayer.bounds = CGRect(x: 0, y: 0, width: layerWidth, height: layerWidth)
+            calayer.position = CGPoint(x: view.bounds.size.width / 2 , y: layerWidth)
+            calayer.backgroundColor = UIColor.black.cgColor
+            return calayer
+        }()
+        view.layer.addSublayer(myCalayer)
+        let animation: CABasicAnimation = CABasicAnimation(keyPath: "position")
+        animation.fromValue = myCalayer.position
+        animation.toValue = CGPoint(x: myCalayer.position.x, y: view.bounds.size.height - view.bounds.size.width / 4)
+        animation.duration = 1
+        myCalayer.add(animation, forKey: "move down")
+//        myCalayer.position = CGPoint(x: myCalayer.position.x, y: view.bounds.size.height - view.bounds.size.width / 4)
     }
 }
 

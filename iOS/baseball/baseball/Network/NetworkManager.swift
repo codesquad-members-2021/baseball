@@ -31,8 +31,8 @@ struct NetworkManager {
         }
     }
 
-    func requestbaseballGame(url: requestScene, httpMethod: NetworkManager.httpMethod, completion : @escaping (Result<Int, NetworkError>) -> Void) -> Void{
-        guard let makedURL: URL = URL.init(string: url.value) else { return }
+    func requestbaseballGame(url: URL?, httpMethod: NetworkManager.httpMethod, completion : @escaping (Result<Int, NetworkError>) -> Void) -> Void{
+        guard let makedURL: URL = url else { return }
         var request: URLRequest = URLRequest.init(url: makedURL)
         
         request.httpMethod = httpMethod.value
