@@ -1,7 +1,7 @@
 package com.codesquad.coco;
 
 
-import com.codesquad.coco.game.domain.GameDAO;
+import com.codesquad.coco.game.domain.DAO.GameDAO;
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.team.domain.Team;
 import com.codesquad.coco.team.domain.TeamRepository;

@@ -1,4 +1,4 @@
-package com.codesquad.coco.game.domain;
+package com.codesquad.coco.game.domain.DAO;
 
 import com.codesquad.coco.game.domain.model.Innings;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
