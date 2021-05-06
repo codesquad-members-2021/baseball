@@ -1,8 +1,11 @@
 package baseball.service.dto;
 
+import baseball.domain.Member;
 import baseball.domain.Team;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TeamDTO {
 
@@ -10,10 +13,10 @@ public class TeamDTO {
     private String name;
     private List<MemberDTO> members;
 
-    public TeamDTO(Team team, List<MemberDTO> members) {
+    public TeamDTO(Team team, Set<Member> members) {
         this.id = team.getId();
         this.name = team.getName();
-        this.members = members;
+        this.members = convertToMemberDTOs(members);
     }
 
     public Long getId() {
@@ -26,5 +29,11 @@ public class TeamDTO {
 
     public List<MemberDTO> getMembers() {
         return members;
+    }
+
+    private List<MemberDTO> convertToMemberDTOs(Set<Member> members) {
+        return members.stream()
+                .map(MemberDTO::new)
+                .collect(Collectors.toList());
     }
 }
