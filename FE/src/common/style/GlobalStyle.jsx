@@ -2,14 +2,17 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     body {
-        width: 1440px;
         height: 100vh;
+        width: 1440px;
         margin: 0 auto;
         background-color: ${({ theme }) => theme.colors.black};
     }
 
     #root {
-        height: 100%;
+        height: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 
