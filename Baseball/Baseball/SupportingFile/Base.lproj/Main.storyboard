@@ -119,14 +119,14 @@
         <!--Item-->
         <scene sceneID="ilJ-Q9-AXy">
             <objects>
-                <viewController id="kzF-gc-ebD" sceneMemberID="viewController">
+                <viewController id="kzF-gc-ebD" customClass="GamePlayViewController" customModule="Baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bse-3r-WIJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-GY-0hY" customClass="GroundView" customModule="Baseball" customModuleProvider="target">
                                 <rect key="frame" x="20" y="107" width="374" height="302"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <color key="backgroundColor" systemColor="systemGray3Color"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juP-Vh-kHk">
                                 <rect key="frame" x="20" y="417" width="374" height="146"/>
@@ -238,6 +238,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="bAO-yL-WDL"/>
+                    <navigationItem key="navigationItem" id="WhE-Jq-ePL"/>
+                    <connections>
+                        <outlet property="groundView" destination="5cQ-GY-0hY" id="EqH-Fw-L16"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BBA-Vc-vAq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -279,9 +283,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
