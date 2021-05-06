@@ -1,14 +1,32 @@
+import { useContext } from 'react';
 import styled from "styled-components";
+import { GlobalContext } from "util/context.js";
+import { GlobalAction } from 'util/action.js';
 
-function GameListItem({ match, idx }) {
+function GameListItem({ match, idx, isLoading }) {
+  const { globalDispatch } = useContext(GlobalContext);
+
+  const handleClickTeam = (teamName) => {
+    globalDispatch({
+        type: GlobalAction.SELECT_TEAM,
+        payload: { gameId: match.id, playTeam: teamName }
+    });
+  }
+
   return (
-    <StyledGameListItem>
-      <GameNumber>Game {idx + 1}</GameNumber>
-      <MatchInformation>
-        <TeamHome>{match.home.name} </TeamHome>
-        vs.
-        <TeamAway>{match.away.name}</TeamAway>
-      </MatchInformation>
+    isLoading
+    ? <StlyedLoadingListItem/>
+    : <StyledGameListItem>
+        <GameNumber>Game {idx + 1}</GameNumber>
+        <MatchInformation>
+            <TeamHome onClick={() => handleClickTeam(match.home.name)}>
+              {match.home.name}
+            </TeamHome>
+            vs.
+            <TeamAway onClick={() => handleClickTeam(match.away.name)}>
+              {match.away.name}
+            </TeamAway>
+        </MatchInformation>
     </StyledGameListItem>
   );
 }
@@ -49,3 +67,16 @@ const MatchInformation = styled.div`
 const TeamHome = styled.div``;
 
 const TeamAway = styled.div``;
+
+const StlyedLoadingListItem = styled.li`
+  list-style: none;
+  text-align: center;
+  background-color: #b3b3b3;
+  border-radius: 10px;
+  height: 5rem;
+  padding: 0.5rem;
+
+    & + & {
+        margin-top: 1rem;
+    }
+`

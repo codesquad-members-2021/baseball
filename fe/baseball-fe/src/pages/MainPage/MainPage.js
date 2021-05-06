@@ -44,7 +44,6 @@ const StyledMainPage = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* overflow-y: auto; */
 
   & > div {
     color: #fff;

@@ -1,57 +1,27 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import GameListItem from "./GameListItem";
+import useFetch from 'util/hook/useFetch';
+import API from 'util/API';
 
 function GameList() {
   const [gameList, setGameList] = useState();
+  const { response , error, isLoading } = useFetch(API.matches);
 
   useEffect(() => {
-    // TODO: fetch data
-    setGameList([
-      {
-        id: 1,
-        home: {
-          name: "hanwha",
-        },
-        away: {
-          name: "kium",
-        },
-      },
-      {
-        id: 1,
-        home: {
-          name: "Twins",
-        },
-        away: {
-          name: "Doosan",
-        },
-      },
-      {
-        id: 1,
-        home: {
-          name: "Twins",
-        },
-        away: {
-          name: "Doosan",
-        },
-      },
-      {
-        id: 1,
-        home: {
-          name: "Twins",
-        },
-        away: {
-          name: "Doosan",
-        },
-      },
-    ]);
-  }, []);
+    if (!response) return;
+    setGameList(response.matches);
+  }, [response]);
+
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 
   return (
     <StyledGameList>
       {gameList &&
         gameList.map((match, idx) => (
-          <GameListItem key={idx} match={match} idx={idx} />
+          <GameListItem key={idx} match={match} idx={idx} isLoading={isLoading}/>
         ))}
     </StyledGameList>
   );
@@ -66,3 +36,4 @@ const StyledGameList = styled.ul`
   padding: 0;
   overflow-y: scroll;
 `;
+
