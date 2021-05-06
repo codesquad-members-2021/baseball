@@ -54,8 +54,8 @@ public class Game {
     public Game(Team awayTeam, Team homeTeam) {
         this.awayTeamId = awayTeam.getId();
         this.homeTeamId = homeTeam.getId();
-        this.pitcherUniformNumber = awayTeam.getFirstPlayer().getId();
-        this.batterUniformNumber = homeTeam.getFirstPlayer().getId();
+        this.pitcherUniformNumber = awayTeam.getFirstPlayerUniformNumber();
+        this.batterUniformNumber = homeTeam.getFirstPlayerUniformNumber();
 
         initializeBattingHistory(awayTeam);
         initializeBattingHistory(homeTeam);
@@ -175,7 +175,7 @@ public class Game {
         Team defenseTeam = acquireDefenseTeam(awayTeam, homeTeam);
 
         //수비팀의 투수 설정
-        int nextPitcherUniformNumber = defenseTeam.getNextPlayer(this.batterUniformNumber).getUniformNumber();
+        int nextPitcherUniformNumber = defenseTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
 
         //공격팀 타자 등판
@@ -189,7 +189,7 @@ public class Game {
 
         //타석에 다음 선수 등판
         int batterTeamId = attackTeam.getId();
-        int nextBatterUniformNumber = attackTeam.getNextPlayer(this.pitcherUniformNumber).getUniformNumber();
+        int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(batterUniformNumber);
         this.batterUniformNumber = nextBatterUniformNumber;
 
         //선수의 BatterHistory 에 타석 카운트 추가
