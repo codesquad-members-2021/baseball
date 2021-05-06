@@ -1,14 +1,18 @@
 package codesquad.team7.baseball.game;
 
+import org.springframework.data.relational.core.mapping.MappedCollection;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TeamScores {
 
     private Integer totalScore;
-    private List<Integer> inningScore;
 
-    TeamScores(Integer totalScore, List<Integer> inningScore) {
+    @MappedCollection(idColumn = "information_id", keyColumn = "inning")
+    private List<InningScore> inningScore;
+
+    TeamScores(Integer totalScore, List<InningScore> inningScore) {
         this.totalScore = totalScore;
         this.inningScore = inningScore;
     }
@@ -17,7 +21,7 @@ public class TeamScores {
         return totalScore;
     }
 
-    public List<Integer> getInningScore() {
+    public List<InningScore> getInningScore() {
         return inningScore;
     }
 

@@ -2,32 +2,32 @@ package codesquad.team7.baseball.game;
 
 public class BaseState {
 
-    private Boolean first;
-    private Boolean second;
-    private Boolean third;
-    private Boolean home;
+    private Boolean firstBase;
+    private Boolean secondBase;
+    private Boolean thirdBase;
+    private Boolean homeBase;
 
-    public BaseState(Boolean first, Boolean second, Boolean third, Boolean home) {
-        this.first = first;
-        this.second = second;
-        this.third = third;
-        this.home = home;
+    public BaseState(Boolean firstBase, Boolean secondBase, Boolean thirdBase, Boolean homeBase) {
+        this.firstBase = firstBase;
+        this.secondBase = secondBase;
+        this.thirdBase = thirdBase;
+        this.homeBase = homeBase;
     }
 
-    public Boolean getFirst() {
-        return first;
+    public Boolean getFirstBase() {
+        return firstBase;
     }
 
-    public Boolean getSecond() {
-        return second;
+    public Boolean getSecondBase() {
+        return secondBase;
     }
 
-    public Boolean getThird() {
-        return third;
+    public Boolean getThirdBase() {
+        return thirdBase;
     }
 
-    public Boolean getHome() {
-        return home;
+    public Boolean getHomeBase() {
+        return homeBase;
     }
 
     public static BaseState newBaseState() {

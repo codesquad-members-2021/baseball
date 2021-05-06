@@ -2,7 +2,9 @@ package codesquad.team7.baseball.game;
 
 import codesquad.team7.baseball.team.Team;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +12,11 @@ import java.util.List;
 public class BaseballGame {
 
     @Id
-    private Long gameId;
+    @Column("game_id")
+    private final Long id;
 
     @Embedded.Empty
-    private BaseballGameTeamInformationMap teamInformation;
+    private TeamInformationMap teamInformation;
 
     @Embedded.Empty
     private Inning inning;
@@ -21,10 +24,11 @@ public class BaseballGame {
     private Integer homeHistoryIndex;
     private Integer awayHistoryIndex;
 
-    private List<BaseballGameInningHistory> history;
+    @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
+    private List<BatterInningHistory> history;
 
-    BaseballGame(Long gameId, BaseballGameTeamInformationMap teamInformation, Inning inning, Integer homeHistoryIndex, Integer awayHistoryIndex, List<BaseballGameInningHistory> history) {
-        this.gameId = gameId;
+    BaseballGame(Long id, TeamInformationMap teamInformation, Inning inning, Integer homeHistoryIndex, Integer awayHistoryIndex, List<BatterInningHistory> history) {
+        this.id = id;
         this.teamInformation = teamInformation;
         this.inning = inning;
         this.homeHistoryIndex = homeHistoryIndex;
@@ -32,11 +36,11 @@ public class BaseballGame {
         this.history = history;
     }
 
-    public Long getGameId() {
-        return gameId;
+    public Long getId() {
+        return id;
     }
 
-    public BaseballGameTeamInformationMap getTeamInformation() {
+    public TeamInformationMap getTeamInformation() {
         return teamInformation;
     }
 
@@ -44,14 +48,14 @@ public class BaseballGame {
         return inning;
     }
 
-    public List<BaseballGameInningHistory> getHistory() {
+    public List<BatterInningHistory> getHistory() {
         return history;
     }
 
     public static BaseballGame newGame(Team home, Team away) {
         return new BaseballGame(
-                0L,
-                BaseballGameTeamInformationMap.newTeamInformation(home, away),
+                null,
+                TeamInformationMap.newTeamInformation(home, away),
                 Inning.newInning(),
                 0,
                 0,

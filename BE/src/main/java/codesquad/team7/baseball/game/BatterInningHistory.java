@@ -1,11 +1,11 @@
 package codesquad.team7.baseball.game;
 
-public class BaseballGameInningHistory {
+public class BatterInningHistory {
 
     private final Pictch pictch;
     private final String state;
 
-    BaseballGameInningHistory(Pictch pictch, String state) {
+    BatterInningHistory(Pictch pictch, String state) {
         this.pictch = pictch;
         this.state = state;
     }

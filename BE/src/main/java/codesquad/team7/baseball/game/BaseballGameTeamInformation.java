@@ -3,12 +3,14 @@ package codesquad.team7.baseball.game;
 import codesquad.team7.baseball.team.Team;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
 
 public class BaseballGameTeamInformation {
 
     @Id
-    private Long id;
+    @Column("information_id")
+    private final Long id;
 
     private Long teamId;
 
@@ -50,7 +52,7 @@ public class BaseballGameTeamInformation {
 
     public static BaseballGameTeamInformation newTeamInfo(Team team) {
         return new BaseballGameTeamInformation(
-                0L,
+                null,
                 team.getId(),
                 PlayersStatistics.newStatistics(),
                 0,
