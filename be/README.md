@@ -6,12 +6,16 @@
 
 ### Spring
 
+일단 openjdk-8-\* 을 설치해보고, 자바버전 관리가 어렵다면 sdkman 을 사용해보자.
+
 ```sh
 kill -kill `lsof -t -i tcp:8080`
 
 ./gradlew build
 
-nohup java -jar ./build/libs/파일명.jar
+cd ./build/libs
+
+nohup java -jar ./파일명.jar
 ```
 
 #### Nginx
