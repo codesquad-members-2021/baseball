@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS baseball_game (
     third_base BOOLEAN,
     home_base BOOLEAN,
 
+    home_user VARCHAR (30),
     home_history_index INT,
+    away_user VARCHAR (30),
     away_history_index INT
 
 );

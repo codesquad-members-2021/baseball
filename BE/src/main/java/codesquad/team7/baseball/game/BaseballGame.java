@@ -21,8 +21,12 @@ public class BaseballGame {
     @Embedded.Empty
     private Inning inning;
 
+    private String homeUser;
     private Integer homeHistoryIndex;
+
+    private String awayUser;
     private Integer awayHistoryIndex;
+
 
     @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
     private List<BatterInningHistory> history;
