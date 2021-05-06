@@ -67,7 +67,7 @@ const StyledTable = styled.table`
 	height: 180px;
 	top: ${(props) => (props.slide ? "20px" : "-200px")};
 	left: 90px;
-	transition: 400ms;
+	transition: top 400ms;
 
 	z-index: 2;
 
