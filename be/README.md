@@ -6,7 +6,7 @@
 
 ### Spring
 
-crontab 으로 deploy.sh 를 주기적으로 실행한다.
+crontab 으로 deploy-local.sh 를 주기적으로 실행한다.
 
 #### Nginx
 
