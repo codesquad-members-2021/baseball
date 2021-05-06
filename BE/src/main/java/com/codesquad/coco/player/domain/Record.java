@@ -50,4 +50,15 @@ public class Record {
                 ", average=" + average +
                 '}';
     }
+
+    public void update(String log) {
+        this.atBat++;
+        if (log.equals("안타")) {
+            this.hits++;
+        }
+        if (log.equals("아웃")) {
+            this.outs++;
+        }
+        this.average = (double) hits / atBat;
+    }
 }
