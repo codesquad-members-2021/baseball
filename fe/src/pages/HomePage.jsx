@@ -31,12 +31,6 @@ const HomepageBackgroundLayer = styled.div`
   background-size: cover;
 `;
 
-const HomePageLayout = styled(Responsive)`
-  /* outline: red solid; */
-  // 수정 필요
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-`;
+const HomePageLayout = styled(Responsive)``;
 
 export default HomePage;
