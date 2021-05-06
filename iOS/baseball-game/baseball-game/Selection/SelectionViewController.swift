@@ -55,8 +55,8 @@ extension SelectionViewController {
         snapshot.appendSections([.main])
         viewModel.didFetchData { games in
             snapshot.appendItems(games)
+            self.dataSource.apply(snapshot)
         }
-        self.dataSource.apply(snapshot)
     }
 }
 
