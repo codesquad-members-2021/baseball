@@ -20,12 +20,16 @@ class GameTest {
         homeTeam.addPlayer(new Player("아이작", 1));
         homeTeam.addPlayer(new Player("쏭", 2));
         homeTeam.addPlayer(new Player("쑤", 3));
+        homeTeam.addPlayer(new Player("쿠퍼", 4));
+        homeTeam.addPlayer(new Player("우디", 5));
 
         awayTeam = new Team("마스터즈");
         awayTeam.setId(2);
         awayTeam.addPlayer(new Player("호눅스", 1));
         awayTeam.addPlayer(new Player("JK", 2));
         awayTeam.addPlayer(new Player("크롱", 3));
+        awayTeam.addPlayer(new Player("세라", 4));
+        awayTeam.addPlayer(new Player("헤드", 5));
 
         game = new Game(awayTeam, homeTeam);
     }
@@ -64,7 +68,7 @@ class GameTest {
         game.proceedStrike(awayTeam, homeTeam);
         assertInning(1, Halves.BOTTOM);
         assertCountStatus(0, 0, 0, 0, 0);
-        assertPlayerStatus(1, 2, null, null, null);
+        assertPlayerStatus(4, 2, null, null, null);
     }
 
     void assertCountStatus(int strike, int ball, int out, int awayScore, int homeScore) {
