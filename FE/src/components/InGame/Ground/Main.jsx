@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BallCount from "./BallCount"
+import BallCount from "./BallCount";
 
 const Main = () => {
 	const gongSoo = "ATTACK";
@@ -13,6 +13,7 @@ const Main = () => {
 			<Runner src="image/runner_running.png" />
 			<RunnerWaiting src="image/runner_waiting.png" />
 			<Batter src="image/batter.png" />
+			<PitchButton>PITCH</PitchButton>
 		</StyledMain>
 	);
 };
@@ -28,7 +29,20 @@ const CurrentInning = styled.div`
 	left: 780px;
 	font-size: 30px;
 `;
-const PitchButton = styled.button``;
+const PitchButton = styled.button`
+	position: absolute;
+	top: 507px;
+	left: 431px;
+	width: 100px;
+	height: 35px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	background-color: rgba(0, 0, 0, 0.65);
+	color: #fff;
+`;
 const Pitcher = styled.img`
 	position: absolute;
 	top: 380px;
