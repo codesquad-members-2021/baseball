@@ -20,6 +20,7 @@ public class Team {
 
     private String name;
 
+    @JsonIgnore
     private boolean isUser;
 
     @JsonIgnore
@@ -39,4 +40,6 @@ public class Team {
         }
         return total;
     }//jung 실험 중
+
+
 }

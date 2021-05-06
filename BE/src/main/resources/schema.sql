@@ -9,11 +9,11 @@ create table team
 drop table if exists team_game_score;
 create table team_game_score
 (
-    id       int auto_increment primary key,
-    inning   int,
-    score    int,
-    team     bigint(20) references team (id),
-    team_key int
+    id            int auto_increment primary key,
+    inning_number int,
+    score         int,
+    team          bigint(20) references team (id),
+    team_key      int
 );
 
 drop table if exists player;
@@ -60,6 +60,18 @@ create table `match`
     my_team_id      bigint(20),
     counter_team_id bigint(20),
     is_home         boolean
+-- ,
+--     inning          bigint(20) references inning(id)
 );
 
 
+drop table if exists inning;
+create table inning
+(
+    id            bigint(20) auto_increment primary key,
+    `out`           int,
+    inning_number int,
+    role          varchar(50),
+    cycle         varchar(50),
+    `match` bigint(20) references `match`(id)
+)

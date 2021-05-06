@@ -20,11 +20,11 @@ values ('jane', 2);
 insert into player(name, team)
 values ('adela', 2);
 
-insert into team_game_score(inning, score, team)
+insert into team_game_score(inning_number, score, team)
 values (1, 0, 1);
-insert into team_game_score(inning, score, team)
+insert into team_game_score(inning_number, score, team)
 values (2, 1, 1);
-insert into team_game_score(inning, score, team)
+insert into team_game_score(inning_number, score, team)
 values (1, 4, 2);
 
 

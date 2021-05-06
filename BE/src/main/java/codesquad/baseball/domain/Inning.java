@@ -1,23 +1,26 @@
 package codesquad.baseball.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamGameScore {
-    @JsonIgnore
+public class Inning {
+
     @Id
     private Long id;
 
+    private int out;
     private int inningNumber;
+    private String role;
+    private String cycle;
 
-    private int score;
+    public void update(int out) {
+        this.out = out;
+    }
+
 
 }

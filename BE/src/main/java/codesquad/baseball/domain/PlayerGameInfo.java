@@ -15,6 +15,7 @@ public class PlayerGameInfo {
     private int battingOrder;
     private String role;
     private int pitchCount;
+
     private int plateAppearance;
     private int hits;
     private int out;
