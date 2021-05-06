@@ -44,8 +44,24 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eiw-FO-rM2">
+                                        <rect key="frame" x="184" y="82" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.50980392159999999" green="0.82745098039999998" blue="0.1764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fyA-SY-VaH"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="buttonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PI9-1v-oKI"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.054234465990000001" alpha="0.74459394980000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Eiw-FO-rM2" firstAttribute="top" secondItem="Dnu-VL-saR" secondAttribute="top" constant="82" id="ZK5-cx-vKc"/>
+                                    <constraint firstAttribute="trailing" secondItem="Eiw-FO-rM2" secondAttribute="trailing" constant="184" id="rvE-Ec-jGz"/>
+                                    <constraint firstItem="Eiw-FO-rM2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dnu-VL-saR" secondAttribute="leading" constant="20" symbolic="YES" id="sVP-vG-hiN"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kdd-0A-hMr"/>
@@ -64,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="108.48214285714285"/>
+            <point key="canvasLocation" x="-168" y="-27"/>
         </scene>
     </scenes>
     <resources>
