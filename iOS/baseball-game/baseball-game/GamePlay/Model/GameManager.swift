@@ -11,10 +11,6 @@ class GameManager: Decodable {
     
     var game: Turn
     
-    enum CodingKeys: String, CodingKey {
-        case game = "team"
-    }
-    
 }
 
 struct Turn: Decodable {
@@ -60,6 +56,8 @@ struct Turn: Decodable {
     var pitches: [Pitch]
     
     struct Pitch: Decodable {
+        
+        let id = UUID()
         
         var result: String
         

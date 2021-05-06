@@ -97,17 +97,13 @@
 			isa = PBXGroup;
 			children = (
 				E4AA6896263FDDD400139BD6 /* AppCycle */,
-				E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */,
-				E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */,
 				E4FE76E42643B57400151B35 /* Main.storyboard */,
 				AE7A1543263FE4FE005EBAB9 /* Selection */,
+				E4FE76E72643B5DD00151B35 /* GamePlay */,
 				AE5C79B526412B900075EBC3 /* Network */,
-				E4AA6886263FDDA500139BD6 /* GamePlayViewController.swift */,
 				E4AA688B263FDDA800139BD6 /* Assets.xcassets */,
 				E4AA688D263FDDA800139BD6 /* LaunchScreen.storyboard */,
 				E4AA6890263FDDA900139BD6 /* Info.plist */,
-				E4FE76D926412ACD00151B35 /* GameManager.swift */,
-				E4FE76E02643B0AC00151B35 /* GamePlayStoryboard.storyboard */,
 			);
 			path = "baseball-game";
 			sourceTree = "<group>";
@@ -119,6 +115,34 @@
 				E4AA6884263FDDA500139BD6 /* SceneDelegate.swift */,
 			);
 			path = AppCycle;
+			sourceTree = "<group>";
+		};
+		E4FE76E72643B5DD00151B35 /* GamePlay */ = {
+			isa = PBXGroup;
+			children = (
+				E4FE76E02643B0AC00151B35 /* GamePlayStoryboard.storyboard */,
+				E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */,
+				E4AA6886263FDDA500139BD6 /* GamePlayViewController.swift */,
+				E4FE76E92643B67000151B35 /* Model */,
+				E4FE76E82643B60B00151B35 /* SelectPitcher */,
+			);
+			path = GamePlay;
+			sourceTree = "<group>";
+		};
+		E4FE76E82643B60B00151B35 /* SelectPitcher */ = {
+			isa = PBXGroup;
+			children = (
+				E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */,
+			);
+			path = SelectPitcher;
+			sourceTree = "<group>";
+		};
+		E4FE76E92643B67000151B35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E4FE76D926412ACD00151B35 /* GameManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
