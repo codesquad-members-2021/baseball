@@ -14,10 +14,6 @@ public class MemberDTO {
         this.position = member.getPosition();
     }
 
-    public static MemberDTO toMemberDTO(Member member) {
-        return new MemberDTO(member);
-    }
-
     public Long getId() {
         return id;
     }
