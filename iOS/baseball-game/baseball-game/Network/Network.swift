@@ -48,4 +48,35 @@ class NetworkManager {
             })
             .eraseToAnyPublisher()
     }
+    
+    static func post<T: Codable>(url: URL, data: T) -> AnyPublisher<Void, Error> {
+
+        return Just(data)
+            .encode(encoder: JSONEncoder())
+            .mapError { error -> Error in
+                print(error)
+                return error
+            }
+            .map { data -> URLRequest in
+                var request = URLRequest(url: url)
+                request.httpMethod = "post"
+                request.httpBody = data
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(String(data.count), forHTTPHeaderField: "Content-Length")
+                
+                return request
+            }
+            .flatMap { request in
+                return URLSession.shared.dataTaskPublisher(for: request)
+                    .tryMap { element -> Void in
+                        guard let httpResponse = element.response as? HTTPURLResponse,
+                              httpResponse.statusCode == 200 else {
+                            throw NetworkError.BadURL
+                        }
+                        return
+                    }
+            }
+            .eraseToAnyPublisher()
+    }
+    
 }
