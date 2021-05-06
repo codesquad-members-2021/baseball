@@ -11,17 +11,17 @@ function App() {
       <Router>
         <GlobalStyle />
         <Switch>
-          <Route path='/intro'>
+          <Route path="/intro">
             <Intro />
           </Route>
-          <Route path='/ingame'>
+          <Route path="/ingame">
             <InGame />
           </Route>
-          <Route exact path='/'>
+          <Route exact path="/">
             <Home />
           </Route>
-          <Route path='/image'></Route>
-          <Route path='*'>
+          <Route path="/image"></Route>
+          <Route path="*">
             <NoMatch />
           </Route>
         </Switch>
