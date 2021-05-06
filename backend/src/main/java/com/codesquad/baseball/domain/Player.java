@@ -22,6 +22,10 @@ public class Player {
         this.team = builder.team;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static class Builder {
         private int id;
         private int uniformNumber;

@@ -23,6 +23,10 @@ public class Team {
         return players.size();
     }
 
+    public TeamParticipatingInGame createGameParticipatingData() {
+        return new TeamParticipatingInGame(this.id);
+    }
+
     public boolean isSameName(String teamName) {
         return this.teamName.equals(teamName);
     }

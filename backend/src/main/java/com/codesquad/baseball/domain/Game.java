@@ -36,8 +36,7 @@ public class Game {
         this.awayTeam = builder.awayTeam.getId();
     }
 
-    public static Game createGame(String gameTitle, Team homeTeam, Team awayTeam) {
-        //@TODO 생각해보니 수비측, 공격측 투수가 필요함. 그리고 타순은 어떻게? 아마도 Game에서 PlayerParticipatingInGame을 리스트로 가지고 있어야 할듯?
+    public static Game createGame(String gameTitle, TeamParticipatingInGame homeTeam, TeamParticipatingInGame awayTeam) {
         return new Builder()
                 .gameTitle(gameTitle)
                 .isOccupied(false)
@@ -69,8 +68,8 @@ public class Game {
         private int currentPitcher;
         private int currentHitter;
         private boolean isOccupied;
-        private Team homeTeam;
-        private Team awayTeam;
+        private TeamParticipatingInGame homeTeam;
+        private TeamParticipatingInGame awayTeam;
 
         public Builder id(Integer value) {
             id = value;
@@ -122,12 +121,12 @@ public class Game {
             return this;
         }
 
-        public Builder homeTeam(Team value) {
+        public Builder homeTeam(TeamParticipatingInGame value) {
             homeTeam = value;
             return this;
         }
 
-        public Builder awayTeam(Team value) {
+        public Builder awayTeam(TeamParticipatingInGame value) {
             awayTeam = value;
             return this;
         }

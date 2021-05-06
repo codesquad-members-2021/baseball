@@ -27,6 +27,9 @@ class GameRepositoryTest {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private TeamParticipatingInGameRepository teamParticipatingInGameRepository;
+
     @Test
     @DisplayName("게임을 생성할 수 있어야 하고, 생성된 게임의 제목은 입력한 제목이어야 함")
     void testCreateGame() {
@@ -44,7 +47,7 @@ class GameRepositoryTest {
         initTeam(teamA, aPlayers);
         initTeam(teamB, bPlayers);
 
-        Game game = Game.createGame(gameTitle, teamA, teamB);
+        Game game = Game.createGame(gameTitle, teamA.createGameParticipatingData(), teamB.createGameParticipatingData());
         gameRepository.save(game);
         return findGameById(game.getId());
     }
