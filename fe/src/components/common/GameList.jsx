@@ -33,7 +33,7 @@ const GameList = () => {
 };
 
 const GameListLayout = styled.div`
-  width: 100%;
+  width: 60%;
   height: 33vh;
   display: flex;
   flex-direction: column;
