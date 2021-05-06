@@ -7,13 +7,19 @@
 
 import Foundation
 
-struct Game: Hashable, Decodable {
-    let id: Int
-    let home: Team
-    let away: Team
+struct Game: Codable, Hashable {
+    var id: Int = 0
+    var home: Team = Team()
+    var away: Team = Team()
 }
 
-struct Team: Hashable, Decodable {
-    let team: String
-    let status: String
+struct Team: Codable, Hashable {
+    var team: String = ""
+    var status: String = ""
+}
+
+struct GameInfo: Codable {
+    var userID: String = ""
+    var gameID: Int = 0
+    var team: String = ""
 }

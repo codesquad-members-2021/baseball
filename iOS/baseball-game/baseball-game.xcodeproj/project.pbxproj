@@ -13,6 +13,7 @@
 		AE5C79B426412B830075EBC3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C79B326412B830075EBC3 /* Network.swift */; };
 		AE5C79B7264138E70075EBC3 /* SelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C79B6264138E70075EBC3 /* SelectViewModel.swift */; };
 		AE7A1542263FE4DE005EBAB9 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7A1541263FE4DE005EBAB9 /* SelectionViewController.swift */; };
+		AEFE32DA2643971B0077AA5F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE32D92643971B0077AA5F /* LoginViewController.swift */; };
 		E4AA6883263FDDA500139BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA6882263FDDA500139BD6 /* AppDelegate.swift */; };
 		E4AA6885263FDDA500139BD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA6884263FDDA500139BD6 /* SceneDelegate.swift */; };
 		E4AA6887263FDDA500139BD6 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA6886263FDDA500139BD6 /* GamePlayViewController.swift */; };
@@ -40,6 +41,7 @@
 		AE5C79B326412B830075EBC3 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AE5C79B6264138E70075EBC3 /* SelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewModel.swift; sourceTree = "<group>"; };
 		AE7A1541263FE4DE005EBAB9 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		AEFE32D92643971B0077AA5F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E4AA687F263FDDA500139BD6 /* baseball-game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "baseball-game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AA6882263FDDA500139BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4AA6884263FDDA500139BD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		AE7A1543263FE4FE005EBAB9 /* Selection */ = {
 			isa = PBXGroup;
 			children = (
+				AEFE32D92643971B0077AA5F /* LoginViewController.swift */,
 				AE7A1541263FE4DE005EBAB9 /* SelectionViewController.swift */,
 				AE5C79B6264138E70075EBC3 /* SelectViewModel.swift */,
 				AE5C79AD2640E8710075EBC3 /* GameCell.swift */,
@@ -256,6 +259,7 @@
 				E4FE76DA26412ACD00151B35 /* GameManager.swift in Sources */,
 				E4FE76DF26438ABC00151B35 /* PitchListTableViewCell.swift in Sources */,
 				E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */,
+				AEFE32DA2643971B0077AA5F /* LoginViewController.swift in Sources */,
 				AE5C79AF2640E8710075EBC3 /* GameCell.swift in Sources */,
 				E4FE76ED2643DA3400151B35 /* Turn.swift in Sources */,
 				AE5C79B2264127300075EBC3 /* Game.swift in Sources */,

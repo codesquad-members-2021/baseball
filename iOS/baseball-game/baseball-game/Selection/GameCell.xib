@@ -45,6 +45,9 @@
                         <state key="normal" title="Captin">
                             <color key="titleColor" systemColor="labelColor"/>
                         </state>
+                        <connections>
+                            <action selector="awayButtonTouched:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bye-JP-eFE"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGM-8n-Dyj">
                         <rect key="frame" x="201" y="46" width="168" height="67"/>
@@ -52,6 +55,9 @@
                         <state key="normal" title="Marvel">
                             <color key="titleColor" systemColor="labelColor"/>
                         </state>
+                        <connections>
+                            <action selector="homeButtonTouched:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="l5H-pZ-3eP"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
