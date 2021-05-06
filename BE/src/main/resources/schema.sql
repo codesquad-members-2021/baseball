@@ -1,8 +1,9 @@
 drop table if exists team;
 create table team
 (
-    id   int auto_increment primary key,
-    name varchar(64) unique not null
+    id      int auto_increment primary key,
+    name    varchar(64) unique not null,
+    is_user boolean
 );
 
 drop table if exists team_game_score;
@@ -49,7 +50,7 @@ create table history
     team        bigint(20) references team (id),
     team_key    int,
     player      bigint(20) references player (id),
-    player_key int
+    player_key  int
 );
 
 drop table if exists `match`;

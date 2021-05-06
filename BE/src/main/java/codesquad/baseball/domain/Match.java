@@ -14,9 +14,11 @@ public class Match {
 
     @NonNull
     private Long myTeamId;
+    //Team homeTeam;
 
     @NonNull
     private Long counterTeamId;
+    //Team awayTeam;
 
     @NonNull
     private boolean isHome;

@@ -11,11 +11,11 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class TeamHistoryDTO {
-    public List<PlayerHistoryDTO> playerPlayerHistoryDTOList = new ArrayList<>();
+    public List<PlayerHistoryDTO> playerHistory = new ArrayList<>();
 
     public TeamHistoryDTO(Team team) {
         for(Player player : team.getPlayerList()) {
-            this.playerPlayerHistoryDTOList.add(new PlayerHistoryDTO(player));
+            this.playerHistory.add(new PlayerHistoryDTO(player));
         }
     }
 }

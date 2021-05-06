@@ -1,5 +1,6 @@
 package codesquad.baseball.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,17 +20,23 @@ public class Team {
 
     private String name;
 
+    private boolean isUser;
+
+    @JsonIgnore
     private List<History> historyList = new ArrayList<>();
 
-   private List<TeamGameScore> teamGameScoreList = new ArrayList<>();
+    @JsonIgnore
+    private List<TeamGameScore> teamGameScoreList = new ArrayList<>();
 
-   private List<Player> playerList = new ArrayList<>();
+    @JsonIgnore
+    private List<Player> playerList = new ArrayList<>();
 
-   public int getTotalScore() {
-       int total=0;
-       for(TeamGameScore teamGameScore: teamGameScoreList) {
-           total += teamGameScore.getScore();
-       }
-       return total;
-   }//jung 실험 중
+    @JsonIgnore
+    public int getTotalScore() {
+        int total = 0;
+        for (TeamGameScore teamGameScore : teamGameScoreList) {
+            total += teamGameScore.getScore();
+        }
+        return total;
+    }//jung 실험 중
 }

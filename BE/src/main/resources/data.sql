@@ -1,11 +1,15 @@
-insert into team(name)
-values ('team1');
-insert into team(name)
-values ('team2');
-insert into team(name)
-values ('team3');
-insert into team(name)
-values ('team4');
+insert into team(name, is_user)
+values ('Captain', false);
+insert into team(name,  is_user)
+values ('Marvel', false);
+insert into team(name,  is_user)
+values ('Twins', false);
+insert into team(name,  is_user)
+values ('Tigers', false);
+insert into team(name,  is_user)
+values ('Rockets', false);
+insert into team(name,  is_user)
+values ('Dodgers', false);
 
 insert into player(name, team)
 values ('eve', 1);
@@ -17,7 +21,9 @@ insert into player(name, team)
 values ('adela', 2);
 
 insert into team_game_score(inning, score, team)
-values (1, 3, 1);
+values (1, 0, 1);
+insert into team_game_score(inning, score, team)
+values (2, 1, 1);
 insert into team_game_score(inning, score, team)
 values (1, 4, 2);
 
