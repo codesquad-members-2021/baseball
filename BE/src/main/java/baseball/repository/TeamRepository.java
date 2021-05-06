@@ -11,5 +11,4 @@ public interface TeamRepository extends CrudRepository<Team, Long> {
 
     @Query("select at_bat, hit, `out`, average, name, position from record left join member on record.member = id where id = :id")
     Optional<RecordMember> findRecordByMemberId(Long id);
-
 }
