@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 enum Section {
     case main
@@ -24,7 +25,8 @@ typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Foo>
 
 class GameViewController: UIViewController {
     
-    @IBOutlet weak var gameStory: UITableView!
+    @IBOutlet weak var gameView: GameView!
+    @IBOutlet weak var ballCount: UITableView!
     @IBOutlet var tableViewHeight: NSLayoutConstraint!
     private lazy var dataSource = makeDataSource()
     var foos: [Foo] = [Foo(title: "aa"), Foo(title: "dd"), Foo(title: "dc"), Foo(title: "ds"), Foo(title: "dsa"), Foo(title: "as")]
@@ -34,21 +36,22 @@ class GameViewController: UIViewController {
         registerNib()
         applySnapshot()
         configureTableViewHeight()
+        appearPitchButton()
     }
     
     func configureTableViewHeight() {
         DispatchQueue.main.async {
-            self.tableViewHeight.constant = self.gameStory.contentSize.height
+            self.tableViewHeight.constant = self.ballCount.contentSize.height
         }
     }
     
     func registerNib() {
         let nibName = UINib(nibName: "GameStoryTableViewCell", bundle: nil)
-        gameStory.register(nibName, forCellReuseIdentifier: GameStoryTableViewCell.identifier)
+        ballCount.register(nibName, forCellReuseIdentifier: GameStoryTableViewCell.identifier)
     }
     
     func makeDataSource() -> Datasource {
-        let dataSource = Datasource(tableView: gameStory) { (tableView, indexPath, item) -> UITableViewCell? in
+        let dataSource = Datasource(tableView: ballCount) { (tableView, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.identifier, for: indexPath) as? GameStoryTableViewCell
             cell?.countLabel.text = "스트라이크"
             cell?.countImage.image = UIImage(systemName: "doc.fill")
@@ -62,6 +65,17 @@ class GameViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(foos, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+    }
+    
+    func appearPitchButton() {
+        let pitchButton = PitchButton()
+        self.gameView.addSubview(pitchButton)
+        pitchButton.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self.gameView.safeAreaLayoutGuide)
+            $0.width.equalTo(120)
+            $0.height.equalTo(30)
+        }
+        
     }
 }
 

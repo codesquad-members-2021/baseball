@@ -609,7 +609,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="hIk-IB-hCa"/>
                     <connections>
-                        <outlet property="gameStory" destination="D4S-3T-wkb" id="Hu4-jR-JfZ"/>
+                        <outlet property="ballCount" destination="D4S-3T-wkb" id="Hu4-jR-JfZ"/>
+                        <outlet property="gameView" destination="eRJ-jI-fyo" id="J2P-5K-PlT"/>
                         <outlet property="tableViewHeight" destination="8NJ-Bp-ic0" id="AA0-5k-Z6r"/>
                     </connections>
                 </viewController>
