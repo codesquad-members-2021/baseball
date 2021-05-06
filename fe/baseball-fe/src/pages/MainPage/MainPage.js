@@ -19,9 +19,9 @@ function MainPage() {
       <div>BASEBALL GAME ONLINE</div>
       <Message/>
       <GameList/>
-      {/* <button onClick={() => globalDispatch({ type: GlobalAction.SELECT_TEAM, payload: testPayload })}>
+      <button onClick={() => globalDispatch({ type: GlobalAction.SELECT_TEAM, payload: testPayload })}>
         게임시작
-      </button> */}
+      </button>
     </StyledMainPage>
   )
 }
