@@ -12,17 +12,17 @@ class GamePlayViewController: UIViewController {
 
     @IBOutlet weak var pitchListTableView: UITableView!
     @IBOutlet weak var pitchButton: UIButton!
+    @IBOutlet weak var teamScoreView: TeamScoreView!
+    @IBOutlet weak var inningLabel: UILabel!
+    @IBOutlet weak var turnLabel: UILabel!
+    @IBOutlet weak var pitcherInfoView: PitcherInfoView!
+    @IBOutlet weak var batterInfoView: PitcherInfoView!
 
     enum ViewID {
         static let storyboard = "GamePlay"
         static let controller = "gamePlay"
         static let segue = "selectPitcher"
         static let cell = "pitchListCell"
-    }
-    
-    enum Role {
-        static let offense = "offense"
-        static let defense = "defense"
     }
     
     private var gamePlayViewModel: GamePlayViewModel!
@@ -45,7 +45,7 @@ class GamePlayViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] gameManager in
                 guard let gameManager = gameManager else { return }
-                self?.updateLabels(with: gameManager)
+                self?.updateViews(with: gameManager)
             }
             .store(in: &cancelBag)
         
@@ -69,54 +69,25 @@ class GamePlayViewController: UIViewController {
         performSegue(withIdentifier: ViewID.segue, sender: nil)
     }
     
-    //정리가 필요하다.
-    @IBOutlet weak var homeLabel: UILabel!
-    @IBOutlet weak var homeScoreLabel: UILabel!
-    
-    @IBOutlet weak var awayLabel: UILabel!
-    @IBOutlet weak var awayScoreLabel: UILabel!
-    
-    @IBOutlet weak var inningLabel: UILabel!
-    @IBOutlet weak var turnLabel: UILabel!
-    
-    @IBOutlet weak var pitcherView: UIView!
-    @IBOutlet weak var pitcherNameLabel: UILabel!
-    @IBOutlet weak var pitherInfoLabel: UILabel!
-    
-    @IBOutlet weak var batterView: UIView!
-    @IBOutlet weak var batterNameLabel: UILabel!
-    @IBOutlet weak var batterInfoLabel: UILabel!
-    
-    
-    private func updateLabels(with gameManager: GameManagable) {
-        let teamInfo = gameManager.teams()
-        homeLabel.text = teamInfo[GameManager.Side.home]!
-        awayLabel.text = teamInfo[GameManager.Side.away]!
-        
-        let scoreInfo = gameManager.scores()
-        homeScoreLabel.text = "\(scoreInfo[GameManager.Side.home]!)"
-        awayScoreLabel.text = "\(scoreInfo[GameManager.Side.away]!)"
-        
+    private func updateViews(with gameManager: GameManagable) {
+        teamScoreView.updateTeamNames(from: gameManager.teams())
+        teamScoreView.updateScores(from: gameManager.scores())
         inningLabel.text = gameManager.inning()
-        
-        let pitcherInfo = gameManager.pitcher()
-        pitcherNameLabel.text = pitcherInfo.name
-        pitherInfoLabel.text = pitcherInfo.info
-        
-        let batterInfo = gameManager.batter()
-        batterNameLabel.text = batterInfo.name
-        batterInfoLabel.text = batterInfo.info
+        pitcherInfoView.updateLabels(from: gameManager.pitcher())
+        batterInfoView.updateLabels(from: gameManager.batter())
         
         guard let isUserDefense = gameManager.isUserDefense() else { return }
         
         if isUserDefense {
             self.pitchButton.isHidden = false
-            pitcherView.backgroundColor = .lightGray
-            batterView.backgroundColor = .white
+            turnLabel.text = GameManager.Role.defense
+            pitcherInfoView.highlight()
+            batterInfoView.unhighlight()
         } else {
             self.pitchButton.isHidden = true
-            pitcherView.backgroundColor = .white
-            batterView.backgroundColor = .lightGray
+            turnLabel.text = GameManager.Role.offense
+            pitcherInfoView.unhighlight()
+            batterInfoView.highlight()
         }
     }
 }
@@ -124,7 +95,8 @@ class GamePlayViewController: UIViewController {
 extension GamePlayViewController {
     
     private func configureDataSource() {
-        self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) { (tableView, indexPath, pitch) -> UITableViewCell in
+        self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) {
+            (tableView, indexPath, pitch) -> UITableViewCell in
             
             guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: ViewID.cell) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
