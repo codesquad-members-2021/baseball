@@ -30,7 +30,6 @@ const BaseballFieldWrapper = styled.div`
   color: white;
   width: 65%;
   height: 100%;
-  position: relative;
 `;
 
 export default BaseballField;
