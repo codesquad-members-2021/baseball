@@ -9,6 +9,7 @@ public class Member {
 
     private String name;
     private String position;
+    private Record record;
 
     public Member(Long id, String name, String position) {
         this.id = id;
@@ -26,5 +27,13 @@ public class Member {
 
     public String getPosition() {
         return position;
+    }
+
+    public Record getRecord() {
+        return record;
+    }
+
+    public void setRecord(Record record) {
+        this.record = record;
     }
 }
