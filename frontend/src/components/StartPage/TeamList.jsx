@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import API from '../Hook/API';
 import { theme } from '../Style/Theme';
-
-const SingleList = styled.div`
-  width: 337px;
-  height: 85px;
-  margin: 10px;
-
-  background: #c4c4c4;
-  border-radius: 12px;
-`;
-
-const GameTitle = styled.div`
-  font-size: ${theme.fontSize.small};
-  font-weight: ${theme.fontWeight.normal};
-  color: ${theme.colors.red};
-`;
-
-const TeamName = styled.span`
-  font-size: ${theme.fontSize.large};
-  font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.black};
-`;
 
 const TeamList = () => {
   const [teamList, setTeamLiset] = useState([]);
@@ -38,7 +17,7 @@ const TeamList = () => {
         setTeamLiset(games);
         setLoading(false);
       } catch (err) {
-        setError(err); //error처리
+        setError(err);
       }
     };
     getGameList();
@@ -47,12 +26,12 @@ const TeamList = () => {
   const List = () => {
     return teamList.map((team, i) => (
       <SingleList key={i}>
-        <di>{team.gameTitle}</di>
-        <GameTitle>
+        <GameTitle>{team.gameTitle}</GameTitle>
+        <TeamWrapper>
           <TeamName>{team.awayTeam.teamName}</TeamName>
           <span>VS</span>
           <TeamName>{team.homeTeam.teamName}</TeamName>
-        </GameTitle>
+        </TeamWrapper>
       </SingleList>
     ));
   };
@@ -64,5 +43,46 @@ const TeamList = () => {
     </>
   );
 };
+
+const SingleList = styled.div`
+  width: 337px;
+  height: 85px;
+  margin: 10px;
+
+  background: #c4c4c4;
+  border-radius: 12px;
+`;
+
+const GameTitle = styled.div`
+  font-size: ${theme.fontSize.small};
+  font-weight: ${theme.fontWeight.normal};
+  color: ${theme.colors.red};
+
+  text-align: center;
+`;
+
+const TeamName = styled.span`
+  font-size: ${theme.fontSize.large};
+  font-weight: ${theme.fontWeight.bold};
+  color: ${theme.colors.black};
+  cursor: pointer;
+
+  &:hover {
+    color: ${theme.colors.red};
+  }
+`;
+
+const TeamWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 0 30px;
+
+  &:hover {
+    overflow-y: scroll;
+    margin-right: -15px;
+  }
+`;
 
 export default TeamList;

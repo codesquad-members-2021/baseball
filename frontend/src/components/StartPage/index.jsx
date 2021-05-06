@@ -1,11 +1,10 @@
-import React from 'react';
 import styled from 'styled-components';
 import TeamList from './TeamList';
 import { theme } from '../Style/Theme';
 
 const TitleStyle = styled.div`
   font-size: ${theme.fontSize.XX_large};
-  font-weight: ${theme.fontWeight.bold};
+  /* font-weight: ${theme.fontWeight.bold}; */
   color: ${theme.colors.white};
 `;
 

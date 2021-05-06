@@ -2,10 +2,18 @@ import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`${reset};
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+/* @font-face {
+  font-family: MyHelvetica;
+  src: local("Helvetica Neue Bold"),
+  local("HelveticaNeue-Bold"),
+  url(MgOpenModernaBold.ttf);
+  font-weight: bold;
+} */
+
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
  
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Press Start 2P', cursive;
   background: linear-gradient(
           rgba(0, 0, 0, 0.7), 
           rgba(0, 0, 0, 0.7)
