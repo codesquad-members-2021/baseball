@@ -1,11 +1,12 @@
 import styled from 'styled-components'
-const GameTitle = ({ children, size }) => {
-  return <Title size={size}>{children}</Title>
+
+const Title = ({ children, size }) => {
+  return <GameTitle size={size}>{children}</GameTitle>
 }
 
-export default GameTitle
+export default Title;
 
-const Title = styled.h1`
+const GameTitle = styled.h1`
   font-size: ${props => (props.size === 'L' ? '4rem' : '2rem')};
   font-weight: 750;
   color: #fff;
