@@ -1,4 +1,4 @@
-const url = 'https://890e124d-c97a-4c91-a91a-0d19d727c1d6.mock.pstmn.io';
+const url = 'http://13.124.70.38:8080';
 const API = {
 	get: {
 		teamList: async () => {
@@ -6,7 +6,7 @@ const API = {
 			return response.json();
 		},
 		initData: async (gameId) => {
-			const response = await fetch(`${url}/games${gameId}`);
+			const response = await fetch(`${url}/games/${gameId}`);
 			return response.json();
 		},
 	},

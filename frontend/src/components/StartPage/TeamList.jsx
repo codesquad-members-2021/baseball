@@ -1,41 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import API from '../Hook/API';
 import { theme } from '../Style/Theme';
-import { Link } from 'react-router-dom';
-
+import { Redirect, Link } from 'react-router-dom';
+import useFetch from '../Hook/useFetch';
 const TeamList = () => {
-	const [teamList, setTeamLiset] = useState([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState('');
+	//! USEfETCh _ Test
+	const [teamData, loadingTeamData, error1] = useFetch('get', 'teamList');
+	const teamListData = teamData.games;
 
-	useEffect(() => {
-		const getGameList = async () => {
-			setLoading(true);
-			try {
-				const { games } = await API.get.teamList();
-				setTeamLiset(games);
-				setLoading(false);
-			} catch (err) {
-				setError(err); //error처리
-			}
-		};
-		getGameList();
-	}, []);
+	const [currentID, setID] = useState(null);
+	const [occupiedState, loadingOccupiedState, error2] = useFetch(
+		'get',
+		'initData',
+		currentID,
+	);
 
-	const List = () => {
-		console.log(teamList);
-		return teamList.map((team, i) => (
+	return (
+		!loadingTeamData &&
+		teamListData.map((team, i) => (
 			<SingleList key={i}>
-				<di>{team.gameTitle}</di>
+				<div>{team.gameTitle}</div>
 				<GameTitle>
-					<TeamName>
-						{/* //occupied인지 체크하는 api요청 */}
-						<Link
+					<TeamName onClick={() => setID(team.id)}>
+						{/* <Redirect
 							to={`/attack/${team.id}/${team.awayTeam.teamName}/${team.homeTeam.teamName}`}
-						>
-							{team.awayTeam.teamName}
-						</Link>
+						></Redirect> */}
+						{team.awayTeam.teamName}
 					</TeamName>
 					<span>VS</span>
 					<TeamName>
@@ -43,14 +33,7 @@ const TeamList = () => {
 					</TeamName>
 				</GameTitle>
 			</SingleList>
-		));
-	};
-
-	return (
-		<>
-			{error && <div>에러가 발생했습니다 : {error}</div>}
-			{loading ? <div>Loading...</div> : <List />}
-		</>
+		))
 	);
 };
 

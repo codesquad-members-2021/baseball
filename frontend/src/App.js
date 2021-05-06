@@ -3,7 +3,6 @@ import StartPage from './components/StartPage';
 import AttackMode from './components/AttackMode';
 import DefenseMode from './components/DefenseMode';
 import { Route } from 'react-router-dom';
-import { Component } from 'react';
 
 function App() {
 	return (

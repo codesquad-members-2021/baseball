@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import API from '../Hook/API';
 import GameGeneralInfo from './GameGeneralInfo';
-
+import styled from 'styled-components';
 const GamePage = ({ data }) => {
 	const gameId = data.id;
 	const [initState, setInitState] = useState([]);
@@ -27,10 +27,22 @@ const GamePage = ({ data }) => {
 			{loading ? (
 				console.log('Loading...')
 			) : (
-				<GameGeneralInfo data={initState}></GameGeneralInfo>
+				<GridBox>
+					<GameGeneralInfo data={initState}></GameGeneralInfo>
+					<div>2</div>
+					<div>3</div>
+					<div>4</div>
+				</GridBox>
 			)}
 		</>
 	);
 };
 
+const GridBox = styled.div`
+	display: grid;
+	grid-template-colums: 3fr 1fr;
+	grid-template-rows: 1fr 3fr;
+	grid-gap: 5px;
+	border: 1px solid blue;
+`;
 export default GamePage;
