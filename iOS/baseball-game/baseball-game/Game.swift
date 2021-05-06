@@ -7,6 +7,12 @@
 
 import Foundation
 
+class GameManager: Decodable {
+    
+    var game: Game
+    
+}
+
 struct Game: Decodable {
     
     var inning: [Int] //2회말:[2,2] / 7회초:[7,1]
@@ -24,6 +30,13 @@ struct Game: Decodable {
         var role: String //offense나 defense
         
         var player: Player
+        
+        enum CodingKeys: String, CodingKey {
+            case name = "team"
+            case score
+            case role
+            case player
+        }
         
         struct Player: Decodable {
             
@@ -48,5 +61,18 @@ struct Game: Decodable {
         
         var log: String
         
+        enum CodingKeys: String, CodingKey {
+            case result = "pitch"
+            case log = "status"
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case inning
+        case home
+        case away
+        case ballCounts
+        case baseInfo
+        case pitches = "list"
     }
 }

@@ -24,7 +24,7 @@ class SelectPitcherViewController: UIViewController {
     
 }
 
-//임시 코드
+//임시 코드 - diffable로 변경
 extension SelectPitcherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
