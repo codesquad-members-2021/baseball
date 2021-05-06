@@ -1,17 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import ScoreList from './GameScoreList';
+import PopUp from '../ui/PopUp';
 
 const GameScore = (props) => {
   //props로 받아올 아이들 1. team 2. player(home or away)
   const ROUND = new Array(12).fill().map((_, idx) => idx + 1);
 
   return (
-    <StyleGameScore>
-      <ScoreList dataType='round' data={ROUND} />
-      <ScoreList team='Captain' dataType='home' data={data.home} isPlayer={true} />
-      <ScoreList team='Marvel' dataType='away' data={data.away} isPlayer={false} />
-    </StyleGameScore>
+    <PopUp>
+      <StyleGameScore>
+        <ScoreList dataType='round' data={ROUND} />
+        <ScoreList team='Captain' dataType='home' data={data.home} isPlayer={true} />
+        <ScoreList team='Marvel' dataType='away' data={data.away} isPlayer={false} />
+      </StyleGameScore>
+    </PopUp>
   );
 };
 
