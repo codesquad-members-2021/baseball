@@ -1,6 +1,5 @@
 package baseball.service.dto;
 
-import baseball.domain.Record;
 import baseball.domain.RecordMember;
 
 import java.util.Set;
