@@ -62,11 +62,11 @@ const StylePlayer = styled.div`
     display: flex;
     font-size: 1.5rem;
     .name {
-      color: #adc9ce;
+      color: #cff0f7;
       margin-right: 0.5rem;
     }
     .detail {
-      color: #78b5cd;
+      color: #79b5ce;
     }
   }
 `;

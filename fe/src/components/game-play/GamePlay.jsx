@@ -14,7 +14,7 @@ const GamePlay = (props) => {
         <Score teamName={teamName} score={score} turn={data.turn}></Score>
         <Player memberList={memberList} turn={data.turn} pitchers={pitchers}></Player>
         <Board></Board>
-        <Log></Log>
+        <Log data={data}></Log>
       </StyleGamePlayGrid>
     </StyleGamePlay>
   );
@@ -24,7 +24,7 @@ const StyleGamePlay = styled.div``;
 
 const StyleGamePlayGrid = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr minmax(19.5rem, 1fr);
   grid-template-rows: minmax(14.5rem, 25vh) 75vh;
   & > div:nth-child(1),
   & > div:nth-child(3) {
@@ -39,6 +39,22 @@ const StyleGamePlayGrid = styled.div`
   & > div:nth-child(2) {
     border-bottom: 3px solid #bbb;
     padding: 1.5rem 2rem;
+  }
+  & > div:nth-child(4) {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 0.875rem;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #999;
+      border-radius: 0.375rem;
+      &:hover {
+        background-color: #555;
+      }
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
   }
 `;
 
