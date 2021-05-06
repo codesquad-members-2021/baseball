@@ -73,14 +73,16 @@ public class Game {
     }
 
     private void goToNextInning(Team homeTeam, Team awayTeam) {
-        //카운트 초기화
-        this.strikeCount = 0;
-        this.ballCount = 0;
+        //아웃 카운트 초기화
         this.outCount = 0;
 
         //다음 이닝으로 변경
-        this.currentInning += 1;
-        this.currentHalves = currentHalves == Halves.TOP ? Halves.BOTTOM : Halves.TOP;
+        if (this.currentHalves == Halves.BOTTOM) {
+            this.currentHalves = Halves.TOP;
+            this.currentInning += 1;
+        } else {
+            this.currentHalves = Halves.BOTTOM;
+        }
         Inning inning = new Inning(currentInning, currentHalves);
         this.inningMap.put(inning.getKeyInGame(), inning);
 
@@ -88,11 +90,28 @@ public class Game {
         Team attackTeam = getAttackTeam(awayTeam, homeTeam);
         Team defenseTeam = getDefenseTeam(awayTeam, homeTeam);
 
-        //공격팀의 타자, 수비팀의 타자 설정
+        //수비팀의 투수 설정
         int nextPitcherUniformNumber = defenseTeam.getNextPlayer(this.batterUniformNumber).getUniformNumber();
-        int nextBatterUniformNumber = attackTeam.getNextPlayer(this.pitcherUniformNumber).getUniformNumber();
         this.pitcherUniformNumber = nextPitcherUniformNumber;
+
+        //공격팀 타자 등판
+        sendBatterOnPlate(attackTeam);
+    }
+
+    private void sendBatterOnPlate(Team attackTeam) {
+        //카운트 초기화
+        this.strikeCount = 0;
+        this.ballCount = 0;
+
+        //타석에 다음 선수 등판
+        int batterTeamId = attackTeam.getId();
+        int nextBatterUniformNumber = attackTeam.getNextPlayer(this.pitcherUniformNumber).getUniformNumber();
         this.batterUniformNumber = nextBatterUniformNumber;
+
+        //선수의 BatterHistory 에 타석 카운트 추가
+        String battingHistoryKey = BattingHistory.getKeyInGame(batterTeamId, batterUniformNumber);
+        BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
+        battingHistory.plusAppear();
     }
 
     private Team getAttackTeam(Team awayTeam, Team homeTeam) {
