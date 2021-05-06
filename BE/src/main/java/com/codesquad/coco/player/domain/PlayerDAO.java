@@ -4,8 +4,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class PlayerDAO {
@@ -15,14 +15,14 @@ public class PlayerDAO {
         this.template = new JdbcTemplate(dataSource);
     }
 
-    public Set<Player> findByTeamName(String teamName) {
+    public List<Player> findByTeamName(String teamName) {
         // todo :  선수 순서 보장
         String sql = "SELECT p.id as pid, p.type, p.name, r.id as rid, r.outs, r.hits, r.at_bat, r.average " +
                 "FROM player p " +
                 "inner JOIN record r ON r.player = p.id " +
                 "WHERE p.team = '" + teamName + "' order by p.id;";
 
-        Set<Player> players = new HashSet<>();
+        List<Player> players = new ArrayList<>();
 
         template.query(sql, (rs, rowNum) -> {
             Record record = new Record(

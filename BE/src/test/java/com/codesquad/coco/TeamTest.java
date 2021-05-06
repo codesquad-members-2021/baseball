@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
@@ -25,12 +25,12 @@ public class TeamTest {
 
     @Test
     @DisplayName("선수 조회")
-    void showPlayer(){
+    void showPlayer() {
         Team ssg = teamRepository.findTeamByName("SSG 랜더스").get();
-        Set<Player> players = ssg.getPlayers();
+        List<Player> players = ssg.getPlayers();
         Assertions.assertThat(players).isNotNull();
         for (Player player : players) {
-            logger.info("선수 {}",player.toString());
+            logger.info("선수 {}", player.toString());
         }
     }
 }

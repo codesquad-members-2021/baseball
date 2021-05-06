@@ -3,16 +3,16 @@ package com.codesquad.coco.team.domain;
 import com.codesquad.coco.player.domain.Player;
 import org.springframework.data.annotation.Id;
 
-import java.util.Set;
+import java.util.List;
 
 public class Team {
 
     @Id
     private String name;
 
-    private Set<Player> players;
+    private List<Player> players;
 
-    public Team(String name, Set<Player> players) {
+    public Team(String name, List<Player> players) {
         this.name = name;
         this.players = players;
     }
@@ -21,7 +21,7 @@ public class Team {
         return name;
     }
 
-    public Set<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
