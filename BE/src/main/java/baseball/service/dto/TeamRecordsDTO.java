@@ -1,15 +1,13 @@
 package baseball.service.dto;
 
-import baseball.domain.RecordMember;
-
 import java.util.Set;
 
 public class TeamRecordsDTO {
 
     private Long teamId;
-    private Set<RecordMember> records;
+    private Set<RecordDTO> records;
 
-    public TeamRecordsDTO(Long teamId, Set<RecordMember> records) {
+    public TeamRecordsDTO(Long teamId, Set<RecordDTO> records) {
         this.teamId = teamId;
         this.records = records;
     }
@@ -18,7 +16,7 @@ public class TeamRecordsDTO {
         return teamId;
     }
 
-    public Set<RecordMember> getRecords() {
+    public Set<RecordDTO> getRecords() {
         return records;
     }
 }
