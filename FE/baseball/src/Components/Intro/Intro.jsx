@@ -1,5 +1,5 @@
-import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 import GameStartButton from '@/Components/Intro/GameStartButton';
+import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 
 const Intro = () => {
   const backgroundUrl =

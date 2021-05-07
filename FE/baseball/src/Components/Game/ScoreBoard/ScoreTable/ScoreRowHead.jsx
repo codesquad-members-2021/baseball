@@ -1,7 +1,7 @@
+import AttackTeamTag from '@/Components/Game/ScoreBoard/Teams/AttackTeamTag';
+import TeamName from '@/Components/Game/ScoreBoard/Teams/TeamName';
+import { ScoreBoardStyles as S } from '@/Components/Game/ScoreBoard/ScoreBoardStyles';
 import { BLANK } from '@/Utils/const';
-import { ScoreBoardStyles as S } from '../ScoreBoardStyles';
-import AttackTeamTag from '../Teams/AttackTeamTag';
-import TeamName from '../Teams/TeamName';
 
 import ScoreItem from './ScoreItem';
 

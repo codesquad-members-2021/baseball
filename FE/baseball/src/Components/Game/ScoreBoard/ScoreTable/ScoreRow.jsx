@@ -1,7 +1,7 @@
-import { ScoreBoardStyles as S } from '../ScoreBoardStyles';
-import AttackTeamTag from '../Teams/AttackTeamTag';
-import TeamNameBox from '../Teams/TeamNameBox';
+import AttackTeamTag from '@/Components/Game/ScoreBoard/Teams/AttackTeamTag';
+import TeamNameBox from '@/Components/Game/ScoreBoard/Teams/TeamNameBox';
 import ScoreItem from './ScoreItem';
+import { ScoreBoardStyles as S } from '@/Components/Game/ScoreBoard/ScoreBoardStyles';
 
 const ScoreRow = ({ teamName }) => {
   return (

@@ -14,7 +14,9 @@ const IntroStyles = {
 
   GameTitle: styled.div`
     width: 100%;
-    font-size: 16px;
+    font-size: 50px;
+    font-weight: 900;
+    text-align: center;
   `,
 
   GameStartButton: styled(CS.BOX.FLEX_CENTER_BOX)`

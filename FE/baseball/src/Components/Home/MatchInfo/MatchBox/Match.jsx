@@ -1,7 +1,7 @@
-import { MatchBox as S } from '@/Components/Home/HomeStyles';
 import { Link } from 'react-router-dom';
 import TeamName from './TeamName';
 import VS from './VS';
+import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
 const Match = () => {
   return (
