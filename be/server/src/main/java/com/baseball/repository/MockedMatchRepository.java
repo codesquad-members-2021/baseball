@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockedMatchRepository implements MatchRepository {
-    private static final List<Match> matches = new ArrayList<>();
+    private final List<Match> matches = new ArrayList<>();
 
-    static {
+    public MockedMatchRepository() {
         matches.add(new Match("Captain", "Marble", "U924AX"));
         matches.add(new Match("Honux", "Crong", "H132UY"));
         matches.add(new Match("Android", "Apple", "M887UW"));

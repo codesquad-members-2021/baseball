@@ -8,9 +8,9 @@ import com.baseball.domain.Score;
 import java.util.Arrays;
 
 public class MockedMatchInfoRepository implements MatchInfoRepository {
-    private static final MatchInfo matchInfo;
+    private final MatchInfo matchInfo;
 
-    static {
+    public MockedMatchInfoRepository() {
         Score score = new Score(3, 2);
         Pitcher pitcher = new Pitcher("김광현", 6, 1, 0, 2);
         Batter batter = new Batter("류현진", 2, 1, 1, 0.500F);

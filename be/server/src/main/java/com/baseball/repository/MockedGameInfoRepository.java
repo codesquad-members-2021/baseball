@@ -6,9 +6,9 @@ import java.util.Arrays;
 
 public class MockedGameInfoRepository implements GameInfoRepository {
 
-    private static final GameInfo gameinfo;
+    private final GameInfo gameinfo;
 
-    static {
+    public MockedGameInfoRepository() {
         Score score = new Score(3, 2);
         Innings innings = new Innings(Arrays.asList(1, 1, 1), Arrays.asList(1, 1));
 
