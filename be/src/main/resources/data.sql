@@ -2,13 +2,13 @@ INSERT INTO GAME(round,in_progress) VALUES(0,false);
 INSERT INTO GAME(round,in_progress) VALUES(0,false);
 INSERT INTO GAME(round,in_progress) VALUES(0,false);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend1', false, false, 1);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend1', true, false, 1);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend2', false, false, 1);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend1', false, false, 2);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend1', true, false, 2);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend2', false, false, 2);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('BE+FE', false, false, 3);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('BE+FE', true, false, 3);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('IOS1', false, false, 3);
 
 
