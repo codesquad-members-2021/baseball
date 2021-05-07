@@ -1,12 +1,14 @@
 import Title from 'components/common/Title'
 import styled from 'styled-components'
 import FlexCenter from 'styles/FlexCenter'
+import HeaderScore from 'components/GamePlay/playHeader/HeaderScore'
 
 const HeaderLeft = () => {
+
   return (
     <StyledHeaderLeft>
       <Title size={'S'}>BASEBALL ONLINE GAME</Title>
-      <span>Captain 1 vs 5 Mavel</span>
+      <HeaderScore/>
     </StyledHeaderLeft>
   )
 }

@@ -10,5 +10,5 @@ const GameTitle = styled.h1`
   font-size: ${props => (props.size === 'L' ? '4rem' : '2rem')};
   font-weight: 750;
   color: #fff;
-  margin-bottom: 2rem;
+  margin: 1rem 0;
 `
