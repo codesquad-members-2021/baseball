@@ -12,6 +12,7 @@ class GameCell: UITableViewCell {
     static let nib = UINib(nibName: GameCell.reuseIdentifier, bundle: nil)
     
     private var viewModel: SelectViewModel!
+    var delegate: GameCellDelegate!
     
     @IBOutlet weak var gameIdLabel: UILabel!
     @IBOutlet weak var awayTeamButton: UIButton!
@@ -50,6 +51,7 @@ class GameCell: UITableViewCell {
         self.viewModel.postSelection(with: self.gameInfo)
         self.awayTeamButton.isEnabled = false
         
+        self.delegate.didPressButton()
     }
     
     @IBAction func homeButtonTouched(_ sender: UIButton) {
@@ -57,6 +59,8 @@ class GameCell: UITableViewCell {
         self.viewModel.setModel(with: self.gameInfo)
         self.viewModel.postSelection(with: self.gameInfo)
         self.homeTeamButton.isEnabled = false
+        
+        self.delegate.didPressButton()
     }
     
 }

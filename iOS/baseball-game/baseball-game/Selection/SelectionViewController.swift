@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol GameCellDelegate {
+    func didPressButton()
+}
+
 class SelectionViewController: UIViewController {
 
     @IBOutlet weak var backgroundView: UIView!
@@ -45,6 +49,7 @@ extension SelectionViewController {
             
             let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as! GameCell
             cell.fill(self.viewModel, state: game)
+            cell.delegate = self
             
             return cell
         }
@@ -58,6 +63,14 @@ extension SelectionViewController {
             snapshot.appendItems(games)
             self.dataSource.apply(snapshot)
         }
+    }
+}
+
+extension SelectionViewController: GameCellDelegate {
+    
+    func didPressButton() {
+        let nextVC = UIStoryboard(name: "GamePlay", bundle: nil).instantiateViewController(identifier: "GamePlayViewController") as GamePlayViewController
+        self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }
 
