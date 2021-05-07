@@ -13,10 +13,6 @@ public class GameDTO {
         this.awayTeamName = awayTeamName;
     }
 
-    public static GameDTO toGameDTO(Long id, String homeTeamName, String awayTeamName) {
-        return new GameDTO(id, homeTeamName, awayTeamName);
-    }
-
     public Long getId() {
         return id;
     }
