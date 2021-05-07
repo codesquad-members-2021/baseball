@@ -1,11 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
 import GameMainBox from "./components/gamePage/gameView/GameMainBox"
+import StartPage from "./components/startPage/StartPage";
 
 function App() {
   return (<>
-  <GameMainBox/>
-  </>);
-}
+     <StartPage />
+     <GameMainBox/>
+    </>);
 
-export default App;
+
