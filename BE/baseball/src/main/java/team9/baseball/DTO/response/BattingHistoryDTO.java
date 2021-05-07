@@ -15,6 +15,7 @@ public class BattingHistoryDTO {
     private String name;
     private int appear_count;
     private int hit_count;
+    private int out_count;
     private double hit_ratio;
     private boolean playing;
 
@@ -30,6 +31,7 @@ public class BattingHistoryDTO {
                 .name(team.getPlayerName(battingHistory.getBatterUniformNumber()))
                 .appear_count(battingHistory.getAppear())
                 .hit_count(battingHistory.getHits())
+                .out_count(battingHistory.getOut())
                 .hit_ratio(hitRatio)
                 .playing(battingHistory.getBatterUniformNumber() == playingUniformNumber)
                 .build();
