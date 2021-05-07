@@ -24,5 +24,9 @@
 | **FE** | [Rano](https://github.com/17-sss) | <img src="https://user-images.githubusercontent.com/33610315/116847942-8b419d80-ac26-11eb-9f13-69db2517fff5.png" width="300"/> |
 
 ## CPR WIKI 😀
+- [CPR : WIKI](https://github.com/ChoiGiSung/baseball/wiki)
 - [CPR : 협업룰](https://github.com/ChoiGiSung/baseball/wiki/CPR-협업룰) 
 - [CPR : API 설계 (1주차)](https://github.com/ChoiGiSung/baseball/wiki/baseball-API-설계)
+
+### Current Page (1주차)
+![녹화_2021_05_07_16_42_51_966](https://user-images.githubusercontent.com/33610315/117416308-3074b280-af54-11eb-95bb-12a98737040a.gif)
