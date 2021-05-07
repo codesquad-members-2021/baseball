@@ -13,14 +13,48 @@ const PitchBtn = styled.button`
 `;
 const SBOState = styled.div``;
 const HorizonList = styled.ul`
+list-style: none;
 display:felx;
+/* font-size: 20px; */
 `;
-const StrikeView = styled(HorizonList)``;
+const StrikeView = styled(HorizonList)`
+/* font-size: 20px; */
+`;
 const BallView = styled(HorizonList)``;
 const OutView = styled(HorizonList)``;
-const StrikeList = styled.li``;
-const BallList = styled.li``;
-const OutList = styled.li``;
+const StrikeList = styled.li`
+/* padding: 10px; */
+font-size: 40px;
+`;
+const BallList = styled.li`
+/* padding: 10px; */
+font-size: 40px;
+`;
+const OutList = styled.li`
+/* padding: 10px; */
+font-size: 40px;
+`;
+const StrikeCircle = styled.div`
+width:50px;
+height:50px;
+border-radius:50%;
+background-color:yellow;
+padding: 10 0px;
+`;
+const BallCircle = styled.div`
+width:50px;
+height:50px;
+border-radius:50%;
+background-color:green;
+padding: 0 10px;
+`;
+const OutCircle = styled.div`
+width:50px;
+height:50px;
+border-radius:50%;
+background-color:red;
+padding: 0 10px;
+`;
 const GroundBox = () => {
     const [pitchState, setPitchState] = useState(true);
     const ConvertPosition = () => {
@@ -33,7 +67,7 @@ const GroundBox = () => {
                 console.log('s');
                 return addStrike();
             case 'Ball':
-                return console.log('b');
+                return addBall();
             case 'Hits':
                 return console.log('H');
             default:
@@ -42,12 +76,51 @@ const GroundBox = () => {
         // pitchArr[]
     }
     const [strikeCnt, setStrikeCnt] = useState([]);
+    const [ballCnt, setBallCnt] = useState([]);
+    const [outCnt, setOutCnt] = useState([]);
     const addStrike = () => {
+        if(strikeCnt.length > 2) return;
         setStrikeCnt([...strikeCnt, {
             id: strikeCnt.length,
             value: 0
         }])
-
+        console.log(strikeCnt);
+        if(strikeCnt.length === 2) {
+            setTimeout(() => {
+                setBallCnt([]);
+                setStrikeCnt([]);
+                return addOut();
+            }, 2000);
+        }
+    }
+    const addOut = () => {
+        if(outCnt.length > 2) return;
+        setOutCnt([...outCnt, {
+            id: outCnt.length,
+            value: 0
+        }])
+        if(outCnt.length === 2) {
+            console.log('공수전환');
+            setTimeout(() => {
+                setOutCnt([]);
+                return;
+            }, 2000)
+        }
+    }
+    const addBall = () => {
+        if(ballCnt.length > 3) return;
+        setBallCnt([...ballCnt, {
+            id: ballCnt.length,
+            value: 0
+        }])
+        if(ballCnt.length === 3) {
+            console.log('4볼');
+            setTimeout(() => {
+                setStrikeCnt([]);
+                setBallCnt([]);
+                return;
+            }, 2000)
+        }
     }
     return (
         <PlayCotainer>
@@ -55,14 +128,20 @@ const GroundBox = () => {
                 <StrikeView>
                     <StrikeList>S</StrikeList>
                     {strikeCnt.map(item => (
-                        <li key={item.id}>{item.value}</li>
+                        <li key={item.id}><StrikeCircle></StrikeCircle></li>
                     ))}
                 </StrikeView>
                 <BallView>
                     <BallList>B</BallList>
+                    {ballCnt.map(item => (
+                        <li key={item.id}><BallCircle></BallCircle></li>
+                    ))}
                 </BallView>
                 <OutView>
                     <OutList>O</OutList>
+                    {outCnt.map(item => (
+                        <li key={item.id}><OutCircle></OutCircle></li>
+                    ))}
                 </OutView>
             </SBOState>
             {pitchState && <PitchBtn onClick={createPitchResult}>PITCH</PitchBtn> }
