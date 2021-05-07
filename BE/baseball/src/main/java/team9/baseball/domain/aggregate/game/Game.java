@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
-import team9.baseball.domain.aggregate.team.Player;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.enums.Halves;
 import team9.baseball.domain.enums.PitchResult;
@@ -67,9 +66,9 @@ public class Game {
     }
 
     private void initializeBattingHistory(Team team) {
-        for (Player player : team.getPlayerMap().values()) {
-            String key = BattingHistory.acquireKeyInGame(team.getId(), player.getUniformNumber());
-            BattingHistory battingHistory = new BattingHistory(team.getId(), player.getUniformNumber());
+        for (Integer uniform_number : team.getPlayerMap().keySet()) {
+            String key = BattingHistory.acquireKeyInGame(team.getId(), uniform_number);
+            BattingHistory battingHistory = new BattingHistory(team.getId(), uniform_number);
             this.battingHistoryMap.put(key, battingHistory);
         }
     }

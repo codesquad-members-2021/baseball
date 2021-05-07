@@ -23,9 +23,9 @@ class TeamRepositoryTest {
     @DisplayName("Team 생성 테스트")
     void create() {
         Team testTeam2 = new Team("마스터즈");
-        testTeam2.addPlayer(new Player("호눅스", 1));
-        testTeam2.addPlayer(new Player("JK", 2));
-        testTeam2.addPlayer(new Player("크롱", 3));
+        testTeam2.addPlayer(1, new Player("호눅스"));
+        testTeam2.addPlayer(2, new Player("JK"));
+        testTeam2.addPlayer(3, new Player("크롱"));
         Team saved = this.teamRepository.save(testTeam2);
         Assertions.assertThat(saved.getName()).isEqualTo("마스터즈");
         Assertions.assertThat(saved.getPlayerMap().size()).isEqualTo(3);
