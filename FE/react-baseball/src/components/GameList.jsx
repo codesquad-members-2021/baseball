@@ -1,10 +1,10 @@
-import games from '../mockData';
-import Game from './Game';
+import games from "../mockData";
+import Game from "./Game";
 
-const GameList = props => {
+const GameList = (props) => {
   return (
     <ul>
-      {games.map(game => (
+      {games.map((game) => (
         <Game key={game.id} game={game} />
       ))}
     </ul>

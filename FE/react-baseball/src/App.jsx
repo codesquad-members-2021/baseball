@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
-import PlayScreen from './routes/PlayScreen';
-import StartScreen from './routes/StartScreen';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./App.css";
+import PlayScreen from "./routes/PlayScreen";
+import StartScreen from "./routes/StartScreen";
 
 function App() {
   return (
