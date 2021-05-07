@@ -44,7 +44,7 @@ public class TeamService {
     }
 
     private Team getPlayerTeam(TeamChoiceDTO choiceDTO) {
-        String teamName = choiceDTO.getPlayer();
+        String teamName = choiceDTO.getUser();
         return new Team(teamName, playerDAO.findByTeamName(teamName));
     }
 

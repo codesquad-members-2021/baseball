@@ -2,16 +2,16 @@ package com.codesquad.coco.team.domain.DTO;
 
 public class TeamChoiceDTO {
 
-    private String player;
+    private String user;
     private String opponent;
 
-    public TeamChoiceDTO(String player, String opponent) {
-        this.player = player;
+    public TeamChoiceDTO(String user, String opponent) {
+        this.user = user;
         this.opponent = opponent;
     }
 
-    public String getPlayer() {
-        return player;
+    public String getUser() {
+        return user;
     }
 
     public String getOpponent() {
