@@ -192,4 +192,7 @@ class BaseballServiceTest {
                 .isEqualTo(expectedGameInfo);
         softly.assertAll();
     }
+
+    // 공수가 바뀌는 상황 (스트라이크가 3번이 나는 상황)
+    // 이닝이 바뀌는 상황 (공수가 바뀌면 이닝이 변함 예) 홈팀 기준으로 수비 -> 공격 이닝 1끝 이닝 2시작
 }
