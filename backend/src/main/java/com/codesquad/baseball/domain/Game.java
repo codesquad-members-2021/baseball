@@ -13,6 +13,9 @@ import java.util.function.Function;
 public class Game {
 
     private static final int NO_PLAYER = -1;
+    private static final int MAXIMUM_STRIKE_COUNT = 3;
+    private static final int MAXIMUM_OUT_COUNT = 3;
+    private static final int MAXIMUM_BALL_COUNT = 4;
 
     @Id
     private Integer id;
@@ -65,8 +68,88 @@ public class Game {
                 .secondBase(NO_PLAYER)
                 .thirdBase(NO_PLAYER)
                 .build();
-        game.createInning();
+        game.proceedToNextInning();
         return game;
+    }
+
+    public void pitch(PlayType playType) {
+        switch (playType) {
+            case HOMERUN:
+                break;
+            case STRIKE:
+                judgeStrike();
+                break;
+            case BALL:
+            case HITS:
+        }
+        judgeState();
+    }
+
+    private void judgeStrike() {
+        increaseStrikeCount();
+    }
+
+    private void judgeState() {
+        if (isThreeStrike()) {
+            resetStrikeCount();
+            increaseOutCount();
+            if (isThreeOut()) {
+                proceedToNextStage();
+            }
+        }
+    }
+
+    private void proceedToNextStage() {
+        resetAllCount();
+        if (isTop) {
+            isTop = false;
+        } else {
+            proceedToNextInning();
+        }
+    }
+
+    private void increaseStrikeCount() {
+        currentStrikeCount++;
+    }
+
+    private void resetStrikeCount() {
+        currentStrikeCount = 0;
+    }
+
+    private void resetAllCount() {
+        currentStrikeCount = 0;
+        currentOutCount = 0;
+        currentBallCount = 0;
+    }
+
+    private void increaseOutCount() {
+        currentOutCount++;
+    }
+
+    private boolean isThreeStrike() {
+        return currentStrikeCount == MAXIMUM_STRIKE_COUNT;
+    }
+
+    private boolean isThreeOut() {
+        return currentOutCount == MAXIMUM_OUT_COUNT;
+    }
+
+    private TeamParticipatingInGame attackingTeam() {
+        // TOP OF THE 8TH INNING = 8회 초
+        // BOTTOM OF 9TH INNING  = 9회 말
+        if (isTop) {
+            return awayTeam();
+        } else {
+            return homeTeam();
+        }
+    }
+
+    private TeamParticipatingInGame defendingTeam() {
+        if (isTop) {
+            return homeTeam();
+        } else {
+            return awayTeam();
+        }
     }
 
     public int currentInningNumber() {
@@ -88,8 +171,9 @@ public class Game {
         return teamScore(Inning::getAwayTeamScore);
     }
 
-    public void createInning() {
+    private void proceedToNextInning() {
         this.innings.add(Inning.createDefaultInning());
+        this.isTop = true;
     }
 
     public boolean isAvailable() {
@@ -136,22 +220,6 @@ public class Game {
 
     public Integer getId() {
         return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", gameTitle='" + gameTitle + '\'' +
-                ", isTop=" + isTop +
-                ", currentStrikeCount=" + currentStrikeCount +
-                ", currentOutCount=" + currentOutCount +
-                ", currentBallCount=" + currentBallCount +
-                ", currentPitcher=" + currentPitcher +
-                ", currentHitter=" + currentHitter +
-                ", isOccupied=" + isOccupied +
-                ", teams=" + teams +
-                '}';
     }
 
     public static class Builder {
@@ -243,5 +311,37 @@ public class Game {
         public Game build() {
             return new Game(this);
         }
+    }
+
+    public int getCurrentStrikeCount() {
+        return currentStrikeCount;
+    }
+
+    public int getCurrentOutCount() {
+        return currentOutCount;
+    }
+
+    public int getCurrentBallCount() {
+        return currentBallCount;
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", gameTitle='" + gameTitle + '\'' +
+                ", isTop=" + isTop +
+                ", currentStrikeCount=" + currentStrikeCount +
+                ", currentOutCount=" + currentOutCount +
+                ", currentBallCount=" + currentBallCount +
+                ", currentPitcher=" + currentPitcher +
+                ", currentHitter=" + currentHitter +
+                ", isOccupied=" + isOccupied +
+                ", teams=" + teams +
+                '}';
     }
 }

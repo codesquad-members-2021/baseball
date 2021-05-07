@@ -68,9 +68,10 @@ class GameRepositoryTest {
     }
 
     @Test
-    @DisplayName("생성된 게임의 초기상태의 이닝정보는 1이닝이어야 합니다.")
+    @DisplayName("생성된 게임의 초기상태의 이닝정보는 1이닝 초여야 합니다.")
     void testInningState() {
         Game game = createGame(GAME_TITLE);
+        assertThat(game.isTop()).isEqualTo(true);
         assertThat(game.currentInningNumber()).isEqualTo(1);
     }
 
@@ -81,6 +82,30 @@ class GameRepositoryTest {
         assertThat(game.homeTeamScore()).isEqualTo(0);
         assertThat(game.awayTeamScore()).isEqualTo(0);
     }
+
+    @Test
+    @DisplayName("피치의 결과가 스트라이크인 상황을 테스트합니다")
+    void testPitchIsStrike() {
+        Game game = createGame(GAME_TITLE);
+        game.pitch(PlayType.STRIKE);
+        assertThat(game.getCurrentStrikeCount()).isEqualTo(1);
+        game.pitch(PlayType.STRIKE);
+        assertThat(game.getCurrentStrikeCount()).isEqualTo(2);
+        game.pitch(PlayType.STRIKE);
+        assertThat(game.getCurrentStrikeCount()).isEqualTo(0);
+        assertThat(game.getCurrentOutCount()).isEqualTo(1);
+        for (int i = 0; i < 6; i++) {
+            game.pitch(PlayType.STRIKE);
+        }
+        assertThat(game.currentInningNumber()).isEqualTo(1);
+        assertThat(game.isTop()).isEqualTo(false);
+        for (int i = 0; i < 9; i++) {
+            game.pitch(PlayType.STRIKE);
+        }
+        assertThat(game.currentInningNumber()).isEqualTo(2);
+        assertThat(game.isTop()).isEqualTo(true);
+    }
+
 
     private Game createGame(String gameTitle) {
         Team teamA = createTeam(A_TEAM_NAME);
