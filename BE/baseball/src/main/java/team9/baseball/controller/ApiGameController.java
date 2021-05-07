@@ -2,10 +2,13 @@ package team9.baseball.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import team9.baseball.DTO.request.CreateGameDTO;
+import team9.baseball.DTO.request.JoinGameDTO;
+import team9.baseball.DTO.request.PitchResultDTO;
 import team9.baseball.DTO.response.ApiResult;
-import team9.baseball.domain.enums.PitchResult;
-import team9.baseball.domain.enums.Venue;
 import team9.baseball.service.GameService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/game")
@@ -23,14 +26,14 @@ public class ApiGameController {
     }
 
     @PostMapping
-    public ApiResult createGame() {
-        gameService.createNewGame(1l, 1, 2);
+    public ApiResult createGame(@RequestBody CreateGameDTO createGameDTO) {
+        gameService.createNewGame(1l, createGameDTO.getAway_team_id(), createGameDTO.getHome_team_id());
         return ApiResult.succeed("OK");
     }
 
     @PostMapping("/joining")
-    public ApiResult joinGame() {
-        gameService.joinGame(1l, 1, Venue.HOME);
+    public ApiResult joinGame(@Valid @RequestBody JoinGameDTO joinGameDTO) {
+        gameService.joinGame(1l, joinGameDTO.getGame_id(), joinGameDTO.getMy_venue());
         return ApiResult.succeed("OK");
     }
 
@@ -39,9 +42,9 @@ public class ApiGameController {
         return ApiResult.succeed(gameService.getCurrentGameStatus(1l));
     }
 
-    @PutMapping("/status")
-    public ApiResult pitch(PitchResult pitchResult) {
-        gameService.applyPitchResult(1l, pitchResult);
+    @PostMapping("/status/pitch-result")
+    public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO) {
+        gameService.applyPitchResult(1l, pitchResultDTO.getPitch_result());
         return ApiResult.succeed("OK");
     }
 
