@@ -6,6 +6,7 @@ import com.codesquad.coco.player.domain.PlayerDAO;
 import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
+import com.codesquad.coco.team.domain.DTO.TeamDTO;
 import com.codesquad.coco.team.domain.Team;
 import com.codesquad.coco.team.domain.TeamDAO;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,13 @@ public class TeamService {
     private Team getOpponentTeam(TeamChoiceDTO choiceDTO) {
         String teamName = choiceDTO.getOpponent();
         return new Team(teamName, playerDAO.findByTeamName(teamName));
+    }
+
+    public TeamDTO findHomeTeamByGameId(Long gameId) {
+        return teamDAO.findHomeTeamByGameId(gameId);
+    }
+
+    public TeamDTO findAwayTeamByGameId(Long gameId) {
+        return teamDAO.findAwayTeamByGameId(gameId);
     }
 }

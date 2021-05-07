@@ -34,10 +34,9 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     public GamePlayDTO homeTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
         Long gameId = teamService.makeHomeGame(choiceDTO);
-        Game game = gameService.choiceGame(gameId);
 
-        TeamDTO homeTeam = DTOConverter.teamToDTO(game.getHome());
-        TeamDTO awayTeam = DTOConverter.teamToDTO(game.getAway());
+        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
+        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
 
         return new GamePlayDTO(gameId, homeTeam, awayTeam);
 
@@ -47,10 +46,9 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     public GamePlayDTO awayTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
         Long gameId = teamService.makeAwayGame(choiceDTO);
-        Game game = gameService.choiceGame(gameId);
 
-        TeamDTO homeTeam = DTOConverter.teamToDTO(game.getHome());
-        TeamDTO awayTeam = DTOConverter.teamToDTO(game.getAway());
+        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
+        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
 
         return new GamePlayDTO(gameId, awayTeam, homeTeam);
     }
@@ -70,6 +68,8 @@ public class GameController {
 
         TeamScoreDTO teamScoreDTO = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(0));
         TeamScoreDTO teamScoreDTO1 = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(1));
+
+        teamService.findHomeTeamByGameId(gameId);
 
         if (teamScoreDTO.getTeamName().equals(userTeamName)) {
             return new GameScoreDTO(teamScoreDTO, teamScoreDTO1);
