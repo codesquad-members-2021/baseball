@@ -10,6 +10,7 @@ import team9.baseball.domain.aggregate.team.Player;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.enums.Halves;
 import team9.baseball.domain.enums.PitchResult;
+import team9.baseball.exception.NotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -127,6 +128,34 @@ public class Game {
         return inningMap.values().stream().filter(x -> x.getHalves() == halves).mapToInt(x -> x.getScore()).sum();
     }
 
+    public Team acquireAttackTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return awayTeam;
+        }
+        return homeTeam;
+    }
+
+    public Team acquireDefenseTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return homeTeam;
+        }
+        return awayTeam;
+    }
+
+    public Inning acquireCurrentInning() {
+        String currentInningKey = Inning.acquireKeyInGame(currentInning, currentHalves);
+        return inningMap.get(currentInningKey);
+    }
+
+    public BattingHistory acquireBattingHistory(int batterTeamId, int batterUniformNumber) {
+        String key = BattingHistory.acquireKeyInGame(batterTeamId, batterUniformNumber);
+        if (!battingHistoryMap.containsKey(key)) {
+            throw new NotFoundException(String.format("%d번 게임방에 %d팀 %d 번호 선수에 대한 기록이 없습니다.",
+                    this.id, batterTeamId, batterUniformNumber));
+        }
+        return battingHistoryMap.get(key);
+    }
+
     private void proceedOut(Team awayTeam, Team homeTeam) {
         //아웃 카운트 증가
         this.outCount++;
@@ -201,25 +230,6 @@ public class Game {
         String battingHistoryKey = BattingHistory.acquireKeyInGame(batterTeamId, batterUniformNumber);
         BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
         battingHistory.plusAppear();
-    }
-
-    private Team acquireAttackTeam(Team awayTeam, Team homeTeam) {
-        if (currentHalves == Halves.TOP) {
-            return awayTeam;
-        }
-        return homeTeam;
-    }
-
-    private Team acquireDefenseTeam(Team awayTeam, Team homeTeam) {
-        if (currentHalves == Halves.TOP) {
-            return homeTeam;
-        }
-        return awayTeam;
-    }
-
-    private Inning acquireCurrentInning() {
-        String currentInningKey = Inning.acquireKeyInGame(currentInning, currentHalves);
-        return inningMap.get(currentInningKey);
     }
 
     private int acquireAttackTeamId() {
