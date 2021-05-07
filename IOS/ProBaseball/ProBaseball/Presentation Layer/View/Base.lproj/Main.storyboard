@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -21,17 +21,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="게임 목록" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQN-OZ-BLp">
-                                <rect key="frame" x="50" y="94" width="314" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hQN-OZ-BLp">
+                                <rect key="frame" x="0.0" y="144" width="414" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="nB1-Ck-R83"/>
+                                    <constraint firstAttribute="height" constant="100" id="nB1-Ck-R83"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.72941176470588232" green="0.45882352941176469" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="knK-Pm-sSw">
-                                <rect key="frame" x="30" y="154" width="354" height="708"/>
+                                <rect key="frame" x="30" y="244" width="354" height="618"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f8m-VM-W6p">
                                     <size key="itemSize" width="128" height="128"/>
@@ -46,17 +46,18 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="knK-Pm-sSw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="4Ga-dy-nRB"/>
-                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Isw-Eo-EL8"/>
+                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Isw-Eo-EL8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="knK-Pm-sSw" secondAttribute="trailing" constant="30" id="STu-iu-TDe"/>
-                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="SWr-kQ-SaU"/>
+                            <constraint firstItem="hQN-OZ-BLp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="SWr-kQ-SaU"/>
                             <constraint firstItem="knK-Pm-sSw" firstAttribute="top" secondItem="hQN-OZ-BLp" secondAttribute="bottom" id="ebg-L9-xZ5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="knK-Pm-sSw" secondAttribute="bottom" id="kfs-Ej-cc2"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hQN-OZ-BLp" secondAttribute="trailing" constant="50" id="nw3-64-wzB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hQN-OZ-BLp" secondAttribute="trailing" id="nw3-64-wzB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="gameListCollectionView" destination="knK-Pm-sSw" id="CbJ-wb-Bqw"/>
                         <outlet property="gameListImageView" destination="cRT-Q8-CVT" id="Hsv-UA-I9M"/>
+                        <outlet property="gameListLabel" destination="hQN-OZ-BLp" id="Vs1-ec-Dfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

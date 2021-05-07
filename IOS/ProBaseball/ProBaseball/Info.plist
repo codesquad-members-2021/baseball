@@ -6,8 +6,8 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>필기체</string>
-		<string></string>
+		<string>AmericanCaptain.otf</string>
+		<string>AmericanCaptain.ttf</string>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>

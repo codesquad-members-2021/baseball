@@ -14,6 +14,7 @@ enum GameListSection: CaseIterable {
 class GameListViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
     @IBOutlet weak var gameListImageView: UIImageView!
+    @IBOutlet weak var gameListLabel: UILabel!
     
     lazy var dataSource = configureDataSource()
     override func viewDidLoad() {
@@ -24,6 +25,21 @@ class GameListViewController: UIViewController {
         gameListCollectionView.dataSource = dataSource
         gameListCollectionView.delegate = self
         updateSnapshot()
+        
+        self.gameListLabel.layer.shadowColor = UIColor(named: "retroBrown")?.cgColor
+        self.gameListLabel.layer.shadowOffset = CGSize(width: 0, height: 6)
+               self.gameListLabel.layer.shadowOpacity = 1.0
+               self.gameListLabel.layer.shadowRadius = 0.0
+        
+        let str = NSAttributedString(string: "Game List", attributes: [
+            NSAttributedString.Key.foregroundColor : UIColor(named: "retroIvory"),
+            NSAttributedString.Key.strokeColor : UIColor(named: "retroBrown"),
+            NSAttributedString.Key.strokeWidth : -5,
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 80.0)
+                ])
+            
+        gameListLabel.attributedText = str
+        gameListLabel.font = UIFont(name: "AmericanCaptain", size: 100)
     }
     
     func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, String> {
