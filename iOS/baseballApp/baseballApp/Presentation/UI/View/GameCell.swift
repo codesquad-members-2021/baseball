@@ -1,6 +1,10 @@
 import UIKit
 import RxSwift
 
+enum Identifier {
+    static let GameCell = "GameCell"
+}
+
 class GameCell: UICollectionViewCell {
     
 
@@ -32,22 +36,5 @@ private extension GameCell {
     private func setupCellView() {
         layer.masksToBounds = true
         layer.cornerRadius = 15
-        setupTapGesture()
-    }
-    
-    private func setupTapGesture() {
-        let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
-        
-        tapGesture.rx.event
-            .bind(onNext: { recognizer in
-                API.shared.checkGameStatus()
-                    .subscribe(onNext: { value in
-                        print(value)
-                    }, onError: { error in
-                        print(error.localizedDescription)
-                    }).disposed(by: self.disposBag)
-            })
-            .disposed(by: disposBag)
     }
 }
