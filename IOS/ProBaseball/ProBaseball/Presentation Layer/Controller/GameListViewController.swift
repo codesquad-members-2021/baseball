@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Section: CaseIterable {
+enum GameListSection: CaseIterable {
     case main
 }
 
@@ -23,8 +23,8 @@ class GameListViewController: UIViewController {
         updateSnapshot()
     }
     
-    func configureDataSource() -> UICollectionViewDiffableDataSource<Section, String> {
-        let dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: gameListCollectionView) { (collectionView, indexPath, icon) -> UICollectionViewCell? in
+    func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, String> {
+        let dataSource = UICollectionViewDiffableDataSource<GameListSection, String>(collectionView: gameListCollectionView) { (collectionView, indexPath, icon) -> UICollectionViewCell? in
      
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameListCollectionViewCell", for: indexPath) as! GameListCollectionViewCell
             cell.homeTeamLabel.text = "hhhh"
@@ -34,9 +34,9 @@ class GameListViewController: UIViewController {
     }
     
     func updateSnapshot(animatingChange: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(["sdf"], toSection: Section.main)
+        var snapshot = NSDiffableDataSourceSnapshot<GameListSection, String>()
+        snapshot.appendSections(GameListSection.allCases)
+        snapshot.appendItems(["sdf"], toSection: GameListSection.main)
      
         dataSource.apply(snapshot, animatingDifferences: false)
     }
