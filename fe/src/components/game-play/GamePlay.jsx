@@ -1,17 +1,52 @@
+import { useEffect, useReducer, createContext, useState, useRef } from 'react';
 import styled from 'styled-components';
 import Score from './score/Score';
 import Player from './player/Player';
 import Board from './board/Board';
 import Log from './log/Log';
 
-const GamePlay = (props) => {
+const ScoreContext = createContext();
+const MemberListContext = createContext();
+const LogContext = createContext();
+
+const memberListReducer = (state, action) => {
+  let next = 0;
+  const newState = state.map((member, idx) => {
+    let { safety, at_bat, out, state } = member;
+    if(action.type === 'out') out++
+    else safety++
+    at_bat++
+    if(action.id === member.id) {
+      next = idx + 1 === member.length ? 0 : idx + 1;
+      return {...member, safety, at_bat, out, state: !state};
+    }
+  });
+  newState[next].state = true;
+  return newState;
+}
+
+const GamePlay = ({ home, away, game_id }) => {
+  
+  const [turn, round, member_list] = [null, null, null];
+  const [inning, setInning] = useState({
+    turn,
+    round
+  });
+  // const [score, setScore] = useState(null);
+  // const [memberList, memberListDispatch] = useReducer(memberListReducer, member_list); //member_list fetch해서 받아올아이
+  /*
+  data,
+
+  */
   const score = { home: data.home.score, away: data.away.score };
   const memberList = { home: data.home.member_list, away: data.home.member_list };
   const pitchers = { home: data.home.pitcher, away: data.home.pitcher };
   return (
     <StyleGamePlay>
       <StyleGamePlayGrid>
-        <Score teamName={teamName} score={score} turn={data.turn}></Score>
+        {/* {/* <ScoreContext.Provider value={score}> */}
+          <Score teamName={teamName} score={score} turn={data.turn}></Score>
+        {/* </ScoreContext.Provider> */}
         <Player memberList={memberList} turn={data.turn} pitchers={pitchers}></Player>
         <Board></Board>
         <Log data={data}></Log>
