@@ -1,7 +1,7 @@
 import Foundation
 
 struct Player {
-    let name: String
-    let backNumber: Int
-    let record: Record
+    private let name: String
+    private let backNumber: Int
+    private let record: Record
 }

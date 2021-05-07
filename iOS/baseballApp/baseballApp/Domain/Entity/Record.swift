@@ -1,8 +1,8 @@
 import Foundation
 
 struct Record {
-    let hit: Int
-    let strike: Int
-    let ball: Int
-    let out: Int
+    private let hit: Int
+    private let strike: Int
+    private let ball: Int
+    private let out: Int
 }
