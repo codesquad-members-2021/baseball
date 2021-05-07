@@ -15,9 +15,6 @@ const Game = () => {
     if(loading) return <div>loading</div>
     const [home, away] = response.team_info;
 
-    
-    
-         
     return (
         <gamePlayContext.Provider value={{home, away}}>
             <Header />

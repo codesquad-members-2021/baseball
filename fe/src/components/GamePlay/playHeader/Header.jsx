@@ -14,6 +14,6 @@ export default Header
 
 const GamePlayHeader = styled.header`
   width: 100%;
-  height: 20%;
+  padding: 1rem 0;
   background-color: black;
 `
