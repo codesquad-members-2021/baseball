@@ -5,13 +5,11 @@ class HomeViewController: UIViewController {
  
     @IBOutlet weak var mainCollectionView: UICollectionView!
     private let viewModel = GameViewModel()
-    private var delegate = MainCollectionViewDelegate()
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindCollectionView()
-        mainCollectionView.delegate = delegate
     }
     
     private func bindCollectionView() {
