@@ -33,6 +33,10 @@ public class GameController {
         return gameService.matchInformations(matchId);
     }
 
+    @GetMapping("/progress/offense")
+    public
+
+    @GetMapping("/progress/defense")
 
 
 }
