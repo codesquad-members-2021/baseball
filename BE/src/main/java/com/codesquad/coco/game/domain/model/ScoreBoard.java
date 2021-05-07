@@ -2,6 +2,7 @@ package com.codesquad.coco.game.domain.model;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreBoard {
@@ -11,7 +12,7 @@ public class ScoreBoard {
 
     private Long game;
     private String team;
-    private List<Innings> innings;
+    private List<Innings> innings = new ArrayList<>();
 
 
     public ScoreBoard(Long id, Long game, String teamName, List<Innings> innings) {
@@ -21,15 +22,26 @@ public class ScoreBoard {
         this.innings = innings;
     }
 
+    public ScoreBoard(Long id, Long game, String team) {
+        this.id = id;
+        this.game = game;
+        this.team = team;
+    }
+
     public ScoreBoard(Long gameId, String team) {
         this.game = gameId;
         this.team = team;
     }
 
+
     public Innings updateScore(int round, int point) {
         //fixme : 만약 해당 이닝에 점수가 나지 않았다면? -> 리스트는 0이 되어야함함
         // fixme : 이닝이 끝날 때 마다 보내 줌 -> 해당 팀만?, 상대 팀도?
         return new Innings(this.id, point, round);
+    }
+
+    public void addInnings(Innings inning) {
+        innings.add(inning);
     }
 
     public Long getId() {

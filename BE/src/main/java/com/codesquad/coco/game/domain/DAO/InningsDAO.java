@@ -1,36 +1,31 @@
 package com.codesquad.coco.game.domain.DAO;
 
 import com.codesquad.coco.game.domain.model.Innings;
+import com.codesquad.coco.utils.mapper.InningsMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.codesquad.coco.utils.SQL.FIND_ALL_INNINGS_SQL;
 
 @Component
 public class InningsDAO {
 
     private JdbcTemplate template;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private InningsMapper inningsMapper = new InningsMapper();
 
-    public InningsDAO(DataSource dataSource) {
-        this.template = new JdbcTemplate(dataSource);
+    public InningsDAO(JdbcTemplate template, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.template = template;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     public List<Innings> findAllById(long id) {
-        String sql = "select i.id, i.score, i.score_board from innings i where i.score_board =" + id + " order by score_board_key";
-
-        List<Innings> innings = new ArrayList<>();
-
-        template.query(sql, (rs, rowNum) -> {
-            innings.add(new Innings(
-                    rs.getLong("id"),
-                    rs.getLong("score_board"),
-                    rs.getInt("score")
-            ));
-            return null;
-        });
-
-        return innings;
+        MapSqlParameterSource parameter = new MapSqlParameterSource();
+        parameter.addValue("id", id);
+        return namedParameterJdbcTemplate.query(FIND_ALL_INNINGS_SQL, parameter, inningsMapper);
     }
 }

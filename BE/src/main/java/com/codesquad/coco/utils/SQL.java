@@ -1,0 +1,12 @@
+package com.codesquad.coco.utils;
+
+public class SQL {
+    public static String GAME_SAVE_SQL = "insert into game (home,away,user_type) values (:home,:away,:user_type)";
+    public static String FIND_USER_TEAM_NAME_SQL = "select if(g.user_type = 'home',g.home,g.away) as user_team_name from game g where g.id = :id";
+    public static String FIND_ALL_INNINGS_SQL = "select i.id, i.score, i.score_board from innings i where i.score_board =:id order by score_board_key";
+    public static String SCORE_BOARD_SAVE_SQL = "insert into score_board (game,team) values (:game, :team)";
+    public static String FIND_SCORE_BOARD_SQL = "select s.id, s.game,s.team from score_board s where s.game =:id and s.team = :teamName ";
+    public static String FIND_SCORE_BOARDS_SQL = "select s.id, s.game,s.team from score_board s where s.game = :id";
+    public static String INNINGS_SAVE_SQL = "insert into innings (score_board, score, score_board_key) values (:score_board,:score,:score_board_key)";
+
+}

@@ -5,18 +5,22 @@ import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.player.domain.PlayerDAO;
 import com.codesquad.coco.player.domain.UserType;
 import com.codesquad.coco.team.domain.Team;
+import com.codesquad.coco.utils.mapper.UserTeamNameMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+
+import static com.codesquad.coco.utils.SQL.FIND_USER_TEAM_NAME_SQL;
+import static com.codesquad.coco.utils.SQL.GAME_SAVE_SQL;
 
 @Component
 public class GameDAO {
@@ -24,11 +28,14 @@ public class GameDAO {
     private JdbcTemplate template;
     private PlayerDAO playerDAO;
     private ScoreBoardDAO boardDAO;
+    private UserTeamNameMapper userTeamNameMapper = new UserTeamNameMapper();
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public GameDAO(DataSource dataSource, PlayerDAO playerDAO, ScoreBoardDAO boardDAO) {
+    public GameDAO(DataSource dataSource, PlayerDAO playerDAO, ScoreBoardDAO boardDAO, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.template = new JdbcTemplate(dataSource);
         this.playerDAO = playerDAO;
         this.boardDAO = boardDAO;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     public Long save(Game game) {
@@ -48,15 +55,12 @@ public class GameDAO {
 
     private Long saveGame(Game game) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "insert into game (home,away,user_type) values (?, ?, ?)";
+        MapSqlParameterSource parameter = new MapSqlParameterSource();
+        parameter.addValue("home", game.homeTeamName());
+        parameter.addValue("away", game.awayTeamName());
+        parameter.addValue("user_type", game.getUserType().toString());
 
-        template.update(con -> {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, game.homeTeamName());
-            ps.setString(2, game.awayTeamName());
-            ps.setString(3, game.getUserType().toString());
-            return ps;
-        }, keyHolder);
+        namedParameterJdbcTemplate.update(GAME_SAVE_SQL, parameter, keyHolder);
 
         return keyHolder.getKey().longValue();
     }
@@ -79,7 +83,6 @@ public class GameDAO {
                     awayTeamName, playerDAO.findByTeamName(awayTeamName)
             );
 
-
             Game game = new Game(
                     rs.getLong("id"),
                     awayTeam,
@@ -93,13 +96,12 @@ public class GameDAO {
         });
 
         return query.get(0);
-
     }
 
 
     public String findUserTeamNameByGameId(Long id) {
-        String sql = "select if(g.user_type = 'home',g.home,g.away) as user_team_name from game g where g.id = " + id;
-        List<String> query = template.query(sql, (rs, rowNum) -> rs.getString("user_team_name"));
-        return query.get(0);
+        MapSqlParameterSource parameter = new MapSqlParameterSource();
+        parameter.addValue("id", id);
+        return namedParameterJdbcTemplate.queryForObject(FIND_USER_TEAM_NAME_SQL, parameter, userTeamNameMapper);
     }
 }
