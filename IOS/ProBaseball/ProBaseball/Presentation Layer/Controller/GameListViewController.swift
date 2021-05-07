@@ -13,10 +13,13 @@ enum GameListSection: CaseIterable {
 
 class GameListViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
+    @IBOutlet weak var gameListImageView: UIImageView!
+    
     lazy var dataSource = configureDataSource()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gameListCollectionView.backgroundColor = .red
+        gameListImageView.backgroundColor = UIColor(patternImage: UIImage(named: "baseBallPattern")!)
+        self.gameListCollectionView.backgroundColor = .clear
         gameListCollectionView.register(UINib(nibName: "GameListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GameListCollectionViewCell")
         gameListCollectionView.dataSource = dataSource
         gameListCollectionView.delegate = self
