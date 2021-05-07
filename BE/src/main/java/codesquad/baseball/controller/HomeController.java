@@ -24,20 +24,11 @@ public class HomeController {
         this.matchRepository = matchRepository;
     }
 
-    @GetMapping
+    @GetMapping("/totalTeamList")
     public ResponseEntity home() {
         List<Team> teamList = (List<Team>) teamRepository.findAll();
         return new ResponseEntity(teamList, HttpStatus.OK);
     }
 
-    @PostMapping
-    public RedirectView home(@RequestBody HashMap<String, String> teamInfo) {
-        Long myTeamId = Long.valueOf(teamInfo.get("myTeamId"));
-        Long counterTeamId = Long.valueOf(teamInfo.get("counterTeamId"));
-        boolean isHome = Boolean.parseBoolean(teamInfo.get("isHome"));
-        Inning inning = new Inning(0, 1, "수비", "초");
-        Match match = new Match(myTeamId, counterTeamId, inning, isHome);
-        Long matchId = matchRepository.save(match).getId();
-        return new RedirectView("/game/" + matchId);
-    }
+
 }
