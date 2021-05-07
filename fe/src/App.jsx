@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+import "./reset.css";
 import Main from "./components/main/Main";
 import Game from "./components/game/Game";
 
