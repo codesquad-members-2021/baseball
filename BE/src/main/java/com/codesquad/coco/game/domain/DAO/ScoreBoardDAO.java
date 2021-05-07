@@ -57,4 +57,15 @@ public class ScoreBoardDAO {
         });
         return query.get(0);
     }
+
+    public void saveInnings(Innings innings) {
+        String sql = "insert into innings (score_board, score, score_board_key) values (?,?,?)";
+        template.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, innings.getScoreBoard());
+            ps.setInt(2, innings.getScore());
+            ps.setInt(3, innings.getInning());
+            return ps;
+        });
+    }
 }

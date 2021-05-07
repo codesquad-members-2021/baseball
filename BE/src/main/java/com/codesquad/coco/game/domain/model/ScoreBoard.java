@@ -26,6 +26,12 @@ public class ScoreBoard {
         this.team = team;
     }
 
+    public Innings updateScore(int round, int point) {
+        //fixme : 만약 해당 이닝에 점수가 나지 않았다면? -> 리스트는 0이 되어야함함
+        // fixme : 이닝이 끝날 때 마다 보내 줌 -> 해당 팀만?, 상대 팀도?
+        return new Innings(this.id, point, round);
+    }
+
     public Long getId() {
         return id;
     }
@@ -55,4 +61,6 @@ public class ScoreBoard {
                 ", innings=" + innings +
                 '}';
     }
+
+
 }

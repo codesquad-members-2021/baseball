@@ -2,6 +2,7 @@ package com.codesquad.coco.game;
 
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.game.domain.model.GamePlayDTO;
+import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.TeamService;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
@@ -54,9 +55,11 @@ public class GameController {
         return new GamePlayDTO(gameId, awayTeam, homeTeam);
     }
 
-    @PutMapping("/games/{gameId}/points")
+    @PostMapping("/games/{gameId}/points")
     @ResponseStatus(HttpStatus.OK)
-    public void plusPoint(@PathVariable Long gameId, TeamPointDTO teamPointDTO) {
-        gameService.plusPoint()
+    public void plusPoint(@PathVariable Long gameId, @RequestBody TeamPointDTO teamPointDTO) {
+        System.out.println(teamPointDTO.toString());
+        ScoreBoard scoreBoard = gameService.findScoreBoard(gameId, teamPointDTO);
+        gameService.plusPoint(scoreBoard, teamPointDTO);
     }
 }
