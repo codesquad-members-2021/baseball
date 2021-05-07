@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `player`;
 DROP TABLE IF EXISTS `team`;
 DROP TABLE IF EXISTS `inning`;
-DROP TABLE IF EXISTS `playing_log`;
+DROP TABLE IF EXISTS `playing`;
 DROP TABLE IF EXISTS `game`;
 
 -- MySQL Workbench Forward Engineering
@@ -24,6 +24,8 @@ USE `baseball`;
 -- -----------------------------------------------------
 -- Table `baseball`.`team`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `baseball`.`team`;
+
 CREATE TABLE IF NOT EXISTS `baseball`.`team`
 (
     `team_id`   INT         NOT NULL,
@@ -38,16 +40,17 @@ CREATE TABLE IF NOT EXISTS `baseball`.`team`
 -- -----------------------------------------------------
 -- Table `baseball`.`player`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `baseball`.`player`;
+
 CREATE TABLE IF NOT EXISTS `baseball`.`player`
 (
     `player_id` INT         NOT NULL,
+    `number`    INT         NOT NULL,
     `name`      VARCHAR(45) NOT NULL,
-    `position`  VARCHAR(45) NOT NULL,
-    `pitch`     INT         NULL,
     `pa`        INT         NULL,
     `hit`       INT         NULL,
     `out`       INT         NULL,
-    `average`   INT         NULL,
+    `average`   DOUBLE      NULL,
     `team_id`   INT         NOT NULL,
     PRIMARY KEY (`player_id`, `team_id`),
     INDEX `fk_player_team_idx` (`team_id` ASC) VISIBLE,
@@ -63,6 +66,8 @@ CREATE TABLE IF NOT EXISTS `baseball`.`player`
 -- -----------------------------------------------------
 -- Table `baseball`.`game`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `baseball`.`game`;
+
 CREATE TABLE IF NOT EXISTS `baseball`.`game`
 (
     `game_id`    INT         NOT NULL AUTO_INCREMENT,
@@ -70,26 +75,32 @@ CREATE TABLE IF NOT EXISTS `baseball`.`game`
     `away`       VARCHAR(45) NOT NULL,
     `home_score` INT         NULL,
     `away_score` INT         NULL,
+    `isEnd`      TINYINT(1)  NOT NULL,
     PRIMARY KEY (`game_id`)
 )
     ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `baseball`.`playing_log`
+-- Table `baseball`.`playing`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `baseball`.`playing_log`
+DROP TABLE IF EXISTS `baseball`.`playing`;
+
+CREATE TABLE IF NOT EXISTS `baseball`.`playing`
 (
-    `log_id`      INT         NOT NULL AUTO_INCREMENT,
-    `player_name` VARCHAR(45) NOT NULL,
-    `pitch`       INT         NULL,
-    `pa`          INT         NULL,
-    `hit`         INT         NULL,
-    `action`      VARCHAR(45) NULL,
-    `total_count` INT         NULL,
-    `game_id`     INT         NOT NULL,
+    `log_id`        INT         NOT NULL AUTO_INCREMENT,
+    `team_id`       VARCHAR(45) NOT NULL,
+    `player_number` INT         NOT NULL,
+    `player_name`   VARCHAR(45) NOT NULL,
+    `pa`            INT         NULL,
+    `hit`           INT         NULL,
+    `out`           INT         NULL,
+    `average`       DOUBLE      NULL,
+    `game_id`       INT         NOT NULL,
     PRIMARY KEY (`log_id`, `game_id`),
     INDEX `fk_playing_log_game1_idx` (`game_id` ASC) VISIBLE,
+    UNIQUE INDEX `player_number_UNIQUE` (`player_number` ASC) VISIBLE,
+    UNIQUE INDEX `team_name_UNIQUE` (`team_id` ASC) VISIBLE,
     CONSTRAINT `fk_playing_log_game1`
         FOREIGN KEY (`game_id`)
             REFERENCES `baseball`.`game` (`game_id`)
@@ -102,23 +113,18 @@ CREATE TABLE IF NOT EXISTS `baseball`.`playing_log`
 -- -----------------------------------------------------
 -- Table `baseball`.`inning`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `baseball`.`inning`;
+
 CREATE TABLE IF NOT EXISTS `baseball`.`inning`
 (
-    `inning_id`    INT         NOT NULL AUTO_INCREMENT,
-    `offense_team` VARCHAR(45) NOT NULL,
-    `inning`       INT         NOT NULL,
-    `score`        INT         NULL,
-    `ball`         INT         NULL,
-    `strike`       INT         NULL,
-    `out`          INT         NULL,
-    `hitter`       INT         NULL,
-    `first_base`   INT         NULL,
-    `second_base`  INT         NULL,
-    `third_base`   INT         NULL,
-    `game_id`      INT         NOT NULL,
-    PRIMARY KEY (`inning_id`, `game_id`),
-    INDEX `fk_inning_game1_idx` (`game_id` ASC) VISIBLE,
-    CONSTRAINT `fk_inning_game1`
+    `inninig_id` INT NOT NULL,
+    `team_id`    INT NOT NULL,
+    `score`      INT NULL,
+    `game_id`    INT NOT NULL,
+    PRIMARY KEY (`inninig_id`, `game_id`),
+    UNIQUE INDEX `team_id_UNIQUE` (`team_id` ASC) VISIBLE,
+    INDEX `fk_inninig_game1_idx` (`game_id` ASC) VISIBLE,
+    CONSTRAINT `fk_inninig_game1`
         FOREIGN KEY (`game_id`)
             REFERENCES `baseball`.`game` (`game_id`)
             ON DELETE NO ACTION
