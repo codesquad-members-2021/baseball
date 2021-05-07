@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
-import { Redirect, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useFetch from '../Hook/useFetch';
 
-const TeamList = () => {
+const TeamList = props => {
   const [teamData, loadingTeamData, error1] = useFetch('get', 'teamList');
   const teamListData = teamData.games;
 
@@ -14,22 +14,31 @@ const TeamList = () => {
     'initData',
     currentID
   );
+  const history = useHistory();
 
-  const onClick = id => {
-    setID(id);
-  };
+  const onClick = useCallback(
+    async id => {
+      await setID(id);
+      if (!error2) {
+        history.push(`/defense/${id}`);
+      }
+    },
+    [history]
+  );
 
   const Lists = () => {
     return teamListData.map((team, i) => (
       <SingleList key={i}>
         <GameTitle>{team.gameTitle}</GameTitle>
         <TeamWrapper>
-          <TeamName id={team.id} onClick={onClick}>
-            {team.awayTeam.teamName}
-          </TeamName>
+          <TeamName id={team.id}>{team.awayTeam.teamName}</TeamName>
           <span>VS</span>
-          <TeamName>
-            <Link to={`/defense/${team.id}`}>{team.homeTeam.teamName}</Link>
+          <TeamName
+            onClick={() => {
+              onClick(team.id);
+            }}
+          >
+            {team.homeTeam.teamName}
           </TeamName>
         </TeamWrapper>
       </SingleList>

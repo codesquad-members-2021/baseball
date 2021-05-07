@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import TeamList from './TeamList';
 import { theme } from '../Style/Theme';
@@ -6,18 +7,20 @@ const GameTitle = () => {
   return <Title>BASEBALL GAME ONLINE</Title>;
 };
 
-const MainMessage = () => {
-  return <Message>참가할 게임을 선택하세요!</Message>;
-};
-
 const StartPage = () => {
+  const [message, setMessage] = useState('참가할 게임을 선택하세요!');
+
+  const MainMessage = () => {
+    return <Message>{message}</Message>;
+  };
+
   return (
     <>
       <GameTitle />
       <MainMessage />
       <div>
         <ListWrapper>
-          <TeamList />
+          <TeamList setMessage={setMessage} />
         </ListWrapper>
       </div>
     </>

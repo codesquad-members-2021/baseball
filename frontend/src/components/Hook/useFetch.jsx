@@ -10,7 +10,7 @@ function useFetch(method, type, value = null) {
       setLoading(true);
       try {
         const res = await API[method][type](value ? value : '');
-        console.log('USE_FETCH', res);
+        setError(false);
         setData(res);
       } catch (err) {
         setError(true);
@@ -25,7 +25,7 @@ function useFetch(method, type, value = null) {
       setLoading(true);
       setError(false);
     };
-  }, [method, type, value]);
+  }, []);
 
   return [data, loading, error];
 }
