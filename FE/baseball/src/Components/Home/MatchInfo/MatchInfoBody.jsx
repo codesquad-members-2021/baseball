@@ -1,4 +1,4 @@
-import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { MatchInfo as S } from '@/Components/Home/HomeStyles';
 import MatchBox from './MatchBox/MatchBox';
 
 const MatchInfoBody = () => {

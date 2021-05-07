@@ -29,7 +29,9 @@ const HomeStyles = {
     padding: 20px;
     margin-bottom: 10px;
   `,
+};
 
+const MatchInfo = {
   MatchInfo: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)`
     width: 500px;
   `,
@@ -75,7 +77,9 @@ const HomeStyles = {
     width: 100%;
     border: 1px solid #ffa7c4;
   `,
+};
 
+const MatchBox = {
   MatchBox: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)`
     border: 1px solid #fff;
     border-radius: 10px;
@@ -132,4 +136,4 @@ const HomeStyles = {
   `,
 };
 
-export { HomeStyles };
+export { HomeStyles, MatchInfo, MatchBox };

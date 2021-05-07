@@ -1,4 +1,4 @@
-import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
 const TeamName = () => {
   return <S.TeamName>TeamName</S.TeamName>;

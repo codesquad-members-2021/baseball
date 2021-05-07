@@ -1,6 +1,6 @@
 import GameNumber from './GameNumber';
 import Match from './Match';
-import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
 const MatchBox = () => {
   return (

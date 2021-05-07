@@ -1,6 +1,6 @@
 import MatchInfoBody from './MatchInfoBody';
 import MatchInfoTitle from './MatchInfoTitle';
-import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { MatchInfo as S } from '@/Components/Home/HomeStyles';
 
 const MatchInfo = () => {
   return (
