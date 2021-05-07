@@ -1,5 +1,6 @@
 package codesquad.baseball.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,11 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeamGameScore {
+    @JsonIgnore
     @Id
     private Long id;
 
-    private int inning;
+    private int inningNumber;
 
     private int score;
 

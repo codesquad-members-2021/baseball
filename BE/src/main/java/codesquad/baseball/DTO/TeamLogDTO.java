@@ -10,12 +10,12 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class TeamHistoryDTO {
-    public List<PlayerHistoryDTO> playerPlayerHistoryDTOList = new ArrayList<>();
+public class TeamLogDTO {
+    private List<PlayerLogDTO> playerLog = new ArrayList<>();
 
-    public TeamHistoryDTO(Team team) {
+    public TeamLogDTO(Team team) {
         for(Player player : team.getPlayerList()) {
-            this.playerPlayerHistoryDTOList.add(new PlayerHistoryDTO(player));
+            this.playerLog.add(new PlayerLogDTO(player, team.getId()));
         }
     }
 }
