@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameManager: Decodable {
+class GameManager {
     
     private var isUserHomeSide: Bool?
     private var teams: Teams
@@ -42,19 +42,7 @@ class GameManager: Decodable {
                   batter: batter,
                   pitcher: pitcher)
     }
-    
-    enum CodingKeys: String, CodingKey {
-        case isUserHomeSide
-        case teams
-        case inning
-        case score
-        case pitchList
-        case ballCounter
-        case baseManager
-        case batter
-        case pitcher
-    }
-    
+
     enum Side {
         static let home = "home"
         static let away = "away"
@@ -66,7 +54,8 @@ class GameManager: Decodable {
     }
 }
 
-extension GameManager: GameManagable {
+///View Controller 이하의 레벨에서 게임 정보 표시하기 위해 사용
+extension GameManager: GameInformable {
 
     func teamInfo() -> [String: String] {
         let home = Side.home, away = Side.away
@@ -110,4 +99,39 @@ extension GameManager: GameManagable {
             return !isHomeDefense()
         }
     }
+}
+
+///ViewModel 이상의 레벨에서 서버에서 받아온 데이터를 프로퍼티에 업데이트하기 위해 사용
+extension GameManager: GameUpdatable {
+    
+    func resetForNewInning(with newInning: Inning) {
+        self.inning = newInning
+        ballCounter.reset()
+        baseManager.reset()
+    }
+    
+    func updateScore(with newScore: Score) {
+        self.score = newScore
+    }
+    
+    func changePitcher(to newPitcher: Player) {
+        self.pitcher = newPitcher
+    }
+    
+    func changeBatter(to newBatter: Player) {
+        self.batter = newBatter
+    }
+    
+    func updateBallCount(with ballChanged: BallChanged) {
+        ballCounter.update(with: ballChanged)
+    }
+    
+    func updateBase(with baseChanged: BaseChanged) {
+        baseManager.update(with: baseChanged)
+    }
+    
+    func updatePitchList(with newPitch: Pitch) {
+        self.pitchList.insert(newPitch, at: 0)
+    }
+    
 }

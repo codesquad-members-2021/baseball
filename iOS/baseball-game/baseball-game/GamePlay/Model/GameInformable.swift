@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GameManagable {
+protocol GameInformable {
     
     func teamInfo() -> [String: String]
     

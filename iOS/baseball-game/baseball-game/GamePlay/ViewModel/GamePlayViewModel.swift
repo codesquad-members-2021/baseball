@@ -10,7 +10,7 @@ import Combine
 
 class GamePlayViewModel {
     
-    @Published var gameManager: GameManagable!
+    @Published var gameManager: GameInformable!
     @Published var pitches: [Pitch]!
     @Published var error: Error!
     

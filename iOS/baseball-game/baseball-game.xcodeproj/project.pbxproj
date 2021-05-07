@@ -27,7 +27,7 @@
 		E4FE76EB2643BDA800151B35 /* GamePlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76EA2643BDA800151B35 /* GamePlayViewModel.swift */; };
 		E4FE76EF2643DA4600151B35 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76EE2643DA4600151B35 /* Player.swift */; };
 		E4FE76F12643DA5600151B35 /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76F02643DA5600151B35 /* Pitch.swift */; };
-		E4FE76F32643DA7300151B35 /* GameManagable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76F22643DA7300151B35 /* GameManagable.swift */; };
+		E4FE76F32643DA7300151B35 /* GameInformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76F22643DA7300151B35 /* GameInformable.swift */; };
 		E4FE76F8264407E600151B35 /* TeamScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76F7264407E600151B35 /* TeamScoreView.swift */; };
 		E4FE76FA2644108900151B35 /* PitcherInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76F92644108900151B35 /* PitcherInfoView.swift */; };
 		E4FE76FC2644136600151B35 /* BatterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76FB2644136600151B35 /* BatterInfoView.swift */; };
@@ -38,6 +38,8 @@
 		E4FE770E2645170300151B35 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE770D2645170300151B35 /* BaseManager.swift */; };
 		E4FE77102645178300151B35 /* Inning.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE770F2645178300151B35 /* Inning.swift */; };
 		E4FE7712264519D700151B35 /* Teams.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE7711264519D700151B35 /* Teams.swift */; };
+		E4FE771826451F5C00151B35 /* GameUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE771726451F5C00151B35 /* GameUpdatable.swift */; };
+		E4FE771A26457E1800151B35 /* GameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE771926457E1800151B35 /* GameDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,7 +65,7 @@
 		E4FE76EA2643BDA800151B35 /* GamePlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewModel.swift; sourceTree = "<group>"; };
 		E4FE76EE2643DA4600151B35 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E4FE76F02643DA5600151B35 /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
-		E4FE76F22643DA7300151B35 /* GameManagable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManagable.swift; sourceTree = "<group>"; };
+		E4FE76F22643DA7300151B35 /* GameInformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInformable.swift; sourceTree = "<group>"; };
 		E4FE76F7264407E600151B35 /* TeamScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamScoreView.swift; sourceTree = "<group>"; };
 		E4FE76F92644108900151B35 /* PitcherInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitcherInfoView.swift; sourceTree = "<group>"; };
 		E4FE76FB2644136600151B35 /* BatterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatterInfoView.swift; sourceTree = "<group>"; };
@@ -74,6 +76,8 @@
 		E4FE770D2645170300151B35 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
 		E4FE770F2645178300151B35 /* Inning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inning.swift; sourceTree = "<group>"; };
 		E4FE7711264519D700151B35 /* Teams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teams.swift; sourceTree = "<group>"; };
+		E4FE771726451F5C00151B35 /* GameUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUpdatable.swift; sourceTree = "<group>"; };
+		E4FE771926457E1800151B35 /* GameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +174,9 @@
 		E4FE76E92643B67000151B35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E4FE76F22643DA7300151B35 /* GameManagable.swift */,
+				E4FE771926457E1800151B35 /* GameDTO.swift */,
+				E4FE76F22643DA7300151B35 /* GameInformable.swift */,
+				E4FE771726451F5C00151B35 /* GameUpdatable.swift */,
 				E4FE76D926412ACD00151B35 /* GameManager.swift */,
 				E4FE7711264519D700151B35 /* Teams.swift */,
 				E4FE770F2645178300151B35 /* Inning.swift */,
@@ -318,17 +324,19 @@
 				AE7A1542263FE4DE005EBAB9 /* SelectionViewController.swift in Sources */,
 				E4FE76FC2644136600151B35 /* BatterInfoView.swift in Sources */,
 				E4FE770E2645170300151B35 /* BaseManager.swift in Sources */,
+				E4FE771826451F5C00151B35 /* GameUpdatable.swift in Sources */,
 				E4FE770C2645162700151B35 /* BallCounter.swift in Sources */,
 				AE5C79B7264138E70075EBC3 /* SelectViewModel.swift in Sources */,
 				E4FE7712264519D700151B35 /* Teams.swift in Sources */,
 				E4AA6883263FDDA500139BD6 /* AppDelegate.swift in Sources */,
 				AE5C79B426412B830075EBC3 /* Network.swift in Sources */,
 				E4FE77102645178300151B35 /* Inning.swift in Sources */,
+				E4FE771A26457E1800151B35 /* GameDTO.swift in Sources */,
 				E4FE76EF2643DA4600151B35 /* Player.swift in Sources */,
 				E4FE76F12643DA5600151B35 /* Pitch.swift in Sources */,
 				E4FE77082644DCC500151B35 /* GameInfo.swift in Sources */,
 				E4AA6885263FDDA500139BD6 /* SceneDelegate.swift in Sources */,
-				E4FE76F32643DA7300151B35 /* GameManagable.swift in Sources */,
+				E4FE76F32643DA7300151B35 /* GameInformable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -69,7 +69,7 @@ class GamePlayViewController: UIViewController {
         performSegue(withIdentifier: ViewID.segue, sender: nil)
     }
     
-    private func updateViews(with gameManager: GameManagable) {
+    private func updateViews(with gameManager: GameInformable) {
         teamScoreView.updateTeamNames(from: gameManager.teamInfo())
         teamScoreView.updateScores(from: gameManager.scoreInfo())
         inningLabel.text = gameManager.inningInfo()
