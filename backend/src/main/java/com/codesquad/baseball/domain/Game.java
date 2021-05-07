@@ -2,9 +2,13 @@ package com.codesquad.baseball.domain;
 
 import com.codesquad.baseball.exceptions.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 public class Game {
 
@@ -13,7 +17,6 @@ public class Game {
     @Id
     private Integer id;
     private String gameTitle;
-    private int currentInning;
     private boolean isTop;
     private int currentStrikeCount;
     private int currentOutCount;
@@ -25,6 +28,8 @@ public class Game {
     private int firstBase;
     private int secondBase;
     private int thirdBase;
+    @MappedCollection(idColumn = "game", keyColumn = "inning_number")
+    private List<Inning> innings = new ArrayList<>();
 
     protected Game() {
     }
@@ -32,7 +37,6 @@ public class Game {
     private Game(Builder builder) {
         this.id = builder.id;
         this.gameTitle = builder.gameTitle;
-        this.currentInning = builder.currentInning;
         this.isTop = builder.isTop;
         this.currentStrikeCount = builder.currentStrikeCount;
         this.currentOutCount = builder.currentOutCount;
@@ -48,7 +52,7 @@ public class Game {
     }
 
     public static Game createGame(String gameTitle, TeamParticipatingInGame homeTeam, TeamParticipatingInGame awayTeam) {
-        return new Builder()
+        Game game = new Builder()
                 .gameTitle(gameTitle)
                 .isOccupied(false)
                 .currentStrikeCount(0)
@@ -61,6 +65,31 @@ public class Game {
                 .secondBase(NO_PLAYER)
                 .thirdBase(NO_PLAYER)
                 .build();
+        game.createInning();
+        return game;
+    }
+
+    public int currentInningNumber() {
+        return innings.size();
+    }
+
+    public int teamScore(Function<Inning, Integer> score) {
+        return innings.stream()
+                .map(score)
+                .mapToInt(value -> value)
+                .sum();
+    }
+
+    public int homeTeamScore() {
+        return teamScore(Inning::getHomeTeamScore);
+    }
+
+    public int awayTeamScore() {
+        return teamScore(Inning::getAwayTeamScore);
+    }
+
+    public void createInning() {
+        this.innings.add(Inning.createDefaultInning());
     }
 
     public boolean isAvailable() {
@@ -114,7 +143,6 @@ public class Game {
         return "Game{" +
                 "id=" + id +
                 ", gameTitle='" + gameTitle + '\'' +
-                ", currentInning=" + currentInning +
                 ", isTop=" + isTop +
                 ", currentStrikeCount=" + currentStrikeCount +
                 ", currentOutCount=" + currentOutCount +
@@ -129,7 +157,6 @@ public class Game {
     public static class Builder {
         private Integer id;
         private String gameTitle;
-        private int currentInning;
         private boolean isTop;
         private int currentStrikeCount;
         private int currentOutCount;
@@ -150,11 +177,6 @@ public class Game {
 
         public Builder gameTitle(String value) {
             gameTitle = value;
-            return this;
-        }
-
-        public Builder currentInning(int value) {
-            currentInning = value;
             return this;
         }
 

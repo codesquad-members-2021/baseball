@@ -27,7 +27,6 @@ create table game
 (
     id                   int primary key auto_increment,
     game_title           varchar(30) not null,
-    current_inning       int         not null,
     is_top               bool        not null,
     current_strike_count int         not null,
     current_out_count    int         not null,

@@ -67,6 +67,21 @@ class GameRepositoryTest {
         assertThat(game.isThirdBaseEmpty()).isTrue();
     }
 
+    @Test
+    @DisplayName("생성된 게임의 초기상태의 이닝정보는 1이닝이어야 합니다.")
+    void testInningState() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.currentInningNumber()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("생성된 게임의 초기상태의 각 팀의 점수는 0점이어야 합니다")
+    void testScore() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.homeTeamScore()).isEqualTo(0);
+        assertThat(game.awayTeamScore()).isEqualTo(0);
+    }
+
     private Game createGame(String gameTitle) {
         Team teamA = createTeam(A_TEAM_NAME);
         Team teamB = createTeam(B_TEAM_NAME);
