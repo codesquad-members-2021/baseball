@@ -20,16 +20,16 @@ const SquadTableBody = ({ playerInfo }) => {
     <S.SquadTable.SquadTableBody>
       <tbody>
         <SquadTableRow row={rowHeaderDefault} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
-        <SquadTableRow row={mockRow} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={true} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
       </tbody>
     </S.SquadTable.SquadTableBody>
   );
