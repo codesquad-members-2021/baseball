@@ -31,22 +31,35 @@ class GameListViewController: UIViewController {
                self.gameListLabel.layer.shadowOpacity = 1.0
                self.gameListLabel.layer.shadowRadius = 0.0
         
-        let str = NSAttributedString(string: "Game List", attributes: [
-            NSAttributedString.Key.foregroundColor : UIColor(named: "retroIvory"),
-            NSAttributedString.Key.strokeColor : UIColor(named: "retroBrown"),
-            NSAttributedString.Key.strokeWidth : -5,
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 80.0)
-                ])
+        let str = NSMutableAttributedString(string: "Game List", attributes: [
+            NSMutableAttributedString.Key.foregroundColor : UIColor(named: "retroIvory"),
+            NSMutableAttributedString.Key.strokeColor : UIColor(named: "retroBrown"),
+            NSMutableAttributedString.Key.strokeWidth : -5,
+            NSMutableAttributedString.Key.font : UIFont.systemFont(ofSize: 80.0)
+            ])
             
         gameListLabel.attributedText = str
         gameListLabel.font = UIFont(name: "AmericanCaptain", size: 100)
+        
+        UIView.animate(withDuration:1,
+        delay: 0,
+        options: [.repeat, .autoreverse],
+        animations: {
+            self.gameListLabel.center.y -= CGFloat(10)
+            print("1")
+        },
+        completion: nil)
     }
     
     func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, String> {
         let dataSource = UICollectionViewDiffableDataSource<GameListSection, String>(collectionView: gameListCollectionView) { (collectionView, indexPath, icon) -> UICollectionViewCell? in
      
+            let tempHomeTeams = ["HAWKS", "HAWKS", "HULKS", "JEJE"]
+            let tempAwayTeams = ["BATMEN", "BATMEN", "JOKERS", "HONG"]
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameListCollectionViewCell", for: indexPath) as! GameListCollectionViewCell
-            cell.homeTeamLabel.text = "hhhh"
+            cell.homeTeamLabel.text = tempHomeTeams[indexPath.row]
+            cell.awayTeamLabel.text = tempAwayTeams[indexPath.row]
+            cell.gameNumberLabel.text = "Game 1"
             return cell
         }
         return dataSource
@@ -63,6 +76,6 @@ class GameListViewController: UIViewController {
 
 extension GameListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.gameListCollectionView.frame.width, height: self.gameListCollectionView.frame.height / 6)
+        return CGSize(width: self.gameListCollectionView.frame.width, height: self.gameListCollectionView.frame.height / 5)
     }
 }

@@ -14,5 +14,7 @@ class GameListCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        homeTeamLabel.font = UIFont(name: "AmericanCaptain", size: 50)
+        awayTeamLabel.font = UIFont(name: "AmericanCaptain", size: 50)
     }
 }

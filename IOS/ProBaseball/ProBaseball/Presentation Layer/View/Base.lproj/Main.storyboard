@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="knK-Pm-sSw">
-                                <rect key="frame" x="30" y="244" width="354" height="618"/>
+                                <rect key="frame" x="15" y="244" width="384" height="518"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f8m-VM-W6p">
                                     <size key="itemSize" width="128" height="128"/>
@@ -45,12 +45,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="knK-Pm-sSw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="4Ga-dy-nRB"/>
+                            <constraint firstItem="knK-Pm-sSw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="4Ga-dy-nRB"/>
                             <constraint firstItem="hQN-OZ-BLp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Isw-Eo-EL8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="knK-Pm-sSw" secondAttribute="trailing" constant="30" id="STu-iu-TDe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="knK-Pm-sSw" secondAttribute="trailing" constant="15" id="STu-iu-TDe"/>
                             <constraint firstItem="hQN-OZ-BLp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="SWr-kQ-SaU"/>
                             <constraint firstItem="knK-Pm-sSw" firstAttribute="top" secondItem="hQN-OZ-BLp" secondAttribute="bottom" id="ebg-L9-xZ5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="knK-Pm-sSw" secondAttribute="bottom" id="kfs-Ej-cc2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="knK-Pm-sSw" secondAttribute="bottom" constant="100" id="kfs-Ej-cc2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hQN-OZ-BLp" secondAttribute="trailing" id="nw3-64-wzB"/>
                         </constraints>
                     </view>
