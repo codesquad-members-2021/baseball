@@ -784,6 +784,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Scores" image="rectangle.and.pencil.and.ellipsis" catalog="system" id="G7D-V1-rtW"/>
                     <connections>
+                        <outlet property="playerInformationTableView" destination="fjD-td-ywJ" id="gAJ-w5-sbM"/>
                         <outletCollection property="awayScoreLabel" destination="Q5O-bT-iL9" collectionClass="NSMutableArray" id="vp3-Ej-NLY"/>
                         <outletCollection property="homeScoreLabel" destination="3ch-Dq-SYi" collectionClass="NSMutableArray" id="vdU-A2-yiR"/>
                         <outletCollection property="awayScoreLabel" destination="8eX-iQ-sBa" collectionClass="NSMutableArray" id="YN5-FN-eiX"/>
