@@ -19,7 +19,7 @@
 		D03CF0622641493C00C00729 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0612641493C00C00729 /* Room.swift */; };
 		D03CF06B264149F000C00729 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF06A264149F000C00729 /* Game.swift */; };
 		D03CF07F264273E000C00729 /* GameUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF07E264273E000C00729 /* GameUseCase.swift */; };
-		D03CF0842642781400C00729 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03CF0832642781400C00729 /* HeaderView.xib */; };
+		D03CF0842642781400C00729 /* ScoreHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03CF0832642781400C00729 /* ScoreHeaderView.xib */; };
 		D03CF0892642782500C00729 /* ScoreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF0882642782500C00729 /* ScoreHeaderView.swift */; };
 		D03CF0A02642890000C00729 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03CF09F2642890000C00729 /* GameViewModel.swift */; };
 		E4BE320026412390006E294A /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BE31FF26412390006E294A /* GroundView.swift */; };
@@ -70,7 +70,7 @@
 		D03CF0612641493C00C00729 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		D03CF06A264149F000C00729 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		D03CF07E264273E000C00729 /* GameUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUseCase.swift; sourceTree = "<group>"; };
-		D03CF0832642781400C00729 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HeaderView.xib; path = BaseballApp/Views/HeaderView.xib; sourceTree = SOURCE_ROOT; };
+		D03CF0832642781400C00729 /* ScoreHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScoreHeaderView.xib; path = BaseballApp/Views/ScoreHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D03CF0882642782500C00729 /* ScoreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreHeaderView.swift; sourceTree = "<group>"; };
 		D03CF09F2642890000C00729 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		E4BE31FF26412390006E294A /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		D03CF0592641490D00C00729 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D03CF0832642781400C00729 /* HeaderView.xib */,
+				D03CF0832642781400C00729 /* ScoreHeaderView.xib */,
 				D03CF0882642782500C00729 /* ScoreHeaderView.swift */,
 				D03CF0172640E61900C00729 /* Main.storyboard */,
 				E4BE320726412F53006E294A /* PitcherRecordTableViewCell.swift */,
@@ -344,7 +344,7 @@
 				E4BE32022641239A006E294A /* GroundView.xib in Resources */,
 				E4BE320A26412F53006E294A /* PitcherRecordTableViewCell.xib in Resources */,
 				D03CF0192640E61900C00729 /* Main.storyboard in Resources */,
-				D03CF0842642781400C00729 /* HeaderView.xib in Resources */,
+				D03CF0842642781400C00729 /* ScoreHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@ class ScoreHeaderView: UIView {
     }
     
     func setup() {
-        guard let headerView = Bundle.main.loadNibNamed(ScoreHeaderView.identifier, owner: self, options: nil)?.first as? ScoreHeaderView else {
+        guard let headerView = Bundle.main.loadNibNamed(ScoreHeaderView.identifier, owner: self, options: nil)?.first as? UIView else {
             return
         }
         headerView.frame = bounds
