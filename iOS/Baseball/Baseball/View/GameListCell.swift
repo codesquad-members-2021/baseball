@@ -22,4 +22,12 @@ class GameListCell: UICollectionViewCell {
     static var nib: UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
+    
+    var gameList: GameList? {
+        didSet{
+            self.gameCountLabel.text = "\(gameList?.gameNumber)"
+            self.awayTeamNameLabel.text = gameList?.away
+            self.homeTeamNameLabel.text = gameList?.home
+        }
+    }
 }

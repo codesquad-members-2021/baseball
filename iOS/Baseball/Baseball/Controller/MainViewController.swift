@@ -6,15 +6,35 @@
 //
 
 import UIKit
+import Combine
 
 class MainViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
+    private var gameListViewModel: GameListViewModel!
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.gameListCollectionView.delegate = self
         self.gameListCollectionView.dataSource = self
         self.gameListCollectionView.register(GameListCell.nib, forCellWithReuseIdentifier: GameListCell.identifier)
+    }
+    
+    func bind() {
+        // nil을 넣는다?
+        gameListViewModel.$gameList
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [unowned self] _ in
+                gameListCollectionView.reloadData()
+            })
+            .store(in: &subscriptions)
     }
 }
 
@@ -27,6 +47,7 @@ extension MainViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameListCell.identifier, for: indexPath) as? GameListCell else {
             return GameListCell()
         }
+        
         return cell
         
     }

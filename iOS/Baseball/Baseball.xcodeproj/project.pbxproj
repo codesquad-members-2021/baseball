@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,12 @@
 		D4A2CB9C2640E5E60019AFB6 /* GameListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB9A2640E5E60019AFB6 /* GameListCell.swift */; };
 		D4A2CB9D2640E5E60019AFB6 /* GameListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */; };
 		D4A2CBA8264382B00019AFB6 /* ScoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */; };
+		D4A2CBBE2643DA410019AFB6 /* GameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBBD2643DA410019AFB6 /* GameEntity.swift */; };
+		D4A2CBC32643DDD00019AFB6 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBC22643DDD00019AFB6 /* EndPoint.swift */; };
+		D4A2CBC8264405400019AFB6 /* FetchGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBC7264405400019AFB6 /* FetchGame.swift */; };
+		D4A2CBCE26440FCA0019AFB6 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBCD26440FCA0019AFB6 /* GameViewModel.swift */; };
+		D4A2CBD3264412B40019AFB6 /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBD2264412B40019AFB6 /* GameListViewModel.swift */; };
+		D4A2CBD8264414B30019AFB6 /* FetchGameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CBD7264414B30019AFB6 /* FetchGameList.swift */; };
 		E021C1CF5AE375C2F9300D39 /* Pods_Baseball_BaseballUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50D46EADD93F895BD0D709A0 /* Pods_Baseball_BaseballUITests.framework */; };
 		E251DC6CD0176A2C568BC3AD /* Pods_Baseball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D159143F731D8C2D8DDBDE86 /* Pods_Baseball.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +76,12 @@
 		D4A2CB9A2640E5E60019AFB6 /* GameListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListCell.swift; sourceTree = "<group>"; };
 		D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameListCell.xib; sourceTree = "<group>"; };
 		D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewController.swift; sourceTree = "<group>"; };
+		D4A2CBBD2643DA410019AFB6 /* GameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
+		D4A2CBC22643DDD00019AFB6 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		D4A2CBC7264405400019AFB6 /* FetchGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGame.swift; sourceTree = "<group>"; };
+		D4A2CBCD26440FCA0019AFB6 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		D4A2CBD2264412B40019AFB6 /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
+		D4A2CBD7264414B30019AFB6 /* FetchGameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGameList.swift; sourceTree = "<group>"; };
 		F745F685E4AD5287ABA0F515 /* Pods-Baseball-BaseballUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baseball-BaseballUITests.release.xcconfig"; path = "Target Support Files/Pods-Baseball-BaseballUITests/Pods-Baseball-BaseballUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +133,6 @@
 				367A893B7C3818AE03AE1029 /* Pods-BaseballTests.debug.xcconfig */,
 				9F92A719088DE201B3531AAD /* Pods-BaseballTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -146,7 +157,11 @@
 		BD8A23712643C47C00828432 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D4A2CBCC26440FBE0019AFB6 /* ViewModel */,
+				D4A2CBBC2643DA300019AFB6 /* Entity */,
 				BD8A23752643C5F300828432 /* Network */,
+				D4A2CBC7264405400019AFB6 /* FetchGame.swift */,
+				D4A2CBD7264414B30019AFB6 /* FetchGameList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +180,7 @@
 			children = (
 				BD8A23732643C4E400828432 /* DTO.swift */,
 				BD8A23762643C73A00828432 /* Network.swift */,
+				D4A2CBC22643DDD00019AFB6 /* EndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -222,6 +238,23 @@
 				D4A2CB8B2640E4FF0019AFB6 /* Info.plist */,
 			);
 			path = BaseballUITests;
+			sourceTree = "<group>";
+		};
+		D4A2CBBC2643DA300019AFB6 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2CBBD2643DA410019AFB6 /* GameEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		D4A2CBCC26440FBE0019AFB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D4A2CBCD26440FCA0019AFB6 /* GameViewModel.swift */,
+				D4A2CBD2264412B40019AFB6 /* GameListViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -465,8 +498,14 @@
 			files = (
 				D4A2CB6C2640E4FD0019AFB6 /* MainViewController.swift in Sources */,
 				D4A2CBA8264382B00019AFB6 /* ScoresViewController.swift in Sources */,
+				D4A2CBBE2643DA410019AFB6 /* GameEntity.swift in Sources */,
+				D4A2CBCE26440FCA0019AFB6 /* GameViewModel.swift in Sources */,
+				D4A2CBC32643DDD00019AFB6 /* EndPoint.swift in Sources */,
+				D4A2CBD8264414B30019AFB6 /* FetchGameList.swift in Sources */,
+				D4A2CBC8264405400019AFB6 /* FetchGame.swift in Sources */,
 				D4A2CB682640E4FD0019AFB6 /* AppDelegate.swift in Sources */,
 				BD8A23742643C4E400828432 /* DTO.swift in Sources */,
+				D4A2CBD3264412B40019AFB6 /* GameListViewModel.swift in Sources */,
 				D4A2CB6A2640E4FD0019AFB6 /* SceneDelegate.swift in Sources */,
 				BD8A23772643C73A00828432 /* Network.swift in Sources */,
 				D4A2CB9C2640E5E60019AFB6 /* GameListCell.swift in Sources */,
