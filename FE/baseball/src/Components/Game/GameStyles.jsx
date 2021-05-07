@@ -1,6 +1,21 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import * as CS from "@/Styles/CommonStyles";
 import theme from "@/Styles/theme";
+
+const ArrowFade = keyframes`
+0% {
+  bottom: 0px;
+  opacity: 0;
+}
+50% {
+  bottom: 1.5px;
+  opacity: 0.4;
+}
+100% {
+  bottom: 3px;
+  opacity: 0.8;
+}
+`;
 
 const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
@@ -65,13 +80,14 @@ const GameHeader = {
     CurrentPlayerTag: styled.div`
       width: 100px;
       text-align: center;
+      font-size: ${theme.FONTSIZE.XS};
       font-weight: 500;
       color: red;
       border-radius: 8px;
       border: 1px solid red;
       background: ${theme.COLOR.CURRENT_PLAYER_TAG};
       padding: 5px;
-      margin: 15px;
+      margin: 10px;
     `,
   },
 };
@@ -224,7 +240,7 @@ const GamePlayLog = {
 const SquadBoard = {
   SquadBoard: styled(CS.BOX.FLEX_ROW_BOX)`
     position: absolute;
-    bottom: ${({ isMouseOver }) => (isMouseOver ? "0px" : "-1080px")};
+    bottom: ${({ isMouseOver }) => (isMouseOver ? "5px" : "-1080px")};
     left: 5%;
     width: 70%;
     height: 77%;
@@ -247,18 +263,18 @@ const SquadBoard = {
     position: absolute;
     display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 99.6%;
+    height: 99.4%;
     background: #222;
-    opacity: 0.7;
+    opacity: 0.8;
     transition: all 1s;
   `,
   PopUpButton: styled.div`
     width: 100px;
-    height: 20px;
+    height: 25px;
     border-radius: 50% 50% 0px 0px;
     position: absolute;
-    bottom: 0%;
+    bottom: 5px;
     left: 530px;
     background: gray;
     opacity: 0.5;
@@ -266,6 +282,11 @@ const SquadBoard = {
     padding: 3px;
     &:hover {
       opacity: 0.7;
+    }
+    div {
+      position: absolute;
+      left: 42.5%;
+      animation: ${ArrowFade} 1s infinite ease-in alternate;
     }
   `,
   SquadTable: {
@@ -277,11 +298,26 @@ const SquadBoard = {
       margin: 0px 30px;
     `,
     SquadTableHeader: styled.div`
+      position: relative;
       font-size: ${theme.FONTSIZE.S};
       font-weight: 700;
       text-align: center;
       border-bottom: 3px solid ${theme.COLOR.DEFAULT};
       padding-bottom: 10px;
+    `,
+    CurrentPlayerTag: styled.div`
+      position: absolute;
+      top: 5px;
+      right: 0;
+      width: 70px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: red;
+      border-radius: 8px;
+      border: 1px solid red;
+      background: ${theme.COLOR.CURRENT_PLAYER_TAG};
+      padding: 5px;
     `,
     SquadTableBody: styled.table`
       width: 100%;
@@ -290,6 +326,8 @@ const SquadBoard = {
     SquadTableRow: styled.tr`
       border-bottom: 1px solid ${theme.COLOR.PLAYER_DESCRIPTION};
       text-align: center;
+      color: ${({ isCurrentPlayer }) =>
+        isCurrentPlayer ? "red" : theme.COLOR.DEFAULT};
     `,
     SquadTableData: styled.td`
       vertical-align: middle;
