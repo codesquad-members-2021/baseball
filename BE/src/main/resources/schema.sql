@@ -68,10 +68,9 @@ create table `match`
 drop table if exists inning;
 create table inning
 (
-    id            bigint(20) auto_increment primary key,
     `out`           int,
     inning_number int,
     role          varchar(50),
     cycle         varchar(50),
-    `match` bigint(20) references `match`(id)
+    `match` bigint(20) primary key references `match`(id)
 )
