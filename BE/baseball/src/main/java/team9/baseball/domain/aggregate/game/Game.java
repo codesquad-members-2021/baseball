@@ -218,6 +218,9 @@ public class Game {
         this.strikeCount = 0;
         this.ballCount = 0;
         this.outCount = 0;
+        this.base1UniformNumber = null;
+        this.base2UniformNumber = null;
+        this.base3UniformNumber = null;
 
         //다음 이닝으로 변경
         if (this.currentHalves == Halves.BOTTOM) {
