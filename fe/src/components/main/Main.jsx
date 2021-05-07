@@ -1,46 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Title from "../shared/Title";
 import Message from "./Message";
 import Teams from "./Teams";
-
-const mockData = [
-  {
-    id: 0,
-    name: "Bears",
-  },
-  {
-    id: 1,
-    name: "Landers",
-  },
-  {
-    id: 2,
-    name: "Twins",
-  },
-  {
-    id: 3,
-    name: "Giants",
-  },
-  {
-    id: 4,
-    name: "Eagles",
-  },
-  {
-    id: 5,
-    name: "Tigers",
-  },
-  {
-    id: 6,
-    name: "Lions",
-  },
-  {
-    id: 7,
-    name: "Dinos",
-  },
-];
+import axios from "axios";
 
 const Main = () => {
-  const [teamList, setTeamList] = useState(mockData);
+  const [teamList, setTeamList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://ec2-15-165-205-188.ap-northeast-2.compute.amazonaws.com:8080").then((res) => console.log(res.data));
+  }, [teamList]);
+
   const setMatches = (teamList) => {
     const result = [];
     let match = [];

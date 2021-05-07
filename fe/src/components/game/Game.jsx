@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Title from "../shared/Title";
 import CurrentIningInfo from "./baseballField/CurrentIningInfo";
@@ -11,6 +12,20 @@ import PlayerListPopup from "./PlayerListPopup";
 import TeamScore from "./TeamScore";
 
 const Game = () => {
+  const { myTeam, counterTeam } = JSON.parse(localStorage.getItem("Teams"));
+
+  const [homeTeam, setHomeTeam] = useState(counterTeam.home ? counterTeam : myTeam);
+  const [expeditionTeam, setExpeditionTeam] = useState(!counterTeam.home ? counterTeam : homeTeam);
+
+  // useEffect(() => {
+  //   fetch("/api/")
+  //     .then((res) => res.json())
+  //     .then((res) => console.log(res));
+  // }, [homeTeam]);
+
+  // const homeTeam = counterTeam.home ? counterTeam : myTeam; // counterTeam이 홈팀이야?
+  // const expeditionTeam = !counterTeam.home ? counterTeam : myTeam; // counterTeam이 원정팀이야?
+
   return (
     <>
       <GameContainer>
@@ -20,9 +35,9 @@ const Game = () => {
             {/* style-component*/}
             <Title />
             <ScoreBox>
-              <TeamScore isHome={false} />
+              <TeamScore isHome={false} team={expeditionTeam} />
               <span>VS</span>
-              <TeamScore isHome />
+              <TeamScore isHome team={homeTeam} />
             </ScoreBox>
           </MainScoreBoard>
           <BaseballField>
