@@ -4,11 +4,23 @@ import theme from '@/Styles/theme';
 
 const HomeStyles = {
   Home: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)`
-    background: #222;
     width: 1440px;
     height: 1080px;
     color: ${theme.COLOR.DEFAULT};
+    border: 3px solid #fff;
+    background: #111;
+    opacity: 0.8;
     padding-top: 40px;
+  `,
+
+  Background: styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    opacity: 0.4;
   `,
 
   HomeTitle: styled.div`

@@ -1,12 +1,22 @@
 import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 
 const GameTitle = () => {
-  return (
-    <S.GameTitle>
-      Team illy'swing BASEBALL GAME!!! <br />
-      comming soon...
-    </S.GameTitle>
-  );
+  // prettier-ignore
+  const title = 
+  `
+   /$$$$$$$$                                /$$$$$$ /$$ /$$
+  |__  $$__/                               |_  $$_/| $$| $$
+     | $$  /$$$$$$   /$$$$$$  /$$$$$$/$$$$   | $$  | $$| $$ /$$   /$$
+     | $$ /$$__  $$ |____  $$| $$_  $$_  $$  | $$  | $$| $$| $$  | $$
+     | $$| $$$$$$$$  /$$$$$$$| $$ \\ $$ \\ $$  | $$  | $$| $$| $$  | $$
+     | $$| $$_____/ /$$__  $$| $$ | $$ | $$  | $$  | $$| $$| $$  | $$
+     | $$|  $$$$$$$|  $$$$$$$| $$ | $$ | $$ /$$$$$$| $$| $$|  $$$$$$$
+     |__/ \\_______/ \\_______/|__/ |__/ |__/|______/|__/|__/ \\____  $$
+                                                            /$$  | $$
+                                                           |  $$$$$$/
+                                                            \\______/
+                                                            `
+  return <S.GameTitle>{title}</S.GameTitle>;
 };
 
 export default GameTitle;

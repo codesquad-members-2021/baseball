@@ -6,10 +6,13 @@ const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
     position: relative;
     border: 3px solid ${theme.COLOR.DEFAULT};
+    background: #111;
+    opacity: 0.8;
     width: 1440px;
     height: 1080px;
   `,
   GameLeftSection: styled(CS.BOX.FLEX_COLUMN_BOX)`
+    position: relative;
     width: 80%;
     height: 100%;
     border-right: 3px solid gray;
@@ -17,6 +20,16 @@ const Game = {
   GameRightSection: styled(CS.BOX.FLEX_COLUMN_BOX)`
     width: 20%;
     height: 100%;
+  `,
+
+  Background: styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    opacity: 0.4;
   `,
 };
 
