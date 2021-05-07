@@ -54,11 +54,11 @@ public class Game {
     public Game(Team awayTeam, Team homeTeam) {
         this.awayTeamId = awayTeam.getId();
         this.homeTeamId = homeTeam.getId();
-        this.pitcherUniformNumber = awayTeam.getFirstPlayerUniformNumber();
-        this.batterUniformNumber = homeTeam.getFirstPlayerUniformNumber();
-
         initializeBattingHistory(awayTeam);
         initializeBattingHistory(homeTeam);
+
+        this.pitcherUniformNumber = homeTeam.getFirstPlayerUniformNumber();
+        sendBatterOnPlate(awayTeamId, awayTeam.getFirstPlayerUniformNumber());
 
         this.currentInning = 1;
         this.currentHalves = Halves.TOP;
@@ -102,7 +102,7 @@ public class Game {
             sendBatterOnBase();
 
             Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
-            sendBatterOnPlate(attackTeam);
+            sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
         }
     }
 
@@ -122,7 +122,7 @@ public class Game {
         sendBatterOnBase();
 
         //타석에 다음 타자 등판
-        sendBatterOnPlate(attackTeam);
+        sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
     }
 
     public int getTotalScore(Halves halves) {
@@ -174,7 +174,7 @@ public class Game {
 
         //타석에 다음 타자 등판
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
-        sendBatterOnPlate(attackTeam);
+        sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
     }
 
     private void sendBatterOnBase() {
@@ -189,7 +189,7 @@ public class Game {
         this.base1UniformNumber = this.batterUniformNumber;
     }
 
-    private void goToNextInning(Team homeTeam, Team awayTeam) {
+    private void goToNextInning(Team awayTeam, Team homeTeam) {
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
@@ -204,7 +204,7 @@ public class Game {
         }
         this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
 
-        //현재 이닝의 공격팀 수비팀 설정
+        //현재 이닝의 공격팀 수비팀 확인
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
         Team defenseTeam = acquireDefenseTeam(awayTeam, homeTeam);
 
@@ -213,17 +213,15 @@ public class Game {
         //공격팀 타자 설정 (직전 투수의 다음 등번호가 타자가 됨)
         int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
-        this.batterUniformNumber = nextBatterUniformNumber;
+        sendBatterOnPlate(attackTeam.getId(), nextBatterUniformNumber);
     }
 
-    private void sendBatterOnPlate(Team attackTeam) {
+    private void sendBatterOnPlate(int batterTeamId, int nextBatterUniformNumber) {
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
 
         //타석에 다음 선수 등판
-        int batterTeamId = attackTeam.getId();
-        int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(batterUniformNumber);
         this.batterUniformNumber = nextBatterUniformNumber;
 
         //선수의 BatterHistory 에 타석 카운트 추가
