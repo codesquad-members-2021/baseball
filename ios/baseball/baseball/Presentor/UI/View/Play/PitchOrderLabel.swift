@@ -7,14 +7,19 @@
 
 import UIKit
 
-class PitchOrderLabel: UILabel {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+final class PitchOrderLabel: UILabel {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureUI()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configureUI()
+    }
+    
+    private func configureUI() {
+        textColor = .white
+        textAlignment = .center
+    }
 }

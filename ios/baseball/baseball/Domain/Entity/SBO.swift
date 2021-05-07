@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct SBO {
+    private(set) var strikeCount: Int
+    private(set) var ballCount: Int
+    private(set) var outCount: Int
+}

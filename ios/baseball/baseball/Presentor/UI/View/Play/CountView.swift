@@ -7,14 +7,30 @@
 
 import UIKit
 
-class CountView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+final class CountView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configure()
+        translatesAutoresizingMaskIntoConstraints = false
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        configure()
+    }
+    
+    private func configure() {
+        widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        hide()
+    }
+    
+    func hide() {
+        backgroundColor = .none
+        layer.borderWidth = 0
+    }
+    
+    func show(color: UIColor) {
+        backgroundColor = color
+        layer.borderWidth = 0.5
+    }
 }

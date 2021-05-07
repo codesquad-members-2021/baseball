@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchUpView: UIView {
+final class MatchUpView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

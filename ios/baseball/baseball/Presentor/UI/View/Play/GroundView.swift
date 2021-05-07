@@ -7,14 +7,15 @@
 
 import UIKit
 
-class GroundView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+final class GroundView: UIView {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
     }
-    */
-
+    
+    func commonInit() {
+        let view = Bundle.main.loadNibNamed("GroundView", owner: self, options: nil)?.first as! UIView
+        view.frame = self.bounds
+        self.addSubview(view)
+    }
 }

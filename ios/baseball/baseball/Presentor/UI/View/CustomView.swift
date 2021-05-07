@@ -1,5 +1,5 @@
 //
-//  RoundedView.swift
+//  CustomView.swift
 //  baseball
 //
 //  Created by zombietux on 2021/05/05.
@@ -33,16 +33,14 @@ import UIKit
         }
         set { layer.borderColor = newValue?.cgColor }
     }
-}
-
-@IBDesignable class RotateView: UIView {
+    
     @IBInspectable var rotation: Double = 0 {
-            didSet {
-                rotateView(rotation: rotation)
-            }
+        didSet {
+            rotateView(rotation: rotation)
         }
-
-        func rotateView(rotation: Double)  {
-            self.transform = CGAffineTransform(rotationAngle: CGFloat(.pi/2 + rotation))
-        }
+    }
+    
+    func rotateView(rotation: Double)  {
+        self.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / rotation))
+    }
 }
