@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class UserTeamNameMapper implements RowMapper<String> {
+public class HomeAwayTeamNameMapper implements RowMapper<String> {
     @Override
     public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return rs.getString("user_team_name");
+        return rs.getString("team_name");
     }
 }
