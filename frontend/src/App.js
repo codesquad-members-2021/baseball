@@ -9,9 +9,9 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Switch>
-        <StartPage />
-        <Route exact path="/attack/:id/:away/:home" component={AttackMode} />
-        <Route path="/defense" component={DefenseMode} />
+        <StartPage exact path="/" />
+        <Route path="/attack/:id/:away/:home" component={AttackMode} />
+        <Route path="/defense/:id" component={DefenseMode} />
       </Switch>
     </BrowserRouter>
   );

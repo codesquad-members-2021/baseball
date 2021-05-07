@@ -15,17 +15,21 @@ const TeamList = () => {
     currentID
   );
 
+  const onClick = id => {
+    setID(id);
+  };
+
   const Lists = () => {
     return teamListData.map((team, i) => (
       <SingleList key={i}>
         <GameTitle>{team.gameTitle}</GameTitle>
         <TeamWrapper>
-          <TeamName onClick={() => setID(team.id)}>
+          <TeamName id={team.id} onClick={onClick}>
             {team.awayTeam.teamName}
           </TeamName>
           <span>VS</span>
           <TeamName>
-            <Link to="/defense">{team.homeTeam.teamName}</Link>
+            <Link to={`/defense/${team.id}`}>{team.homeTeam.teamName}</Link>
           </TeamName>
         </TeamWrapper>
       </SingleList>

@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# 19팀 야구게임
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 팀 소개
 
-## Available Scripts
+BE - 유일한 희망💙 야구의 신 NAS
+FE - 야구를 미션으로 배우고 있는 NAS의 제자들 SIENNA, JUNAMI
+NAS, SIENNA, JUNAMI의 야구게임에 오신 것을 환영합니다💕
 
-In the project directory, you can run:
+## 팀 규칙
 
-### `npm start`
+### 커밋, 이슈 규칙
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [브랜치 커밋/이슈 규칙](https://github.com/Malloc72P/baseball/wiki/%EB%B8%8C%EB%9E%9C%EC%B9%98-%EC%BB%A4%EB%B0%8B-%EC%9D%B4%EC%8A%88-%EA%B7%9C%EC%B9%99)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 일일 회고
 
-### `npm test`
+- 매일 6시 회고 겸 API 회의하기
+  이전 프로젝트에서 느꼈던 우리의 고민들..
+  - 백엔드는 프론트의 작업상황을 잘 모르니 너무 궁금해요!
+  - 프론트끼리도 서로의 고민을 알 수 있어요 !
+    좀 더 원활한 소통을 위해 매일 회고를 하기로 결정!
+- [1주차 회고 보기](https://github.com/Malloc72P/baseball/wiki/%EB%8D%B0%EC%9D%BC%EB%A6%AC%ED%9A%8C%EA%B3%A0-1%EC%A3%BC%EC%B0%A8%F0%9F%8C%B8)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 배포
 
-### `npm run build`
+- 첫 배포는 목요일날 5/6일날한다!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### API 관련 문제가 발생했을때?
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 이게 프론트 문제인지 확실하지 않아도 이슈 등록하기
+- 깃헙에 이슈이용해서 피드백하기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 깃헙 이슈 사용하기
 
-### `npm run eject`
+- 구현할 세부 기능을 이슈에 모두 등록하기
+- 중요한 문제 및 API이슈가 생겼을 때도 이슈에 등록
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 마일스톤 사용하기
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 매일매일 오후 6시에 회고할때 마일스톤을 활용해서 서로에게 자기 팀의 작업을 자랑한다.
+- 마일스톤 다 끝나면 클로즈해주기!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### PR기한 정하기
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- 프론트는 주에 2회 PR을 날리자
+- 백엔드는 매주 목요일에 PR날리는걸로 한다.
 
-## Learn More
+### 함께 회의한 내용/ 설계를 정리하기
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 중간 생산물을 데모나 최종발표때 활용
+- 이런거 안하고 나중에 몰아서 하니까 아쉬웠다.
+- 다 끝났을때, 뭔가 남는게 있으면 좋을 것 같다.
+- [회의록](https://github.com/Malloc72P/baseball/wiki/%ED%9A%8C%EC%9D%98%EB%A1%9D-1%EC%A3%BC-1%EC%9D%BC%EC%B0%A8)
+- [야구 룰 정리](https://github.com/Malloc72P/baseball/wiki/%EC%95%BC%EA%B5%AC-%EB%A3%B0-%EC%A0%95%EB%A6%AC)
+- [컴포넌트 구조](https://github.com/Malloc72P/baseball/wiki/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 프로젝트 미리보기
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![baseball](https://ibb.co/1qym08c)
