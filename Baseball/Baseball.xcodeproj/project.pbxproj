@@ -22,6 +22,7 @@
 		FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A91264138F40037622A /* GameListViewModel.swift */; };
 		FFDD3A9C2643C25F0037622A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */; };
 		FFDD3A9E2643C3960037622A /* PitchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A9D2643C3960037622A /* PitchHistoryCell.swift */; };
+		FFDD3AA62644FD9B0037622A /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3AA52644FD9B0037622A /* CALayer+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		FFDD3A91264138F40037622A /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
 		FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		FFDD3A9D2643C3960037622A /* PitchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchHistoryCell.swift; sourceTree = "<group>"; };
+		FFDD3AA52644FD9B0037622A /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			children = (
 				FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */,
 				FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */,
+				FFDD3AA52644FD9B0037622A /* CALayer+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */,
 				A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */,
 				FFDD3A9E2643C3960037622A /* PitchHistoryCell.swift in Sources */,
+				FFDD3AA62644FD9B0037622A /* CALayer+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,11 +11,18 @@ class GamePlayViewController: UIViewController {
 
     @IBOutlet weak var groundView: GroundView!
     @IBOutlet weak var pitchHistoryTableView: UITableView!
+    @IBOutlet weak var pitcherView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         pitchHistoryTableView.delegate = self
         pitchHistoryTableView.dataSource = self
+        configureView()
+    }
+    
+    private func configureView() {
+        pitcherView.layer.addBorder([.bottom], color: .systemGray4, thickness: 2)
+        pitchHistoryTableView.layer.addBorder([.top], color: .systemGray, thickness: 3)
     }
 }
 
