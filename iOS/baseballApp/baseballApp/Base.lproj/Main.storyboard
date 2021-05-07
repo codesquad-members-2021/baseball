@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5d8-d6-cAs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vEb-Vx-KgU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -36,14 +36,14 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameCell" id="2AE-yc-eHD" customClass="GameCell" customModule="baseballApp" customModuleProvider="target">
-                                                <rect key="frame" x="17.5" y="0.0" width="371" height="139"/>
+                                                <rect key="frame" x="30" y="0.0" width="346" height="139"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eue-zT-qVQ" customClass="GameCell" customModule="baseballApp" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="139"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="346" height="139"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-vA-mfu">
-                                                            <rect key="frame" x="23" y="20" width="325" height="20.5"/>
+                                                            <rect key="frame" x="10.5" y="20" width="325" height="20.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="325" id="3LP-iJ-8IB"/>
                                                                 <constraint firstAttribute="height" constant="20.5" id="8gl-f8-Smw"/>
@@ -53,7 +53,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O8d-u4-vK3">
-                                                            <rect key="frame" x="25.5" y="73" width="320" height="41"/>
+                                                            <rect key="frame" x="13" y="73" width="320" height="41"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-NF-G8J">
                                                                     <rect key="frame" x="0.0" y="0.0" width="130" height="41"/>
@@ -93,7 +93,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="O8d-u4-vK3" secondAttribute="bottom" constant="25" id="oLs-Jp-cVx"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
-                                                <size key="customSize" width="371" height="139"/>
+                                                <size key="customSize" width="346" height="139"/>
                                                 <connections>
                                                     <outlet property="awayTeamLabel" destination="VqJ-U7-lsZ" id="RGA-YT-L2H"/>
                                                     <outlet property="gameIdLabel" destination="3FB-vA-mfu" id="8bv-bv-bGB"/>

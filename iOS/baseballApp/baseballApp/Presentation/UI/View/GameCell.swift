@@ -15,7 +15,7 @@ class GameCell: UICollectionViewCell {
         super.init(frame: frame)
         setupCellView()
     }
-    
+       
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupCellView()

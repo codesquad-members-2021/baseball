@@ -13,14 +13,14 @@ class GameViewModel: CommonViewModel {
     }
     
     func getGameInfo() {
-        API.shared.requestGames()
+        try? API.shared.requestGames()
             .subscribe { gameData in
                 self.transformDTO(to: gameData) { game in
                     self.saveGame(game: game)
                 }
-        } onError: { error in
-            print(error.localizedDescription)
-        }.disposed(by: disposeBag)
+            } onError: { error in
+                print(error.localizedDescription)
+            }.disposed(by: disposeBag)
     }
     
     private func transformDTO(to game: GameDTO, completion: @escaping (Game)->Void
