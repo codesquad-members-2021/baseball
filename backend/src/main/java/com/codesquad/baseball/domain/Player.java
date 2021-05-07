@@ -22,19 +22,16 @@ public class Player {
         this.team = builder.team;
     }
 
-    public int getId() {
-        return id;
+    public boolean isPitcher() {
+        return role == PlayerRole.PITCHER;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", uniformNumber=" + uniformNumber +
-                ", playerName='" + playerName + '\'' +
-                ", role=" + role +
-                ", team=" + team +
-                '}';
+    public boolean isHitter() {
+        return role == PlayerRole.HITTER;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static class Builder {
@@ -72,5 +69,16 @@ public class Player {
         public Player build() {
             return new Player(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", uniformNumber=" + uniformNumber +
+                ", playerName='" + playerName + '\'' +
+                ", role=" + role +
+                ", team=" + team +
+                '}';
     }
 }

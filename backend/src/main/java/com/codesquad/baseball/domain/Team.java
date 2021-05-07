@@ -15,6 +15,14 @@ public class Team {
         this.teamName = teamName;
     }
 
+    public TeamParticipatingInGame createParticipantAsHomeTeam() {
+        return new TeamParticipatingInGame(this.id, true);
+    }
+
+    public TeamParticipatingInGame createParticipantAsAwayTeam() {
+        return new TeamParticipatingInGame(this.id, false);
+    }
+
     public void addPlayer(Player player) {
         players.add(player);
     }
@@ -23,13 +31,6 @@ public class Team {
         return players.size();
     }
 
-    public TeamParticipatingInGame createParticipantAsHomeTeam() {
-        return new TeamParticipatingInGame(this.id, true);
-    }
-
-    public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(this.id, false);
-    }
 
     public boolean isSameName(String teamName) {
         return this.teamName.equals(teamName);

@@ -6,11 +6,12 @@ public class PlayerParticipatingInGame {
     @Id
     private Integer id;
     private int team_participating_in_game;
-    private int bat_order;
+    private int batOrder;
     private int player;
     private int plateAppearances;
     private int hitCount;
     private int outCount;
+    private PitcherPosition pitcherPosition;
 
     public PlayerParticipatingInGame() {
     }
@@ -20,6 +21,27 @@ public class PlayerParticipatingInGame {
         this.plateAppearances = 0;
         this.hitCount = 0;
         this.outCount = 0;
+        this.pitcherPosition = PitcherPosition.NONE;
+    }
+
+    public PlayerParticipatingInGame(int player, PitcherPosition pitcherPosition) {
+        this.player = player;
+        this.plateAppearances = 0;
+        this.hitCount = 0;
+        this.outCount = 0;
+        this.pitcherPosition = pitcherPosition;
+    }
+
+    public boolean isStartingPitcher() {
+        return pitcherPosition == PitcherPosition.SP;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public int getBatOrder() {
+        return batOrder;
     }
 
     @Override
@@ -27,7 +49,7 @@ public class PlayerParticipatingInGame {
         return "PlayerParticipatingInGame{" +
                 "id=" + id +
                 ", team_participating_in_game=" + team_participating_in_game +
-                ", bat_order=" + bat_order +
+                ", bat_order=" + batOrder +
                 ", player=" + player +
                 ", plateAppearances=" + plateAppearances +
                 ", hitCount=" + hitCount +

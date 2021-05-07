@@ -1,6 +1,7 @@
 package com.codesquad.baseball.domain;
 
 import com.codesquad.baseball.exceptions.GameNotFoundException;
+import com.codesquad.baseball.exceptions.PlayerNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -106,6 +108,26 @@ class GameRepositoryTest {
         assertThat(game.isTop()).isEqualTo(true);
     }
 
+    @Test
+    @DisplayName("피치의 결과가 볼인 상황을 테스트합니다")
+    void testPitchIsBall() {
+        Game game = createGame(GAME_TITLE);
+        int firstHitter = game.currentHitter();
+        //1회 볼 이후엔 볼카운트 1이어야 함
+        game.pitch(PlayType.BALL);
+        assertThat(game.getCurrentBallCount()).isEqualTo(1);
+        //3회 볼 이후엔 볼 카운트가 0이어야 함
+        //또한 볼넷 맞기 전의 타자가 1루에 가있어야 함
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
+        assertThat(game.getCurrentBallCount()).isEqualTo(0);
+        assertThat(game.firstBaseRunner()).isEqualTo(firstHitter);
+        //볼넷맞으면 1루주자는 2루에 있어야 함
+        //타자는 1루여야함
+        int secondHitter = game.currentHitter();
+        IntStream.range(0, 4).forEach(value -> game.pitch(PlayType.BALL));
+        assertThat(game.firstBaseRunner()).isEqualTo(secondHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(firstHitter);
+    }
 
     private Game createGame(String gameTitle) {
         Team teamA = createTeam(A_TEAM_NAME);
@@ -119,8 +141,22 @@ class GameRepositoryTest {
         TeamParticipatingInGame aTeamParticipant = teamA.createParticipantAsHomeTeam();
         TeamParticipatingInGame bTeamParticipant = teamB.createParticipantAsAwayTeam();
 
-        teamA.getPlayers().forEach(aTeamParticipant::addPlayer);
-        teamB.getPlayers().forEach(bTeamParticipant::addPlayer);
+        teamA.getPlayers().stream().filter(Player::isHitter).forEach(aTeamParticipant::addPlayer);
+        teamB.getPlayers().stream().filter(Player::isHitter).forEach(bTeamParticipant::addPlayer);
+
+        Player aTeamPitcher = teamA.getPlayers()
+                .stream()
+                .filter(Player::isPitcher)
+                .findFirst()
+                .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PITCHER_FAILED));
+        aTeamParticipant.addPlayer(aTeamPitcher, PitcherPosition.SP);
+
+        Player bTeamPitcher = teamB.getPlayers()
+                .stream()
+                .filter(Player::isPitcher)
+                .findFirst()
+                .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PITCHER_FAILED));
+        bTeamParticipant.addPlayer(bTeamPitcher, PitcherPosition.SP);
 
         Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
 

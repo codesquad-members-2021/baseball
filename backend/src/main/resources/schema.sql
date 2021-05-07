@@ -64,19 +64,22 @@ create table history
 
 create table team_participating_in_game
 (
-    id           int primary key auto_increment,
-    team         int references team (id),
-    game         int references game (id),
-    is_home_team bool not null
+    id              int primary key auto_increment,
+    team            int references team (id),
+    game            int references game (id),
+    is_home_team    bool not null,
+    current_hitter  int references player_participating_in_game (id),
+    current_pitcher int references player_participating_in_game (id)
 );
 
 create table player_participating_in_game
 (
     id                         int primary key auto_increment,
     team_participating_in_game int references team_participating_in_game (id),
-    bat_order                  int not null,
+    bat_order                  int         not null,
     player                     int references player (id),
-    plate_appearances          int not null,
-    hit_count                  int not null,
-    out_count                  int not null
+    plate_appearances          int         not null,
+    hit_count                  int         not null,
+    out_count                  int         not null,
+    pitcher_position           varchar(10) not null
 );

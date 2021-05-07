@@ -24,8 +24,6 @@ public class Game {
     private int currentStrikeCount;
     private int currentOutCount;
     private int currentBallCount;
-    private int currentPitcher;
-    private int currentHitter;
     private boolean isOccupied;
     private Set<TeamParticipatingInGame> teams = new HashSet<>();
     private int firstBase;
@@ -44,8 +42,6 @@ public class Game {
         this.currentStrikeCount = builder.currentStrikeCount;
         this.currentOutCount = builder.currentOutCount;
         this.currentBallCount = builder.currentBallCount;
-        this.currentPitcher = builder.currentPitcher;
-        this.currentHitter = builder.currentHitter;
         this.isOccupied = builder.isOccupied;
         this.teams.add(builder.homeTeam);
         this.teams.add(builder.awayTeam);
@@ -72,31 +68,103 @@ public class Game {
         return game;
     }
 
-    public void pitch(PlayType playType) {
+    public void initializeGame() {
+        teams.forEach(TeamParticipatingInGame::initializeTeam);
+    }
+
+    public List<Integer> pitch(PlayType playType) {
         switch (playType) {
             case HOMERUN:
                 break;
             case STRIKE:
-                judgeStrike();
+                onStrike();
                 break;
             case BALL:
+                onBall();
             case HITS:
         }
-        judgeState();
+        return judgeState();
     }
 
-    private void judgeStrike() {
+    private void onStrike() {
         increaseStrikeCount();
     }
 
-    private void judgeState() {
+    private void onBall() {
+        increaseBallCount();
+    }
+
+    private List<Integer> judgeState() {
+        List<Integer> backHomePlayers = new ArrayList<>();
+        judgeThreeStrike();
+        int backHomePlayer = judge4Ball();
+        if (backHomePlayer != NO_PLAYER) {
+            backHomePlayers.add(backHomePlayer);
+        }
+        return backHomePlayers;
+    }
+
+    private void judgeThreeStrike() {
         if (isThreeStrike()) {
-            resetStrikeCount();
+            resetStrikeAndBall();
             increaseOutCount();
             if (isThreeOut()) {
                 proceedToNextStage();
             }
         }
+    }
+
+    private int judge4Ball() {
+        int backHomePlayer = NO_PLAYER;
+        if (is4Ball()) {
+            resetStrikeAndBall();
+            backHomePlayer = pushAllRunners();
+        }
+        return backHomePlayer;
+    }
+
+    private int pushAllRunners() {
+        int backHomePlayer = NO_PLAYER;
+        if (hasThirdBaseRunner()) {
+            backHomePlayer = thirdBase;
+        }
+        if (hasSecondBaseRunner()) {
+            thirdBase = secondBase;
+        }
+        if (hasFirstBaseRunner()) {
+            secondBase = firstBase;
+        }
+        firstBase = attackingTeam().getCurrentHitter();
+        attackingTeam().changeHitter();
+        return backHomePlayer;
+    }
+
+    public boolean hasFirstBaseRunner() {
+        return firstBase != NO_PLAYER;
+    }
+
+    public boolean hasSecondBaseRunner() {
+        return firstBase != NO_PLAYER;
+    }
+
+    public boolean hasThirdBaseRunner() {
+        return firstBase != NO_PLAYER;
+    }
+
+    public int firstBaseRunner() {
+        return firstBase;
+    }
+
+    public int secondBaseRunner() {
+        return secondBase;
+    }
+
+    public int thirdBaseRunner() {
+        return thirdBase;
+    }
+
+    public int currentHitter() {
+        return attackingTeam().getCurrentHitter();
     }
 
     private void proceedToNextStage() {
@@ -112,13 +180,17 @@ public class Game {
         currentStrikeCount++;
     }
 
-    private void resetStrikeCount() {
-        currentStrikeCount = 0;
+    private void increaseBallCount() {
+        currentBallCount++;
     }
 
     private void resetAllCount() {
-        currentStrikeCount = 0;
         currentOutCount = 0;
+        resetStrikeAndBall();
+    }
+
+    private void resetStrikeAndBall() {
+        currentStrikeCount = 0;
         currentBallCount = 0;
     }
 
@@ -128,6 +200,10 @@ public class Game {
 
     private boolean isThreeStrike() {
         return currentStrikeCount == MAXIMUM_STRIKE_COUNT;
+    }
+
+    private boolean is4Ball() {
+        return currentBallCount == MAXIMUM_BALL_COUNT;
     }
 
     private boolean isThreeOut() {
@@ -229,8 +305,6 @@ public class Game {
         private int currentStrikeCount;
         private int currentOutCount;
         private int currentBallCount;
-        private int currentPitcher;
-        private int currentHitter;
         private boolean isOccupied;
         private TeamParticipatingInGame homeTeam;
         private TeamParticipatingInGame awayTeam;
@@ -265,16 +339,6 @@ public class Game {
 
         public Builder currentBallCount(int value) {
             currentBallCount = value;
-            return this;
-        }
-
-        public Builder currentPitcher(int value) {
-            currentPitcher = value;
-            return this;
-        }
-
-        public Builder currentHitter(int value) {
-            currentHitter = value;
             return this;
         }
 
@@ -338,8 +402,6 @@ public class Game {
                 ", currentStrikeCount=" + currentStrikeCount +
                 ", currentOutCount=" + currentOutCount +
                 ", currentBallCount=" + currentBallCount +
-                ", currentPitcher=" + currentPitcher +
-                ", currentHitter=" + currentHitter +
                 ", isOccupied=" + isOccupied +
                 ", teams=" + teams +
                 '}';
