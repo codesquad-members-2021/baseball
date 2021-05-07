@@ -1,6 +1,6 @@
 import GameTitle from '@/Components/Intro/GameTitle';
-import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 import { Link } from 'react-router-dom';
+import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
 
 const GameStartButton = () => {
   return (

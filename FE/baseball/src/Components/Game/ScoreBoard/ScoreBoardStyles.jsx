@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import * as CS from '@/Styles/CommonStyles';
-import { BLOCK, NONE } from '@/Utils/const';
 import theme from '@/Styles/theme';
 
 const ArrowFade = keyframes`
@@ -25,7 +24,8 @@ const ScoreBoardStyles = {
     font-weight: 900;
     font-size: 24px;
     padding: 10px 40px;
-    border: 1px solid #fff;
+    border: 3px solid #fff;
+    border-radius: 8px;
     background: #111;
     transition: all ease-in-out 0.8s;
     cursor: pointer;
@@ -67,16 +67,16 @@ const ScoreBoardStyles = {
   `,
 
   PopUpBackground: styled.div`
-    display: ${({ isHover }) => (isHover ? BLOCK : NONE)};
+    opacity: ${({ isHover }) => (isHover ? 0.8 : 0)};
     position: absolute;
     top: 0;
     left: 0;
     width: 1434px;
-    height: 1080px;
+    height: 1074px;
     background: #222;
-    opacity: 0.8;
     transition: display 1.5s;
     z-index: 10;
+    transition: all ease-in-out 0.4s;
   `,
   PopUpButton: styled.div`
     width: 100px;

@@ -45,6 +45,7 @@ const Game = {
     height: 100%;
     z-index: -999;
     opacity: 0.4;
+    filter: blur(5px);
   `,
 };
 
@@ -280,6 +281,8 @@ const SquadBoard = {
     opacity: 0.5;
     text-align: center;
     padding: 3px;
+    z-index: 999;
+
     &:hover {
       opacity: 0.7;
     }
