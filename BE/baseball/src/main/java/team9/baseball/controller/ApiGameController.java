@@ -17,6 +17,11 @@ public class ApiGameController {
         this.gameService = gameService;
     }
 
+    @GetMapping("/list")
+    public ApiResult getGameDescriptions() {
+        return ApiResult.succeed(gameService.getAllGameList());
+    }
+
     @PostMapping
     public ApiResult createGame() {
         gameService.createNewGame(1l, 1, 2);

@@ -2,6 +2,7 @@ package team9.baseball.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import team9.baseball.DTO.response.GameDescriptionDTO;
 import team9.baseball.DTO.response.GameStatusDTO;
 import team9.baseball.domain.aggregate.game.Game;
 import team9.baseball.domain.aggregate.team.Team;
@@ -12,6 +13,8 @@ import team9.baseball.exception.NotFoundException;
 import team9.baseball.repository.GameRepository;
 import team9.baseball.repository.TeamRepository;
 import team9.baseball.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class GameService {
@@ -88,6 +91,10 @@ public class GameService {
         user.setCurrentGameId(gameId);
         user.setCurrentGameVenue(venue);
         userRepository.save(user);
+    }
+
+    public List<GameDescriptionDTO> getAllGameList() {
+        return gameRepository.findAllGameDescription();
     }
 
     private User getUser(long userId) {
