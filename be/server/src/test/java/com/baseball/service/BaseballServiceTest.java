@@ -31,11 +31,12 @@ class BaseballServiceTest {
     }
 
     @Test
-    @DisplayName("아무것도 하지 않은 첫 이닝에 대한 스냅샷 테스트")
-    void scenario_test_0() throws JsonProcessingException {
+    @DisplayName("홈팀의 아무것도 하지 않은 첫 이닝에 대한 스냅샷 테스트")
+    void scenario_test_home_0() throws JsonProcessingException {
         String gameId = "TODO";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId));
+        String teamId = "HOME";
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId, teamId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId, teamId));
 
         String expectedProgress = "TODO";
         String expectedGameInfo = "TODO";
@@ -48,13 +49,33 @@ class BaseballServiceTest {
     }
 
     @Test
-    @DisplayName("첫 이닝에서 Ball 이 나왔을 경우에 대한 스냅샷 테스트")
-    void scenario_test_1_ball() throws JsonProcessingException {
-        baseballService.playGame("ball");
-
+    @DisplayName("어웨이팀의 아무것도 하지 않은 첫 이닝에 대한 스냅샷 테스트")
+    void scenario_test_away_0() throws JsonProcessingException {
         String gameId = "TODO";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId));
+        String teamId = "AWAY";
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId, teamId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId, teamId));
+
+        String expectedProgress = "TODO";
+        String expectedGameInfo = "TODO";
+
+        softly.assertThat(actualProgress)
+                .isEqualTo(expectedProgress);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
+        softly.assertAll();
+    }
+
+
+    @Test
+    @DisplayName("홈팀의 첫 이닝에서 Ball 이 나왔을 경우에 대한 스냅샷 테스트")
+    void scenario_test_home_1_ball() throws JsonProcessingException {
+        String gameId = "TODO";
+        String teamId = "HOME";
+        baseballService.playGame(gameId, "ball");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "TODO";
@@ -68,13 +89,14 @@ class BaseballServiceTest {
     }
 
     @Test
-    @DisplayName("첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트")
-    void scenario_test_1_hit() throws JsonProcessingException {
-        baseballService.playGame("hit");
-
+    @DisplayName("어웨이의 첫 이닝에서 Ball 이 나왔을 경우에 대한 스냅샷 테스트")
+    void scenario_test_away_1_ball() throws JsonProcessingException {
         String gameId = "TODO";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId));
+        String teamId = "AWAY";
+        baseballService.playGame(gameId, "ball");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "TODO";
@@ -88,13 +110,77 @@ class BaseballServiceTest {
     }
 
     @Test
-    @DisplayName("첫 이닝에서 Strike 가 나왔을 경우에 대한 스냅샷 테스트")
+    @DisplayName("홈팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트")
+    void scenario_test_home_1_hit() throws JsonProcessingException {
+        String gameId = "TODO";
+        String teamId = "HOME";
+        baseballService.playGame(gameId, "hit");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
+
+        //TODO: 스냅샷을 떠야한다.
+        String expectedProgress = "TODO";
+        String expectedGameInfo = "TODO";
+
+        softly.assertThat(actualProgress)
+                .isEqualTo(expectedProgress);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("어웨이팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트")
+    void scenario_test_away_1_hit() throws JsonProcessingException {
+        String gameId = "TODO";
+        String teamId = "AWAY";
+        baseballService.playGame(gameId, "hit");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
+
+        //TODO: 스냅샷을 떠야한다.
+        String expectedProgress = "TODO";
+        String expectedGameInfo = "TODO";
+
+        softly.assertThat(actualProgress)
+                .isEqualTo(expectedProgress);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("홈팀의 첫 이닝에서 Strike 가 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_1_strike() throws JsonProcessingException {
-        baseballService.playGame("strike");
-
         String gameId = "TODO";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(gameId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(gameId));
+        String teamId = "HOME";
+        baseballService.playGame(gameId, "strike");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
+
+        //TODO: 스냅샷을 떠야한다.
+        String expectedProgress = "TODO";
+        String expectedGameInfo = "TODO";
+
+        softly.assertThat(actualProgress)
+                .isEqualTo(expectedProgress);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("어웨이팀의 첫 이닝에서 Strike 가 나왔을 경우에 대한 스냅샷 테스트")
+    void scenario_test_away_1_strike() throws JsonProcessingException {
+        String gameId = "TODO";
+        String teamId = "AWAY";
+        baseballService.playGame(gameId, "strike");
+
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, gameId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, gameId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "TODO";
