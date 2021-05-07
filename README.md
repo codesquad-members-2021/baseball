@@ -35,3 +35,6 @@ fix: Title: 버그 수정
 
 ## OAuth 화면
 <img width="300" alt="스크린샷 2021-05-07 오후 2 24 58" src="https://user-images.githubusercontent.com/75113784/117401823-382a5c00-af40-11eb-87d9-059f54028b23.png"><img width="300" alt="스크린샷 2021-05-07 오후 2 25 18" src="https://user-images.githubusercontent.com/75113784/117401818-36f92f00-af40-11eb-884e-ba81b2def54e.png"><img width="300" alt="스크린샷 2021-05-07 오후 2 25 23" src="https://user-images.githubusercontent.com/75113784/117401803-319be480-af40-11eb-840a-4419a5a31bf0.png">
+
+## 게임 화면
+<img width="300" alt="Screen Shot 2021-05-07 at 4 36 56 PM" src="https://user-images.githubusercontent.com/56751259/117414839-92341d00-af52-11eb-946c-b18447d7af70.png"><img width="300" alt="Screen Shot 2021-05-07 at 4 24 25 PM" src="https://user-images.githubusercontent.com/56751259/117414828-8ea09600-af52-11eb-8ef6-8390d159921e.png">
