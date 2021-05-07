@@ -27,15 +27,15 @@ class GameRepositoryTest {
     @BeforeEach
     void setUp() {
         Team testTeam = new Team("코드스쿼드");
-        testTeam.addPlayer(new Player("아이작", 1));
-        testTeam.addPlayer(new Player("쏭", 2));
-        testTeam.addPlayer(new Player("쑤", 3));
+        testTeam.addPlayer(1, new Player("아이작"));
+        testTeam.addPlayer(2, new Player("쏭"));
+        testTeam.addPlayer(3, new Player("쑤"));
         this.teamRepository.save(testTeam);
 
         Team testTeam2 = new Team("마스터즈");
-        testTeam2.addPlayer(new Player("호눅스", 1));
-        testTeam2.addPlayer(new Player("JK", 2));
-        testTeam2.addPlayer(new Player("크롱", 3));
+        testTeam2.addPlayer(1, new Player("호눅스"));
+        testTeam2.addPlayer(2, new Player("JK"));
+        testTeam2.addPlayer(3, new Player("크롱"));
         this.teamRepository.save(testTeam2);
     }
 

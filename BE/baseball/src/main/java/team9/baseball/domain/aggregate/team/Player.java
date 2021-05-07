@@ -12,10 +12,7 @@ public class Player {
 
     private String name;
 
-    private Integer uniformNumber;
-
-    public Player(String name, Integer uniformNumber) {
+    public Player(String name) {
         this.name = name;
-        this.uniformNumber = uniformNumber;
     }
 }

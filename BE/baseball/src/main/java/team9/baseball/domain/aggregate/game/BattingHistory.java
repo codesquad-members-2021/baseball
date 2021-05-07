@@ -23,12 +23,9 @@ public class BattingHistory {
 
     private int out;
 
-    private String keyInGame;
-
     public BattingHistory(Integer batterTeamId, Integer batterUniformNumber) {
         this.batterTeamId = batterTeamId;
         this.batterUniformNumber = batterUniformNumber;
-        this.keyInGame = acquireKeyInGame(batterTeamId, batterUniformNumber);
     }
 
     public static String acquireKeyInGame(Integer batterTeamId, Integer batterUniformNumber) {

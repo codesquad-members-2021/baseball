@@ -29,15 +29,20 @@ public class Team {
         this.name = name;
     }
 
-    public int getFirstPlayerUniformNumber() {
-        Player firstPlayer = playerMap.values().stream().findFirst().
-                orElseThrow(() -> new NotFoundException("팀에 속한 선수가 없습니다."));
-
-        return firstPlayer.getUniformNumber();
+    public String getPlayerName(int uniform_number) {
+        if (!playerMap.containsKey(uniform_number)) {
+            throw new NotFoundException(this.id + "팀에 " + uniform_number + "번호의 선수가 없습니다.");
+        }
+        return playerMap.get(uniform_number).getName();
     }
 
-    public void addPlayer(Player player) {
-        playerMap.put(player.getUniformNumber(), player);
+    public int getFirstPlayerUniformNumber() {
+        return playerMap.keySet().stream().findFirst().
+                orElseThrow(() -> new NotFoundException("팀에 속한 선수가 없습니다."));
+    }
+
+    public void addPlayer(int uniform_number, Player player) {
+        playerMap.put(uniform_number, player);
     }
 
     public int getNextPlayerUniformNumber(int currentUniformNumber) {
@@ -45,8 +50,7 @@ public class Team {
             throw new NotFoundException("팀에 속한 선수가 없습니다.");
         }
 
-        List<Integer> playerList = playerMap.values().stream().map(x -> x.getUniformNumber())
-                .sorted().collect(Collectors.toList());
+        List<Integer> playerList = playerMap.keySet().stream().sorted().collect(Collectors.toList());
 
         int currentIndex = playerList.indexOf(currentUniformNumber);
         int nextIndex = (currentIndex + 1) % playerList.size();

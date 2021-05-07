@@ -24,8 +24,6 @@ public class Inning {
 
     private int score;
 
-    private String keyInGame;
-
     @MappedCollection(idColumn = "inning_id", keyColumn = "index_in_inning")
     List<PitchHistory> pitchHistoryList = new ArrayList<>();
 
@@ -33,7 +31,6 @@ public class Inning {
         this.inning = inning;
         this.halves = halves;
         this.score = 0;
-        this.keyInGame = acquireKeyInGame(inning, halves);
     }
 
     public void plusScore() {

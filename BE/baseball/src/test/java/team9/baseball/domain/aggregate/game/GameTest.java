@@ -17,19 +17,19 @@ class GameTest {
     void setUp() {
         homeTeam = new Team("코드스쿼드");
         homeTeam.setId(1);
-        homeTeam.addPlayer(new Player("아이작", 1));
-        homeTeam.addPlayer(new Player("쏭", 2));
-        homeTeam.addPlayer(new Player("쑤", 3));
-        homeTeam.addPlayer(new Player("쿠퍼", 4));
-        homeTeam.addPlayer(new Player("우디", 5));
+        homeTeam.addPlayer(1, new Player("아이작"));
+        homeTeam.addPlayer(2, new Player("쏭"));
+        homeTeam.addPlayer(3, new Player("쑤"));
+        homeTeam.addPlayer(4, new Player("쿠퍼"));
+        homeTeam.addPlayer(5, new Player("우디"));
 
         awayTeam = new Team("마스터즈");
         awayTeam.setId(2);
-        awayTeam.addPlayer(new Player("호눅스", 1));
-        awayTeam.addPlayer(new Player("JK", 2));
-        awayTeam.addPlayer(new Player("크롱", 3));
-        awayTeam.addPlayer(new Player("세라", 4));
-        awayTeam.addPlayer(new Player("헤드", 5));
+        awayTeam.addPlayer(1, new Player("호눅스"));
+        awayTeam.addPlayer(2, new Player("JK"));
+        awayTeam.addPlayer(3, new Player("크롱"));
+        awayTeam.addPlayer(4, new Player("세라"));
+        awayTeam.addPlayer(5, new Player("헤드"));
 
         game = new Game(awayTeam, homeTeam);
     }

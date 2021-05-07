@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
-import team9.baseball.domain.aggregate.team.Player;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.enums.Halves;
 import team9.baseball.domain.enums.PitchResult;
+import team9.baseball.exception.NotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,35 +54,34 @@ public class Game {
     public Game(Team awayTeam, Team homeTeam) {
         this.awayTeamId = awayTeam.getId();
         this.homeTeamId = homeTeam.getId();
-        this.pitcherUniformNumber = awayTeam.getFirstPlayerUniformNumber();
-        this.batterUniformNumber = homeTeam.getFirstPlayerUniformNumber();
-
         initializeBattingHistory(awayTeam);
         initializeBattingHistory(homeTeam);
 
+        this.pitcherUniformNumber = homeTeam.getFirstPlayerUniformNumber();
+        sendBatterOnPlate(awayTeamId, awayTeam.getFirstPlayerUniformNumber());
+
         this.currentInning = 1;
         this.currentHalves = Halves.TOP;
-        Inning firstInning = new Inning(currentInning, currentHalves);
-        this.inningMap.put(firstInning.getKeyInGame(), firstInning);
+        this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
     }
 
     private void initializeBattingHistory(Team team) {
-        for (Player player : team.getPlayerMap().values()) {
-            BattingHistory battingHistory = new BattingHistory(team.getId(), player.getUniformNumber());
-            this.battingHistoryMap.put(battingHistory.getKeyInGame(), battingHistory);
+        for (Integer uniform_number : team.getPlayerMap().keySet()) {
+            String key = BattingHistory.acquireKeyInGame(team.getId(), uniform_number);
+            BattingHistory battingHistory = new BattingHistory(team.getId(), uniform_number);
+            this.battingHistoryMap.put(key, battingHistory);
         }
     }
 
     public void proceedStrike(Team awayTeam, Team homeTeam) {
-        //카운트 증가
-        this.strikeCount++;
-
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
-                acquireAttackTeamId(), batterUniformNumber, PitchResult.STRIKE);
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.STRIKE, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
+        //카운트 증가
+        this.strikeCount++;
         //삼진 아웃 처리
         if (strikeCount == 3) {
             proceedOut(awayTeam, homeTeam);
@@ -90,41 +89,72 @@ public class Game {
     }
 
     public void proceedBall(Team awayTeam, Team homeTeam) {
-        //카운트 증가
-        this.ballCount++;
-
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
-                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL);
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
+        //카운트 증가
+        this.ballCount++;
         //볼넷일 경우 출루하고 다음 타자 등판
         if (ballCount == 4) {
             sendBatterOnBase();
 
             Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
-            sendBatterOnPlate(attackTeam);
+            sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
         }
     }
 
     public void proceedHit(Team awayTeam, Team homeTeam) {
-        Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
+        //기록할 pitch history 생성
+        PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.HIT, this.strikeCount, this.ballCount);
+        //현재 이닝에 pitch history 기록
+        acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
         //타자의 battingHistory 에 타수 카운트 추가
-        String battingHistoryKey = BattingHistory.acquireKeyInGame(attackTeam.getId(), batterUniformNumber);
-        BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
+        Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
+        BattingHistory battingHistory = acquireBattingHistory(attackTeam.getId(), batterUniformNumber);
         battingHistory.plusHits();
 
         //타자 출루
         sendBatterOnBase();
 
         //타석에 다음 타자 등판
-        sendBatterOnPlate(attackTeam);
+        sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
     }
 
     public int getTotalScore(Halves halves) {
         return inningMap.values().stream().filter(x -> x.getHalves() == halves).mapToInt(x -> x.getScore()).sum();
+    }
+
+    public Team acquireAttackTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return awayTeam;
+        }
+        return homeTeam;
+    }
+
+    public Team acquireDefenseTeam(Team awayTeam, Team homeTeam) {
+        if (currentHalves == Halves.TOP) {
+            return homeTeam;
+        }
+        return awayTeam;
+    }
+
+    public Inning acquireCurrentInning() {
+        String currentInningKey = Inning.acquireKeyInGame(currentInning, currentHalves);
+        return inningMap.get(currentInningKey);
+    }
+
+    public BattingHistory acquireBattingHistory(int batterTeamId, int batterUniformNumber) {
+        String key = BattingHistory.acquireKeyInGame(batterTeamId, batterUniformNumber);
+        if (!battingHistoryMap.containsKey(key)) {
+            throw new NotFoundException(String.format("%d번 게임방에 %d팀 %d 번호 선수에 대한 기록이 없습니다.",
+                    this.id, batterTeamId, batterUniformNumber));
+        }
+        return battingHistoryMap.get(key);
     }
 
     private void proceedOut(Team awayTeam, Team homeTeam) {
@@ -144,7 +174,7 @@ public class Game {
 
         //타석에 다음 타자 등판
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
-        sendBatterOnPlate(attackTeam);
+        sendBatterOnPlate(attackTeam.getId(), attackTeam.getNextPlayerUniformNumber(batterUniformNumber));
     }
 
     private void sendBatterOnBase() {
@@ -159,7 +189,7 @@ public class Game {
         this.base1UniformNumber = this.batterUniformNumber;
     }
 
-    private void goToNextInning(Team homeTeam, Team awayTeam) {
+    private void goToNextInning(Team awayTeam, Team homeTeam) {
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
@@ -172,10 +202,9 @@ public class Game {
         } else {
             this.currentHalves = Halves.BOTTOM;
         }
-        Inning inning = new Inning(currentInning, currentHalves);
-        this.inningMap.put(inning.getKeyInGame(), inning);
+        this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
 
-        //현재 이닝의 공격팀 수비팀 설정
+        //현재 이닝의 공격팀 수비팀 확인
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
         Team defenseTeam = acquireDefenseTeam(awayTeam, homeTeam);
 
@@ -184,42 +213,21 @@ public class Game {
         //공격팀 타자 설정 (직전 투수의 다음 등번호가 타자가 됨)
         int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
-        this.batterUniformNumber = nextBatterUniformNumber;
+        sendBatterOnPlate(attackTeam.getId(), nextBatterUniformNumber);
     }
 
-    private void sendBatterOnPlate(Team attackTeam) {
+    private void sendBatterOnPlate(int batterTeamId, int nextBatterUniformNumber) {
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
 
         //타석에 다음 선수 등판
-        int batterTeamId = attackTeam.getId();
-        int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(batterUniformNumber);
         this.batterUniformNumber = nextBatterUniformNumber;
 
         //선수의 BatterHistory 에 타석 카운트 추가
         String battingHistoryKey = BattingHistory.acquireKeyInGame(batterTeamId, batterUniformNumber);
         BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
         battingHistory.plusAppear();
-    }
-
-    private Team acquireAttackTeam(Team awayTeam, Team homeTeam) {
-        if (currentHalves == Halves.TOP) {
-            return awayTeam;
-        }
-        return homeTeam;
-    }
-
-    private Team acquireDefenseTeam(Team awayTeam, Team homeTeam) {
-        if (currentHalves == Halves.TOP) {
-            return homeTeam;
-        }
-        return awayTeam;
-    }
-
-    private Inning acquireCurrentInning() {
-        String currentInningKey = Inning.acquireKeyInGame(currentInning, currentHalves);
-        return inningMap.get(currentInningKey);
     }
 
     private int acquireAttackTeamId() {

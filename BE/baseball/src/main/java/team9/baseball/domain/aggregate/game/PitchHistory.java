@@ -24,12 +24,19 @@ public class PitchHistory {
 
     private PitchResult result;
 
+    private int strikeCount;
+
+    private int ballCount;
+
     public PitchHistory(Integer pitcherTeamId, Integer pitcherUniformNumber,
-                        Integer batterTeamId, Integer batterUniformNumber, PitchResult result) {
+                        Integer batterTeamId, Integer batterUniformNumber, PitchResult result,
+                        int strikeCount, int ballCount) {
         this.pitcherTeamId = pitcherTeamId;
         this.pitcherUniformNumber = pitcherUniformNumber;
         this.batterTeamId = batterTeamId;
         this.batterUniformNumber = batterUniformNumber;
         this.result = result;
+        this.strikeCount = strikeCount;
+        this.ballCount = ballCount;
     }
 }
