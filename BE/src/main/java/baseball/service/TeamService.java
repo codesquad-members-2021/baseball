@@ -2,7 +2,7 @@ package baseball.service;
 
 import baseball.domain.Member;
 import baseball.domain.Record;
-import baseball.domain.RecordMember;
+import baseball.service.dto.RecordDTO;
 import baseball.domain.Team;
 import baseball.repository.TeamRepository;
 import baseball.service.dto.RequestTeamDTO;
@@ -52,14 +52,13 @@ public class TeamService {
         Team team = teamRepository.findById(teamId).orElseThrow(NoSuchElementException::new);
         Set<Member> members = team.getMembers();
 
-        Set<RecordMember> recordMembers = new HashSet<>();
+        Set<RecordDTO> recordDTOS = new HashSet<>();
         for (Member member : members) {
-            if(member.hasRecord()) {
-                RecordMember recordMember = teamRepository.findRecordByMemberId(member.getId()).get();
-                recordMembers.add(recordMember);
+            if (member.hasRecord()) {
+                RecordDTO recordDTO = teamRepository.findRecordByMemberId(member.getId()).get();
+                recordDTOS.add(recordDTO);
             }
         }
-
-        return new TeamRecordsDTO(teamId, recordMembers);
+        return new TeamRecordsDTO(teamId, recordDTOS);
     }
 }

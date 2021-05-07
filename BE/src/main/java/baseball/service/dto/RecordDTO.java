@@ -1,6 +1,6 @@
-package baseball.domain;
+package baseball.service.dto;
 
-public class RecordMember {
+public class RecordDTO {
 
     private String name;
     private String position;
@@ -9,7 +9,7 @@ public class RecordMember {
     private int out;
     private double average;
 
-    public RecordMember(String name, String position, int atBat, int hit, int out, double average) {
+    public RecordDTO(String name, String position, int atBat, int hit, int out, double average) {
         this.name = name;
         this.position = position;
         this.atBat = atBat;
