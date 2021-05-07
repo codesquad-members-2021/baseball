@@ -23,6 +23,8 @@
 		8872EBEE2640EFED00EDB038 /* GameListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8872EBEC2640EFED00EDB038 /* GameListCollectionViewCell.xib */; };
 		8872EBF826412C4700EDB038 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBF726412C4700EDB038 /* Game.swift */; };
 		8872EBFC26412C6600EDB038 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EBFB26412C6600EDB038 /* GameList.swift */; };
+		8872EC0F2643BF6200EDB038 /* BallCountCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EC0D2643BF6200EDB038 /* BallCountCollectionViewCell.swift */; };
+		8872EC102643BF6200EDB038 /* BallCountCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		8872EBEC2640EFED00EDB038 /* GameListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameListCollectionViewCell.xib; sourceTree = "<group>"; };
 		8872EBF726412C4700EDB038 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		8872EBFB26412C6600EDB038 /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
+		8872EC0D2643BF6200EDB038 /* BallCountCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCountCollectionViewCell.swift; sourceTree = "<group>"; };
+		8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallCountCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,8 @@
 				1ED6F9442643837300FEFADF /* PlayView.swift */,
 				1ED6F946264389B400FEFADF /* DiamondView.swift */,
 				1ED6F94826438E9300FEFADF /* HomeView.swift */,
+				8872EC0D2643BF6200EDB038 /* BallCountCollectionViewCell.swift */,
+				8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 			files = (
 				8872EBEE2640EFED00EDB038 /* GameListCollectionViewCell.xib in Resources */,
 				8872EBAD263FD2FC00EDB038 /* LaunchScreen.storyboard in Resources */,
+				8872EC102643BF6200EDB038 /* BallCountCollectionViewCell.xib in Resources */,
 				8872EBAA263FD2FC00EDB038 /* Assets.xcassets in Resources */,
 				8872EBA8263FD2F900EDB038 /* Main.storyboard in Resources */,
 			);
@@ -268,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8872EBED2640EFED00EDB038 /* GameListCollectionViewCell.swift in Sources */,
+				8872EC0F2643BF6200EDB038 /* BallCountCollectionViewCell.swift in Sources */,
 				1ED6F947264389B400FEFADF /* DiamondView.swift in Sources */,
 				8872EBE42640EAF300EDB038 /* PlayViewController.swift in Sources */,
 				8872EBF826412C4700EDB038 /* Game.swift in Sources */,
