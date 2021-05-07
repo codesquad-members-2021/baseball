@@ -2,6 +2,8 @@ package baseball.service;
 
 import baseball.domain.Member;
 import baseball.domain.Record;
+import baseball.exception.RecordDTONotFoundException;
+import baseball.exception.TeamNotFoundException;
 import baseball.service.dto.RecordDTO;
 import baseball.domain.Team;
 import baseball.repository.TeamRepository;
@@ -42,20 +44,21 @@ public class TeamService {
     }
 
     public void insertRecord(Long teamId, Long memberId, int atBat, int hit, int out) {
-        Team team = teamRepository.findById(teamId).orElseThrow(NoSuchElementException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
         Member member = team.getMemberById(memberId);
         member.setRecord(new Record(atBat, hit, out));
         teamRepository.save(team);
     }
 
     public TeamRecordsDTO getRecordsOfTeam(Long teamId) {
-        Team team = teamRepository.findById(teamId).orElseThrow(NoSuchElementException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
         Set<Member> members = team.getMembers();
 
         Set<RecordDTO> recordDTOS = new HashSet<>();
         for (Member member : members) {
             if (member.hasRecord()) {
-                RecordDTO recordDTO = teamRepository.findRecordByMemberId(member.getId()).get();
+                RecordDTO recordDTO = teamRepository.findRecordByMemberId(member.getId())
+                        .orElseThrow(RecordDTONotFoundException::new);
                 recordDTOS.add(recordDTO);
             }
         }

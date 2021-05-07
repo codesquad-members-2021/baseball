@@ -3,6 +3,8 @@ package baseball.service;
 import baseball.domain.Game;
 import baseball.domain.Score;
 import baseball.domain.Team;
+import baseball.exception.GameNotFoundException;
+import baseball.exception.TeamNotFoundException;
 import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
 import baseball.service.dto.GameDTO;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class GameService {
@@ -36,8 +37,8 @@ public class GameService {
 
         for (Game game : games) {
             Long id = game.getId();
-            Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(NoSuchElementException::new);
-            Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(NoSuchElementException::new);
+            Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+            Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
 
             GameDTO gameDTO = new GameDTO(id, homeTeam.getName(), awayTeam.getName());
             gameDTOs.add(gameDTO);
@@ -49,8 +50,8 @@ public class GameService {
         List<Game> games = new ArrayList<>();
 
         for (long i = 1; i <= NUMBER_OF_TEAM; i += 2) {
-            Team homeTeam = teamRepository.findById(i).orElseThrow(NoSuchElementException::new);
-            Team awayTeam = teamRepository.findById(i + 1).orElseThrow(NoSuchElementException::new);
+            Team homeTeam = teamRepository.findById(i).orElseThrow(TeamNotFoundException::new);
+            Team awayTeam = teamRepository.findById(i + 1).orElseThrow(TeamNotFoundException::new);
 
             Game game = new Game(homeTeam.getId(), awayTeam.getId());
             games.add(game);
@@ -59,7 +60,7 @@ public class GameService {
     }
 
     public void saveScore(Long teamId, int inningNumber, int score) {
-        Team team = teamRepository.findById(teamId).orElseThrow(NoSuchElementException::new);
+        Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
 
         Score newScore = new Score(inningNumber, score);
         team.setScore(newScore);
@@ -68,9 +69,9 @@ public class GameService {
     }
 
     public GameScoreDTO convertToGameScoreDTO(Long gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(NoSuchElementException::new);
-        Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(NoSuchElementException::new);
-        Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(NoSuchElementException::new);
+        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
+        Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
 
         return new GameScoreDTO(gameId, homeTeam, awayTeam);
     }
