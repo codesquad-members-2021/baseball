@@ -36,7 +36,10 @@ create table game
     current_hitter       int references player (id),
     is_occupied          bool        not null,
     home_team            int references team_participating_in_game (id),
-    away_team            int references team_participating_in_game (id)
+    away_team            int references team_participating_in_game (id),
+    first_base           int references player (id),
+    second_base          int references player (id),
+    third_base           int references player (id)
 );
 
 create table inning

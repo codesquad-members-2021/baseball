@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class Game {
 
+    private static final int NO_PLAYER = -1;
+
     @Id
     private Integer id;
     private String gameTitle;
@@ -20,6 +22,9 @@ public class Game {
     private int currentHitter;
     private boolean isOccupied;
     private Set<TeamParticipatingInGame> teams = new HashSet<>();
+    private int firstBase;
+    private int secondBase;
+    private int thirdBase;
 
     protected Game() {
     }
@@ -35,8 +40,11 @@ public class Game {
         this.currentPitcher = builder.currentPitcher;
         this.currentHitter = builder.currentHitter;
         this.isOccupied = builder.isOccupied;
-        teams.add(builder.homeTeam);
-        teams.add(builder.awayTeam);
+        this.teams.add(builder.homeTeam);
+        this.teams.add(builder.awayTeam);
+        this.firstBase = builder.firstBase;
+        this.secondBase = builder.secondBase;
+        this.thirdBase = builder.thirdBase;
     }
 
     public static Game createGame(String gameTitle, TeamParticipatingInGame homeTeam, TeamParticipatingInGame awayTeam) {
@@ -49,6 +57,9 @@ public class Game {
                 .isTop(true)
                 .homeTeam(homeTeam)
                 .awayTeam(awayTeam)
+                .firstBase(NO_PLAYER)
+                .secondBase(NO_PLAYER)
+                .thirdBase(NO_PLAYER)
                 .build();
     }
 
@@ -80,6 +91,18 @@ public class Game {
 
     public int sizeOfAwayTeam() {
         return awayTeam().sizeOfPlayer();
+    }
+
+    public boolean isFirstBaseEmpty() {
+        return firstBase == NO_PLAYER;
+    }
+
+    public boolean isSecondBaseEmpty() {
+        return secondBase == NO_PLAYER;
+    }
+
+    public boolean isThirdBaseEmpty() {
+        return thirdBase == NO_PLAYER;
     }
 
     public Integer getId() {
@@ -116,6 +139,9 @@ public class Game {
         private boolean isOccupied;
         private TeamParticipatingInGame homeTeam;
         private TeamParticipatingInGame awayTeam;
+        private int firstBase;
+        private int secondBase;
+        private int thirdBase;
 
         public Builder id(Integer value) {
             id = value;
@@ -174,6 +200,21 @@ public class Game {
 
         public Builder awayTeam(TeamParticipatingInGame value) {
             awayTeam = value;
+            return this;
+        }
+
+        public Builder firstBase(int value) {
+            firstBase = value;
+            return this;
+        }
+
+        public Builder secondBase(int value) {
+            secondBase = value;
+            return this;
+        }
+
+        public Builder thirdBase(int value) {
+            thirdBase = value;
             return this;
         }
 

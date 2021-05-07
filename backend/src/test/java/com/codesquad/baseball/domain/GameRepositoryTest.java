@@ -58,6 +58,15 @@ class GameRepositoryTest {
         assertThat(game.isAvailable()).isTrue();
     }
 
+    @Test
+    @DisplayName("생성된 게임의 초기상태의 1,2,3루는 비어있어야 합니다")
+    void testBaseState() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.isFirstBaseEmpty()).isTrue();
+        assertThat(game.isSecondBaseEmpty()).isTrue();
+        assertThat(game.isThirdBaseEmpty()).isTrue();
+    }
+
     private Game createGame(String gameTitle) {
         Team teamA = createTeam(A_TEAM_NAME);
         Team teamB = createTeam(B_TEAM_NAME);
