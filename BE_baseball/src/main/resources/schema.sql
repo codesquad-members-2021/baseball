@@ -19,8 +19,6 @@ DESC `match`;
 
 drop table IF EXISTS `board`;
 
-
-
 CREATE TABLE IF NOT EXISTS `baseball`.`board`
 (
     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -42,5 +40,23 @@ DESC `board`;
 
 --
 --
+
+
+
+drop table IF EXISTS `team`;
+
+CREATE TABLE IF NOT EXISTS `baseball`.`team`
+(
+    `team_id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `team_name` VARCHAR(45) NOT NULL,
+    `win` INT NOT NULL,
+    `lose` INT NOT NULL,
+    `draw` INT NOT NULL,
+    `victory_point` INT NOT NULL
+);
+
+ALTER TABLE `team` CONVERT TO character SET utf8;
+DESC `team`;
+
 
 show tables;
