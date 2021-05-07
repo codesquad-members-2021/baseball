@@ -28,7 +28,9 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
         guard let url = config.authenticate()?.appending([URLQueryItem(name: "redirect_uri", value: "baseball://")]) else { return }
         webAuthSession = ASWebAuthenticationSession.init(url: url, callbackURLScheme: callbackUrlScheme, completionHandler: { (callBack:URL?, error:Error?) in
             if error != nil {
-                print(NetworkingError.ASWebAuthenticationSessionError.rawValue)
+                #if DEBUG
+                NSLog(NetworkingError.ASWebAuthenticationSessionError.rawValue)
+                #endif
                 return
             }
             guard let successURL = callBack else { return }
@@ -41,7 +43,9 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
                     vc.user = userDTO
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    #if DEBUG
+                    NSLog(error.localizedDescription)
+                    #endif
                 }
             }
         })
@@ -57,3 +61,11 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
     }
 }
 
+extension OAuthViewController {
+    func getClientID() -> String {
+        guard let path = Bundle.main.path(forResource: "NetworkElements", ofType: "plist") else { return "" }
+        let plist = NSDictionary(contentsOfFile: path)
+        guard let key = plist?.object(forKey: "ClientID") as? String else { return "" }
+        return key
+    }
+}
