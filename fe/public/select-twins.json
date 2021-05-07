@@ -1,0 +1,90 @@
+{
+    "team_info": [
+        {
+            "teamName": "Twins",
+            "selected": true,
+            "isHome": true,
+            "player": [
+                {
+                    "Name": "얘는투수",
+                    "isPitcher": true
+                },
+                {
+                    "Name": "Q",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "Eamon",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "헷갈릴",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                }
+            ]
+        },
+        {
+            "teamName": "Codesquad",
+            "selected": false,
+            "isHome": false,
+            "player": [
+                {
+                    "Name": "호눅스",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "Dico",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "Kyle",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "성",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "제이슨",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "네이버간제이슨",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                },
+                {
+                    "Name": "류현진",
+                    "isPitcher": false
+                }
+            ]
+        }
+    ]
+}
