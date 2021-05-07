@@ -43,4 +43,21 @@ select * from board;
 
 
 
-(1,'BOT/HOME',0,0,0,0,0,'kim','dong');
+
+-- ----------------------------------------------------------
+-- team 관련 데이터
+-- Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants;
+DESC `team`;
+-- DELETE FROM `team` WHERE team_id = *;
+INSERT INTO `team`(`team_id`,`team_name`,`win`,`lose`,`draw`,`victory_point`) values
+(1,'Tigers',10,10,2,10*3+2),
+(2,'Bears',1,19,2,1*3+2),
+(3,'Twins',3,17,2,3*3+2),
+(4,'Dinos',5,15,2,5*3+2),
+(5,'Lions',7,13,2,7*3+2),
+(6,'Eagles',9,11,2,9*3+2),
+(7,'Giants',12,8,2,12*3+2);
+SELECT * FROM team;
+
+
+-- ----------------------------------------------------------
