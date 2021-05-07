@@ -75,15 +75,14 @@ public class Game {
     }
 
     public void proceedStrike(Team awayTeam, Team homeTeam) {
-        //카운트 증가
-        this.strikeCount++;
-
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
-                acquireAttackTeamId(), batterUniformNumber, PitchResult.STRIKE);
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.STRIKE, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
+        //카운트 증가
+        this.strikeCount++;
         //삼진 아웃 처리
         if (strikeCount == 3) {
             proceedOut(awayTeam, homeTeam);
@@ -91,15 +90,14 @@ public class Game {
     }
 
     public void proceedBall(Team awayTeam, Team homeTeam) {
-        //카운트 증가
-        this.ballCount++;
-
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
-                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL);
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
+        //카운트 증가
+        this.ballCount++;
         //볼넷일 경우 출루하고 다음 타자 등판
         if (ballCount == 4) {
             sendBatterOnBase();
@@ -110,11 +108,15 @@ public class Game {
     }
 
     public void proceedHit(Team awayTeam, Team homeTeam) {
-        Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
+        //기록할 pitch history 생성
+        PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL, this.strikeCount, this.ballCount);
+        //현재 이닝에 pitch history 기록
+        acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
         //타자의 battingHistory 에 타수 카운트 추가
-        String battingHistoryKey = BattingHistory.acquireKeyInGame(attackTeam.getId(), batterUniformNumber);
-        BattingHistory battingHistory = battingHistoryMap.get(battingHistoryKey);
+        Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
+        BattingHistory battingHistory = acquireBattingHistory(attackTeam.getId(), batterUniformNumber);
         battingHistory.plusHits();
 
         //타자 출루
