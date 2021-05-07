@@ -10,18 +10,19 @@ import RxSwift
 import Alamofire
 
 class NetworkService {
-    func get<T: Codable>() -> Observable<T> {
+    func get<T: Codable>(path: APIPath, id: String? = nil) -> Observable<T> {
         return Observable<T>.create({ observer in
-            let endPoint = EndPoint.init(method: .get, path: .test)
+            let endPoint = EndPoint.init(method: .get, path: path, id: id)
             
             var request : URLRequest {
-                var request = URLRequest.init(url: URL(string: "")!)
+                
                 do {
-                    request = try endPoint.asURLRequest()
+                    let request = try endPoint.asURLRequest()
+                    return request
                 } catch {
                     assertionFailure("NetworkService.get.request")
                 }
-                return request
+                return URLRequest.init(url: URL(string: "")!)
             }
             
             let dataRequest = AF.request(request)
@@ -30,6 +31,7 @@ class NetworkService {
                 switch response.result {
                 case .success(let data):
                     do {
+                        print(T.self)
                         let model : T = try JSONDecoder().decode(T.self, from: data)
                         observer.onNext(model)
                     } catch  {
@@ -40,7 +42,6 @@ class NetworkService {
                     observer.onError(error)
                 }
             }
-            
             
             return Disposables.create {
                 dataRequest.cancel()

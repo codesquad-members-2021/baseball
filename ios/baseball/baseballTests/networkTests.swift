@@ -11,7 +11,7 @@ import XCTest
 class networkTests: XCTestCase {
 
     override func setUp() {
-        <#code#>
+        
     }
     
 }
