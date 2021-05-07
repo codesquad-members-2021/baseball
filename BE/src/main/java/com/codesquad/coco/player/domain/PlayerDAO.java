@@ -11,24 +11,24 @@ import static com.codesquad.coco.utils.SQL.*;
 
 @Component
 public class PlayerDAO {
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate template;
     private PlayerMapper playerMapper = new PlayerMapper();
 
-    public PlayerDAO(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public PlayerDAO(NamedParameterJdbcTemplate template) {
+        this.template = template;
     }
 
     public List<Player> findByTeamName(String teamName) {
         MapSqlParameterSource parameter = new MapSqlParameterSource();
         parameter.addValue("teamName", teamName);
-        return namedParameterJdbcTemplate.query(FIND_PLAYER_BY_TEAM_NAME, parameter, playerMapper);
+        return template.query(FIND_PLAYER_BY_TEAM_NAME, parameter, playerMapper);
 
     }
 
     public Player findById(Long id) {
         MapSqlParameterSource parameter = new MapSqlParameterSource();
         parameter.addValue("id", id);
-        return namedParameterJdbcTemplate.queryForObject(FIND_PLAYER_BY_PLAYER_ID, parameter, playerMapper);
+        return template.queryForObject(FIND_PLAYER_BY_PLAYER_ID, parameter, playerMapper);
     }
 
     public void updateRecord(Record record) {
@@ -38,6 +38,6 @@ public class PlayerDAO {
         parameter.addValue("outs", record.getOuts());
         parameter.addValue("average", record.getAverage());
         parameter.addValue("id", record.getId());
-        namedParameterJdbcTemplate.update(UPDATE_PLAYER_RECORD, parameter);
+        template.update(UPDATE_PLAYER_RECORD, parameter);
     }
 }

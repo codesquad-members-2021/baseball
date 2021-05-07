@@ -18,12 +18,12 @@ public class ScoreBoardDAO {
 
 
     private InningsDAO inningsDAO;
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate template;
     private ScoreBoardMapper scoreBoardMapper = new ScoreBoardMapper();
 
-    public ScoreBoardDAO(InningsDAO inningsDAO, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public ScoreBoardDAO(InningsDAO inningsDAO, NamedParameterJdbcTemplate template) {
         this.inningsDAO = inningsDAO;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.template = template;
     }
 
     public Long save(ScoreBoard board) {
@@ -32,7 +32,7 @@ public class ScoreBoardDAO {
         parameter.addValue("game", board.getGameId());
         parameter.addValue("team", board.teamName());
 
-        namedParameterJdbcTemplate.update(SCORE_BOARD_SAVE_SQL, parameter, keyHolder);
+        template.update(SCORE_BOARD_SAVE_SQL, parameter, keyHolder);
 
         return keyHolder.getKey().longValue();
     }
@@ -42,7 +42,7 @@ public class ScoreBoardDAO {
         parameter.addValue("id", id);
         parameter.addValue("teamName", teamName);
 
-        ScoreBoard board = namedParameterJdbcTemplate.queryForObject(FIND_SCORE_BOARD_SQL, parameter, scoreBoardMapper);
+        ScoreBoard board = template.queryForObject(FIND_SCORE_BOARD_SQL, parameter, scoreBoardMapper);
         List<Innings> innings = inningsDAO.findAllById(board.getId());
         innings.forEach(board::addInnings);
         return board;
@@ -52,7 +52,7 @@ public class ScoreBoardDAO {
         MapSqlParameterSource parameter = new MapSqlParameterSource();
         parameter.addValue("id", id);
 
-        List<ScoreBoard> scoreBoards = namedParameterJdbcTemplate.query(FIND_SCORE_BOARDS_SQL, parameter, scoreBoardMapper);
+        List<ScoreBoard> scoreBoards = template.query(FIND_SCORE_BOARDS_SQL, parameter, scoreBoardMapper);
 
         for (ScoreBoard board : scoreBoards) {
             List<Innings> innings = inningsDAO.findAllById(board.getId());
@@ -68,7 +68,7 @@ public class ScoreBoardDAO {
         parameter.addValue("score", innings.getScore());
         parameter.addValue("score_board_key", innings.getInning());
 
-        namedParameterJdbcTemplate.update(INNINGS_SAVE_SQL, parameter);
+        template.update(INNINGS_SAVE_SQL, parameter);
     }
 
 }

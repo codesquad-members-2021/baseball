@@ -17,20 +17,20 @@ import static com.codesquad.coco.utils.SQL.FIND_ALL_TEAM_NAME;
 @Component
 public class TeamDAO {
 
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate template;
     private PlayerDAO playerDAO;
     private GameDAO gameDAO;
     private TeamNameMapper mapper = new TeamNameMapper();
 
-    public TeamDAO(NamedParameterJdbcTemplate namedParameterJdbcTemplate, PlayerDAO playerDAO, GameDAO gameDAO) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public TeamDAO(NamedParameterJdbcTemplate template, PlayerDAO playerDAO, GameDAO gameDAO) {
+        this.template = template;
         this.playerDAO = playerDAO;
         this.gameDAO = gameDAO;
     }
 
     public MainPageTeamDTO findAllName() {
         MainPageTeamDTO mainPageTeamDTO = new MainPageTeamDTO();
-        List<TeamNameDTO> query = namedParameterJdbcTemplate.query(FIND_ALL_TEAM_NAME, mapper);
+        List<TeamNameDTO> query = template.query(FIND_ALL_TEAM_NAME, mapper);
         query.forEach(mainPageTeamDTO::addTeamDTO);
         return mainPageTeamDTO;
     }
