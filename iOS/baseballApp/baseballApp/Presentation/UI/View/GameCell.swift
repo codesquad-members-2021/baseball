@@ -1,5 +1,4 @@
 import UIKit
-import RxSwift
 
 enum Identifier {
     static let GameCell = "GameCell"
@@ -11,7 +10,6 @@ class GameCell: UICollectionViewCell {
     @IBOutlet weak var gameIdLabel: UILabel!
     @IBOutlet weak var homeTeamLabel: UILabel!
     @IBOutlet weak var awayTeamLabel: UILabel!
-    private let disposBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
