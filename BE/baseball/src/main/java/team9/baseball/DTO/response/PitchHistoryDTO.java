@@ -8,7 +8,7 @@ import team9.baseball.domain.aggregate.game.PitchHistory;
 import team9.baseball.domain.aggregate.team.Team;
 
 @Getter
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PitchHistoryDTO {
     private PlayerDTO pitcher;

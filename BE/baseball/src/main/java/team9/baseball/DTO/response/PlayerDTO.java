@@ -7,7 +7,7 @@ import lombok.Getter;
 import team9.baseball.domain.aggregate.team.Team;
 
 @Getter
-@Builder
+@Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PlayerDTO {
     private int team_id;
