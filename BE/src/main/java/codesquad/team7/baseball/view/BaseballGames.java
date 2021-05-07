@@ -1,5 +1,7 @@
 package codesquad.team7.baseball.view;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import java.util.List;
 
 public class BaseballGames {

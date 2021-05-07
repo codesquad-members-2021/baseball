@@ -2,12 +2,14 @@ package codesquad.team7.baseball.view;
 
 import codesquad.team7.baseball.game.*;
 import codesquad.team7.baseball.team.Team;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonRootName("game")
+@JsonTypeName("game")
+@JsonTypeInfo(include= JsonTypeInfo.As.WRAPPER_OBJECT,use= JsonTypeInfo.Id.NAME)
 public class BaseballGameView {
 
     private final TeamInfoView home;

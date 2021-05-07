@@ -1,14 +1,21 @@
-= Getting Started With Spring REST Docs
+= Online Baseball Game
 
-This is an example output for a service running at http://localhost:8080:
+API 정리
 
-.request
-include::{snippets}/baseball/http-request.adoc[]
+./games request
+include::{snippets}/games/http-request.adoc[]
 
-.response
-include::{snippets}/baseball/http-response.adoc[]
+./games response
+include::{snippets}/games/http-response.adoc[]
 
-.Response Detail
-include::{snippets}/baseball/response-fields.adoc[]
+./games Response Detail
+include::{snippets}/games/response-fields.adoc[]
 
-As you can see the format is very simple, and in fact you always get the same message.
+./games/:gameId Request
+include::{snippets}/game/http-request.adoc[]
+
+./games/:gameId Response
+include::{snippets}/game/http-response.adoc[]
+
+./games/:gameId Response Detail
+include::{snippets}/game/response-fields.adoc[]

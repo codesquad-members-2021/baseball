@@ -55,7 +55,7 @@ public class Inning {
 
     public static Inning newInning() {
         return new Inning(
-                0,
+                1,
                 TeamEnum.AWAY,
                 0,
                 0,
