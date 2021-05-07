@@ -31,6 +31,7 @@
 		CEA5D6252643850700745C9D /* URLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D6242643850700745C9D /* URLManager.swift */; };
 		CEA5D62826438B2100745C9D /* PitchingHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */; };
 		CEA5D62B26438DA100745C9D /* testCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D62A26438DA100745C9D /* testCell.swift */; };
+		CEA5D634264407C400745C9D /* InningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D633264407C400745C9D /* InningInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		CEA5D6242643850700745C9D /* URLManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLManager.swift; sourceTree = "<group>"; };
 		CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchingHistoryDataSource.swift; sourceTree = "<group>"; };
 		CEA5D62A26438DA100745C9D /* testCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCell.swift; sourceTree = "<group>"; };
+		CEA5D633264407C400745C9D /* InningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InningInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				829CFA532640421900D9F635 /* MatchUpCell.swift */,
 				CEA5D62726438B2100745C9D /* PitchingHistoryDataSource.swift */,
 				CEA5D62A26438DA100745C9D /* testCell.swift */,
+				CEA5D633264407C400745C9D /* InningInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				CEA103D626413D8F008BA763 /* InningInfo.swift in Sources */,
 				82E20E1F2642692C006C80DF /* NetworkManager.swift in Sources */,
 				829CFA3D2640379B00D9F635 /* AppDelegate.swift in Sources */,
+				CEA5D634264407C400745C9D /* InningInfoView.swift in Sources */,
 				829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */,
 				CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */,
 				82FD39E92643DB71002AD9A2 /* TeamDTO.swift in Sources */,

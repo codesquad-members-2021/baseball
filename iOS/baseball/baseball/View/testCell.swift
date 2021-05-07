@@ -9,5 +9,4 @@ import UIKit
 
 class testCell: UITableViewCell {
     @IBOutlet weak var test1: UILabel!
-    
 }
