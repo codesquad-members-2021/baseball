@@ -5,12 +5,19 @@ const API = {
       const response = await fetch(`${url}/games`);
       return response.json();
     },
+  },
+  post: {},
+  patch: {
     initData: async gameId => {
-      console.log(gameId);
-      const response = await fetch(`${url}/games/${gameId}`);
+      const response = await fetch(`${url}/games/${gameId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'API-Key': 'secret',
+        },
+      });
       return response.json();
     },
   },
-  post: {},
 };
 export default API;

@@ -15,9 +15,11 @@ const StartPage = () => {
     <>
       <GameTitle />
       <MainMessage />
-      <ListWrapper>
-        <TeamList />
-      </ListWrapper>
+      <div>
+        <ListWrapper>
+          <TeamList />
+        </ListWrapper>
+      </div>
     </>
   );
 };
@@ -28,16 +30,21 @@ const Title = styled.div`
   font-size: ${theme.fontSize.XX_large};
   font-weight: ${theme.fontWeight.bold};
   color: ${theme.colors.white};
+  text-align: center;
+  margin: 20px 0;
 `;
 
 const Message = styled.div`
   font-size: ${theme.fontSize.large};
   font-weight: ${theme.fontWeight.normal};
   color: ${theme.colors.white};
+  text-align: center;
+  margin: 10px 0;
 `;
 
 const ListWrapper = styled.div`
   width: 370px;
+  margin: 0 auto;
   max-height: 295px;
   overflow: hidden;
 
