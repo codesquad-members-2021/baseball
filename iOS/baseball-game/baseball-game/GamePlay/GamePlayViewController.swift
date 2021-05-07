@@ -70,11 +70,11 @@ class GamePlayViewController: UIViewController {
     }
     
     private func updateViews(with gameManager: GameManagable) {
-        teamScoreView.updateTeamNames(from: gameManager.teams())
-        teamScoreView.updateScores(from: gameManager.scores())
-        inningLabel.text = gameManager.inning()
-        pitcherInfoView.updateLabels(from: gameManager.pitcher())
-        batterInfoView.updateLabels(from: gameManager.batter())
+        teamScoreView.updateTeamNames(from: gameManager.teamInfo())
+        teamScoreView.updateScores(from: gameManager.scoreInfo())
+        inningLabel.text = gameManager.inningInfo()
+        pitcherInfoView.updateLabels(from: gameManager.pitcherInfo())
+        batterInfoView.updateLabels(from: gameManager.batterInfo())
         
         guard let isUserDefense = gameManager.isUserDefense() else { return }
         

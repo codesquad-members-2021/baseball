@@ -9,16 +9,18 @@ import Foundation
 
 protocol GameManagable {
     
-    func teams() -> [String: String]
+    func teamInfo() -> [String: String]
     
-    func scores() -> [String: Int]
+    func scoreInfo() -> [String: Int]
     
-    func inning() -> String
+    func inningInfo() -> String
 
-    func pitcher() -> Player
+    func pitcherInfo() -> Player
     
-    func batter() -> Player
-
+    func batterInfo() -> Player
+    
+    func pitchInfo() -> [Pitch]
+    
     func isUserDefense() -> Bool?
     
 }

@@ -26,8 +26,8 @@ class GamePlayViewModel {
             .sink { error in
             self.error = error as? Error
         } receiveValue: { data in
-            self.pitches = data.turn.pitches
-            self.gameManager = GameManager(isUserHomeSide: self.isUserHomeSide, turn: data.turn)
+            self.gameManager = data
+            self.pitches = self.gameManager.pitchInfo()
         }.store(in: &cancelBag)
     }
     
