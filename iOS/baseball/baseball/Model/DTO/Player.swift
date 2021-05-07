@@ -8,7 +8,7 @@
 import Foundation
 
 struct Player: Codable {
-    let id: Int
-    let name: String
-    let AVG: Double
+    private let id: Int
+    private let name: String
+    private let AVG: Double
 }
