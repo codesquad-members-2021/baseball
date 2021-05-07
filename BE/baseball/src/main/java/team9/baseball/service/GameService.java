@@ -3,6 +3,7 @@ package team9.baseball.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team9.baseball.DTO.response.GameDescriptionDTO;
+import team9.baseball.DTO.response.GameHistoryDTO;
 import team9.baseball.DTO.response.GameStatusDTO;
 import team9.baseball.domain.aggregate.game.Game;
 import team9.baseball.domain.aggregate.team.Team;
@@ -67,6 +68,18 @@ public class GameService {
         Team homeTeam = getTeam(game.getHomeTeamId());
 
         return GameStatusDTO.of(game, awayTeam, homeTeam, user.getCurrentGameVenue());
+    }
+
+    public GameHistoryDTO getCurrentGameHistory(long userId) {
+        User user = getUser(userId);
+        if (user.getCurrentGameId() == null) {
+            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
+        }
+        Game game = getGame(user.getCurrentGameId());
+        Team awayTeam = getTeam(game.getAwayTeamId());
+        Team homeTeam = getTeam(game.getHomeTeamId());
+
+        return GameHistoryDTO.of(game, awayTeam, homeTeam);
     }
 
     public void createNewGame(long userId, int awayTeamId, int homeTeamId) {

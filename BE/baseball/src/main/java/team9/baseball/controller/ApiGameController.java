@@ -44,4 +44,9 @@ public class ApiGameController {
         gameService.applyPitchResult(1l, pitchResult);
         return ApiResult.succeed("OK");
     }
+
+    @GetMapping("/history")
+    public ApiResult getCurrentGameHistory() {
+        return ApiResult.succeed(gameService.getCurrentGameHistory(1l));
+    }
 }
