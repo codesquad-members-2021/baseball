@@ -2,6 +2,10 @@ package com.dong.baseball.Domain;
 
 import org.springframework.data.annotation.Id;
 
+enum Team_enum {
+    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants
+}
+
 public class Team {
     @Id
     private Long teamId;
@@ -59,7 +63,4 @@ public class Team {
     public void setVictoryPoint(int victoryPoint) {
         this.victoryPoint = victoryPoint;
     }
-}
-enum Team_enum {
-    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants;
 }
