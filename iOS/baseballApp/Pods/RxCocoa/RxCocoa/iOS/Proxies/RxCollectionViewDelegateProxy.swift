@@ -18,14 +18,14 @@ open class RxCollectionViewDelegateProxy
     , UICollectionViewDelegateFlowLayout {
 
     /// Typed parent object.
-    public weak private(set) var collectionView: UICollectionView?
+    public weak private(set) var mainCollectionView: UICollectionView?
 
     /// Initializes `RxCollectionViewDelegateProxy`
     ///
     /// - parameter collectionView: Parent object for delegate proxy.
-    public init(collectionView: UICollectionView) {
-        self.collectionView = collectionView
-        super.init(scrollView: collectionView)
+    public init(mainCollectionView: UICollectionView) {
+        self.mainCollectionView = mainCollectionView
+        super.init(scrollView: mainCollectionView)
     }
 }
 

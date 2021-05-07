@@ -21,10 +21,10 @@ class API {
     }
     
     
-    func get<T: Codable>(_ url: URL) -> Observable<T> {
+    private func get<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in
             AF.request(url, method: .get)
-                .responseDecodable(of: T.self, queue: DispatchQueue.global()) { response in
+                .responseDecodable(of: T.self) { response in
                     switch response.result {
                     case .failure(let error):
                         observer.onError(error)
@@ -38,10 +38,10 @@ class API {
         }
     }
     
-    func post<T: Codable>(_ url: URL) -> Observable<T> {
+    private func post<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in
             AF.request(url, method: .post)
-                .responseDecodable(of: T.self, queue: DispatchQueue.global()) { response in
+                .responseDecodable(of: T.self) { response in
                     switch response.result {
                     case .failure(let error):
                         observer.onError(error)
