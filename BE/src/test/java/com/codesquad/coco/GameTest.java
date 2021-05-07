@@ -39,11 +39,4 @@ public class GameTest {
         //todo : 게임은 만들어 지면서 스코어 보드도 만들어야 한다.
     }
 
-    @Test
-    @DisplayName("게임 찾기")
-    void showGame() {
-        Game bigMatch = gameDAO.findById(1L);
-
-        logger.info(bigMatch.toString());
-    }
 }
