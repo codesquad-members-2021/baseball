@@ -265,6 +265,7 @@ const SquadBoard = {
     opacity: 0.5;
     text-align: center;
     padding: 3px;
+
     &:hover {
       opacity: 0.7;
     }
