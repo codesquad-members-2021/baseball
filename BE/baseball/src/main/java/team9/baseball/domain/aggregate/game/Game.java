@@ -63,14 +63,14 @@ public class Game {
 
         this.currentInning = 1;
         this.currentHalves = Halves.TOP;
-        Inning firstInning = new Inning(currentInning, currentHalves);
-        this.inningMap.put(firstInning.getKeyInGame(), firstInning);
+        this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
     }
 
     private void initializeBattingHistory(Team team) {
         for (Player player : team.getPlayerMap().values()) {
+            String key = BattingHistory.acquireKeyInGame(team.getId(), player.getUniformNumber());
             BattingHistory battingHistory = new BattingHistory(team.getId(), player.getUniformNumber());
-            this.battingHistoryMap.put(battingHistory.getKeyInGame(), battingHistory);
+            this.battingHistoryMap.put(key, battingHistory);
         }
     }
 
@@ -203,8 +203,7 @@ public class Game {
         } else {
             this.currentHalves = Halves.BOTTOM;
         }
-        Inning inning = new Inning(currentInning, currentHalves);
-        this.inningMap.put(inning.getKeyInGame(), inning);
+        this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
 
         //현재 이닝의 공격팀 수비팀 설정
         Team attackTeam = acquireAttackTeam(awayTeam, homeTeam);
