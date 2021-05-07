@@ -21,7 +21,7 @@ public class PlayerService {
     }
 
     public void updateRecord(Record record, PlayerEventDTO eventDTO) {
-        record.update(eventDTO.getLog());
+        record.update(eventDTO.getRecord());
         playerDAO.updateRecord(record);
     }
 }

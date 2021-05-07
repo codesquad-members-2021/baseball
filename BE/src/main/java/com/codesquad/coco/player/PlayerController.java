@@ -16,7 +16,7 @@ public class PlayerController {
         this.playerService = playerService;
     }
 
-    @PutMapping("/players/{playerId}/log")
+    @PutMapping("/players/{playerId}/record")
     @ResponseStatus(HttpStatus.OK)
     public void playerEvent(@PathVariable Long playerId, @RequestBody PlayerEventDTO eventDTO) {
         Player player = playerService.findById(playerId);

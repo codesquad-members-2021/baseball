@@ -1,12 +1,12 @@
 package com.codesquad.coco.player.domain;
 
-public enum LogType {
-    HITS("안타"),
-    OUT("아웃");
+public enum RecordType {
+    HITS("hits"),
+    OUT("out");
 
     private String log;
 
-    LogType(String log) {
+    RecordType(String log) {
         this.log = log;
     }
 }

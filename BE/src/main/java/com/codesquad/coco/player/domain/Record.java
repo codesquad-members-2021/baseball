@@ -51,12 +51,12 @@ public class Record {
                 '}';
     }
 
-    public void update(String log) {
+    public void update(RecordType log) {
         this.atBat++;
-        if (log.equals("안타")) {
+        if (log == RecordType.HITS) {
             this.hits++;
         }
-        if (log.equals("아웃")) {
+        if (log == RecordType.OUT) {
             this.outs++;
         }
         this.average = (double) hits / atBat;
