@@ -12,6 +12,9 @@
 		BD8A23772643C73A00828432 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8A23762643C73A00828432 /* Network.swift */; };
 		BD8A237A2644F8EB00828432 /* PlayerInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8A23782644F8EB00828432 /* PlayerInformationCell.swift */; };
 		BD8A237B2644F8EB00828432 /* PlayerInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8A23792644F8EB00828432 /* PlayerInformationCell.xib */; };
+		BD8A237E264508F800828432 /* BallCountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8A237C264508F800828432 /* BallCountCell.swift */; };
+		BD8A237F264508F800828432 /* BallCountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD8A237D264508F800828432 /* BallCountCell.xib */; };
+		BD8A238126450B8E00828432 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8A238026450B8E00828432 /* PlayViewController.swift */; };
 		D4A2CB682640E4FD0019AFB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB672640E4FD0019AFB6 /* AppDelegate.swift */; };
 		D4A2CB6A2640E4FD0019AFB6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB692640E4FD0019AFB6 /* SceneDelegate.swift */; };
 		D4A2CB6C2640E4FD0019AFB6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A2CB6B2640E4FD0019AFB6 /* MainViewController.swift */; };
@@ -62,6 +65,9 @@
 		BD8A23762643C73A00828432 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		BD8A23782644F8EB00828432 /* PlayerInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationCell.swift; sourceTree = "<group>"; };
 		BD8A23792644F8EB00828432 /* PlayerInformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerInformationCell.xib; sourceTree = "<group>"; };
+		BD8A237C264508F800828432 /* BallCountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCountCell.swift; sourceTree = "<group>"; };
+		BD8A237D264508F800828432 /* BallCountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallCountCell.xib; sourceTree = "<group>"; };
+		BD8A238026450B8E00828432 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		D159143F731D8C2D8DDBDE86 /* Pods_Baseball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baseball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2CB642640E4FD0019AFB6 /* Baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A2CB672640E4FD0019AFB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 			children = (
 				D4A2CBA7264382B00019AFB6 /* ScoresViewController.swift */,
 				D4A2CB6B2640E4FD0019AFB6 /* MainViewController.swift */,
+				BD8A238026450B8E00828432 /* PlayViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -156,6 +163,8 @@
 				D4A2CB9B2640E5E60019AFB6 /* GameListCell.xib */,
 				BD8A23782644F8EB00828432 /* PlayerInformationCell.swift */,
 				BD8A23792644F8EB00828432 /* PlayerInformationCell.xib */,
+				BD8A237C264508F800828432 /* BallCountCell.swift */,
+				BD8A237D264508F800828432 /* BallCountCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,6 +384,7 @@
 				BD8A237B2644F8EB00828432 /* PlayerInformationCell.xib in Resources */,
 				D4A2CB712640E4FF0019AFB6 /* Assets.xcassets in Resources */,
 				D4A2CB6F2640E4FD0019AFB6 /* Main.storyboard in Resources */,
+				BD8A237F264508F800828432 /* BallCountCell.xib in Resources */,
 				D4A2CB9D2640E5E60019AFB6 /* GameListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,8 +521,10 @@
 				D4A2CBD8264414B30019AFB6 /* FetchGameList.swift in Sources */,
 				D4A2CBC8264405400019AFB6 /* FetchGame.swift in Sources */,
 				BD8A237A2644F8EB00828432 /* PlayerInformationCell.swift in Sources */,
+				BD8A238126450B8E00828432 /* PlayViewController.swift in Sources */,
 				D4A2CB682640E4FD0019AFB6 /* AppDelegate.swift in Sources */,
 				BD8A23742643C4E400828432 /* DTO.swift in Sources */,
+				BD8A237E264508F800828432 /* BallCountCell.swift in Sources */,
 				D4A2CBD3264412B40019AFB6 /* GameListViewModel.swift in Sources */,
 				D4A2CB6A2640E4FD0019AFB6 /* SceneDelegate.swift in Sources */,
 				BD8A23772643C73A00828432 /* Network.swift in Sources */,
