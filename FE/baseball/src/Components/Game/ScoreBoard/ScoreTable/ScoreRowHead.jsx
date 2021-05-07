@@ -1,13 +1,15 @@
+import { BLANK } from '@/Utils/const';
 import { ScoreBoardStyles as S } from '../ScoreBoardStyles';
 import AttackTeamTag from '../Teams/AttackTeamTag';
-import TeamNameBox from '../Teams/TeamNameBox';
+import TeamName from '../Teams/TeamName';
+
 import ScoreItem from './ScoreItem';
 
-const ScoreRow = ({ teamName }) => {
+const ScoreRowHead = () => {
   return (
-    <S.ScoreRow>
+    <S.ScoreRowHead>
       <AttackTeamTag />
-      <TeamNameBox teamName={teamName} />
+      <TeamName teamName={BLANK} />
       <ScoreItem />
       <ScoreItem />
       <ScoreItem />
@@ -22,8 +24,8 @@ const ScoreRow = ({ teamName }) => {
       <ScoreItem />
       <ScoreItem />
       <ScoreItem />
-    </S.ScoreRow>
+    </S.ScoreRowHead>
   );
 };
 
-export default ScoreRow;
+export default ScoreRowHead;

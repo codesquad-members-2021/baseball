@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
 	${reset};
@@ -17,7 +17,6 @@ const GlobalStyles = createGlobalStyle`
 		font-family: 'Orbitron', sans-serif;
 		font-size : 16px;
 		background-color : rgba(20,20,20,1);
-		padding-top:100px;
 		display: flex;
 		justify-content: center;
 		align-items: center;

@@ -4,19 +4,22 @@ import theme from '@/Styles/theme';
 
 const IntroStyles = {
   Intro: styled(CS.BOX.FLEX_CENTER_BOX)`
-    background: #222;
     width: 1440px;
     height: 1080px;
     color: ${theme.COLOR.DEFAULT};
+    border: 3px solid #fff;
+    background: #111;
+    opacity: 0.8;
   `,
 
   GameTitle: styled.div`
-    text-align: center;
+    width: 100%;
+    font-size: 16px;
   `,
 
   GameStartButton: styled(CS.BOX.FLEX_CENTER_BOX)`
-    width: 650px;
-    height: 100px;
+    width: 1000px;
+    height: fit-content;
     padding: 20px;
     border: 1px solid #fff;
     border-radius: 10px;
@@ -31,6 +34,16 @@ const IntroStyles = {
     :active {
       background: #111;
     }
+  `,
+
+  Background: styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    opacity: 0.4;
   `,
 };
 

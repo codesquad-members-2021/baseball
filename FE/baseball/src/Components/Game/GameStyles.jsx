@@ -1,14 +1,17 @@
-import styled from "styled-components";
-import * as CS from "@/Styles/CommonStyles";
-import theme from "@/Styles/theme";
+import styled from 'styled-components';
+import * as CS from '@/Styles/CommonStyles';
+import theme from '@/Styles/theme';
 
 const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
     border: 3px solid #fff;
+    background: #111;
+    opacity: 0.8;
     width: 1440px;
     height: 1080px;
   `,
   GameLeftSection: styled(CS.BOX.FLEX_COLUMN_BOX)`
+    position: relative;
     width: 80%;
     height: 100%;
     border-right: 3px solid gray;
@@ -16,6 +19,16 @@ const Game = {
   GameRightSection: styled(CS.BOX.FLEX_COLUMN_BOX)`
     width: 20%;
     height: 100%;
+  `,
+
+  Background: styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -999;
+    opacity: 0.4;
   `,
 };
 
@@ -97,7 +110,7 @@ const GamePlayground = {
     border-radius: 8px;
     background: #222;
     color: #fff;
-    font-family: "Orbitron", sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: ${theme.FONTSIZE.M};
     padding: 10px;
   `,
@@ -128,11 +141,11 @@ const GamePlayground = {
       margin-right: 3px;
       background: ${({ type }) => {
         switch (type) {
-          case "STRIKE":
+          case 'STRIKE':
             return theme.COLOR.BALLCOUNT_STRIKE;
-          case "BALL":
+          case 'BALL':
             return theme.COLOR.BALLCOUNT_BALL;
-          case "OUT":
+          case 'OUT':
             return theme.COLOR.BALLCOUNT_OUT;
           default:
             return;
@@ -177,7 +190,7 @@ const GamePlayLog = {
     LogTitle: styled.div`
       font-weight: 600;
       color: ${({ isCurrentPlayer }) =>
-        isCurrentPlayer ? "red" : theme.COLOR.PLAYER_NAME};
+        isCurrentPlayer ? 'red' : theme.COLOR.PLAYER_NAME};
     `,
     Log: styled.div`
       padding: 20px 0px;
@@ -199,7 +212,7 @@ const GamePlayLog = {
       margin-right: 40px;
       font-weight: 700;
       color: ${({ isEndAction }) =>
-        isEndAction ? theme.COLOR.LOG_END_ACTION : "#fff"};
+        isEndAction ? theme.COLOR.LOG_END_ACTION : '#fff'};
     `,
     LogRowBallCount: styled.div`
       color: ${theme.COLOR.LOG_BALLCOUNT};
