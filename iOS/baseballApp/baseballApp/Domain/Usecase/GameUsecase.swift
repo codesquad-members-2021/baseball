@@ -15,19 +15,4 @@ class GameUsecase: GameUsecasePort {
     func gameList() -> Observable<[Game]> {
         return gameStorage
     }
-    
-    let api = API.shared
-    func getGameInfo() -> Observable<GameDTO> {
-        return Observable.create { observer in
-            self.api.requestGames()
-                .subscribe(onNext: { gameDTO in
-                    observer.onNext(gameDTO)
-                }, onError: { error in
-                    print(error.localizedDescription)})
-                .disposed(by: self.disposeBag)
-            return Disposables.create()
-        }
-    }
-    
-    
 }
