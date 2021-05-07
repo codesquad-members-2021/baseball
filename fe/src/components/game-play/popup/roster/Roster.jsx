@@ -1,20 +1,17 @@
 import styled from 'styled-components';
-import PopUp from '../ui/PopUp';
 import TeamRoster from './TeamRoster';
-const GameRoster = () => {
+const Roster = () => {
   // team_name 필요
   return (
-    <PopUp>
-      <StyleGameRoster>
-        <TeamRoster {...game_roster.home}/>
-        <TeamRoster {...game_roster.away} player={true}/>
-      </StyleGameRoster>
-    </PopUp>
+    <StyleRoster>
+      <TeamRoster {...game_roster.home}/>
+      <TeamRoster {...game_roster.away} player={true}/>
+    </StyleRoster>
   );
 }
 
 // 90vw는 돼야하는데 그러면 이상함...;
-const StyleGameRoster = styled.div`
+const StyleRoster = styled.div`
   margin: 0 auto;
   max-width: 60vw;
   margin-top: 5rem;
@@ -153,4 +150,4 @@ const game_roster = {
 }
 
 
-export default GameRoster;
+export default Roster;
