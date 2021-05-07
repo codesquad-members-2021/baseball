@@ -8,7 +8,7 @@
 import UIKit
 
 protocol GameCellDelegate {
-    func didPressButton()
+    func didPressButton(with gameInfo: GameInfo)
 }
 
 class SelectionViewController: UIViewController {
@@ -68,8 +68,9 @@ extension SelectionViewController {
 
 extension SelectionViewController: GameCellDelegate {
     
-    func didPressButton() {
+    func didPressButton(with gameInfo: GameInfo) {
         let nextVC = UIStoryboard(name: "GamePlay", bundle: nil).instantiateViewController(identifier: "GamePlayViewController") as GamePlayViewController
+        nextVC.getInfo(with: gameInfo)
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
 }

@@ -29,6 +29,7 @@ class GamePlayViewController: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
     private let isUserHomeSide = true
+    private var gameInfo: GameInfo!
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -115,5 +116,12 @@ extension GamePlayViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(pitches, toSection: 0)
         self.dataSource.apply(snapshot)
+    }
+}
+
+extension GamePlayViewController {
+    
+    func getInfo(with gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
     }
 }

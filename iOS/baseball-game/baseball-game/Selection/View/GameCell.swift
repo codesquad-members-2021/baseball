@@ -51,7 +51,7 @@ class GameCell: UITableViewCell {
         self.viewModel.postSelection(with: self.gameInfo)
         self.awayTeamButton.isEnabled = false
         
-        self.delegate.didPressButton()
+        self.delegate.didPressButton(with: self.gameInfo)
     }
     
     @IBAction func homeButtonTouched(_ sender: UIButton) {
@@ -60,7 +60,7 @@ class GameCell: UITableViewCell {
         self.viewModel.postSelection(with: self.gameInfo)
         self.homeTeamButton.isEnabled = false
         
-        self.delegate.didPressButton()
+        self.delegate.didPressButton(with: self.gameInfo)
     }
     
 }
