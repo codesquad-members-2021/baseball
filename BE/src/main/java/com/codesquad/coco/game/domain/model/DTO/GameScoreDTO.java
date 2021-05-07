@@ -1,4 +1,4 @@
-package com.codesquad.coco.game.domain.model;
+package com.codesquad.coco.game.domain.model.DTO;
 
 import com.codesquad.coco.team.domain.DTO.TeamScoreDTO;
 

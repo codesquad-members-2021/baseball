@@ -1,8 +1,8 @@
 package com.codesquad.coco.player;
 
+import com.codesquad.coco.player.domain.DTO.PlayerEventDTO;
 import com.codesquad.coco.player.domain.Player;
 import com.codesquad.coco.player.domain.PlayerDAO;
-import com.codesquad.coco.player.domain.PlayerEventDTO;
 import com.codesquad.coco.player.domain.Record;
 import org.springframework.stereotype.Service;
 

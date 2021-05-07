@@ -144,7 +144,7 @@ VALUES
 
 
 insert into game(id, home, away, user_type)
-values (1, '두산 베어스', 'SSG 랜더스', 'home');
+values (1, '두산 베어스', 'SSG 랜더스', 'HOME');
 
 insert into score_board(id, game, team)
 values (1, 1, '두산 베어스');

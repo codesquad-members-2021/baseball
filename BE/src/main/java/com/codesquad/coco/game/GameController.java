@@ -1,8 +1,8 @@
 package com.codesquad.coco.game;
 
+import com.codesquad.coco.game.domain.model.DTO.GamePlayDTO;
+import com.codesquad.coco.game.domain.model.DTO.GameScoreDTO;
 import com.codesquad.coco.game.domain.model.Game;
-import com.codesquad.coco.game.domain.model.GamePlayDTO;
-import com.codesquad.coco.game.domain.model.GameScoreDTO;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.TeamService;
 import com.codesquad.coco.team.domain.DTO.*;
@@ -76,4 +76,20 @@ public class GameController {
         }
         return new GameScoreDTO(teamScoreDTO1, teamScoreDTO);
     }
+
+    @GetMapping("/games/{gameId}/players")
+    @ResponseStatus(HttpStatus.OK)
+    public GamePlayDTO showPlayer(@PathVariable Long gameId) {
+        Game game = gameService.choiceGame(gameId);
+        String userTeamName = gameService.findUserTeamNameByGameId(gameId);
+
+        TeamDTO homeTeam = DTOConverter.teamToDTO(game.getHome());
+        TeamDTO awayTeam = DTOConverter.teamToDTO(game.getAway());
+
+        if (homeTeam.getTeamName().equals(userTeamName)) {
+            return new GamePlayDTO(gameId, homeTeam, awayTeam);
+        }
+        return new GamePlayDTO(gameId, awayTeam, homeTeam);
+    }
+
 }

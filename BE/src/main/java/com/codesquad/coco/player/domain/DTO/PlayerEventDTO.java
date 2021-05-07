@@ -1,4 +1,6 @@
-package com.codesquad.coco.player.domain;
+package com.codesquad.coco.player.domain.DTO;
+
+import com.codesquad.coco.player.domain.RecordType;
 
 public class PlayerEventDTO {
 
