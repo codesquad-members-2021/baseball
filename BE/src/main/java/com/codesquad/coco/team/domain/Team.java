@@ -1,6 +1,6 @@
 package com.codesquad.coco.team.domain;
 
-import com.codesquad.coco.player.domain.Player;
+import com.codesquad.coco.player.domain.model.Player;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;

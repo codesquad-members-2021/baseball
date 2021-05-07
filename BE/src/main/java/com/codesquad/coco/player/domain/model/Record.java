@@ -1,5 +1,6 @@
-package com.codesquad.coco.player.domain;
+package com.codesquad.coco.player.domain.model;
 
+import com.codesquad.coco.player.domain.RecordType;
 import org.springframework.data.annotation.Id;
 
 public class Record {

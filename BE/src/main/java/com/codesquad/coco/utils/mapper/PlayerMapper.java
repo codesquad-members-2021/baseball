@@ -1,7 +1,7 @@
 package com.codesquad.coco.utils.mapper;
 
-import com.codesquad.coco.player.domain.Player;
-import com.codesquad.coco.player.domain.Record;
+import com.codesquad.coco.player.domain.model.Player;
+import com.codesquad.coco.player.domain.model.Record;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

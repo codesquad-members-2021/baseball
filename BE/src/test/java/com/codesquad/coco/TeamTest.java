@@ -1,6 +1,6 @@
 package com.codesquad.coco;
 
-import com.codesquad.coco.player.domain.Player;
+import com.codesquad.coco.player.domain.model.Player;
 import com.codesquad.coco.team.domain.Team;
 import com.codesquad.coco.team.domain.TeamRepository;
 import org.assertj.core.api.Assertions;

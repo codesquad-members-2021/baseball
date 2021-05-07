@@ -2,7 +2,7 @@ package com.codesquad.coco.utils;
 
 import com.codesquad.coco.game.domain.model.Innings;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
-import com.codesquad.coco.player.domain.DTO.PlayerDTO;
+import com.codesquad.coco.player.domain.model.DTO.PlayerDTO;
 import com.codesquad.coco.team.domain.DTO.TeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamScoreDTO;
 import com.codesquad.coco.team.domain.Team;

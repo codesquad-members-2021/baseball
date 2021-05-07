@@ -1,5 +1,7 @@
 package com.codesquad.coco.player.domain;
 
+import com.codesquad.coco.player.domain.model.Player;
+import com.codesquad.coco.player.domain.model.Record;
 import com.codesquad.coco.utils.mapper.PlayerMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

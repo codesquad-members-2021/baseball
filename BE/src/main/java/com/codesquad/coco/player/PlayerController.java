@@ -1,8 +1,8 @@
 package com.codesquad.coco.player;
 
-import com.codesquad.coco.player.domain.DTO.PlayerEventDTO;
-import com.codesquad.coco.player.domain.Player;
-import com.codesquad.coco.player.domain.Record;
+import com.codesquad.coco.player.domain.model.DTO.PlayerEventDTO;
+import com.codesquad.coco.player.domain.model.Player;
+import com.codesquad.coco.player.domain.model.Record;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

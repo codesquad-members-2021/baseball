@@ -1,4 +1,4 @@
-package com.codesquad.coco.player.domain;
+package com.codesquad.coco.player.domain.model;
 
 import org.springframework.data.annotation.Id;
 
