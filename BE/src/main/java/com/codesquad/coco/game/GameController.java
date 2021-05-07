@@ -1,8 +1,8 @@
-package com.codesquad.coco.team;
+package com.codesquad.coco.game;
 
-import com.codesquad.coco.game.GameService;
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.game.domain.model.GamePlayDTO;
+import com.codesquad.coco.team.TeamService;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
 import com.codesquad.coco.team.domain.DTO.TeamDTO;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-public class TeamController {
+public class GameController {
 
     private TeamService teamService;
     private GameService gameService;
 
-    public TeamController(TeamService teamService, GameService gameService) {
+    public GameController(TeamService teamService, GameService gameService) {
         this.teamService = teamService;
         this.gameService = gameService;
     }
