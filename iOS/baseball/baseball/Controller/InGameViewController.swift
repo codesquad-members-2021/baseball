@@ -19,6 +19,5 @@ class InGameViewController: UIViewController {
         dataSource.setupDataSource(tableView: pitchingHistoryTableView)
         self.inningInfoView.applyBallCount(strike: 1, ball: 2, out: 1)
     }
-    
 }
 

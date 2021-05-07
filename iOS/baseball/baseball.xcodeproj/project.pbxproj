@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		827E60342644FA160054F5E2 /* MyTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827E60332644FA160054F5E2 /* MyTeam.swift */; };
+		828F89A02644D07D00F928F0 /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828F899F2644D07D00F928F0 /* BaseState.swift */; };
 		829CFA3D2640379B00D9F635 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA3C2640379B00D9F635 /* AppDelegate.swift */; };
 		829CFA3F2640379B00D9F635 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA3E2640379B00D9F635 /* SceneDelegate.swift */; };
 		829CFA412640379B00D9F635 /* GameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829CFA402640379B00D9F635 /* GameSelectViewController.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		827E60332644FA160054F5E2 /* MyTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTeam.swift; sourceTree = "<group>"; };
+		828F899F2644D07D00F928F0 /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
 		829CFA392640379B00D9F635 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		829CFA3C2640379B00D9F635 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		829CFA3E2640379B00D9F635 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				CEA103D526413D8F008BA763 /* InningInfo.swift */,
 				CEA103D826413E91008BA763 /* PitchingHistory.swift */,
 				CEA103DB26413F2C008BA763 /* InningScore.swift */,
+				828F899F2644D07D00F928F0 /* BaseState.swift */,
+				827E60332644FA160054F5E2 /* MyTeam.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				829CFA542640421900D9F635 /* MatchUpCell.swift in Sources */,
 				CEA103DC26413F2C008BA763 /* InningScore.swift in Sources */,
 				82FD39E92643DB71002AD9A2 /* TeamDTO.swift in Sources */,
+				827E60342644FA160054F5E2 /* MyTeam.swift in Sources */,
 				CEA103C726413962008BA763 /* Player.swift in Sources */,
 				82DB49E926404C76008B1EC0 /* InGameViewController.swift in Sources */,
 				CEA103D326413D02008BA763 /* Game.swift in Sources */,
@@ -269,6 +276,7 @@
 				CEA5D6252643850700745C9D /* URLManager.swift in Sources */,
 				CEA103D026413BE5008BA763 /* Pitcher.swift in Sources */,
 				CEA103D926413E91008BA763 /* PitchingHistory.swift in Sources */,
+				828F89A02644D07D00F928F0 /* BaseState.swift in Sources */,
 				829CFA3F2640379B00D9F635 /* SceneDelegate.swift in Sources */,
 				CEA5D62B26438DA100745C9D /* testCell.swift in Sources */,
 				CEA5D62826438B2100745C9D /* PitchingHistoryDataSource.swift in Sources */,
