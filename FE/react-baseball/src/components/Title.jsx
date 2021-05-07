@@ -1,10 +1,14 @@
 import styled from 'styled-components';
-import theme from '../theme';
 
-const Title = () => <TitleDiv theme={theme}>BASEBALL GAME ONLINE</TitleDiv>;
+const Title = ({ type }) => (
+  <TitleDiv type={type}>BASEBALL GAME ONLINE</TitleDiv>
+);
 
 const TitleDiv = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.XL};
+  margin: 18px 0;
+  font-size: ${({ theme, type }) =>
+    type === theme.screenType.PLAY ? theme.fontSizes.S : theme.fontSizes.XXL};
+  font-weight: 600;
 `;
 
 export default Title;

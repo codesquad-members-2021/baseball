@@ -1,7 +1,7 @@
-import Caption from "../components/Caption";
-import GameList from "../components/GameList";
-import Title from "../components/Title";
-import styled from "styled-components";
+import Caption from '../components/Caption';
+import GameList from '../components/GameList';
+import Title from '../components/Title';
+import styled from 'styled-components';
 
 const StartDiv = styled.div`
   margin: 0 auto;
