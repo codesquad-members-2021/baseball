@@ -1,9 +1,10 @@
+
 ## 개요
 온라인 야구게임 만들기
 
 
 ## 시연
-![screen-recording-_7_](https://user-images.githubusercontent.com/68339352/117411226-539c6380-af4e-11eb-95f9-dba98c08f309.gif)
+![Untitled_ May 7, 2021 4_13 PM](https://user-images.githubusercontent.com/71962505/117412133-5fd4f080-af4f-11eb-8a40-8ce6b8bb16da.gif)
 
 
 ## 팀원
