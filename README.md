@@ -1,6 +1,11 @@
 ## 개요
 온라인 야구게임 만들기
 
+
+## 시연
+![screen-recording-_7_](https://user-images.githubusercontent.com/68339352/117411226-539c6380-af4e-11eb-95f9-dba98c08f309.gif)
+
+
 ## 팀원
 |`FE`|`BackEnd`|
 |---|---|
