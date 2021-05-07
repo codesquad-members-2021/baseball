@@ -24,9 +24,9 @@ final class MatchBoardView: UIView {
         self.addSubview(view)
     }
     
-    func configureSBOsView(sbo: SBO) {
-        sboBoardView.strikeView.updateCountViews(count: sbo.strikeCount)
-        sboBoardView.ballView.updateCountViews(count: sbo.ballCount)
-        sboBoardView.outView.updateCountViews(count: sbo.outCount)
-    }
+//    func configureSBOsView(sbo: SBO) {
+//        sboBoardView.strikeView.updateCountViews(count: sbo.strikeCount)
+//        sboBoardView.ballView.updateCountViews(count: sbo.ballCount)
+//        sboBoardView.outView.updateCountViews(count: sbo.outCount)
+//    }
 }

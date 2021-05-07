@@ -12,13 +12,7 @@ class GameListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let gameList = [
-        Match(id: "1", home: "Captin", away: "Marvel"),
-        Match(id: "2", home: "Twins", away: "Tigers"),
-        Match(id: "3", home: "Giants", away: "Dodgers"),
-        Match(id: "4", home: "Heroes", away: "Lions"),
-        Match(id: "5", home: "Heroes", away: "Lions"),
-        Match(id: "6", home: "Heroes", away: "Lions"),
-        Match(id: "7", home: "Heroes", away: "Lions"),
+        Match(home: "Marvel", away: "Captin", id: "1"),
     ]
     
     override func viewDidLoad() {
