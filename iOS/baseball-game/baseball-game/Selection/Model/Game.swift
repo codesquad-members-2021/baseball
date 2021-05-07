@@ -12,14 +12,3 @@ struct Game: Codable, Hashable {
     var home: Team = Team()
     var away: Team = Team()
 }
-
-struct Team: Codable, Hashable {
-    var team: String = ""
-    var status: String = ""
-}
-
-struct GameInfo: Codable {
-    var userID: String = ""
-    var gameID: Int = 0
-    var team: String = ""
-}

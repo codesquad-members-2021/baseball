@@ -18,12 +18,11 @@ class SelectViewModel {
     }
     
     //MARK: GET
-    
     func request() {
-        NetworkManager.request(type: [Game].self, url: EndPoint.url(path: "")!)
+        NetworkManager.get(type: [Game].self, url: EndPoint.url(path: "")!)
             .receive(on: DispatchQueue.main)
             .sink { error in
-                print(error)
+                print(error) ///사용자에게 에러 표시하는 부분 미구현
             } receiveValue: { games in
                 self.fetch(data: games)
             }
@@ -47,9 +46,9 @@ class SelectViewModel {
         NetworkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
             .receive(on: DispatchQueue.main)
             .sink { error in
-                print(error)
+                print(error) ///사용자에게 에러 표시하는 부분 미구현
             } receiveValue: { _ in
-                print("success")
+                print("success") ///서버 POST 기능 미구현
             }
             .store(in: &cancellable)
     }

@@ -32,7 +32,7 @@ enum EndPoint {
 
 class NetworkManager {
     
-    static func request<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
+    static func get<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
         
         return URLSession.shared.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
@@ -54,7 +54,7 @@ class NetworkManager {
         return Just(data)
             .encode(encoder: JSONEncoder())
             .mapError { error -> Error in
-                print(error)
+                print(error) ///사용자에게 에러 표시하는 부분 미구현
                 return error
             }
             .map { data -> URLRequest in

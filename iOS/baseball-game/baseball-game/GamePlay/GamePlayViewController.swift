@@ -28,7 +28,7 @@ class GamePlayViewController: UIViewController {
     private var gamePlayViewModel: GamePlayViewModel!
     private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
-    private let isUserHomeSide = true // 게임 선택 시 값을 지정해줄 수 있도록 한다 (prepare segue?)
+    private let isUserHomeSide = true
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class GamePlayViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { error in
                 guard let error = error else { return }
-                print(error) //사용자에게 에러 표시!
+                print(error) ///사용자에게 에러 표시하는 부분 미구현
             }.store(in: &cancelBag)
     }
 

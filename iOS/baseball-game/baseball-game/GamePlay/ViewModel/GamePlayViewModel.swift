@@ -22,7 +22,7 @@ class GamePlayViewModel {
     }
     
     func requestGame() {
-        NetworkManager.request(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
+        NetworkManager.get(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
             .sink { error in
             self.error = error as? Error
         } receiveValue: { data in
