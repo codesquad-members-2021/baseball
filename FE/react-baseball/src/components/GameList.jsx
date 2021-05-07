@@ -20,7 +20,7 @@ const GameUl = styled.ul`
 `;
 
 const GamesWrapper = styled.div`
-  width: 500px;
+  width: 540px;
   height: 320px;
   overflow-y: scroll;
 `;

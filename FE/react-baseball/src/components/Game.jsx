@@ -8,9 +8,13 @@ const Game = ({ game }) => {
   return (
     <GameLi>
       <Wrapper>
-        <Team onClick={handleClickTeam}>{game.home_team.name}</Team>
+        <Team type='home' onClick={handleClickTeam}>
+          {game.home_team.name}
+        </Team>
         <Versus>vs</Versus>
-        <Team onClick={handleClickTeam}>{game.away_team.name}</Team>
+        <Team type='away' onClick={handleClickTeam}>
+          {game.away_team.name}
+        </Team>
       </Wrapper>
     </GameLi>
   );
@@ -36,6 +40,8 @@ const Team = styled.div`
   font-size: 32px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.darkGray};
+  width: 180px;
+  text-align: ${({ type }) => (type === 'home' ? 'right' : 'left')};
 
   &:hover {
     cursor: pointer;
