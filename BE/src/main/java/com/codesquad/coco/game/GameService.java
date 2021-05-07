@@ -8,6 +8,8 @@ import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GameService {
 
@@ -23,12 +25,20 @@ public class GameService {
         return gameDAO.findById(id);
     }
 
-    public ScoreBoard findScoreBoard(Long gameId, TeamPointDTO teamPointDTO) {
+    public ScoreBoard findScoreBoardByTeamName(Long gameId, TeamPointDTO teamPointDTO) {
         return boardDAO.findByGameIdAndTeamName(gameId, teamPointDTO.getTeamName());
     }
 
     public void plusPoint(ScoreBoard scoreBoard, TeamPointDTO teamPointDTO) {
         Innings innings = scoreBoard.updateScore(teamPointDTO.getRound(), teamPointDTO.getPoint());
         boardDAO.saveInnings(innings);
+    }
+
+    public List<ScoreBoard> findScoreBoardByGameId(Long gameId) {
+        return boardDAO.findByGameId(gameId);
+    }
+
+    public String findUserTeamNameByGameId(Long gameId) {
+        return gameDAO.findUserTeamNameByGameId(gameId);
     }
 }

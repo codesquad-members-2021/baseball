@@ -97,4 +97,9 @@ public class GameDAO {
     }
 
 
+    public String findUserTeamNameByGameId(Long id) {
+        String sql = "select if(g.user_type = 'home',g.home,g.away) as user_team_name from game g where g.id = " + id;
+        List<String> query = template.query(sql, (rs, rowNum) -> rs.getString("user_team_name"));
+        return query.get(0);
+    }
 }

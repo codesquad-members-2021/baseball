@@ -2,15 +2,15 @@ package com.codesquad.coco.game;
 
 import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.game.domain.model.GamePlayDTO;
+import com.codesquad.coco.game.domain.model.GameScoreDTO;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.TeamService;
-import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
-import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
-import com.codesquad.coco.team.domain.DTO.TeamDTO;
-import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
+import com.codesquad.coco.team.domain.DTO.*;
 import com.codesquad.coco.utils.DTOConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -58,8 +58,22 @@ public class GameController {
     @PostMapping("/games/{gameId}/points")
     @ResponseStatus(HttpStatus.OK)
     public void plusPoint(@PathVariable Long gameId, @RequestBody TeamPointDTO teamPointDTO) {
-        System.out.println(teamPointDTO.toString());
-        ScoreBoard scoreBoard = gameService.findScoreBoard(gameId, teamPointDTO);
+        ScoreBoard scoreBoard = gameService.findScoreBoardByTeamName(gameId, teamPointDTO);
         gameService.plusPoint(scoreBoard, teamPointDTO);
+    }
+
+    @GetMapping("/games/{gameId}/points")
+    @ResponseStatus(HttpStatus.OK)
+    public GameScoreDTO gamePoint(@PathVariable Long gameId) {
+        List<ScoreBoard> scoreBoard = gameService.findScoreBoardByGameId(gameId);
+        String userTeamName = gameService.findUserTeamNameByGameId(gameId);
+
+        TeamScoreDTO teamScoreDTO = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(0));
+        TeamScoreDTO teamScoreDTO1 = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(1));
+
+        if (teamScoreDTO.getTeamName().equals(userTeamName)) {
+            return new GameScoreDTO(teamScoreDTO, teamScoreDTO1);
+        }
+        return new GameScoreDTO(teamScoreDTO1, teamScoreDTO);
     }
 }

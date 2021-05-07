@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -40,10 +41,17 @@ public class ScoreBoardDAO {
 
     public ScoreBoard findByGameIdAndTeamName(Long id, String teamName) {
         String sql = "select s.id, s.game,s.team from score_board s where s.game = " + id + " and s.team = '" + teamName + "'";
+        return findScoreBoard(sql);
+    }
 
+    public List<ScoreBoard> findByGameId(Long id) {
+        String sql = "select s.id, s.game,s.team from score_board s where s.game = " + id;
+        return findScoreBoards(sql);
+    }
+
+    private ScoreBoard findScoreBoard(String sql) {
 
         List<ScoreBoard> query = template.query(sql, (rs, rowNum) -> {
-
             List<Innings> innings = inningsDAO.findAllById(rs.getLong("id"));
 
             ScoreBoard board = new ScoreBoard(
@@ -58,6 +66,24 @@ public class ScoreBoardDAO {
         return query.get(0);
     }
 
+    private List<ScoreBoard> findScoreBoards(String sql) {
+
+        List<ScoreBoard> scoreBoards = new ArrayList<>();
+        template.query(sql, (rs, rowNum) -> {
+            List<Innings> innings = inningsDAO.findAllById(rs.getLong("id"));
+
+            scoreBoards.add(new ScoreBoard(
+                    rs.getLong("id"),
+                    rs.getLong("game"),
+                    rs.getString("team"),
+                    innings
+            ));
+
+            return null;
+        });
+        return scoreBoards;
+    }
+
     public void saveInnings(Innings innings) {
         String sql = "insert into innings (score_board, score, score_board_key) values (?,?,?)";
         template.update(con -> {
@@ -68,4 +94,5 @@ public class ScoreBoardDAO {
             return ps;
         });
     }
+
 }
