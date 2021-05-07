@@ -6,21 +6,24 @@ import { SquadBoard as S } from "@/Components/Game/GameStyles";
 const SquadBoard = () => {
   const [mouseOverFlag, setMouseOverFlag] = useState(false);
 
-  const handleMouseOver = () => {
+  const handleMouseOver = ({ target: { tagName } }) => {
+    if (tagName === "path" || tagName === "svg") return;
     setMouseOverFlag((prev) => !prev);
-    console.log("화면이 보여지나요 ? " + mouseOverFlag);
   };
 
   return (
     <>
-      <S.PopUpBackground isMouseOver={mouseOverFlag} />
-      <PopUpButton
-        isMouseOver={mouseOverFlag}
-        handleMouseOver={handleMouseOver}
-      />
-      <S.SquadBoard isMouseOver={mouseOverFlag}>
-        <SquadTable />
-      </S.SquadBoard>
+      <S.SquadBoardWrapper>
+        <S.PopUpBackground
+          isMouseOver={mouseOverFlag}
+          onMouseOver={handleMouseOver}
+        />
+        <PopUpButton handleMouseOver={handleMouseOver} />
+        <S.SquadBoard isMouseOver={mouseOverFlag}>
+          <SquadTable />
+          <SquadTable />
+        </S.SquadBoard>
+      </S.SquadBoardWrapper>
     </>
   );
 };

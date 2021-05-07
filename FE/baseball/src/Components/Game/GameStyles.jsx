@@ -5,7 +5,7 @@ import theme from "@/Styles/theme";
 const Game = {
   Game: styled(CS.BOX.FLEX_ROW_BOX)`
     position: relative;
-    border: 3px solid #fff;
+    border: 3px solid ${theme.COLOR.DEFAULT};
     width: 1440px;
     height: 1080px;
   `,
@@ -94,10 +94,10 @@ const GamePlayground = {
     left: 44%;
     width: 150px;
     outline: none;
-    border: 2px solid #fff;
+    border: 2px solid ${theme.COLOR.DEFAULT};
     border-radius: 8px;
     background: #222;
-    color: #fff;
+    color: ${theme.COLOR.DEFAULT};
     font-family: "Orbitron", sans-serif;
     font-size: ${theme.FONTSIZE.M};
     padding: 10px;
@@ -192,7 +192,7 @@ const GamePlayLog = {
       border: 2px solid #222;
       border-radius: 50%;
       color: #222;
-      background: #fff;
+      background: ${theme.COLOR.DEFAULT};
       text-align: center;
       margin-right: 20px;
     `,
@@ -200,7 +200,7 @@ const GamePlayLog = {
       margin-right: 40px;
       font-weight: 700;
       color: ${({ isEndAction }) =>
-        isEndAction ? theme.COLOR.LOG_END_ACTION : "#fff"};
+        isEndAction ? theme.COLOR.LOG_END_ACTION : theme.COLOR.DEFAULT};
     `,
     LogRowBallCount: styled.div`
       color: ${theme.COLOR.LOG_BALLCOUNT};
@@ -209,30 +209,38 @@ const GamePlayLog = {
 };
 
 const SquadBoard = {
-  SquadBoard: styled.div`
-    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
+  SquadBoard: styled(CS.BOX.FLEX_ROW_BOX)`
     position: absolute;
-    bottom: 0;
+    bottom: ${({ isMouseOver }) => (isMouseOver ? "0px" : "-1080px")};
     left: 5%;
     width: 70%;
     height: 77%;
     background: #222;
     padding: 30px;
     z-index: 999;
+    border-radius: 8px;
+    border: 3px solid ${theme.COLOR.DEFAULT};
+    transition: all 1s;
   `,
-  PopUpBackground: styled.div`
-    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
+  SquadBoardWrapper: styled.div`
     position: absolute;
     top: 0;
+    left: 0;
+    width: 1440px;
+    height: 1080px;
+    overflow: hidden;
+  `,
+  PopUpBackground: styled.div`
+    position: absolute;
+    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
     left: 0;
     width: 100%;
     height: 100%;
     background: #222;
     opacity: 0.7;
-    transition: display 1.5s;
+    transition: all 1s;
   `,
   PopUpButton: styled.div`
-    display: ${({ isMouseOver }) => (isMouseOver ? "none" : "block")};
     width: 100px;
     height: 20px;
     border-radius: 50% 50% 0px 0px;
@@ -243,15 +251,35 @@ const SquadBoard = {
     opacity: 0.5;
     text-align: center;
     padding: 3px;
-    z-index: 99999;
-
     &:hover {
       opacity: 0.7;
     }
   `,
   SquadTable: {
-    SquadTableHeaderRow: styled.div`
+    SquadTable: styled.div`
+      padding: 20px;
+      border-radius: 8px;
+      border: 3px solid ${theme.COLOR.DEFAULT};
+      width: 45%;
+      margin: 0px 30px;
+    `,
+    SquadTableHeader: styled.div`
       font-size: ${theme.FONTSIZE.S};
+      font-weight: 700;
+      text-align: center;
+      border-bottom: 3px solid ${theme.COLOR.DEFAULT};
+      padding-bottom: 10px;
+    `,
+    SquadTableBody: styled.table`
+      width: 100%;
+      height: 95%;
+    `,
+    SquadTableRow: styled.tr`
+      border-bottom: 1px solid ${theme.COLOR.PLAYER_DESCRIPTION};
+      text-align: center;
+    `,
+    SquadTableData: styled.td`
+      vertical-align: middle;
     `,
   },
 };

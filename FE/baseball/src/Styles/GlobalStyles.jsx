@@ -17,10 +17,10 @@ const GlobalStyles = createGlobalStyle`
 		font-family: 'Orbitron', sans-serif;
 		font-size : 16px;
 		background-color : rgba(20,20,20,1);
-		padding-top:100px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		
 	}
 	.App {
 		width:1440px;
@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 		flex-direction:column;
 		justify-content: center;
 		align-items: center;
+	}
 `;
 
 export default GlobalStyles;
