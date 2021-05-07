@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Combine
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
+    private var gameListViewModel: GameListViewModel!
+    private var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,9 +19,26 @@ class ViewController: UIViewController {
         self.gameListCollectionView.dataSource = self
         self.gameListCollectionView.register(GameListCell.nib, forCellWithReuseIdentifier: GameListCell.identifier)
     }
+    
+    func bind() {
+        // nil을 넣는다?
+        gameListViewModel.$gameList
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [unowned self] _ in
+                gameListCollectionView.reloadData()
+            })
+            .store(in: &subscriptions)
+    }
 }
 
-extension ViewController: UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -27,12 +47,13 @@ extension ViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GameListCell.identifier, for: indexPath) as? GameListCell else {
             return GameListCell()
         }
+        
         return cell
         
     }
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width - 10
         let height = (collectionView.bounds.height) / 5 - 10
