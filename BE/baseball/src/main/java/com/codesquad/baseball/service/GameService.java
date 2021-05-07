@@ -1,5 +1,6 @@
 package com.codesquad.baseball.service;
 
+import com.codesquad.baseball.DTO.GameListDTO;
 import com.codesquad.baseball.domain.Game;
 import com.codesquad.baseball.repository.GameRepository;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GameService {
         return gameRepository.save(game);
     }
 
-    public List<Game> browseAllGames() {
-        return (List<Game>) gameRepository.findAll();
+    public List<GameListDTO> browseAllGames() {
+        return gameRepository.browseAllGames();
     }
 }

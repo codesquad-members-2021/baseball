@@ -1,6 +1,6 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.domain.Game;
+import com.codesquad.baseball.DTO.GameListDTO;
 import com.codesquad.baseball.service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ public class GameController {
     }
 
     @GetMapping("/games")
-    public List<Game> browseGames() {
+    public List<GameListDTO> browseGames() {
         return gameService.browseAllGames();
     }
 }
