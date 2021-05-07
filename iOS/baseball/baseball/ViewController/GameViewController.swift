@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var ballCount: UITableView!
     @IBOutlet var tableViewHeight: NSLayoutConstraint!
     private lazy var dataSource = makeDataSource()
-    var foos: [Foo] = [Foo(title: "aa"), Foo(title: "dd"), Foo(title: "dc"), Foo(title: "ds"), Foo(title: "dsa"), Foo(title: "as")]
+    var foos: [Foo] = [Foo(title: "aa")]
     
     override func viewDidLoad() {
         super.viewDidLoad()

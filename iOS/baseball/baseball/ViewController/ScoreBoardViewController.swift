@@ -44,19 +44,6 @@ class ScoreBoardViewController: UIViewController {
         var snapshot = Snapshot()
         let playerScoreBoards = [
             PlayerScoreBoard(id: 1, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 2, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 3, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 4, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 5, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 6, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 7, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 8, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 9, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 10, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 11, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 12, name: "정대현", TPA: 1, hits: 3, out: 1),
-            PlayerScoreBoard(id: 13, name: "양원종", TPA: 1, hits: 1, out: 2),
-            PlayerScoreBoard(id: 14, name: "정대현", TPA: 1, hits: 3, out: 1),
         ]
         snapshot.appendSections(["test"])
         snapshot.appendItems(playerScoreBoards, toSection: "test")
