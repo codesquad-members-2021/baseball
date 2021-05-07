@@ -5,9 +5,11 @@ import Game from './Game';
 const GameList = (props) => {
   return (
     <GameUl>
-      {games.map((game) => (
-        <Game key={game.id} game={game} />
-      ))}
+      <GamesWrapper>
+        {games.map((game) => (
+          <Game key={game.id} game={game} />
+        ))}
+      </GamesWrapper>
     </GameUl>
   );
 };
@@ -15,9 +17,11 @@ const GameList = (props) => {
 const GameUl = styled.ul`
   display: flex;
   flex-direction: column;
-  /* gap: 14px 0; */
+`;
+
+const GamesWrapper = styled.div`
   width: 500px;
-  height: 300px;
+  height: 320px;
   overflow-y: scroll;
 `;
 

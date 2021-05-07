@@ -12,7 +12,6 @@ const StartDiv = styled.div`
 `;
 const StartScreen = (props) => (
   <StartDiv>
-    <h1>start 화면</h1>
     <Title />
     <Caption />
     <GameList />
