@@ -1,80 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
 import { Redirect, Link } from 'react-router-dom';
 import useFetch from '../Hook/useFetch';
-const TeamList = () => {
-	//! USEfETCh _ Test
-	const [teamData, loadingTeamData, error1] = useFetch('get', 'teamList');
-	const teamListData = teamData.games;
-
-	const [currentID, setID] = useState(null);
-	const [occupiedState, loadingOccupiedState, error2] = useFetch(
-		'get',
-		'initData',
-		currentID,
-	);
-
-	return (
-		!loadingTeamData &&
-		teamListData.map((team, i) => (
-			<SingleList key={i}>
-				<div>{team.gameTitle}</div>
-				<GameTitle>
-					<TeamName onClick={() => setID(team.id)}>
-						{/* <Redirect
-							to={`/attack/${team.id}/${team.awayTeam.teamName}/${team.homeTeam.teamName}`}
-						></Redirect> */}
-						{team.awayTeam.teamName}
-					</TeamName>
-					<span>VS</span>
-					<TeamName>
-						<Link to="/defense">{team.homeTeam.teamName}</Link>
-					</TeamName>
-				</GameTitle>
-			</SingleList>
-		))
-	);
-};
 
 const TeamList = () => {
-  const [teamList, setTeamLiset] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  //! USEfETCh _ Test
+  const [teamData, loadingTeamData, error1] = useFetch('get', 'teamList');
+  const teamListData = teamData.games;
 
-  useEffect(() => {
-    const getGameList = async () => {
-      setLoading(true);
-      try {
-        const { games } = await API.get.teamList();
-        console.log(games);
-        setTeamLiset(games);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-      }
-    };
-    getGameList();
-  }, []);
-
-  const List = () => {
-    return teamList.map((team, i) => (
-      <SingleList key={i}>
-        <GameTitle>{team.gameTitle}</GameTitle>
-        <TeamWrapper>
-          <TeamName>{team.awayTeam.teamName}</TeamName>
-          <span>VS</span>
-          <TeamName>{team.homeTeam.teamName}</TeamName>
-        </TeamWrapper>
-      </SingleList>
-    ));
-  };
+  const [currentID, setID] = useState(null);
+  const [occupiedState, loadingOccupiedState, error2] = useFetch(
+    'get',
+    'initData',
+    currentID
+  );
 
   return (
-    <>
-      {error && <div>에러가 발생했습니다 : {error}</div>}
-      {loading ? <div>Loading...</div> : <List />}
-    </>
+    !loadingTeamData &&
+    teamListData.map((team, i) => (
+      <SingleList key={i}>
+        <div>{team.gameTitle}</div>
+        <GameTitle>
+          <TeamName onClick={() => setID(team.id)}>
+            {/* <Redirect
+							to={`/attack/${team.id}/${team.awayTeam.teamName}/${team.homeTeam.teamName}`}
+						></Redirect> */}
+            {team.awayTeam.teamName}
+          </TeamName>
+          <span>VS</span>
+          <TeamName>
+            <Link to="/defense">{team.homeTeam.teamName}</Link>
+          </TeamName>
+        </GameTitle>
+      </SingleList>
+    ))
   );
 };
 
@@ -91,6 +51,7 @@ const GameTitle = styled.div`
   font-size: ${theme.fontSize.small};
   font-weight: ${theme.fontWeight.normal};
   color: ${theme.colors.red};
+  padding-top: 5px;
 
   text-align: center;
 `;
@@ -111,12 +72,8 @@ const TeamWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+  height: 55px;
   padding: 0 30px;
-
-  &:hover {
-    overflow-y: scroll;
-    margin-right: -15px;
-  }
 `;
 
 export default TeamList;

@@ -10,10 +10,10 @@ const GlobalStyle = createGlobalStyle`${reset};
   font-weight: bold;
 } */
 
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
  
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Noto Sans KR', sans-serif;
   background: linear-gradient(
           rgba(0, 0, 0, 0.7), 
           rgba(0, 0, 0, 0.7)
