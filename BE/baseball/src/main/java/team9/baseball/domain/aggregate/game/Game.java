@@ -110,7 +110,7 @@ public class Game {
     public void proceedHit(Team awayTeam, Team homeTeam) {
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
-                acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL, this.strikeCount, this.ballCount);
+                acquireAttackTeamId(), batterUniformNumber, PitchResult.HIT, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
