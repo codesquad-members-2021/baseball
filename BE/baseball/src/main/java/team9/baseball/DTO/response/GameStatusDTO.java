@@ -81,7 +81,7 @@ public class GameStatusDTO {
                 .base1(PlayerDTO.of(attackTeam, game.getBase1UniformNumber()))
                 .base2(PlayerDTO.of(attackTeam, game.getBase2UniformNumber()))
                 .base3(PlayerDTO.of(attackTeam, game.getBase3UniformNumber()))
-                .pitch_histories(acquirePitchHistories(game.acquireCurrentInning()))
+                .pitch_histories(acquirePitchHistories(attackTeam, defenseTeam, game.acquireCurrentInning()))
                 .my_role(myRole)
                 .build();
     }
@@ -100,9 +100,9 @@ public class GameStatusDTO {
         return "#" + pitcherCount;
     }
 
-    private static List<PitchHistoryDTO> acquirePitchHistories(Inning inning) {
+    private static List<PitchHistoryDTO> acquirePitchHistories(Team attackTeam, Team defenseTeam, Inning inning) {
         return inning.getPitchHistoryList().stream().
-                map(pitchHistory -> PitchHistoryDTO.of(pitchHistory)).
+                map(pitchHistory -> PitchHistoryDTO.of(attackTeam, defenseTeam, pitchHistory)).
                 collect(Collectors.toList());
     }
 
