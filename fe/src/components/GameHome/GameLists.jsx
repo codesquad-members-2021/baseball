@@ -1,5 +1,5 @@
 import GameItem from 'components/GameHome/GameItem'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 
 const GameLists = ({ data }) => {
@@ -11,14 +11,33 @@ const GameLists = ({ data }) => {
 
 export default GameLists
 
+
+
 const StyledGameLists = styled.ul`
   height: 27rem;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
   &:hover {
-    overflow-y: scroll;
     &::-webkit-scrollbar {
-      width: 0px;
       background-color: black;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #2f3542;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: grey;
     }
   }
 `
+
