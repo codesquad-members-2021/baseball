@@ -12,7 +12,7 @@ class GameListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let gameList = [
-        Match(id: "1", home: "Captin", away: "Marble"),
+        Match(id: "1", home: "Captin", away: "Marvel"),
         Match(id: "2", home: "Twins", away: "Tigers"),
         Match(id: "3", home: "Giants", away: "Dodgers"),
         Match(id: "4", home: "Heroes", away: "Lions"),
