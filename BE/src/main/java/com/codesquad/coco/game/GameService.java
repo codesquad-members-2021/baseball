@@ -2,7 +2,6 @@ package com.codesquad.coco.game;
 
 import com.codesquad.coco.game.domain.DAO.GameDAO;
 import com.codesquad.coco.game.domain.DAO.ScoreBoardDAO;
-import com.codesquad.coco.game.domain.model.Game;
 import com.codesquad.coco.game.domain.model.Innings;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
@@ -19,10 +18,6 @@ public class GameService {
     public GameService(GameDAO gameDAO, ScoreBoardDAO boardDAO) {
         this.gameDAO = gameDAO;
         this.boardDAO = boardDAO;
-    }
-
-    public Game choiceGame(Long id) {
-        return gameDAO.findById(id);
     }
 
     public ScoreBoard findScoreBoardByTeamName(Long gameId, TeamPointDTO teamPointDTO) {
