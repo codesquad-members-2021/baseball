@@ -119,6 +119,11 @@ const HomeStyles = {
     }
   `,
 
+  Link: styled.div`
+    width: 100%;
+    height: 100%;
+  `,
+
   VS: styled.div`
     display: flex;
     align-items: center;
