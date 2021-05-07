@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		
 	}
 	.App {
 		width:1440px;
@@ -28,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 		flex-direction:column;
 		justify-content: center;
 		align-items: center;
+	}
 `;
 
 export default GlobalStyles;
