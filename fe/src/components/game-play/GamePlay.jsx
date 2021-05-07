@@ -4,6 +4,9 @@ import Score from './score/Score';
 import Player from './player/Player';
 import Board from './board/Board';
 import Log from './log/Log';
+import PopUpScore from './popup/score/Score';
+import PopUpRoster from './popup/roster/Roster';
+import PopUp from '../ui/PopUp';
 
 const ScoreContext = createContext();
 const MemberListContext = createContext();
@@ -43,6 +46,8 @@ const GamePlay = ({ home, away, game_id }) => {
   const pitchers = { home: data.home.pitcher, away: data.home.pitcher };
   return (
     <StyleGamePlay>
+      <PopUp position='top'><PopUpScore /></PopUp>
+      <PopUp position='bottom'><PopUpRoster /></PopUp>
       <StyleGamePlayGrid>
         {/* {/* <ScoreContext.Provider value={score}> */}
           <Score teamName={teamName} score={score} turn={data.turn}></Score>

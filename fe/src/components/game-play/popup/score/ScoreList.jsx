@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoBaseballOutline } from 'react-icons/io5';
 
-const GameScoreList = ({ team, dataType, data, isPlayer }) => {
+const ScoreList = ({ team, dataType, data, isPlayer }) => {
   const isRound = dataType === 'round';
 
   const scoreList = new Array(12).fill('');
@@ -81,4 +81,4 @@ const StyleScoreList = styled.div`
   }
 `;
 
-export default GameScoreList;
+export default ScoreList;
