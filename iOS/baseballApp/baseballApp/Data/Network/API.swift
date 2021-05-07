@@ -5,17 +5,16 @@ import Alamofire
 class API {
     static let shared: API = API()
 
-    func requestGames() -> Observable<GameDTO> {
+    func requestGames() throws -> Observable<GameDTO> {
         guard  let url = URL(string: Endpoint.getGame) else {
-            fatalError()
+            throw APIError.urlNotSupport
         }
         return get(url)
     }
     
-    func checkGameStatus() -> Observable<Game> {
+    func checkGameStatus() throws -> Observable<Game> {
         guard let url = URL(string: Endpoint.postGame) else {
-            fatalError()
-            
+            throw APIError.urlNotSupport
         }
         return get(url)
     }
@@ -57,13 +56,13 @@ class API {
 }
 
 enum APIError: LocalizedError {
-       case urlNotSupport
-       case noData
-       
-       var errorDescription: String? {
-           switch self {
-           case .urlNotSupport: return "URL NOT Supported"
-           case .noData: return "Has No Data"
-           }
-       }
-   }
+    case urlNotSupport
+    case noData
+    
+    var errorDescription: String? {
+        switch self {
+        case .urlNotSupport: return "URL NOT Supported"
+        case .noData: return "Has No Data"
+        }
+    }
+}
