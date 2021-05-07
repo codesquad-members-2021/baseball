@@ -4,7 +4,7 @@ import { useState } from 'react';
 import PopUpButton from './PopUpButton';
 
 const ScoreBoard = () => {
-  const initialScoreBoardPosition = -196;
+  const initialScoreBoardPosition = -199;
   const [isHover, setIsHover] = useState(false);
   const [scoreBoardPosition, setScoreBoardPosition] = useState(
     initialScoreBoardPosition

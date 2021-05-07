@@ -1,4 +1,4 @@
-import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
 const VS = () => {
   return <S.VS>VS</S.VS>;
