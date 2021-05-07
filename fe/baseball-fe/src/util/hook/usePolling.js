@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function usePolling({ URL, options = {}, delay, completeFn }) {
+function usePolling({ URL, options = {}, delay, completeFn = () => false }) {
   const [timeoutId, setTimeoutId] = useState();
   const [response, setResponse] = useState();
   const [error, setError] = useState();
@@ -29,7 +29,9 @@ function usePolling({ URL, options = {}, delay, completeFn }) {
           setIsLoading(false);
         }
       } catch (err) {
+        console.error(err);
         setError(err);
+        setPolling(false);
         setIsLoading(false);
       }
     }

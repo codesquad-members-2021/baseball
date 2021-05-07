@@ -6,7 +6,7 @@ import API from 'util/API';
 
 function GameList() {
   const [gameList, setGameList] = useState();
-  const { response , error, isLoading } = useFetch(API.matches);
+  const { response , error, isLoading } = useFetch(API.matches());
 
   useEffect(() => {
     if (!response) return;

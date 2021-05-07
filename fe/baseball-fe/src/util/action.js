@@ -3,8 +3,9 @@ export const GlobalAction = {
 };
 
 export const GameAction = {
+  START: 'start',
   PITCH: 'pitch',
-  END_ROUND: 'end-round',
+  END_HALF_INNING: 'end-half-inning',
   CHANGE_PITCHER: 'change-pitcher',
   CHANGE_HITTER: 'change-hitter',
   SCORE: 'score',
@@ -13,8 +14,3 @@ export const GameAction = {
   BALL: 'ball',
   OUT: 'out',
 };
-
-export const SituationAction = {
-
-};
-

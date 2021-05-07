@@ -9,11 +9,3 @@ function globalReducer(state, { type, payload }) {
 };
 
 export default globalReducer;
-
-/*
-dispatch({ type: GlobalAction.SELECT_TEAM, payload: {
-  gameId: 123
-  playTeam: 'a'
-  home: true
-}});
-*/

@@ -6,10 +6,10 @@ import { GlobalAction } from 'util/action.js';
 function GameListItem({ match, idx, isLoading }) {
   const { globalDispatch } = useContext(GlobalContext);
 
-  const handleClickTeam = (teamName) => {
+  const handleClickTeam = ({ playTeam, home }) => {
     globalDispatch({
         type: GlobalAction.SELECT_TEAM,
-        payload: { gameId: match.id, playTeam: teamName }
+        payload: { gameId: match.id, playTeam, home }
     });
   }
 
@@ -19,11 +19,17 @@ function GameListItem({ match, idx, isLoading }) {
     : <StyledGameListItem>
         <GameNumber>Game {idx + 1}</GameNumber>
         <MatchInformation>
-            <TeamHome onClick={() => handleClickTeam(match.home.name)}>
+            <TeamHome onClick={() => handleClickTeam({
+              playTeam: match.home.name,
+              home: true
+            })}>
               {match.home.name}
             </TeamHome>
             vs.
-            <TeamAway onClick={() => handleClickTeam(match.away.name)}>
+            <TeamAway onClick={() => handleClickTeam({
+              playTeam: match.away.name,
+              home: false
+            })}>
               {match.away.name}
             </TeamAway>
         </MatchInformation>

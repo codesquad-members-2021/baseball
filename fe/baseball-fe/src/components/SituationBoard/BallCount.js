@@ -1,29 +1,42 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { GameContext } from 'util/context.js';
 
 function BallCount() {
-  const renderStrike = () => {
+  const { gameState } = useContext(GameContext);
 
+  const renderStrike = () => {
+    return [...Array(gameState.ballCount.strike).keys()].map((_, idx) =>
+      <Count key={idx} className='strike'/>
+    );
   }
 
   const renderBall = () => {
-
+    return [...Array(gameState.ballCount.ball).keys()].map((_, idx) =>
+      <Count key={idx} className='ball'/>
+    );
   }
 
   const renderOut = () => {
-
+    return [...Array(gameState.ballCount.out).keys()].map((_, idx) =>
+      <Count key={idx} className='out'/>
+    );
   }
 
   return (
     <StyledBallCount>
-      <ul className='strike'>
+      <CountList>
         S
-      </ul>
-      <ul className='ball'>
+        {renderStrike()}
+      </CountList>
+      <CountList>
         B
-      </ul>
-      <ul className='out'>
+        {renderBall()}
+      </CountList>
+      <CountList>
         O
-      </ul>
+        {renderOut()}
+      </CountList>
     </StyledBallCount>
   )
 }
@@ -35,20 +48,28 @@ const StyledBallCount = styled.div`
   align-self: flex-start;
 `;
 
-const Count = styled.div`
+const CountList = styled.ul`
+  display: flex;
+  list-style: none;
+  padding-left: 1rem;
+`;
+
+const Count = styled.li`
   width: 1rem;
   height: 1rem;
   border-radius: 9999px;
 
-  .strike {
+    margin-left: 0.5rem;
+
+  &.strike {
     background-color: yellow;
   }
 
-  .ball {
+  &.ball {
     background-color: green;
   }
 
-  .out {
+  &.out {
     background-color: red;
   }
 `;

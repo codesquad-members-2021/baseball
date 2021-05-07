@@ -1,15 +1,29 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'util/context.js';
+import { GameAction } from 'util/action.js';
 
 import BallCount from './BallCount.js';
 import Field from './Field.js';
+import Baseball from 'util/baseball.js';
 
 function SituationBoard({ className }) {
+  const { gameState, gameDispatch } = useContext(GameContext);
+
+  const handleClickPitch = () => {
+    const result = Baseball.pitch();
+    gameDispatch({ type: result });
+  }
+
   return (
     <StyledSituationBoard className={className}>
       <BallCount/>
-      <div className='inning'></div>
-      <button className='pitch-btn'>PITCH</button>
+        <div className='inning'>
+          {gameState.halfInning.currentInning}회
+          {gameState.halfInning.frame === "top" ? " 초" : " 말"}
+          {gameState.mode === "fielding" ? " 수비" : " 공격"}
+        </div>
+      <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>
       <Field/>
     </StyledSituationBoard>
   )

@@ -1,7 +1,10 @@
 import { useEffect, useReducer, useContext } from 'react';
 import styled from 'styled-components';
+import usePolling from 'util/hook/usePolling.js';
 import gameReducer from 'util/reducer/gameReducer.js';
 import { GameContext, GlobalContext } from 'util/context.js';
+import { GameAction } from 'util/action.js';
+import API from 'util/API.js';
 
 import TeamScore from 'components/TeamScore/TeamScore.js';
 import SituationBoard from 'components/SituationBoard/SituationBoard.js';
@@ -9,30 +12,71 @@ import CurrentPlayer from 'components/CurrentPlayer/CurrentPlayer.js';
 import BroadCast from 'components/BroadCast/BroadCast.js';
 
 const _initialState = {
-  mode: '',
-  awayTeam: 'abc',
-  homeTeam: 'def',
-  awayScore: 0,
-  homeScore: 0,
+  mode: null,
+  home: null,
+  away: null,
+  latestResult: null,
+  currPitcherNum: null,
   currPitcher: null,
+  currHitterNum: null,
   currHitter: null,
+  base: {
+    first: null,
+    second: null,
+    third: null
+  },
+  ballCount: {
+    strike: null,
+    ball: null,
+    out: null
+  },
+  halfInning: {
+    currentInning: null,
+    frame: null
+  }
 }
 
 function GamePage() {
   const { globalState } = useContext(GlobalContext);
   const [gameState, gameDispatch] = useReducer(gameReducer, _initialState);
-  
+  const { response, error, setPolling } = usePolling({
+    URL: API.start({ id: globalState.gameId }),
+    delay: 1000,
+  });
+
   useEffect(() => {
-    // TODO: fetch data
+    setPolling(true);
   }, []);
+
+  useEffect(() => {
+    if (!response) return;
+
+    const mode = getCurrMode(response);
+
+    if (!gameState.mode) gameDispatch({ type: GameAction.START, payload: {
+      ...response,
+      mode
+    }});
+    // TODO: else ..
+
+    if (mode === 'fielding') setPolling(false);
+  }, [response]);
+
+  const getCurrMode = (data) =>  {
+    return globalState.home ? data.home.mode : data.away.mode;
+  }
 
   return (
     <StyledGamePage>
       <GameContext.Provider value={{ gameState, gameDispatch }}>
-        <TeamScore className='team-score' playTeam={globalState.playTeam}/>
-        <CurrentPlayer className='current-player'/>
-        <SituationBoard className='situation-board'/>
-        <BroadCast className='broadcast'/>
+        {console.log(gameState.mode)}
+        {gameState.mode &&
+        <>
+          <TeamScore className='team-score'/>
+          <CurrentPlayer className='current-player'/>
+          <SituationBoard className='situation-board'/>
+          <BroadCast className='broadcast'/>
+        </>}
       </GameContext.Provider>
     </StyledGamePage>
   )

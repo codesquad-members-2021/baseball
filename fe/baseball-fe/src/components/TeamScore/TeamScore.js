@@ -10,16 +10,16 @@ function TeamScore({ className, playTeam }) {
       <div className='title'>BASEBALL GAME ONLINE</div>
       <div className='score-board'>
         <div className='away-team'>
-          {gameState.awayTeam}
-          {playTeam === gameState.awayTeam &&
+          {gameState.away.name}
+          {playTeam === gameState.away.name &&
             <div className='player'>Player</div>}
         </div>
-        <span className='score'>{gameState.awayScore}</span>
+        <span className='score'>{gameState.away.score}</span>
         vs
-        <span className='score'>{gameState.homeScore}</span>
+        <span className='score'>{gameState.home.score}</span>
         <div className='home-team'>
-          {gameState.homeTeam}
-          {playTeam === gameState.homeTeam &&
+          {gameState.home.name}
+          {playTeam === gameState.home.name &&
             <div className='player'>Player</div>}
         </div>
       </div>
