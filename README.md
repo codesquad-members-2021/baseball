@@ -32,3 +32,6 @@ fix: Title: 버그 수정
 
 ## Wiki
 - [Link](https://github.com/isaac56/baseball/wiki)
+
+## OAuth 화면
+<img width="300" alt="스크린샷 2021-05-07 오후 2 24 58" src="https://user-images.githubusercontent.com/75113784/117401823-382a5c00-af40-11eb-87d9-059f54028b23.png"><img width="300" alt="스크린샷 2021-05-07 오후 2 25 18" src="https://user-images.githubusercontent.com/75113784/117401818-36f92f00-af40-11eb-884e-ba81b2def54e.png"><img width="300" alt="스크린샷 2021-05-07 오후 2 25 23" src="https://user-images.githubusercontent.com/75113784/117401803-319be480-af40-11eb-840a-4419a5a31bf0.png">
