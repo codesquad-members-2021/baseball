@@ -11,7 +11,7 @@ public class MatchInfoDto {
     private final Integer ball;
     private final Integer outCount;
     private final List<Boolean> bases;
-    private final String inningInfo;
+    private final InningInfoDto inningInfo;
     private final PitcherDto pitcher;
     private final BatterDto batter;
     private final List<Boolean> pitcherInfo;
@@ -34,7 +34,7 @@ public class MatchInfoDto {
         private Integer ball;
         private Integer outCount;
         private List<Boolean> bases;
-        private String inningInfo;
+        private InningInfoDto inningInfo;
         private PitcherDto pitcher;
         private BatterDto batter;
         private List<Boolean> pitcherInfo;
@@ -64,7 +64,7 @@ public class MatchInfoDto {
             return this;
         }
 
-        private Builder inningInfo(String inningInfo) {
+        private Builder inningInfo(InningInfoDto inningInfo) {
             this.inningInfo = inningInfo;
             return this;
         }
@@ -109,7 +109,7 @@ public class MatchInfoDto {
         return bases;
     }
 
-    public String getInningInfo() {
+    public InningInfoDto getInningInfo() {
         return inningInfo;
     }
 
@@ -132,7 +132,7 @@ public class MatchInfoDto {
                 .ball(matchInfo.getBall())
                 .outCount(matchInfo.getOutCount())
                 .bases(matchInfo.getBases())
-                .inningInfo(matchInfo.getInningInfo())
+                .inningInfo(InningInfoDto.from(matchInfo.getInningInfo()))
                 .pitcher(PitcherDto.from(matchInfo.getPitcher()))
                 .batter(BatterDto.from(matchInfo.getBatter()))
                 .pitcherInfo(matchInfo.getPitcherInfo());
