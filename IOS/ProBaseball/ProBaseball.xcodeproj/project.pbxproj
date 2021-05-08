@@ -27,6 +27,9 @@
 		8872EC102643BF6200EDB038 /* BallCountCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */; };
 		8872EC1D2644EC0B00EDB038 /* AmericanCaptain.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8872EC1B2644EC0B00EDB038 /* AmericanCaptain.ttf */; };
 		8872EC1E2644EC0B00EDB038 /* AmericanCaptain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8872EC1C2644EC0B00EDB038 /* AmericanCaptain.otf */; };
+		8872EC292645A4A900EDB038 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EC282645A4A900EDB038 /* EndPoint.swift */; };
+		8872EC2F2645A6EB00EDB038 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EC2E2645A6EB00EDB038 /* NetworkController.swift */; };
+		8872EC332645A74500EDB038 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8872EC322645A74500EDB038 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 		8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallCountCollectionViewCell.xib; sourceTree = "<group>"; };
 		8872EC1B2644EC0B00EDB038 /* AmericanCaptain.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmericanCaptain.ttf; sourceTree = "<group>"; };
 		8872EC1C2644EC0B00EDB038 /* AmericanCaptain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmericanCaptain.otf; sourceTree = "<group>"; };
+		8872EC282645A4A900EDB038 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		8872EC2E2645A6EB00EDB038 /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		8872EC322645A74500EDB038 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +137,7 @@
 		8872EBD8263FDBA400EDB038 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
+				8872EC272645A49E00EDB038 /* Network */,
 				8872EBF726412C4700EDB038 /* Game.swift */,
 				8872EBFB26412C6600EDB038 /* GameList.swift */,
 			);
@@ -176,6 +183,16 @@
 				8872EC0E2643BF6200EDB038 /* BallCountCollectionViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		8872EC272645A49E00EDB038 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8872EC282645A4A900EDB038 /* EndPoint.swift */,
+				8872EC322645A74500EDB038 /* NetworkError.swift */,
+				8872EC2E2645A6EB00EDB038 /* NetworkController.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +301,7 @@
 			files = (
 				8872EBED2640EFED00EDB038 /* GameListCollectionViewCell.swift in Sources */,
 				8872EC0F2643BF6200EDB038 /* BallCountCollectionViewCell.swift in Sources */,
+				8872EC332645A74500EDB038 /* NetworkError.swift in Sources */,
 				1ED6F947264389B400FEFADF /* DiamondView.swift in Sources */,
 				8872EBE42640EAF300EDB038 /* PlayViewController.swift in Sources */,
 				8872EBF826412C4700EDB038 /* Game.swift in Sources */,
@@ -292,7 +310,9 @@
 				8872EBE82640EB0C00EDB038 /* ScoreViewController.swift in Sources */,
 				8872EBA1263FD2F900EDB038 /* AppDelegate.swift in Sources */,
 				1ED6F9452643837300FEFADF /* PlayView.swift in Sources */,
+				8872EC2F2645A6EB00EDB038 /* NetworkController.swift in Sources */,
 				8872EBA3263FD2F900EDB038 /* SceneDelegate.swift in Sources */,
+				8872EC292645A4A900EDB038 /* EndPoint.swift in Sources */,
 				8872EBFC26412C6600EDB038 /* GameList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,36 +7,33 @@
 
 import Foundation
 
-struct Game {
+struct Game: Codable, CustomStringConvertible {
     let myTeam: Team
     let opponentTeam: Team
     let inning: Inning
     let ballCount: BallCount
 }
 
-struct Inning {
-    var status: String
-    var inningNum: Int
+struct BallCount: Codable, CustomStringConvertible {
+    let strike, ball, out: Int
 }
 
-struct Team {
-    var score: Int
-    var isAttack: Bool
-    var players: [Player]
-    var currentPitcher: Player
-    var currentBatsman: Player
+struct Inning: Codable, CustomStringConvertible {
+    let status: String
+    let inningNum: Int
 }
 
-struct Player {
+struct Team: Codable, CustomStringConvertible {
     let name: String
-    var plateAppearance: Int
-    var numberOfPitches: Int
-    var hitsNumber: Int
-    var accumulatedOutCount: Int
+    let score: Int
+    let isAttack: Bool
+    let players: [Player]
+    let currentPitcher, currentBatsman: Player
 }
 
-struct BallCount {
-    let strike: Int
-    let ball: Int
-    let out: Int
+struct Player: Codable, CustomStringConvertible {
+    let name: String
+    let plateAppearance, numberOfPitches, hitsNumbers, accumulatedOutCount: Int
 }
+
+

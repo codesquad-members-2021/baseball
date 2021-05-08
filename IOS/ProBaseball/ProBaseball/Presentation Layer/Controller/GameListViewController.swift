@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum GameListSection: CaseIterable {
     case main
@@ -15,6 +16,8 @@ class GameListViewController: UIViewController {
     @IBOutlet weak var gameListCollectionView: UICollectionView!
     @IBOutlet weak var gameListImageView: UIImageView!
     @IBOutlet weak var gameListLabel: UILabel!
+    let networkManager = NetworkController()
+    var subscriptions = Set<AnyCancellable>()
     
     lazy var dataSource = configureDataSource()
     override func viewDidLoad() {
@@ -49,6 +52,22 @@ class GameListViewController: UIViewController {
             print("1")
         },
         completion: nil)
+    
+        
+        //test
+        let endpoint = Endpoint(path: "/test")
+        print(endpoint.url)
+        
+        networkManager.get(type: GameList.self, url: endpoint.url, headers: endpoint.headers).sink { (completion) in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                break
+            }
+        } receiveValue: { (gameList) in
+            print(gameList.games[0])
+        }.store(in: &subscriptions)
     }
     
     func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, String> {
