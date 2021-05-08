@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.HashMap;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class HomeController {
     private final TeamRepository teamRepository;
