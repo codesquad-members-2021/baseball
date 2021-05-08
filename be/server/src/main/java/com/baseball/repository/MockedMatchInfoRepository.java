@@ -51,16 +51,16 @@ public class MockedMatchInfoRepository implements MatchInfoRepository {
         //홈팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트
 //        Score score = new Score(0, 0);
 //        InningInfo inningInfo = new InningInfo(1, Boolean.TRUE, Boolean.FALSE); //1회 초 수비
-//        Pitcher pitcher = new Pitcher("김광현", 1, 0, 0, 1); // numberOfPitching +1, innings +1
-//        Batter batter = new Batter("류현진", 1, 1, 0, 0.00F); //타석 +1, 안타 +1
+//        Pitcher pitcher = new Pitcher("김광현", 1, 1, 0, 1); // numberOfPitching +1, hit(피안타) +1, innings +1
+//        Batter batter = new Batter("류현진", 1, 1, 0, 1.00F); //타석 +1, 안타 +1, 평균(안타/타석)=1
 //        matchInfo = new MatchInfo(score, 0, 0, 0, Arrays.asList(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE), inningInfo, pitcher, batter, new ArrayList<>());
         //+1 루(일루 진출)
 
         //어웨이팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트
 //        Score score = new Score(0, 0);
 //        InningInfo inningInfo = new InningInfo(1, Boolean.TRUE, Boolean.TRUE); //1회 초 공격
-//        Pitcher pitcher = new Pitcher("김광현", 1, 0, 0, 1);  // numberOfPitching +1, innings +1
-//        Batter batter = new Batter("류현진", 1, 1, 0, 0.00F);  //타석 +1, 안타 +1
+//        Pitcher pitcher = new Pitcher("김광현", 1, 1, 0, 1);  // numberOfPitching +1, hit(피안타) +1, innings +1
+//        Batter batter = new Batter("류현진", 1, 1, 0, 1.00F);  //타석 +1, 안타 +1, 평균(안타/타석)=1
 //        matchInfo = new MatchInfo(score, 0, 0, 0, Arrays.asList(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE), inningInfo, pitcher, batter, new ArrayList<>());
         //+1 루(일루 진출)
 

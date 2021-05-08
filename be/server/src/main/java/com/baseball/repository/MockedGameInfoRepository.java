@@ -63,13 +63,13 @@ public class MockedGameInfoRepository implements GameInfoRepository {
 //        Innings innings = new Innings(new ArrayList<>(), new ArrayList<>());
 //
 //        Players awayPlayers = new Players(
-//                Arrays.asList(new Pitcher("김광현", 1, 0, 0, 1)),  //numberOfPitching +1, innings +1
+//                Arrays.asList(new Pitcher("김광현", 1, 1, 0, 1)),  //numberOfPitching +1, hit(피안타) +1, innings +1
 //                Arrays.asList(new Batter("류현진", 0, 0, 0, 0F))
 //        );
 //
 //        Players homePlayers = new Players(
 //                Arrays.asList(new Pitcher("김광현", 0, 0, 0, 0)),
-//                Arrays.asList(new Batter("류현진", 1, 1, 0, 0F)) //타석 +1, 안타 +1
+//                Arrays.asList(new Batter("류현진", 1, 1, 0, 1.00F)) //타석 +1, 안타 +1, 평균(안타/타석)=1
 //        );
 //
 //        gameinfo = new GameInfo(score, innings, awayPlayers, homePlayers);
