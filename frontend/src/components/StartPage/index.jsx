@@ -3,20 +3,12 @@ import styled from 'styled-components';
 import TeamList from './TeamList';
 import { theme } from '../Style/Theme';
 
-const GameTitle = () => {
-	return <Title>BASEBALL GAME ONLINE</Title>;
-};
-
 const StartPage = () => {
 	const [message, setMessage] = useState('참가할 게임을 선택하세요!');
-	const MainMessage = () => {
-		return <Message>{message}</Message>;
-	};
-
 	return (
 		<>
-			<GameTitle />
-			<MainMessage />
+			<Title>BASEBALL GAME ONLINE</Title>
+			<Message>{message}</Message>
 			<div>
 				<ListWrapper>
 					<TeamList setMessage={setMessage} />
@@ -49,7 +41,6 @@ const ListWrapper = styled.div`
 	margin: 0 auto;
 	max-height: 295px;
 	overflow: hidden;
-
 	&:hover {
 		overflow-y: scroll;
 	}
