@@ -35,7 +35,7 @@ const Info = styled.div`
     }
 
     .info {
-        color: ${({ theme }) => theme.colors.gray3};
+        color: ${({ theme }) => theme.colors.mint};
     }
 
     span + span { margin-left: 16px; }
