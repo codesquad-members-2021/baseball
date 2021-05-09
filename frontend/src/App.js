@@ -5,16 +5,16 @@ import DefenseMode from './components/DefenseMode';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Switch>
-        <StartPage exact path="/" />
-        <Route path="/attack/:id/:away/:home" component={AttackMode} />
-        <Route path="/defense/:id" component={DefenseMode} />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<GlobalStyle />
+			<Switch>
+				<StartPage exact path="/" />
+				<Route path="/attack/:id" component={AttackMode} />
+				<Route path="/defense/:id" component={DefenseMode} />
+			</Switch>
+		</BrowserRouter>
+	);
 }
 
 export default App;
