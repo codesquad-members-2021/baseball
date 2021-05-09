@@ -29,11 +29,11 @@ public class BaseballService {
                 .collect(Collectors.toList());
     }
 
-    public MatchInfoDto getProgress(String gameId, String teamId) {
+    public MatchInfoDto getProgress(String gameId) {
         return MatchInfoDto.from(baseballRepository.findMatchById(gameId));
     }
 
-    public GameInfoDto getGameInfo(String gameId, String teamId) {
+    public GameInfoDto getGameInfo(String gameId) {
         return GameInfoDto.from(baseballRepository.findMatchById(gameId));
     }
 

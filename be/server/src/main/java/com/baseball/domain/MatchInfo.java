@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class MatchInfo {
     private Integer halvesCount = 0;
-    private Boolean isUserOffense = false;
     private List<Boolean> bases = Arrays.asList(false, false, false);
     private List<PitchResult> pitchResults = new ArrayList<>();
 
@@ -25,7 +24,7 @@ public class MatchInfo {
     }
 
     public Boolean getUserOffense() {
-        return isUserOffense;
+        return false;
     }
 
     public Integer getStrike() {

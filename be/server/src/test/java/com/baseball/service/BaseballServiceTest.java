@@ -35,8 +35,8 @@ class BaseballServiceTest {
     void scenario_test_home_0() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamId = "HOME";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId, teamId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId, teamId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
         String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":0,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
@@ -53,8 +53,8 @@ class BaseballServiceTest {
     void scenario_test_away_0() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamId = "AWAY";
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId, teamId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId, teamId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
         String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":0,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
@@ -74,8 +74,8 @@ class BaseballServiceTest {
         String teamId = "HOME";
         baseballService.playGame(matchId, "ball");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":1,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":0,\"baseOnBalls\":1,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[false]}";
@@ -95,8 +95,8 @@ class BaseballServiceTest {
         String teamId = "AWAY";
         baseballService.playGame(matchId, "ball");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":1,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":0,\"baseOnBalls\":1,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[false]}";
@@ -116,8 +116,8 @@ class BaseballServiceTest {
         String teamId = "HOME";
         baseballService.playGame(matchId, "hit");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[true,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":1,\"baseOnBalls\":0,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":1,\"out\":0,\"average\":1.0},\"pitcherInfo\":[]}";
@@ -137,8 +137,8 @@ class BaseballServiceTest {
         String teamId = "AWAY";
         baseballService.playGame(matchId, "hit");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[true,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":1,\"baseOnBalls\":0,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":1,\"out\":0,\"average\":1.0},\"pitcherInfo\":[]}";
@@ -158,8 +158,8 @@ class BaseballServiceTest {
         String teamId = "HOME";
         baseballService.playGame(matchId, "strike");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":1,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":0,\"baseOnBalls\":0,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[true]}";
@@ -179,8 +179,8 @@ class BaseballServiceTest {
         String teamId = "AWAY";
         baseballService.playGame(matchId, "strike");
 
-        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(teamId, matchId));
-        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(teamId, matchId));
+        String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
+        String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
         //TODO: 스냅샷을 떠야한다.
         String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":1,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":1,\"hit\":0,\"baseOnBalls\":0,\"innings\":1},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[true]}";
