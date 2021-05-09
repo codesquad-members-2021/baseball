@@ -5,7 +5,7 @@ const HistoryContext = React.createContext();
 
 export const Router = ({ children }) => {
   const [currentPath, setCurrentPath] = useState('/');
-  const history = window.history;
+  const { history, location: { pathname } } = window;
 
   useEffect(() => {
     //popstate 이벤트 등록.  
@@ -13,9 +13,10 @@ export const Router = ({ children }) => {
     window.addEventListener('popstate', e => {
       if (e.state !== null) {
         console.log(e.state)
-        setCurrentPath(e.state.to)
+        setCurrentPath(e.state.to);
       }
     });
+    setCurrentPath(pathname); //처음 url 입력시 path 지정하게하는것 
   }, []);
 
   return (
@@ -25,13 +26,14 @@ export const Router = ({ children }) => {
   );
 };
 
-export const Route = ({ path, children }) => {
+export const Route = ({ path, children, component }) => {
   //useContext 를 사용해서 currentPath를 얻어오고 path와 일치하는치 확인 후 렌더링
   const { currentPath } = useContext(HistoryContext);
-  console.log(path === currentPath)
+  console.log(path)
+  console.log(currentPath)
   return (
     <>
-      {path === currentPath && children}
+      {path === currentPath && component ? component() : children}
     </>
   );
 };
