@@ -24,10 +24,8 @@ public class GameHistoryDTO {
         List<Integer> awayScores = acquireScores(game, Halves.TOP);
         List<Integer> homeScores = acquireScores(game, Halves.BOTTOM);
 
-        int awayPlayingUniformNumber = game.getCurrentHalves() == Halves.TOP ?
-                game.getBatterUniformNumber() : game.getPitcherUniformNumber();
-        int homePlayingUniformNumber = game.getCurrentHalves() == Halves.BOTTOM ?
-                game.getBatterUniformNumber() : game.getPitcherUniformNumber();
+        int awayPlayingUniformNumber = game.getAwayPlayingUniformNumber();
+        int homePlayingUniformNumber = game.getHomePlayingUniformNumber();
 
         List<BattingHistoryDTO> awayBattingHistories = acquireBattingHistoryDTOList(game, awayTeam, awayPlayingUniformNumber);
         List<BattingHistoryDTO> homeBattingHistories = acquireBattingHistoryDTOList(game, homeTeam, homePlayingUniformNumber);

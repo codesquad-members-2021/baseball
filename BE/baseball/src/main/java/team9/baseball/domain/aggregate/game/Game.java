@@ -157,6 +157,14 @@ public class Game {
         return battingHistoryMap.get(key);
     }
 
+    public Integer getAwayPlayingUniformNumber() {
+        return this.currentHalves == Halves.TOP ? batterUniformNumber : pitcherUniformNumber;
+    }
+
+    public Integer getHomePlayingUniformNumber() {
+        return this.currentHalves == Halves.BOTTOM ? batterUniformNumber : pitcherUniformNumber;
+    }
+
     private void proceedOut(Team awayTeam, Team homeTeam) {
         //아웃 카운트 증가
         this.outCount++;
