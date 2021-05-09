@@ -79,37 +79,46 @@ public class Game {
     }
 
     public List<Integer> pitch(PlayType playType) {
+        List<Integer> backHomeRunners = new ArrayList<>();
         switch (playType) {
-            case HOMERUN:
-                break;
             case STRIKE:
                 onStrike();
                 break;
-            case BALL:
-                onBall();
-            case HITS:
+            case BALL: {
+                int backHomeRunner = onBall();
+                if (backHomeRunner != NO_PLAYER) {
+                    backHomeRunners.add(backHomeRunner);
+                }
+                break;
+            }
+            case HITS : {
+                int backHomeRunner = onHits();
+                if (backHomeRunner != NO_PLAYER) {
+                    backHomeRunners.add(backHomeRunner);
+                }
+                break;
+            }
         }
-        List<Integer> backHomeRunners = judgeState();
-        backHomeRunners.forEach(i -> currentInning().addScore(attackingTeam()));
+        judgeScore(backHomeRunners);
         return backHomeRunners;
     }
 
     private void onStrike() {
         increaseStrikeCount();
-    }
-
-    private void onBall() {
-        increaseBallCount();
-    }
-
-    private List<Integer> judgeState() {
-        List<Integer> backHomePlayers = new ArrayList<>();
         judgeThreeStrike();
-        int backHomePlayer = judge4Ball();
-        if (backHomePlayer != NO_PLAYER) {
-            backHomePlayers.add(backHomePlayer);
-        }
-        return backHomePlayers;
+    }
+
+    private int onBall() {
+        increaseBallCount();
+        return judge4Ball();
+    }
+
+    private int onHits() {
+        return judgeHits();
+    }
+
+    private void judgeScore(List<Integer> backHomeRunners) {
+        backHomeRunners.forEach(i -> currentInning().addScore(attackingTeam()));
     }
 
     private void judgeThreeStrike() {
@@ -125,13 +134,17 @@ public class Game {
     private int judge4Ball() {
         int backHomePlayer = NO_PLAYER;
         if (is4Ball()) {
-            resetStrikeAndBall();
             backHomePlayer = pushAllRunners();
         }
         return backHomePlayer;
     }
 
+    private int judgeHits() {
+        return pushAllRunners();
+    }
+
     private int pushAllRunners() {
+        resetStrikeAndBall();
         int backHomePlayer = NO_PLAYER;
         if (hasThirdBaseRunner()) {
             backHomePlayer = thirdBase;

@@ -153,10 +153,49 @@ class GameRepositoryTest {
         assertThat(pitchResult.size()).isEqualTo(1);
         assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
         assertThat(game.awayTeamScore()).isEqualTo(2);
-        //말로 교대 후, 4볼을 4번 맞으면 홈팀의 점수가 올라가야 합니다
+        //초에서 말로 교대 후, 4볼을 4번 맞으면 홈팀의 점수가 올라가야 합니다
         IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
         IntStream.range(0, 16).forEach(value -> game.pitch(PlayType.BALL));
         assertThat(game.homeTeamScore()).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("피치의 결과가 안타인 상황을 테스트합니다")
+    void testPitchIsHits() {
+        Game game = createGame(GAME_TITLE);
+        //1안타후엔 첫번째 타자가 1루에 가있어야 함
+        int firstHitter = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        assertThat(game.firstBaseRunner()).isEqualTo(firstHitter);
+        //2안타후엔 첫번째 타자가 2루, 두번째가 1루
+        int secondHitter = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        assertThat(game.firstBaseRunner()).isEqualTo(secondHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(firstHitter);
+        //3안타후엔 첫번째 타자가 3루, 두번째가 2루 세번째는 3루
+        int thirdHitter = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        assertThat(game.firstBaseRunner()).isEqualTo(thirdHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(secondHitter);
+        assertThat(game.thirdBaseRunner()).isEqualTo(firstHitter);
+        //4안타후엔 첫번째 타자가 백홈, 두번째가 3루 세번째는 2루 네번째가 1루, 원정팀 1점
+        int fourthHitter = game.currentHitter();
+        List<Integer> backHomeResult = game.pitch(PlayType.HITS);
+        assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
+        assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
+        assertThat(backHomeResult.size()).isEqualTo(1);
+        assertThat(backHomeResult.get(0)).isEqualTo(firstHitter);
+        assertThat(game.awayTeamScore()).isEqualTo(1);
+        //공수교대 후 5안타하면 홈팀 2점
+        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        IntStream.range(0, 5).forEach(value -> game.pitch(PlayType.HITS));
+        assertThat(game.homeTeamScore()).isEqualTo(2);
+        //공수교대 후 5안타하면 원정팀 3점, 홈팀 여전히 2점
+        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        IntStream.range(0, 5).forEach(value -> game.pitch(PlayType.HITS));
+        assertThat(game.awayTeamScore()).isEqualTo(3);
+        assertThat(game.homeTeamScore()).isEqualTo(2);
     }
 
     private Game createGame(String gameTitle) {
