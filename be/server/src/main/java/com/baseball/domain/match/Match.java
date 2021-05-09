@@ -2,8 +2,9 @@ package com.baseball.domain.match;
 
 import com.baseball.domain.player.Batter;
 import com.baseball.domain.player.Pitcher;
-import com.baseball.domain.team.SelectedTeam;
 import com.baseball.domain.team.Teams;
+
+import static com.baseball.domain.team.SelectedTeam.AWAY;
 
 public class Match {
     private final Teams teams;
@@ -38,7 +39,7 @@ public class Match {
     }
 
     public Boolean getUserOffense() {
-        return getUserTop() && teams.getSelectedTeam() == SelectedTeam.AWAY;
+        return teams.getSelectedTeam() == AWAY ? getUserTop() : !getUserTop();
     }
 
     public void play(String pitch) {
