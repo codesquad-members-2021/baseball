@@ -1,6 +1,5 @@
-package com.baseball.domain;
+package com.baseball.domain.match;
 
-import com.baseball.domain.match.Matches;
 import com.baseball.exception.MatchNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

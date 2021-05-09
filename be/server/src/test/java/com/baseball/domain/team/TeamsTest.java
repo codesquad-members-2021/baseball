@@ -1,8 +1,6 @@
-package com.baseball.domain;
+package com.baseball.domain.team;
 
 import com.baseball.domain.player.Players;
-import com.baseball.domain.team.Team;
-import com.baseball.domain.team.Teams;
 import com.baseball.exception.MatchOccupiedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +29,7 @@ class TeamsTest {
     }
 
     @Test
-    @DisplayName("이미 팀이 선택되었다면, 다시 팀을 고를 수 없습니다.")
+    @DisplayName("이미 팀이 선택되었다면, 다시 팀을 고를 수 없다.")
     void selectTeam() {
         teams.selectTeam("AWAY");
         assertThatExceptionOfType(MatchOccupiedException.class)
