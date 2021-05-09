@@ -18,16 +18,16 @@ class GameListViewController: UIViewController {
     @IBOutlet weak var gameListLabel: UILabel!
     
     var viewModel: GameListViewModel!
-    lazy var dataSource = configureDataSource()
+    var dataSource: UICollectionViewDiffableDataSource<GameListSection , Game>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         gameListImageView.backgroundColor = UIColor(patternImage: UIImage(named: "baseBallPattern")!)
         self.gameListCollectionView.backgroundColor = .clear
+        
         gameListCollectionView.register(UINib(nibName: "GameListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GameListCollectionViewCell")
         gameListCollectionView.dataSource = dataSource
         gameListCollectionView.delegate = self
-        updateSnapshot()
         
         self.gameListLabel.layer.shadowColor = UIColor(named: "retroBrown")?.cgColor
         self.gameListLabel.layer.shadowOffset = CGSize(width: 0, height: 6)
@@ -49,37 +49,48 @@ class GameListViewController: UIViewController {
         options: [.repeat, .autoreverse],
         animations: {
             self.gameListLabel.center.y -= CGFloat(10)
-            print("1")
+        
         },
         completion: nil)
-        print("injection end")
-        viewModel.fetchGameList()
+        
+        self.dataSource = configureDataSource()
+        bind()
     }
     
     func depend(viewModel: GameListViewModel) {
         self.viewModel = viewModel
     }
     
-    func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, String> {
-        let dataSource = UICollectionViewDiffableDataSource<GameListSection, String>(collectionView: gameListCollectionView) { (collectionView, indexPath, icon) -> UICollectionViewCell? in
-     
-            let tempHomeTeams = ["HAWKS", "HAWKS", "HULKS", "JEJE"]
-            let tempAwayTeams = ["BATMEN", "BATMEN", "JOKERS", "HONG"]
+    func bind() {
+        viewModel.fetchGameList()
+        viewModel.didUpdateGameList { [weak self] (gameList) in
+//            self?.dataSource = self?.configureDataSource()
+            self?.performUIUpdate(with: gameList)
+        }
+    }
+    
+    func configureDataSource() -> UICollectionViewDiffableDataSource<GameListSection, Game> {
+        let dataSource = UICollectionViewDiffableDataSource<GameListSection, Game>(collectionView: gameListCollectionView) { (collectionView, indexPath, game) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameListCollectionViewCell", for: indexPath) as! GameListCollectionViewCell
-            cell.homeTeamLabel.text = tempHomeTeams[indexPath.row]
-            cell.awayTeamLabel.text = tempAwayTeams[indexPath.row]
-            cell.gameNumberLabel.text = "Game 1"
+            cell.homeTeamLabel.text = game.myTeam.name
+            cell.awayTeamLabel.text = game.opponentTeam.name
+            cell.gameNumberLabel.text = "Game \(indexPath.row + 1)"
             return cell
         }
         return dataSource
     }
     
-    func updateSnapshot(animatingChange: Bool = false) {
-        var snapshot = NSDiffableDataSourceSnapshot<GameListSection, String>()
+    func updateSnapshot(with gameList: GameList) {
+        var snapshot = NSDiffableDataSourceSnapshot<GameListSection, Game>()
         snapshot.appendSections(GameListSection.allCases)
-        snapshot.appendItems(["sdf"], toSection: GameListSection.main)
-     
-        dataSource.apply(snapshot, animatingDifferences: false)
+        snapshot.appendItems(gameList.games, toSection: GameListSection.main)
+        dataSource.apply(snapshot)
+    }
+    
+    func performUIUpdate(with gameList: GameList) {
+        DispatchQueue.main.async {
+            self.updateSnapshot(with: gameList)
+        }
     }
 }
 

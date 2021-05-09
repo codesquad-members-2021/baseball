@@ -9,19 +9,17 @@ import Foundation
 import Combine
 
 protocol GameListUseCaseProtocol {
-    func fetchGameList(endpoint: Endpoint, completion: ([Game]) -> Void)
+    func fetchGameList(endpoint: Endpoint) -> AnyPublisher<GameList, NetworkError>
 }
 
 class GameListUseCase: GameListUseCaseProtocol {
-    let gameListRepository: GameListRepository
+    let networkController: NetworkControllerProtocol
     
-    init(gameListRepository: GameListRepository) {
-        self.gameListRepository = gameListRepository
+    init(networkController: NetworkControllerProtocol) {
+        self.networkController = networkController
     }
     
-    func fetchGameList(endpoint: Endpoint, completion: ([Game]) -> Void) {
-        gameListRepository.fetchGameList(endpoint: endpoint) { (gameArray) in
-            completion(gameArray)
-        }
+    func fetchGameList(endpoint: Endpoint) -> AnyPublisher<GameList, NetworkError> {
+        return networkController.get(type: GameList.self, url: endpoint.url, method: .get)
     }
 }

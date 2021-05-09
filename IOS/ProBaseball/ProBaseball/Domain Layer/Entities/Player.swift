@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Player: Codable, CustomStringConvertible {
+struct Player: Codable, CustomStringConvertible, Hashable {
     let name: String
     let plateAppearance, numberOfPitches, hitsNumbers, accumulatedOutCount: Int
 }

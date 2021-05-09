@@ -6,17 +6,39 @@
 //
 
 import Foundation
+import Combine
 
 class GameListViewModel {
     private let gameListUseCase: GameListUseCase
+    private var subscriptions = Set<AnyCancellable>()
+    @Published var gameList: GameList?
     
     init(gameListUseCase: GameListUseCase) {
         self.gameListUseCase = gameListUseCase
     }
     
     func fetchGameList() {
-        self.gameListUseCase.fetchGameList(endpoint: Endpoint.test) { (gameList) in
-            print(gameList)
-        }
+        gameListUseCase.fetchGameList(endpoint: Endpoint.test).sink { (completion) in
+            switch completion {
+            case .failure(let error):
+                print(error)
+            case .finished:
+                break
+            }
+        } receiveValue: { (gameList) in
+            self.gameList = gameList
+        }.store(in: &subscriptions)
+    }
+    
+    func didUpdateGameList(completion: @escaping ((GameList) ->())) {
+        $gameList
+            .sink { (gameList) in
+                if gameList != nil {
+                    completion(gameList!)
+                } else {
+                    print("gameList is empty")
+                    return
+                }
+        }.store(in: &subscriptions)
     }
 }

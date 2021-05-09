@@ -13,20 +13,14 @@ protocol NetworkControllerProtocol {
     
     func get<T>(type: T.Type,
                 url: URL,
-                headers: Headers
+                method: HTTPMethod
     ) -> AnyPublisher<T, NetworkError> where T: Codable
 }
 
 final class NetworkController: NetworkControllerProtocol {
-    func get<T>(type: T.Type, url: URL, headers: Headers) -> AnyPublisher<T, NetworkError> where T : Codable {
+    func get<T>(type: T.Type, url: URL, method: HTTPMethod) -> AnyPublisher<T, NetworkError> where T : Codable {
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        
-        headers.forEach { (key, value) in
-            if let value = value as? String {
-                            urlRequest.setValue(value, forHTTPHeaderField: key)
-            }
-        }
+        urlRequest.httpMethod = method.rawValue
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .mapError({ _ in

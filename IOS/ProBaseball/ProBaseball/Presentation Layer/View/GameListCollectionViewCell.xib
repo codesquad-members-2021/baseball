@@ -35,30 +35,32 @@
                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v8-W2-lBm">
-                                    <rect key="frame" x="53.5" y="41.5" width="83.5" height="36"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8v8-W2-lBm">
+                                    <rect key="frame" x="8.5" y="41.5" width="139" height="36"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aUA-29-OaP">
-                                    <rect key="frame" x="213" y="41.5" width="77" height="36"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUA-29-OaP">
+                                    <rect key="frame" x="199.5" y="41.5" width="139" height="36"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="8v8-W2-lBm" firstAttribute="width" secondItem="oeL-6r-k8l" secondAttribute="width" multiplier="0.4" id="2aw-5s-LLt"/>
+                                <constraint firstItem="aUA-29-OaP" firstAttribute="width" secondItem="oeL-6r-k8l" secondAttribute="width" multiplier="0.4" id="7Wf-2Q-OCR"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="top" secondItem="ozx-EV-aGZ" secondAttribute="bottom" constant="25" id="F5X-V0-NJ9"/>
                                 <constraint firstItem="aUA-29-OaP" firstAttribute="centerY" secondItem="PPs-BN-Y7O" secondAttribute="centerY" id="Gda-Gy-BSv"/>
                                 <constraint firstItem="ozx-EV-aGZ" firstAttribute="top" secondItem="oeL-6r-k8l" secondAttribute="top" constant="5" id="Gzd-ER-6kg"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="height" secondItem="oeL-6r-k8l" secondAttribute="height" multiplier="0.2" id="HXU-q1-2J5"/>
                                 <constraint firstItem="ozx-EV-aGZ" firstAttribute="leading" secondItem="oeL-6r-k8l" secondAttribute="leading" id="KQO-4m-VCe"/>
-                                <constraint firstItem="aUA-29-OaP" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="1.45" id="Pzg-Kp-CZb"/>
+                                <constraint firstItem="aUA-29-OaP" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="1.55" id="Pzg-Kp-CZb"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="centerY" secondItem="8v8-W2-lBm" secondAttribute="centerY" id="SR1-pd-Egl"/>
                                 <constraint firstAttribute="trailing" secondItem="ozx-EV-aGZ" secondAttribute="trailing" id="YZV-Lr-aW6"/>
                                 <constraint firstItem="PPs-BN-Y7O" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" id="aeQ-9N-dDB"/>
-                                <constraint firstItem="8v8-W2-lBm" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="0.55" id="zoc-UO-kKA"/>
+                                <constraint firstItem="8v8-W2-lBm" firstAttribute="centerX" secondItem="oeL-6r-k8l" secondAttribute="centerX" multiplier="0.45" id="zoc-UO-kKA"/>
                             </constraints>
                         </view>
                         <blurEffect style="extraLight"/>

@@ -8,12 +8,8 @@
 import Foundation
 
 final class GameListSceneDIContainer {
-    func makeGameListRepository() -> GameListRepository {
-        return GameListRepository(networkController: NetworkController())
-    }
-    
     func makeGameListUseCase() -> GameListUseCase {
-        return GameListUseCase(gameListRepository: makeGameListRepository())
+        return GameListUseCase(networkController: NetworkController())
     }
 
     func makeGameListViewModel() -> GameListViewModel {
