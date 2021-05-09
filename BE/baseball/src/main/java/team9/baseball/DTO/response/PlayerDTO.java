@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import team9.baseball.domain.aggregate.team.Team;
+import team9.baseball.domain.aggregate.team.Player;
 
 @Getter
 @Builder(access = AccessLevel.PRIVATE)
@@ -14,15 +14,15 @@ public class PlayerDTO {
     private int uniformNumber;
     private String name;
 
-    public static PlayerDTO of(Team team, Integer uniform_number) {
-        if (uniform_number == null) {
+    public static PlayerDTO of(Player player) {
+        if (player == null) {
             return null;
         }
 
         return builder()
-                .teamId(team.getId())
-                .uniformNumber(uniform_number)
-                .name(team.getPlayerName(uniform_number))
+                .teamId(player.getId())
+                .uniformNumber(player.getUniformNumber())
+                .name(player.getName())
                 .build();
     }
 }

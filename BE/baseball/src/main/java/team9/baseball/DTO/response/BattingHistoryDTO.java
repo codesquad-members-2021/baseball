@@ -23,7 +23,7 @@ public class BattingHistoryDTO {
     public static BattingHistoryDTO of(Team team, BattingHistory battingHistory, int playingUniformNumber) {
         return builder()
                 .uniformNumber(battingHistory.getBatterUniformNumber())
-                .name(team.getPlayerName(battingHistory.getBatterUniformNumber()))
+                .name(team.getPlayer(battingHistory.getBatterUniformNumber()).getName())
                 .appearCount(battingHistory.getAppear())
                 .hitCount(battingHistory.getHits())
                 .outCount(battingHistory.getOut())

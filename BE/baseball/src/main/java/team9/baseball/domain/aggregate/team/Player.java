@@ -10,6 +10,10 @@ public class Player {
     @Id
     private Integer id;
 
+    private Integer teamId;
+
+    private Integer uniformNumber;
+
     private String name;
 
     public Player(String name) {
