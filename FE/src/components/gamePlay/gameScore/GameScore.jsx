@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { cssFlexAlignCenter } from "../../utilComponent/CommonStyledCSS";
 import Logo from "../../utilComponent/Logo";
 import GameScoreStatus from "./GameScoreStatus";
 
@@ -15,8 +16,6 @@ export default GameScore;
 
 // --- Styled Components ---
 const StyledGameScore = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${cssFlexAlignCenter};
     flex-direction: column; 
 `;

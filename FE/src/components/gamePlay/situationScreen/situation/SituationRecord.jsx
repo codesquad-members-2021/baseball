@@ -5,10 +5,10 @@ const SituationRecord = () => {
     return (
         <StyledSituationRecord>
             {[...Array(5)].map((_, i) => (
-                <Record>
+                <Record key={i}>
                     <Num>{i+1}</Num>
-                    <Name>{i % 2 === 0 ? '스트라이크' : '아웃'}</Name>
-                    <Data>S1 B{i+1}</Data>
+                    <span>{i % 2 === 0 ? '스트라이크' : '아웃'}</span>
+                    <span>S1 B{i+1}</span>
                 </Record>
             ))}
         </StyledSituationRecord>
@@ -44,7 +44,3 @@ const Num = styled.span`
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => theme.fontSize.XS};
 `;
-
-const Name = styled.span``;
-
-const Data = styled.span``;

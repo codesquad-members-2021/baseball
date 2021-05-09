@@ -1,18 +1,26 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import GameScore from './gameScore/GameScore';
 import MatchScreen from './matchScreen/MatchScreen';
 import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
+import { cssScrollbar } from '../utilComponent/CommonStyledCSS';
 
 const GamePlay = () => {
+    const childComponents = [
+        <GameScore />,
+        <MatchScreen />,
+        <BattleGround />,
+        <SituationScreen />,
+    ];
+    const gamePlayItems = childComponents.map((child, i) => (
+        <GamePlayItem key={i} idx={i + 1}>
+            {child}
+        </GamePlayItem>
+    ));
+
     return (
         <StyledGamePlay>
-            <GamePlayItems>
-                <li><GameScore /></li>
-                <li><MatchScreen /></li>
-                <li><BattleGround /></li>
-                <li><SituationScreen /></li>
-            </GamePlayItems>
+            <GamePlayItems>{gamePlayItems}</GamePlayItems>
         </StyledGamePlay>
     );
 };
@@ -21,7 +29,7 @@ export default GamePlay;
 
 // --- Styled Components ---
 const StyledGamePlay = styled.div`
-    min-width: 100%;
+    width: 60%;
     color: ${({ theme }) => theme.colors.white};
 `;
 
@@ -29,16 +37,17 @@ const GamePlayItems = styled.ul`
     display: grid;
     grid-template-columns: 3fr 1fr;
     border: 3px solid ${({ theme }) => theme.colors.white};
+`;
 
-    li {
-        padding: 24px;
-    }
-    li:nth-child(1),
-    li:nth-child(2) {
-        border-bottom: 3px solid ${({ theme }) => theme.colors.white};
-    }
+const GamePlayItem = styled.li`
+    padding: 16px;
 
-    li:nth-child(2n) {
-        border-left: 3px solid ${({ theme }) => theme.colors.white};
-    }
+    ${({ idx }) => (idx % 2 === 0) && 
+        css`border-left: 3px solid ${({ theme }) => theme.colors.white};`};
+    ${({ idx }) => (idx === 1 || idx === 2) 
+        && css`border-bottom: 3px solid ${({ theme }) => theme.colors.white};`};
+    ${({ idx }) => (idx === 3 || idx === 4) 
+        && css`max-height: 500px;`};
+
+    ${({ idx }) => (idx === 4) && cssScrollbar};
 `;

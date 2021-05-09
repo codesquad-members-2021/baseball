@@ -1,6 +1,5 @@
 // styled-components의 ThemeProvider에 쓰임
 // ThemeProvider는 useContext 쓰듯 사용하기!
-
 const fontFamily = 'Noto Sans KR';
 const fontWeight = {
     normal: 400,
@@ -8,15 +7,15 @@ const fontWeight = {
     bold2: 900,
 };
 const fontSize = {
-    XS: '18px',
-    S: '24px',
-    M: '30px',
-    L: '36px',
-    XL: '42px',
-    XXL: '48px',
-    XXXL: '54px',
-    XXXXL: '60px',
-    TEAM: '74px'
+    XS: '16px',
+    S: '20px',
+    M: '24px',
+    L: '28px',
+    XL: '32px',
+    XXL: '36px',
+    XXXL: '42px',
+    XXXXL: '48px',
+    TEAM: '54px'
 };
 const colors = {
     white: '#FFF',
