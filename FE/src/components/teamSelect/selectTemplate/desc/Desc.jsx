@@ -7,7 +7,9 @@ export default Desc;
 
 // --- Styled Components ---
 const StyledDesc = styled.div`
-    font-size: ${({ theme }) => theme.fontSize.XL};
+    font-size: ${({ theme }) => theme.fontSize.S};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
     color: ${({ theme }) => theme.colors.white};
+
+    margin: 16px 0;
 `;

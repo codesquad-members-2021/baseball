@@ -8,13 +8,14 @@ const fontWeight = {
     bold2: 900,
 };
 const fontSize = {
-    S: '14px',
-    M: '16px',
-    M2: '18px',
-    L: '20px',
-    XL: '24px',
-    XXL: '32px',
-    XXXL: '40px',
+    S: '24px',
+    M: '30px',
+    L: '36px',
+    XL: '42px',
+    XXL: '48px',
+    XXXL: '54px',
+    XXXXL: '60px',
+    TEAM: '74px'
 };
 const colors = {
     white: '#FFF',

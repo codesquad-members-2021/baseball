@@ -29,6 +29,9 @@ const GamePlayItems = styled.ul`
     display: grid;
     grid-template-columns: 3fr 1fr;
 
+    li {
+        padding: 24px;
+    }
     li:nth-child(1),
     li:nth-child(2) {
         border-bottom: 3px solid ${({ theme }) => theme.colors.white};
