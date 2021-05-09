@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { GlobalContext } from "../../App";
 import Title from "../shared/Title";
-import CurrentIningInfo from "./baseballField/CurrentIningInfo";
+import CurrentInningInfo from "./baseballField/CurrentInningInfo";
 import Diamond from "./baseballField/Diamond";
 import PitchButton from "./baseballField/PitchButton";
 import SBO from "./baseballField/SBO";
@@ -12,11 +13,8 @@ import PlayerListPopup from "./PlayerListPopup";
 import TeamScore from "./TeamScore";
 
 const Game = () => {
-  const { myTeam, counterTeam } = JSON.parse(localStorage.getItem("Teams"));
-
-  const [homeTeam, setHomeTeam] = useState(counterTeam.home ? counterTeam : myTeam);
-  const [expeditionTeam, setExpeditionTeam] = useState(!counterTeam.home ? counterTeam : homeTeam);
-
+  const { myTeam, counterTeam, homeTeam, currGameState } = useContext(GlobalContext);
+  const expeditionTeam = homeTeam.id !== myTeam.id ? myTeam : counterTeam;
   // useEffect(() => {
   //   fetch("/api/")
   //     .then((res) => res.json())
@@ -35,9 +33,9 @@ const Game = () => {
             {/* style-component*/}
             <Title />
             <ScoreBox>
-              <TeamScore isHome={false} team={expeditionTeam} />
+              <TeamScore isHome={false} team={expeditionTeam} score={currGameState.expeditionTeam.totalScore} />
               <span>VS</span>
-              <TeamScore isHome team={homeTeam} />
+              <TeamScore isHome team={homeTeam} score={currGameState.homeTeam.totalScore} />
             </ScoreBox>
           </MainScoreBoard>
           <BaseballField>
@@ -46,7 +44,7 @@ const Game = () => {
             <Diamond>
               <PitchButton />
             </Diamond>
-            <CurrentIningInfo />
+            <CurrentInningInfo inning={currGameState.inning} />
           </BaseballField>
         </GameProgress>
 
@@ -54,15 +52,13 @@ const Game = () => {
           {/* style-component*/}
           <CurrentPlayerContainer>
             {/* style-component*/}
-            <CurrentPlayer />
-            <CurrentPlayer />
+            <CurrentPlayer player={currGameState.pitcher} />
+            <CurrentPlayer player={currGameState.hitter} />
           </CurrentPlayerContainer>
           <PlayerHistoryContainer>
             {/* style-component*/}
-            <PlayerHistory />
-            <PlayerHistory />
-            <PlayerHistory />
-            {/*map 돌릴 예정 */}
+            {currGameState.teamLog.playerLog.length &&
+              [...currGameState.teamLog.playerLog].map((playerHistory) => <PlayerHistory history={playerHistory} />)}
           </PlayerHistoryContainer>
         </PlayerProgress>
       </GameContainer>

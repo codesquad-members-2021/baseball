@@ -1,12 +1,14 @@
 import React from "react";
 
-const CurrentPlayer = (props) => {
+const CurrentPlayer = ({ player }) => {
   return (
     <div>
-      <div>투수</div>
+      <div>{player.role}</div>
       <div>
-        <span>최동원</span>
-        <span>#30</span>
+        <span>{player.name}</span>
+        <span>
+          {player.role === "투수" ? `#${player.pitchCount}` : `${player.plateAppearances}타석 ${player.hits}안타`}
+        </span>
       </div>
     </div>
   );

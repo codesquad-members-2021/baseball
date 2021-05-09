@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const TeamScore = ({ isHome, team }) => {
+const TeamScore = ({ isHome, team, score }) => {
   return (
     <TeamScoreContainer isHome={isHome}>
-      <p>0</p>
+      <p>{score}</p>
       <p>{team.name}</p>
     </TeamScoreContainer>
   );
