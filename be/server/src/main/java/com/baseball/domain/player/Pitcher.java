@@ -1,30 +1,19 @@
-package com.baseball.domain;
+package com.baseball.domain.player;
 
-public class Pitcher {
-    private final String name;
+public class Pitcher extends Player {
     private final Integer numberOfPitching;
-    private final Integer hit;
     private final Integer baseOnBalls;
     private final Integer innings;
 
     public Pitcher(String name, Integer numberOfPitching, Integer hit, Integer baseOnBalls, Integer innings) {
-        this.name = name;
+        super(name, hit);
         this.numberOfPitching = numberOfPitching;
-        this.hit = hit;
         this.baseOnBalls = baseOnBalls;
         this.innings = innings;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public Integer getNumberOfPitching() {
         return numberOfPitching;
-    }
-
-    public Integer getHit() {
-        return hit;
     }
 
     public Integer getBaseOnBalls() {

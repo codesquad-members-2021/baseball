@@ -1,6 +1,9 @@
 package com.baseball.domain;
 
 
+import com.baseball.domain.player.Batter;
+import com.baseball.domain.player.Pitcher;
+
 import java.util.List;
 
 public class MatchInfo {

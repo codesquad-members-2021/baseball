@@ -1,6 +1,10 @@
 package com.baseball.repository;
 
-import com.baseball.domain.*;
+import com.baseball.domain.InningInfo;
+import com.baseball.domain.MatchInfo;
+import com.baseball.domain.Score;
+import com.baseball.domain.player.Batter;
+import com.baseball.domain.player.Pitcher;
 
 import java.util.Arrays;
 

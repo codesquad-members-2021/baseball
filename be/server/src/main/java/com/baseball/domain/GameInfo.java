@@ -1,5 +1,7 @@
 package com.baseball.domain;
 
+import com.baseball.domain.player.Players;
+
 public class GameInfo {
     private final Score scores;
     private final Innings innings;

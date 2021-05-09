@@ -1,30 +1,19 @@
-package com.baseball.domain;
+package com.baseball.domain.player;
 
-public class Batter {
-    private final String name;
+public class Batter extends Player {
     private final Integer plateAppearances;
-    private final Integer hit;
     private final Integer out;
     private final Float average;
 
     public Batter(String name, Integer plateAppearances, Integer hit, Integer out, Float average) {
-        this.name = name;
+        super(name, hit);
         this.plateAppearances = plateAppearances;
-        this.hit = hit;
         this.out = out;
         this.average = average;
     }
-
-    public String getName() {
-        return name;
-    }
-
+    
     public Integer getPlateAppearances() {
         return plateAppearances;
-    }
-
-    public Integer getHit() {
-        return hit;
     }
 
     public Integer getOut() {
