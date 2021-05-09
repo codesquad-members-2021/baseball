@@ -9,5 +9,5 @@ import team9.baseball.domain.enums.PitchResult;
 @Setter
 @NoArgsConstructor
 public class PitchResultDTO {
-    private PitchResult pitch_result;
+    private PitchResult pitchResult;
 }

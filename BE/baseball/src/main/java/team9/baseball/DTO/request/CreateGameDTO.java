@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CreateGameDTO {
-    private int away_team_id;
-    private int home_team_id;
+    private int awayTeamId;
+    private int homeTeamId;
 }

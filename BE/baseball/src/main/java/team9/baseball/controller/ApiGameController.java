@@ -27,13 +27,13 @@ public class ApiGameController {
 
     @PostMapping
     public ApiResult createGame(@RequestBody CreateGameDTO createGameDTO) {
-        gameService.createNewGame(1l, createGameDTO.getAway_team_id(), createGameDTO.getHome_team_id());
+        gameService.createNewGame(1l, createGameDTO.getAwayTeamId(), createGameDTO.getHomeTeamId());
         return ApiResult.succeed("OK");
     }
 
     @PostMapping("/joining")
     public ApiResult joinGame(@Valid @RequestBody JoinGameDTO joinGameDTO) {
-        gameService.joinGame(1l, joinGameDTO.getGame_id(), joinGameDTO.getMy_venue());
+        gameService.joinGame(1l, joinGameDTO.getGameId(), joinGameDTO.getMyVenue());
         return ApiResult.succeed("OK");
     }
 
@@ -44,7 +44,7 @@ public class ApiGameController {
 
     @PostMapping("/status/pitch-result")
     public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO) {
-        gameService.applyPitchResult(1l, pitchResultDTO.getPitch_result());
+        gameService.applyPitchResult(1l, pitchResultDTO.getPitchResult());
         return ApiResult.succeed("OK");
     }
 

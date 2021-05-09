@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @AllArgsConstructor
 public class JoinGameDTO {
-    private int game_id;
-    
+    private int gameId;
+
     @NotNull
-    private Venue my_venue;
+    private Venue myVenue;
 }
