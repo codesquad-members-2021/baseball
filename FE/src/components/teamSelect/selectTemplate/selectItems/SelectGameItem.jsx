@@ -1,14 +1,17 @@
 import styled, {css} from 'styled-components';
+import {Link} from "react-router-dom";
 
-const SelectGameItem = ({ home, away, idx }) => {
+const SelectGameItem = ({ home, away, idx, to}) => {
     return home && away && (
         <StyledSelectGameItem>
+            <SelectGameLink to = {to}>
             <GameNumParagraph>Game {idx}</GameNumParagraph>
             <TeamInfo>
                 <TeamInfoSpan type="team">{away}</TeamInfoSpan> 
                 <TeamInfoSpan>VS</TeamInfoSpan>
                 <TeamInfoSpan type="team">{home}</TeamInfoSpan>
             </TeamInfo>
+            </SelectGameLink>
         </StyledSelectGameItem>
     );
 };
@@ -25,6 +28,10 @@ const StyledSelectGameItem = styled.li`
     & + & {
         margin-top: 20px;
     }
+`;
+
+const SelectGameLink = styled(Link)`
+    text-decoration: none;
 `;
 
 const GameNumParagraph = styled.p`

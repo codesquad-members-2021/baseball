@@ -8,6 +8,7 @@ const fontWeight = {
     bold2: 900,
 };
 const fontSize = {
+    XS: '18px',
     S: '24px',
     M: '30px',
     L: '36px',
@@ -27,6 +28,7 @@ const colors = {
     gray4: '#BDBDBD',
     gray5: '#E0E0E0',
     gray6: '#F5F5F7',
+    mint: '#1EBFD4',
 };
 
 const theme = {
