@@ -9,14 +9,18 @@ const Field = () => {
 	const [runnerList, setRunnerList] = useState([
 		{
 			base: 0,
-			isRunning: true,
 		},
 	]);
 
+	const [isInPlay, setInPlay] = useState(false);
+
 	const hit = async () => {
+		if (isInPlay) return;
+		setInPlay(() => true);
 		await ready();
 		await run();
 		arrive();
+		setInPlay(() => false);
 	};
 
 	const ready = () =>
@@ -32,17 +36,14 @@ const Field = () => {
 
 	const run = () =>
 		new Promise((res, rej) => {
-			setRunnerList((list) => {
-				return [
-					...list.map((el) => {
-						return { base: el.base++, isRunning: true };
-					}),
-					{
-						base: 0,
-						isRunning: true,
-					},
-				];
-			});
+			setRunnerList((list) => [
+				...list.map((el) => {
+					return { base: el.base++, isRunning: true };
+				}),
+				{
+					base: 0,
+				},
+			]);
 			setTimeout(() => res(), 400);
 		});
 
@@ -59,13 +60,18 @@ const Field = () => {
 	return (
 		<StyledField>
 			<BallCount count={count} />
+
 			<CurrentInning>8회초 수비</CurrentInning>
+
 			{gongSoo === "DEFENSE" && <PitchButton onClick={hit}>PITCH</PitchButton>}
+
 			<Pitcher src="image/pitcher_eagles_heart.png" />
+
 			{runnerList.map((el, i) => (
 				<Runner key={i} {...el} />
 			))}
-			<Batter src="image/batter.png" />
+			
+			{isInPlay || <Batter src="image/batter.png" />}
 		</StyledField>
 	);
 };
