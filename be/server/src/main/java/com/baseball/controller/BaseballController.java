@@ -3,15 +3,13 @@ package com.baseball.controller;
 import com.baseball.dto.GameInfoDto;
 import com.baseball.dto.MatchDto;
 import com.baseball.dto.MatchInfoDto;
+import com.baseball.dto.MatchRequestDto;
 import com.baseball.service.BaseballService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,5 +43,14 @@ public class BaseballController {
     public ResponseEntity<GameInfoDto> getGameInfo(@ApiParam("게임의 식별자") @PathVariable String id) {
         GameInfoDto gameInfo = baseballService.getGameInfo(id);
         return ResponseEntity.ok().body(gameInfo);
+    }
+
+    @PutMapping("/match")
+    @ApiOperation(value = "게임 입장 요청", notes = "게임에 입장하면서 응원할 팀을 선택합니다.")
+    public ResponseEntity<Void> selectTeam(@RequestBody MatchRequestDto matchRequestDto) {
+        String matchId = matchRequestDto.getId();
+        String teamName = matchRequestDto.getSelectedTeam();
+        baseballService.selectTeam(matchId, teamName);
+        return ResponseEntity.ok().build();
     }
 }

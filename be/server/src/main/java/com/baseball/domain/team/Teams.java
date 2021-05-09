@@ -1,28 +1,38 @@
-package com.baseball.domain;
+package com.baseball.domain.team;
 
 import com.baseball.domain.player.Batter;
 import com.baseball.domain.player.Pitcher;
+import com.baseball.exception.MatchOccupiedException;
 
-public class Match {
+import static com.baseball.domain.team.SelectedTeam.*;
+
+public class Teams {
     private final Team awayTeam;
     private final Team homeTeam;
-    private final MatchInfo matchInfo = new MatchInfo();
+    private SelectedTeam selectedTeam = NONE;
 
-    public Match(Team awayTeam, Team homeTeam) {
-        this.homeTeam = homeTeam;
+    public Teams(Team awayTeam, Team homeTeam) {
         this.awayTeam = awayTeam;
-    }
-
-    public Team getHomeTeam() {
-        return homeTeam;
+        this.homeTeam = homeTeam;
     }
 
     public Team getAwayTeam() {
         return awayTeam;
     }
 
-    public MatchInfo getMatchInfo() {
-        return matchInfo;
+    public Team getHomeTeam() {
+        return homeTeam;
+    }
+
+    public SelectedTeam getSelectedTeam() {
+        return selectedTeam;
+    }
+
+    public void selectTeam(String teamName) {
+        if (selectedTeam != NONE) {
+            throw new MatchOccupiedException();
+        }
+        selectedTeam = homeTeam.getName().equals(teamName) ? HOME : AWAY;
     }
 
     public Pitcher getPitcher() {

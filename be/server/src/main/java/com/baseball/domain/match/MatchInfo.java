@@ -1,4 +1,4 @@
-package com.baseball.domain;
+package com.baseball.domain.match;
 
 
 import java.util.ArrayList;
@@ -11,20 +11,8 @@ public class MatchInfo {
     private List<Boolean> bases = Arrays.asList(false, false, false);
     private List<PitchResult> pitchResults = new ArrayList<>();
 
-    public Integer getInningCount() {
-        /**
-         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
-         * 출처: https://en.wikipedia.org/wiki/Inning
-         */
-        return 1 + (halvesCount / 2);
-    }
-
-    public Boolean getUserTop() {
-        return halvesCount % 2 == 0;
-    }
-
-    public Boolean getUserOffense() {
-        return false;
+    public Integer getHalvesCount() {
+        return halvesCount;
     }
 
     public Integer getStrike() {

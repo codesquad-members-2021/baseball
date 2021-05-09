@@ -1,8 +1,9 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Match;
-import com.baseball.domain.MatchInfo;
-import com.baseball.domain.Team;
+import com.baseball.domain.match.Match;
+import com.baseball.domain.match.MatchInfo;
+import com.baseball.domain.team.Team;
+import com.baseball.domain.team.Teams;
 
 import java.util.List;
 
@@ -128,8 +129,9 @@ public class MatchInfoDto {
     }
 
     public static MatchInfoDto from(Match match) {
-        Team awayTeam = match.getAwayTeam();
-        Team homeTeam = match.getHomeTeam();
+        Teams teams = match.getTeams();
+        Team awayTeam = teams.getAwayTeam();
+        Team homeTeam = teams.getHomeTeam();
         MatchInfo matchInfo = match.getMatchInfo();
         Builder builder = new Builder()
                 .scores(ScoreDto.from(awayTeam, homeTeam))
@@ -137,9 +139,9 @@ public class MatchInfoDto {
                 .ball(matchInfo.getBall())
                 .outCount(matchInfo.getOutCount())
                 .bases(matchInfo.getBases())
-                .inningInfo(InningInfoDto.from(matchInfo))
-                .pitcher(PitcherDto.from(match.getPitcher()))
-                .batter(BatterDto.from(match.getBatter()))
+                .inningInfo(InningInfoDto.from(match))
+                .pitcher(PitcherDto.from(teams.getPitcher()))
+                .batter(BatterDto.from(teams.getBatter()))
                 .pitcherInfo(matchInfo.getPitcherInfo());
         return builder.build();
     }

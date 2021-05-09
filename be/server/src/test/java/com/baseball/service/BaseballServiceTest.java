@@ -34,17 +34,18 @@ class BaseballServiceTest {
     @DisplayName("홈팀의 아무것도 하지 않은 첫 이닝에 대한 스냅샷 테스트")
     void scenario_test_home_0() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "HOME";
+        String teamName = "HOME";
+        baseballService.selectTeam(matchId, teamName);
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
         String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
-        String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
-        String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":0,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
+        String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":false},\"pitcher\":{\"name\":\"AWAY1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"HOME1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
+        String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"HOME1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},{\"name\":\"HOME2투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"HOME1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},{\"name\":\"HOME2타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"AWAY1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},{\"name\":\"AWAY2투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"AWAY1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},{\"name\":\"AWAY2타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
 
         softly.assertThat(actualProgress)
                 .isEqualTo(expectedProgress);
-//        softly.assertThat(actualGameInfo)
-//                .isEqualTo(expectedGameInfo);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
         softly.assertAll();
     }
 
@@ -52,17 +53,18 @@ class BaseballServiceTest {
     @DisplayName("어웨이팀의 아무것도 하지 않은 첫 이닝에 대한 스냅샷 테스트")
     void scenario_test_away_0() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "AWAY";
+        String teamName = "AWAY";
+        baseballService.selectTeam(matchId, teamName);
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
         String actualGameInfo = objectMapper.writeValueAsString(baseballService.getGameInfo(matchId));
 
-        String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
-        String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":0,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"김광현\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"류현진\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
+        String expectedProgress = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"strike\":0,\"ball\":0,\"outCount\":0,\"bases\":[false,false,false],\"inningInfo\":{\"inningCount\":1,\"userTop\":true,\"userOffense\":true},\"pitcher\":{\"name\":\"AWAY1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},\"batter\":{\"name\":\"HOME1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},\"pitcherInfo\":[]}";
+        String expectedGameInfo = "{\"scores\":{\"awayScore\":0,\"homeScore\":0},\"innings\":{\"away\":[],\"home\":[]},\"awayPlayers\":{\"pitchers\":[{\"name\":\"HOME1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},{\"name\":\"HOME2투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"HOME1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},{\"name\":\"HOME2타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]},\"homePlayers\":{\"pitchers\":[{\"name\":\"AWAY1투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0},{\"name\":\"AWAY2투수\",\"numberOfPitching\":0,\"hit\":0,\"baseOnBalls\":0,\"innings\":0}],\"batters\":[{\"name\":\"AWAY1타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0},{\"name\":\"AWAY2타자\",\"plateAppearances\":1,\"hit\":0,\"out\":0,\"average\":0.0}]}}";
 
         softly.assertThat(actualProgress)
                 .isEqualTo(expectedProgress);
-//        softly.assertThat(actualGameInfo)
-//                .isEqualTo(expectedGameInfo);
+        softly.assertThat(actualGameInfo)
+                .isEqualTo(expectedGameInfo);
         softly.assertAll();
     }
 
@@ -71,7 +73,7 @@ class BaseballServiceTest {
     @DisplayName("홈팀의 첫 이닝에서 Ball 이 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_home_1_ball() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "HOME";
+        String teamName = "HOME";
         baseballService.playGame(matchId, "ball");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -92,7 +94,7 @@ class BaseballServiceTest {
     @DisplayName("어웨이의 첫 이닝에서 Ball 이 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_away_1_ball() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "AWAY";
+        String teamName = "AWAY";
         baseballService.playGame(matchId, "ball");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -113,7 +115,7 @@ class BaseballServiceTest {
     @DisplayName("홈팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_home_1_hit() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "HOME";
+        String teamName = "HOME";
         baseballService.playGame(matchId, "hit");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -134,7 +136,7 @@ class BaseballServiceTest {
     @DisplayName("어웨이팀의 첫 이닝에서 Hit 가 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_away_1_hit() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "AWAY";
+        String teamName = "AWAY";
         baseballService.playGame(matchId, "hit");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -155,7 +157,7 @@ class BaseballServiceTest {
     @DisplayName("홈팀의 첫 이닝에서 Strike 가 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_1_strike() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "HOME";
+        String teamName = "HOME";
         baseballService.playGame(matchId, "strike");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -176,7 +178,7 @@ class BaseballServiceTest {
     @DisplayName("어웨이팀의 첫 이닝에서 Strike 가 나왔을 경우에 대한 스냅샷 테스트")
     void scenario_test_away_1_strike() throws JsonProcessingException {
         String matchId = "MATCH_ID";
-        String teamId = "AWAY";
+        String teamName = "AWAY";
         baseballService.playGame(matchId, "strike");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));

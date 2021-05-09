@@ -1,4 +1,4 @@
-package com.baseball.domain;
+package com.baseball.domain.match;
 
 public enum PitchResult {
     BALL, HIT, STRIKE;

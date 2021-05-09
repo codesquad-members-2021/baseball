@@ -1,4 +1,4 @@
-package com.baseball.domain;
+package com.baseball.domain.match;
 
 import com.baseball.exception.MatchNotFoundException;
 

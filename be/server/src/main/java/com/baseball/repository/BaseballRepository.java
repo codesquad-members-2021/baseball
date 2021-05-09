@@ -1,6 +1,6 @@
 package com.baseball.repository;
 
-import com.baseball.domain.Match;
+import com.baseball.domain.match.Match;
 
 import java.util.Map;
 

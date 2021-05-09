@@ -29,15 +29,20 @@ public class BaseballService {
                 .collect(Collectors.toList());
     }
 
-    public MatchInfoDto getProgress(String gameId) {
-        return MatchInfoDto.from(baseballRepository.findMatchById(gameId));
+    public MatchInfoDto getProgress(String matchId) {
+        return MatchInfoDto.from(baseballRepository.findMatchById(matchId));
     }
 
-    public GameInfoDto getGameInfo(String gameId) {
-        return GameInfoDto.from(baseballRepository.findMatchById(gameId));
+    public GameInfoDto getGameInfo(String matchId) {
+        return GameInfoDto.from(baseballRepository.findMatchById(matchId));
     }
 
-    public void playGame(String gameId, String inningResult) {
+    public void selectTeam(String matchId, String teamName) {
+        baseballRepository.findMatchById(matchId)
+                .selectTeam(teamName);
+    }
+
+    public void playGame(String matchId, String inningResult) {
         /**
          * TODO: inningResult 는 ball, hit, strike 중 1개의 String 이다.
          * 만약 3개에 해당되지 않는 string 이나, 비어있는 String 을 받았다면,

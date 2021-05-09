@@ -1,8 +1,9 @@
 package com.baseball.dto;
 
 
-import com.baseball.domain.Match;
-import com.baseball.domain.Team;
+import com.baseball.domain.match.Match;
+import com.baseball.domain.team.Team;
+import com.baseball.domain.team.Teams;
 
 public class GameInfoDto {
 
@@ -66,8 +67,9 @@ public class GameInfoDto {
     }
 
     public static GameInfoDto from(Match match) {
-        Team awayTeam = match.getAwayTeam();
-        Team homeTeam = match.getHomeTeam();
+        Teams teams = match.getTeams();
+        Team awayTeam = teams.getAwayTeam();
+        Team homeTeam = teams.getHomeTeam();
         Builder builder = new Builder()
                 .scores(ScoreDto.from(awayTeam, homeTeam))
                 .innings(InningsDto.from(awayTeam, homeTeam))

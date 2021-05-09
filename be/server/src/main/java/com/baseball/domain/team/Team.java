@@ -1,4 +1,4 @@
-package com.baseball.domain;
+package com.baseball.domain.team;
 
 import com.baseball.domain.player.Players;
 

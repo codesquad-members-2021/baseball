@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Team;
+import com.baseball.domain.team.Team;
 
 public class ScoreDto {
     private final Integer awayScore;

@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Team;
+import com.baseball.domain.team.Team;
 
 import java.util.List;
 
