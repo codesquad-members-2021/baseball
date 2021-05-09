@@ -1,30 +1,35 @@
-import React from 'react';
-import { theme, AlignTextCenter } from '../Style/Theme';
+import React, { useState } from 'react';
+import { theme } from '../Style/Theme';
 import styled from 'styled-components';
 const GameGeneralInfo = ({ data }) => {
 	console.log(data);
+	const [away_score, setAwayScore] = useState(0);
+	const [home_score, setHomeScore] = useState(0);
 	return (
-		<Border>
+		<InfoWrapper>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<FlexBox>
 				<TeamName>{data.awayTeam.teamName}</TeamName>
-				<TeamName>{data.awayTeam.teamName}</TeamName>
+				<TeamName>{away_score}</TeamName>
 				<VS>VS</VS>
-				<TeamName>{data.homeTeam.teamName}</TeamName>
+				<TeamName>{home_score}</TeamName>
 				<TeamName>{data.homeTeam.teamName}</TeamName>
 			</FlexBox>
-		</Border>
+		</InfoWrapper>
 	);
 };
 
-const Border = styled.div`
+const InfoWrapper = styled.div`
+	padding: 30px;
 	text-align: center;
-	border: 1px solid blue;
+	border-bottom: 5px solid ${theme.colors.white};
+	border-right: 5px solid ${theme.colors.white};
 `;
 
 const FlexBox = styled.div`
 	display: flex;
-	justify-contents: center;
+	justify-content: center;
+	align-items: center;
 `;
 const Title = styled.div`
 	font-size: ${theme.fontSize.X_large};
@@ -33,13 +38,14 @@ const Title = styled.div`
 `;
 
 const TeamName = styled.span`
+	margin: 20px;
 	font-size: ${theme.fontSize.XX_large};
 	font-weight: ${theme.fontWeight.bold};
 	color: ${theme.colors.white};
 `;
 
 const VS = styled.div`
-	font-size: ${theme.fontSize.XX_large};
+	font-size: ${theme.fontSize.X_large};
 	font-weight: ${theme.fontWeight.bold};
 	color: ${theme.colors.grey};
 `;

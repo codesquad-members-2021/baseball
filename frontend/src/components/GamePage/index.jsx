@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
 import useFetch from '../Hook/useFetch';
-import API from '../Hook/API';
 import GameGeneralInfo from './GameGeneralInfo';
+import GamePlayers from './GamePlayers';
 import styled from 'styled-components';
+import GameLog from './GameLog';
 const GamePage = ({ data }) => {
-	console.log(data);
 	const gameId = data.id;
 	const [gameInfo, loading, error] = useFetch('patch', 'initGame', gameId);
 
@@ -15,9 +14,9 @@ const GamePage = ({ data }) => {
 			) : (
 				<GridBox>
 					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GamePlayers />
 					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
-					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
-					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GameLog data={gameInfo}></GameLog>
 				</GridBox>
 			)}
 		</>
