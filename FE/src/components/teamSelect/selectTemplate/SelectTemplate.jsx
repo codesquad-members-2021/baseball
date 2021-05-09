@@ -20,4 +20,5 @@ export default SelectTemplate;
 // --- Styled Components ---
 const StyledSelectTemplate = styled.div`
     text-align: center;
+    margin: 0 5%;
 `;

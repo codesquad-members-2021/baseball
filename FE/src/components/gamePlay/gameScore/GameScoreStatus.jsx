@@ -10,7 +10,7 @@ const ScoreStatus = ({ data = true, playerTeam = 'teamName' }) => {
                         <span className="score">1</span>
                     </StatusItem>
                 </Status>
-                <StatusItem>VS</StatusItem>
+                <Versus>VS</Versus>
                 <Status>
                     <StatusItem type="team">
                         <span className="score">2</span>
@@ -30,37 +30,40 @@ export default ScoreStatus;
 const StyledScoreStatus = styled.div`
     display: flex;
     justify-content: space-evenly;
-    width: 95%;
-    margin: 32px auto 16px;
+    margin: 24px 32px;
 `;
 
 const Status = styled.div`
-    width: inherit;
+    text-align: center;
+    height: 100%;
+`;
+
+const Versus = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.XXXL};
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
+    color: ${({ theme }) => theme.colors.gray5};
+    margin: auto 0;
 `;
 
 const StatusItem = styled.div`
-    width: inherit;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     align-items: center;
-    justify-content: ${({ type }) =>
-        type === 'team' ? 'space-between' : 'center'};
+    justify-content: space-between;
 
+    font-size: ${({ theme }) => theme.fontSize.TEAM};
+    font-weight: ${({ theme }) => theme.fontWeight.bold2};
 
-    font-size: ${({ type, theme }) =>
-        type === 'team' ? theme.fontSize.XXXXL : theme.fontSize.XXL};
-    font-weight: ${({ type, theme }) =>
-        type === 'team' ? theme.fontWeight.bold2 : theme.fontWeight.bold};
-    color: ${({ type, theme }) =>
-        type === 'team' ? theme.colors.white : theme.colors.gray3};
-
+    color: ${({ theme }) => theme.colors.white};
     .score {
-        color: ${({ theme }) => theme.colors.gray5};
+        font-size: ${({ theme }) => theme.fontSize.XXXXL};
+        color: ${({ theme }) => theme.colors.gray4};
     }
 `;
 
 const IsPlayer = styled.p`
     font-size: ${({ theme }) => theme.fontSize.M};
-    color: ${({ theme }) => theme.colors.red };
+    color: ${({ theme }) => theme.colors.red};
     text-align: center;
 
     ${StatusItem} + & {
