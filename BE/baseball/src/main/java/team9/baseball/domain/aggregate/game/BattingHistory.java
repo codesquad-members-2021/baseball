@@ -45,6 +45,10 @@ public class BattingHistory {
         return this.batterTeamId == team.getId();
     }
 
+    public String getStatus() {
+        return String.format("%d타석 %d안타", this.appear, this.hits);
+    }
+
     public void plusAppear() {
         this.appear++;
     }

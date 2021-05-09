@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import team9.baseball.domain.aggregate.game.BattingHistory;
 import team9.baseball.domain.aggregate.game.Game;
 import team9.baseball.domain.aggregate.game.Inning;
 import team9.baseball.domain.aggregate.team.Team;
@@ -59,9 +58,6 @@ public class GameStatusDTO {
         TeamDTO homeTeamDTO = TeamDTO.of(homeTeam.getName(), game.getTotalScore(Halves.BOTTOM),
                 acquireCurrentRole(game.getCurrentHalves(), Halves.BOTTOM));
 
-
-        BattingHistory batterHistory = game.acquireBattingHistory(attackTeam.getId(), game.getBatterUniformNumber());
-        String batterStatus = acquireBatterStatus(batterHistory);
         String pitcherStatus = acquirePitcherStatus(game, defenseTeam.getId(), game.getPitcherUniformNumber());
 
         String myRole = userVenue.getHalves() == game.getCurrentHalves() ? "ATTACK" : "DEFENSE";
@@ -77,17 +73,13 @@ public class GameStatusDTO {
                 .pitcher(PlayerDTO.of(defenseTeam, game.getPitcherUniformNumber()))
                 .pitcherStatus(pitcherStatus)
                 .batter(PlayerDTO.of(attackTeam, game.getBatterUniformNumber()))
-                .batterStatus(batterStatus)
+                .batterStatus(game.acquireBatterStatus())
                 .base1(PlayerDTO.of(attackTeam, game.getBase1UniformNumber()))
                 .base2(PlayerDTO.of(attackTeam, game.getBase2UniformNumber()))
                 .base3(PlayerDTO.of(attackTeam, game.getBase3UniformNumber()))
                 .pitchHistories(acquirePitchHistories(attackTeam, defenseTeam, game.acquireCurrentInning()))
                 .myRole(myRole)
                 .build();
-    }
-
-    private static String acquireBatterStatus(BattingHistory batterHistory) {
-        return String.format("%d타석 %d안타", batterHistory.getAppear(), batterHistory.getHits());
     }
 
     private static String acquirePitcherStatus(Game game, int pitcherTeamId, int pitcherUniformNumber) {

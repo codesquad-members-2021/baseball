@@ -148,13 +148,19 @@ public class Game {
         return inningMap.get(currentInningKey);
     }
 
-    public BattingHistory acquireBattingHistory(int batterTeamId, int batterUniformNumber) {
+    private BattingHistory acquireBattingHistory(int batterTeamId, int batterUniformNumber) {
         String key = BattingHistory.acquireKeyInGame(batterTeamId, batterUniformNumber);
         if (!battingHistoryMap.containsKey(key)) {
             throw new NotFoundException(String.format("%d번 게임방에 %d팀 %d 번호 선수에 대한 기록이 없습니다.",
                     this.id, batterTeamId, batterUniformNumber));
         }
         return battingHistoryMap.get(key);
+    }
+
+    public String acquireBatterStatus() {
+        int attackTeamId = acquireAttackTeamId();
+        BattingHistory batterHistory = acquireBattingHistory(attackTeamId, this.batterUniformNumber);
+        return batterHistory.getStatus();
     }
 
     public Integer getAwayPlayingUniformNumber() {
