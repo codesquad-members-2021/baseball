@@ -6,6 +6,14 @@ const cssFlexAlignCenter = css`
     align-items: center;
 `;
 
+const cssTranslate = css`
+    background-color: transparent;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    outline: none;
+    border: none;
+`;
+
 const cssScrollbar = css`
     height: inherit;
     overflow-y: scroll;
@@ -26,4 +34,4 @@ const cssScrollbar = css`
     }
 `;
 
-export { cssFlexAlignCenter, cssScrollbar };
+export { cssFlexAlignCenter, cssTranslate, cssScrollbar };

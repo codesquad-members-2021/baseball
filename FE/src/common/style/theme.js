@@ -20,7 +20,10 @@ const fontSize = {
 const colors = {
     white: '#FFF',
     red: '#CC484D',
-    black: '#010101',
+    yellow: '#FAF300',
+    green: '#00EA00',
+    black1: '#010101',
+    black2: '#181818',
     gray1: '#333',
     gray2: '#4F4F4F',
     gray3: '#828282',

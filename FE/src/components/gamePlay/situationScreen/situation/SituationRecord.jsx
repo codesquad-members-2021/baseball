@@ -41,6 +41,6 @@ const Num = styled.span`
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.white};
     padding: 4px 8px;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.black1};
     font-size: ${({ theme }) => theme.fontSize.XS};
 `;

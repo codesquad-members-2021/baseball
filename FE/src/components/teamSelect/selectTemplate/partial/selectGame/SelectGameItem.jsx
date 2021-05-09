@@ -54,7 +54,7 @@ const TeamInfo = styled.div`
 const TeamInfoSpan = styled.span`
     font-size: ${({type, theme}) => (type === 'team') ? theme.fontSize.XXL : theme.fontSize.XL};
     font-weight: ${({type, theme}) => (type === 'team') ? theme.fontWeight.bold2 : theme.fontWeight.bold};
-    color: ${({type, theme}) => (type === 'team') ? theme.colors.black : theme.colors.gray3};
+    color: ${({type, theme}) => (type === 'team') ? theme.colors.black1 : theme.colors.gray3};
 
     ${({ type }) =>
         type === 'team' &&
