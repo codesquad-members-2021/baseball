@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import TeamList from './TeamList';
 import { theme, AlignTextCenter } from '../Style/Theme';
-
+import Scroll from '../Style/Scroll';
 const StartPage = () => {
 	const [message, setMessage] = useState('참가할 게임을 선택하세요!');
 
@@ -39,25 +39,8 @@ const Message = styled.div`
 	text-align: center;
 `;
 
-const ListWrapper = styled.div`
+const ListWrapper = styled(Scroll)`
 	width: 370px;
 	margin: 0 auto;
 	max-height: 295px;
-	overflow: hidden;
-
-	&:hover {
-		overflow-y: scroll;
-	}
-	&::-webkit-scrollbar {
-		width: 10px;
-		padding-right: 5px;
-	}
-	&::-webkit-scrollbar-thumb {
-		background-color: ${theme.colors.red_log};
-		border-radius: 5px;
-	}
-	&::-webkit-scrollbar-track {
-		background-color: ${theme.colors.grey_transparent};
-		border-radius: 5px;
-	}
 `;

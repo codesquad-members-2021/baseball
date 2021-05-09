@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
+import Scroll from '../Style/Scroll';
 const GameLog = () => {
 	return (
-		<div>
+		<GameLogScroll>
 			<PlayerWrapper>
 				<Player now={true}>7번 타자 류현진</Player>
 				<LogWrapper>
@@ -52,9 +53,67 @@ const GameLog = () => {
 					<AccLog>S1 B0</AccLog>
 				</LogWrapper>
 			</PlayerWrapper>
-		</div>
+			<PlayerWrapper>
+				<Player now={false}>6번 타자 시에나</Player>
+				<Result>안타!</Result>
+				<LogWrapper>
+					<Number>&#9314;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B2</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9313;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B1</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9312;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B0</AccLog>
+				</LogWrapper>
+			</PlayerWrapper>
+			<PlayerWrapper>
+				<Player now={false}>6번 타자 시에나</Player>
+				<Result>안타!</Result>
+				<LogWrapper>
+					<Number>&#9314;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B2</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9313;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B1</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9312;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B0</AccLog>
+				</LogWrapper>
+			</PlayerWrapper>
+			<PlayerWrapper>
+				<Player now={false}>6번 타자 시에나</Player>
+				<Result>안타!</Result>
+				<LogWrapper>
+					<Number>&#9314;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B2</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9313;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B1</AccLog>
+				</LogWrapper>
+				<LogWrapper>
+					<Number>&#9312;</Number>
+					<Log>볼</Log>
+					<AccLog>S1 B0</AccLog>
+				</LogWrapper>
+			</PlayerWrapper>
+		</GameLogScroll>
 	);
 };
+const GameLogScroll = styled(Scroll)``;
 const Span = styled.span`
 	display: inline-block;
 	text-align: center;
@@ -62,9 +121,10 @@ const Span = styled.span`
 	font-weight: ${theme.fontWeight.light};
 `;
 const PlayerWrapper = styled.div`
-	margin-left: 20px;
+	padding-left: 20px;
 `;
 const LogWrapper = styled.div`
+	width: fit-content;
 	padding-top: 10px;
 	display: grid;
 	grid-template-columns: 20px 130px 100px;
