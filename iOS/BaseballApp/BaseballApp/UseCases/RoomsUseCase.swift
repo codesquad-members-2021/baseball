@@ -9,7 +9,6 @@ import Foundation
 
 class RoomsUseCase {
     let apiRequestManager = APIRequestManager()
-    let endpoint: Endpoint = Endpoint()
     
     func start(url: URL) {
         apiRequestManager.fetchRooms(url: url, method: .get)
