@@ -1,17 +1,70 @@
+import { useState } from "react";
 import styled from "styled-components";
 import BallCount from "./BallCount";
 
 const Field = () => {
 	const gongSoo = "DEFENSE";
 	const count = { ball: 2, strike: 1, out: 2 };
+
+	const [runnerList, setRunnerList] = useState([
+		{
+			base: 0,
+			isRunning: true,
+		},
+	]);
+
+	const hit = async () => {
+		await ready();
+		await run();
+		arrive();
+	};
+
+	const ready = () =>
+		new Promise((res, rej) => {
+			setRunnerList((list) => [
+				...list.map((el) => {
+					el.isRunning = true;
+					return el;
+				}),
+			]);
+			res();
+		});
+
+	const run = () =>
+		new Promise((res, rej) => {
+			setRunnerList((list) => {
+				return [
+					...list.map((el) => {
+						return { base: el.base++, isRunning: true };
+					}),
+					{
+						base: 0,
+						isRunning: true,
+					},
+				];
+			});
+			setTimeout(() => res(), 400);
+		});
+
+	const arrive = () => {
+		setRunnerList((list) => [
+			...list.map((el) => {
+				el.isRunning = false;
+				if (el.base % 4 === 0 && el.base !== 0) el.isScoring = true;
+				return el;
+			}),
+		]);
+	};
+
 	return (
 		<StyledField>
 			<BallCount count={count} />
 			<CurrentInning>8회초 수비</CurrentInning>
-			{gongSoo === "DEFENSE" && <PitchButton>PITCH</PitchButton>}
+			{gongSoo === "DEFENSE" && <PitchButton onClick={hit}>PITCH</PitchButton>}
 			<Pitcher src="image/pitcher_eagles_heart.png" />
-			<Runner src="image/runner_running.png" />
-			<RunnerWaiting src="image/runner_waiting.png" />
+			{runnerList.map((el, i) => (
+				<Runner key={i} {...el} />
+			))}
 			<Batter src="image/batter.png" />
 		</StyledField>
 	);
@@ -48,17 +101,25 @@ const Pitcher = styled.img`
 	left: 450px;
 	width: 60px;
 `;
-const Runner = styled.img`
+
+const baseLocation = [
+	{ base: 0, top: "560px", left: "492px" },
+	{ base: 1, top: "318px", left: "631px" },
+	{ base: 2, top: "144px", left: "407px" },
+	{ base: 3, top: "357px", left: "253px" },
+];
+
+const Runner = styled.img.attrs(({ base, isRunning }) => ({
+	src: isRunning ? "image/runner_running.png" : "image/runner_waiting.png",
+	style: baseLocation[base % 4],
+}))`
+	visibility: ${({ base, isScoring }) => (base === 0 || isScoring ? "hidden" : "visible")};
+	transform: ${({ base, isRunning }) => ((base % 4 === 0 || base % 4 === 1) && isRunning ? "scaleX(-1);" : "")};
+
 	position: absolute;
-	top: 270px;
-	left: 563px;
 	width: 80px;
-`;
-const RunnerWaiting = styled.img`
-	position: absolute;
-	top: 148px;
-	left: 443px;
-	width: 80px;
+
+	transition: top 400ms, left 400ms;
 `;
 const Batter = styled.img`
 	position: absolute;
