@@ -8,7 +8,6 @@
 import UIKit
 
 class GroundView: UIView {
-    static let identifier = String(describing: GroundView.self)
     let infieldSquareLayer = CAShapeLayer()
     let homePlateLayer = CAShapeLayer()
     let firstBaseLayer = CAShapeLayer()

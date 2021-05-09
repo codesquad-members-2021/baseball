@@ -9,11 +9,9 @@ import UIKit
 
 class PitcherRecordTableViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
-    
-    static let identifier = String(describing: PitcherRecordTableViewCell.self)
 
     static func nib() -> UINib {
-        return UINib(nibName: identifier, bundle: nil)
+        return UINib(nibName: self.identifier, bundle: nil)
     }
     
     override func awakeFromNib() {

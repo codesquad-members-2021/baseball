@@ -8,8 +8,6 @@
 import UIKit
 
 class RoomTableViewCell: UITableViewCell {
-
-    static let identifier = String(describing: RoomTableViewCell.self)
     
     @IBOutlet weak var roomNumber: UILabel!
     @IBOutlet weak var awayTeamName: UILabel!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CountView: UIView {
+class CountView: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()

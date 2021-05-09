@@ -8,8 +8,6 @@
 import UIKit
 
 class ScoreHeaderView: UIView {
-    
-    static let identifier = String(describing: ScoreHeaderView.self)
 
     @IBOutlet weak var awayTeamName: UILabel!
     @IBOutlet weak var homeTeamName: UILabel!
