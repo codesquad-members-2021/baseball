@@ -30,7 +30,7 @@ class PlayViewController: UIViewController {
      
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BallCountCollectionViewCell", for: indexPath) as! BallCountCollectionViewCell
 //            cell.homeTeamLabel.text = "hhhh"
-            cell
+            
             return cell
         }
         return dataSource

@@ -20,12 +20,12 @@ protocol NetworkControllerProtocol {
 final class NetworkController: NetworkControllerProtocol {
     func get<T>(type: T.Type, url: URL, headers: Headers) -> AnyPublisher<T, NetworkError> where T : Codable {
         var urlRequest = URLRequest(url: url)
-//        urlRequest.httpMethod = "GET"
+        urlRequest.httpMethod = "GET"
         
         headers.forEach { (key, value) in
             if let value = value as? String {
                             urlRequest.setValue(value, forHTTPHeaderField: key)
-                        }
+            }
         }
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)

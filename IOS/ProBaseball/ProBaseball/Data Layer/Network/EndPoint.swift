@@ -37,8 +37,8 @@ extension Endpoint {
 }
 
 extension Endpoint {
-    static var test: URL {
-        return Endpoint(path: "/test").url
+    static var test: Self {
+        return Endpoint(path: "/test") as! Self
     }
     
 //    static func users(count: Int) -> Self {

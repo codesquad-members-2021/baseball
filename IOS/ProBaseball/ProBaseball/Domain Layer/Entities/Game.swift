@@ -23,17 +23,4 @@ struct Inning: Codable, CustomStringConvertible {
     let inningNum: Int
 }
 
-struct Team: Codable, CustomStringConvertible {
-    let name: String
-    let score: Int
-    let isAttack: Bool
-    let players: [Player]
-    let currentPitcher, currentBatsman: Player
-}
-
-struct Player: Codable, CustomStringConvertible {
-    let name: String
-    let plateAppearance, numberOfPitches, hitsNumbers, accumulatedOutCount: Int
-}
-
 
