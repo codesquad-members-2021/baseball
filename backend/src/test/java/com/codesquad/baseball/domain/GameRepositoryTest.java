@@ -198,6 +198,46 @@ class GameRepositoryTest {
         assertThat(game.homeTeamScore()).isEqualTo(2);
     }
 
+    @Test
+    @DisplayName("피치의 결과가 홈런인 상황을 테스트합니다")
+    void testPitchIsHomeRun() {
+        Game game = createGame(GAME_TITLE);
+        //1점홈런은 원정팀 1점, 홈팀 0점이어야 하고, 모든 주자는 돌아와야 함. 백홈한 주자는 한명이어야 하고 그건 홈런친 친구여야 함
+        int firstHitter = game.currentHitter();
+        List<Integer> pitchResult = game.pitch(PlayType.HOMERUN);
+        assertThat(game.hasFirstBaseRunner()).isFalse();
+        assertThat(game.hasSecondBaseRunner()).isFalse();
+        assertThat(game.hasThirdBaseRunner()).isFalse();
+        assertThat(game.awayTeamScore()).isEqualTo(1);
+        assertThat(game.homeTeamScore()).isEqualTo(0);
+        assertThat(pitchResult.size()).isEqualTo(1);
+        assertThat(pitchResult.get(0)).isEqualTo(firstHitter);
+        //그 다음, 2루까지 채운다음 홈런치면 원정팀은 4점이어야 함. 백홈한건 홈런친애랑 1,2루에 있던 애들이어야 함
+        int secondHitter = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        int thirdHitter = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        int fourthHitter = game.currentHitter();
+        pitchResult = game.pitch(PlayType.HOMERUN);
+        assertThat(game.hasFirstBaseRunner()).isFalse();
+        assertThat(game.hasSecondBaseRunner()).isFalse();
+        assertThat(game.hasThirdBaseRunner()).isFalse();
+        assertThat(game.awayTeamScore()).isEqualTo(4);
+        assertThat(game.homeTeamScore()).isEqualTo(0);
+        assertThat(pitchResult.size()).isEqualTo(3);
+        assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
+        assertThat(pitchResult.get(1)).isEqualTo(thirdHitter);
+        assertThat(pitchResult.get(2)).isEqualTo(fourthHitter);
+        //일단 공수교대한다음, 1,2,3루를 다 채운다
+        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        IntStream.range(0,3).forEach(value -> game.pitch(PlayType.HITS));
+        //만루홈런치면 홈팀은 4점을 얻어야 함. 백홈은 총 4명이어야 함
+        pitchResult = game.pitch(PlayType.HOMERUN);
+        assertThat(game.awayTeamScore()).isEqualTo(4);
+        assertThat(game.homeTeamScore()).isEqualTo(4);
+        assertThat(pitchResult.size()).isEqualTo(4);
+    }
+
     private Game createGame(String gameTitle) {
         Team teamA = createTeam(A_TEAM_NAME);
         Team teamB = createTeam(B_TEAM_NAME);

@@ -91,11 +91,15 @@ public class Game {
                 }
                 break;
             }
-            case HITS : {
+            case HITS: {
                 int backHomeRunner = onHits();
                 if (backHomeRunner != NO_PLAYER) {
                     backHomeRunners.add(backHomeRunner);
                 }
+                break;
+            }
+            case HOMERUN: {
+                backHomeRunners = onHomeRun();
                 break;
             }
         }
@@ -115,6 +119,10 @@ public class Game {
 
     private int onHits() {
         return judgeHits();
+    }
+
+    private List<Integer> onHomeRun() {
+        return recallAllRunners();
     }
 
     private void judgeScore(List<Integer> backHomeRunners) {
@@ -160,16 +168,36 @@ public class Game {
         return backHomePlayer;
     }
 
+    private List<Integer> recallAllRunners() {
+        resetStrikeAndBall();
+        List<Integer> backHomeRunners = new ArrayList<>();
+        if (hasThirdBaseRunner()) {
+            backHomeRunners.add(thirdBase);
+            thirdBase = NO_PLAYER;
+        }
+        if (hasSecondBaseRunner()) {
+            backHomeRunners.add(secondBase);
+            secondBase = NO_PLAYER;
+        }
+        if (hasFirstBaseRunner()) {
+            backHomeRunners.add(firstBase);
+            firstBase = NO_PLAYER;
+        }
+        backHomeRunners.add(attackingTeam().getCurrentHitter());
+        attackingTeam().changeHitter();
+        return backHomeRunners;
+    }
+
     public boolean hasFirstBaseRunner() {
         return firstBase != NO_PLAYER;
     }
 
     public boolean hasSecondBaseRunner() {
-        return firstBase != NO_PLAYER;
+        return secondBase != NO_PLAYER;
     }
 
     public boolean hasThirdBaseRunner() {
-        return firstBase != NO_PLAYER;
+        return thirdBase != NO_PLAYER;
     }
 
     public int firstBaseRunner() {
