@@ -1,25 +1,19 @@
 package com.baseball.domain;
 
 public class Match {
-    private final String home;
-    private final String away;
-    private final String id;
+    private final Team homeTeam;
+    private final Team awayTeam;
 
-    public Match(String home, String away, String id) {
-        this.home = home;
-        this.away = away;
-        this.id = id;
+    public Match(Team homeTeam, Team awayTeam) {
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
     }
 
-    public String getHome() {
-        return home;
+    public Team getHomeTeam() {
+        return homeTeam;
     }
 
-    public String getAway() {
-        return away;
-    }
-
-    public String getId() {
-        return id;
+    public Team getAwayTeam() {
+        return awayTeam;
     }
 }

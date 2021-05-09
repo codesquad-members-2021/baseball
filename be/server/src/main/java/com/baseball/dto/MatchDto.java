@@ -1,6 +1,9 @@
 package com.baseball.dto;
 
 import com.baseball.domain.Match;
+import com.baseball.domain.Team;
+
+import java.util.Map;
 
 public class MatchDto {
     private final String home;
@@ -50,11 +53,15 @@ public class MatchDto {
         return id;
     }
 
-    public static MatchDto from(Match match) {
+    public static MatchDto from(Map.Entry<String, Match> entry) {
+        String id = entry.getKey();
+        Match match = entry.getValue();
+        Team homeTeam = match.getHomeTeam();
+        Team awayTeam = match.getAwayTeam();
         Builder builder = new Builder()
-                .home(match.getHome())
-                .away(match.getAway())
-                .id(match.getId());
+                .home(homeTeam.getName())
+                .away(awayTeam.getName())
+                .id(id);
         return builder.build();
     }
 

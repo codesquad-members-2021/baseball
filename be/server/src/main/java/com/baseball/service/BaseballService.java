@@ -11,23 +11,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class BaseballService {
-    private final MatchRepository matchRepository;
+    private final BaseballRepository baseballRepository;
     private final MatchInfoRepository matchInfoRepository;
     private final GameInfoRepository gameInfoRepository;
 
     // FIXME: 나중에 JDBC 연결을 하면 이 생성자는 삭제해야함
     public BaseballService() {
-        this(new MockedMatchRepository(), new MockedMatchInfoRepository(), new MockedGameInfoRepository());
+        this(new MockedBaseballRepository(), new MockedMatchInfoRepository(), new MockedGameInfoRepository());
     }
 
-    public BaseballService(MatchRepository matchRepository, MatchInfoRepository matchInfoRepository, GameInfoRepository gameInfoRepository) {
-        this.matchRepository = matchRepository;
+    public BaseballService(BaseballRepository baseballRepository, MatchInfoRepository matchInfoRepository, GameInfoRepository gameInfoRepository) {
+        this.baseballRepository = baseballRepository;
         this.matchInfoRepository = matchInfoRepository;
         this.gameInfoRepository = gameInfoRepository;
     }
 
     public List<MatchDto> getMatches() {
-        return matchRepository.findAll().stream()
+        return baseballRepository.findAllMatches().entrySet().stream()
                 .map(MatchDto::from)
                 .collect(Collectors.toList());
     }
