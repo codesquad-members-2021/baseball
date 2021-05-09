@@ -9,7 +9,7 @@ const Popup = () => {
   const $PopupBackground = useRef(null);
   const distance = 15;
 
-  const handleMove = ({ target, clientY }) => {
+  const handleMoveShowPopup = ({ target, clientY }) => {
     if (target === $PopupBackground.current) return;
     if (clientY < distance) return setTogglePopupState('top');
     if (window.innerHeight - distance < clientY) {
@@ -22,9 +22,9 @@ const Popup = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mousemove', handleMoveShowPopup);
     return () => {
-      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mousemove', handleMoveShowPopup);
     };
   }, []);
 

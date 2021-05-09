@@ -1,16 +1,14 @@
 import React from 'react';
 import Home from 'Components/Home';
 import GamePage from "Components/GamePage";
-import { Route } from "react-router-dom";
+import { Router, Route } from "utils/Router";
 
 const Page = () => {
   return (
-    <>
-      <Route path="/" component={Home} exact />
+    <Router>
+      <Route path="/" component={Home} />
       <Route path="/GamePage" component={GamePage} />
-      {/* <Home></Home>
-      <GamePage></GamePage> */}
-    </>
+    </Router>
   );
 };
 

@@ -16,34 +16,34 @@ const PlayerScoreTable = () => {
         </thead>
         <tbody>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>김광진</td> <td>1</td> <td>0</td> <td>1</td> <td>1.000</td>
+            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
           </tr>
           <tr>
-            <td>Totals</td><td>9</td> <td>4</td> <td>5</td>
+            <td>Totals</td><td>9</td><td>4</td><td>5</td>
           </tr>
         </tbody>
       </PlayerTable>
