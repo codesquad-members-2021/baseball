@@ -17,22 +17,10 @@ const Field = () => {
 	const hit = async () => {
 		if (isInPlay) return;
 		setInPlay(() => true);
-		await ready();
 		await run();
 		arrive();
 		setInPlay(() => false);
 	};
-
-	const ready = () =>
-		new Promise((res, rej) => {
-			setRunnerList((list) => [
-				...list.map((el) => {
-					el.isRunning = true;
-					return el;
-				}),
-			]);
-			res();
-		});
 
 	const run = () =>
 		new Promise((res, rej) => {
@@ -70,7 +58,7 @@ const Field = () => {
 			{runnerList.map((el, i) => (
 				<Runner key={i} {...el} />
 			))}
-			
+
 			{isInPlay || <Batter src="image/batter.png" />}
 		</StyledField>
 	);
