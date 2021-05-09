@@ -7,32 +7,32 @@ public class Game {
     @Id
     private Long id;
 
-    private String homeTeam;
+    private Long homeTeamId;
 
-    private String awayTeam;
+    private Long awayTeamId;
 
-    public Game(String homeTeam, String awayTeam) {
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
+    public Game(Long homeTeamId, Long awayTeamId) {
+        this.homeTeamId = homeTeamId;
+        this.awayTeamId = awayTeamId;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getHomeTeam() {
-        return homeTeam;
+    public Long getHomeTeamId() {
+        return homeTeamId;
     }
 
-    public String getAwayTeam() {
-        return awayTeam;
+    public Long getAwayTeamId() {
+        return awayTeamId;
     }
 
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setHomeTeamId(Long homeTeamId) {
+        this.homeTeamId = homeTeamId;
     }
 
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
+    public void setAwayTeamId(Long awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 }
