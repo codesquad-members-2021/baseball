@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import Header from "./Header";
-import Main from "./Main"
+import Score from "./Score";
+import Field from "./Field"
 
 const Ground = () => {
 	return (
 		<StyledGround>
-			<Header />
-			<Main />
+			<Score />
+			<Field />
 		</StyledGround>
 	);
 };

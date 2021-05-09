@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Header = () => {
+const Score = () => {
 	return (
-		<StyledHeader>
+		<StyledScore>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<Team>
 				<TeamName>Bears</TeamName>
@@ -11,11 +11,11 @@ const Header = () => {
 				<TeamScore>1</TeamScore>
 				<TeamName>Eagles</TeamName>
 			</Team>
-		</StyledHeader>
+		</StyledScore>
 	);
 };
 
-const StyledHeader = styled.div`
+const StyledScore = styled.div`
 	height: 180px;
 	border-bottom: 3px solid gray;
 	background-color: #000;
@@ -44,4 +44,4 @@ const TeamScore = styled.div`
 	color: #fff;
 	font-size: 60px;
 `;
-export default Header;
+export default Score;
