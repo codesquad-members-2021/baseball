@@ -14,16 +14,16 @@ public class PitchHistoryDTO {
     private PlayerDTO pitcher;
     private PlayerDTO batter;
     private String result;
-    private int strike_count;
-    private int ball_count;
+    private int strikeCount;
+    private int ballCount;
 
     public static PitchHistoryDTO of(Team attackTeam, Team defenseTeam, PitchHistory pitchHistory) {
         return builder()
                 .pitcher(PlayerDTO.of(defenseTeam, pitchHistory.getPitcherUniformNumber()))
                 .batter(PlayerDTO.of(attackTeam, pitchHistory.getBatterUniformNumber()))
                 .result(pitchHistory.getResult().name())
-                .strike_count(pitchHistory.getStrikeCount())
-                .ball_count(pitchHistory.getBallCount())
+                .strikeCount(pitchHistory.getStrikeCount())
+                .ballCount(pitchHistory.getBallCount())
                 .build();
     }
 }

@@ -11,12 +11,12 @@ import team9.baseball.domain.aggregate.team.Team;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class BattingHistoryDTO {
-    private int uniform_number;
+    private int uniformNumber;
     private String name;
-    private int appear_count;
-    private int hit_count;
-    private int out_count;
-    private double hit_ratio;
+    private int appearCount;
+    private int hitCount;
+    private int outCount;
+    private double hitRatio;
     private boolean playing;
 
 
@@ -27,12 +27,12 @@ public class BattingHistoryDTO {
         }
 
         return builder()
-                .uniform_number(battingHistory.getBatterUniformNumber())
+                .uniformNumber(battingHistory.getBatterUniformNumber())
                 .name(team.getPlayerName(battingHistory.getBatterUniformNumber()))
-                .appear_count(battingHistory.getAppear())
-                .hit_count(battingHistory.getHits())
-                .out_count(battingHistory.getOut())
-                .hit_ratio(hitRatio)
+                .appearCount(battingHistory.getAppear())
+                .hitCount(battingHistory.getHits())
+                .outCount(battingHistory.getOut())
+                .hitRatio(hitRatio)
                 .playing(battingHistory.getBatterUniformNumber() == playingUniformNumber)
                 .build();
     }

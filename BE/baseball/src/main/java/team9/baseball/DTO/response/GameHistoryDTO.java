@@ -17,8 +17,8 @@ import java.util.stream.Collectors;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class GameHistoryDTO {
-    private TeamHistoryDTO away_team;
-    private TeamHistoryDTO home_team;
+    private TeamHistoryDTO awayTeam;
+    private TeamHistoryDTO homeTeam;
 
     public static GameHistoryDTO of(Game game, Team awayTeam, Team homeTeam) {
         List<Integer> awayScores = acquireScores(game, Halves.TOP);
@@ -33,8 +33,8 @@ public class GameHistoryDTO {
         List<BattingHistoryDTO> homeBattingHistories = acquireBattingHistoryDTOList(game, homeTeam, homePlayingUniformNumber);
 
         return builder()
-                .away_team(TeamHistoryDTO.of(awayTeam.getName(), awayScores, awayBattingHistories))
-                .home_team(TeamHistoryDTO.of(homeTeam.getName(), homeScores, homeBattingHistories))
+                .awayTeam(TeamHistoryDTO.of(awayTeam.getName(), awayScores, awayBattingHistories))
+                .homeTeam(TeamHistoryDTO.of(homeTeam.getName(), homeScores, homeBattingHistories))
                 .build();
     }
 

@@ -11,15 +11,15 @@ import java.util.List;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TeamHistoryDTO {
-    private String team_name;
+    private String teamName;
     private List<Integer> scores;
-    private List<BattingHistoryDTO> batting_history;
+    private List<BattingHistoryDTO> battingHistory;
 
     public static TeamHistoryDTO of(String team_name, List<Integer> scores, List<BattingHistoryDTO> batting_history) {
         return builder()
-                .team_name(team_name)
+                .teamName(team_name)
                 .scores(scores)
-                .batting_history(batting_history)
+                .battingHistory(batting_history)
                 .build();
     }
 }

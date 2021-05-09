@@ -24,9 +24,9 @@ public class GameStatusDTO {
 
     private int out;
 
-    private TeamDTO away_team;
+    private TeamDTO awayTeam;
 
-    private TeamDTO home_team;
+    private TeamDTO homeTeam;
 
     private String inning;
 
@@ -34,11 +34,11 @@ public class GameStatusDTO {
 
     private PlayerDTO pitcher;
 
-    private String pitcher_status;
+    private String pitcherStatus;
 
     private PlayerDTO batter;
 
-    private String batter_status;
+    private String batterStatus;
 
     private PlayerDTO base1;
 
@@ -46,9 +46,9 @@ public class GameStatusDTO {
 
     private PlayerDTO base3;
 
-    private List<PitchHistoryDTO> pitch_histories;
+    private List<PitchHistoryDTO> pitchHistories;
 
-    private String my_role;
+    private String myRole;
 
     public static GameStatusDTO of(Game game, Team awayTeam, Team homeTeam, Venue userVenue) {
         Team attackTeam = game.acquireAttackTeam(awayTeam, homeTeam);
@@ -70,19 +70,19 @@ public class GameStatusDTO {
                 .strike(game.getStrikeCount())
                 .ball(game.getBallCount())
                 .out(game.getOutCount())
-                .away_team(awayTeamDTO)
-                .home_team(homeTeamDTO)
+                .awayTeam(awayTeamDTO)
+                .homeTeam(homeTeamDTO)
                 .inning(game.getCurrentInning().toString())
                 .halves(game.getCurrentHalves().name())
                 .pitcher(PlayerDTO.of(defenseTeam, game.getPitcherUniformNumber()))
-                .pitcher_status(pitcherStatus)
+                .pitcherStatus(pitcherStatus)
                 .batter(PlayerDTO.of(attackTeam, game.getBatterUniformNumber()))
-                .batter_status(batterStatus)
+                .batterStatus(batterStatus)
                 .base1(PlayerDTO.of(attackTeam, game.getBase1UniformNumber()))
                 .base2(PlayerDTO.of(attackTeam, game.getBase2UniformNumber()))
                 .base3(PlayerDTO.of(attackTeam, game.getBase3UniformNumber()))
-                .pitch_histories(acquirePitchHistories(attackTeam, defenseTeam, game.acquireCurrentInning()))
-                .my_role(myRole)
+                .pitchHistories(acquirePitchHistories(attackTeam, defenseTeam, game.acquireCurrentInning()))
+                .myRole(myRole)
                 .build();
     }
 

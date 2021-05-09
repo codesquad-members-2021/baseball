@@ -10,8 +10,8 @@ import team9.baseball.domain.aggregate.team.Team;
 @Builder(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class PlayerDTO {
-    private int team_id;
-    private int uniform_number;
+    private int teamId;
+    private int uniformNumber;
     private String name;
 
     public static PlayerDTO of(Team team, Integer uniform_number) {
@@ -20,8 +20,8 @@ public class PlayerDTO {
         }
 
         return builder()
-                .team_id(team.getId())
-                .uniform_number(uniform_number)
+                .teamId(team.getId())
+                .uniformNumber(uniform_number)
                 .name(team.getPlayerName(uniform_number))
                 .build();
     }
