@@ -39,4 +39,8 @@ public class PitchHistory {
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
     }
+
+    public boolean hasMatchedPitcher(int pitcherTeamId, int pitcherUniformNumber) {
+        return this.pitcherTeamId == pitcherTeamId && this.pitcherUniformNumber == pitcherUniformNumber;
+    }
 }

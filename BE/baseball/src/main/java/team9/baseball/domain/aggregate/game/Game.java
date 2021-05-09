@@ -163,6 +163,16 @@ public class Game {
         return batterHistory.getStatus();
     }
 
+    public String acquirePitcherStatus() {
+        int defenseTeamId = acquireDefenseTeamId();
+        long pitcherCount = inningMap.values().stream()
+                .flatMap(inning -> inning.getPitchHistoryList().stream())
+                .filter(pitchHistory -> pitchHistory.hasMatchedPitcher(defenseTeamId, this.pitcherUniformNumber))
+                .count();
+
+        return "#" + pitcherCount;
+    }
+
     public Integer getAwayPlayingUniformNumber() {
         return this.currentHalves == Halves.TOP ? batterUniformNumber : pitcherUniformNumber;
     }

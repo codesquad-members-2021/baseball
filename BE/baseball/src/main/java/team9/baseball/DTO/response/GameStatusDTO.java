@@ -58,8 +58,6 @@ public class GameStatusDTO {
         TeamDTO homeTeamDTO = TeamDTO.of(homeTeam.getName(), game.getTotalScore(Halves.BOTTOM),
                 acquireCurrentRole(game.getCurrentHalves(), Halves.BOTTOM));
 
-        String pitcherStatus = acquirePitcherStatus(game, defenseTeam.getId(), game.getPitcherUniformNumber());
-
         String myRole = userVenue.getHalves() == game.getCurrentHalves() ? "ATTACK" : "DEFENSE";
 
         return builder()
@@ -71,7 +69,7 @@ public class GameStatusDTO {
                 .inning(game.getCurrentInning().toString())
                 .halves(game.getCurrentHalves().name())
                 .pitcher(PlayerDTO.of(defenseTeam, game.getPitcherUniformNumber()))
-                .pitcherStatus(pitcherStatus)
+                .pitcherStatus(game.acquirePitcherStatus())
                 .batter(PlayerDTO.of(attackTeam, game.getBatterUniformNumber()))
                 .batterStatus(game.acquireBatterStatus())
                 .base1(PlayerDTO.of(attackTeam, game.getBase1UniformNumber()))
@@ -80,16 +78,6 @@ public class GameStatusDTO {
                 .pitchHistories(acquirePitchHistories(attackTeam, defenseTeam, game.acquireCurrentInning()))
                 .myRole(myRole)
                 .build();
-    }
-
-    private static String acquirePitcherStatus(Game game, int pitcherTeamId, int pitcherUniformNumber) {
-        long pitcherCount = game.getInningMap().values().stream()
-                .flatMap(inning -> inning.getPitchHistoryList().stream())
-                .filter(pitchHistory -> pitchHistory.getPitcherTeamId() == pitcherTeamId &&
-                        pitchHistory.getPitcherUniformNumber() == pitcherUniformNumber)
-                .count();
-
-        return "#" + pitcherCount;
     }
 
     private static List<PitchHistoryDTO> acquirePitchHistories(Team attackTeam, Team defenseTeam, Inning inning) {
