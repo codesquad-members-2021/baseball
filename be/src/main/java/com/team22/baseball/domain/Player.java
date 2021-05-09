@@ -30,6 +30,9 @@ public class Player {
 
     private final int teamId;
 
+    @MappedCollection(idColumn = "player_id", keyColumn = "id")
+    private List<PlayerHistory> playerHistories = new ArrayList<>();
+
     @PersistenceConstructor
     private Player(Long id, String name, boolean isPitcher, int uniformNumber, int plateAppearance, int hits, int outs, int teamId) {
         this.id = id;
@@ -40,6 +43,10 @@ public class Player {
         this.hits = hits;
         this.outs = outs;
         this.teamId = teamId;
+    }
+
+    public List<PlayerHistory> getPlayerHistories() {
+        return playerHistories;
     }
 
     public Long getId() {

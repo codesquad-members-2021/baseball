@@ -91,5 +91,25 @@ class GameServiceTest {
             }
         }
     }
-    
+
+
+    @Test
+    @DisplayName("Backend1팀 선수의 히스토리 출력 테스트")
+    void historyTest(){
+        List<Game> games = gameRepository.findAll();
+        String findTeam = "Backend1";
+
+        for (Game game : games) {
+            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기 또는 분리할 방법 생각하기
+                if (team.getName().equals(findTeam)) {
+                    for (Player player : team.getPlayers()) {
+                        System.err.println(player.getPlayerHistories().toString());
+                    }
+                }
+            }
+        }
+
+    }
+
+
 }
