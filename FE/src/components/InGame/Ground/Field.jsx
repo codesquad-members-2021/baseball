@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import BallCount from "./BallCount";
 
-const Main = () => {
+const Field = () => {
 	const gongSoo = "DEFENSE";
 	const count = { ball: 2, strike: 1, out: 2 };
 	return (
-		<StyledMain>
+		<StyledField>
 			<BallCount count={count} />
 			<CurrentInning>8회초 수비</CurrentInning>
 			{gongSoo === "DEFENSE" && <PitchButton>PITCH</PitchButton>}
@@ -13,11 +13,11 @@ const Main = () => {
 			<Runner src="image/runner_running.png" />
 			<RunnerWaiting src="image/runner_waiting.png" />
 			<Batter src="image/batter.png" />
-		</StyledMain>
+		</StyledField>
 	);
 };
 
-const StyledMain = styled.div`
+const StyledField = styled.div`
 	width: 960px;
 	height: 540px;
 	background-image: url("image/base2.png");
@@ -67,4 +67,4 @@ const Batter = styled.img`
 	width: 70px;
 `;
 
-export default Main;
+export default Field;
