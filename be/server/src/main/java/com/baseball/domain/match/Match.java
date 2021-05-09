@@ -1,5 +1,7 @@
 package com.baseball.domain.match;
 
+import com.baseball.domain.player.Batter;
+import com.baseball.domain.player.Pitcher;
 import com.baseball.domain.team.SelectedTeam;
 import com.baseball.domain.team.Teams;
 
@@ -37,5 +39,13 @@ public class Match {
 
     public Boolean getUserOffense() {
         return getUserTop() && teams.getSelectedTeam() == SelectedTeam.AWAY;
+    }
+
+    public void play(String pitch) {
+        PitchResult pitchResult = PitchResult.of(pitch);
+        // TODO: pitchResult 에 따라, teams 와 matchInfo 를 업데이트 해주어야 함
+        Pitcher pitcher = teams.getPitcher();
+        Batter batter = teams.getBatter();
+        matchInfo.pushPitchResult(pitchResult);
     }
 }

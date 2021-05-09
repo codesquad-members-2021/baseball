@@ -74,6 +74,7 @@ class BaseballServiceTest {
     void scenario_test_home_1_ball() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "HOME";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "ball");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -95,6 +96,7 @@ class BaseballServiceTest {
     void scenario_test_away_1_ball() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "AWAY";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "ball");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -116,6 +118,7 @@ class BaseballServiceTest {
     void scenario_test_home_1_hit() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "HOME";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "hit");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -137,6 +140,7 @@ class BaseballServiceTest {
     void scenario_test_away_1_hit() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "AWAY";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "hit");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -158,6 +162,7 @@ class BaseballServiceTest {
     void scenario_test_1_strike() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "HOME";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "strike");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));
@@ -179,6 +184,7 @@ class BaseballServiceTest {
     void scenario_test_away_1_strike() throws JsonProcessingException {
         String matchId = "MATCH_ID";
         String teamName = "AWAY";
+        baseballService.selectTeam(matchId, teamName);
         baseballService.playGame(matchId, "strike");
 
         String actualProgress = objectMapper.writeValueAsString(baseballService.getProgress(matchId));

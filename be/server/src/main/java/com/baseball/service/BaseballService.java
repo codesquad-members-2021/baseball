@@ -42,12 +42,9 @@ public class BaseballService {
                 .selectTeam(teamName);
     }
 
-    public void playGame(String matchId, String inningResult) {
-        /**
-         * TODO: inningResult 는 ball, hit, strike 중 1개의 String 이다.
-         * 만약 3개에 해당되지 않는 string 이나, 비어있는 String 을 받았다면,
-         * 랜덤하게 3개중에 한개를 생성하도록 한다.
-         */
+    public void playGame(String matchId, String pitchResult) {
+        baseballRepository.findMatchById(matchId)
+                .play(pitchResult);
     }
 
 }

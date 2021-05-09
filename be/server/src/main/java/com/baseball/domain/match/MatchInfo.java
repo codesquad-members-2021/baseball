@@ -41,4 +41,8 @@ public class MatchInfo {
                 .map(PitchResult::toBoolean)
                 .collect(Collectors.toList());
     }
+
+    public void pushPitchResult(PitchResult pitchResult) {
+        pitchResults.add(pitchResult);
+    }
 }
