@@ -19,6 +19,7 @@ final class PitchOrderLabel: UILabel {
     }
     
     private func configureUI() {
+        font = UIFont.systemFont(ofSize: 11)
         textColor = .white
         textAlignment = .center
     }

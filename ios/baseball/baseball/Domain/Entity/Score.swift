@@ -8,6 +8,6 @@
 import Foundation
 
 struct Score: Codable {
-    private let awayScore: Int
-    private let homeScore: Int
+    private (set) var awayScore: Int
+    private (set) var homeScore: Int
 }

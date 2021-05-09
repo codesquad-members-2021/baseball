@@ -8,9 +8,9 @@
 import Foundation
 
 struct Pitcher: Codable {
-    private let name: String
-    private let numberOfPitching: Int
-    private let hit: Int
-    private let baseOnBalls: Int
-    private let innings: Int
+    private (set) var name: String
+    private (set) var numberOfPitching: Int
+    private (set) var hit: Int
+    private (set) var baseOnBalls: Int
+    private (set) var innings: Int
 }

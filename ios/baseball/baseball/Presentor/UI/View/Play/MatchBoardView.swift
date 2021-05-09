@@ -10,7 +10,7 @@ import UIKit
 final class MatchBoardView: UIView {
     @IBOutlet weak var sboBoardView: SBOBoardView!
     @IBOutlet weak var groundView: GroundView!
-    @IBOutlet weak var offenseAndDefenseLabel: UILabel!
+    @IBOutlet weak var inningInfoLabel: UILabel!
     @IBOutlet weak var pitchButton: PitchButton!
     
     required init?(coder: NSCoder) {
@@ -24,9 +24,13 @@ final class MatchBoardView: UIView {
         self.addSubview(view)
     }
     
-//    func configureSBOsView(sbo: SBO) {
-//        sboBoardView.strikeView.updateCountViews(count: sbo.strikeCount)
-//        sboBoardView.ballView.updateCountViews(count: sbo.ballCount)
-//        sboBoardView.outView.updateCountViews(count: sbo.outCount)
-//    }
+    func configureSBOBoardView(sbo: SBO) {
+        sboBoardView.strikeView.updateCountViews(count: sbo.strike)
+        sboBoardView.ballView.updateCountViews(count: sbo.ball)
+        sboBoardView.outView.updateCountViews(count: sbo.out)
+    }
+    
+    func configureInningInfo(inningInfo: InningInfo) {
+        inningInfoLabel.text = "\(inningInfo.inningCount)회\(inningInfo.makeTopOrBottom()) \(inningInfo.makeOffenseOrDefence())"
+    }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 struct Batter: Codable {
-    private let name: String
-    private let plateAppearances: Int
-    private let hit: Int
-    private let out: Int
-    private let average: Float
+    private (set) var name: String
+    private (set) var plateAppearances: Int
+    private (set) var hit: Int
+    private (set) var out: Int
+    private (set) var average: Float
 }

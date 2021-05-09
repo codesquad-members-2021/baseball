@@ -8,6 +8,6 @@
 import Foundation
 
 struct Innings: Codable {
-    private let home: [Int]
-    private let away: [Int]
+    private (set) var home: [Int]
+    private (set) var away: [Int]
 }

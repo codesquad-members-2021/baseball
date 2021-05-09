@@ -8,6 +8,10 @@
 import UIKit
 
 final class GroundView: UIView {
+    @IBOutlet weak var firstBaseView: RoundedView!
+    @IBOutlet weak var secondBaseView: RoundedView!
+    @IBOutlet weak var thirdBaseView: RoundedView!
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         commonInit()

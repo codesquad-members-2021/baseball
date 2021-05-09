@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aob-Lh-Va9">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -146,7 +146,7 @@
         <!--Play-->
         <scene sceneID="dw1-fm-2xV">
             <objects>
-                <viewController id="kq7-CK-g93" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayViewController" id="kq7-CK-g93" customClass="PlayViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mnB-AF-Puz">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,31 +190,31 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ql2-US-lDI">
                                 <rect key="frame" x="0.0" y="516" width="390" height="245"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IU1-wn-CIw">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IU1-wn-CIw">
                                     <size key="itemSize" width="390" height="54"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="T8g-AK-dsT">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PitchInfoCell" id="T8g-AK-dsT" customClass="PitchInfoCell" customModule="baseball" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zOC-Wa-y5k">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lap-gD-ouR" customClass="PicthOrderView" customModule="baseball" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="16" width="22" height="22"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lap-gD-ouR" customClass="PitchOrderView" customModule="baseball" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="19" width="16" height="16"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="Aln-HK-hGI"/>
-                                                        <constraint firstAttribute="width" constant="22" id="yui-xr-OzD"/>
+                                                        <constraint firstAttribute="height" constant="16" id="Aln-HK-hGI"/>
+                                                        <constraint firstAttribute="width" constant="16" id="yui-xr-OzD"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KoQ-dr-kHd">
-                                                    <rect key="frame" x="62" y="18" width="65" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    <rect key="frame" x="46.000000000000007" y="17.333333333333336" width="73.666666666666686" height="19.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -230,11 +230,16 @@
                                                 <constraint firstItem="Lap-gD-ouR" firstAttribute="leading" secondItem="zOC-Wa-y5k" secondAttribute="leading" constant="20" id="SJH-sF-fx7"/>
                                                 <constraint firstItem="MmC-DS-TBu" firstAttribute="centerY" secondItem="Lap-gD-ouR" secondAttribute="centerY" id="V3h-VL-gIe"/>
                                                 <constraint firstItem="Lap-gD-ouR" firstAttribute="centerY" secondItem="zOC-Wa-y5k" secondAttribute="centerY" id="gS4-NS-ma2"/>
-                                                <constraint firstItem="KoQ-dr-kHd" firstAttribute="leading" secondItem="Lap-gD-ouR" secondAttribute="trailing" constant="20" id="lpy-vj-GhL"/>
+                                                <constraint firstItem="KoQ-dr-kHd" firstAttribute="leading" secondItem="Lap-gD-ouR" secondAttribute="trailing" constant="10" id="lpy-vj-GhL"/>
                                                 <constraint firstAttribute="trailing" secondItem="MmC-DS-TBu" secondAttribute="trailing" constant="20" id="u1y-p0-bXH"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="390" height="54"/>
+                                        <connections>
+                                            <outlet property="countLabel" destination="MmC-DS-TBu" id="SsT-OZ-ReB"/>
+                                            <outlet property="pitchOrderView" destination="Lap-gD-ouR" id="26l-au-UIZ"/>
+                                            <outlet property="sboLabel" destination="KoQ-dr-kHd" id="VDr-2l-gbj"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -261,6 +266,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Play" image="icons8-baseball-player-30" id="auQ-fq-0WY"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ql2-US-lDI" id="abf-qk-P0O"/>
+                        <outlet property="matchBoardView" destination="elN-VX-KSR" id="NT1-Z9-YSC"/>
+                        <outlet property="matchUpView" destination="KZz-Cl-gT2" id="swu-cr-S8A"/>
+                        <outlet property="scoreView" destination="BKm-lo-4HL" id="uIK-P4-dBR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fa-jy-wHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
