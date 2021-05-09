@@ -3,7 +3,10 @@ package com.baseball.service;
 import com.baseball.dto.GameInfoDto;
 import com.baseball.dto.MatchDto;
 import com.baseball.dto.MatchInfoDto;
-import com.baseball.repository.*;
+import com.baseball.repository.BaseballRepository;
+import com.baseball.repository.MatchInfoRepository;
+import com.baseball.repository.MockedBaseballRepository;
+import com.baseball.repository.MockedMatchInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,17 +16,15 @@ import java.util.stream.Collectors;
 public class BaseballService {
     private final BaseballRepository baseballRepository;
     private final MatchInfoRepository matchInfoRepository;
-    private final GameInfoRepository gameInfoRepository;
 
     // FIXME: 나중에 JDBC 연결을 하면 이 생성자는 삭제해야함
     public BaseballService() {
-        this(new MockedBaseballRepository(), new MockedMatchInfoRepository(), new MockedGameInfoRepository());
+        this(new MockedBaseballRepository(), new MockedMatchInfoRepository());
     }
 
-    public BaseballService(BaseballRepository baseballRepository, MatchInfoRepository matchInfoRepository, GameInfoRepository gameInfoRepository) {
+    public BaseballService(BaseballRepository baseballRepository, MatchInfoRepository matchInfoRepository) {
         this.baseballRepository = baseballRepository;
         this.matchInfoRepository = matchInfoRepository;
-        this.gameInfoRepository = gameInfoRepository;
     }
 
     public List<MatchDto> getMatches() {
@@ -37,7 +38,7 @@ public class BaseballService {
     }
 
     public GameInfoDto getGameInfo(String gameId, String teamId) {
-        return GameInfoDto.from(gameInfoRepository.findByGameId(gameId));
+        return GameInfoDto.from(baseballRepository.findMatchById(gameId));
     }
 
     public void playGame(String gameId, String inningResult) {

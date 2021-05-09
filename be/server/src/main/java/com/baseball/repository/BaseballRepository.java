@@ -6,4 +6,6 @@ import java.util.Map;
 
 public interface BaseballRepository {
     Map<String, Match> findAllMatches();
+
+    Match findMatchById(String id);
 }

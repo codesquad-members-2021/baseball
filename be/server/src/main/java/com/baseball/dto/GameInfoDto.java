@@ -1,7 +1,8 @@
 package com.baseball.dto;
 
 
-import com.baseball.domain.GameInfo;
+import com.baseball.domain.Match;
+import com.baseball.domain.Team;
 
 public class GameInfoDto {
 
@@ -64,12 +65,14 @@ public class GameInfoDto {
         return homePlayers;
     }
 
-    public static GameInfoDto from(GameInfo gameInfo) {
+    public static GameInfoDto from(Match match) {
+        Team awayTeam = match.getAwayTeam();
+        Team homeTeam = match.getHomeTeam();
         Builder builder = new Builder()
-                .scores(ScoreDto.from(gameInfo.getScores()))
-                .innings(InningsDto.from(gameInfo.getInnings()))
-                .awayPlayers(PlayersDto.from(gameInfo.getAwayPlayers()))
-                .homePlayers(PlayersDto.from(gameInfo.getHomePlayers()));
+                .scores(ScoreDto.from(awayTeam, homeTeam))
+                .innings(InningsDto.from(awayTeam, homeTeam))
+                .awayPlayers(PlayersDto.from(awayTeam.getPlayers()))
+                .homePlayers(PlayersDto.from(homeTeam.getPlayers()));
         return builder.build();
     }
 }

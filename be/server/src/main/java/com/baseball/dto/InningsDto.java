@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Innings;
+import com.baseball.domain.Team;
 
 import java.util.List;
 
@@ -41,10 +41,10 @@ public class InningsDto {
         return home;
     }
 
-    public static InningsDto from(Innings innings) {
+    public static InningsDto from(Team awayTeam, Team homeTeam) {
         Builder builder = new Builder()
-                .away(innings.getAway())
-                .home(innings.getHome());
+                .away(awayTeam.getScores())
+                .home(homeTeam.getScores());
         return builder.build();
     }
 }
