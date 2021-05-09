@@ -2,6 +2,7 @@ package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.DTO.GameListDTO;
 import com.codesquad.baseball.domain.Game;
+import com.codesquad.baseball.error.exception.GameNotFoundException;
 import com.codesquad.baseball.repository.GameRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,9 @@ public class GameService {
 
     public List<GameListDTO> browseAllGames() {
         return gameRepository.browseAllGames();
+    }
+
+    public Game findGameById(Long id) {
+        return gameRepository.findById(id).orElseThrow(GameNotFoundException::new);
     }
 }
