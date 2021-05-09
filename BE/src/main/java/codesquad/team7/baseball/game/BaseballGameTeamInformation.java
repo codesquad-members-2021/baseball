@@ -2,7 +2,6 @@ package codesquad.team7.baseball.game;
 
 import codesquad.team7.baseball.team.Team;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
 
@@ -20,17 +19,37 @@ public class BaseballGameTeamInformation {
     @Embedded.Empty
     private PlayersStatistics playersStatistics;
 
+    private Integer batterNumber;
     private Integer pitches;
 
     @Embedded.Empty
     private TeamScores teamScores;
 
-    BaseballGameTeamInformation(Long id, Long teamId, PlayersStatistics playersStatistics, Integer pitches, TeamScores teamScores) {
+    BaseballGameTeamInformation(Long id, Long teamId, PlayersStatistics playersStatistics, Integer batterNumber, Integer pitches, TeamScores teamScores) {
         this.id = id;
         this.teamId = teamId;
         this.playersStatistics = playersStatistics;
+        this.batterNumber = batterNumber;
         this.pitches = pitches;
         this.teamScores = teamScores;
+    }
+
+    public void hitAndSetNextBatter() {
+        playersStatistics.hit(batterNumber);
+        batterNumber++;
+    }
+
+    public void outAndSetNextBatter() {
+        playersStatistics.out(batterNumber);
+        batterNumber++;
+    }
+
+    public void pitch() {
+        pitches++;
+    }
+
+    public void scoreUp(int inning) {
+        teamScores.scoreUp(inning);
     }
 
     public Long getTeamId() {
@@ -43,6 +62,10 @@ public class BaseballGameTeamInformation {
 
     public PlayersStatistics getPlayersStatistics() {
         return playersStatistics;
+    }
+
+    public Integer getBatter() {
+        return batterNumber;
     }
 
     public Integer getPitches() {
@@ -60,6 +83,7 @@ public class BaseballGameTeamInformation {
                 null,
                 team.getId(),
                 PlayersStatistics.newStatistics(),
+                0,
                 0,
                 TeamScores.newTeamScores()
         );

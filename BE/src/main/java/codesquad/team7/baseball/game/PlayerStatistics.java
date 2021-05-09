@@ -14,6 +14,23 @@ public class PlayerStatistics {
         this.average = average;
     }
 
+    public void hit() {
+        atBat++;
+        hits++;
+        calculateAverage();
+    }
+
+    public double calculateAverage() {
+        average = hits / (double) atBat;
+        return average;
+    }
+
+    public void out() {
+        atBat++;
+        out++;
+        calculateAverage();
+    }
+
     public Integer getAtBat() {
         return atBat;
     }

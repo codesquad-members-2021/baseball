@@ -14,6 +14,16 @@ public class PlayersStatistics {
         this.players = players;
     }
 
+    public void hit(int playerNumber) {
+        PlayerStatistics player = players.get(playerNumber);
+        player.hit();
+    }
+
+    public void out(int playerNumber) {
+        PlayerStatistics player = players.get(playerNumber);
+        player.out();
+    }
+
     public PlayerStatistics get(int i) {
         return players.get(i);
     }

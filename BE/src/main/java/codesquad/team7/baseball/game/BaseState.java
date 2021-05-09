@@ -35,4 +35,45 @@ public class BaseState {
                 false, false, false, false
         );
     }
+
+    public boolean hit() {
+        homeBase = thirdBase;
+        thirdBase = secondBase;
+        secondBase = firstBase;
+        firstBase = true;
+        return homeBase;
+    }
+
+    public boolean fourBall() {
+        if (!firstBase) {
+            firstBase = true;
+            return false;
+        }
+
+        if (!secondBase) {
+            secondBase = true;
+            return false;
+        }
+
+        if (!thirdBase) {
+            thirdBase = true;
+            return false;
+        }
+
+        if (!homeBase) {
+            homeBase = true;
+        }
+        return true;
+    }
+
+    public void flushHome() {
+        homeBase = false;
+    }
+
+    public void nextInning() {
+        firstBase = false;
+        secondBase = false;
+        thirdBase = false;
+        homeBase = false;
+    }
 }

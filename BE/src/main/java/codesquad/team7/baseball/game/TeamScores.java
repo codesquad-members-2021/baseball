@@ -17,6 +17,20 @@ public class TeamScores {
         this.inningScore = inningScore;
     }
 
+    public void scoreUp(int inning) {
+        totalScore++;
+        InningScore score = inningScore.get(inningIndex(inning));
+        score.scoreUp();
+    }
+
+    private int inningIndex(int inning) {
+        return inning - 1;
+    }
+
+    public void nextInning() {
+        inningScore.add(new InningScore(0));
+    }
+
     public Integer getTotalScore() {
         return totalScore;
     }

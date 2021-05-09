@@ -71,7 +71,7 @@ public class BaseballGame {
     }
 
     public Integer getBatterNumber() {
-        return inning.getBatterNumber();
+        return teamInformation.getBatter(inning.getAttackTeam());
     }
 
     public Integer getStrike() {

@@ -11,4 +11,8 @@ public class InningScore {
     public Integer getInningScore() {
         return score;
     }
+
+    public void scoreUp() {
+        score++;
+    }
 }

@@ -23,6 +23,11 @@ public class TeamInformationMap {
         return teamInformationMap.get(TeamEnum.AWAY);
     }
 
+    public Integer getBatter(TeamEnum teamEnum) {
+        BaseballGameTeamInformation teamInformation = teamInformationMap.get(teamEnum);
+        return teamInformation.getBatter();
+    }
+
     public static TeamInformationMap newTeamInformation(Team home, Team away) {
         Map<TeamEnum, BaseballGameTeamInformation> teamInformationMap = new HashMap<>();
         teamInformationMap.put(TeamEnum.HOME, BaseballGameTeamInformation.newTeamInfo(home));

@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS baseball_game (
 
     ordinal INT,
     attack_team CHAR(4),
-    batter_number INT,
 
     strike INT,
     ball INT,
@@ -40,6 +39,7 @@ CREATE TABLE IF NOT EXISTS baseball_game_team_information (
     baseball_game_team CHAR(4),
 
     team_id BIGINT,
+    batter_number INT,
     pitches INT,
     total_score INT,
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS inning_score (
 CREATE TABLE IF NOT EXISTS batter_inning_history (
     game_id BIGINT,
     batter_inning_history_index INT,
-    pictch CHAR(10),
+    pitch CHAR(10),
     `state` CHAR(3),
     CONSTRAINT batter_inning_history_ref_game_id FOREIGN KEY (game_id) REFERENCES baseball_game (game_id)
 );
