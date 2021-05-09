@@ -25,7 +25,6 @@
 		93E965942643AB26005C9F6C /* SBOBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965932643AB26005C9F6C /* SBOBoardView.swift */; };
 		93E965992643AD12005C9F6C /* CountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965982643AD12005C9F6C /* CountView.swift */; };
 		93E9659E2643ADF0005C9F6C /* SBOBoardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E9659D2643ADF0005C9F6C /* SBOBoardView.xib */; };
-		93E965A62643B277005C9F6C /* SBO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965A52643B277005C9F6C /* SBO.swift */; };
 		93E965AB2643B715005C9F6C /* PicthOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965AA2643B715005C9F6C /* PicthOrderView.swift */; };
 		93E965B02643B730005C9F6C /* PitchOrderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965AF2643B730005C9F6C /* PitchOrderLabel.swift */; };
 		93E965B92643CB3A005C9F6C /* RecodeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965B72643CB3A005C9F6C /* RecodeHeaderView.swift */; };
@@ -33,6 +32,8 @@
 		93E965C22643DFAF005C9F6C /* PitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965C12643DFAF005C9F6C /* PitchButton.swift */; };
 		93E965D22644D98E005C9F6C /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965D12644D98E005C9F6C /* PlayViewController.swift */; };
 		93E965D72644D9A6005C9F6C /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E965D62644D9A6005C9F6C /* ScoreViewController.swift */; };
+		93E9662426455E0F005C9F6C /* MatchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9662326455E0F005C9F6C /* MatchUseCase.swift */; };
+		93E966312645650B005C9F6C /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E966302645650B005C9F6C /* MatchViewModel.swift */; };
 		A03DB670041063072849A07E /* Pods_baseball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6185C5821FDF374680999A /* Pods_baseball.framework */; };
 		B04466A32640E5E900DAD616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04466A22640E5E900DAD616 /* AppDelegate.swift */; };
 		B04466A52640E5E900DAD616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04466A42640E5E900DAD616 /* SceneDelegate.swift */; };
@@ -104,6 +105,8 @@
 		93E965C12643DFAF005C9F6C /* PitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchButton.swift; sourceTree = "<group>"; };
 		93E965D12644D98E005C9F6C /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		93E965D62644D9A6005C9F6C /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		93E9662326455E0F005C9F6C /* MatchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUseCase.swift; sourceTree = "<group>"; };
+		93E966302645650B005C9F6C /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchViewModel.swift; path = baseball/Domain/MatchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		9DE1AC5DF34B16FA735B56F7 /* Pods_baseballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6185C5821FDF374680999A /* Pods_baseball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B044669F2640E5E800DAD616 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -237,6 +240,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		93E9662826455E13005C9F6C /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				93E9662326455E0F005C9F6C /* MatchUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		B04466962640E5E800DAD616 = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				B044670D2644D6EA00DAD616 /* Entity */,
+				93E9662826455E13005C9F6C /* UseCase */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -322,6 +334,7 @@
 		B04466D82640E94C00DAD616 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				93E966302645650B005C9F6C /* MatchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -640,6 +653,7 @@
 				B04466A32640E5E900DAD616 /* AppDelegate.swift in Sources */,
 				93E965D72644D9A6005C9F6C /* ScoreViewController.swift in Sources */,
 				93E965C22643DFAF005C9F6C /* PitchButton.swift in Sources */,
+				93E9662426455E0F005C9F6C /* MatchUseCase.swift in Sources */,
 				93E9651B26413F42005C9F6C /* ScoreView.swift in Sources */,
 				93E9654D26438261005C9F6C /* InningInfoLabel.swift in Sources */,
 				93E96544264379BC005C9F6C /* InningNumberStack.swift in Sources */,
@@ -655,6 +669,7 @@
 				B044671C2644DF6F00DAD616 /* Score.swift in Sources */,
 				B04467172644DF3900DAD616 /* MatchInfo.swift in Sources */,
 				B04466F52640F60A00DAD616 /* EndPoint.swift in Sources */,
+				93E966312645650B005C9F6C /* MatchViewModel.swift in Sources */,
 				B04467212644DF9E00DAD616 /* Innings.swift in Sources */,
 				B044670F2644D74100DAD616 /* Match.swift in Sources */,
 				B04466EC2640F5DD00DAD616 /* NetworkService.swift in Sources */,
