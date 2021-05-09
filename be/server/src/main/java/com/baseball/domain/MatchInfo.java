@@ -9,12 +9,12 @@ public class MatchInfo {
     private final Integer ball;
     private final Integer outCount;
     private final List<Boolean> bases;
-    private final String inningInfo;
+    private final InningInfo inningInfo;
     private final Pitcher pitcher;
     private final Batter batter;
     private final List<Boolean> pitcherInfo;
 
-    public MatchInfo(Score scores, Integer strike, Integer ball, Integer outCount, List<Boolean> bases, String inningInfo, Pitcher pitcher, Batter batter, List<Boolean> pitcherInfo) {
+    public MatchInfo(Score scores, Integer strike, Integer ball, Integer outCount, List<Boolean> bases, InningInfo inningInfo, Pitcher pitcher, Batter batter, List<Boolean> pitcherInfo) {
         this.scores = scores;
         this.strike = strike;
         this.ball = ball;
@@ -46,7 +46,7 @@ public class MatchInfo {
         return bases;
     }
 
-    public String getInningInfo() {
+    public InningInfo getInningInfo() {
         return inningInfo;
     }
 
