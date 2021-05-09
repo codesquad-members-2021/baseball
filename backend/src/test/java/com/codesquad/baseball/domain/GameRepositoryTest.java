@@ -142,6 +142,7 @@ class GameRepositoryTest {
         assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
         assertThat(pitchResult.size()).isEqualTo(1);
         assertThat(pitchResult.get(0)).isEqualTo(firstHitter);
+        assertThat(game.awayTeamScore()).isEqualTo(1);
         //볼넷 한번 더 맞으면 2번타자는 백홈, 3번타자는 3루, 4번타자는 2루, 5번타자는 1루에 있어야 함
         int fifthHitter = game.currentHitter();
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
@@ -151,6 +152,11 @@ class GameRepositoryTest {
         assertThat(game.thirdBaseRunner()).isEqualTo(thirdHitter);
         assertThat(pitchResult.size()).isEqualTo(1);
         assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
+        assertThat(game.awayTeamScore()).isEqualTo(2);
+        //말로 교대 후, 4볼을 4번 맞으면 홈팀의 점수가 올라가야 합니다
+        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        IntStream.range(0, 16).forEach(value -> game.pitch(PlayType.BALL));
+        assertThat(game.homeTeamScore()).isEqualTo(1);
     }
 
     private Game createGame(String gameTitle) {

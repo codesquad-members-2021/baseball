@@ -67,7 +67,7 @@ create table team_participating_in_game
     id              int primary key auto_increment,
     team            int references team (id),
     game            int references game (id),
-    is_home_team    bool not null,
+    team_type       varchar(4) not null,
     current_hitter  int references player_participating_in_game (id),
     current_pitcher int references player_participating_in_game (id)
 );

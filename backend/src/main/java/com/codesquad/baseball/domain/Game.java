@@ -89,7 +89,9 @@ public class Game {
                 onBall();
             case HITS:
         }
-        return judgeState();
+        List<Integer> backHomeRunners = judgeState();
+        backHomeRunners.forEach(i -> currentInning().addScore(attackingTeam()));
+        return backHomeRunners;
     }
 
     private void onStrike() {
@@ -174,7 +176,7 @@ public class Game {
     }
 
     private void proceedToNextStage() {
-        resetAllCount();
+        resetField();
         if (isTop) {
             isTop = false;
         } else {
@@ -190,9 +192,12 @@ public class Game {
         currentBallCount++;
     }
 
-    private void resetAllCount() {
+    private void resetField() {
         currentOutCount = 0;
         resetStrikeAndBall();
+        firstBase = NO_PLAYER;
+        secondBase = NO_PLAYER;
+        thirdBase = NO_PLAYER;
     }
 
     private void resetStrikeAndBall() {
@@ -236,6 +241,10 @@ public class Game {
 
     public int currentInningNumber() {
         return innings.size();
+    }
+
+    private Inning currentInning() {
+        return innings.get(innings.size() - 1);
     }
 
     public int teamScore(Function<Inning, Integer> score) {

@@ -14,16 +14,16 @@ public class TeamParticipatingInGame {
     private int team;
     @MappedCollection(idColumn = "team_participating_in_game", keyColumn = "bat_order")
     private List<PlayerParticipatingInGame> players = new ArrayList<>();
-    private boolean isHomeTeam;
+    private TeamType teamType;
     private int currentHitter = -1;
     private int currentPitcher = -1;
 
     protected TeamParticipatingInGame() {
     }
 
-    public TeamParticipatingInGame(int id, boolean isHomeTeam) {
+    public TeamParticipatingInGame(int id, TeamType teamType) {
         this.id = id;
-        this.isHomeTeam = isHomeTeam;
+        this.teamType = teamType;
     }
 
     public void initializeTeam() {
@@ -61,11 +61,11 @@ public class TeamParticipatingInGame {
     }
 
     public boolean isHomeTeam() {
-        return isHomeTeam;
+        return teamType == TeamType.HOME;
     }
 
     public boolean isAwayTeam() {
-        return !isHomeTeam;
+        return teamType == TeamType.AWAY;
     }
 
     public int sizeOfPlayer() {
@@ -92,13 +92,17 @@ public class TeamParticipatingInGame {
         this.currentPitcher = currentPitcher;
     }
 
+    public TeamType getTeamType() {
+        return teamType;
+    }
+
     @Override
     public String toString() {
         return "TeamParticipatingInGame{" +
                 "id=" + id +
                 ", team=" + team +
                 ", players=" + players +
-                ", isHomeTeam=" + isHomeTeam +
+                ", teamType=" + teamType +
                 '}';
     }
 }

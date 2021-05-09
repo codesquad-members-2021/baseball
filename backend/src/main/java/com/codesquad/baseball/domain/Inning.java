@@ -26,6 +26,31 @@ public class Inning {
         return new Inning(INITIAL_SCORE, INITIAL_SCORE);
     }
 
+    public void addScore(TeamParticipatingInGame attackingTeam) {
+        TeamType teamType = attackingTeam.getTeamType();
+        if (teamType == TeamType.HOME) {
+            addHomeTeamScore();
+        } else if (teamType == TeamType.AWAY) {
+            addAwayTeamScore();
+        }
+    }
+
+    private void addHomeTeamScore() {
+        homeTeamScore++;
+    }
+
+    private void addAwayTeamScore() {
+        awayTeamScore++;
+    }
+
+    public int getHomeTeamScore() {
+        return homeTeamScore;
+    }
+
+    public int getAwayTeamScore() {
+        return awayTeamScore;
+    }
+
     @Override
     public String toString() {
         return "Inning{" +
@@ -35,13 +60,5 @@ public class Inning {
                 ", homeTeamScore=" + homeTeamScore +
                 ", awayTeamScore=" + awayTeamScore +
                 '}';
-    }
-
-    public int getHomeTeamScore() {
-        return homeTeamScore;
-    }
-
-    public int getAwayTeamScore() {
-        return awayTeamScore;
     }
 }

@@ -16,11 +16,11 @@ public class Team {
     }
 
     public TeamParticipatingInGame createParticipantAsHomeTeam() {
-        return new TeamParticipatingInGame(this.id, true);
+        return new TeamParticipatingInGame(this.id, TeamType.HOME);
     }
 
     public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(this.id, false);
+        return new TeamParticipatingInGame(this.id, TeamType.AWAY);
     }
 
     public void addPlayer(Player player) {
