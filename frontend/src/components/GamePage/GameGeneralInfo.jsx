@@ -1,25 +1,30 @@
 import React from 'react';
-import { theme } from '../Style/Theme';
+import { theme, AlignTextCenter } from '../Style/Theme';
 import styled from 'styled-components';
 const GameGeneralInfo = ({ data }) => {
 	console.log(data);
 	return (
-		<>
+		<Border>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<FlexBox>
-				<TeamName>주나미</TeamName>
-				<TeamName>{data.awayTeamScore}</TeamName>
+				<TeamName>{data.awayTeam.teamName}</TeamName>
+				<TeamName>{data.awayTeam.teamName}</TeamName>
 				<VS>VS</VS>
-
-				<TeamName>{data.homeTeamScore}</TeamName>
-				<TeamName>시에나</TeamName>
+				<TeamName>{data.homeTeam.teamName}</TeamName>
+				<TeamName>{data.homeTeam.teamName}</TeamName>
 			</FlexBox>
-		</>
+		</Border>
 	);
 };
 
+const Border = styled.div`
+	text-align: center;
+	border: 1px solid blue;
+`;
+
 const FlexBox = styled.div`
 	display: flex;
+	justify-contents: center;
 `;
 const Title = styled.div`
 	font-size: ${theme.fontSize.X_large};

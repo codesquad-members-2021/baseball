@@ -18,8 +18,8 @@ function useFetch(method, type, value = null) {
 		return () => {
 			setState({ data: [], loading: true, error: null });
 		};
-	}, []);
+	}, [value]);
 
-	return { data, loading, error };
+	return [data, loading, error];
 }
 export default useFetch;

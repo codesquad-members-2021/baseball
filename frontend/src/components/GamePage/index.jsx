@@ -1,37 +1,23 @@
 import { useState, useEffect } from 'react';
+import useFetch from '../Hook/useFetch';
 import API from '../Hook/API';
 import GameGeneralInfo from './GameGeneralInfo';
 import styled from 'styled-components';
 const GamePage = ({ data }) => {
+	console.log(data);
 	const gameId = data.id;
-	const [initState, setInitState] = useState([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(false);
+	const [gameInfo, loading, error] = useFetch('patch', 'initGame', gameId);
 
-	useEffect(() => {
-		const getInitScore = async () => {
-			setLoading(true);
-			try {
-				const { gameStatus } = await API.get.initData('/' + gameId);
-				setInitState(gameStatus);
-				setLoading(false);
-			} catch (err) {
-				console.error(err);
-				setError(true); //error처리
-			}
-		};
-		getInitScore();
-	}, []);
 	return (
 		<>
 			{loading ? (
 				console.log('Loading...')
 			) : (
 				<GridBox>
-					<GameGeneralInfo data={initState}></GameGeneralInfo>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
+					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
 				</GridBox>
 			)}
 		</>
@@ -39,10 +25,11 @@ const GamePage = ({ data }) => {
 };
 
 const GridBox = styled.div`
+	width: 100vw;
+	height: 100vh;
 	display: grid;
-	grid-template-colums: 3fr 1fr;
-	grid-template-rows: 1fr 3fr;
+	grid-template-columns: 80% 20%;
+	grid-template-rows: 20% 80%;
 	grid-gap: 5px;
-	border: 1px solid blue;
 `;
 export default GamePage;
