@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from 'styled-components';
 import { divideArray } from "../../../common/util";
-import Desc from './desc/Desc';
-import SelectGame from './selectItems/SelectGame';
+import Desc from './partial/Desc';
+import SelectGame from './partial/selectGame/SelectGame';
 
 const SelectTemplate = () => {
     const [teamData] = useState(['Captin', 'Marvel', 'Twins', 'Tigers', 'Rockets', 'Dodgers']);
