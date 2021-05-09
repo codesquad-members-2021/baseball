@@ -2,6 +2,7 @@ package com.codesquad.baseball.domain;
 
 import com.codesquad.baseball.exceptions.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class Game {
     private int thirdBase;
     @MappedCollection(idColumn = "game", keyColumn = "inning_number")
     private List<Inning> innings = new ArrayList<>();
+    @Transient
+    private boolean isInitialized = false;
 
     protected Game() {
     }
@@ -69,7 +72,10 @@ public class Game {
     }
 
     public void initializeGame() {
-        teams.forEach(TeamParticipatingInGame::initializeTeam);
+        if (!isInitialized) {
+            teams.forEach(TeamParticipatingInGame::initializeTeam);
+            isInitialized = true;
+        }
     }
 
     public List<Integer> pitch(PlayType playType) {

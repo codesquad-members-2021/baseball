@@ -127,6 +127,30 @@ class GameRepositoryTest {
         IntStream.range(0, 4).forEach(value -> game.pitch(PlayType.BALL));
         assertThat(game.firstBaseRunner()).isEqualTo(secondHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(firstHitter);
+        //볼넷 한번 더 맞으면 1번타자는 3루, 2번타자는 2루, 3번타자는 1루에 있어야 함
+        int thirdHitter = game.currentHitter();
+        IntStream.range(0, 4).forEach(value -> game.pitch(PlayType.BALL));
+        assertThat(game.firstBaseRunner()).isEqualTo(thirdHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(secondHitter);
+        assertThat(game.thirdBaseRunner()).isEqualTo(firstHitter);
+        //볼넷 한번 더 맞으면 1번타자는 백홈, 2번타자는 3루, 3번타자는 2루, 4번타자는 1루에 있어야 함
+        int fourthHitter = game.currentHitter();
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
+        List<Integer> pitchResult = game.pitch(PlayType.BALL);
+        assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
+        assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
+        assertThat(pitchResult.size()).isEqualTo(1);
+        assertThat(pitchResult.get(0)).isEqualTo(firstHitter);
+        //볼넷 한번 더 맞으면 2번타자는 백홈, 3번타자는 3루, 4번타자는 2루, 5번타자는 1루에 있어야 함
+        int fifthHitter = game.currentHitter();
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
+        pitchResult = game.pitch(PlayType.BALL);
+        assertThat(game.firstBaseRunner()).isEqualTo(fifthHitter);
+        assertThat(game.secondBaseRunner()).isEqualTo(fourthHitter);
+        assertThat(game.thirdBaseRunner()).isEqualTo(thirdHitter);
+        assertThat(pitchResult.size()).isEqualTo(1);
+        assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
     }
 
     private Game createGame(String gameTitle) {
@@ -159,7 +183,7 @@ class GameRepositoryTest {
         bTeamParticipant.addPlayer(bTeamPitcher, PitcherPosition.SP);
 
         Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
-
+        game.initializeGame();
         gameRepository.save(game);
         return findGameById(game.getId());
     }
