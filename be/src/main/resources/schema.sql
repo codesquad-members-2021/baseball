@@ -24,7 +24,7 @@ CREATE TABLE TEAM
 
 CREATE TABLE TEAM_SCORE
 (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id      BIGINT PRIMARY KEY AUTO_INCREMENT,
     team_id BIGINT,
     round   INT,
     score   INT,
@@ -33,27 +33,23 @@ CREATE TABLE TEAM_SCORE
 
 CREATE TABLE PLAYER
 (
-    id         BIGINT PRIMARY KEY AUTO_INCREMENT,
-    name       VARCHAR(50),
-    is_pitcher TINYINT(1),
-    team_id    BIGINT,
+    id               BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name             VARCHAR(50),
+    is_pitcher       TINYINT(1),
+    uniform_number   INT,
+    plate_appearance INT DEFAULT 0,
+    hits             INT DEFAULT 0,
+    outs             INT DEFAULT 0,
+    team_id          BIGINT,
     FOREIGN KEY (team_id) REFERENCES TEAM (id)
 );
 
-CREATE TABLE PLAYER_SCORE
-(
-    player_id        BIGINT PRIMARY KEY,
-    plate_appearance INT,
-    hits             INT,
-    outs             INT,
-    FOREIGN KEY (player_id) REFERENCES PLAYER (id)
-);
 
 CREATE TABLE PLAYER_HISTORY
 (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id        BIGINT PRIMARY KEY AUTO_INCREMENT,
     player_id BIGINT,
-    round   INT,
-    record   VARCHAR(45),
+    round     INT,
+    record    VARCHAR(45),
     FOREIGN KEY (player_id) REFERENCES PLAYER (id)
 );
