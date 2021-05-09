@@ -8,13 +8,13 @@ public class ErrorResponse {
 
     private String message;
 
-    private ErrorResponse(HttpStatus status, String message) {
-        this.status = status;
-        this.message = message;
+    private ErrorResponse(ErrorCode errorCode) {
+        this.status = errorCode.getStatus();
+        this.message = errorCode.getMessage();
     }
 
     public static ErrorResponse of(ErrorCode errorCode) {
-        return new ErrorResponse(errorCode.getStatus(), errorCode.getMessage());
+        return new ErrorResponse(errorCode);
     }
 
     public HttpStatus getStatus() {
