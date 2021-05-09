@@ -32,6 +32,14 @@ public class BattingHistory {
         return batterTeamId + "_" + batterUniformNumber;
     }
 
+    public double getHitRatio() {
+        double hitRatio = 0;
+        if (this.appear != 0) {
+            hitRatio = (double) this.hits / (double) this.appear;
+        }
+        return hitRatio;
+    }
+
     public void plusAppear() {
         this.appear++;
     }

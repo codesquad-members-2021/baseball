@@ -21,18 +21,13 @@ public class BattingHistoryDTO {
 
 
     public static BattingHistoryDTO of(Team team, BattingHistory battingHistory, int playingUniformNumber) {
-        double hitRatio = 0;
-        if (battingHistory.getAppear() != 0) {
-            hitRatio = (double) battingHistory.getHits() / (double) battingHistory.getAppear();
-        }
-
         return builder()
                 .uniformNumber(battingHistory.getBatterUniformNumber())
                 .name(team.getPlayerName(battingHistory.getBatterUniformNumber()))
                 .appearCount(battingHistory.getAppear())
                 .hitCount(battingHistory.getHits())
                 .outCount(battingHistory.getOut())
-                .hitRatio(hitRatio)
+                .hitRatio(battingHistory.getHitRatio())
                 .playing(battingHistory.getBatterUniformNumber() == playingUniformNumber)
                 .build();
     }
