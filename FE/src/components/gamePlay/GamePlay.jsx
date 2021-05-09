@@ -47,7 +47,7 @@ const GamePlayItem = styled.li`
     ${({ idx }) => (idx === 1 || idx === 2) 
         && css`border-bottom: 3px solid ${({ theme }) => theme.colors.white};`};
     ${({ idx }) => (idx === 3 || idx === 4) 
-        && css`max-height: 500px;`};
+        && css`max-height: 600px;`};
 
     ${({ idx }) => (idx === 4) && cssScrollbar};
 `;

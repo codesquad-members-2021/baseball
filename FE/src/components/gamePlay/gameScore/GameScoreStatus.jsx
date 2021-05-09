@@ -62,7 +62,8 @@ const StatusItem = styled.div`
 `;
 
 const IsPlayer = styled.p`
-    font-size: ${({ theme }) => theme.fontSize.M};
+    font-size: ${({ theme }) => theme.fontSize.L};
+    font-weight: ${({ theme }) => theme.fontWeight.bold};
     color: ${({ theme }) => theme.colors.red};
     text-align: center;
 

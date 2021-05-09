@@ -36,7 +36,7 @@ export const StyledMain = styled.div`
 export const StyledBackground = styled.div`
     ${cssFullSize};
     z-index: 0;
-    background-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.black1};
     opacity: 0.7;
 `;
 

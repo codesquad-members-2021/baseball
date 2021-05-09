@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Round = () => {
     return (
         <StyledRound>
-            Round
+            2회초 수비
         </StyledRound>
     );
 };
@@ -11,5 +11,7 @@ const Round = () => {
 export default Round;
 
 // --- Styled Components ---
-const StyledRound = styled.div`
+const StyledRound = styled.span`
+    font-size: ${({theme}) => theme.fontSize.XXL};
+    font-weight: ${({theme}) => theme.fontWeight.bold};
 `;
