@@ -9,13 +9,6 @@ public class Pitcher extends Player {
         super(name);
     }
 
-    public Pitcher(String name, Integer numberOfPitching, Integer hit, Integer baseOnBalls, Integer innings) {
-        super(name, hit);
-        this.numberOfPitching = numberOfPitching;
-        this.baseOnBalls = baseOnBalls;
-        this.innings = innings;
-    }
-
     public Integer getNumberOfPitching() {
         return numberOfPitching;
     }

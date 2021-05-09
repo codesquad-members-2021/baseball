@@ -1,67 +1,57 @@
 package com.baseball.domain;
 
 
-import com.baseball.domain.player.Batter;
-import com.baseball.domain.player.Pitcher;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MatchInfo {
-    private final Score scores;
-    private final Integer strike;
-    private final Integer ball;
-    private final Integer outCount;
-    private final List<Boolean> bases;
-    private final InningInfo inningInfo;
-    private final Pitcher pitcher;
-    private final Batter batter;
-    private final List<Boolean> pitcherInfo;
+    private Integer halvesCount = 0;
+    private Boolean isUserOffense = false;
+    private List<Boolean> bases = Arrays.asList(false, false, false);
+    private List<PitchResult> pitchResults = new ArrayList<>();
 
-    public MatchInfo(Score scores, Integer strike, Integer ball, Integer outCount, List<Boolean> bases, InningInfo inningInfo, Pitcher pitcher, Batter batter, List<Boolean> pitcherInfo) {
-        this.scores = scores;
-        this.strike = strike;
-        this.ball = ball;
-        this.outCount = outCount;
-        this.bases = bases;
-        this.inningInfo = inningInfo;
-        this.pitcher = pitcher;
-        this.batter = batter;
-        this.pitcherInfo = pitcherInfo;
+    public Integer getInningCount() {
+        /**
+         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
+         * 출처: https://en.wikipedia.org/wiki/Inning
+         */
+        return 1 + (halvesCount / 2);
     }
 
-    public Score getScores() {
-        return scores;
+    public Boolean getUserTop() {
+        return halvesCount % 2 == 0;
+    }
+
+    public Boolean getUserOffense() {
+        return isUserOffense;
     }
 
     public Integer getStrike() {
-        return strike;
+        return (int) pitchResults.stream()
+                .filter(pitch -> pitch == PitchResult.STRIKE)
+                .count();
     }
 
     public Integer getBall() {
-        return ball;
+        return (int) pitchResults.stream()
+                .filter(pitch -> pitch == PitchResult.BALL)
+                .count();
     }
 
     public Integer getOutCount() {
-        return outCount;
+        return getStrike() / 3;
     }
 
     public List<Boolean> getBases() {
         return bases;
     }
 
-    public InningInfo getInningInfo() {
-        return inningInfo;
-    }
-
-    public Pitcher getPitcher() {
-        return pitcher;
-    }
-
-    public Batter getBatter() {
-        return batter;
-    }
-
     public List<Boolean> getPitcherInfo() {
-        return pitcherInfo;
+        return pitchResults.stream()
+                .filter(pitch -> pitch != PitchResult.HIT)
+                .map(PitchResult::toBoolean)
+                .collect(Collectors.toList());
     }
 }

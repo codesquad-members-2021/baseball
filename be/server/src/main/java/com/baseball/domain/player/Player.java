@@ -8,11 +8,6 @@ public class Player {
         this.name = name;
     }
 
-    public Player(String name, Integer hit) {
-        this.name = name;
-        this.hit = hit;
-    }
-
     public String getName() {
         return name;
     }

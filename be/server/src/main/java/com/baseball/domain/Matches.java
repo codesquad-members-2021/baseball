@@ -2,12 +2,12 @@ package com.baseball.domain;
 
 import com.baseball.exception.MatchNotFoundException;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class Matches {
-    private final Map<String, Match> matches = new ConcurrentHashMap<>();
+    private final Map<String, Match> matches = new LinkedHashMap<>();
 
     public void put(String id, Match match) {
         matches.put(id, match);

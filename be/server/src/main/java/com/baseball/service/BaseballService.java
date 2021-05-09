@@ -4,9 +4,7 @@ import com.baseball.dto.GameInfoDto;
 import com.baseball.dto.MatchDto;
 import com.baseball.dto.MatchInfoDto;
 import com.baseball.repository.BaseballRepository;
-import com.baseball.repository.MatchInfoRepository;
 import com.baseball.repository.MockedBaseballRepository;
-import com.baseball.repository.MockedMatchInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,16 +13,14 @@ import java.util.stream.Collectors;
 @Service
 public class BaseballService {
     private final BaseballRepository baseballRepository;
-    private final MatchInfoRepository matchInfoRepository;
 
     // FIXME: 나중에 JDBC 연결을 하면 이 생성자는 삭제해야함
     public BaseballService() {
-        this(new MockedBaseballRepository(), new MockedMatchInfoRepository());
+        this(new MockedBaseballRepository());
     }
 
-    public BaseballService(BaseballRepository baseballRepository, MatchInfoRepository matchInfoRepository) {
+    public BaseballService(BaseballRepository baseballRepository) {
         this.baseballRepository = baseballRepository;
-        this.matchInfoRepository = matchInfoRepository;
     }
 
     public List<MatchDto> getMatches() {
@@ -34,7 +30,7 @@ public class BaseballService {
     }
 
     public MatchInfoDto getProgress(String gameId, String teamId) {
-        return MatchInfoDto.from(matchInfoRepository.findByGameId(gameId));
+        return MatchInfoDto.from(baseballRepository.findMatchById(gameId));
     }
 
     public GameInfoDto getGameInfo(String gameId, String teamId) {
