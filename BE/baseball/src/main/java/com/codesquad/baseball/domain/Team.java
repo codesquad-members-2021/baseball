@@ -1,8 +1,9 @@
 package com.codesquad.baseball.domain;
 
+import com.codesquad.baseball.error.exception.PlayerNotFoundException;
 import org.springframework.data.annotation.Id;
 
-import java.util.Map;
+import java.util.Set;
 
 public class Team {
 
@@ -16,6 +17,8 @@ public class Team {
     private boolean isPlayable;
 
     private Long pitcherId;
+
+    private Set<Player> players;
 
     public Team(String name, boolean isHome, boolean isPlayable) {
         this.name = name;
@@ -43,6 +46,10 @@ public class Team {
         return pitcherId;
     }
 
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -59,11 +66,25 @@ public class Team {
         this.pitcherId = pitcherId;
     }
 
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public Player getPlayerById(Long id) {
+        for (Player player : players) {
+            if (id.equals(player.getId())) {
+                return player;
+            }
+        }
+        throw new PlayerNotFoundException();
+    }
+
     @Override
     public String toString() {
         return "Team{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", players=" + players +
                 '}';
     }
 }
