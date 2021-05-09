@@ -3,6 +3,7 @@ package com.team22.baseball.service;
 import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
+import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.repository.GameRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -55,19 +56,14 @@ class GameServiceTest {
 
     @Test
     @DisplayName("Backend2 팀의 선수가 10명인지 테스트")
-    void printAllPlayer() {
-        List<Game> games = gameRepository.findAll();
-        String findTeam = "Backend2";
+    void printAllPlayer() throws Exception {
+        final String name = "Backend2";
+        Team team = gameRepository.findTeamByTitle(name).orElseThrow(Exception::new);
 
-        for (Game game : games) {
-            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기
-                if (team.getName().equals(findTeam)) {
-                    System.out.println(team.getPlayers().toString());
-                    assertThat(team.getPlayers().size()).isEqualTo(10);
-                    break;
-                }
-            }
-        }
+        assertAll(
+                () -> assertEquals(team.getName(), name),
+                () -> assertEquals(team.getPlayers().size(), 10)
+        );
     }
 
     @Test
@@ -86,5 +82,19 @@ class GameServiceTest {
             assertThat(player.getPlateAppearance()).isZero();
         }
     }
-    
+
+    @Test
+    @DisplayName("특정팀의 점수 히스토리를 출력합니다.")
+    void printTeamScore() throws Exception {
+
+        final String name = "Backend1";
+
+        Team team = gameRepository.findTeamByTitle(name).orElseThrow(Exception::new);
+
+        for (TeamScore teamScore : team.getTeamScores()) {
+            System.out.println(teamScore.toString());
+        }
+
+    }
+
 }

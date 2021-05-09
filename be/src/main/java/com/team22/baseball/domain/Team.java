@@ -23,6 +23,9 @@ public class Team {
     @MappedCollection(idColumn = "team_id", keyColumn = "id")
     private List<Player> players = new ArrayList<>();
 
+    @MappedCollection(idColumn = "team_id", keyColumn = "id")
+    private List<TeamScore> teamScores = new ArrayList<>();
+
     @PersistenceConstructor
     private Team(Long id, String name, boolean isHome, boolean selected) {
         this.id = id;
@@ -33,6 +36,10 @@ public class Team {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public List<TeamScore> getTeamScores() {
+        return teamScores;
     }
 
     public Long getId() {
