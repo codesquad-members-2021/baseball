@@ -1,6 +1,7 @@
 package com.team22.baseball.service;
 
 import com.team22.baseball.domain.Game;
+import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.repository.GameRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -33,14 +34,14 @@ class GameServiceTest {
     }
 
     @Test
-    @DisplayName("Id로 게임을 검색한다.")
+    @DisplayName("첫번째 게임을 검색한다.")
     void findGameOfId() throws Exception {
         Game findGame = gameRepository.findById(1L).orElseThrow(Exception::new);
         assertThat(findGame).isNotNull();
     }
 
     @Test
-    @DisplayName("Game2에 속한 Team을 출력한다.")
+    @DisplayName("두번째 게임에 속한 Team을 출력한다.")
     void team() throws Exception {
         Game findGame = gameRepository.findById(2L).orElseThrow(Exception::new);
         List<Team> teamList = findGame.getTeams();
@@ -53,4 +54,42 @@ class GameServiceTest {
         );
     }
 
+    @Test
+    @DisplayName("Backend2 팀의 선수가 10명인지 테스트")
+    void printAllPlayer() {
+        List<Game> games = gameRepository.findAll();
+        String findTeam = "Backend2";
+
+        for (Game game : games) {
+            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기
+                if (team.getName().equals(findTeam)) {
+                    System.out.println(team.getPlayers().toString());
+                    assertThat(team.getPlayers().size()).isEqualTo(10);
+                    break;
+                }
+            }
+        }
+    }
+
+
+    @Test
+    @DisplayName("Backend팀 선수의 초기 정보가 유효한지 검사한다.")
+    void infoOfPlayer() {
+        List<Game> games = gameRepository.findAll();
+        String findTeam = "Backend";
+
+        for (Game game : games) {
+            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기 또는 분리할 방법 생각하기
+                if (team.getName().equals(findTeam)) {
+                    for (Player player : team.getPlayers()) {
+                        assertThat(player.getHits()).isZero();
+                        assertThat(player.getOuts()).isZero();
+                        assertThat(player.getPlateAppearance()).isZero();
+                    }
+                }
+
+            }
+        }
+    }
+    
 }

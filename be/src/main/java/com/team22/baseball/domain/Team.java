@@ -1,7 +1,12 @@
 package com.team22.baseball.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(value = "TEAM")
 public class Team {
@@ -15,11 +20,19 @@ public class Team {
 
     private final boolean selected;
 
-    Team(Long id, String name, boolean isHome, boolean selected) {
+    @MappedCollection(idColumn = "team_id", keyColumn = "id")
+    private List<Player> players = new ArrayList<>();
+
+    @PersistenceConstructor
+    private Team(Long id, String name, boolean isHome, boolean selected) {
         this.id = id;
         this.name = name;
         this.isHome = isHome;
         this.selected = selected;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 
     public Long getId() {
