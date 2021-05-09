@@ -54,9 +54,8 @@ public class GameHistoryDTO {
 
     private static List<BattingHistoryDTO> acquireBattingHistoryDTOList(Game game, Team team, int playingUniformNumber) {
         return game.getBattingHistoryMap().values().stream()
-                .filter(x -> x.getBatterTeamId() == team.getId())
+                .filter(x -> x.hasMatchingTeamId(team))
                 .map(x -> BattingHistoryDTO.of(team, x, playingUniformNumber))
                 .collect(Collectors.toList());
     }
-
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import team9.baseball.domain.aggregate.team.Team;
 
 @Getter
 @Setter
@@ -38,6 +39,10 @@ public class BattingHistory {
             hitRatio = (double) this.hits / (double) this.appear;
         }
         return hitRatio;
+    }
+
+    public boolean hasMatchingTeamId(Team team) {
+        return this.batterTeamId == team.getId();
     }
 
     public void plusAppear() {
