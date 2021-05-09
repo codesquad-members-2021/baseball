@@ -32,7 +32,7 @@ public class Game {
         return teams;
     }
 
-    public void addTeam(Team team){
+    public void addTeam(Team team) {
         teams.add(team);
     }
 
@@ -48,7 +48,7 @@ public class Game {
         return inProgress;
     }
 
-    public static Game of(int round, boolean inProgress){
+    public static Game of(int round, boolean inProgress) {
         return new Game(null, round, inProgress);
     }
 

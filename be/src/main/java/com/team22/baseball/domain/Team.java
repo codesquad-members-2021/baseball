@@ -58,7 +58,7 @@ public class Team {
         return selected;
     }
 
-    public static Team of(Long id,String name, boolean isHome, boolean selected){
+    public static Team of(Long id, String name, boolean isHome, boolean selected) {
         return new Team(id, name, isHome, selected);
     }
 

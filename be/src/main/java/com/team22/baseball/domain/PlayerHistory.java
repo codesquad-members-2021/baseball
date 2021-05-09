@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(value= "PLAYER_HISTORY")
+@Table(value = "PLAYER_HISTORY")
 public class PlayerHistory {
 
     @Id
@@ -40,11 +40,11 @@ public class PlayerHistory {
         return record;
     }
 
-    PlayerHistory withId(Long playerId, int round, String record){
+    PlayerHistory withId(Long playerId, int round, String record) {
         return new PlayerHistory(null, playerId, round, record);
     }
 
-    public PlayerHistory of(Long playerId, int round, String record){
+    public PlayerHistory of(Long playerId, int round, String record) {
         return new PlayerHistory(null, playerId, round, record);
     }
 
