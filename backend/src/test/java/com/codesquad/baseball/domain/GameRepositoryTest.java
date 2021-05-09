@@ -168,24 +168,22 @@ class GameRepositoryTest {
         teamA.getPlayers().stream().filter(Player::isHitter).forEach(aTeamParticipant::addPlayer);
         teamB.getPlayers().stream().filter(Player::isHitter).forEach(bTeamParticipant::addPlayer);
 
-        Player aTeamPitcher = teamA.getPlayers()
-                .stream()
-                .filter(Player::isPitcher)
-                .findFirst()
-                .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PITCHER_FAILED));
-        aTeamParticipant.addPlayer(aTeamPitcher, PitcherPosition.SP);
-
-        Player bTeamPitcher = teamB.getPlayers()
-                .stream()
-                .filter(Player::isPitcher)
-                .findFirst()
-                .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PITCHER_FAILED));
-        bTeamParticipant.addPlayer(bTeamPitcher, PitcherPosition.SP);
+        registerPlayersInGame(teamA, aTeamParticipant);
+        registerPlayersInGame(teamB, bTeamParticipant);
 
         Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
         game.initializeGame();
         gameRepository.save(game);
         return findGameById(game.getId());
+    }
+
+    private void registerPlayersInGame(Team team, TeamParticipatingInGame teamParticipant) {
+        Player pitcher = team.getPlayers()
+                .stream()
+                .filter(Player::isPitcher)
+                .findFirst()
+                .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PITCHER_FAILED));
+        teamParticipant.addPlayer(pitcher, PitcherPosition.SP);
     }
 
     private Game findGameById(int gameId) {
