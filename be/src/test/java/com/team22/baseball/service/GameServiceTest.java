@@ -22,7 +22,6 @@ class GameServiceTest {
     @Autowired
     GameRepository gameRepository;
 
-
     @Test
     @DisplayName("Game 리스트 순회 테스트")
     void allGame() {
@@ -71,45 +70,21 @@ class GameServiceTest {
         }
     }
 
-
     @Test
-    @DisplayName("Backend팀 선수의 초기 정보가 유효한지 검사한다.")
-    void infoOfPlayer() {
-        List<Game> games = gameRepository.findAll();
-        String findTeam = "Backend";
+    @DisplayName("Backend1팀 선수의 초기 정보가 유효한지 검사한다.")
+    void infoOfPlayer() throws Exception {
 
-        for (Game game : games) {
-            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기 또는 분리할 방법 생각하기
-                if (team.getName().equals(findTeam)) {
-                    for (Player player : team.getPlayers()) {
-                        assertThat(player.getHits()).isZero();
-                        assertThat(player.getOuts()).isZero();
-                        assertThat(player.getPlateAppearance()).isZero();
-                    }
-                }
+        final String name = "Backend1";
 
-            }
+        Team team = gameRepository.findTeamByTitle(name).orElseThrow(Exception::new);
+
+        assertThat(team.getName()).isEqualTo(name);
+
+        for (Player player : team.getPlayers()) {
+            assertThat(player.getHits()).isZero();
+            assertThat(player.getOuts()).isZero();
+            assertThat(player.getPlateAppearance()).isZero();
         }
     }
-
-
-    @Test
-    @DisplayName("Backend1팀 선수의 히스토리 출력 테스트")
-    void historyTest(){
-        List<Game> games = gameRepository.findAll();
-        String findTeam = "Backend1";
-
-        for (Game game : games) {
-            for (Team team : game.getTeams()) { //TODO. GameRepository에서 Team을 한번에 찾을 수 있는 Query작성하기 또는 분리할 방법 생각하기
-                if (team.getName().equals(findTeam)) {
-                    for (Player player : team.getPlayers()) {
-                        System.err.println(player.getPlayerHistories().toString());
-                    }
-                }
-            }
-        }
-
-    }
-
-
+    
 }
