@@ -1,4 +1,10 @@
 package com.codesquad.baseball.error.exception;
 
-public class GameNotFoundException extends RuntimeException{
+import com.codesquad.baseball.error.ErrorCode;
+
+public class GameNotFoundException extends NotFoundException {
+
+    public GameNotFoundException() {
+        super(ErrorCode.GAME_NOT_FOUND_EXCEPTION);
+    }
 }
