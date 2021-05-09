@@ -27,12 +27,12 @@ public class MockedBaseballRepository implements BaseballRepository {
     public MockedBaseballRepository() {
         matches.put("MATCH_ID", new Match(new Teams(
                 new Team("AWAY", new Players(
-                        Arrays.asList(new Pitcher("HOME1투수"), new Pitcher("HOME2투수")),
-                        Arrays.asList(new Batter("HOME1타자"), new Batter("HOME2타자"))
-                )),
-                new Team("HOME", new Players(
                         Arrays.asList(new Pitcher("AWAY1투수"), new Pitcher("AWAY2투수")),
                         Arrays.asList(new Batter("AWAY1타자"), new Batter("AWAY2타자"))
+                )),
+                new Team("HOME", new Players(
+                        Arrays.asList(new Pitcher("HOME1투수"), new Pitcher("HOME2투수")),
+                        Arrays.asList(new Batter("HOME1타자"), new Batter("HOME2타자"))
                 ))
         )));
         matches.put("U924AX", new Match(new Teams(
