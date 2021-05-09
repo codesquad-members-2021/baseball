@@ -31,8 +31,16 @@ public class GameHistoryDTO {
         List<BattingHistoryDTO> homeBattingHistories = acquireBattingHistoryDTOList(game, homeTeam, homePlayingUniformNumber);
 
         return builder()
-                .awayTeam(TeamHistoryDTO.of(awayTeam.getName(), awayScores, awayBattingHistories))
-                .homeTeam(TeamHistoryDTO.of(homeTeam.getName(), homeScores, homeBattingHistories))
+                .awayTeam(TeamHistoryDTO.builder()
+                        .teamName(awayTeam.getName())
+                        .scores(awayScores)
+                        .battingHistory(awayBattingHistories)
+                        .build())
+                .homeTeam(TeamHistoryDTO.builder()
+                        .teamName(homeTeam.getName())
+                        .scores(homeScores)
+                        .battingHistory(homeBattingHistories)
+                        .build())
                 .build();
     }
 
