@@ -14,9 +14,34 @@ const Field = () => {
 
 	const [isInPlay, setInPlay] = useState(false);
 
+	const [pitchingStep, setpitchingStep] = useState("windup");
+
+	const pitch = async () => {
+		await windup();
+		await throwing();
+		await release();
+	};
+
+	const windup = () =>
+		new Promise((res, rej) => {
+			setpitchingStep("windup");
+			setTimeout(() => res(), 200);
+		});
+	const throwing = () =>
+		new Promise((res, rej) => {
+			setpitchingStep("throwing");
+			setTimeout(() => res(), 250);
+		});
+	const release = () =>
+		new Promise((res, rej) => {
+			setpitchingStep("release");
+			setTimeout(() => res(), 150);
+		});
+
 	const hit = async () => {
 		if (isInPlay) return;
 		setInPlay(() => true);
+		await pitch();
 		await run();
 		arrive();
 		setInPlay(() => false);
@@ -51,15 +76,15 @@ const Field = () => {
 
 			<CurrentInning>8회초 수비</CurrentInning>
 
-			{gongSoo === "DEFENSE" && <PitchButton onClick={hit}>PITCH</PitchButton>}
-
-			<Pitcher src="image/pitcher_eagles_heart.png" />
+			<Pitcher step={pitchingStep} />
 
 			{runnerList.map((el, i) => (
 				<Runner key={i} {...el} />
 			))}
 
 			{isInPlay || <Batter src="image/batter.png" />}
+
+			{gongSoo === "DEFENSE" && <PitchButton onClick={hit}>PITCH</PitchButton>}
 		</StyledField>
 	);
 };
@@ -89,11 +114,13 @@ const PitchButton = styled.button`
 	background-color: rgba(0, 0, 0, 0.65);
 	color: #fff;
 `;
-const Pitcher = styled.img`
+const Pitcher = styled.img.attrs(({ step }) => ({
+	src: `image/pitcher_${step}.png`,
+}))`
 	position: absolute;
 	top: 380px;
 	left: 450px;
-	width: 60px;
+	width: ${({ step }) => (step === "windup" ? "50px" : "60px")};
 `;
 
 const baseLocation = [
