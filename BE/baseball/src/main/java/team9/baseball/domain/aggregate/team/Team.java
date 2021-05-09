@@ -29,11 +29,11 @@ public class Team {
         this.name = name;
     }
 
-    public Player getPlayer(int uniformNumber) {
-        if (!playerMap.containsKey(uniformNumber)) {
-            throw new NotFoundException(this.id + "팀에 " + uniformNumber + "번호의 선수가 없습니다.");
+    public String getPlayerName(int uniform_number) {
+        if (!playerMap.containsKey(uniform_number)) {
+            throw new NotFoundException(this.id + "팀에 " + uniform_number + "번호의 선수가 없습니다.");
         }
-        return playerMap.get(uniformNumber);
+        return playerMap.get(uniform_number).getName();
     }
 
     public int getFirstPlayerUniformNumber() {

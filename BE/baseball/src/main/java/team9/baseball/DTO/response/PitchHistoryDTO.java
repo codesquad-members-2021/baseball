@@ -19,8 +19,8 @@ public class PitchHistoryDTO {
 
     public static PitchHistoryDTO of(Team attackTeam, Team defenseTeam, PitchHistory pitchHistory) {
         return builder()
-                .pitcher(PlayerDTO.of(defenseTeam.getPlayer(pitchHistory.getPitcherUniformNumber())))
-                .batter(PlayerDTO.of(attackTeam.getPlayer(pitchHistory.getBatterUniformNumber())))
+                .pitcher(PlayerDTO.of(defenseTeam, pitchHistory.getPitcherUniformNumber()))
+                .batter(PlayerDTO.of(attackTeam, pitchHistory.getBatterUniformNumber()))
                 .result(pitchHistory.getResult().name())
                 .strikeCount(pitchHistory.getStrikeCount())
                 .ballCount(pitchHistory.getBallCount())
