@@ -9,7 +9,6 @@ const API = {
 	post: {},
 	patch: {
 		initGame: async (gameId) => {
-			console.log(gameId);
 			const response = await fetch(`${url}/games/${gameId}`, {
 				method: 'PATCH',
 				headers: {

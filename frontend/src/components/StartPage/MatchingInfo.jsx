@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import useFetch from '../Hook/useFetch';
 import { theme } from '../Style/Theme';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 const MatchingInfo = ({ setMessage, data }) => {
 	const [currentID, setID] = useState(null);
 	const [occupiedState, loadingOccupiedState, occupied] = useFetch(
@@ -39,30 +39,31 @@ const MatchingInfo = ({ setMessage, data }) => {
 			<TeamName onClick={() => handleClick(data.id, 'AWAY')}>
 				{data.awayTeam.teamName}
 			</TeamName>
-			<span>VS</span>
+			<VS>VS</VS>
 			<TeamName onClick={() => handleClick(data.id, 'HOME')}>
 				{data.homeTeam.teamName}
 			</TeamName>
 		</TeamWrapper>
 	);
 };
-
-const TeamName = styled.span`
+const VS = styled.div`
 	font-size: ${theme.fontSize.large};
 	font-weight: ${theme.fontWeight.bold};
-	color: ${theme.colors.black};
+	color: ${theme.colors.grey_deep};
+`;
+const TeamName = styled.span`
+	font-size: ${theme.fontSize.X_large};
+	font-weight: ${theme.fontWeight.bold};
 	cursor: pointer;
 	&:hover {
 		color: ${theme.colors.red};
 	}
 `;
-
 const TeamWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-around;
 	overflow: hidden;
-	height: 55px;
 	padding: 0 30px;
 `;
 
