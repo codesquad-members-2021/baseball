@@ -99,10 +99,10 @@
                                     <outlet property="homeTeamLabel" destination="7j3-0Y-JTj" id="jkU-kl-xbb"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4x-6W-2hJ" userLabel="Ground View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F4x-6W-2hJ" userLabel="Ground View" customClass="GroundView" customModule="baseball_game" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="105" width="414" height="368"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X46-so-drB" userLabel="SBO View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X46-so-drB" userLabel="SBO View" customClass="BallCountView" customModule="baseball_game" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="110.5" height="110.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mMQ-eN-G3u">
@@ -397,6 +397,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ballCountView" destination="X46-so-drB" id="cRm-iR-GZI"/>
                         <outlet property="batterInfoView" destination="9vJ-MP-eiP" id="Qk7-Rg-ieX"/>
                         <outlet property="inningLabel" destination="u08-VH-Cxe" id="wlU-uc-koK"/>
                         <outlet property="pitchButton" destination="h44-ox-CWT" id="6M5-Oz-dqq"/>

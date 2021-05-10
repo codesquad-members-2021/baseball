@@ -40,6 +40,18 @@ class GamePlayViewController: UIViewController {
         bind()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        ballCountView.reset()
+        ballCountView.fillStrike(upto: 1)
+        ballCountView.fillStrike(upto: 2)
+        ballCountView.fillBall(upto: 1)
+        ballCountView.fillOut(upto: 1)
+        //ballCountView.fillStrike(upto: 3)
+    }
+    
+    @IBOutlet weak var ballCountView: BallCountView!
+    
     private func bind() {
         gamePlayViewModel.$gameManager
             .receive(on: DispatchQueue.main)
