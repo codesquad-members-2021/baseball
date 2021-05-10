@@ -38,7 +38,7 @@
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameCell" id="2AE-yc-eHD" customClass="GameCell" customModule="baseballApp" customModuleProvider="target">
                                                 <rect key="frame" x="30" y="0.0" width="346" height="139"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eue-zT-qVQ" customClass="GameCell" customModule="baseballApp" customModuleProvider="target">
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eue-zT-qVQ" customClass="GameCell" customModule="baseballApp" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="346" height="139"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -260,7 +260,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="8cy-oc-dKv">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="5d8-d6-cAs" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBar" automaticallyAdjustsScrollViewInsets="NO" id="5d8-d6-cAs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionIndicatorImage="baseball_player" id="lo7-XV-kyt">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

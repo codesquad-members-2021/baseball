@@ -10,6 +10,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindCollectionView()
+        mainCollectionView.delegate = self
     }
     
     private func bindCollectionView() {
@@ -22,3 +23,9 @@ class HomeViewController: UIViewController {
     }
 }
 
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tapBarVC = (storyboard?.instantiateViewController(identifier: "TabBar"))!
+        present(tapBarVC, animated: true, completion: nil)
+    }
+}
