@@ -2,10 +2,18 @@ import styled from "styled-components";
 
 const BallCount = ({ count }) => (
 	<StyledBallCount>
-		<Count type="B" count={count.ball} />
-		<Count type="S" count={count.strike} />
-		<Count type="O" count={count.out} />
+		<Count type="BALL" count={count.ball} />
+		<Count type="STRIKE" count={count.strike} />
+		<Count type="OUT" count={count.out} />
 	</StyledBallCount>
+);
+
+const Count = ({ type, count }) => (
+	<StyledCount type={type}>
+		<CountTitle>{type[0]}</CountTitle>
+		<CountOn>{"●".repeat(count)}</CountOn>
+		<CountOff>{"●".repeat((type === "BALL" ? 3 : 2) - count)}</CountOff>
+	</StyledCount>
 );
 
 const StyledBallCount = styled.div`
@@ -13,21 +21,13 @@ const StyledBallCount = styled.div`
 	top: 185px;
 	left: 10px;
 `;
-
-const Count = ({ type, count }) => (
-	<StyledCount type={type}>
-		<CountTitle>{type}</CountTitle>
-		<CountOn>{"●".repeat(count)}</CountOn>
-		<CountOff>{"●".repeat((type === "B" ? 3 : 2) - count)}</CountOff>
-	</StyledCount>
-);
-
+const colorMap = {
+	BALL : "#080",
+	STRIKE : "#ff0",
+	OUT : "#f00",
+}
 const StyledCount = styled.div`
-	color: ${({ type }) => {
-		if (type === "B") return "green";
-		if (type === "S") return "yellow";
-		if (type === "O") return "red";
-	}};
+	color: ${({ type }) => colorMap[type]};
 	font-size: 40px;
 	height: 45px;
 	display: flex;

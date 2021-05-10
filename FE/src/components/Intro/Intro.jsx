@@ -2,13 +2,13 @@ import styled from "styled-components";
 import TeamSelect from "./TeamSelect";
 
 const Intro = () => (
-	<Wrapper>
+	<StyledIntro>
 		<Title>Baseball Game Online</Title>
 		<TeamSelect />
-	</Wrapper>
+	</StyledIntro>
 );
 
-const Wrapper = styled.div`
+const StyledIntro = styled.div`
 	height: 720px;
 	display: flex;
 	flex-direction: column;
