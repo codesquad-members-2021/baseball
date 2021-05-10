@@ -1,0 +1,60 @@
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "1Xk-53-K6z"; */
+"1Xk-53-K6z.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "GAME 2"; ObjectID = "6By-Cd-2vp"; */
+"6By-Cd-2vp.text" = "GAME 2";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "76n-No-DGX"; */
+"76n-No-DGX.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "8PW-lk-AK4"; */
+"8PW-lk-AK4.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "9MV-KB-q8k"; */
+"9MV-KB-q8k.text" = "VS";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "E1P-kM-l8n"; */
+"E1P-kM-l8n.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "GAME 4"; ObjectID = "GdV-30-dcz"; */
+"GdV-30-dcz.text" = "GAME 4";
+
+/* Class = "UILabel"; text = "GAME 3"; ObjectID = "Mhz-ou-VlE"; */
+"Mhz-ou-VlE.text" = "GAME 3";
+
+/* Class = "UITabBarItem"; title = "Item 2"; ObjectID = "OQt-Cj-LPT"; */
+"OQt-Cj-LPT.title" = "Item 2";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "OtZ-Mx-FeG"; */
+"OtZ-Mx-FeG.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Snx-44-3WR"; */
+"Snx-44-3WR.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "TFW-EF-y8z"; */
+"TFW-EF-y8z.normalTitle" = "Button";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "U3Z-nF-2aM"; */
+"U3Z-nF-2aM.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "eA6-O7-JMS"; */
+"eA6-O7-JMS.text" = "VS";
+
+/* Class = "UITabBarItem"; title = "Item 1"; ObjectID = "hIk-IB-hCa"; */
+"hIk-IB-hCa.title" = "Item 1";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "jwm-X6-2ej"; */
+"jwm-X6-2ej.text" = "VS";
+
+/* Class = "UILabel"; text = "게임 목록"; ObjectID = "oJ3-Bg-s9U"; */
+"oJ3-Bg-s9U.text" = "게임 목록";
+
+/* Class = "UILabel"; text = "GAME 1"; ObjectID = "qFD-Ga-ZH4"; */
+"qFD-Ga-ZH4.text" = "GAME 1";
+
+/* Class = "UILabel"; text = "VS"; ObjectID = "qz4-gp-HJM"; */
+"qz4-gp-HJM.text" = "VS";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "vUx-Xi-gJv"; */
+"vUx-Xi-gJv.normalTitle" = "Button";
