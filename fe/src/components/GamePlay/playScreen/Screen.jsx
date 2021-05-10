@@ -33,7 +33,10 @@ const ScreenField = styled.img`
   width: 34%;
   transform: rotate(45deg);
 `
-const ScreenRound = styled(Span)`
+const ScreenRound = styled.span`
+  font-size: ${({ theme }) => `${theme.fontSizes.BASE}rem`};
+  font-weight: ${({ theme }) => `${theme.weights.BASE}`};
+  color: ${({ theme }) => `${theme.colors.white}`};
   position: absolute;
   right: 2%;
   top: 4%;
@@ -57,7 +60,6 @@ const PitchButton = styled.button`
   &:hover {
     /* transition: ease-in 0.5s; */
     animation: ${buttonAnimation} 5s linear infinite;
-    animation-delay: 0.5s;
     transform-origin: 50% 50%;
   }
 `
