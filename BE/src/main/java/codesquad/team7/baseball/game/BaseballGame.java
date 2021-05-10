@@ -69,6 +69,10 @@ public class BaseballGame {
             return;
         }
 
+        if (pitch == Pitch.STRIKE) {
+            strike(attackTeam);
+        }
+
     }
 
     private void hit(TeamEnum attackTeam) {
@@ -100,6 +104,13 @@ public class BaseballGame {
         if (inning.isThreeOut()) {
             inning.threeOut();
             teamInformation.nextInning(attackTeam.opposite());
+        }
+    }
+
+    private void strike(TeamEnum attackTeam) {
+        inning.strike();
+        if (inning.isThreeStrike()) {
+            out(attackTeam);
         }
     }
 

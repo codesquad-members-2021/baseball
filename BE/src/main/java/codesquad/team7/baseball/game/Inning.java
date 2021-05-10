@@ -58,15 +58,6 @@ public class Inning {
         baseState.fourBall();
     }
 
-    public void strike() {
-        strike += 1;
-        baseState.flushHome();
-        if (strike >= 3) {
-            strike = 0;
-            out();
-        }
-    }
-
     public void out() {
         strike = 0;
         ball = 0;
@@ -85,15 +76,21 @@ public class Inning {
 
     private void nextInning() {
         baseState.nextInning();
-        if (attackTeam == TeamEnum.AWAY) {
-            attackTeam = TeamEnum.HOME;
-            return;
-        }
 
         if (attackTeam == TeamEnum.HOME) {
-            attackTeam = TeamEnum.AWAY;
             ordinal += 1;
         }
+
+        attackTeam = attackTeam.opposite();
+    }
+
+    public void strike() {
+        strike += 1;
+        baseState.flushHome();
+    }
+
+    public boolean isThreeStrike() {
+        return strike >= 3;
     }
 
     public Integer getOrdinal() {

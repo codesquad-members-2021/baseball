@@ -93,4 +93,10 @@ public class BaseballController {
         return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
     }
 
+    @GetMapping("/3/pitch/strike")
+    public BaseballGameView strike() {
+        baseballGame.pitch(Pitch.STRIKE);
+        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+    }
+
 }
