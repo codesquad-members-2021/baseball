@@ -43,11 +43,11 @@ public class Match {
     }
 
     public void play(String pitch) {
-        PitchResult pitchResult = PitchResult.of(pitch);
+        PlayResult playResult = PlayResult.of(pitch);
         Pitcher pitcher = teams.getPitcher();
         Batter batter = teams.getBatter();
-        pitcher.play(pitchResult);
-        batter.play(pitchResult);
-        matchInfo.update(pitchResult);
+        pitcher.play(playResult);
+        batter.play(playResult);
+        matchInfo.update(playResult);
     }
 }

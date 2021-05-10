@@ -9,21 +9,21 @@ import java.util.stream.Collectors;
 public class MatchInfo {
     private Integer halvesCount = 0;
     private List<Boolean> bases = Arrays.asList(false, false, false);
-    private List<PitchResult> pitchResults = new ArrayList<>();
+    private List<PlayResult> playResults = new ArrayList<>();
 
     public Integer getHalvesCount() {
         return halvesCount;
     }
 
     public Integer getStrike() {
-        return (int) pitchResults.stream()
-                .filter(pitch -> pitch == PitchResult.STRIKE)
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.STRIKE)
                 .count();
     }
 
     public Integer getBall() {
-        return (int) pitchResults.stream()
-                .filter(pitch -> pitch == PitchResult.BALL)
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.BALL)
                 .count();
     }
 
@@ -36,14 +36,14 @@ public class MatchInfo {
     }
 
     public List<Boolean> getPitcherInfo() {
-        return pitchResults.stream()
-                .filter(pitch -> pitch != PitchResult.HIT)
-                .map(PitchResult::toBoolean)
+        return playResults.stream()
+                .filter(pitch -> pitch != PlayResult.HIT)
+                .map(PlayResult::toBoolean)
                 .collect(Collectors.toList());
     }
 
-    public void update(PitchResult pitchResult) {
+    public void update(PlayResult playResult) {
         // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
-        pitchResults.add(pitchResult);
+        playResults.add(playResult);
     }
 }

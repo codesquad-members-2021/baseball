@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.baseball.domain.match.PitchResult.BALL;
-import static com.baseball.domain.match.PitchResult.STRIKE;
+import static com.baseball.domain.match.PlayResult.BALL;
+import static com.baseball.domain.match.PlayResult.STRIKE;
 
 class PitcherTest {
     private SoftAssertions softly;
@@ -39,7 +39,7 @@ class PitcherTest {
         softly.assertThat(pitcher.getBaseOnBalls())
                 .isEqualTo(0);
         softly.assertThat(pitcher.getInnings())
-                .isEqualTo(1);
+                .isEqualTo(0F);
         softly.assertThat(pitcher.getHit())
                 .isEqualTo(0);
         softly.assertThat(pitcher.getNumberOfPitching())
@@ -48,13 +48,48 @@ class PitcherTest {
     }
 
     @Test
+    @DisplayName("피쳐가 공을 던지고, STRIKE 3번일 경우에 대한 테스트")
+    void scenario_strike_3() {
+        for (int i = 0; i < 3; i++) {
+            pitcher.play(STRIKE);
+        }
+        softly.assertThat(pitcher.getBaseOnBalls())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getInnings())
+                .isEqualTo(0.33333334f);
+        softly.assertThat(pitcher.getHit())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getNumberOfPitching())
+                .isEqualTo(3);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("피쳐가 공을 던지고, STRIKE 9번일 경우에 대한 테스트")
+    void scenario_strike_9() {
+        for (int i = 0; i < 9; i++) {
+            pitcher.play(STRIKE);
+
+        }
+        softly.assertThat(pitcher.getBaseOnBalls())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getInnings())
+                .isEqualTo(1F);
+        softly.assertThat(pitcher.getHit())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getNumberOfPitching())
+                .isEqualTo(9);
+        softly.assertAll();
+    }
+
+    @Test
     @DisplayName("피쳐가 공을 던지고, BALL 일 경우에 대한 테스트")
     void scenario_ball() {
         pitcher.play(BALL);
         softly.assertThat(pitcher.getBaseOnBalls())
-                .isEqualTo(0);
+                .isEqualTo(0.25F);
         softly.assertThat(pitcher.getInnings())
-                .isEqualTo(1);
+                .isEqualTo(0);
         softly.assertThat(pitcher.getHit())
                 .isEqualTo(0);
         softly.assertThat(pitcher.getNumberOfPitching())
@@ -62,5 +97,21 @@ class PitcherTest {
         softly.assertAll();
     }
 
+    @Test
+    @DisplayName("피쳐가 공을 던지고, 4 BALL 일 경우에 대한 테스트")
+    void scenario_ball_4() {
+        for (int i = 0; i < 4; i++) {
+            pitcher.play(BALL);
+        }
+        softly.assertThat(pitcher.getBaseOnBalls())
+                .isEqualTo(1F);
+        softly.assertThat(pitcher.getInnings())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getHit())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getNumberOfPitching())
+                .isEqualTo(4);
+        softly.assertAll();
+    }
 
 }

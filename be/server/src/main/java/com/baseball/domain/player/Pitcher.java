@@ -1,6 +1,6 @@
 package com.baseball.domain.player;
 
-import com.baseball.domain.match.PitchResult;
+import com.baseball.domain.match.PlayResult;
 
 public class Pitcher extends Player {
     private Integer numberOfPitching = 0;
@@ -12,13 +12,13 @@ public class Pitcher extends Player {
     }
 
     @Override
-    public void play(PitchResult pitchResult) {
+    public void play(PlayResult playResult) {
         // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
-        if (pitchResult == PitchResult.STRIKE) {
+        if (playResult == PlayResult.STRIKE) {
             numberOfPitching++;
             strikeCount++;
         }
-        if (pitchResult == PitchResult.BALL) {
+        if (playResult == PlayResult.BALL) {
             numberOfPitching++;
             ballCount++;
         }

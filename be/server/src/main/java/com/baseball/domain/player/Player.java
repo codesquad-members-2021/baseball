@@ -1,6 +1,6 @@
 package com.baseball.domain.player;
 
-import com.baseball.domain.match.PitchResult;
+import com.baseball.domain.match.PlayResult;
 
 public abstract class Player {
     private final String name;
@@ -18,5 +18,5 @@ public abstract class Player {
         return hit;
     }
 
-    public abstract void play(PitchResult pitchResult);
+    public abstract void play(PlayResult playResult);
 }
