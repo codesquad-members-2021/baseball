@@ -5,8 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.baseball.domain.match.PlayResult.BALL;
-import static com.baseball.domain.match.PlayResult.STRIKE;
+import static com.baseball.domain.match.PlayResult.*;
 
 class PitcherTest {
     private SoftAssertions softly;
@@ -111,6 +110,21 @@ class PitcherTest {
                 .isEqualTo(0);
         softly.assertThat(pitcher.getNumberOfPitching())
                 .isEqualTo(4);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("피쳐가 공을 던지고, HIT이벤트가 발생한다 하더라도 data는 달라지는게 없어야한다")
+    void scenario_hit() {
+        pitcher.play(HIT);
+        softly.assertThat(pitcher.getBaseOnBalls())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getInnings())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getHit())
+                .isEqualTo(0);
+        softly.assertThat(pitcher.getNumberOfPitching())
+                .isEqualTo(1);
         softly.assertAll();
     }
 

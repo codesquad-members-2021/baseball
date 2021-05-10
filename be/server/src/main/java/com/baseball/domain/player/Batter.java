@@ -12,8 +12,10 @@ public class Batter extends Player {
 
     @Override
     public void play(PlayResult playResult) {
-        // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
 
+        if (playResult == PlayResult.HIT) {
+            increseHit();
+        }
         if (playResult == PlayResult.STRIKE) {
             strikeCount++;
 

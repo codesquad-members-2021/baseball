@@ -18,5 +18,9 @@ public abstract class Player {
         return hit;
     }
 
+    void increseHit() {
+        hit++;
+    }
+
     public abstract void play(PlayResult playResult);
 }
