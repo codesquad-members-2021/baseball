@@ -1,5 +1,6 @@
 const theme = {
   fontSizes: {
+    TXS: '15px',
     XXS: '20px',
     XS: '25px',
     S: '30px',
@@ -10,6 +11,7 @@ const theme = {
   },
   colors: {
     white: '#FFF',
+    black: '#333',
     green: '#4f9202',
     yellow: '#dec170',
     yellowOrange: '#eabd57',
