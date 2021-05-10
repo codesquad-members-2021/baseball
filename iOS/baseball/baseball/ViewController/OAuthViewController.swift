@@ -17,6 +17,7 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
     var gameManager: GameManager!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.configOAuth()
         let networkingCenter = NetworkingCenter()
         let jsonProcessCenter = JSONProcessCenter()
