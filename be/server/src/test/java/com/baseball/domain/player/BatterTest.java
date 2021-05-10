@@ -63,6 +63,23 @@ class BatterTest {
     }
 
     @Test
+    @DisplayName("베터에서 out이 3번 일어났을 경우에 대한 테스트")
+    void scenario_out_3() {
+        for (int i = 0; i < 3; i++) {
+            batter.play(STRIKE);
+        }
+        softly.assertThat(batter.getPlateAppearances())
+                .isEqualTo(1);
+        softly.assertThat(batter.getOut())
+                .isEqualTo(3);
+        softly.assertThat(batter.getAverage())
+                .isEqualTo(0);
+        softly.assertThat(batter.getHit())
+                .isEqualTo(0);
+        softly.assertAll();
+    }
+
+    @Test
     @DisplayName("피쳐에서 ball이 일어났을 경우에 대한 테스트")
     void scenario_ball() {
         batter.play(BALL);

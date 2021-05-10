@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MatchInfo {
-    private Integer halvesCount = 0;
-    private List<Boolean> bases = Arrays.asList(false, false, false);
+    private Integer halvesCount = 1;
+    private List<Boolean> bases = new ArrayList<>(Arrays.asList(false, false, false));
     private List<PlayResult> playResults = new ArrayList<>();
 
     public Integer getHalvesCount() {
@@ -43,7 +43,18 @@ public class MatchInfo {
     }
 
     public void update(PlayResult playResult) {
-        // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
+        // TODO: playResult 에 따른 상태변화를 TDD 로 구현
         playResults.add(playResult);
+
+        if (playResult == PlayResult.HIT) {
+            bases.remove(2);
+            bases.add(0, Boolean.TRUE);
+        }
+
+        if (playResult == PlayResult.STRIKE) {
+            if (getOutCount() == 3) {
+                halvesCount++;
+            }
+        }
     }
 }
