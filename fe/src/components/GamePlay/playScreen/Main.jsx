@@ -1,12 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 const Main = () => {
-  return <StyldeMain></StyldeMain>
-}
+  return <StyldeMain></StyldeMain>;
+};
 
-export default Main
+export default Main;
 
 const StyldeMain = styled.main`
   display: flex;
   width: 100%;
   height: 80%;
-`
+`;

@@ -1,5 +1,11 @@
+
 ## 개요
 온라인 야구게임 만들기
+
+
+## 시연
+![Untitled_ May 7, 2021 4_13 PM](https://user-images.githubusercontent.com/71962505/117412133-5fd4f080-af4f-11eb-8a40-8ce6b8bb16da.gif)
+
 
 ## 팀원
 |`FE`|`BackEnd`|
