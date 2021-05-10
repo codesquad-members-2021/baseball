@@ -1,10 +1,10 @@
 import React from 'react';
 import GamePage from '../GamePage';
-const DefenseMode = () => {
+const DefenseMode = ({ match }) => {
+	const id = match.params;
 	return (
 		<>
-			<div>수비모드</div>
-			<GamePage />
+			<GamePage data={id} />
 		</>
 	);
 };

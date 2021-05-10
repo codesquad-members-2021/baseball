@@ -1,37 +1,24 @@
 import { useState, useEffect } from 'react';
 import API from './API';
 function useFetch(method, type, value = null) {
-	console.log(method, type, value);
-	const [data, setData] = useState([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(false);
+	const [state, setState] = useState({ data: [], loading: true, error: null });
+	const { data, loading, error } = state;
 
-	useEffect((value) => {
-		async function fetchUrl(value) {
-			setLoading(true);
+	useEffect(() => {
+		async function fetchUrl() {
 			try {
-				const res = await API[method][type](value ? value : '');
-				console.log('USE_FETCH', res);
-				// axios({ url, method, code });
-				setData(res);
+				const response = await API[method][type](value ? value : '');
+				setState({ ...state, loading: false, data: response });
 			} catch (err) {
-				setError(true);
-				console.error('요청주소에 문제가 있어요😯', err.response);
-				// if (error.response.status >= 400) {
-				// 	setData(error.response.status);
-				// 	;
-				// }
-			} finally {
-				setLoading(false);
+				setState({ ...state, loading: false, error: err });
+				console.error('요청주소에 문제가 있어요😯', err);
 			}
 		}
 		fetchUrl();
 		return () => {
-			setData([]);
-			setLoading(true);
-			setError(false);
+			setState({ data: [], loading: true, error: null });
 		};
-	}, []);
+	}, [value]);
 
 	return [data, loading, error];
 }
