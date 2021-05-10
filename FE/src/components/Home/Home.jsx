@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import styled from "styled-components";
-import { githubProvider, googleProvider } from "../../config/authMethods";
+import { githubProvider, googleProvider } from "../../config/authProvider";
 import socialMediaAuth from "../../service/auth";
 
 const Home = () => {
@@ -16,7 +16,6 @@ const Home = () => {
 
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
-    console.log(res);
     if (res) {
       setLoginStatus(true);
       const id = getOnlyId(res.email);
