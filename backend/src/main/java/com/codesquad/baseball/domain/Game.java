@@ -15,6 +15,9 @@ public class Game {
     private static final int MAXIMUM_STRIKE_COUNT = 3;
     private static final int MAXIMUM_OUT_COUNT = 3;
     private static final int MAXIMUM_BALL_COUNT = 4;
+    private static final int LAST_INNING = 9;
+    private static final int LAST_EXTENDED_INNING = 12;
+    private static final boolean END_OF_THE_GAME = true;
 
     @Id
     private Integer id;
@@ -115,8 +118,7 @@ public class Game {
         }
         savePitchResult(pitchResult);
         updatePlayerRecord(pitchResult);
-        judgePitchResult(pitchResult);
-        return pitchResult;
+        return judgePitchResult(pitchResult);
     }
 
     private void updatePlayerRecord(PitchResult pitchResult) {
@@ -174,7 +176,7 @@ public class Game {
         return pitchResult;
     }
 
-    private void judgePitchResult(PitchResult pitchResult) {
+    private PitchResult judgePitchResult(PitchResult pitchResult) {
         switch (pitchResult.getPlayType()) {
             case HOMERUN:
             case HITS:
@@ -187,11 +189,15 @@ public class Game {
                 resetStrikeAndBall();
                 increaseOutCount();
                 if (isThreeOut()) {
-                    proceedToNextStage();
+                    boolean isEndOfTheGame = proceedToNextStage();
+                    if (isEndOfTheGame) {
+                        pitchResult.changeGameStateToGameOver();
+                    }
                 }
                 break;
         }
         pitchResult.getBackHomeRunners().forEach(i -> currentInning().addScore(attackingTeam()));
+        return pitchResult;
     }
 
     private void changeHitterOfAttackingTeam() {
@@ -286,13 +292,45 @@ public class Game {
         return defendingTeam().getCurrentPitcher();
     }
 
-    private void proceedToNextStage() {
+    private boolean proceedToNextStage() {
         resetField();
         if (isTop) {
             isTop = false;
         } else {
+            if (judgeGameOver()) {
+                return END_OF_THE_GAME;
+            }
             proceedToNextInning();
         }
+        return !END_OF_THE_GAME;
+    }
+
+    private boolean judgeGameOver() {
+        if (isLastInning() && !isTieState()) {
+            return END_OF_THE_GAME;
+        } else if (isExtendedInning() && !isTieState()) {
+            return END_OF_THE_GAME;
+        } else if (isLastExtendedInning()) {
+            return END_OF_THE_GAME;
+        }
+        return !END_OF_THE_GAME;
+    }
+
+    private boolean isTieState() {
+        return homeTeamScore() == awayTeamScore();
+    }
+
+    private boolean isLastInning() {
+        return currentInningNumber() == LAST_INNING;
+    }
+
+    private boolean isExtendedInning() {
+        int inningNumber = currentInningNumber();
+        return LAST_INNING < inningNumber && inningNumber <= LAST_EXTENDED_INNING;
+    }
+
+    private boolean isLastExtendedInning() {
+        return currentInningNumber() == LAST_EXTENDED_INNING;
     }
 
     private void increaseStrikeCount() {

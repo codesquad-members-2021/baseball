@@ -208,7 +208,7 @@ class GameRepositoryTest {
         Game game = createGame(GAME_TITLE);
         //1점홈런은 원정팀 1점, 홈팀 0점이어야 하고, 모든 주자는 돌아와야 함. 백홈한 주자는 한명이어야 하고 그건 홈런친 친구여야 함
         int firstHitter = game.currentHitter();
-        PitchResult pitchResult = game.pitch(PlayType.HOMERUN);
+        PitchResult pitchResult = doHomeRun(game);
         assertThat(game.hasFirstBaseRunner()).isFalse();
         assertThat(game.hasSecondBaseRunner()).isFalse();
         assertThat(game.hasThirdBaseRunner()).isFalse();
@@ -222,7 +222,7 @@ class GameRepositoryTest {
         int thirdHitter = game.currentHitter();
         doHits(game);
         int fourthHitter = game.currentHitter();
-        pitchResult = game.pitch(PlayType.HOMERUN);
+        pitchResult = doHomeRun(game);
         assertThat(game.hasFirstBaseRunner()).isFalse();
         assertThat(game.hasSecondBaseRunner()).isFalse();
         assertThat(game.hasThirdBaseRunner()).isFalse();
@@ -236,7 +236,7 @@ class GameRepositoryTest {
         threeOut(game);
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.HITS));
         //만루홈런치면 홈팀은 4점을 얻어야 함. 백홈은 총 4명이어야 함
-        pitchResult = game.pitch(PlayType.HOMERUN);
+        pitchResult = doHomeRun(game);
         assertThat(game.awayTeamScore()).isEqualTo(4);
         assertThat(game.homeTeamScore()).isEqualTo(4);
         assertThat(pitchResult.numberOfRunners()).isEqualTo(4);
@@ -249,28 +249,28 @@ class GameRepositoryTest {
         int[] expectedHomeTeamScores = {1, 0, 0, 0, 1};
         //1이닝 초
         Game game = createGame(GAME_TITLE);
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
         //3아웃
         threeOut(game);
         //1이닝 말
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
         //3아웃 3번
         IntStream.range(0, 3).forEach(value -> threeOut(game));
         //3이닝 초
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.HITS));
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
         assertThat(game.currentInningNumber()).isEqualTo(3);
         assertThat(game.isTop()).isTrue();
         //3아웃 4번
         IntStream.range(0, 4).forEach(value -> threeOut(game));
         //5이닝 초
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
         assertThat(game.currentInningNumber()).isEqualTo(5);
         assertThat(game.isTop()).isTrue();
         //3아웃
         threeOut(game);
         //5이닝 말
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
         assertThat(game.currentInningNumber()).isEqualTo(5);
         assertThat(game.isTop()).isFalse();
         //이닝 별 점수결과 확인하기
@@ -317,6 +317,92 @@ class GameRepositoryTest {
             assertThat(currentRecord.getHitCount()).isEqualTo(currentExpectedRecord[2]);
             assertThat(currentRecord.getOutCount()).isEqualTo(currentExpectedRecord[3]);
         });
+    }
+
+    @Test
+    @DisplayName("9회말에 동점상황이 아니라면 경기가 종료될 수 있어야 합니다")
+    void testEndOfTheGame() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.currentInningNumber()).isEqualTo(1);
+        //1회초
+        IntStream.range(0, 9).forEach(value -> doHomeRun(game));
+        threeOut(game);
+        //1회말
+        threeOut(game);
+        //스킵(2회초)
+        IntStream.range(0, 8).forEach(value -> threeOut(game));
+        //6회초
+        IntStream.range(0, 9).forEach(value -> doHomeRun(game));
+        doStrike(game);
+        doStrike(game);
+        PitchResult pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.IN_PROGRESS);
+        threeStrike(game);
+        threeStrike(game);
+        assertThat(game.currentInningNumber()).isEqualTo(6);
+        //6회말
+        IntStream.range(0, 9).forEach(value -> doHomeRun(game));
+        threeOut(game);
+        //스킵(7회초)
+        IntStream.range(0, 5).forEach(value -> threeOut(game));
+        //9회말
+        assertThat(game.currentInningNumber()).isEqualTo(9);
+        assertThat(game.isTop()).isFalse();
+        threeStrike(game);
+        threeStrike(game);
+        doStrike(game);
+        doStrike(game);
+        pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.GAME_OVER);
+    }
+
+    @Test
+    @DisplayName("9회말에 동점상황이면 연장전을 해야 합니다")
+    void testExtendedGame() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.currentInningNumber()).isEqualTo(1);
+        //1회초
+        IntStream.range(0, 2 * 9).forEach(value -> threeOut(game));
+        threeOut(game);
+        threeStrike(game);
+        threeStrike(game);
+        doStrike(game);
+        doStrike(game);
+        PitchResult pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.IN_PROGRESS);
+        //12회말까지 동점이면 그냥 그 상태로 종료해야 함
+        IntStream.range(0, 5).forEach(value -> threeOut(game));
+        threeStrike(game);
+        threeStrike(game);
+        doStrike(game);
+        doStrike(game);
+        pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.GAME_OVER);
+    }
+
+    @Test
+    @DisplayName("10회말에 동점상황이 아니면 거기서 끝나야 합니다")
+    void testGameEndIn10th() {
+        Game game = createGame(GAME_TITLE);
+        assertThat(game.currentInningNumber()).isEqualTo(1);
+        //1회초
+        IntStream.range(0, 2 * 9).forEach(value -> threeOut(game));
+        threeOut(game);
+        threeStrike(game);
+        threeStrike(game);
+        doStrike(game);
+        doStrike(game);
+        PitchResult pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.IN_PROGRESS);
+        //10회초
+        doHomeRun(game);
+        threeOut(game);
+        threeStrike(game);
+        threeStrike(game);
+        doStrike(game);
+        doStrike(game);
+        pitchResult = doStrike(game);
+        assertThat(pitchResult.getGameState()).isEqualTo(GameState.GAME_OVER);
     }
 
     private void testHistoryOfCurrentInning(Game game) {
@@ -386,7 +472,7 @@ class GameRepositoryTest {
             game.pitch(PlayType.STRIKE);
             historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, strikeCount + 1, 3, pitcher, hitter7, 0));
         });
-        game.pitch(PlayType.HOMERUN);
+        doHomeRun(game);
 
         //테스트데이터 입력
         histories = game.showHistoriesOfCurrentInning();
@@ -435,6 +521,12 @@ class GameRepositoryTest {
 
     private PitchResult doStrike(Game game) {
         PitchResult pitchResult = game.pitch(PlayType.STRIKE);
+        gameRepository.save(game);
+        return pitchResult;
+    }
+
+    private PitchResult doHomeRun(Game game) {
+        PitchResult pitchResult = game.pitch(PlayType.HOMERUN);
         gameRepository.save(game);
         return pitchResult;
     }

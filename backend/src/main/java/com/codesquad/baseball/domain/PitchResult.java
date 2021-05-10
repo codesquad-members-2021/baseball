@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PitchResult {
+
     private PlayType playType;
     private List<Integer> backHomeRunners = new ArrayList<>();
+    private GameState gameState;
 
     public PitchResult(PlayType playType) {
         this.playType = playType;
+        gameState = GameState.IN_PROGRESS;
     }
 
     public int numberOfRunners() {
@@ -42,11 +45,19 @@ public class PitchResult {
         playType = PlayType.FOUR_BALL;
     }
 
+    public void changeGameStateToGameOver() {
+        gameState = GameState.GAME_OVER;
+    }
+
     public PlayType getPlayType() {
         return playType;
     }
 
     public List<Integer> getBackHomeRunners() {
         return backHomeRunners;
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 }

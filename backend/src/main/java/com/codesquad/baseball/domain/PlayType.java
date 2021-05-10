@@ -7,5 +7,5 @@ public enum PlayType {
     BALL,
     STRIKE_OUT,
     FOUR_BALL,
-    AT_BAT,
+    AT_BAT
 }
