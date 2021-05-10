@@ -17,7 +17,7 @@ class JwtTokenUtilTest {
         map.put("userId", 1l);
         map.put("userEmail", "isaac@naver.com");
         map.put("resourceServer", "GITHUB");
-        String jwt = JwtTokenUtil.createToken("access", "user", map);
+        String jwt = JwtTokenUtil.createToken("access", "user", map, 10);
         Claims claims = JwtTokenUtil.getTokenData(jwt);
 
         Assertions.assertThat(claims.get("userId", Integer.class)).isEqualTo(1);
@@ -32,7 +32,7 @@ class JwtTokenUtilTest {
         map.put("userId", 1l);
         map.put("userEmail", "isaac@naver.com");
         map.put("resourceServer", "GITHUB");
-        String jwt = JwtTokenUtil.createToken("access", "user", map);
+        String jwt = JwtTokenUtil.createToken("access", "user", map, 10);
         String wrongJwt = jwt.substring(0, jwt.length() - 1);
 
         checkWriteSignature(jwt, true);

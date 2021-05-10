@@ -15,9 +15,9 @@ public class JwtTokenUtil {
 
     private static final String SECRET_KEY = "TEMP"; //배포시 SECRET_KEY는 환경변수로 설정할 예정 (개인키 노출 X)
 
-    public static String createToken(String subject, String audience, Map<String, Object> privateClaims) {
+    public static String createToken(String subject, String audience, Map<String, Object> privateClaims, int expiredMinute) {
 
-        long ttlMillis = (30 * 1000 * 60);
+        long ttlMillis = (expiredMinute * 60 * 1000);
 
         if (ttlMillis <= 0) {
             throw new RuntimeException("JWT 유효시간은 0보다 작거나 같을 수 없습니다.");
