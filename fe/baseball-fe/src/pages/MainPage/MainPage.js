@@ -19,7 +19,7 @@ function MainPage() {
       <div>BASEBALL GAME ONLINE</div>
       <Message />
       <GameList />
-      <button
+      {/* <button
         onClick={() =>
           globalDispatch({
             type: GlobalAction.SELECT_TEAM,
@@ -28,7 +28,7 @@ function MainPage() {
         }
       >
         게임시작
-      </button>
+      </button> */}
     </StyledMainPage>
   );
 }

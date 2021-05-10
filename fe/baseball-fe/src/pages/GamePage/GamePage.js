@@ -10,6 +10,9 @@ import TeamScore from 'components/TeamScore/TeamScore.js';
 import SituationBoard from 'components/SituationBoard/SituationBoard.js';
 import CurrentPlayer from 'components/CurrentPlayer/CurrentPlayer.js';
 import BroadCast from 'components/BroadCast/BroadCast.js';
+import ScorePopup from 'pages/GamePage/ScorePopup';
+import PlayerListPopup from 'pages/GamePage/PlayerListPopup.js';
+import Popup from 'components/Popup/Popup.js';
 
 const _initialState = {
   mode: null,
@@ -69,13 +72,14 @@ function GamePage() {
   return (
     <StyledGamePage>
       <GameContext.Provider value={{ gameState, gameDispatch }}>
-        {console.log(gameState.mode)}
         {gameState.mode &&
         <>
           <TeamScore className='team-score'/>
           <CurrentPlayer className='current-player'/>
           <SituationBoard className='situation-board'/>
           <BroadCast className='broadcast'/>
+          <Popup direction="top"><ScorePopup/></Popup>
+          <Popup direction="bottom"><PlayerListPopup/></Popup>
         </>}
       </GameContext.Provider>
     </StyledGamePage>
@@ -85,6 +89,7 @@ function GamePage() {
 export default GamePage;
 
 const StyledGamePage = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   box-shadow: 0 0 0 1px green inset;

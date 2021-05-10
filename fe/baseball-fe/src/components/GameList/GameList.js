@@ -30,9 +30,11 @@ function GameList() {
 export default GameList;
 
 const StyledGameList = styled.ul`
+ & > * {
+   font-size: 1.4rem;
+ }
   width: 30rem;
   height: 20rem;
-  border: 1px solid red;
   padding: 0;
   overflow-y: scroll;
 `;

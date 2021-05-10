@@ -61,11 +61,12 @@ const GameNumber = styled.div`
 const MatchInformation = styled.div`
   & > div {
     display: inline-block;
-    font-size: 2rem;
+    font-size: 1.8rem;
     width: calc(100% / 3);
 
     &:hover {
       color: red;
+      transition: 0.3s;
     }
   }
 `;
