@@ -27,6 +27,19 @@ class GameListViewController: UIViewController {
                 cell.numberLabel.text = "GAME \(index+1)"
             }
             .disposed(by: disposeBag)
+        
+        collectionView.rx.modelSelected(Match.self).subscribe(onNext: { [weak self] item in
+            self?.showPlayTab(id: item.id)
+        })
+        .disposed(by: disposeBag)
+    }
+    
+    private func showPlayTab(id: String) {
+        guard let mainTabBarController = storyboard?.instantiateViewController(identifier: "MainTabBarController") else { return }
+        mainTabBarController.modalPresentationStyle = .fullScreen
+        guard let playViewController = mainTabBarController.children.first as? PlayViewController else { return }
+        playViewController.initId(id)
+        present(mainTabBarController, animated: true, completion: .none)
     }
 }
 

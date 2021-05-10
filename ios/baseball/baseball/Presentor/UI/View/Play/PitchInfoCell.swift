@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class PitchInfoCell: UICollectionViewCell {
     static let reuseIdentifier = "PitchInfoCell"
+    private var disposeBag = DisposeBag()
     
     @IBOutlet weak var pitchOrderView: PitchOrderView!
     @IBOutlet weak var sboLabel: UILabel!
@@ -19,5 +21,9 @@ class PitchInfoCell: UICollectionViewCell {
         pitchOrderView.pitchOrderLabel.text = "\(order)"
         sboLabel.text = "스트라이크" //변경
         countLabel.text = "1-3" //변경
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aob-Lh-Va9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -280,7 +280,7 @@
         <!--Scores-->
         <scene sceneID="jaW-fk-FWi">
             <objects>
-                <viewController id="Beg-ZH-b04" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScoreViewController" id="Beg-ZH-b04" customClass="ScoreViewController" customModule="baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x48-u6-yvr">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -302,11 +302,11 @@
                                             <constraint firstAttribute="height" constant="26" id="c7f-wn-Ypk"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ewI-NQ-48H" customClass="TeamInningScoreStack" customModule="baseball" customModuleProvider="target">
-                                        <rect key="frame" x="70" y="51" width="285" height="26"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ewI-NQ-48H" customClass="TeamInningScoreStack" customModule="baseball" customModuleProvider="target">
+                                        <rect key="frame" x="70" y="51" width="285" height="30"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="TZh-jg-5Zi"/>
+                                            <constraint firstAttribute="height" constant="30" id="TZh-jg-5Zi"/>
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJe-Rh-RSW" userLabel="Line">
@@ -324,22 +324,22 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8R-Uv-BaJ">
-                                        <rect key="frame" x="13.999999999999996" y="55.666666666666657" width="51.666666666666657" height="17"/>
+                                        <rect key="frame" x="13.999999999999996" y="57.666666666666657" width="51.666666666666657" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marvel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ia6-oF-CQD">
-                                        <rect key="frame" x="17.333333333333329" y="87.666666666666657" width="45" height="17"/>
+                                        <rect key="frame" x="17.333333333333329" y="85.666666666666657" width="45" height="17"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-Rl-h4q" customClass="TeamInningScoreStack" customModule="baseball" customModuleProvider="target">
-                                        <rect key="frame" x="70" y="83" width="285" height="26"/>
+                                        <rect key="frame" x="70" y="79" width="285" height="30"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="fdA-Cs-k9Y"/>
+                                            <constraint firstAttribute="height" constant="30" id="fdA-Cs-k9Y"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -377,14 +377,14 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MTu-Qv-gaP">
                                 <rect key="frame" x="0.0" y="285" width="390" height="476"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wZO-Ec-Oxv">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wZO-Ec-Oxv">
                                     <size key="itemSize" width="388" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wxr-WC-ZeD">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayersHistoryCell" id="wxr-WC-ZeD" customClass="PlayersHistoryCell" customModule="baseball" customModuleProvider="target">
                                         <rect key="frame" x="1" y="0.0" width="388" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mof-b7-khM">
@@ -448,6 +448,13 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="388" height="50"/>
+                                        <connections>
+                                            <outlet property="avgLabel" destination="6F0-HZ-u2b" id="57a-Xo-8UO"/>
+                                            <outlet property="hitLabel" destination="Udb-Cp-uhJ" id="VXw-Im-aZT"/>
+                                            <outlet property="nameLabel" destination="6Zx-Cu-QFt" id="J1z-gT-9Qq"/>
+                                            <outlet property="outLabel" destination="iK5-le-w3s" id="ZgT-lY-JPN"/>
+                                            <outlet property="plateAppearancesLabel" destination="phg-3j-EXe" id="VKj-a5-vdr"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -471,6 +478,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Scores" image="chart.bar.xaxis" catalog="system" id="wE6-kV-lAa"/>
+                    <connections>
+                        <outlet property="awayScoreStack" destination="dHk-Rl-h4q" id="PfG-xm-Ymo"/>
+                        <outlet property="collectionView" destination="MTu-Qv-gaP" id="Rer-ys-JsI"/>
+                        <outlet property="homeScoreStack" destination="ewI-NQ-48H" id="8Oj-vP-rUH"/>
+                        <outlet property="scoreView" destination="K1h-Fr-gEF" id="5Zd-Y7-Phr"/>
+                        <outlet property="segmentedControl" destination="EIK-ZQ-tFf" id="NZy-qH-dfJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o8f-GL-JVV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -479,7 +493,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="cLp-bf-8c6">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Aob-Lh-Va9" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Aob-Lh-Va9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eLp-oj-3Hf">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

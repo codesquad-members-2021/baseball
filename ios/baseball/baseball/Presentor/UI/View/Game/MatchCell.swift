@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 class MatchCell: UICollectionViewCell {
     static let reuseIdentifier = "MatchCell"
+    private var disposeBag = DisposeBag()
     
     @IBOutlet weak var dimView: UIView!
     @IBOutlet weak var numberLabel: UILabel!
@@ -18,5 +20,9 @@ class MatchCell: UICollectionViewCell {
     func configureCell(_ match: Match) {
         self.homeTeamLabel.text = match.home
         self.awayTeamLabel.text = match.away
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
 }

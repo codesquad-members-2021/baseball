@@ -16,7 +16,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var matchUpView: MatchUpView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var id: String = "U924AX"
+    private var id: String!
     private var viewModel: PlayViewModel!
     private var disposeBag = DisposeBag()
     

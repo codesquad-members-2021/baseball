@@ -37,7 +37,7 @@ final class SBOView: UIView {
     
     private func initCountViews() -> [CountView] {
         var views = [CountView]()
-        let totalCount = 4
+        let totalCount = 3
         for _ in 0 ..< totalCount {
             let view = CountView()
             views.append(view)
