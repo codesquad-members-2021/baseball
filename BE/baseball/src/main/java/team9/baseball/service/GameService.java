@@ -114,6 +114,25 @@ public class GameService {
         }
     }
 
+    public void quitGame(long userId) {
+        User user = getUser(userId);
+        user.checkUserJoining();
+        long currentGameId = user.getCurrentGameId();
+
+        user.setCurrentGameId(null);
+        user.setCurrentGameVenue(null);
+        userRepository.save(user);
+
+        Game game = getGame(currentGameId);
+        game.setStatus(GameStatus.EXITED);
+        gameRepository.save(game);
+
+        //game에 참가중인 유저가 모두 나갔을 경우 게임방 삭제
+        if (!userRepository.existsByCurrentGameId(game.getId())) {
+            gameRepository.delete(game);
+        }
+    }
+
     public List<GameDescriptionDTO> getAllGameList() {
         return gameRepository.findAllGameDescription();
     }

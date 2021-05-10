@@ -37,6 +37,12 @@ public class ApiGameController {
         return ApiResult.succeed("OK");
     }
 
+    @DeleteMapping("/joining")
+    public ApiResult quitGame() {
+        gameService.quitGame(1l);
+        return ApiResult.succeed("OK");
+    }
+
     @GetMapping("/status")
     public ApiResult getCurrentGameStatus() {
         return ApiResult.succeed(gameService.getCurrentGameStatus(1l));
