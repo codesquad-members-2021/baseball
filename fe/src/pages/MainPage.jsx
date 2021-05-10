@@ -1,11 +1,14 @@
 import styled from "styled-components";
+import PlaySection from "../components/PlaySection/PlaySection";
 
 const MainPage = () => {
   return (
     <MainPageLayout>
       <div className={"Score"}></div>
       <div className={"CurrentPlayer"}></div>
-      <div className={"Play"}></div>
+      <div className={"Play"}>
+        <PlaySection></PlaySection>
+      </div>
       <div className={"History"}></div>
     </MainPageLayout>
   );
@@ -27,11 +30,11 @@ const MainPageLayout = styled.div`
   }
   div.CurrentPlayer {
     grid-area: CurrentPlayer;
-    background-color: #badff5;
+    background-color: #859096;
   }
   div.Play {
+    position: relative;
     grid-area: Play;
-    background-color: #bad8ba;
   }
   div.History {
     grid-area: History;
