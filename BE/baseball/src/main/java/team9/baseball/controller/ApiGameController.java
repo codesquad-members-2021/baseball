@@ -8,6 +8,7 @@ import team9.baseball.DTO.request.PitchResultDTO;
 import team9.baseball.DTO.response.ApiResult;
 import team9.baseball.service.GameService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -32,30 +33,35 @@ public class ApiGameController {
     }
 
     @PostMapping("/joining")
-    public ApiResult joinGame(@Valid @RequestBody JoinGameDTO joinGameDTO) {
-        gameService.joinGame(1l, joinGameDTO.getGameId(), joinGameDTO.getMyVenue());
+    public ApiResult joinGame(@Valid @RequestBody JoinGameDTO joinGameDTO, HttpServletRequest request) {
+        long userId = (long) request.getAttribute("userId");
+        gameService.joinGame(userId, joinGameDTO.getGameId(), joinGameDTO.getMyVenue());
         return ApiResult.succeed("OK");
     }
 
     @DeleteMapping("/joining")
-    public ApiResult quitGame() {
-        gameService.quitGame(1l);
+    public ApiResult quitGame(HttpServletRequest request) {
+        long userId = (long) request.getAttribute("userId");
+        gameService.quitGame(userId);
         return ApiResult.succeed("OK");
     }
 
     @GetMapping("/status")
-    public ApiResult getCurrentGameStatus() {
-        return ApiResult.succeed(gameService.getCurrentGameStatus(1l));
+    public ApiResult getCurrentGameStatus(HttpServletRequest request) {
+        long userId = (long) request.getAttribute("userId");
+        return ApiResult.succeed(gameService.getCurrentGameStatus(userId));
     }
 
     @PostMapping("/status/pitch-result")
-    public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO) {
+    public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO, HttpServletRequest request) {
+        long userId = (long) request.getAttribute("userId");
         gameService.applyPitchResult(1l, pitchResultDTO.getPitchResult());
         return ApiResult.succeed("OK");
     }
 
     @GetMapping("/history")
-    public ApiResult getCurrentGameHistory() {
-        return ApiResult.succeed(gameService.getCurrentGameHistory(1l));
+    public ApiResult getCurrentGameHistory(HttpServletRequest request) {
+        long userId = (long) request.getAttribute("userId");
+        return ApiResult.succeed(gameService.getCurrentGameHistory(userId));
     }
 }
