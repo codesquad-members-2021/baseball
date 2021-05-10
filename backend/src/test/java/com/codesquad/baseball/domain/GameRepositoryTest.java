@@ -412,24 +412,6 @@ class GameRepositoryTest {
         }
     }
 
-    private static class HistoryTestDTO {
-        public PlayType playType;
-        public int strikeCount;
-        public int ballCount;
-        public int pitcher;
-        public int hitter;
-        public int earnedScore;
-
-        public HistoryTestDTO(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
-            this.playType = playType;
-            this.strikeCount = strikeCount;
-            this.ballCount = ballCount;
-            this.pitcher = pitcher;
-            this.hitter = hitter;
-            this.earnedScore = earnedScore;
-        }
-    }
-
     private void testHistory(History history, HistoryTestDTO historyTestDTO) {
         assertThat(history.getPlayType()).isEqualTo(historyTestDTO.playType);
         assertThat(history.getStrikeCount()).isEqualTo(historyTestDTO.strikeCount);
@@ -535,5 +517,23 @@ class GameRepositoryTest {
                 .uniformNumber(uniformNumber)
                 .role(role)
                 .build();
+    }
+
+    private static class HistoryTestDTO {
+        public PlayType playType;
+        public int strikeCount;
+        public int ballCount;
+        public int pitcher;
+        public int hitter;
+        public int earnedScore;
+
+        public HistoryTestDTO(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
+            this.playType = playType;
+            this.strikeCount = strikeCount;
+            this.ballCount = ballCount;
+            this.pitcher = pitcher;
+            this.hitter = hitter;
+            this.earnedScore = earnedScore;
+        }
     }
 }

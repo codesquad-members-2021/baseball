@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -425,6 +424,36 @@ public class Game {
         return id;
     }
 
+    public int getCurrentStrikeCount() {
+        return currentStrikeCount;
+    }
+
+    public int getCurrentOutCount() {
+        return currentOutCount;
+    }
+
+    public int getCurrentBallCount() {
+        return currentBallCount;
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", gameTitle='" + gameTitle + '\'' +
+                ", isTop=" + isTop +
+                ", currentStrikeCount=" + currentStrikeCount +
+                ", currentOutCount=" + currentOutCount +
+                ", currentBallCount=" + currentBallCount +
+                ", isOccupied=" + isOccupied +
+                ", teams=" + teams +
+                '}';
+    }
+
     public static class Builder {
         private Integer id;
         private String gameTitle;
@@ -502,35 +531,5 @@ public class Game {
         public Game build() {
             return new Game(this);
         }
-    }
-
-    public int getCurrentStrikeCount() {
-        return currentStrikeCount;
-    }
-
-    public int getCurrentOutCount() {
-        return currentOutCount;
-    }
-
-    public int getCurrentBallCount() {
-        return currentBallCount;
-    }
-
-    public boolean isTop() {
-        return isTop;
-    }
-
-    @Override
-    public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", gameTitle='" + gameTitle + '\'' +
-                ", isTop=" + isTop +
-                ", currentStrikeCount=" + currentStrikeCount +
-                ", currentOutCount=" + currentOutCount +
-                ", currentBallCount=" + currentBallCount +
-                ", isOccupied=" + isOccupied +
-                ", teams=" + teams +
-                '}';
     }
 }

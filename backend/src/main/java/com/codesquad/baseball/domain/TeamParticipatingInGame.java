@@ -93,12 +93,12 @@ public class TeamParticipatingInGame {
         return currentHitter;
     }
 
-    public int getCurrentPitcher() {
-        return currentPitcher;
-    }
-
     public void setCurrentHitter(int currentHitter) {
         this.currentHitter = currentHitter;
+    }
+
+    public int getCurrentPitcher() {
+        return currentPitcher;
     }
 
     public void setCurrentPitcher(int currentPitcher) {
