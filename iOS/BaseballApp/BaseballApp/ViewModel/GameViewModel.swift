@@ -29,12 +29,4 @@ class GameViewModel {
         }
         .store(in: &cancelBag)
     }
-    
-    func getAwayScore() -> Int {
-        return game?.data.away_team.score ?? 0
-    }
-    
-    func getHomeScore() -> Int {
-        return game?.data.home_team.score ?? 0
-    }
 }

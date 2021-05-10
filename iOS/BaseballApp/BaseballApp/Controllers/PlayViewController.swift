@@ -22,7 +22,7 @@ class PlayViewController: UIViewController {
     var count: Int = 0
     var viewModel: GameViewModel! {
         didSet {
-            count = viewModel?.game?.data.pitch_histories.count ?? 0
+            count = viewModel?.game?.data.pitchHistories.count ?? 0
         }
     }
     
@@ -42,11 +42,11 @@ class PlayViewController: UIViewController {
         configureUI()
         viewModel.load { game in
             DispatchQueue.main.async { [weak self] in
-                self?.scoreHeaderView.configureAway(score: game.away_team.score)
-                self?.scoreHeaderView.configureHome(score: game.home_team.score)
-                self?.currentPlayerView.configure(batter: game.batter, status: game.batter_status)
-                self?.currentPlayerView.configure(pitcher: game.pitcher, status: game.pitcher_status)
-                self?.currentPlayerView.configure(playerRole: game.my_role)
+                self?.scoreHeaderView.configureAway(score: game.awayTeam.score)
+                self?.scoreHeaderView.configureHome(score: game.homeTeam.score)
+                self?.currentPlayerView.configure(batter: game.batter, status: game.batterStatus)
+                self?.currentPlayerView.configure(pitcher: game.pitcher, status: game.pitcherStatus)
+                self?.currentPlayerView.configure(playerRole: game.myRole)
                 self?.pitcherHistoryTableView.reloadData()
             }
         }
@@ -78,12 +78,12 @@ class PlayViewController: UIViewController {
 
 extension PlayViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.game?.data.pitch_histories.count ?? 0
+        return viewModel?.game?.data.pitchHistories.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PitcherRecordTableViewCell.identifier, for: indexPath) as? PitcherRecordTableViewCell,
-              let record = viewModel.game?.data.pitch_histories[indexPath.row] else {
+              let record = viewModel.game?.data.pitchHistories[indexPath.row] else {
             return UITableViewCell()
         }
         cell.configure(record: record)

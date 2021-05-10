@@ -31,11 +31,11 @@ class CurrentPlayerView: UIView {
     
     func configure(playerRole: String) {
         if playerRole == Role.DEFENSE {
-            isBatter.isHidden = false
-            isPitcher.isHidden = true
-        } else {
             isBatter.isHidden = true
             isPitcher.isHidden = false
+        } else {
+            isBatter.isHidden = false
+            isPitcher.isHidden = true
         }
     }
 }

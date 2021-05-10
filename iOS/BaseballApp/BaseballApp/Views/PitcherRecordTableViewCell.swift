@@ -23,8 +23,8 @@ class PitcherRecordTableViewCell: UITableViewCell {
     
     func configure(record: Record) {
         result.text = record.result
-        let strike = record.strike_count
-        let ball = record.ball_count
+        let strike = record.strikeCount
+        let ball = record.ballCount
         count.text = "\(strike)-\(ball)"
     }
 }
