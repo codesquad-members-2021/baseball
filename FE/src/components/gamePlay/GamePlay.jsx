@@ -5,6 +5,8 @@ import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
 import { cssScrollbar } from '../utilComponent/CommonStyledCSS';
 
+import PlayerListPopup from '../playerListPopup/PlayerListPopup';
+
 const GamePlay = () => {
     const childComponents = [
         <GameScore />,
@@ -20,6 +22,7 @@ const GamePlay = () => {
 
     return (
         <StyledGamePlay>
+            <PlayerListPopup/>
             <GamePlayItems>{gamePlayItems}</GamePlayItems>
         </StyledGamePlay>
     );
@@ -31,6 +34,7 @@ export default GamePlay;
 const StyledGamePlay = styled.div`
     width: 60%;
     color: ${({ theme }) => theme.colors.white};
+    position: relative;
 `;
 
 const GamePlayItems = styled.ul`

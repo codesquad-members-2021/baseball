@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { cssFullAbsolutePosition } from '../../utilComponent/CommonStyledCSS';
 import BaseballStadium from './partial/BaseballStadium';
 import PitchButton from './partial/PitchButton';
 import Round from './partial/Round';
@@ -27,12 +28,7 @@ const StyledBattleGround = styled.div`
 `;
 
 const StadiumPartial = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-
+    ${cssFullAbsolutePosition};
 
     .position__right--top {
         position: absolute;

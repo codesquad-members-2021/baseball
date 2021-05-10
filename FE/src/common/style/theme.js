@@ -23,6 +23,7 @@ const colors = {
     yellow: '#FAF300',
     green: '#00EA00',
     black1: '#010101',
+    black1_opacity: '#01010180',
     black2: '#181818',
     gray1: '#333',
     gray2: '#4F4F4F',
