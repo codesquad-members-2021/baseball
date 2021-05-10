@@ -1,61 +1,34 @@
 import styled from "styled-components";
-
-const Table = ({ slide }) => {
-	const inning = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "R"];
-
-	return (
-		<StyledTable slide={slide}>
-			<thead>
-				<tr>
-					<th>&nbsp;</th>
-				</tr>
-				<tr>
-					<th>awayTeam</th>
-				</tr>
-				<tr>
-					<th>homeTeam</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					{inning.map((e) => (
-						<Inning key={e}>{e}</Inning>
-					))}
-				</tr>
-				<tr>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-					<td>1</td>
-					<td>0</td>
-					<td>0</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<Sum>1</Sum>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>3</td>
-					<td>5</td>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>0</td>
-					<td>0</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<Sum>14</Sum>
-				</tr>
-			</tbody>
-		</StyledTable>
-	);
-};
+//prettier-ignore
+const Table = ({ data, slide }) => (
+	<StyledTable slide={slide}>
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+			</tr>
+			<tr>
+				<th>{data.awayTeam.name}</th>
+			</tr>
+			<tr>
+				<th>{data.homeTeam.name}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, "R"].map(e => <Inning key={e}>{e}</Inning>)}
+			</tr>
+			<Score score={data.awayTeam.scores} />
+			<Score score={data.homeTeam.scores} />
+		</tbody>
+	</StyledTable>
+);
+//prettier-ignore
+const Score = ({ score }) => (
+	<tr>
+		{[...score, ...Array.from({ length: 12 }).fill("")].slice(0, 12).map((e, i) => <td key={100 * e + i}>{e}</td>)}
+		<Sum>{score.length && score.reduce((acc, cur) => acc + cur, 0)}</Sum>
+	</tr>
+);
 
 const StyledTable = styled.table`
 	position: absolute;

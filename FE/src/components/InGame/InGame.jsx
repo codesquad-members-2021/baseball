@@ -21,12 +21,14 @@ const InGame = () => {
         toggle={toggleScoreBoard}
         isDark={isDark}
         setDark={setDark}
+        gameId={1}
       />
       <LineUp
         slide={slideLineUp}
         toggle={toggleLineUp}
         isDark={isDark}
         setDark={setDark}
+        gameId={1}
       />
       <Main onClick={clickMain} isDark={isDark}>
         <Ground />
