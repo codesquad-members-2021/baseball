@@ -13,6 +13,7 @@ const Header = () => {
 export default Header;
 
 const GamePlayHeader = styled.header`
+  display: flex;
   width: 100%;
   padding: 1rem 0;
   background-color: black;
