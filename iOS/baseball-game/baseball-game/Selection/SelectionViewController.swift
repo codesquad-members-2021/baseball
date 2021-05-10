@@ -36,6 +36,7 @@ class SelectionViewController: UIViewController {
 
 
 extension SelectionViewController {
+    
     enum Section {
         case main
     }
@@ -64,6 +65,7 @@ extension SelectionViewController {
             self.dataSource.apply(snapshot)
         }
     }
+    
 }
 
 extension SelectionViewController: GameCellDelegate {
@@ -73,6 +75,7 @@ extension SelectionViewController: GameCellDelegate {
         nextVC.getInfo(with: gameInfo)
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
+    
 }
 
 
@@ -85,4 +88,5 @@ extension SelectionViewController {
         self.gradientLayer.frame = self.view.bounds
         self.backgroundView.layer.addSublayer(self.gradientLayer)
     }
+    
 }

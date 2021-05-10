@@ -8,6 +8,7 @@
 import UIKit
 
 class GameCell: UITableViewCell {
+    
     static let reuseIdentifier = "GameCell"
     static let nib = UINib(nibName: GameCell.reuseIdentifier, bundle: nil)
     

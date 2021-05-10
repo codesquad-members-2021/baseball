@@ -8,11 +8,8 @@
 import Foundation
 
 struct Pitch: Decodable, Hashable {
-    
     let id = UUID()
-    
     var result: String
-    
     var log: String
     
     enum CodingKeys: String, CodingKey {

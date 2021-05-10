@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 class SelectViewModel {
+    
     private(set) var gameInfo: GameInfo!
     private var cancellable = Set<AnyCancellable>()
     

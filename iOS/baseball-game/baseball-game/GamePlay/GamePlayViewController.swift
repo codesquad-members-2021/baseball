@@ -91,6 +91,7 @@ class GamePlayViewController: UIViewController {
             batterInfoView.highlight()
         }
     }
+    
 }
 
 extension GamePlayViewController {
@@ -117,6 +118,7 @@ extension GamePlayViewController {
         snapshot.appendItems(pitches, toSection: 0)
         self.dataSource.apply(snapshot)
     }
+    
 }
 
 extension GamePlayViewController {
@@ -124,4 +126,5 @@ extension GamePlayViewController {
     func getInfo(with gameInfo: GameInfo) {
         self.gameInfo = gameInfo
     }
+    
 }

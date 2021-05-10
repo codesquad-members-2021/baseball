@@ -31,6 +31,7 @@ class GameManager: Decodable {
         static let offense = "offense"
         static let defense = "defense"
     }
+    
 }
 
 extension GameManager: GameManagable {
@@ -74,4 +75,5 @@ extension GameManager: GameManagable {
             return turn.away.role == Role.defense
         }
     }
+    
 }
