@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useContext } from "react";
-import { MainContext } from "../../App";
+import { MainContext } from "../Main";
 
 const Game = ({ id, homeTeam, awayTeam }) => {
 	const { setGameId } = useContext(MainContext);

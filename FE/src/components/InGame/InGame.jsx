@@ -4,7 +4,7 @@ import ScoreBoard from "./ScoreBoard/ScoreBoard";
 import LineUp from "./LineUp/LineUp";
 import Ground from "./Ground/Ground";
 import Record from "./Record/Record";
-import { MainContext } from "../../App";
+import { MainContext } from "../Main";
 
 const InGame = () => {
 	const { gameId } = useContext(MainContext);
