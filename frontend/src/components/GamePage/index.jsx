@@ -1,9 +1,11 @@
 import useFetch from '../Hook/useFetch';
+import styled from 'styled-components';
 import GameGeneralInfo from './GameGeneralInfo';
 import GamePlayers from './GamePlayers';
-import styled from 'styled-components';
+import GameFieldArea from './GameFieldArea';
 import GameLog from './GameLog';
-const GamePage = ({ data }) => {
+import GamePlayersList from './GamePlayersList';
+const GamePage = ({ data, type }) => {
 	const gameId = data.id;
 	const [gameInfo, loading, error] = useFetch('patch', 'initGame', gameId);
 
@@ -15,7 +17,7 @@ const GamePage = ({ data }) => {
 				<GridBox>
 					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
 					<GamePlayers />
-					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
+					<GameFieldArea type={type} />
 					<GameLog data={gameInfo}></GameLog>
 				</GridBox>
 			)}

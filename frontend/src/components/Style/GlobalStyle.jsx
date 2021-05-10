@@ -9,7 +9,9 @@ const GlobalStyle = createGlobalStyle`${reset};
   url('/font/DungGeunMo.woff')format('woff');
   font-weight: bold;
 }
- 
+button{
+  cursor: pointer;
+}
 body {
   font-family: DungGeunMo;
   background: linear-gradient(

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { theme } from '../Style/Theme';
 import styled from 'styled-components';
 const GameGeneralInfo = ({ data }) => {
-	console.log(data);
 	const [away_score, setAwayScore] = useState(0);
 	const [home_score, setHomeScore] = useState(0);
 	return (

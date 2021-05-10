@@ -11,23 +11,24 @@ const MatchingInfo = ({ setMessage, data }) => {
 		'initGame',
 		currentID,
 	);
+
 	const history = useHistory();
 	const handleClick = useCallback(
 		async (id, type) => {
 			await setID(id);
+			console.log(occupiedState);
 			if (!occupied && type === 'HOME') {
 				history.push(`/defense/${id}`);
 			} else if (!occupied && type === 'AWAY') {
 				history.push(`/attack/${id}`);
 			} else {
+				//occupied=true인경우(409error)
 				setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
 				console.log(data);
-				//occupied=true인경우(409error)
 			}
 		},
 		[history],
 	);
-
 	return (
 		<TeamWrapper>
 			<TeamName onClick={() => handleClick(data.id, 'AWAY')}>
