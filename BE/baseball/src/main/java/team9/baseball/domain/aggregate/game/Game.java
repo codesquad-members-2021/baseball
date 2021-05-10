@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.domain.aggregate.team.Team;
+import team9.baseball.domain.enums.GameStatus;
 import team9.baseball.domain.enums.Halves;
 import team9.baseball.domain.enums.PitchResult;
 import team9.baseball.exception.NotFoundException;
@@ -45,6 +46,8 @@ public class Game {
 
     private int outCount;
 
+    private GameStatus status;
+
     @MappedCollection(idColumn = "game_id", keyColumn = "key_in_game")
     private Map<String, BattingHistory> battingHistoryMap = new HashMap<>();
 
@@ -63,6 +66,8 @@ public class Game {
         this.currentInning = 1;
         this.currentHalves = Halves.TOP;
         this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
+
+        this.status = GameStatus.WAITING;
     }
 
     private void initializeBattingHistory(Team team) {
@@ -70,6 +75,12 @@ public class Game {
             String key = BattingHistory.acquireKeyInGame(team.getId(), uniform_number);
             BattingHistory battingHistory = new BattingHistory(team.getId(), uniform_number);
             this.battingHistoryMap.put(key, battingHistory);
+        }
+    }
+
+    public void checkPlaying() {
+        if (this.status != GameStatus.PLAYING) {
+            throw new RuntimeException("진행중인 게임이 아닙니다.");
         }
     }
 
