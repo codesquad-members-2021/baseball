@@ -1,90 +1,47 @@
 import { useState } from "react";
 import styled from "styled-components";
+import delay from "../../../utils/delay/delay";
 import BallCount from "./BallCount";
 
 const Field = () => {
 	const gongSoo = "DEFENSE";
-	const count = { ball: 2, strike: 1, out: 2 };
+	const count = { ball: 2, strike: 1, out: 1 };
 
-	const [runnerList, setRunnerList] = useState([
-		{
-			base: 0,
-		},
-	]);
+	const [runnerList, setRunnerList] = useState([{ base: 0 }]);
+	const [isPlaying, setPlaying] = useState(false);
 
-	const [isInPlay, setInPlay] = useState(false);
-
-	const [pitchingStep, setpitchingStep] = useState("windup");
+	const [pitchingStep, setpitchingStep] = useState("release");
 
 	const pitch = async () => {
-		await windup();
-		await throwing();
-		await release();
+		await delay(() => setpitchingStep("windup"), 200);
+		await delay(() => setpitchingStep("throwing"), 250);
+		await delay(() => setpitchingStep("release"), 150);
 	};
-
-	const windup = () =>
-		new Promise((res, rej) => {
-			setpitchingStep("windup");
-			setTimeout(() => res(), 200);
-		});
-	const throwing = () =>
-		new Promise((res, rej) => {
-			setpitchingStep("throwing");
-			setTimeout(() => res(), 250);
-		});
-	const release = () =>
-		new Promise((res, rej) => {
-			setpitchingStep("release");
-			setTimeout(() => res(), 150);
-		});
 
 	const hit = async () => {
-		if (isInPlay) return;
-		setInPlay(() => true);
-		await pitch();
-		await run();
+		setPlaying(() => true);
+		await delay(run, 400);
 		arrive();
-		setInPlay(() => false);
+		setPlaying(() => false);
 	};
 
-	const run = () =>
-		new Promise((res, rej) => {
-			setRunnerList((list) => [
-				...list.map((el) => {
-					return { base: el.base++, isRunning: true };
-				}),
-				{
-					base: 0,
-				},
-			]);
-			setTimeout(() => res(), 400);
-		});
+	const run = () => setRunnerList((list) => [...list.map((el) => ({ base: el.base++, isRunning: true })), { base: 0 }]);
 
-	const arrive = () => {
-		setRunnerList((list) => [
-			...list.map((el) => {
-				el.isRunning = false;
-				if (el.base % 4 === 0 && el.base !== 0) el.isScoring = true;
-				return el;
-			}),
-		]);
+	const arrive = () => setRunnerList((list) => [...list.map((el) => ({ ...el, isRunning: false }))]);
+
+	const play = async () => {
+		await pitch();
+		await hit();
 	};
-
+	//prettier-ignore
 	return (
 		<StyledField>
 			<BallCount count={count} />
-
 			<CurrentInning>8회초 수비</CurrentInning>
-
 			<Pitcher step={pitchingStep} />
-
-			{runnerList.map((el, i) => (
-				<Runner key={i} {...el} />
-			))}
-
-			{isInPlay || <Batter src="image/batter.png" />}
-
-			{gongSoo === "DEFENSE" && <PitchButton onClick={hit}>PITCH</PitchButton>}
+			{runnerList.map((el, i) => <Runner key={i} {...el} />)}
+			{isPlaying || <Batter src="image/batter.png" />}
+			{gongSoo === "DEFENSE" && <PitchButton onClick={play}>PITCH</PitchButton>}
 		</StyledField>
 	);
 };
@@ -92,7 +49,7 @@ const Field = () => {
 const StyledField = styled.div`
 	width: 960px;
 	height: 540px;
-	background-image: url("image/base2.png");
+	background-image: url("image/base.png");
 `;
 const CurrentInning = styled.div`
 	position: absolute;
@@ -134,13 +91,13 @@ const Runner = styled.img.attrs(({ base, isRunning }) => ({
 	src: isRunning ? "image/runner_running.png" : "image/runner_waiting.png",
 	style: baseLocation[base % 4],
 }))`
-	visibility: ${({ base, isScoring }) => (base === 0 || isScoring ? "hidden" : "visible")};
+	visibility: ${({ base, isRunning }) => (base % 4 === 0 && !isRunning ? "hidden" : "visible")};
 	transform: ${({ base, isRunning }) => ((base % 4 === 0 || base % 4 === 1) && isRunning ? "scaleX(-1);" : "")};
 
 	position: absolute;
 	width: 80px;
 
-	transition: top 400ms, left 400ms;
+	transition: top 590ms, left 590ms;
 `;
 const Batter = styled.img`
 	position: absolute;

@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-const Score = () => {
+const Score = ({homeTeam, awayTeam}) => {
 	return (
 		<StyledScore>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<Team>
-				<TeamName>Bears</TeamName>
-				<TeamScore>14</TeamScore>
+				<TeamName>{awayTeam.name}</TeamName>
+				<TeamScore>{awayTeam.score}</TeamScore>
 				vs
-				<TeamScore>1</TeamScore>
-				<TeamName>Eagles</TeamName>
+				<TeamScore>{homeTeam.score}</TeamScore>
+				<TeamName>{homeTeam.name}</TeamName>
 			</Team>
 		</StyledScore>
 	);

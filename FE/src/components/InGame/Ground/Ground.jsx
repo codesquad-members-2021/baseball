@@ -1,11 +1,21 @@
 import styled from "styled-components";
 import Score from "./Score";
-import Field from "./Field"
+import Field from "./Field";
 
 const Ground = () => {
+	const data = {
+		homeTeam: {
+			name: "Eagles",
+			score: 1,
+		},
+		awayTeam: {
+			name: "Bears",
+			score: 14,
+		},
+	};
 	return (
 		<StyledGround>
-			<Score />
+			<Score {...data} />
 			<Field />
 		</StyledGround>
 	);
