@@ -291,6 +291,34 @@ class GameRepositoryTest {
         testHistoryOfCurrentInning(game);
     }
 
+    @Test
+    @DisplayName("선수별 경기기록을 조회할 수 있어야 합니다")
+    void testPlayersRecord() {
+        //타순, 타석, 안타, 아웃
+        int[][] playerRecords = {
+                {0, 1, 0, 1},
+                {1, 1, 0, 0},
+                {2, 1, 1, 0},
+                {3, 1, 1, 0},
+                {4, 1, 1, 0},
+                {5, 1, 1, 0},
+                {6, 1, 1, 0},
+                {7, 1, 0, 1},
+                {8, 1, 0, 0},
+        };
+        Game game = createGame(GAME_TITLE);
+        testHistoryOfCurrentInning(game);
+        List<PlayerParticipatingInGame> awayTeamRecords = game.showPlayerRecords(TeamType.AWAY);
+        IntStream.range(0, awayTeamRecords.size()).forEach(i -> {
+            int[] currentExpectedRecord = playerRecords[i];
+            PlayerParticipatingInGame currentRecord = awayTeamRecords.get(i);
+            assertThat(currentRecord.getBatOrder()).isEqualTo(currentExpectedRecord[0]);
+            assertThat(currentRecord.getPlateAppearances()).isEqualTo(currentExpectedRecord[1]);
+            assertThat(currentRecord.getHitCount()).isEqualTo(currentExpectedRecord[2]);
+            assertThat(currentRecord.getOutCount()).isEqualTo(currentExpectedRecord[3]);
+        });
+    }
+
     private void testHistoryOfCurrentInning(Game game) {
         List<HistoryTestDTO> historyTestDTOS = new ArrayList<>();
         //1회초의 스트라이크 정보가 기록되어야 합니다
@@ -316,7 +344,7 @@ class GameRepositoryTest {
         testHistories(histories, historyTestDTOS);
 
         //1회초의 볼 기록도 기록되어야 합니다
-        IntStream.range(0,4).forEach(value -> game.pitch(PlayType.BALL));
+        IntStream.range(0, 4).forEach(value -> game.pitch(PlayType.BALL));
         int hitter3 = game.currentHitter();
         doBall(game);
         //테스트데이터 입력
@@ -350,11 +378,11 @@ class GameRepositoryTest {
 
         //1회초의 홈런 기록도 기록되어야 합니다
         int hitter7 = game.currentHitter();
-        IntStream.range(0,3).forEach(ballCount -> {
+        IntStream.range(0, 3).forEach(ballCount -> {
             doBall(game);
             historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 0, ballCount + 1, pitcher, hitter7, 0));
         });
-        IntStream.range(0,2).forEach(strikeCount -> {
+        IntStream.range(0, 2).forEach(strikeCount -> {
             game.pitch(PlayType.STRIKE);
             historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, strikeCount + 1, 3, pitcher, hitter7, 0));
         });
@@ -363,6 +391,17 @@ class GameRepositoryTest {
         //테스트데이터 입력
         histories = game.showHistoriesOfCurrentInning();
         historyTestDTOS.add(new HistoryTestDTO(PlayType.HOMERUN, 2, 3, pitcher, hitter7, 4));
+        testHistories(histories, historyTestDTOS);
+
+        //1회초의 아웃도 기록되어야 합니다
+        int hitter8 = game.currentHitter();
+        IntStream.range(0, 2).forEach(strikeCount -> {
+            doStrike(game);
+            historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, strikeCount + 1, 0, pitcher, hitter8, 0));
+        });
+        doStrike(game);
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE_OUT, 3, 0, pitcher, hitter8, 0));
+        histories = game.showHistoriesOfCurrentInning();
         testHistories(histories, historyTestDTOS);
     }
 
@@ -399,7 +438,7 @@ class GameRepositoryTest {
         assertThat(history.getHitter()).isEqualTo(historyTestDTO.hitter);
         assertThat(history.getEarnedScore()).isEqualTo(historyTestDTO.earnedScore);
     }
-    
+
     private PitchResult doHits(Game game) {
         PitchResult pitchResult = game.pitch(PlayType.HITS);
         gameRepository.save(game);
@@ -417,7 +456,7 @@ class GameRepositoryTest {
         gameRepository.save(game);
         return pitchResult;
     }
-    
+
     private void threeOut(Game game) {
         IntStream.range(0, 3).forEach(value -> threeStrike(game));
     }

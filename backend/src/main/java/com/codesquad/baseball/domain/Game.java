@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Game {
@@ -113,10 +114,38 @@ public class Game {
                 break;
             }
         }
-        currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
-                defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter(), pitchResult.numberOfRunners());
+        savePitchResult(pitchResult);
+        updatePlayerRecord(pitchResult);
         judgePitchResult(pitchResult);
         return pitchResult;
+    }
+
+    private void updatePlayerRecord(PitchResult pitchResult) {
+        PlayerParticipatingInGame playerRecord = attackingTeam().findPlayerByBatOrder(currentHitter());
+        switch (pitchResult.getPlayType()) {
+            case HOMERUN:
+            case HITS:
+                playerRecord.increaseHitCount();
+                break;
+            case STRIKE_OUT:
+                playerRecord.increaseOutCount();
+                break;
+            case AT_BAT:
+                playerRecord.increasePlateAppearances();
+                break;
+        }
+    }
+
+    public List<PlayerParticipatingInGame> showPlayerRecords(TeamType teamType) {
+        if (teamType == TeamType.HOME) {
+            return homeTeam().getPlayers();
+        }
+        return awayTeam().getPlayers();
+    }
+
+    private void savePitchResult(PitchResult pitchResult) {
+        currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
+                defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter(), pitchResult.numberOfRunners());
     }
 
     private PitchResult onStrike() {
@@ -151,11 +180,11 @@ public class Game {
             case HOMERUN:
             case HITS:
             case FOUR_BALL:
-                attackingTeam().changeHitter();
+                changeHitterOfAttackingTeam();
                 resetStrikeAndBall();
                 break;
             case STRIKE_OUT:
-                attackingTeam().changeHitter();
+                changeHitterOfAttackingTeam();
                 resetStrikeAndBall();
                 increaseOutCount();
                 if (isThreeOut()) {
@@ -164,6 +193,11 @@ public class Game {
                 break;
         }
         pitchResult.getBackHomeRunners().forEach(i -> currentInning().addScore(attackingTeam()));
+    }
+
+    private void changeHitterOfAttackingTeam() {
+        attackingTeam().changeHitter();
+        updatePlayerRecord(new PitchResult(PlayType.AT_BAT));
     }
 
     private PlayType judgeThreeStrike() {

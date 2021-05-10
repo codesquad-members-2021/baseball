@@ -32,6 +32,18 @@ public class PlayerParticipatingInGame {
         this.pitcherPosition = pitcherPosition;
     }
 
+    public void increasePlateAppearances() {
+        this.plateAppearances++;
+    }
+
+    public void increaseHitCount() {
+        this.hitCount++;
+    }
+
+    public void increaseOutCount() {
+        this.outCount++;
+    }
+
     public boolean isStartingPitcher() {
         return pitcherPosition == PitcherPosition.SP;
     }
@@ -44,6 +56,22 @@ public class PlayerParticipatingInGame {
         return batOrder;
     }
 
+    public int getPlayer() {
+        return player;
+    }
+
+    public int getPlateAppearances() {
+        return plateAppearances;
+    }
+
+    public int getHitCount() {
+        return hitCount;
+    }
+
+    public int getOutCount() {
+        return outCount;
+    }
+
     @Override
     public String toString() {
         return "PlayerParticipatingInGame{" +
@@ -54,6 +82,6 @@ public class PlayerParticipatingInGame {
                 ", plateAppearances=" + plateAppearances +
                 ", hitCount=" + hitCount +
                 ", outCount=" + outCount +
-                '}';
+                '}' + '\n';
     }
 }

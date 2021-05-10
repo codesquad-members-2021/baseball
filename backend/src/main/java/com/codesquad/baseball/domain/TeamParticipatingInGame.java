@@ -9,6 +9,8 @@ import java.util.List;
 
 public class TeamParticipatingInGame {
 
+    private static final int BAT_ORDER_OF_FIRST_HITTER = 0;
+
     @Id
     private int id;
     private int team;
@@ -27,8 +29,14 @@ public class TeamParticipatingInGame {
     }
 
     public void initializeTeam() {
-        currentHitter = players.get(0).getBatOrder();
+        PlayerParticipatingInGame firstHitter = players.get(BAT_ORDER_OF_FIRST_HITTER);
+        firstHitter.increasePlateAppearances();
+        currentHitter = firstHitter.getBatOrder();
         currentPitcher = findStartingPitcher().getBatOrder();
+    }
+
+    public PlayerParticipatingInGame findPlayerByBatOrder(int batOrder) {
+        return players.get(batOrder);
     }
 
     private PlayerParticipatingInGame findStartingPitcher() {
@@ -95,6 +103,10 @@ public class TeamParticipatingInGame {
 
     public void setCurrentPitcher(int currentPitcher) {
         this.currentPitcher = currentPitcher;
+    }
+
+    public List<PlayerParticipatingInGame> getPlayers() {
+        return players;
     }
 
     public TeamType getTeamType() {
