@@ -1,22 +1,26 @@
-import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
+import { useState, createContext } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import { githubProvider, googleProvider } from "../../config/authProvider";
 import socialMediaAuth from "../../service/auth";
+import Intro from "../Intro/Intro";
+import InGame from "../InGame/InGame";
+import NoMatch from "../NoMatch/NoMatch";
+
+export const LoginContext = createContext();
 
 const Home = () => {
   const [loginStatus, setLoginStatus] = useState(false);
   const [userId, setUserId] = useState();
+  const [startButtonClick, setStartButtonClick] = useState(false);
+
+  const handleStart = () => {
+    setStartButtonClick(true);
+  };
 
   const handleOnClick = async (provider) => {
     const res = await socialMediaAuth(provider);
-    if (res) {
+    if (res.email) {
       setLoginStatus(true);
       const id = getOnlyId(res.email);
       setUserId(id);
@@ -29,36 +33,60 @@ const Home = () => {
   };
 
   return (
-    <Wrapper>
-      <StyledHome loginStatus={loginStatus}>
-        <Title>
-          BASEBALL ONLINE <SubTitle>Freddie, Goody, Seong</SubTitle>
-        </Title>
-        {loginStatus ? <UserInfo>{userId}</UserInfo> : <></>}
-        <SelectTeam login={loginStatus}>
-          <Link to="/intro">게임 시작하기</Link>
-        </SelectTeam>
-        <Login>
-          {loginStatus ? (
-            <></>
-          ) : (
-            <>
-              <div>소셜 계정으로 로그인</div>
-              <LoginBtns>
-                <button
-                  className="github"
-                  onClick={() => handleOnClick(githubProvider)}
-                ></button>
-                <button
-                  className="google"
-                  onClick={() => handleOnClick(googleProvider)}
-                ></button>
-              </LoginBtns>
-            </>
-          )}
-        </Login>
-      </StyledHome>
-    </Wrapper>
+    <Router>
+      <LoginContext.Provider value={{ loginStatus, userId }}>
+        {startButtonClick ? (
+          <Switch>
+            <Route path="/intro">
+              <Intro />
+            </Route>
+            <Route path="/ingame">
+              <InGame />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        ) : (
+          <Wrapper>
+            <StyledHome loginStatus={loginStatus}>
+              <Title>
+                BASEBALL ONLINE <Authors>Freddie, Goody, Seong</Authors>
+              </Title>
+              {loginStatus ? (
+                <UserInfo>{userId}</UserInfo>
+              ) : (
+                <LoginRequire>
+                  게임을 플레이 하려면 로그인해야 합니다.
+                </LoginRequire>
+              )}
+              <SelectTeam login={loginStatus} onClick={handleStart}>
+                <Link to="/intro">게임 시작하기</Link>
+              </SelectTeam>
+              <Login>
+                {loginStatus ? (
+                  <></>
+                ) : (
+                  <>
+                    <div>소셜 계정으로 로그인</div>
+                    <LoginBtns>
+                      <button
+                        className="github"
+                        onClick={() => handleOnClick(githubProvider)}
+                      ></button>
+                      <button
+                        className="google"
+                        onClick={() => handleOnClick(googleProvider)}
+                      ></button>
+                    </LoginBtns>
+                  </>
+                )}
+              </Login>
+            </StyledHome>
+          </Wrapper>
+        )}
+      </LoginContext.Provider>
+    </Router>
   );
 };
 
@@ -87,6 +115,12 @@ const SelectTeam = styled.button`
   align-items: center;
 `;
 
+const LoginRequire = styled.div`
+  font-size: 26px;
+  color: white;
+  text-align: center;
+`;
+
 const UserInfo = styled.div`
   color: white;
   justify-self: center;
@@ -104,7 +138,7 @@ const Title = styled.div`
   margin: 5rem 0;
 `;
 
-const SubTitle = styled.div`
+const Authors = styled.div`
   padding: 0.5rem 0;
   font-size: 20px;
   color: white;

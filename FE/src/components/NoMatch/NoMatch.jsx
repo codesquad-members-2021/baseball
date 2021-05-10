@@ -1,11 +1,35 @@
-import React from 'react';
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import Home from "../Home/Home";
 
 const NoMatch = () => {
+  const [isLoadHome, setIsLoadHome] = useState(false);
+  const loadHome = () => {
+    setIsLoadHome(true);
+  };
   return (
-    <>
-      <div>존재하지 않는 페이지입니다. </div>
-      <div>Error : 404</div>
-    </>
+    <Router>
+      {isLoadHome ? (
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      ) : (
+        <>
+          <div>잘못된 접근입니다. </div>
+          <button onClick={loadHome}>
+            <Link to="/">메인으로</Link>
+          </button>
+        </>
+      )}
+    </Router>
   );
 };
 
