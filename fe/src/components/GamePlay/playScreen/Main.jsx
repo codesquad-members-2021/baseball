@@ -8,7 +8,7 @@ const Main = () => {
   )
 }
 
-export default Main
+export default Main;
 
 const StyldeMain = styled.main`
   display: flex;
