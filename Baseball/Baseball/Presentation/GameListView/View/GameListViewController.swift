@@ -9,9 +9,20 @@ import UIKit
 
 class GameListViewController: UIViewController {
     
-    @IBOutlet weak var gameListCollectionView: UICollectionView!
-    private var viewModel = GameListViewModel()
+    static let storyboardName = "Main"
+    static let storyboardID = "GameListViewController"
     
+    @IBOutlet weak var gameListCollectionView: UICollectionView!
+    private var viewModel: GameListViewModel!
+    
+    static func create(with viewModel: GameListViewModel) -> GameListViewController {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+        guard let vc = storyboard.instantiateViewController(identifier: storyboardID) as? GameListViewController else {
+            return GameListViewController()
+        }
+        vc.viewModel = viewModel
+        return vc
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

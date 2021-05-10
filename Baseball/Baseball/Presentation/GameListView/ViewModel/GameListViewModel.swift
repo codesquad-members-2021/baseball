@@ -10,10 +10,18 @@ import Combine
 
 class GameListViewModel {
     @Published private (set) var matchUpGames: [MatchUp]
+    private var fetchGameListUseCase: FetchGameListUseCase
     
-    init() {
+    init(fetchGameListUseCase: FetchGameListUseCase) {
         self.matchUpGames = []
+        self.fetchGameListUseCase = fetchGameListUseCase
+        
+        fetchGameList()
     }
     
-    
+    private func fetchGameList() {
+        fetchGameListUseCase.execute { matchUps in
+            self.matchUpGames = matchUps
+        }
+    }
 }
