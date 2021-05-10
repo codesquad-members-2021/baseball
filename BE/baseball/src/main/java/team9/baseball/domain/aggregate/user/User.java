@@ -41,4 +41,16 @@ public class User {
         }
         return oauthAccessToken.getAccessToken();
     }
+
+    public void checkUserJoining() {
+        if (this.currentGameId == null) {
+            throw new RuntimeException(id + "사용자는 게임중이 아닙니다.");
+        }
+    }
+
+    public void checkUserNotJoining() {
+        if (this.currentGameId != null) {
+            throw new RuntimeException(id + "사용자는 이미 게임중입니다.");
+        }
+    }
 }

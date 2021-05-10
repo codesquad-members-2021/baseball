@@ -32,9 +32,8 @@ public class GameService {
 
     public void applyPitchResult(long userId, PitchResult pitchResult) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
@@ -60,9 +59,8 @@ public class GameService {
 
     public GameStatusDTO getCurrentGameStatus(long userId) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
@@ -72,9 +70,8 @@ public class GameService {
 
     public GameHistoryDTO getCurrentGameHistory(long userId) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
@@ -93,9 +90,8 @@ public class GameService {
 
     public void joinGame(long userId, long gameId, Venue venue) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() != null) {
-            throw new RuntimeException(userId + "사용자는 이미 게임중입니다.");
-        }
+        user.checkUserNotJoining();
+
         Game game = getGame(gameId);
         if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue)) {
             throw new RuntimeException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
