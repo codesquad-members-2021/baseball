@@ -20,10 +20,10 @@ struct Foo: Hashable {
     let title: String
 }
 
-typealias Datasource = UITableViewDiffableDataSource<Section, Foo>
-typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Foo>
+fileprivate typealias Datasource = UITableViewDiffableDataSource<Section, Foo>
+fileprivate typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Foo>
 
-class GameViewController: UIViewController {
+final class GameViewController: UIViewController {
     
     @IBOutlet weak var gameView: GameView!
     @IBOutlet weak var ballCount: UITableView!
@@ -39,18 +39,18 @@ class GameViewController: UIViewController {
         appearPitchButton()
     }
     
-    func configureTableViewHeight() {
+    private func configureTableViewHeight() {
         DispatchQueue.main.async {
             self.tableViewHeight.constant = self.ballCount.contentSize.height
         }
     }
     
-    func registerNib() {
+    private func registerNib() {
         let nibName = UINib(nibName: "GameStoryTableViewCell", bundle: nil)
         ballCount.register(nibName, forCellReuseIdentifier: GameStoryTableViewCell.className)
     }
     
-    func makeDataSource() -> Datasource {
+    private func makeDataSource() -> Datasource {
         let dataSource = Datasource(tableView: ballCount) { (tableView, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.className, for: indexPath) as? GameStoryTableViewCell
             cell?.countLabel.text = "스트라이크"
@@ -60,14 +60,14 @@ class GameViewController: UIViewController {
         return dataSource
     }
     
-    func applySnapshot(animatingDifferences: Bool = true) {
+    private func applySnapshot(animatingDifferences: Bool = true) {
         var snapshot = Snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(foos, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
     }
     
-    func appearPitchButton() {
+    private func appearPitchButton() {
         let pitchButton = PitchButton()
         self.gameView.addSubview(pitchButton)
         pitchButton.snp.makeConstraints {

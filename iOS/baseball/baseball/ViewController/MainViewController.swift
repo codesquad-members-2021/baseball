@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     @IBOutlet var teams: [UIButton]!
     var user: UserDTO!
     

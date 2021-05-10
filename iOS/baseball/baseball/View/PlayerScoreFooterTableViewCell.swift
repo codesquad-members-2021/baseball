@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayerScoreFooterTableViewCell: UITableViewHeaderFooterView {
+final class PlayerScoreFooterTableViewCell: UITableViewHeaderFooterView {
     override func awakeFromNib() {
         super.awakeFromNib()
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlayerScoreTableViewCell: UITableViewCell {
+final class PlayerScoreTableViewCell: UITableViewCell {
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var TPA: UILabel!
     @IBOutlet weak var hits: UILabel!

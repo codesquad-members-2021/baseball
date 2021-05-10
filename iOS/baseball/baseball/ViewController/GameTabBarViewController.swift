@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameTabBarViewController: UITabBarController {
+final class GameTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setTabBarItems()

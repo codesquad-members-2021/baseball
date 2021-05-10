@@ -11,7 +11,7 @@ protocol ServerCommunicable {
     func postLoginCode(kindOf: KindOfNetworkAction, callBackURLCode: String, complete: @escaping (Result<Data, NetworkingError>) -> ()) 
 }
 
-class NetworkingCenter: ServerCommunicable {
+final class NetworkingCenter: ServerCommunicable {
     func postLoginCode(kindOf kind: KindOfNetworkAction, callBackURLCode: String, complete: @escaping (Result<Data, NetworkingError>) -> ()) {
         guard let url = URL(string: "http://\(self.getHOST()):8080/login?code=\(callBackURLCode)") else { return }
         var urlRequest = URLRequest(url: url)

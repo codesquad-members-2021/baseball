@@ -9,12 +9,12 @@ import UIKit
 import OctoKit
 import AuthenticationServices
 
-class OAuthViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
+final class OAuthViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
     lazy var config = OAuthConfiguration.init(token: self.getClientID(),
                                               secret: "",
                                               scopes: ["user"])
-    var webAuthSession: ASWebAuthenticationSession?
-    var gameManager: GameManager!
+    private var webAuthSession: ASWebAuthenticationSession?
+    private var gameManager: GameManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
