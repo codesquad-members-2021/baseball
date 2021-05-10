@@ -32,6 +32,7 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
     var webAuthSession: ASWebAuthenticationSession?
 
     override func viewDidLoad() {
+        super.viewDidLoad() 
         self.configOAuth()
     }
     
@@ -105,4 +106,3 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
         webAuthSession?.start()
     }
 }
-
