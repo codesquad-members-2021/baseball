@@ -12,18 +12,19 @@ public class BaseballGameTeamInformation {
 
     @Id
     @Column("information_id")
+    // TeamInformation 과 PlayersStatistics / TeamScores 를 OneToMany Mapping 하기 위해 추가한 id
     private final Long id;
 
-    private Long teamId;
+    private final Long teamId;
 
     @Embedded.Empty
-    private PlayersStatistics playersStatistics;
+    private final PlayersStatistics playersStatistics;
 
     private Integer batterNumber;
     private Integer pitches;
 
     @Embedded.Empty
-    private TeamScores teamScores;
+    private final TeamScores teamScores;
 
     BaseballGameTeamInformation(Long id, Long teamId, PlayersStatistics playersStatistics, Integer batterNumber, Integer pitches, TeamScores teamScores) {
         this.id = id;
@@ -34,14 +35,17 @@ public class BaseballGameTeamInformation {
         this.teamScores = teamScores;
     }
 
-    public void hitAndSetNextBatter() {
+    public void hit() {
         playersStatistics.hit(batterNumber);
-        batterNumber++;
+
     }
 
-    public void outAndSetNextBatter() {
+    public void out() {
         playersStatistics.out(batterNumber);
-        batterNumber++;
+    }
+
+    public void setNextBatter() {
+        batterNumber = (batterNumber + 1) % playersStatistics.size();
     }
 
     public void pitch() {

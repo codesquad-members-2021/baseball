@@ -2,16 +2,28 @@ package codesquad.team7.baseball.game;
 
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayersStatistics {
 
+    private static final int PLAYER_NUMBER = 9;
+
     @MappedCollection(idColumn = "information_id", keyColumn = "player_statistics_index")
-    private List<PlayerStatistics> players;
+    private final List<PlayerStatistics> players;
 
     PlayersStatistics(List<PlayerStatistics> players) {
         this.players = players;
+    }
+
+    public static PlayersStatistics newStatistics() {
+        List<PlayerStatistics> playerStatisticsList = new ArrayList<>();
+
+        for (int i = 0; i < PLAYER_NUMBER; i++) {
+            playerStatisticsList.add(PlayerStatistics.newPlayerStatistics());
+        }
+
+        return new PlayersStatistics(playerStatisticsList);
     }
 
     public void hit(int playerNumber) {
@@ -28,17 +40,7 @@ public class PlayersStatistics {
         return players.get(i);
     }
 
-    public static PlayersStatistics newStatistics() {
-        return new PlayersStatistics(Arrays.asList(
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics(),
-                PlayerStatistics.newPlayerStatistics()
-        ));
+    public int size() {
+        return PLAYER_NUMBER;
     }
 }
