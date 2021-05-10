@@ -11,7 +11,7 @@ const HeaderScore = () => {
     <GameScoreWrap>
       <Span selected={home.selected}>{home.teamName}</Span>
       <Span>{scores.home}</Span>
-      <Span>vs</Span>
+      <Span color="lightGray">vs</Span>
       <Span>{scores.away}</Span>
       <Span selected={away.selected}>{away.teamName}</Span>
     </GameScoreWrap>
@@ -23,5 +23,5 @@ export default HeaderScore;
 const GameScoreWrap = styled(FlexCenter)`
   justify-content: space-between;
   width: 100%;
-  padding: 0.5rem 6rem;
+  padding: 0.5rem 7rem;
 `;

@@ -14,16 +14,18 @@ const colors = {
 
 const fontSizes = {
   TITLEL: '4',
-  TITLES: '2',
+  TITLEM: '2',
+  TITLES: '1.2',
   SMALL: '1',
-  BASE: '2',
+  BASE: '2.4',
   LARGE: '3',
   XLARGE: '4',
 };
 
 const weights = {
   BASE: 600,
-  LARGE: 700,
+  MEDIUM: 700,
+  LARGE: 750,
   XLARGE: 800,
 };
 
