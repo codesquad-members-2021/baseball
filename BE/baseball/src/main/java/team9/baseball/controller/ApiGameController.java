@@ -27,7 +27,7 @@ public class ApiGameController {
 
     @PostMapping
     public ApiResult createGame(@RequestBody CreateGameDTO createGameDTO) {
-        gameService.createNewGame(1l, createGameDTO.getAwayTeamId(), createGameDTO.getHomeTeamId());
+        gameService.createNewGame(createGameDTO.getAwayTeamId(), createGameDTO.getHomeTeamId());
         return ApiResult.succeed("OK");
     }
 

@@ -83,8 +83,7 @@ public class GameService {
         return GameHistoryDTO.of(game, awayTeam, homeTeam);
     }
 
-    public void createNewGame(long userId, int awayTeamId, int homeTeamId) {
-        User user = getUser(userId);
+    public void createNewGame(int awayTeamId, int homeTeamId) {
         Team awayTeam = getTeam(awayTeamId);
         Team homeTeam = getTeam(homeTeamId);
 
