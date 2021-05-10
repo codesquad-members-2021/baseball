@@ -10,9 +10,6 @@ import OctoKit
 import AuthenticationServices
 
 final class OAuthViewController: UIViewController, ASWebAuthenticationPresentationContextProviding {
-    lazy var config = OAuthConfiguration.init(token: self.getClientID(),
-                                              secret: "",
-                                              scopes: ["user"])
     var webAuthSession: ASWebAuthenticationSession?
     var gameManager: GameManager!
     var oauthManager: OAuthManager!
@@ -27,7 +24,7 @@ final class OAuthViewController: UIViewController, ASWebAuthenticationPresentati
     }
     
     func configOAuth() {
-        webAuthSession = self.oauthManager.initPostLoginCodeWebAuthSession(config: config) { (result) in
+        webAuthSession = self.oauthManager.initPostLoginCodeWebAuthSession() { (result) in
             switch result {
             case .success(let userDTO):
                 guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.className) as? MainViewController else { return }
@@ -48,14 +45,5 @@ final class OAuthViewController: UIViewController, ASWebAuthenticationPresentati
     
     @IBAction func touchGithubLogin(_ sender: UIButton) {
         webAuthSession?.start()
-    }
-}
-
-extension OAuthViewController {
-    func getClientID() -> String {
-        guard let path = Bundle.main.path(forResource: "NetworkElements", ofType: "plist") else { return "" }
-        let plist = NSDictionary(contentsOfFile: path)
-        guard let key = plist?.object(forKey: "ClientID") as? String else { return "" }
-        return key
     }
 }

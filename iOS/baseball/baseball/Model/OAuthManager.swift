@@ -12,13 +12,16 @@ import AuthenticationServices
 class OAuthManager {
     let networkingCenter: ServerCommunicable
     let jsonProcessCenter: JSONDecodable
+    lazy var config = OAuthConfiguration.init(token: self.getClientID(),
+                                              secret: "",
+                                              scopes: ["user"])
     
     init(serverCommunicable: ServerCommunicable, JSONDecodable: JSONDecodable) {
         self.networkingCenter = serverCommunicable
         self.jsonProcessCenter = JSONDecodable
     }
     
-    func initPostLoginCodeWebAuthSession(config: OAuthConfiguration, completion: @escaping (Result<UserDTO, NetworkingError>) -> ()) -> ASWebAuthenticationSession? {
+    func initPostLoginCodeWebAuthSession(completion: @escaping (Result<UserDTO, NetworkingError>) -> ()) -> ASWebAuthenticationSession? {
         let callbackUrlScheme = "baseball"
         guard let url = config.authenticate()?.appending([URLQueryItem(name: "redirect_uri", value: "baseball://")]) else { return nil }
         return ASWebAuthenticationSession.init(url: url, callbackURLScheme: callbackUrlScheme, completionHandler: { (callBack:URL?, error:Error?) in
@@ -57,5 +60,14 @@ class OAuthManager {
                 completion(.failure(NetworkingError.responseError))
             }
         }
+    }
+}
+
+extension OAuthManager {
+    func getClientID() -> String {
+        guard let path = Bundle.main.path(forResource: "NetworkElements", ofType: "plist") else { return "" }
+        let plist = NSDictionary(contentsOfFile: path)
+        guard let key = plist?.object(forKey: "ClientID") as? String else { return "" }
+        return key
     }
 }
