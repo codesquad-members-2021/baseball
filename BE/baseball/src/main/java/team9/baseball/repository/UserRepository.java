@@ -15,5 +15,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     boolean existsByCurrentGameIdAndCurrentGameVenue(Long currentGameId, Venue currentGameVenue);
 
-    boolean existsByIdAndEmailAndOauthResourceServer(Long id, String email, String oauthResourceServer);
+    Optional<User> findByIdAndEmailAndOauthResourceServer(Long id, String email, String oauthResourceServer);
 }
