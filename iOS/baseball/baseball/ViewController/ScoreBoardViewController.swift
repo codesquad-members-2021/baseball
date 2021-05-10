@@ -67,7 +67,7 @@ extension ScoreBoardViewController {
 
 extension ScoreBoardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = Bundle.main.loadNibNamed(PlayerScoreHeaderTableViewCell.className, owner: self, options: nil)?.last as! PlayerScoreHeaderTableViewCell
+        guard let header = Bundle.main.loadNibNamed(PlayerScoreHeaderTableViewCell.className, owner: self, options: nil)?.last as? PlayerScoreHeaderTableViewCell else { return nil }
         return header
     }
     
