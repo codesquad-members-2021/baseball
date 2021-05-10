@@ -18,13 +18,20 @@ class NetworkingCenter: ServerCommunicable {
         urlRequest.httpMethod = kind.HTTPMethod.rawValue
 
         URLSession.init(configuration: .default).dataTask(with: urlRequest) { (data, response, error) in
-            if error != nil {
+            if let error = error as NSError?, error.domain == NSURLErrorDomain, error.code == NSURLErrorNotConnectedToInternet {
+                complete(.failure(NetworkingError.notConnectedToInternet))
+                return
+            }
+            
+            guard let data = data, let httpResponse = response as? HTTPURLResponse else {
+                complete(.failure(NetworkingError.networkError))
+                return
+            }
+            guard 200..<300 ~= httpResponse.statusCode else {
                 complete(.failure(NetworkingError.responseError))
                 return
             }
-            guard let data = data else {
-                return
-            }
+            
             complete(.success(data))
         }.resume()
     }

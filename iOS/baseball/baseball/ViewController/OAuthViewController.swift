@@ -15,41 +15,30 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
                                               scopes: ["user"])
     var webAuthSession: ASWebAuthenticationSession?
     var gameManager: GameManager!
+    var oauthManager: OAuthManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configOAuth()
         let networkingCenter = NetworkingCenter()
         let jsonProcessCenter = JSONProcessCenter()
         self.gameManager = GameManager(serverCommunicable: networkingCenter, JSONDecodable: jsonProcessCenter)
+        self.oauthManager = OAuthManager(serverCommunicable: networkingCenter, JSONDecodable: jsonProcessCenter)
+        self.configOAuth()
     }
     
     func configOAuth() {
-        let callbackUrlScheme = "baseball"
-        guard let url = config.authenticate()?.appending([URLQueryItem(name: "redirect_uri", value: "baseball://")]) else { return }
-        webAuthSession = ASWebAuthenticationSession.init(url: url, callbackURLScheme: callbackUrlScheme, completionHandler: { (callBack:URL?, error:Error?) in
-            if error != nil {
+        webAuthSession = self.oauthManager.initPostLoginCodeWebAuthSession(config: config) { (result) in
+            switch result {
+            case .success(let userDTO):
+                guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.className) as? MainViewController else { return }
+                vc.user = userDTO
+                self.navigationController?.pushViewController(vc, animated: true)
+            case .failure(let error):
                 #if DEBUG
-                NSLog(NetworkingError.ASWebAuthenticationSessionError.rawValue)
+                NSLog(error.localizedDescription)
                 #endif
-                return
             }
-            guard let successURL = callBack else { return }
-            let callBackURLCode = successURL.extractCallbackURLCode()
-            
-            self.gameManager.postLoginCode(callBackURLCode: String(callBackURLCode)) { (result) in
-                switch result {
-                case .success(let userDTO):
-                    guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.className) as? MainViewController else { return }
-                    vc.user = userDTO
-                    self.navigationController?.pushViewController(vc, animated: true)
-                case .failure(let error):
-                    #if DEBUG
-                    NSLog(error.localizedDescription)
-                    #endif
-                }
-            }
-        })
+        }
         webAuthSession?.presentationContextProvider = self
     }
 

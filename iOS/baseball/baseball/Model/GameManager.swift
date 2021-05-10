@@ -16,22 +16,5 @@ class GameManager {
         self.jsonProcessCenter = JSONDecodable
     }
     
-    func postLoginCode(callBackURLCode: String, completion: @escaping (Result<UserDTO, NetworkingError>) -> ()) {
-        networkingCenter.postLoginCode(kindOf: .login, callBackURLCode: callBackURLCode) { (result) in
-            switch result {
-            case .success(let data):
-                let decodeResult = self.jsonProcessCenter.decodeData(typeOf: UserDTO.self, data: data)
-                switch decodeResult {
-                case .success(let userDTO):
-                    DispatchQueue.main.async {
-                        completion(.success(userDTO))
-                    }
-                case .failure(_):
-                    completion(.failure(NetworkingError.decodeError))
-                }
-            case .failure(_):
-                completion(.failure(NetworkingError.responseError))
-            }
-        }
-    }
+    
 }
