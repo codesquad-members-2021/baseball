@@ -11,7 +11,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
-public class JwtTokenUtil {
+public class JwtUtil {
 
     private static final String SECRET_KEY = "TEMP"; //배포시 SECRET_KEY는 환경변수로 설정할 예정 (개인키 노출 X)
 
