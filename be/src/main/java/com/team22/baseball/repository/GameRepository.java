@@ -1,6 +1,7 @@
 package com.team22.baseball.repository;
 
 import com.team22.baseball.domain.Game;
+import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.dto.response.GameDto;
 import com.team22.baseball.dto.response.PlayerInfoDto;
@@ -54,6 +55,18 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     @Modifying
     @Query("UPDATE TEAM SET TEAM.selected=true WHERE TEAM.name = :teamTitle;")
     void updateSelectedTeamByTitle(@Param("teamTitle") String teamTitle);
+
+    @Modifying
+    @Query("UPDATE PLAYER SET plate_appearance= :plate_appearance, hits= :hits, outs= :outs WHERE PLAYER.name = :name;")
+    void updatePlayerInfo(@Param("name") String name, @Param("plate_appearance") int plate_appearance, @Param("hits") int hits, @Param("outs") int outs);
+
+    @Modifying
+    @Query("INSERT INTO TEAM_SCORE(team_id, round, score)\n" +
+            "VALUES((SELECT TEAM.id FROM TEAM WHERE TEAM.name = :teamName), :round,:score)")
+    void insertTeamScore(@Param("teamName") String teamName, @Param("round") int round, @Param("score") int score);
+
+    @Query("SELECT * FROM PLAYER AS P WHERE P.name = :name;")
+    Optional<Player> findPlayerByName(@Param("name") String name);
 
 }
 
