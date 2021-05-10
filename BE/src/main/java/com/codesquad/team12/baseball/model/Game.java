@@ -34,9 +34,17 @@ public class Game {
         this.awayName = awayName;
     }
 
-    public static GameDto of(Game game) {
-        TeamDto home = Team.of(new Team(game.homeName, false));
-        TeamDto away = Team.of(new Team(game.awayName, false));
+    public static GameDto createGameDto(Game game) {
+        TeamDto home = Team.createTeamDto(new Team(game.homeName, false));
+        TeamDto away = Team.createTeamDto(new Team(game.awayName, false));
         return new GameDto(game.id, home, away);
+    }
+
+    public String getHomeName() {
+        return homeName;
+    }
+
+    public String getAwayName() {
+        return awayName;
     }
 }

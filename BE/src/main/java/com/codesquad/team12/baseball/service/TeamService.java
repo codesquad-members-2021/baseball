@@ -1,6 +1,6 @@
 package com.codesquad.team12.baseball.service;
 
-import com.codesquad.team12.baseball.model.Player;
+import com.codesquad.team12.baseball.dto.TeamPlayerDto;
 import com.codesquad.team12.baseball.model.Team;
 import com.codesquad.team12.baseball.repository.TeamRepository;
 import org.springframework.stereotype.Service;
@@ -13,8 +13,10 @@ public class TeamService {
         this.teamRepository = teamRepository;
     }
 
-    public Team findById(Long id) {
-        return teamRepository.findById(id)
+    public TeamPlayerDto findById(String name) {
+        Team team = teamRepository.findById(name)
                 .orElseThrow(IllegalArgumentException::new);
+        return Team.createTeamPlayerDto(team);
     }
+
 }

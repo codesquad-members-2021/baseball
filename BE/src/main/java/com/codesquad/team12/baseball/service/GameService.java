@@ -25,7 +25,7 @@ public class GameService {
         return gameRepository
                 .findAll()
                 .stream()
-                .map(Game::of)
+                .map(Game::createGameDto)
                 .collect(Collectors.toList());
     }
 
