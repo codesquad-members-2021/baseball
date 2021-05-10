@@ -232,6 +232,12 @@ public class Game {
     }
 
     private void goToNextInning(Team awayTeam, Team homeTeam) {
+        //게임 종료 상황이면 다음이닝으로 넘어가지 않고 게임종료
+        if (isExited()) {
+            this.status = GameStatus.EXITED;
+            return;
+        }
+
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
@@ -259,6 +265,18 @@ public class Game {
         int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
         sendBatterOnPlate(attackTeam.getId(), nextBatterUniformNumber);
+    }
+
+    private boolean isExited() {
+        if (currentInning == 9 && currentHalves == Halves.BOTTOM &&
+                getTotalScore(Halves.TOP) != getTotalScore(Halves.BOTTOM)) {
+            return true;
+        }
+        if (currentInning == 12 && currentHalves == Halves.BOTTOM) {
+            return true;
+        }
+
+        return false;
     }
 
     private void sendBatterOnPlate(int batterTeamId, int nextBatterUniformNumber) {
