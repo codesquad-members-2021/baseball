@@ -2,11 +2,11 @@ import CurrentPlayerTag from './CurrentPlayerTag';
 import TeamName from './TeamName';
 import { ScoreBoardStyles as S } from '@/Components/Game/ScoreBoard/ScoreBoardStyles';
 
-const TeamNameBox = ({ teamName }) => {
+const TeamNameBox = ({ team, isPlayer }) => {
   return (
     <S.TeamNameBox>
-      <TeamName teamName={teamName} />
-      <CurrentPlayerTag />
+      <TeamName {...{ team }} />
+      <CurrentPlayerTag {...{ isPlayer }} />
     </S.TeamNameBox>
   );
 };
