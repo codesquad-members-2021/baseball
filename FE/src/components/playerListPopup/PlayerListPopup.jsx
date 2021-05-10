@@ -23,6 +23,7 @@ export default PlayerListPopup;
     // 나중에 z-index도 context + reducer 관리해야할듯
 const StyledPlayerListPopup = styled.div`
     ${cssFullAbsolutePosition};
+    top: auto;
     z-index: 10;
 `;
 

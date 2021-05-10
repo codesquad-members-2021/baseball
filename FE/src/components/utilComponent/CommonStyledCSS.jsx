@@ -47,7 +47,7 @@ const cssOpacityBackground = css`
     ${cssFullAbsolutePosition};
     ${cssFlexAlignCenter};
     height: inherit;
-    background-color: #01010180;
+    background-color: #010101e8;
 `;
 
 
