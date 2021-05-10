@@ -16,7 +16,6 @@
 		2263441F2642CE9F00211BC7 /* PlayerScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263441D2642CE9F00211BC7 /* PlayerScoreTableViewCell.swift */; };
 		226344202642CE9F00211BC7 /* PlayerScoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2263441E2642CE9F00211BC7 /* PlayerScoreTableViewCell.xib */; };
 		226B928A2648F972006007D0 /* NSObject+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B92892648F972006007D0 /* NSObject+extension.swift */; };
-		2290FF5F2644DE9300AC3475 /* NetworkElements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2290FF5E2644DE9200AC3475 /* NetworkElements.plist */; };
 		22941A5826412D1B00598814 /* PlayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A5726412D1B00598814 /* PlayerList.swift */; };
 		22941A5D26412D5800598814 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A5C26412D5800598814 /* Player.swift */; };
 		22941A6226412D8000598814 /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22941A6126412D8000598814 /* GameList.swift */; };
@@ -52,6 +51,7 @@
 		B34B59F22641979B009105DC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B34B59F12641979B009105DC /* SnapKit */; };
 		B38653A926428B6E00DFC803 /* GameStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */; };
 		B38653AA26428B6E00DFC803 /* GameStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */; };
+		B3C16B8D264908DF0078DAE6 /* NetworkElements.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3C16B8C264908DF0078DAE6 /* NetworkElements.plist */; };
 		B3F663F92643D0CF00625A2F /* GameHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3F663F82643D0CF00625A2F /* GameHeaderView.xib */; };
 		B3F663FE2643D0DE00625A2F /* GameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F663FD2643D0DE00625A2F /* GameHeaderView.swift */; };
 /* End PBXBuildFile section */
@@ -82,7 +82,6 @@
 		2263441D2642CE9F00211BC7 /* PlayerScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerScoreTableViewCell.swift; sourceTree = "<group>"; };
 		2263441E2642CE9F00211BC7 /* PlayerScoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerScoreTableViewCell.xib; sourceTree = "<group>"; };
 		226B92892648F972006007D0 /* NSObject+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+extension.swift"; sourceTree = "<group>"; };
-		2290FF5E2644DE9200AC3475 /* NetworkElements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NetworkElements.plist; path = ../../../../NetworkElements.plist; sourceTree = "<group>"; };
 		22941A5726412D1B00598814 /* PlayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerList.swift; sourceTree = "<group>"; };
 		22941A5C26412D5800598814 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		22941A6126412D8000598814 /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		B34B59E826419634009105DC /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B38653A726428B6E00DFC803 /* GameStoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStoryTableViewCell.swift; sourceTree = "<group>"; };
 		B38653A826428B6E00DFC803 /* GameStoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameStoryTableViewCell.xib; sourceTree = "<group>"; };
+		B3C16B8C264908DF0078DAE6 /* NetworkElements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = NetworkElements.plist; path = ../../../../../Downloads/NetworkElements.plist; sourceTree = "<group>"; };
 		B3F663F82643D0CF00625A2F /* GameHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameHeaderView.xib; sourceTree = "<group>"; };
 		B3F663FD2643D0DE00625A2F /* GameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -273,8 +273,8 @@
 				22941AD0264141E100598814 /* ViewController */,
 				22941A532641140000598814 /* Model */,
 				B32499D8263FF3B300D8DEA8 /* Main.storyboard */,
+				B3C16B8C264908DF0078DAE6 /* NetworkElements.plist */,
 				B32499DB263FF3B400D8DEA8 /* Assets.xcassets */,
-				2290FF5E2644DE9200AC3475 /* NetworkElements.plist */,
 				B32499DD263FF3B400D8DEA8 /* LaunchScreen.storyboard */,
 				B32499E0263FF3B400D8DEA8 /* Info.plist */,
 			);
@@ -415,7 +415,7 @@
 				B32499DC263FF3B400D8DEA8 /* Assets.xcassets in Resources */,
 				B38653AA26428B6E00DFC803 /* GameStoryTableViewCell.xib in Resources */,
 				226344132642CE0000211BC7 /* PlayerScoreHeaderTableViewCell.xib in Resources */,
-				2290FF5F2644DE9300AC3475 /* NetworkElements.plist in Resources */,
+				B3C16B8D264908DF0078DAE6 /* NetworkElements.plist in Resources */,
 				B32499DA263FF3B300D8DEA8 /* Main.storyboard in Resources */,
 				226344202642CE9F00211BC7 /* PlayerScoreTableViewCell.xib in Resources */,
 				22B3033C26438EED001AB2E4 /* PlayerScoreFooterTableViewCell.xib in Resources */,

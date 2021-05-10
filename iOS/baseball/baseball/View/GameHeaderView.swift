@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameHeaderView: UIView {
+final class GameHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,14 +20,14 @@ class GameHeaderView: UIView {
     }
     
     
-    func xibSetUp() {
+    private func xibSetUp() {
         guard let view = loadViewFromNib(nib: "GameHeaderView") else { return }
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
     }
     
-    func loadViewFromNib(nib: String) -> UIView? {
+    private func loadViewFromNib(nib: String) -> UIView? {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nib, bundle: bundle)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView

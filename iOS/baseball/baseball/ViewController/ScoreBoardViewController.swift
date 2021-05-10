@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ScoreBoardViewController: UIViewController {
+final class ScoreBoardViewController: UIViewController {
     @IBOutlet weak var homeTotalScore: UILabel!
     @IBOutlet weak var awayTotalScore: UILabel!
     @IBOutlet var homeScores: [UILabel]!
@@ -16,8 +16,8 @@ class ScoreBoardViewController: UIViewController {
     @IBOutlet weak var teamControllBar: UISegmentedControl!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
-    typealias DataSource = UITableViewDiffableDataSource<String, PlayerScoreBoard>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<String, PlayerScoreBoard>
+    fileprivate typealias DataSource = UITableViewDiffableDataSource<String, PlayerScoreBoard>
+    fileprivate typealias Snapshot = NSDiffableDataSourceSnapshot<String, PlayerScoreBoard>
     private lazy var dataSource = makeDataSource()
     
     override func viewDidLoad() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PitchButton: UIButton {
+final class PitchButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +19,7 @@ class PitchButton: UIButton {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         self.layer.cornerRadius = 4
         self.clipsToBounds = true
         self.backgroundColor = .black

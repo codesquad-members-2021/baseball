@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GameManager {
+final class GameManager {
     let networkingCenter: ServerCommunicable
     let jsonProcessCenter: JSONDecodable
     

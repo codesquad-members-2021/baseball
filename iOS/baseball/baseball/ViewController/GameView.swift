@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class GameView: UIView {
+final class GameView: UIView {
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()

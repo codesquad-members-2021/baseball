@@ -11,7 +11,7 @@ protocol JSONDecodable {
     func decodeData<T: Decodable>(typeOf type: T.Type, data: Data) -> Result<T, Error>
 }
 
-class JSONProcessCenter: JSONDecodable {
+final class JSONProcessCenter: JSONDecodable {
     func decodeData<T: Decodable>(typeOf type: T.Type, data: Data) -> Result<T, Error> {
         do {
             let decodedData = try JSONDecoder().decode(type, from: data)

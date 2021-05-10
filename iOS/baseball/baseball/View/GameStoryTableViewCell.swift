@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GameStoryTableViewCell: UITableViewCell {
+final class GameStoryTableViewCell: UITableViewCell {
     @IBOutlet weak var countImage: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var countNumberLabel: UILabel!
