@@ -16,4 +16,5 @@ const GamePlayHeader = styled.header`
   width: 100%;
   padding: 1rem 0;
   background-color: black;
+  height: 20%;
 `
