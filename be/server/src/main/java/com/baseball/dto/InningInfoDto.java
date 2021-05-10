@@ -1,7 +1,7 @@
 package com.baseball.dto;
 
 
-import com.baseball.domain.InningInfo;
+import com.baseball.domain.match.Match;
 
 public class InningInfoDto {
     private final Integer inningCount;
@@ -52,11 +52,11 @@ public class InningInfoDto {
         return isUserOffense;
     }
 
-    public static InningInfoDto from(InningInfo inningInfo) {
+    public static InningInfoDto from(Match match) {
         Builder builder = new Builder()
-                .inningCount(inningInfo.getInningCount())
-                .userTop(inningInfo.getUserTop())
-                .userOffense(inningInfo.getUserOffense());
+                .inningCount(match.getInningCount())
+                .userTop(match.getUserTop())
+                .userOffense(match.getUserOffense());
         return builder.build();
     }
 }

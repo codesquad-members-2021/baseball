@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Pitcher;
+import com.baseball.domain.player.Pitcher;
 
 public class PitcherDto {
 

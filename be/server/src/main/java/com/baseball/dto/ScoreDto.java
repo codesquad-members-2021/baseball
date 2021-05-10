@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Score;
+import com.baseball.domain.team.Team;
 
 public class ScoreDto {
     private final Integer awayScore;
@@ -38,10 +38,10 @@ public class ScoreDto {
         return homeScore;
     }
 
-    public static ScoreDto from(Score score) {
+    public static ScoreDto from(Team awayTeam, Team homeTeam) {
         Builder builder = new Builder()
-                .awayScore(score.getAwayScore())
-                .homeScore(score.getHomeScore());
+                .awayScore(awayTeam.totalScore())
+                .homeScore(homeTeam.totalScore());
         return builder.build();
     }
 

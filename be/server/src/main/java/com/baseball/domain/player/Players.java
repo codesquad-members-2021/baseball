@@ -1,4 +1,4 @@
-package com.baseball.domain;
+package com.baseball.domain.player;
 
 import java.util.List;
 

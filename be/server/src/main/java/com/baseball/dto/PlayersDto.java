@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.Players;
+import com.baseball.domain.player.Players;
 
 import java.util.List;
 import java.util.stream.Collectors;
