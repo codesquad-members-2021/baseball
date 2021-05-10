@@ -24,7 +24,7 @@ class SelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setBackground()
+        self.configureBackgroundUI()
         
         self.viewModel.request()
         self.registerNib()
@@ -81,7 +81,7 @@ extension SelectionViewController: GameCellDelegate {
 
 extension SelectionViewController {
 
-    private func setBackground() {
+    private func configureBackgroundUI() {
         self.gradientLayer.colors = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor, #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor, #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1).cgColor, #colorLiteral(red: 0.06274510175, green: 0, blue: 0.1921568662, alpha: 1).cgColor, #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).cgColor]
         self.gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         self.gradientLayer.endPoint = CGPoint(x: 1, y: 1)
