@@ -3,7 +3,7 @@ import Home from 'Components/Home';
 import GamePage from "Components/GamePage";
 import { Router, Route } from "utils/BeemoRouter";
 import io from 'socket.io-client';
-
+import API from 'utils/API';
 const Page = () => {
 
   useEffect(() => {
@@ -15,6 +15,14 @@ const Page = () => {
       });
     };
     connectSocket();
+  }, []);
+
+  useEffect(() => {
+    const getTeams = async () => {
+      const teams = await API.get.teams();
+      console.log(teams);
+    }
+    getTeams();
   }, []);
 
   return (
