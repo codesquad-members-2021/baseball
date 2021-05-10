@@ -92,11 +92,11 @@ class GameRepositoryTest {
         Game game = createGame(GAME_TITLE);
         int nextHitter = game.nextHitter();
         //스트라이크를 할 수 있어야 하며, 이에 대한 카운트가 증가해야 합니다
-        game.pitch(PlayType.STRIKE);
+        doStrike(game);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(1);
-        game.pitch(PlayType.STRIKE);
+        doStrike(game);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(2);
-        game.pitch(PlayType.STRIKE);
+        doStrike(game);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(0);
         assertThat(game.getCurrentOutCount()).isEqualTo(1);
         //스트라이크 아웃 이후의 타자는 이전에 구한 nextHitter이어야 합니다
@@ -118,7 +118,7 @@ class GameRepositoryTest {
         Game game = createGame(GAME_TITLE);
         int firstHitter = game.currentHitter();
         //1회 볼 이후엔 볼카운트 1이어야 함
-        game.pitch(PlayType.BALL);
+        doBall(game);
         assertThat(game.getCurrentBallCount()).isEqualTo(1);
         //3회 볼 이후엔 볼 카운트가 0이어야 함
         //또한 볼넷 맞기 전의 타자가 1루에 가있어야 함
@@ -140,7 +140,7 @@ class GameRepositoryTest {
         //볼넷 한번 더 맞으면 1번타자는 백홈, 2번타자는 3루, 3번타자는 2루, 4번타자는 1루에 있어야 함
         int fourthHitter = game.currentHitter();
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
-        PitchResult pitchResult = game.pitch(PlayType.BALL);
+        PitchResult pitchResult = doBall(game);
         assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
@@ -150,7 +150,7 @@ class GameRepositoryTest {
         //볼넷 한번 더 맞으면 2번타자는 백홈, 3번타자는 3루, 4번타자는 2루, 5번타자는 1루에 있어야 함
         int fifthHitter = game.currentHitter();
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
-        pitchResult = game.pitch(PlayType.BALL);
+        pitchResult = doBall(game);
         assertThat(game.firstBaseRunner()).isEqualTo(fifthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(thirdHitter);
@@ -169,22 +169,22 @@ class GameRepositoryTest {
         Game game = createGame(GAME_TITLE);
         //1안타후엔 첫번째 타자가 1루에 가있어야 함
         int firstHitter = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         assertThat(game.firstBaseRunner()).isEqualTo(firstHitter);
         //2안타후엔 첫번째 타자가 2루, 두번째가 1루
         int secondHitter = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         assertThat(game.firstBaseRunner()).isEqualTo(secondHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(firstHitter);
         //3안타후엔 첫번째 타자가 3루, 두번째가 2루 세번째는 3루
         int thirdHitter = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         assertThat(game.firstBaseRunner()).isEqualTo(thirdHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(secondHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(firstHitter);
         //4안타후엔 첫번째 타자가 백홈, 두번째가 3루 세번째는 2루 네번째가 1루, 원정팀 1점
         int fourthHitter = game.currentHitter();
-        PitchResult backHomeResult = game.pitch(PlayType.HITS);
+        PitchResult backHomeResult = doHits(game);
         assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
@@ -218,9 +218,9 @@ class GameRepositoryTest {
         assertThat(pitchResult.findRunnerByOrder(0)).isEqualTo(firstHitter);
         //그 다음, 2루까지 채운다음 홈런치면 원정팀은 4점이어야 함. 백홈한건 홈런친애랑 1,2루에 있던 애들이어야 함
         int secondHitter = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         int thirdHitter = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         int fourthHitter = game.currentHitter();
         pitchResult = game.pitch(PlayType.HOMERUN);
         assertThat(game.hasFirstBaseRunner()).isFalse();
@@ -318,7 +318,7 @@ class GameRepositoryTest {
         //1회초의 볼 기록도 기록되어야 합니다
         IntStream.range(0,4).forEach(value -> game.pitch(PlayType.BALL));
         int hitter3 = game.currentHitter();
-        game.pitch(PlayType.BALL);
+        doBall(game);
         //테스트데이터 입력
         histories = game.showHistoriesOfCurrentInning();
         historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 1, 1, pitcher, hitter2, 0));
@@ -331,13 +331,13 @@ class GameRepositoryTest {
 
         //1회초의 안타 기록도 기록되어야 합니다
         game.pitch(PlayType.STRIKE);
-        game.pitch(PlayType.HITS);
+        doHits(game);
         int hitter4 = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         int hitter5 = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         int hitter6 = game.currentHitter();
-        game.pitch(PlayType.HITS);
+        doHits(game);
         //테스트데이터 입력
         histories = game.showHistoriesOfCurrentInning();
         historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, 1, 1, pitcher, hitter3, 0));
@@ -351,7 +351,7 @@ class GameRepositoryTest {
         //1회초의 홈런 기록도 기록되어야 합니다
         int hitter7 = game.currentHitter();
         IntStream.range(0,3).forEach(ballCount -> {
-            game.pitch(PlayType.BALL);
+            doBall(game);
             historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 0, ballCount + 1, pitcher, hitter7, 0));
         });
         IntStream.range(0,2).forEach(strikeCount -> {
@@ -399,13 +399,31 @@ class GameRepositoryTest {
         assertThat(history.getHitter()).isEqualTo(historyTestDTO.hitter);
         assertThat(history.getEarnedScore()).isEqualTo(historyTestDTO.earnedScore);
     }
+    
+    private PitchResult doHits(Game game) {
+        PitchResult pitchResult = game.pitch(PlayType.HITS);
+        gameRepository.save(game);
+        return pitchResult;
+    }
 
+    private PitchResult doBall(Game game) {
+        PitchResult pitchResult = game.pitch(PlayType.BALL);
+        gameRepository.save(game);
+        return pitchResult;
+    }
+
+    private PitchResult doStrike(Game game) {
+        PitchResult pitchResult = game.pitch(PlayType.STRIKE);
+        gameRepository.save(game);
+        return pitchResult;
+    }
+    
     private void threeOut(Game game) {
         IntStream.range(0, 3).forEach(value -> threeStrike(game));
     }
 
     private void threeStrike(Game game) {
-        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.STRIKE));
+        IntStream.range(0, 3).forEach(value -> doStrike(game));
     }
 
     private Game createGame(String gameTitle) {
