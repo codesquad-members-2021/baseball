@@ -10,7 +10,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindCollectionView()
-        mainCollectionView.delegate = self
+        setupCollectionViewDelegate()
     }
     
     private func bindCollectionView() {
@@ -21,11 +21,15 @@ class HomeViewController: UIViewController {
             cell.configureCell(game: game)
         }.disposed(by: disposeBag)
     }
-}
-
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tapBarVC = (storyboard?.instantiateViewController(identifier: "TabBar"))!
-        present(tapBarVC, animated: true, completion: nil)
+    
+    private func setupCollectionViewDelegate() {
+        mainCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                let tabBarVC = self?.storyboard?.instantiateViewController(identifier: "TabBar")
+                self?.present(tabBarVC!, animated: true, completion: nil)
+            }, onError: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
     }
 }
