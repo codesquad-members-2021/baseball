@@ -12,7 +12,7 @@ const SelectGame = ({ refinedTeamData }) => {
                 idx={i + 1}
                 away={arr[0]}
                 home={arr[1]}
-                to={'/game'}
+                to={`/game/${arr[0]}/VS/${arr[1]}`}
             />
         ));
 
