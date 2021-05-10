@@ -15,4 +15,5 @@ else
     kill $TOMCAT_PROCESS
 fi
 
-nohup java -jar ./build/libs/baseball.jar & >> log.txt 2>&1
+java -jar ./build/libs/baseball.jar & >> log.txt 2>&1
+# nohup java -jar ./build/libs/baseball.jar & >> log.txt 2>&1
