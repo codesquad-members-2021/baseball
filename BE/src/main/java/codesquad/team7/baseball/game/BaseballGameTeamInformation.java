@@ -92,4 +92,8 @@ public class BaseballGameTeamInformation {
                 TeamScores.newTeamScores()
         );
     }
+
+    public void nextInning() {
+        teamScores.nextInning();
+    }
 }

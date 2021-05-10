@@ -30,8 +30,13 @@ public class TeamInformationMap {
 
     public static TeamInformationMap newTeamInformation(Team home, Team away) {
         Map<TeamEnum, BaseballGameTeamInformation> teamInformationMap = new HashMap<>();
+
         teamInformationMap.put(TeamEnum.HOME, BaseballGameTeamInformation.newTeamInfo(home));
-        teamInformationMap.put(TeamEnum.AWAY, BaseballGameTeamInformation.newTeamInfo(away));
+
+        BaseballGameTeamInformation awayTeamInfo = BaseballGameTeamInformation.newTeamInfo(away);
+        awayTeamInfo.nextInning();
+
+        teamInformationMap.put(TeamEnum.AWAY, awayTeamInfo);
         return new TeamInformationMap(teamInformationMap);
     }
 

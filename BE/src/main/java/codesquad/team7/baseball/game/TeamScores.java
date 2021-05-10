@@ -10,7 +10,7 @@ public class TeamScores {
     private Integer totalScore;
 
     @MappedCollection(idColumn = "information_id", keyColumn = "inning")
-    private List<InningScore> inningScore;
+    private final List<InningScore> inningScore;
 
     TeamScores(Integer totalScore, List<InningScore> inningScore) {
         this.totalScore = totalScore;

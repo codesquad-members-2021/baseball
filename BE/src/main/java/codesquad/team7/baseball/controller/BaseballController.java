@@ -1,6 +1,7 @@
 package codesquad.team7.baseball.controller;
 
 import codesquad.team7.baseball.game.BaseballGame;
+import codesquad.team7.baseball.game.Pitch;
 import codesquad.team7.baseball.repository.BaseballGameRepository;
 import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;
@@ -9,6 +10,7 @@ import codesquad.team7.baseball.view.BaseballGameTitle;
 import codesquad.team7.baseball.view.BaseballGameView;
 import codesquad.team7.baseball.view.BaseballGames;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -70,6 +72,12 @@ public class BaseballController {
 
     @GetMapping("/3")
     public BaseballGameView baseballGame() {
+        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+    }
+
+    @GetMapping("/3/pitch")
+    public BaseballGameView pitch() {
+        baseballGame.pitch(Pitch.HIT);
         return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
     }
 
