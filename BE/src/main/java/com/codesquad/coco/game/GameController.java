@@ -4,12 +4,11 @@ import com.codesquad.coco.game.domain.model.DTO.GamePlayDTO;
 import com.codesquad.coco.game.domain.model.DTO.GameScoreDTO;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.TeamService;
-import com.codesquad.coco.team.domain.DTO.*;
-import com.codesquad.coco.utils.DTOConverter;
+import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
+import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
+import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -32,24 +31,13 @@ public class GameController {
     @PostMapping("/games/type-home")
     @ResponseStatus(HttpStatus.CREATED)
     public GamePlayDTO homeTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
-        Long gameId = teamService.makeHomeGame(choiceDTO);
-
-        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
-        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
-
-        return new GamePlayDTO(gameId, homeTeam, awayTeam);
-
+        return teamService.makeHomeGameDTO(choiceDTO);
     }
 
     @PostMapping("/games/type-away")
     @ResponseStatus(HttpStatus.CREATED)
     public GamePlayDTO awayTeamMatch(@RequestBody TeamChoiceDTO choiceDTO) {
-        Long gameId = teamService.makeAwayGame(choiceDTO);
-
-        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
-        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
-
-        return new GamePlayDTO(gameId, awayTeam, homeTeam);
+        return teamService.makeAwayGameDTO(choiceDTO);
     }
 
     @PostMapping("/games/{gameId}/points")
@@ -62,32 +50,13 @@ public class GameController {
     @GetMapping("/games/{gameId}/points")
     @ResponseStatus(HttpStatus.OK)
     public GameScoreDTO gamePoint(@PathVariable Long gameId) {
-        List<ScoreBoard> scoreBoard = gameService.findScoreBoardByGameId(gameId);
-        String userTeamName = gameService.findUserTeamNameByGameId(gameId);
-
-        TeamScoreDTO teamScoreDTO = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(0));
-        TeamScoreDTO teamScoreDTO1 = DTOConverter.scoreToTeamScoreDTO(scoreBoard.get(1));
-
-        teamService.findHomeTeamByGameId(gameId);
-
-        if (teamScoreDTO.getTeamName().equals(userTeamName)) {
-            return new GameScoreDTO(teamScoreDTO, teamScoreDTO1);
-        }
-        return new GameScoreDTO(teamScoreDTO1, teamScoreDTO);
+        return gameService.findGameScoreDTOByGameId(gameId);
     }
 
     @GetMapping("/games/{gameId}/players")
     @ResponseStatus(HttpStatus.OK)
     public GamePlayDTO showPlayer(@PathVariable Long gameId) {
-        String userTeamName = gameService.findUserTeamNameByGameId(gameId);
-
-        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
-        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
-
-        if (homeTeam.getTeamName().equals(userTeamName)) {
-            return new GamePlayDTO(gameId, homeTeam, awayTeam);
-        }
-        return new GamePlayDTO(gameId, awayTeam, homeTeam);
+        return gameService.findGamePlayDTOByGameId(gameId);
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.codesquad.coco.utils.SQL.*;
+import static com.codesquad.coco.utils.BASEBALL_SQLKt.*;
 
 @Component
 public class PlayerDAO {
@@ -38,7 +38,6 @@ public class PlayerDAO {
         parameter.addValue("atBat", record.getAtBat());
         parameter.addValue("hits", record.getHits());
         parameter.addValue("outs", record.getOuts());
-        parameter.addValue("average", record.getAverage());
         parameter.addValue("id", record.getId());
         template.update(UPDATE_PLAYER_RECORD, parameter);
     }

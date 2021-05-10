@@ -23,13 +23,12 @@ create table player
 
 create table record
 (
-    id      BIGINT auto_increment primary key,
-    at_bat  int not null,
-    hits    int not null,
-    outs    int not null,
-    average double(4, 3
-) not null,
-    player BIGINT references player(id)
+    id     BIGINT auto_increment primary key,
+    at_bat int not null,
+    hits   int not null,
+    outs   int not null,
+
+    player BIGINT references player (id)
 );
 
 create table game

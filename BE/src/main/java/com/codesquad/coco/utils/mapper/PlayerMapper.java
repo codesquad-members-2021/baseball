@@ -14,8 +14,7 @@ public class PlayerMapper implements RowMapper<Player> {
                 rs.getLong("rid"),
                 rs.getInt("at_bat"),
                 rs.getInt("hits"),
-                rs.getInt("outs"),
-                rs.getDouble("average")
+                rs.getInt("outs")
         );
         return new Player(
                 rs.getLong("pid"),

@@ -10,7 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import static com.codesquad.coco.utils.SQL.*;
+import static com.codesquad.coco.utils.BASEBALL_SQLKt.*;
 
 @Component
 public class GameDAO {
@@ -26,10 +26,17 @@ public class GameDAO {
         this.template = template;
     }
 
-    public Long save(Game game) {
+    public Long makeGame(Game game) {
         Long gameId = saveGame(game);
-        ScoreBoard away = new ScoreBoard(gameId, game.awayTeamName());
-        ScoreBoard home = new ScoreBoard(gameId, game.homeTeamName());
+        ScoreBoard away = new ScoreBoard.Builder()
+                .game(gameId)
+                .team(game.awayTeamName())
+                .build();
+        ScoreBoard home = new ScoreBoard.Builder()
+                .game(gameId)
+                .team(game.homeTeamName())
+                .build();
+
         saveScoreBoard(game, away);
         saveScoreBoard(game, home);
         return gameId;

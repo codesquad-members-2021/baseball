@@ -11,14 +11,12 @@ public class Record {
     private int atBat;
     private int hits;
     private int outs;
-    private double average;
 
-    public Record(Long id, int atBat, int hits, int outs, double average) {
+    public Record(Long id, int atBat, int hits, int outs) {
         this.id = id;
         this.atBat = atBat;
         this.hits = hits;
         this.outs = outs;
-        this.average = average;
     }
 
     public Long getId() {
@@ -38,7 +36,7 @@ public class Record {
     }
 
     public double getAverage() {
-        return average;
+        return (double) hits / atBat;
     }
 
     @Override
@@ -48,7 +46,7 @@ public class Record {
                 ", atBat=" + atBat +
                 ", hits=" + hits +
                 ", outs=" + outs +
-                ", average=" + average +
+                ", average=" + getAverage() +
                 '}';
     }
 
@@ -60,6 +58,5 @@ public class Record {
         if (log == RecordType.OUT) {
             this.outs++;
         }
-        this.average = (double) hits / atBat;
     }
 }
