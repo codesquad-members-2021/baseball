@@ -32,6 +32,7 @@
 		76619AC22643AE83004D31C6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AC12643AE83004D31C6 /* GameCell.swift */; };
 		76619B062644EE37004D31C6 /* StadiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619B052644EE37004D31C6 /* StadiumView.swift */; };
 		76619B082644EE42004D31C6 /* StadiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76619B072644EE42004D31C6 /* StadiumView.xib */; };
+		7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */; };
 		F36C7CA9C029C0FB3B9C3E12 /* Pods_baseballApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D440DD687E5153149898B6E /* Pods_baseballApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		76619AC12643AE83004D31C6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		76619B052644EE37004D31C6 /* StadiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadiumView.swift; sourceTree = "<group>"; };
 		76619B072644EE42004D31C6 /* StadiumView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StadiumView.xib; sourceTree = "<group>"; };
+		7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayStoryboard.storyboard; sourceTree = "<group>"; };
 		9D440DD687E5153149898B6E /* Pods_baseballApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE39EEDB49C05D5593DD150 /* Pods-baseballAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballAppTests.debug.xcconfig"; path = "Target Support Files/Pods-baseballAppTests/Pods-baseballAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2922330279C4AAA4D13C84B /* Pods-baseballApp-baseballAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballApp-baseballAppUITests.release.xcconfig"; path = "Target Support Files/Pods-baseballApp-baseballAppUITests/Pods-baseballApp-baseballAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		7650A1D82640F7BC006C1E5F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				7691F9A326491ABB00C56E11 /* Storyboard */,
 				7650A1DB26411736006C1E5F /* View */,
 				7650A1DA2641172B006C1E5F /* ViewController */,
 			);
@@ -268,6 +271,14 @@
 				76619AB1264385BB004D31C6 /* API.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		7691F9A326491ABB00C56E11 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		8C376B28B5FECA76AEC3D38C /* Frameworks */ = {
@@ -401,6 +412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */,
 				7650A1B42640E3A9006C1E5F /* LaunchScreen.storyboard in Resources */,
 				7650A1B12640E3A9006C1E5F /* Assets.xcassets in Resources */,
 				76619B082644EE42004D31C6 /* StadiumView.xib in Resources */,
