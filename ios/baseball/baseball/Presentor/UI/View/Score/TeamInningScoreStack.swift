@@ -7,21 +7,33 @@
 
 import UIKit
 
-@IBDesignable
 final class TeamInningScoreStack: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addInningViewLabels()
+        configureUI()
     }
-    
+
     required init(coder: NSCoder) {
         super.init(coder: coder)
-        addInningViewLabels()
+        configureUI()
     }
     
-    private func addInningViewLabels() {
-        let max = 12
-        for _ in 0..<max {
+    private func configureUI() {
+        alignment = .center
+    }
+    
+    func addInningViewLabels(inningsScore: [Int]) {
+        inningsScore.forEach { score in
+            let label = InningInfoLabel()
+            label.text = "\(score)"
+            addArrangedSubview(label)
+        }
+        
+        emptyInningViewLables(emptyCount: 11-inningsScore.count)
+    }
+    
+    private func emptyInningViewLables(emptyCount: Int) {
+        for _ in 0..<emptyCount {
             let label = InningInfoLabel()
             addArrangedSubview(label)
         }
