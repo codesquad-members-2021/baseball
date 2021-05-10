@@ -13,16 +13,12 @@ import PlayerListPopup from "./PlayerListPopup";
 import TeamScore from "./TeamScore";
 
 const Game = () => {
-  const { myTeam, counterTeam, homeTeam, currGameState } = useContext(GlobalContext);
-  const expeditionTeam = homeTeam.id !== myTeam.id ? myTeam : counterTeam;
+  const { myTeam, counterTeam, homeTeam, expeditionTeam, currPitcher, currHitter, currInning, currTeamLog } = useContext(GlobalContext);
   // useEffect(() => {
   //   fetch("/api/")
   //     .then((res) => res.json())
   //     .then((res) => console.log(res));
   // }, [homeTeam]);
-
-  // const homeTeam = counterTeam.home ? counterTeam : myTeam; // counterTeam이 홈팀이야?
-  // const expeditionTeam = !counterTeam.home ? counterTeam : myTeam; // counterTeam이 원정팀이야?
 
   return (
     <>
@@ -33,18 +29,17 @@ const Game = () => {
             {/* style-component*/}
             <Title />
             <ScoreBox>
-              <TeamScore isHome={false} team={expeditionTeam} score={currGameState.expeditionTeam.totalScore} />
+              <TeamScore isHome={false} team={expeditionTeam} />
               <span>VS</span>
-              <TeamScore isHome team={homeTeam} score={currGameState.homeTeam.totalScore} />
+              <TeamScore isHome team={homeTeam} />
             </ScoreBox>
           </MainScoreBoard>
           <BaseballField>
             {/* style-component*/}
             <SBO />
-            <Diamond>
-              <PitchButton />
-            </Diamond>
-            <CurrentInningInfo inning={currGameState.inning} />
+            <Diamond />
+            {/* </Diamond> */}
+            <CurrentInningInfo inning={currInning} />
           </BaseballField>
         </GameProgress>
 
@@ -52,13 +47,12 @@ const Game = () => {
           {/* style-component*/}
           <CurrentPlayerContainer>
             {/* style-component*/}
-            <CurrentPlayer player={currGameState.pitcher} />
-            <CurrentPlayer player={currGameState.hitter} />
+            <CurrentPlayer player={currPitcher} />
+            <CurrentPlayer player={currHitter} />
           </CurrentPlayerContainer>
           <PlayerHistoryContainer>
             {/* style-component*/}
-            {currGameState.teamLog.playerLog.length &&
-              [...currGameState.teamLog.playerLog].map((playerHistory) => <PlayerHistory history={playerHistory} />)}
+            {currTeamLog.length && [...currTeamLog].map((playerLog) => <PlayerHistory history={playerLog} />)}
           </PlayerHistoryContainer>
         </PlayerProgress>
       </GameContainer>

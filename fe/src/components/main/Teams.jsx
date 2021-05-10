@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../../App";
 const mockData = {
   inning: {
-    out: 0,
+    out: 0, // 전체 아웃인듯?
     inningNumber: 1,
     role: "수비",
     cycle: "초",
@@ -71,33 +71,34 @@ const mockData = {
 };
 
 const Teams = ({ teamSet }) => {
-  // const [selectedTeamSet, setSelectedTeamSet] = useState(null);
-
-  const { setMyTeam, setCounterTeam, setHomeTeam, setCurrGameState, setCurrPlayer } = useContext(GlobalContext);
+  const { setMyTeam, setCounterTeam, setHomeTeam, setExpeditionTeam, setCurrHitter, setCurrPitcher, setCurrInning, setCurrTeamLog } = useContext(GlobalContext);
   const setTeams = (teamName, teamId, idx) => {
     const counterTeamId = idx ? teamSet[0].id : teamSet[1].id;
     const counterTeamName = teamSet[idx ? 0 : 1].name;
     const isHome = idx === 1;
-    const homeTeam = isHome ? { id: teamId, name: teamName } : { id: counterTeamId, name: counterTeamName };
+    // const homeTeam = isHome ? { id: teamId, name: teamName } : { id: counterTeamId, name: counterTeamName };
     setMyTeam({ id: teamId, name: teamName });
     setCounterTeam({ id: counterTeamId, name: counterTeamName });
-    setHomeTeam(homeTeam);
-    setCurrGameState(mockData);
-    setCurrPlayer({
+    setHomeTeam(mockData.homeTeam);
+    setExpeditionTeam(mockData.expeditionTeam);
+    // setCurrGameState([...mockData]);
+    setCurrPitcher({
+      role: mockData.pitcher.role,
+      name: mockData.pitcher.name,
+      pitchCount: mockData.pitcher.pitchCount,
+    });
+    setCurrHitter({
+      role: mockData.hitter.role,
       playerBattingOrder: mockData.nextHitter.playerBattingOrder,
       teamId: mockData.nextHitter.teamId,
-      playerName: mockData.nextHitter.playerName,
-      historyList: [
-        {
-          id: 1,
-          actionName: null,
-          strike: 0,
-          ball: 0,
-          out: 0,
-        },
-      ],
+      historyList: [...mockData.nextHitter.historyList],
+      name: mockData.hitter.name,
+      plateAppearances: mockData.hitter.plateAppearances,
+      hits: mockData.hitter.hits,
     });
-    // console.log("teamId, name", teamId, teamName, "counterTeamId, name", counterTeamId, counterTeamName);
+    setCurrInning(mockData.inning);
+    setCurrTeamLog([...mockData.teamLog.playerLog]);
+
     // 데이터베이스에 현재팀, 반대팀 정보 저장하는 로직 짜기
     // useEffect(() => {
     // fetch("http://ec2-15-165-82-124.ap-northeast-2.compute.amazonaws.com:8080/game", {
@@ -115,13 +116,6 @@ const Teams = ({ teamSet }) => {
     //   .then((res) => res.json())
     //   .then((res) => console.log(res));
     // }, []);
-
-    // const teams = {
-    //   myTeam: { id: teamId, name: teamName, home: isHome },
-    //   counterTeam: { id: counterTeamId, name: counterTeamName, home: !isHome },
-    // };
-    // setSelectedTeamSet(teams);
-    // localStorage.setItem("Teams", JSON.stringify(teams));
   };
 
   return (
@@ -136,22 +130,3 @@ const Teams = ({ teamSet }) => {
 };
 
 export default Teams;
-
-// [
-//   [
-//     { id: 2, name: "Twins" },
-//     { id: 5, name: "Tigers" },
-//   ],
-//   [
-//     { id: 0, name: "Bears" },
-//     { id: 7, name: "Dinos" },
-//   ],
-//   [
-//     { id: 1, name: "Landers" },
-//     { id: 3, name: "Giants" },
-//   ],
-//   [
-//     { id: 4, name: "Eagles" },
-//     { id: 6, name: "Lions" },
-//   ],
-// ];
