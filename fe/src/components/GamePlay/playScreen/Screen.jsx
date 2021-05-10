@@ -1,10 +1,12 @@
 import styled from 'styled-components'
-
+import BallCount from 'components/GamePlay/playScreen/BallCount'
+import Span from 'components/common/Span'
 const Screen = () => {
   return (
     <StyledScreen>
       <ScreenField src='field.svg' alt='field' />
       <ScreenRound>2회 초 수비</ScreenRound>
+      <BallCount />
     </StyledScreen>
   )
 }
@@ -27,11 +29,8 @@ const ScreenField = styled.img`
   width: 34%;
   transform: rotate(45deg);
 `
-const ScreenRound = styled.span`
+const ScreenRound = styled(Span)`
   position: absolute;
   right: 2%;
-  top: 2%;
-  color: ${props => props.theme.colors.white};
-  font-size: ${props => `${props.theme.fontSizes.LARGE}rem`};
-  font-weight: ${props => props.theme.weights.LARGE};
+  top: 4%;
 `
