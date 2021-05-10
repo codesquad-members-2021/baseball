@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -96,14 +97,10 @@ class GameRepositoryTest {
         game.pitch(PlayType.STRIKE);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(0);
         assertThat(game.getCurrentOutCount()).isEqualTo(1);
-        for (int i = 0; i < 6; i++) {
-            game.pitch(PlayType.STRIKE);
-        }
+        IntStream.range(0, 2).forEach(value -> threeStrike(game));
         assertThat(game.currentInningNumber()).isEqualTo(1);
         assertThat(game.isTop()).isEqualTo(false);
-        for (int i = 0; i < 9; i++) {
-            game.pitch(PlayType.STRIKE);
-        }
+        threeOut(game);
         assertThat(game.currentInningNumber()).isEqualTo(2);
         assertThat(game.isTop()).isEqualTo(true);
     }
@@ -154,7 +151,7 @@ class GameRepositoryTest {
         assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
         assertThat(game.awayTeamScore()).isEqualTo(2);
         //초에서 말로 교대 후, 4볼을 4번 맞으면 홈팀의 점수가 올라가야 합니다
-        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        threeOut(game);
         IntStream.range(0, 16).forEach(value -> game.pitch(PlayType.BALL));
         assertThat(game.homeTeamScore()).isEqualTo(1);
     }
@@ -188,11 +185,11 @@ class GameRepositoryTest {
         assertThat(backHomeResult.get(0)).isEqualTo(firstHitter);
         assertThat(game.awayTeamScore()).isEqualTo(1);
         //공수교대 후 5안타하면 홈팀 2점
-        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        threeOut(game);
         IntStream.range(0, 5).forEach(value -> game.pitch(PlayType.HITS));
         assertThat(game.homeTeamScore()).isEqualTo(2);
         //공수교대 후 5안타하면 원정팀 3점, 홈팀 여전히 2점
-        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
+        threeOut(game);
         IntStream.range(0, 5).forEach(value -> game.pitch(PlayType.HITS));
         assertThat(game.awayTeamScore()).isEqualTo(3);
         assertThat(game.homeTeamScore()).isEqualTo(2);
@@ -229,13 +226,63 @@ class GameRepositoryTest {
         assertThat(pitchResult.get(1)).isEqualTo(thirdHitter);
         assertThat(pitchResult.get(2)).isEqualTo(fourthHitter);
         //일단 공수교대한다음, 1,2,3루를 다 채운다
-        IntStream.range(0, 9).forEach(value -> game.pitch(PlayType.STRIKE));
-        IntStream.range(0,3).forEach(value -> game.pitch(PlayType.HITS));
+        threeOut(game);
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.HITS));
         //만루홈런치면 홈팀은 4점을 얻어야 함. 백홈은 총 4명이어야 함
         pitchResult = game.pitch(PlayType.HOMERUN);
         assertThat(game.awayTeamScore()).isEqualTo(4);
         assertThat(game.homeTeamScore()).isEqualTo(4);
         assertThat(pitchResult.size()).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("이닝 별 점수를 테스트할 수 있어야 합니다")
+    void testScoreOfInnings() {
+        int[] expectedHomeTeamScores = { 1, 0, 0, 0, 1 };
+        int[] expectedAwayTeamScores = { 1, 0, 4, 0, 1 };
+        //1이닝 초
+        Game game = createGame(GAME_TITLE);
+        game.pitch(PlayType.HOMERUN);
+        //3아웃
+        threeOut(game);
+        //1이닝 말
+        game.pitch(PlayType.HOMERUN);
+        //3아웃 3번
+        IntStream.range(0, 3).forEach(value -> threeOut(game));
+        //3이닝 초
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.HITS));
+        game.pitch(PlayType.HOMERUN);
+        assertThat(game.currentInningNumber()).isEqualTo(3);
+        assertThat(game.isTop()).isTrue();
+        //3아웃 4번
+        IntStream.range(0, 4).forEach(value -> threeOut(game));
+        //5이닝 초
+        game.pitch(PlayType.HOMERUN);
+        assertThat(game.currentInningNumber()).isEqualTo(5);
+        assertThat(game.isTop()).isTrue();
+        //3아웃
+        threeOut(game);
+        //5이닝 말
+        game.pitch(PlayType.HOMERUN);
+        assertThat(game.currentInningNumber()).isEqualTo(5);
+        assertThat(game.isTop()).isFalse();
+        //이닝 별 점수결과 확인하기
+        List<Map<TeamType, Integer>> scoreBoard = game.showScoreBoard();
+        IntStream.range(0, scoreBoard.size()).forEach(i -> {
+            Map<TeamType, Integer> scoreMap = scoreBoard.get(i);
+            int expectedHomeTeamScore = expectedHomeTeamScores[i];
+            int expectedAwayTeamScore = expectedAwayTeamScores[i];
+            assertThat(scoreMap.get(TeamType.HOME)).isEqualTo(expectedHomeTeamScore);
+            assertThat(scoreMap.get(TeamType.AWAY)).isEqualTo(expectedAwayTeamScore);
+        });
+    }
+
+    private void threeOut(Game game) {
+        IntStream.range(0, 3).forEach(value -> threeStrike(game));
+    }
+
+    private void threeStrike(Game game) {
+        IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.STRIKE));
     }
 
     private Game createGame(String gameTitle) {

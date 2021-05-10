@@ -5,11 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Game {
 
@@ -76,6 +74,15 @@ public class Game {
             teams.forEach(TeamParticipatingInGame::initializeTeam);
             isInitialized = true;
         }
+    }
+
+    public List<Map<TeamType, Integer>> showScoreBoard() {
+        return innings.stream().map(inning -> {
+            Map<TeamType, Integer> scoreMap = new HashMap<>();
+            scoreMap.put(TeamType.HOME, inning.getHomeTeamScore());
+            scoreMap.put(TeamType.AWAY, inning.getAwayTeamScore());
+            return scoreMap;
+        }).collect(Collectors.toList());
     }
 
     public List<Integer> pitch(PlayType playType) {
