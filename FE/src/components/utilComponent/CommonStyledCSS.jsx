@@ -6,6 +6,14 @@ const cssFlexAlignCenter = css`
     align-items: center;
 `;
 
+const cssFullAbsolutePosition = css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+`;
+
 const cssTranslate = css`
     background-color: transparent;
     background-repeat: no-repeat;
@@ -34,4 +42,13 @@ const cssScrollbar = css`
     }
 `;
 
-export { cssFlexAlignCenter, cssTranslate, cssScrollbar };
+// cssOpacityBackground, 전체화면을 약간 투명한 검은색으로 변경
+const cssOpacityBackground = css`
+    ${cssFullAbsolutePosition};
+    ${cssFlexAlignCenter};
+    height: inherit;
+    background-color: #010101e8;
+`;
+
+
+export { cssFlexAlignCenter, cssFullAbsolutePosition, cssTranslate, cssScrollbar, cssOpacityBackground };
