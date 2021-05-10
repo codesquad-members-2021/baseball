@@ -135,8 +135,8 @@ const GamePlayground = {
 
   GameDisplay: styled.div`
     position: absolute;
-    bottom: 0;
-    left: 45%;
+    bottom: -3%;
+    left: 9%;
   `,
 
   BallCountBoard: {
