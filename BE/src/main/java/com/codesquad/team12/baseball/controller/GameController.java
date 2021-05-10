@@ -1,10 +1,16 @@
 package com.codesquad.team12.baseball.controller;
 
+import com.codesquad.team12.baseball.service.TeamService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/games/{gameId}")
 public class GameController {
+    private final TeamService teamService;
+
+    public GameController(TeamService teamService) {
+        this.teamService = teamService;
+    }
 
     @GetMapping
     public void getGame(@PathVariable Long gameId) {

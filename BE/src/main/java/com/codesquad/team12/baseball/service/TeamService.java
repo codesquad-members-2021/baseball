@@ -3,7 +3,9 @@ package com.codesquad.team12.baseball.service;
 import com.codesquad.team12.baseball.model.Player;
 import com.codesquad.team12.baseball.model.Team;
 import com.codesquad.team12.baseball.repository.TeamRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TeamService {
     private final TeamRepository teamRepository;
 

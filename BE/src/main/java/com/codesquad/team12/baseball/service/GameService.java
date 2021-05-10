@@ -1,10 +1,14 @@
 package com.codesquad.team12.baseball.service;
 
+import com.codesquad.team12.baseball.dto.GameDto;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.repository.GameRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Service
 public class GameService {
     private final GameRepository gameRepository;
 
@@ -17,8 +21,12 @@ public class GameService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public List<Game> findAll() {
-        return gameRepository.findAll();
+    public List<GameDto> findAll() {
+        return gameRepository
+                .findAll()
+                .stream()
+                .map(Game::of)
+                .collect(Collectors.toList());
     }
 
 }
