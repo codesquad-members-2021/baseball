@@ -16,10 +16,10 @@ public class BaseballGame {
     private final Long id;
 
     @Embedded.Empty
-    private TeamInformationMap teamInformation;
+    private final TeamInformationMap teamInformation;
 
     @Embedded.Empty
-    private Inning inning;
+    private final Inning inning;
 
     private String homeUser;
     private Integer homeHistoryIndex;
@@ -28,7 +28,7 @@ public class BaseballGame {
     private Integer awayHistoryIndex;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
-    private List<BatterInningHistory> history;
+    private final List<BatterInningHistory> history;
 
     BaseballGame(Long id, TeamInformationMap teamInformation, Inning inning, Integer homeHistoryIndex, Integer awayHistoryIndex, List<BatterInningHistory> history) {
         this.id = id;
@@ -48,6 +48,26 @@ public class BaseballGame {
                 0,
                 new ArrayList<>()
         );
+    }
+
+    public void pitch(Pitch pitch) {
+        TeamEnum attackTeam = inning.getAttackTeam();
+        teamInformation.pitch(attackTeam.opposite());
+
+        if (pitch == Pitch.HIT) {
+            hit(attackTeam);
+            return;
+        }
+
+    }
+
+    private void hit(TeamEnum attack) {
+        inning.hit();
+        teamInformation.hit(attack);
+        if (inning.isScored()) {
+            teamInformation.scoreUp(attack, inning.getOrdinal());
+        }
+        teamInformation.setNextBatter(attack);
     }
 
     public Long getId() {

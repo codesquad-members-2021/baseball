@@ -34,4 +34,24 @@ public class TeamInformationMap {
         teamInformationMap.put(TeamEnum.AWAY, BaseballGameTeamInformation.newTeamInfo(away));
         return new TeamInformationMap(teamInformationMap);
     }
+
+    public void hit(TeamEnum attackTeam) {
+        BaseballGameTeamInformation attackTeamInformation = teamInformationMap.get(attackTeam);
+        attackTeamInformation.hit();
+    }
+
+    public void pitch(TeamEnum defenceTeam) {
+        BaseballGameTeamInformation defenceTeamInformation = teamInformationMap.get(defenceTeam);
+        defenceTeamInformation.pitch();
+    }
+
+    public void scoreUp(TeamEnum attackTeam, int currentInning) {
+        BaseballGameTeamInformation attackTeamInformation = teamInformationMap.get(attackTeam);
+        attackTeamInformation.scoreUp(currentInning);
+    }
+
+    public void setNextBatter(TeamEnum attackTeam) {
+        BaseballGameTeamInformation attackTeamInformation = teamInformationMap.get(attackTeam);
+        attackTeamInformation.setNextBatter();
+    }
 }
