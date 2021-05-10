@@ -5,13 +5,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team9.baseball.DTO.response.ApiResult;
+import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ApiResult runtimeExcpetion(Exception ex) {
+    @ExceptionHandler(BadStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResult badStatusException(Exception ex) {
         return ApiResult.failed(ex);
     }
 

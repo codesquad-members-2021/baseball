@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.domain.enums.ResourceOwner;
 import team9.baseball.domain.enums.Venue;
+import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 
 import java.util.HashMap;
@@ -44,13 +45,13 @@ public class User {
 
     public void checkUserJoining() {
         if (this.currentGameId == null) {
-            throw new RuntimeException(id + "사용자는 게임중이 아닙니다.");
+            throw new BadStatusException(id + "사용자는 게임중이 아닙니다.");
         }
     }
 
     public void checkUserNotJoining() {
         if (this.currentGameId != null) {
-            throw new RuntimeException(id + "사용자는 이미 게임중입니다.");
+            throw new BadStatusException(id + "사용자는 이미 게임중입니다.");
         }
     }
 }

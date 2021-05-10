@@ -11,6 +11,7 @@ import team9.baseball.domain.aggregate.user.User;
 import team9.baseball.domain.enums.GameStatus;
 import team9.baseball.domain.enums.PitchResult;
 import team9.baseball.domain.enums.Venue;
+import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 import team9.baseball.repository.GameRepository;
 import team9.baseball.repository.TeamRepository;
@@ -43,7 +44,7 @@ public class GameService {
 
         //현재 내가 공격팀이면 공을 던질 수 없다.
         if (game.getCurrentHalves() == user.getCurrentGameVenue().getHalves()) {
-            throw new RuntimeException(userId + "번 사용자는 현재 공격팀입니다.");
+            throw new BadStatusException(userId + "번 사용자는 현재 공격팀입니다.");
         }
 
         switch (pitchResult) {
@@ -96,7 +97,7 @@ public class GameService {
         user.checkUserNotJoining();
 
         if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue)) {
-            throw new RuntimeException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
+            throw new BadStatusException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
         }
 
         Game game = getGame(gameId);
