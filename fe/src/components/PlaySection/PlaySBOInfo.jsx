@@ -1,26 +1,60 @@
 import styled from "styled-components";
 
+const setActiveState = count => {
+  const initActiveState = Array(3).fill(false);
+  for (let i = 0; i < count; i++) initActiveState[i] = true;
+  return initActiveState;
+};
+
+const SBOProperties = {
+  strike: {
+    color: "yellow",
+    title: "S",
+  },
+  ball: {
+    color: "green",
+    title: "B",
+  },
+  out: {
+    color: "red",
+    title: "O",
+  },
+};
+
 const PlaySBOInfo = ({ SBOState }) => {
-  //ball type SBO 상태에 맞게 랜더링 하도록 수정 예정
+  const { strike, ball, out } = SBOState;
+
   return (
     <SBOInfoLayout>
       <Row>
-        <BallType>S</BallType>
-        <Light active={true} bgColor="yellow"></Light>
-        <Light active={true} bgColor="yellow"></Light>
-        <Light active={false} bgColor="yellow"></Light>
+        <BallType>{SBOProperties.strike.title}</BallType>
+        {setActiveState(strike).map((x, idx) => (
+          <Light
+            key={`strike-${idx}`}
+            active={x}
+            bgColor={SBOProperties.strike.color}
+          />
+        ))}
       </Row>
       <Row>
-        <BallType>B</BallType>
-        <Light active={true} bgColor="green"></Light>
-        <Light active={true} bgColor="green"></Light>
-        <Light active={true} bgColor="green"></Light>
+        <BallType>{SBOProperties.ball.title}</BallType>
+        {setActiveState(ball).map((x, idx) => (
+          <Light
+            key={`ball-${idx}`}
+            active={x}
+            bgColor={SBOProperties.ball.color}
+          />
+        ))}
       </Row>
       <Row>
-        <BallType>O</BallType>
-        <Light active={true} bgColor="red"></Light>
-        <Light active={true} bgColor="red"></Light>
-        <Light active={true} bgColor="red"></Light>
+        <BallType>{SBOProperties.out.title}</BallType>
+        {setActiveState(out).map((x, idx) => (
+          <Light
+            key={`ball-${idx}`}
+            active={x}
+            bgColor={SBOProperties.out.color}
+          />
+        ))}
       </Row>
     </SBOInfoLayout>
   );
