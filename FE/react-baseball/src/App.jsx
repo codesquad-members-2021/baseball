@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-
 import styled from 'styled-components';
-
 
 import './App.css';
 import PlayScreen from './routes/PlayScreen';
@@ -19,6 +17,7 @@ function App() {
 
   body{
     box-sizing:border-box;
+    background-color:black;
   }
   
   ol, ul {
@@ -26,13 +25,11 @@ function App() {
   }
 `;
 
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
         <Switch>
-
           <AppDiv>
             <Route path='/' exact>
               <StartScreen />
@@ -41,7 +38,6 @@ function App() {
               <PlayScreen />
             </Route>
           </AppDiv>
-
         </Switch>
       </BrowserRouter>
     </ThemeProvider>

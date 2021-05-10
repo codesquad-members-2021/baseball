@@ -32,15 +32,15 @@ const Player = styled.div`
   text-align: center;
 `;
 const PlayerName = styled.div`
-  color: ${({ theme }) => theme.colors.GREY};
+  color: ${({ theme }) => theme.colors.grey};
   font-size: ${({ theme }) => theme.fontSizes.XXS};
 `;
 const PitcherNum = styled.div`
-  color: ${({ theme }) => theme.colors.YELLOW};
+  color: ${({ theme }) => theme.colors.yellow};
   font-size: ${({ theme }) => theme.fontSizes.XS};
 `;
 const PlayerRatio = styled.div`
-  color: ${({ theme }) => theme.colors.YELLOW};
+  color: ${({ theme }) => theme.colors.yellow};
   font-size: ${({ theme }) => theme.fontSizes.XS};
 `;
 const PlayerTag = styled.div`

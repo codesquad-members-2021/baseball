@@ -9,25 +9,19 @@ const theme = {
     XXL: '50px',
   },
   colors: {
-    GREEN: '#4f9202',
-    ORANGE: '#eaa719',
-    YEORANGE: '#eabd57',
-    GREY: '#dbd6c3',
-    YELLOW: '#dec170',
+    white: '#FFF',
+    green: '#4f9202',
+    yellow: '#dec170',
+    yellowOrange: '#eabd57',
+    orange: '#eaa719',
+    gray: '#dbd6c3',
+    darkGray: '#333',
+    lightGray: '#bdbdbd',
   },
 
   screenType: {
     START: 'start',
     PLAY: 'play',
-  },
-
-  colors: {
-    darkGray: '#333',
-    gray: '#828282',
-    lightGray: '#bdbdbd',
-    lightGrayBG: '#F5F5F7',
-    white: '#FFF',
-    green: '#73b356',
   },
 };
 

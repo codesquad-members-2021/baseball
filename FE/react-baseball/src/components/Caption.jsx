@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { useContext } from 'react';
 import { PlayableContext } from '../routes/StartScreen';
 
@@ -7,7 +8,11 @@ const Caption = (props) => {
   if (playable.home_team_status === false) {
     message = '이미 선택된 팀입니다. 다른 팀을 선택해주세요!';
   }
-  return <span>{message}</span>;
+  return <Span>{message}</Span>;
 };
+
+const Span = styled.span`
+  color: ${({ theme }) => theme.colors.white};
+`;
 
 export default Caption;
