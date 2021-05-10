@@ -22,6 +22,14 @@ const Page = () => {
     connectSocket();
   }, []);
 
+  useEffect(() => {
+    const getTeams = async () => {
+      const teams = await API.get.teams();
+      console.log(teams);
+    }
+    getTeams();
+  }, []);
+
   return (
     <Router>
       <PageContext.Provider value={{ socket }}>
