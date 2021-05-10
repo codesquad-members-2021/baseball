@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 protocol MatchUseCasePort {
     func get(path: APIPath, id: String?) -> Observable<[Match]>
