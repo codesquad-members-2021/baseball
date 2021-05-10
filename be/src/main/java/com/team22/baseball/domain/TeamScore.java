@@ -1,5 +1,6 @@
 package com.team22.baseball.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.Table;
@@ -8,8 +9,10 @@ import org.springframework.data.relational.core.mapping.Table;
 public class TeamScore {
 
     @Id
+    @JsonIgnore
     private final Long id;
 
+    @JsonIgnore
     private final Long teamId;
 
     private final int round;

@@ -1,8 +1,15 @@
 package com.team22.baseball.service;
 
 import com.team22.baseball.domain.Player;
+import com.team22.baseball.domain.Team;
+import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
-import com.team22.baseball.dto.response.*;
+import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
+import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamTypeDto;
 import com.team22.baseball.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +39,9 @@ public class GameService {
         return gameRepository.findTeamInfoByTitle(title).orElseThrow(Exception::new);
     }
 
-    public List<PlayerInfoDto> findPlayerListByTeamTitle(String title){
+    public List<PlayerInfoDto> findPlayerListByTeamTitle(String title) {
         return gameRepository.findPlayerListByTeamTitle(title);
     }
-
 
 
     public List<TeamListDto> getInfoSelectedTeam(String title) throws Exception {
@@ -63,11 +69,11 @@ public class GameService {
         gameRepository.updateSelectedTeamByTitle(title);
     }
 
-    public void updatePlayerInfo(String name,  int plate_appearance, int hits, int outs){
+    public void updatePlayerInfo(String name, int plate_appearance, int hits, int outs) {
         gameRepository.updatePlayerInfo(name, plate_appearance, hits, outs);
     }
 
-    public void insertTeamScore(String teamName,  int round, int score){
+    public void insertTeamScore(String teamName, int round, int score) {
         gameRepository.insertTeamScore(teamName, round, score);
     }
 
@@ -79,20 +85,42 @@ public class GameService {
 
         Player findPlayer = findPlayerByName(req.getPlayerName());
 
-        int plateAppearance = findPlayer.getPlateAppearance()+1; //m 타석은 무조건 1이 맞을까 ?
+        int plateAppearance = findPlayer.getPlateAppearance() + 1; //m 타석은 무조건 1이 맞을까 ?
         int hits;
         int outs;
 
-        if(req.isHit()){
-            hits = findPlayer.getHits()+1;
+        if (req.isHit()) {
+            hits = findPlayer.getHits() + 1;
             outs = findPlayer.getOuts();
-        }else{
-            outs = findPlayer.getOuts()+1;
+        } else {
+            outs = findPlayer.getOuts() + 1;
             hits = findPlayer.getHits();
         }
 
-        return new int[]{plateAppearance,hits,outs};
+        return new int[]{plateAppearance, hits, outs};
 
     }
+
+    public List<Team> findTeamById(Long id) {
+        return gameRepository.findTeamById(id);
+    }
+
+    public List<TeamScore> findTeamScoreByName(String name) {
+        return gameRepository.findTeamScoreByName(name);
+    }
+
+    public List<detailScoreDto> getDetailScoreOfEachTeam(Long gameID) {
+
+        List<Team> teams = findTeamById(gameID);
+
+        List<detailScoreDto> detailScoreDtos = new ArrayList<>();
+
+        for (Team team : teams) {
+            detailScoreDtos.add(new detailScoreDto(team.getName(), findTeamScoreByName(team.getName())));
+        }
+
+        return detailScoreDtos;
+    }
+
 
 }

@@ -3,10 +3,11 @@ package com.team22.baseball.repository;
 import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
-import com.team22.baseball.dto.response.GameDto;
-import com.team22.baseball.dto.response.PlayerInfoDto;
-import com.team22.baseball.dto.response.TeamInfoDto;
-import com.team22.baseball.dto.response.TeamTypeDto;
+import com.team22.baseball.domain.TeamScore;
+import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamTypeDto;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,7 +27,7 @@ public interface GameRepository extends CrudRepository<Game, Long> {
 
     @Query("SELECT home_group.id AS game_id, home_group.in_progress as in_progress ,home_group.home as home, away_group.away as away\n" +
             "FROM\n" +
-            "(SELECT GAME.id AS id, GAME.in_progress AS in_progress,  TEAM.name AS home, TEAM.selected as selected\n" +
+            "(SELECT GAME.id AS id, GAME.in_progress AS in_progress, TEAM.name AS home, TEAM.selected as selected\n" +
             "FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id\n" +
             "WHERE TEAM.is_home = true) as home_group\n" +
             "INNER JOIN\n" +
@@ -51,7 +52,6 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "WHERE T.name = :title;")
     List<PlayerInfoDto> findPlayerListByTeamTitle(@Param("title") String title);
 
-
     @Modifying
     @Query("UPDATE TEAM SET TEAM.selected=true WHERE TEAM.name = :teamTitle;")
     void updateSelectedTeamByTitle(@Param("teamTitle") String teamTitle);
@@ -67,6 +67,16 @@ public interface GameRepository extends CrudRepository<Game, Long> {
 
     @Query("SELECT * FROM PLAYER AS P WHERE P.name = :name;")
     Optional<Player> findPlayerByName(@Param("name") String name);
+
+    @Query("SELECT * FROM TEAM\n" +
+            "WHERE TEAM.game_id = (SELECT GAME.id FROM GAME WHERE GAME.id = :id);")
+    List<Team> findTeamById(@Param("id") Long id);
+
+    @Query("SELECT *\n" +
+            "FROM TEAM_SCORE\n" +
+            "WHERE TEAM_SCORE.team_id = (SELECT TEAM.id FROM TEAM WHERE TEAM.name = :name);")
+    List<TeamScore> findTeamScoreByName(@Param("name") String name);
+
 
 }
 

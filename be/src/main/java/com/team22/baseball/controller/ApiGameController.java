@@ -1,8 +1,9 @@
 package com.team22.baseball.controller;
 
 import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
-import com.team22.baseball.dto.response.GameDto;
-import com.team22.baseball.dto.response.TeamListDto;
+import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
+import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,13 @@ public class ApiGameController {
 
         gameService.updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);
         gameService.insertTeamScore(req.getTeamName(), req.getRound(), req.getTeamScore());
+    }
+
+    @GetMapping("/detailScore/{gameID}")
+    @ResponseStatus(HttpStatus.OK)
+    private List<detailScoreDto> detailScore(@PathVariable Long gameID) {
+
+        return gameService.getDetailScoreOfEachTeam(gameID);
     }
 
 }
