@@ -14,6 +14,15 @@ public class Pitcher extends Player {
     @Override
     public void play(PitchResult pitchResult) {
         // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
+        if (pitchResult == PitchResult.STRIKE) {
+            numberOfPitching++;
+            innings++;
+        }
+        if (pitchResult == PitchResult.BALL) {
+            numberOfPitching++;
+            baseOnBalls++;
+            innings++;
+        }
     }
 
     public Integer getNumberOfPitching() {

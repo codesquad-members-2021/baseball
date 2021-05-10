@@ -46,6 +46,8 @@ public class Match {
         PitchResult pitchResult = PitchResult.of(pitch);
         Pitcher pitcher = teams.getPitcher();
         Batter batter = teams.getBatter();
+        pitcher.play(pitchResult);
+        batter.play(pitchResult);
         matchInfo.update(pitchResult);
     }
 }
