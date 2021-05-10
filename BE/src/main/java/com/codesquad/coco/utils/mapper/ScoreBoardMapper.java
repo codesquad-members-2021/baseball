@@ -9,10 +9,10 @@ import java.sql.SQLException;
 public class ScoreBoardMapper implements RowMapper<ScoreBoard> {
     @Override
     public ScoreBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new ScoreBoard(
-                rs.getLong("id"),
-                rs.getLong("game"),
-                rs.getString("team")
-        );
+        return new ScoreBoard.Builder()
+                .id(rs.getLong("id"))
+                .game(rs.getLong("game"))
+                .team(rs.getString("team"))
+                .build();
     }
 }

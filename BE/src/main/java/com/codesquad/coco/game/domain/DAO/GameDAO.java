@@ -28,8 +28,15 @@ public class GameDAO {
 
     public Long makeGame(Game game) {
         Long gameId = saveGame(game);
-        ScoreBoard away = new ScoreBoard(gameId, game.awayTeamName());
-        ScoreBoard home = new ScoreBoard(gameId, game.homeTeamName());
+        ScoreBoard away = new ScoreBoard.Builder()
+                .game(gameId)
+                .team(game.awayTeamName())
+                .build();
+        ScoreBoard home = new ScoreBoard.Builder()
+                .game(gameId)
+                .team(game.homeTeamName())
+                .build();
+
         saveScoreBoard(game, away);
         saveScoreBoard(game, home);
         return gameId;
