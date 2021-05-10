@@ -34,7 +34,10 @@ public class JwtUtil {
                 .setHeaderParam("typ", "JWT")
                 .signWith(signatureAlgorithm, signingKey);
 
-        builder.setClaims(privateClaims);
+        for (Map.Entry<String, Object> claim : privateClaims.entrySet()) {
+            builder.claim(claim.getKey(), claim.getValue());
+        }
+
 
         long nowMillis = System.currentTimeMillis();
         builder.setExpiration(new Date(nowMillis + ttlMillis));
