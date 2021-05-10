@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Span from 'components/common/Span';
 
 const VsSpan = ({ children, ...rest }) => {
   return <StyledSpan {...rest}>{children}</StyledSpan>;
@@ -6,8 +7,6 @@ const VsSpan = ({ children, ...rest }) => {
 
 export default VsSpan;
 
-const StyledSpan = styled.span`
-  font-size: ${({ theme }) => `${theme.fontSizes.BASE}rem`};
-  font-weight: ${({ theme }) => `${theme.weights.BASE}`};
+const StyledSpan = styled(Span)`
   color: ${({ theme }) => theme.colors.lightGray};
 `;
