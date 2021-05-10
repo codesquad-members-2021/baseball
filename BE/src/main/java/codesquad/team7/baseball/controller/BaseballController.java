@@ -87,4 +87,10 @@ public class BaseballController {
         return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
     }
 
+    @GetMapping("/3/pitch/out")
+    public BaseballGameView out() {
+        baseballGame.pitch(Pitch.OUT);
+        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+    }
+
 }

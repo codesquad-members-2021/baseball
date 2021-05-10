@@ -72,10 +72,15 @@ public class Inning {
         ball = 0;
         out += 1;
         baseState.flushHome();
-        if (out >= 3) {
-            out = 0;
-            nextInning();
-        }
+    }
+
+    public boolean isThreeOut() {
+        return out >= 3;
+    }
+
+    public void threeOut() {
+        out = 0;
+        nextInning();
     }
 
     private void nextInning() {

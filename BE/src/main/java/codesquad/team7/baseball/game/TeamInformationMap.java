@@ -59,4 +59,14 @@ public class TeamInformationMap {
         BaseballGameTeamInformation attackTeamInformation = teamInformationMap.get(attackTeam);
         attackTeamInformation.setNextBatter();
     }
+
+    public void out(TeamEnum attackTeam) {
+        BaseballGameTeamInformation attackTeamInformation = teamInformationMap.get(attackTeam);
+        attackTeamInformation.out();
+    }
+
+    public void nextInning(TeamEnum team) {
+        BaseballGameTeamInformation teamInformation = teamInformationMap.get(team);
+        teamInformation.nextInning();
+    }
 }

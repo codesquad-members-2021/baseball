@@ -64,6 +64,11 @@ public class BaseballGame {
             return;
         }
 
+        if (pitch == Pitch.OUT) {
+            out(attackTeam);
+            return;
+        }
+
     }
 
     private void hit(TeamEnum attackTeam) {
@@ -85,6 +90,16 @@ public class BaseballGame {
 
         if (inning.homeIn()) {
             teamInformation.scoreUp(attackTeam, inning.getOrdinal());
+        }
+    }
+
+    private void out(TeamEnum attackTeam) {
+        inning.out();
+        teamInformation.out(attackTeam);
+        teamInformation.setNextBatter(attackTeam);
+        if (inning.isThreeOut()) {
+            inning.threeOut();
+            teamInformation.nextInning(attackTeam.opposite());
         }
     }
 
