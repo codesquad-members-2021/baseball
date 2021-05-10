@@ -75,9 +75,9 @@ const Pitcher = styled.img.attrs(({ step }) => ({
 	src: `image/pitcher_${step}.png`,
 }))`
 	position: absolute;
-	top: 380px;
+	top: 376px;
 	left: 450px;
-	width: ${({ step }) => (step === "windup" ? "50px" : "60px")};
+	width: 60px;
 `;
 
 const baseLocation = [
@@ -93,10 +93,8 @@ const Runner = styled.img.attrs(({ base, isRunning }) => ({
 }))`
 	visibility: ${({ base, isRunning }) => (base % 4 === 0 && !isRunning ? "hidden" : "visible")};
 	transform: ${({ base, isRunning }) => ((base % 4 === 0 || base % 4 === 1) && isRunning ? "scaleX(-1);" : "")};
-
 	position: absolute;
 	width: 80px;
-
 	transition: top 590ms, left 590ms;
 `;
 const Batter = styled.img`

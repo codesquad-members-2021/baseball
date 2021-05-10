@@ -24,7 +24,7 @@ const TeamSelect = () => {
 		<StyledTeamSelect>
 			<Alert>{alertMessage}</Alert>
 			<GameList isHover={isHover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-				{gameList ? gameList.map((el, i) => <Game {...el} key={i} index={i} />) : "loading..."}
+				{gameList ? gameList.map((el, i) => <Game {...el} key={i} />) : "loading..."}
 			</GameList>
 		</StyledTeamSelect>
 	);

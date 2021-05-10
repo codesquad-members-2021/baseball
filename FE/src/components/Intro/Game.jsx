@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import { MainContext } from "../Main";
 
-const Game = ({ index, homeTeam, awayTeam }) => {
+const Game = ({ id, homeTeam, awayTeam }) => {
+	const { setGameId } = useContext(MainContext);
 	return (
 		<StyledGame>
-			<Index>GAME {index + 1}</Index>
-			<Link to="/ingame">
+			<Index>GAME {id}</Index>
+			<Link to="/ingame" onClick={() => setGameId(() => id)}>
 				<Team>{awayTeam.name}</Team>
 			</Link>
 			<Versus>VS</Versus>
-			<Link to="/ingame">
+			<Link to="/ingame" onClick={() => setGameId(() => id)}>
 				<Team>{homeTeam.name}</Team>
 			</Link>
 		</StyledGame>
