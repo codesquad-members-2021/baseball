@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Game = ({ index, homeTeam, awayTeam }) => {
 	return (
-		<Wrapper>
+		<StyledGame>
 			<Index>GAME {index + 1}</Index>
 			<Link to="/ingame">
 				<Team>{awayTeam.name}</Team>
@@ -12,11 +12,11 @@ const Game = ({ index, homeTeam, awayTeam }) => {
 			<Link to="/ingame">
 				<Team>{homeTeam.name}</Team>
 			</Link>
-		</Wrapper>
+		</StyledGame>
 	);
 };
 
-const Wrapper = styled.li`
+const StyledGame = styled.li`
 	position: relative;
 	width: 720px;
 	height: 115px;
