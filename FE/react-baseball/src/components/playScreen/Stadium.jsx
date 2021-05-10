@@ -1,8 +1,26 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
+
 const Stadium = () => {
-  const boardHistory = useContext(BoardHistoryContext);
+  const { ballCnt, dispatch } = useContext(BoardHistoryContext);
+  // var boardHistoryLst = [boardHistory[S],boardHistory[B],boardHistory[O]]
+
+  const PlayBoardTemp = ({ type }) => {
+    if (type === 'S') {
+      var arr = new Array(ballCnt.S).fill(0);
+      var temp = arr.map((ele) => (ele = '🟡'));
+      return <>{temp}</>;
+    } else if (type === 'B') {
+      var arr = new Array(ballCnt.B).fill(0);
+      var temp = arr.map((ele) => (ele = '🟢'));
+      return <>{temp}</>;
+    } else if (type === 'O') {
+      var arr = new Array(ballCnt.O).fill(0);
+      var temp = arr.map((ele) => (ele = '🔴'));
+      return <>{temp}</>;
+    }
+  };
 
   return (
     <StadiumDiv>
@@ -10,15 +28,21 @@ const Stadium = () => {
         <PlayBoardDiv>
           <PlayBoard>
             <BoardTag>S</BoardTag>
-            <BoardNum>🟡 🟡 </BoardNum>
+            <BoardNum>
+              <PlayBoardTemp type='S' />
+            </BoardNum>
           </PlayBoard>
           <PlayBoard>
             <BoardTag>B</BoardTag>
-            <BoardNum>🟢</BoardNum>
+            <BoardNum>
+              <PlayBoardTemp type='B' />
+            </BoardNum>
           </PlayBoard>
           <PlayBoard>
             <BoardTag>O</BoardTag>
-            <BoardNum>🔴 🔴</BoardNum>
+            <BoardNum>
+              <PlayBoardTemp type='O' />
+            </BoardNum>
           </PlayBoard>
         </PlayBoardDiv>
         <PlayInningDiv>
@@ -28,18 +52,22 @@ const Stadium = () => {
       <PlayerDiv>
         <Player />
       </PlayerDiv>
-      <PlayButton onClick={() => playPitch()}>PITCH</PlayButton>
+      <PlayButton onClick={() => playPitch(dispatch, ballCnt)}>
+        PITCH
+      </PlayButton>
     </StadiumDiv>
   );
 };
 var tempBoardLst = ['S', 'B', 'O'];
 
-const playPitch = () => {
+const playPitch = (callback, ballCnt) => {
   var randomBoard =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
-  // console.log(randomBoard);
-  boardHistory[randomBoard] += 1;
-  // console.log('바꿨다', boardHistory);
+  callback({ type: randomBoard });
+
+  // boardHistory[randomBoard] += 1;
+
+  // boardHistory[] += 1;
 };
 
 const StadiumDiv = styled.div`
