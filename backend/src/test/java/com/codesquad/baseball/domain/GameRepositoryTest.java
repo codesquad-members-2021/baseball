@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest
 @Transactional
@@ -90,6 +91,8 @@ class GameRepositoryTest {
     @DisplayName("피치의 결과가 스트라이크인 상황을 테스트합니다")
     void testPitchIsStrike() {
         Game game = createGame(GAME_TITLE);
+        int nextHitter = game.nextHitter();
+        //스트라이크를 할 수 있어야 하며, 이에 대한 카운트가 증가해야 합니다
         game.pitch(PlayType.STRIKE);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(1);
         game.pitch(PlayType.STRIKE);
@@ -97,9 +100,14 @@ class GameRepositoryTest {
         game.pitch(PlayType.STRIKE);
         assertThat(game.getCurrentStrikeCount()).isEqualTo(0);
         assertThat(game.getCurrentOutCount()).isEqualTo(1);
+        //스트라이크 아웃 이후의 타자는 이전에 구한 nextHitter이어야 합니다
+        assertThat(game.currentHitter()).isEqualTo(nextHitter);
+
+        //2아웃을 또 하면 초에서 말로 넘어가야 합니다
         IntStream.range(0, 2).forEach(value -> threeStrike(game));
         assertThat(game.currentInningNumber()).isEqualTo(1);
         assertThat(game.isTop()).isEqualTo(false);
+        //3아웃을 하면 2이닝 초로 넘어가야 합니다
         threeOut(game);
         assertThat(game.currentInningNumber()).isEqualTo(2);
         assertThat(game.isTop()).isEqualTo(true);
@@ -133,12 +141,12 @@ class GameRepositoryTest {
         //볼넷 한번 더 맞으면 1번타자는 백홈, 2번타자는 3루, 3번타자는 2루, 4번타자는 1루에 있어야 함
         int fourthHitter = game.currentHitter();
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.BALL));
-        List<Integer> pitchResult = game.pitch(PlayType.BALL);
+        PitchResult pitchResult = game.pitch(PlayType.BALL);
         assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
-        assertThat(pitchResult.size()).isEqualTo(1);
-        assertThat(pitchResult.get(0)).isEqualTo(firstHitter);
+        assertThat(pitchResult.numberOfRunners()).isEqualTo(1);
+        assertThat(pitchResult.findRunnerByOrder(0)).isEqualTo(firstHitter);
         assertThat(game.awayTeamScore()).isEqualTo(1);
         //볼넷 한번 더 맞으면 2번타자는 백홈, 3번타자는 3루, 4번타자는 2루, 5번타자는 1루에 있어야 함
         int fifthHitter = game.currentHitter();
@@ -147,8 +155,8 @@ class GameRepositoryTest {
         assertThat(game.firstBaseRunner()).isEqualTo(fifthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(thirdHitter);
-        assertThat(pitchResult.size()).isEqualTo(1);
-        assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
+        assertThat(pitchResult.numberOfRunners()).isEqualTo(1);
+        assertThat(pitchResult.findRunnerByOrder(0)).isEqualTo(secondHitter);
         assertThat(game.awayTeamScore()).isEqualTo(2);
         //초에서 말로 교대 후, 4볼을 4번 맞으면 홈팀의 점수가 올라가야 합니다
         threeOut(game);
@@ -177,12 +185,12 @@ class GameRepositoryTest {
         assertThat(game.thirdBaseRunner()).isEqualTo(firstHitter);
         //4안타후엔 첫번째 타자가 백홈, 두번째가 3루 세번째는 2루 네번째가 1루, 원정팀 1점
         int fourthHitter = game.currentHitter();
-        List<Integer> backHomeResult = game.pitch(PlayType.HITS);
+        PitchResult backHomeResult = game.pitch(PlayType.HITS);
         assertThat(game.firstBaseRunner()).isEqualTo(fourthHitter);
         assertThat(game.secondBaseRunner()).isEqualTo(thirdHitter);
         assertThat(game.thirdBaseRunner()).isEqualTo(secondHitter);
-        assertThat(backHomeResult.size()).isEqualTo(1);
-        assertThat(backHomeResult.get(0)).isEqualTo(firstHitter);
+        assertThat(backHomeResult.numberOfRunners()).isEqualTo(1);
+        assertThat(backHomeResult.findRunnerByOrder(0)).isEqualTo(firstHitter);
         assertThat(game.awayTeamScore()).isEqualTo(1);
         //공수교대 후 5안타하면 홈팀 2점
         threeOut(game);
@@ -201,14 +209,14 @@ class GameRepositoryTest {
         Game game = createGame(GAME_TITLE);
         //1점홈런은 원정팀 1점, 홈팀 0점이어야 하고, 모든 주자는 돌아와야 함. 백홈한 주자는 한명이어야 하고 그건 홈런친 친구여야 함
         int firstHitter = game.currentHitter();
-        List<Integer> pitchResult = game.pitch(PlayType.HOMERUN);
+        PitchResult pitchResult = game.pitch(PlayType.HOMERUN);
         assertThat(game.hasFirstBaseRunner()).isFalse();
         assertThat(game.hasSecondBaseRunner()).isFalse();
         assertThat(game.hasThirdBaseRunner()).isFalse();
         assertThat(game.awayTeamScore()).isEqualTo(1);
         assertThat(game.homeTeamScore()).isEqualTo(0);
-        assertThat(pitchResult.size()).isEqualTo(1);
-        assertThat(pitchResult.get(0)).isEqualTo(firstHitter);
+        assertThat(pitchResult.numberOfRunners()).isEqualTo(1);
+        assertThat(pitchResult.findRunnerByOrder(0)).isEqualTo(firstHitter);
         //그 다음, 2루까지 채운다음 홈런치면 원정팀은 4점이어야 함. 백홈한건 홈런친애랑 1,2루에 있던 애들이어야 함
         int secondHitter = game.currentHitter();
         game.pitch(PlayType.HITS);
@@ -221,10 +229,10 @@ class GameRepositoryTest {
         assertThat(game.hasThirdBaseRunner()).isFalse();
         assertThat(game.awayTeamScore()).isEqualTo(4);
         assertThat(game.homeTeamScore()).isEqualTo(0);
-        assertThat(pitchResult.size()).isEqualTo(3);
-        assertThat(pitchResult.get(0)).isEqualTo(secondHitter);
-        assertThat(pitchResult.get(1)).isEqualTo(thirdHitter);
-        assertThat(pitchResult.get(2)).isEqualTo(fourthHitter);
+        assertThat(pitchResult.numberOfRunners()).isEqualTo(3);
+        assertThat(pitchResult.findRunnerByOrder(0)).isEqualTo(secondHitter);
+        assertThat(pitchResult.findRunnerByOrder(1)).isEqualTo(thirdHitter);
+        assertThat(pitchResult.findRunnerByOrder(2)).isEqualTo(fourthHitter);
         //일단 공수교대한다음, 1,2,3루를 다 채운다
         threeOut(game);
         IntStream.range(0, 3).forEach(value -> game.pitch(PlayType.HITS));
@@ -232,14 +240,14 @@ class GameRepositoryTest {
         pitchResult = game.pitch(PlayType.HOMERUN);
         assertThat(game.awayTeamScore()).isEqualTo(4);
         assertThat(game.homeTeamScore()).isEqualTo(4);
-        assertThat(pitchResult.size()).isEqualTo(4);
+        assertThat(pitchResult.numberOfRunners()).isEqualTo(4);
     }
 
     @Test
     @DisplayName("이닝 별 점수를 테스트할 수 있어야 합니다")
     void testScoreOfInnings() {
-        int[] expectedHomeTeamScores = { 1, 0, 0, 0, 1 };
-        int[] expectedAwayTeamScores = { 1, 0, 4, 0, 1 };
+        int[] expectedAwayTeamScores = {1, 0, 4, 0, 1};
+        int[] expectedHomeTeamScores = {1, 0, 0, 0, 1};
         //1이닝 초
         Game game = createGame(GAME_TITLE);
         game.pitch(PlayType.HOMERUN);
@@ -275,6 +283,54 @@ class GameRepositoryTest {
             assertThat(scoreMap.get(TeamType.HOME)).isEqualTo(expectedHomeTeamScore);
             assertThat(scoreMap.get(TeamType.AWAY)).isEqualTo(expectedAwayTeamScore);
         });
+    }
+
+    @Test
+    @DisplayName("이닝 별 경기내용이 기록되어야 합니다")
+    void testHistories() {
+        Game game = createGame(GAME_TITLE);
+        final int awayTeamPitcher = game.currentPitcher();
+        int awayTeamHitter1 = game.currentHitter();
+        //1회초의 스트라이크 정보가 기록되어야 합니다
+        game.pitch(PlayType.STRIKE);
+        List<History> histories = game.findHistoriesByInningNumber(0);
+        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
+
+        //1회초의 스트라이크 아웃 정보가 기록되어야 합니다
+        game.pitch(PlayType.STRIKE);
+        game.pitch(PlayType.STRIKE);
+        int awayTeamHitter2 = game.currentHitter();
+        game.pitch(PlayType.STRIKE);
+        histories = game.findHistoriesByInningNumber(0);
+        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(1), PlayType.STRIKE, 2, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(2), PlayType.STRIKE_OUT, 3, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(3), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter2);
+
+        //1회초의 볼 기록도 기록되어야 합니다
+        game.pitch(PlayType.BALL);
+        game.pitch(PlayType.BALL);
+        game.pitch(PlayType.BALL);
+        game.pitch(PlayType.BALL);
+        int awayTeamHitter3 = game.currentHitter();
+        game.pitch(PlayType.BALL);
+        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(1), PlayType.STRIKE, 2, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(2), PlayType.STRIKE_OUT, 3, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistory(histories.get(3), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter2);
+        testHistory(histories.get(4), PlayType.BALL, 1, 1, awayTeamPitcher, awayTeamHitter2);
+        testHistory(histories.get(5), PlayType.BALL, 1, 2, awayTeamPitcher, awayTeamHitter2);
+        testHistory(histories.get(6), PlayType.BALL, 1, 3, awayTeamPitcher, awayTeamHitter2);
+        testHistory(histories.get(7), PlayType.FOUR_BALL, 0, 0, awayTeamPitcher, awayTeamHitter2);
+        testHistory(histories.get(8), PlayType.BALL, 0, 1, awayTeamPitcher, awayTeamHitter3);
+    }
+
+    private void testHistory(History history, PlayType playType, int strike, int ball, int pitcher, int hitter) {
+        assertThat(history.getPlayType()).isEqualTo(playType);
+        assertThat(history.getStrikeCount()).isEqualTo(strike);
+        assertThat(history.getBallCount()).isEqualTo(ball);
+        assertThat(history.getPitcher()).isEqualTo(pitcher);
+        assertThat(history.getHitter()).isEqualTo(hitter);
     }
 
     private void threeOut(Game game) {

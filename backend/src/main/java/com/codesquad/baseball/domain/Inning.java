@@ -1,6 +1,10 @@
 package com.codesquad.baseball.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Inning {
 
@@ -12,12 +16,13 @@ public class Inning {
     private int inningNumber;
     private int homeTeamScore;
     private int awayTeamScore;
+    @MappedCollection(idColumn = "inning", keyColumn = "history_order")
+    private List<History> histories = new ArrayList<>();
 
     protected Inning() {
     }
 
     public Inning(int homeTeamScore, int awayTeamScore) {
-        this.inningNumber = inningNumber;
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
     }
@@ -33,6 +38,14 @@ public class Inning {
         } else if (teamType == TeamType.AWAY) {
             addAwayTeamScore();
         }
+    }
+
+    public void addHistory(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter) {
+        histories.add(new History(playType, strikeCount, ballCount, pitcher, hitter));
+    }
+
+    public List<History> showHistory() {
+        return histories;
     }
 
     private void addHomeTeamScore() {

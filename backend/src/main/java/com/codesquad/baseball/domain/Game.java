@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private static final int NO_PLAYER = -1;
+    public static final int NO_PLAYER = -1;
     private static final int MAXIMUM_STRIKE_COUNT = 3;
     private static final int MAXIMUM_OUT_COUNT = 3;
     private static final int MAXIMUM_BALL_COUNT = 4;
@@ -69,6 +69,11 @@ public class Game {
         return game;
     }
 
+    public List<History> findHistoriesByInningNumber(int inningNumber) {
+        Inning inning = innings.get(inningNumber);
+        return inning.showHistory();
+    }
+
     public void initializeGame() {
         if (!isInitialized) {
             teams.forEach(TeamParticipatingInGame::initializeTeam);
@@ -85,77 +90,93 @@ public class Game {
         }).collect(Collectors.toList());
     }
 
-    public List<Integer> pitch(PlayType playType) {
-        List<Integer> backHomeRunners = new ArrayList<>();
+    public PitchResult pitch(PlayType playType) {
+        PitchResult pitchResult = new PitchResult(playType);
         switch (playType) {
             case STRIKE:
-                onStrike();
+                pitchResult = onStrike();
                 break;
             case BALL: {
-                int backHomeRunner = onBall();
-                if (backHomeRunner != NO_PLAYER) {
-                    backHomeRunners.add(backHomeRunner);
-                }
+                pitchResult = onBall();
                 break;
             }
             case HITS: {
-                int backHomeRunner = onHits();
-                if (backHomeRunner != NO_PLAYER) {
-                    backHomeRunners.add(backHomeRunner);
-                }
+                pitchResult = onHits();
                 break;
             }
             case HOMERUN: {
-                backHomeRunners = onHomeRun();
+                pitchResult = onHomeRun();
                 break;
             }
         }
-        judgeScore(backHomeRunners);
-        return backHomeRunners;
+        currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
+                defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter());
+        judgePitchResult(pitchResult);
+        return pitchResult;
     }
 
-    private void onStrike() {
+    private PitchResult onStrike() {
+        PitchResult pitchResult = new PitchResult(PlayType.STRIKE);
         increaseStrikeCount();
-        judgeThreeStrike();
+        PlayType strikeResult = judgeThreeStrike();
+        if (strikeResult == PlayType.STRIKE_OUT) {
+            pitchResult.changePlayTypeToStrikeOut();
+        }
+        return pitchResult;
     }
 
-    private int onBall() {
+    private PitchResult onBall() {
         increaseBallCount();
         return judge4Ball();
     }
 
-    private int onHits() {
-        return judgeHits();
+    private PitchResult onHits() {
+        PitchResult pitchResult = new PitchResult(PlayType.HITS);
+        pitchResult.addRunner(pushAllRunners());
+        return pitchResult;
     }
 
-    private List<Integer> onHomeRun() {
-        return recallAllRunners();
+    private PitchResult onHomeRun() {
+        PitchResult pitchResult = new PitchResult(PlayType.HOMERUN);
+        pitchResult.addRunner(recallAllRunners());
+        return pitchResult;
     }
 
-    private void judgeScore(List<Integer> backHomeRunners) {
-        backHomeRunners.forEach(i -> currentInning().addScore(attackingTeam()));
+    private void judgePitchResult(PitchResult pitchResult) {
+        switch (pitchResult.getPlayType()) {
+            case HOMERUN:
+            case HITS:
+            case FOUR_BALL:
+                attackingTeam().changeHitter();
+                break;
+            case STRIKE_OUT:
+                attackingTeam().changeHitter();
+                resetStrikeAndBall();
+                increaseOutCount();
+                if (isThreeOut()) {
+                    proceedToNextStage();
+                }
+                break;
+        }
+        pitchResult.getBackHomeRunners().forEach(i -> currentInning().addScore(attackingTeam()));
     }
 
-    private void judgeThreeStrike() {
+    private PlayType judgeThreeStrike() {
         if (isThreeStrike()) {
-            resetStrikeAndBall();
-            increaseOutCount();
-            if (isThreeOut()) {
-                proceedToNextStage();
-            }
+            return PlayType.STRIKE_OUT;
         }
+        return PlayType.STRIKE;
     }
 
-    private int judge4Ball() {
-        int backHomePlayer = NO_PLAYER;
+    private PitchResult judge4Ball() {
+        PitchResult pitchResult = new PitchResult(PlayType.BALL);
         if (is4Ball()) {
-            backHomePlayer = pushAllRunners();
+            int backHomeRunner = pushAllRunners();
+            pitchResult.changePlayTypeToFourBall();
+            pitchResult.addRunner(backHomeRunner);
+            return pitchResult;
         }
-        return backHomePlayer;
-    }
-
-    private int judgeHits() {
-        return pushAllRunners();
+        return pitchResult;
     }
 
     private int pushAllRunners() {
@@ -171,7 +192,7 @@ public class Game {
             secondBase = firstBase;
         }
         firstBase = attackingTeam().getCurrentHitter();
-        attackingTeam().changeHitter();
+        //attackingTeam().changeHitter();
         return backHomePlayer;
     }
 
@@ -191,7 +212,7 @@ public class Game {
             firstBase = NO_PLAYER;
         }
         backHomeRunners.add(attackingTeam().getCurrentHitter());
-        attackingTeam().changeHitter();
+        //attackingTeam().changeHitter();
         return backHomeRunners;
     }
 
@@ -221,6 +242,14 @@ public class Game {
 
     public int currentHitter() {
         return attackingTeam().getCurrentHitter();
+    }
+
+    public int nextHitter() {
+        return attackingTeam().nextHitter();
+    }
+
+    public int currentPitcher() {
+        return defendingTeam().getCurrentPitcher();
     }
 
     private void proceedToNextStage() {

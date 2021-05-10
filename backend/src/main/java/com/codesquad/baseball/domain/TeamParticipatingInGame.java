@@ -39,10 +39,7 @@ public class TeamParticipatingInGame {
     }
 
     public int changeHitter() {
-        currentHitter++;
-        if (players.size() == currentHitter) {
-            currentHitter = 0;
-        }
+        currentHitter = nextHitter();
         return currentHitter;
     }
 
@@ -54,6 +51,14 @@ public class TeamParticipatingInGame {
     public void addPlayer(Player player, PitcherPosition pitcherPosition) {
         PlayerParticipatingInGame participatingPlayer = new PlayerParticipatingInGame(player.getId(), pitcherPosition);
         players.add(participatingPlayer);
+    }
+
+    public int nextHitter() {
+        int next = currentHitter + 1;
+        if (players.size() == next) {
+            next = 0;
+        }
+        return next;
     }
 
     public int getId() {

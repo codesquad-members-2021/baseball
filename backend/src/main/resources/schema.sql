@@ -52,14 +52,14 @@ create table inning
 
 create table history
 (
-    id           int primary key auto_increment,
-    inning       int references inning (id),
-    inning_key   int,
-    play_type    varchar(10) not null,
-    strike_count int         not null,
-    ball_count   int         not null,
-    pitcher      int references player (id),
-    hitter       int references player (id)
+    id            int primary key auto_increment,
+    inning        int references inning (id),
+    history_order int,
+    play_type     varchar(10) not null,
+    strike_count  int         not null,
+    ball_count    int         not null,
+    pitcher       int references player (id),
+    hitter        int references player (id)
 );
 
 create table team_participating_in_game
