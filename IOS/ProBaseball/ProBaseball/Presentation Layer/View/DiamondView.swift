@@ -18,7 +18,7 @@ class DiamondView: UIView {
     
     override func draw(_ rect: CGRect) {
         self.createRectangle()
-        setFillBase(color: .white)
+        setFillBase(color: .black)
         UIColor.darkGray.setStroke()
         path.lineWidth = 1
         path.stroke()

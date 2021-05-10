@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ahR-4n-MoX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -123,7 +123,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="MlL-Fk-she"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6a-Wo-Fom" customClass="PlayView" customModule="ProBaseball" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6a-Wo-Fom">
                                 <rect key="frame" x="0.0" y="101.5" width="414" height="270"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Aa4-tJ-87E">
@@ -204,17 +204,27 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2B-xv-qh3" customClass="PlayView" customModule="ProBaseball" customModuleProvider="target">
+                                        <rect key="frame" x="90" y="18" width="234" height="234"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="N2B-xv-qh3" secondAttribute="height" id="ABF-NO-Aps"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                 <constraints>
                                     <constraint firstItem="rPl-XI-xUI" firstAttribute="top" secondItem="NmS-pl-kB9" secondAttribute="bottom" id="938-KL-veZ"/>
                                     <constraint firstAttribute="trailing" secondItem="ptV-Da-Zu0" secondAttribute="trailing" constant="10" id="BN4-pc-fIc"/>
                                     <constraint firstItem="rPl-XI-xUI" firstAttribute="leading" secondItem="p6a-Wo-Fom" secondAttribute="leading" constant="10" id="BwA-7Q-vgS"/>
+                                    <constraint firstItem="N2B-xv-qh3" firstAttribute="centerX" secondItem="p6a-Wo-Fom" secondAttribute="centerX" id="Ugt-kr-nqQ"/>
                                     <constraint firstItem="NmS-pl-kB9" firstAttribute="top" secondItem="p6a-Wo-Fom" secondAttribute="top" constant="10" id="cvd-np-MMd"/>
                                     <constraint firstAttribute="height" constant="270" id="gLK-yl-oMY"/>
                                     <constraint firstItem="NmS-pl-kB9" firstAttribute="leading" secondItem="p6a-Wo-Fom" secondAttribute="leading" constant="10" id="h9X-EK-DJt"/>
+                                    <constraint firstItem="N2B-xv-qh3" firstAttribute="height" secondItem="p6a-Wo-Fom" secondAttribute="height" multiplier="0.866667" id="jOd-pf-yYn"/>
                                     <constraint firstItem="ptV-Da-Zu0" firstAttribute="top" secondItem="p6a-Wo-Fom" secondAttribute="top" constant="10" id="okz-Cc-IUJ"/>
                                     <constraint firstItem="Aa4-tJ-87E" firstAttribute="leading" secondItem="p6a-Wo-Fom" secondAttribute="leading" constant="10" id="pGL-Kg-m6i"/>
+                                    <constraint firstItem="N2B-xv-qh3" firstAttribute="centerY" secondItem="p6a-Wo-Fom" secondAttribute="centerY" id="qbT-wd-iwV"/>
                                     <constraint firstItem="Aa4-tJ-87E" firstAttribute="top" secondItem="rPl-XI-xUI" secondAttribute="bottom" id="uS3-GU-GHA"/>
                                 </constraints>
                             </view>
