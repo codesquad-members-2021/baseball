@@ -64,9 +64,7 @@ const Home = () => {
                 <Link to="/intro">게임 시작하기</Link>
               </SelectTeam>
               <Login>
-                {loginStatus ? (
-                  <></>
-                ) : (
+                {!loginStatus && (
                   <>
                     <div>소셜 계정으로 로그인</div>
                     <LoginBtns>
