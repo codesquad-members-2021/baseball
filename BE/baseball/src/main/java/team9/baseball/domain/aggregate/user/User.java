@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
-import team9.baseball.domain.enums.ResourceOwner;
+import team9.baseball.domain.enums.ResourceServer;
 import team9.baseball.domain.enums.Venue;
 import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
@@ -32,13 +32,13 @@ public class User {
 
     public User(String email, OauthAccessToken oauthAccessToken) {
         this.email = email;
-        this.oauthAccessTokenMap.put(oauthAccessToken.getResourceOwner(), oauthAccessToken);
+        this.oauthAccessTokenMap.put(oauthAccessToken.getResourceServer(), oauthAccessToken);
     }
 
-    public String getAccessToken(ResourceOwner resourceOwner) {
-        OauthAccessToken oauthAccessToken = oauthAccessTokenMap.getOrDefault(resourceOwner.name(), null);
+    public String getAccessToken(ResourceServer resourceServer) {
+        OauthAccessToken oauthAccessToken = oauthAccessTokenMap.getOrDefault(resourceServer.name(), null);
         if (oauthAccessToken == null) {
-            throw new NotFoundException(resourceOwner.name() + "의 access token이 존재하지 않습니다.");
+            throw new NotFoundException(resourceServer.name() + "의 access token이 존재하지 않습니다.");
         }
         return oauthAccessToken.getAccessToken();
     }

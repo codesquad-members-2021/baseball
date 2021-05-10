@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import team9.baseball.domain.enums.ResourceOwner;
+import team9.baseball.domain.enums.ResourceServer;
 
 @Getter
 @Setter
@@ -14,12 +14,12 @@ public class OauthAccessToken {
     @Id
     private Long id;
 
-    private String resourceOwner;
+    private String resourceServer;
 
     private String accessToken;
 
-    public OauthAccessToken(ResourceOwner resourceOwner, String accessToken) {
-        this.resourceOwner = resourceOwner.name();
+    public OauthAccessToken(ResourceServer resourceServer, String accessToken) {
+        this.resourceServer = resourceServer.name();
         this.accessToken = accessToken;
     }
 }
