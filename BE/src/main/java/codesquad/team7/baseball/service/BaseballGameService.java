@@ -52,6 +52,9 @@ public class BaseballGameService {
 
         BaseballGame newBaseballGame = BaseballGame.newGame(dinos, eagles);
         baseballGameRepository.save(newBaseballGame);
+        baseballGameRepository.save(newBaseballGame);
+        baseballGameRepository.save(newBaseballGame);
+        baseballGameRepository.save(newBaseballGame);
     }
 
     public BaseballGames baseballGames() {

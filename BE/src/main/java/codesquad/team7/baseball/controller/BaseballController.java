@@ -4,6 +4,7 @@ import codesquad.team7.baseball.service.BaseballGameService;
 import codesquad.team7.baseball.view.BaseballGameView;
 import codesquad.team7.baseball.view.BaseballGames;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,29 +23,9 @@ public class BaseballController {
         return baseballGameService.baseballGames();
     }
 
-    @GetMapping("/1")
-    public BaseballGameView baseballGame() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
-    }
-
-    @GetMapping("/1/pitch/hit")
-    public BaseballGameView hit() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
-    }
-
-    @GetMapping("/1/pitch/ball")
-    public BaseballGameView ball() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
-    }
-
-    @GetMapping("/3/pitch/out")
-    public BaseballGameView out() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(3L)).bulid();
-    }
-
-    @GetMapping("/3/pitch/strike")
-    public BaseballGameView strike() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(3L)).bulid();
+    @GetMapping("/{gameId}")
+    public BaseballGameView baseballGame(@PathVariable Long gameId) {
+        return new BaseballGameView.Builder(baseballGameService.baseballGame(gameId)).bulid();
     }
 
 }
