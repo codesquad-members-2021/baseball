@@ -50,7 +50,7 @@ const PlaySBOInfo = ({ SBOState }) => {
         <BallType>{SBOProperties.out.title}</BallType>
         {setActiveState(out).map((x, idx) => (
           <Light
-            key={`ball-${idx}`}
+            key={`out-${idx}`}
             active={x}
             bgColor={SBOProperties.out.color}
           />
