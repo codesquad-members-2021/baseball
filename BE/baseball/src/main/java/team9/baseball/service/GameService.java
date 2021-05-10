@@ -8,6 +8,7 @@ import team9.baseball.DTO.response.GameStatusDTO;
 import team9.baseball.domain.aggregate.game.Game;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.aggregate.user.User;
+import team9.baseball.domain.enums.GameStatus;
 import team9.baseball.domain.enums.PitchResult;
 import team9.baseball.domain.enums.Venue;
 import team9.baseball.exception.NotFoundException;
@@ -35,6 +36,8 @@ public class GameService {
         user.checkUserJoining();
 
         Game game = getGame(user.getCurrentGameId());
+        game.checkPlaying();
+
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
 
@@ -92,14 +95,23 @@ public class GameService {
         User user = getUser(userId);
         user.checkUserNotJoining();
 
-        Game game = getGame(gameId);
         if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue)) {
             throw new RuntimeException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
         }
 
+        Game game = getGame(gameId);
+        game.checkWaiting();
+
         user.setCurrentGameId(gameId);
         user.setCurrentGameVenue(venue);
         userRepository.save(user);
+
+        //상대팀도 유저가 들어와있으면 게임 시작
+        if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue.getOtherVenue())) {
+
+            game.setStatus(GameStatus.PLAYING);
+            gameRepository.save(game);
+        }
     }
 
     public List<GameDescriptionDTO> getAllGameList() {

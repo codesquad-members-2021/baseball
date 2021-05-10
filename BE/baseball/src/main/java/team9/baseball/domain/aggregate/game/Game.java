@@ -78,6 +78,12 @@ public class Game {
         }
     }
 
+    public void checkWaiting() {
+        if (this.status != GameStatus.WAITING) {
+            throw new RuntimeException("대기중인 게임이 아닙니다.");
+        }
+    }
+
     public void checkPlaying() {
         if (this.status != GameStatus.PLAYING) {
             throw new RuntimeException("진행중인 게임이 아닙니다.");
