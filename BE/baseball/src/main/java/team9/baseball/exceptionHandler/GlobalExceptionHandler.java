@@ -10,6 +10,7 @@ import team9.baseball.DTO.response.ApiResult;
 import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 import team9.baseball.exception.OauthException;
+import team9.baseball.exception.UnauthorizedException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -34,7 +35,10 @@ public class GlobalExceptionHandler {
         return ApiResult.failed("유효한 access token 이 아닙니다.");
     }
 
-    @ExceptionHandler(OauthException.class)
+    @ExceptionHandler({
+            UnauthorizedException.class,
+            OauthException.class
+    })
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiResult oauthException(Exception ex) {
         return ApiResult.failed(ex);
