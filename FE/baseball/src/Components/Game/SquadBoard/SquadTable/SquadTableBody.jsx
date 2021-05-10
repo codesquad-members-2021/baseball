@@ -1,35 +1,31 @@
 import SquadTableRow from "./SquadTableRow";
 import { SquadBoard as S } from "@/Components/Game/GameStyles";
 
-const SquadTableBody = ({ playerInfo }) => {
+const SquadTableBody = ({ squads }) => {
   const rowHeaderDefault = {
-    타자: "타자",
-    타석: "타석",
-    안타: "안타",
-    아웃: "아웃",
-    평균: "평균",
+    player: "player",
+    pa: "pa",
+    hit: "hit",
+    out: "out",
+    average: "average",
   };
-  const mockRow = {
-    타자: "스윙",
-    타석: "1",
-    안타: "2",
-    아웃: "2",
-    평균: "1.000",
+
+  const total = {
+    player: "Totals",
+    pa: squads.reduce((prev, curr) => prev + curr.pa, 0),
+    hit: squads.reduce((prev, curr) => prev + curr.hit, 0),
+    out: squads.reduce((prev, curr) => prev + curr.out, 0),
+    average: "------",
   };
+
   return (
     <S.SquadTable.SquadTableBody>
       <tbody>
         <SquadTableRow row={rowHeaderDefault} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={true} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
-        <SquadTableRow row={mockRow} isCurrentPlayer={false} />
+        {squads.map((playerInfo, index) => {
+          return <SquadTableRow key={index} row={playerInfo} />;
+        })}
+        <SquadTableRow row={total} />
       </tbody>
     </S.SquadTable.SquadTableBody>
   );

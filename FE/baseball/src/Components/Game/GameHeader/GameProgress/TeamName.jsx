@@ -1,11 +1,11 @@
 import CurrentPlayerTag from "./CurrentPlayerTag";
 import { GameHeader as S } from "@/Components/Game/GameStyles";
 
-const TeamName = ({ teamName, isCurrentPlayer }) => {
+const TeamName = ({ teamName, selectedTeam }) => {
   return (
     <S.GameProgress.TeamNameWrapper>
       <S.GameProgress.TeamName>{teamName}</S.GameProgress.TeamName>
-      {isCurrentPlayer ? <CurrentPlayerTag /> : null}
+      {teamName === selectedTeam ? <CurrentPlayerTag /> : null}
     </S.GameProgress.TeamNameWrapper>
   );
 };
