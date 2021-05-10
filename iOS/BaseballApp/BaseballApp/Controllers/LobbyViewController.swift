@@ -11,23 +11,34 @@ import Combine
 class LobbyViewController: UIViewController {
 
     @IBOutlet weak var roomsTableView: UITableView!
-    var viewModel: RoomsViewModel?
-    var cancelBag = Set<AnyCancellable>()
+    var viewModel: RoomsViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        roomsTableView.dataSource = self
         
         viewModel = RoomsViewModel()
-        bind()
+        viewModel.load {
+            DispatchQueue.main.async {
+                self.roomsTableView.reloadData()
+            }
+        }
     }
-    
-    func bind() {
-        viewModel?.$rooms
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
-                self?.roomsTableView.reloadData()
-            })
-            .store(in: &self.cancelBag)
-    }
+   
 }
 
+extension LobbyViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.rooms.data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RoomTableViewCell.identifier, for: indexPath) as? RoomTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let data = viewModel.rooms.data[indexPath.row]
+        cell.fill(data: data)
+        return cell
+    }
+}

@@ -6,13 +6,26 @@
 //
 
 import Foundation
+import Combine
 
 class RoomsViewModel {
-    @Published var rooms: RoomResponse = RoomResponse(rooms: [])
+    @Published var rooms: RoomResponse = RoomResponse(data: [])
+    var cancelBag = Set<AnyCancellable>()
     let roomsUseCase = RoomsUseCase()
-    
-    func load() {
-        guard let url = Endpoint.url(path: "/room/list") else { return }
-        roomsUseCase.start(url: url)
+        
+    func load(completionHandler: @escaping () -> Void) {
+        guard let url = Endpoint.url(path: Endpoint.Path.gameList) else { return }
+        let publisher = roomsUseCase.start(url: url)
+        publisher.sink { (completion) in
+            switch completion {
+            case .finished:
+                completionHandler()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        } receiveValue: { (response) in
+            self.rooms = response
+        }
+        .store(in: &cancelBag)
     }
 }

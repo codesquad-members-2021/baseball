@@ -7,36 +7,47 @@
 
 import Foundation
 
+struct GameResponse: Decodable {
+    let data: Game
+}
+
 struct Game: Decodable {
-    let home: Team
-    let away: Team
     let strike: Int
     let ball: Int
     let out: Int
+    let away_team: Team
+    let home_team: Team
     let inning: String
-    let myRole: String
+    let halves: String
+    let pitcher: Player
+    let pitcher_status: String
+    let batter: Player
+    let batter_status: String
     let base1: String?
     let base2: String?
     let base3: String?
-    let pitcherHistory: [Record]
+    let pitch_histories: [Record]
+    let my_role: String
+}
+
+struct Player: Decodable {
+    let team_id: Int
+    let uniform_number: Int
+    let name: String
 }
 
 struct Record: Decodable {
+    let pitcher: Player
+    let batter: Player
     let result: String
-    let pitchStrikeCount: String
-    
-    enum CodingKeys: String, CodingKey {
-        case result
-        case pitchStrikeCount = "log"
-    }
+    let strike_count: Int
+    let ball_count: Int
 }
 
 struct Team: Decodable {
     let name: String
     let score: Int
-    let position: String
-    let player: String
-    let playerStatus: String
+    let role: String
 }
 
 struct Scoreboard: Decodable {
