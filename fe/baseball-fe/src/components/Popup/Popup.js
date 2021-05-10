@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 function Popup({ direction, children }) {
     const [ active, setActive ] = useState(false);
@@ -11,7 +11,7 @@ function Popup({ direction, children }) {
 
     return (
         active
-        ? <StlyedPopup onClick={(e)=> closePopup(e)}>
+        ? <StlyedPopup direction={direction} onClick={(e)=> closePopup(e)}>
             <div className="wrapper">
                 {children}
             </div>
@@ -21,6 +21,25 @@ function Popup({ direction, children }) {
 }
 
 export default Popup;
+
+const drop = keyframes`
+    0% {
+        top: 20%;
+    }
+    100% {
+        top: 50%;
+    }
+`;
+
+const raise = keyframes`
+    0% {
+        top: 60%;
+    }
+    100% {
+        top: 50%;
+    }
+`;
+
 
 //팝업의 배경이 되는 요소
 const StlyedPopup = styled.div`
@@ -40,6 +59,7 @@ z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    animation: ${props => props.direction === "top" ? drop : raise} 0.5s cubic-bezier(0.61, 1, 0.88, 1);
 }
 `
 
@@ -51,6 +71,3 @@ const StyleEmpty = styled.div`
   top: ${props => props.direction === "top" && "0px"};
   bottom: ${props => props.direction === "bottom" && "0px"};
 `
-
-//마우스 오버 이벤트: 보이지 않는 div 상자를 만들어두고, mouseover가 되었을 때 Slide 되어서 내려올 수 있게 하기!
-//bottom popup과 top popup에 모두 재사용이 가능하게 만들기!
