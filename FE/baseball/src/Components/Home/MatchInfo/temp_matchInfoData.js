@@ -1,6 +1,7 @@
 export const matchInfoData = {
   game: [
     {
+      gameId: 1,
       home: {
         teamName: 'LG Tweens',
         isPlaying: true,
@@ -11,6 +12,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 2,
       home: {
         teamName: 'NC Dinos',
         isPlaying: false,
@@ -21,6 +23,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 3,
       home: {
         teamName: 'Hanhwa',
         isPlaying: false,
@@ -31,6 +34,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 4,
       home: {
         teamName: 'KIA Tigers',
         isPlaying: false,
@@ -41,6 +45,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 5,
       home: {
         teamName: 'Rockets',
         isPlaying: false,
@@ -51,6 +56,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 6,
       home: {
         teamName: 'Crong',
         isPlaying: false,
@@ -61,6 +67,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 7,
       home: {
         teamName: 'Raccoon',
         isPlaying: false,
@@ -71,6 +78,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 8,
       home: {
         teamName: 'Autumn',
         isPlaying: false,
@@ -81,6 +89,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 9,
       home: {
         teamName: 'August',
         isPlaying: false,
@@ -91,6 +100,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 10,
       home: {
         teamName: 'Q',
         isPlaying: false,
@@ -101,6 +111,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 11,
       home: {
         teamName: 'Daisy',
         isPlaying: false,
@@ -111,6 +122,7 @@ export const matchInfoData = {
       },
     },
     {
+      gameId: 12,
       home: {
         teamName: 'Illy',
         isPlaying: false,

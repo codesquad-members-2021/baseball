@@ -8,7 +8,7 @@ const MatchInfoBody = () => {
     <S.ScrollMask>
       <S.MatchInfoBody>
         {matchInfoData.game.map((match, idx) => (
-          <MatchBox key={uuidv4()} {...{ match, idx }} />
+          <MatchBox key={uuidv4()} gameId={match.gameId} {...{ match, idx }} />
         ))}
       </S.MatchInfoBody>
     </S.ScrollMask>

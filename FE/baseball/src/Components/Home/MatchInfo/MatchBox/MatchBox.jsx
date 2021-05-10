@@ -2,11 +2,11 @@ import GameNumber from './GameNumber';
 import Match from './Match';
 import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
-const MatchBox = ({ match, idx }) => {
+const MatchBox = ({ gameId, match, idx }) => {
   return (
     <S.MatchBox>
       <GameNumber {...{ idx }} />
-      <Match {...{ match }} />
+      <Match {...{ gameId, match }} />
     </S.MatchBox>
   );
 };
