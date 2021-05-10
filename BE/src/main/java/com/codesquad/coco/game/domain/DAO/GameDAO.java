@@ -10,7 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import static com.codesquad.coco.utils.SQL.*;
+import static com.codesquad.coco.utils.BASEBALL_SQLKt.*;
 
 @Component
 public class GameDAO {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.codesquad.coco.utils.SQL.FIND_ALL_INNINGS_SQL;
+import static com.codesquad.coco.utils.BASEBALL_SQLKt.FIND_ALL_INNINGS_SQL;
 
 @Component
 public class InningsDAO {
