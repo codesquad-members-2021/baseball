@@ -18,6 +18,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var playInformationStackView: UIStackView!
     @IBOutlet weak var scoreHeaderView: ScoreHeaderView!
     
+    var currentPlayerView: CurrentPlayerView!
     var count: Int = 0
     var viewModel: GameViewModel! {
         didSet {
@@ -43,6 +44,9 @@ class PlayViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.scoreHeaderView.configureAway(score: game.away_team.score)
                 self?.scoreHeaderView.configureHome(score: game.home_team.score)
+                self?.currentPlayerView.configure(batter: game.batter, status: game.batter_status)
+                self?.currentPlayerView.configure(pitcher: game.pitcher, status: game.pitcher_status)
+                self?.currentPlayerView.configure(playerRole: game.my_role)
             }
         }
     }
@@ -56,7 +60,7 @@ class PlayViewController: UIViewController {
                                                                options: nil)?.first as? CurrentPlayerView else {
             return
         }
-        
+        self.currentPlayerView = currentPlayerView
         playInformationStackView.addArrangedSubview(groundView)
         playInformationStackView.addArrangedSubview(currentPlayerView)
         playInformationStackView.addArrangedSubview(pitcherHistoryTableView)
