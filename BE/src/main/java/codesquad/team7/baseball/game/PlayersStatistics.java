@@ -43,4 +43,8 @@ public class PlayersStatistics {
     public int size() {
         return players.size();
     }
+
+    public List<PlayerStatistics> getPlayers() {
+        return players;
+    }
 }

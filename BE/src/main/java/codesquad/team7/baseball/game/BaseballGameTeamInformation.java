@@ -22,14 +22,11 @@ public class BaseballGameTeamInformation {
 
     @Embedded.Empty
     private final PlayersStatistics playersStatistics;
-
-    @Embedded.Empty
-    private Pitcher pitcher;
-
-    private Integer batterNumber;
-
     @Embedded.Empty
     private final TeamScores teamScores;
+    @Embedded.Empty
+    private Pitcher pitcher;
+    private Integer batterNumber;
 
     BaseballGameTeamInformation(Long id, Long teamId, String name, PlayersStatistics playersStatistics, Integer batterNumber, Pitcher pitcher, TeamScores teamScores) {
         this.id = id;
@@ -81,16 +78,20 @@ public class BaseballGameTeamInformation {
         return teamScores.getTotalScore();
     }
 
-    public PlayersStatistics getPlayersStatistics() {
-        return playersStatistics;
+    public List<PlayerStatistics> getPlayersStatistics() {
+        return playersStatistics.getPlayers();
     }
 
     public Integer getBatter() {
         return batterNumber;
     }
 
-    public Integer getPitches() {
-        return pitcher.getPitches();
+    public String getTeamName() {
+        return name;
+    }
+
+    public Pitcher getPitcher() {
+        return pitcher;
     }
 
     public List<Integer> getInningScore() {
@@ -103,7 +104,5 @@ public class BaseballGameTeamInformation {
         teamScores.nextInning();
     }
 
-    public String getTeamName() {
-        return name;
-    }
+
 }

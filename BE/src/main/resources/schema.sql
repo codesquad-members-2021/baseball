@@ -58,7 +58,6 @@ CREATE TABLE IF NOT EXISTS player_statistics (
     at_bat INT,
     hits INT,
     `out` INT,
-    average DOUBLE,
     CONSTRAINT player_statistics_ref_information_id FOREIGN KEY (information_id) REFERENCES baseball_game_team_information (information_id)
 );
 

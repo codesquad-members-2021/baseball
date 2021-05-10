@@ -16,8 +16,8 @@ public class InningScoreView {
 
     public static InningScoreView of(BaseballGameTeamInformation homeTeamInformation, BaseballGameTeamInformation awayTeamInformation) {
         return new InningScoreView(
-            homeTeamInformation.getInningScore(),
-            awayTeamInformation.getInningScore()
+                homeTeamInformation.getInningScore(),
+                awayTeamInformation.getInningScore()
         );
     }
 

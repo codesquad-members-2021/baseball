@@ -1,7 +1,6 @@
 package codesquad.team7.baseball.view;
 
 import codesquad.team7.baseball.game.BaseballGame;
-import codesquad.team7.baseball.team.Team;
 
 public class BaseballGameTitle {
 
@@ -15,6 +14,10 @@ public class BaseballGameTitle {
         this.away = away;
     }
 
+    public static BaseballGameTitle of(BaseballGame game) {
+        return new BaseballGameTitle(game.getId(), game.getHomeTeamName(), game.getAwayTeamName());
+    }
+
     public Long getGameId() {
         return gameId;
     }
@@ -25,9 +28,5 @@ public class BaseballGameTitle {
 
     public String getAway() {
         return away;
-    }
-
-    public static BaseballGameTitle of(BaseballGame game) {
-        return new BaseballGameTitle(game.getId(), game.getHomeTeamName(), game.getAwayTeamName());
     }
 }

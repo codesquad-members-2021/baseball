@@ -1,7 +1,6 @@
 package codesquad.team7.baseball.view;
 
 import codesquad.team7.baseball.game.*;
-import codesquad.team7.baseball.team.Team;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("game")
-@JsonTypeInfo(include= JsonTypeInfo.As.WRAPPER_OBJECT,use= JsonTypeInfo.Id.NAME)
+@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class BaseballGameView {
 
     private final TeamInfoView home;
@@ -103,12 +102,12 @@ public class BaseballGameView {
         private final List<Boolean> baseState;
         private final InningScoreView inningScore;
 
-        public Builder(BaseballGame baseballGame, Team home, Team away) {
+        public Builder(BaseballGame baseballGame) {
             BaseballGameTeamInformation homeTeamInformation = baseballGame.getHomeTeamInformation();
             BaseballGameTeamInformation awayTeamInformation = baseballGame.getAwayTeamInformation();
 
-            this.home = new TeamInfoView.Builder(home, homeTeamInformation).build();
-            this.away = new TeamInfoView.Builder(away, awayTeamInformation).build();
+            this.home = new TeamInfoView.Builder(homeTeamInformation).build();
+            this.away = new TeamInfoView.Builder(awayTeamInformation).build();
 
             this.inning = baseballGame.getInningOrdinal();
             this.state = baseballGame.getInningAttackTeam();

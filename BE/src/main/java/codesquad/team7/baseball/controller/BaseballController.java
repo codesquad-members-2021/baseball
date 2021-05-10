@@ -10,7 +10,6 @@ import codesquad.team7.baseball.view.BaseballGameTitle;
 import codesquad.team7.baseball.view.BaseballGameView;
 import codesquad.team7.baseball.view.BaseballGames;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,12 +21,11 @@ import java.util.List;
 public class BaseballController {
 
     private final BaseballGames baseballGames;
+    private final BaseballGameRepository baseballGameRepository;
+    private final TeamRepository teamRepository;
     private BaseballGame baseballGame;
     private Team dinos;
     private Team eagles;
-
-    private final BaseballGameRepository baseballGameRepository;
-    private final TeamRepository teamRepository;
 
     public BaseballController(BaseballGameRepository baseballGameRepository, TeamRepository teamRepository) {
         this.baseballGameRepository = baseballGameRepository;
@@ -72,31 +70,31 @@ public class BaseballController {
 
     @GetMapping("/3")
     public BaseballGameView baseballGame() {
-        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+        return new BaseballGameView.Builder(baseballGame).bulid();
     }
 
     @GetMapping("/3/pitch/hit")
     public BaseballGameView hit() {
         baseballGame.pitch(Pitch.HIT);
-        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+        return new BaseballGameView.Builder(baseballGame).bulid();
     }
 
     @GetMapping("/3/pitch/ball")
     public BaseballGameView ball() {
         baseballGame.pitch(Pitch.BALL);
-        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+        return new BaseballGameView.Builder(baseballGame).bulid();
     }
 
     @GetMapping("/3/pitch/out")
     public BaseballGameView out() {
         baseballGame.pitch(Pitch.OUT);
-        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+        return new BaseballGameView.Builder(baseballGame).bulid();
     }
 
     @GetMapping("/3/pitch/strike")
     public BaseballGameView strike() {
         baseballGame.pitch(Pitch.STRIKE);
-        return new BaseballGameView.Builder(baseballGame, dinos, eagles).bulid();
+        return new BaseballGameView.Builder(baseballGame).bulid();
     }
 
 }
