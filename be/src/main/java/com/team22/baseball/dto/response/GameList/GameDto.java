@@ -1,4 +1,4 @@
-package com.team22.baseball.dto.response;
+package com.team22.baseball.dto.response.GameList;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
