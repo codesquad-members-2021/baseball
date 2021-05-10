@@ -74,6 +74,10 @@ public class Game {
         return inning.showHistory();
     }
 
+    public List<History> showHistoriesOfCurrentInning() {
+        return currentInning().showHistory();
+    }
+
     public void initializeGame() {
         if (!isInitialized) {
             teams.forEach(TeamParticipatingInGame::initializeTeam);
@@ -110,7 +114,7 @@ public class Game {
             }
         }
         currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
-                defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter());
+                defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter(), pitchResult.numberOfRunners());
         judgePitchResult(pitchResult);
         return pitchResult;
     }
@@ -148,6 +152,7 @@ public class Game {
             case HITS:
             case FOUR_BALL:
                 attackingTeam().changeHitter();
+                resetStrikeAndBall();
                 break;
             case STRIKE_OUT:
                 attackingTeam().changeHitter();
@@ -180,7 +185,6 @@ public class Game {
     }
 
     private int pushAllRunners() {
-        resetStrikeAndBall();
         int backHomePlayer = NO_PLAYER;
         if (hasThirdBaseRunner()) {
             backHomePlayer = thirdBase;
@@ -192,12 +196,10 @@ public class Game {
             secondBase = firstBase;
         }
         firstBase = attackingTeam().getCurrentHitter();
-        //attackingTeam().changeHitter();
         return backHomePlayer;
     }
 
     private List<Integer> recallAllRunners() {
-        resetStrikeAndBall();
         List<Integer> backHomeRunners = new ArrayList<>();
         if (hasThirdBaseRunner()) {
             backHomeRunners.add(thirdBase);
@@ -212,7 +214,6 @@ public class Game {
             firstBase = NO_PLAYER;
         }
         backHomeRunners.add(attackingTeam().getCurrentHitter());
-        //attackingTeam().changeHitter();
         return backHomeRunners;
     }
 

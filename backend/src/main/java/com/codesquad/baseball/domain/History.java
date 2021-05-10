@@ -10,13 +10,15 @@ public class History {
     private int ballCount;
     private int pitcher;
     private int hitter;
+    private int earnedScore;
 
-    public History(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter) {
+    public History(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
         this.playType = playType;
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
         this.pitcher = pitcher;
         this.hitter = hitter;
+        this.earnedScore = earnedScore;
     }
 
     public Integer getId() {
@@ -41,5 +43,9 @@ public class History {
 
     public int getHitter() {
         return hitter;
+    }
+
+    public int getEarnedScore() {
+        return earnedScore;
     }
 }

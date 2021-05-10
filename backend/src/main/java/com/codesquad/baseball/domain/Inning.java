@@ -40,8 +40,8 @@ public class Inning {
         }
     }
 
-    public void addHistory(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter) {
-        histories.add(new History(playType, strikeCount, ballCount, pitcher, hitter));
+    public void addHistory(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
+        histories.add(new History(playType, strikeCount, ballCount, pitcher, hitter, earnedScore));
     }
 
     public List<History> showHistory() {

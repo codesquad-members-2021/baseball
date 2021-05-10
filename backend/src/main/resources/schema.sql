@@ -59,7 +59,8 @@ create table history
     strike_count  int         not null,
     ball_count    int         not null,
     pitcher       int references player (id),
-    hitter        int references player (id)
+    hitter        int references player (id),
+    earned_score  int
 );
 
 create table team_participating_in_game

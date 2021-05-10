@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest
 @Transactional
@@ -107,7 +106,7 @@ class GameRepositoryTest {
         IntStream.range(0, 2).forEach(value -> threeStrike(game));
         assertThat(game.currentInningNumber()).isEqualTo(1);
         assertThat(game.isTop()).isEqualTo(false);
-        //3아웃을 하면 2이닝 초로 넘어가야 합니다
+        //3아웃을 하면 2이닝 초로 넘어가야 합니다다
         threeOut(game);
         assertThat(game.currentInningNumber()).isEqualTo(2);
         assertThat(game.isTop()).isEqualTo(true);
@@ -289,48 +288,116 @@ class GameRepositoryTest {
     @DisplayName("이닝 별 경기내용이 기록되어야 합니다")
     void testHistories() {
         Game game = createGame(GAME_TITLE);
-        final int awayTeamPitcher = game.currentPitcher();
-        int awayTeamHitter1 = game.currentHitter();
-        //1회초의 스트라이크 정보가 기록되어야 합니다
-        game.pitch(PlayType.STRIKE);
-        List<History> histories = game.findHistoriesByInningNumber(0);
-        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
+        testHistoryOfCurrentInning(game);
+    }
 
+    private void testHistoryOfCurrentInning(Game game) {
+        List<HistoryTestDTO> historyTestDTOS = new ArrayList<>();
+        //1회초의 스트라이크 정보가 기록되어야 합니다
+        final int pitcher = game.currentPitcher();
+        int hitter1 = game.currentHitter();
+        game.pitch(PlayType.STRIKE);
+        List<History> histories = game.showHistoriesOfCurrentInning();
+        //테스트데이터 입력
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, 1, 0, pitcher, hitter1, 0));
+        //테스트
+        testHistories(histories, historyTestDTOS);
         //1회초의 스트라이크 아웃 정보가 기록되어야 합니다
         game.pitch(PlayType.STRIKE);
         game.pitch(PlayType.STRIKE);
-        int awayTeamHitter2 = game.currentHitter();
+        int hitter2 = game.currentHitter();
         game.pitch(PlayType.STRIKE);
-        histories = game.findHistoriesByInningNumber(0);
-        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(1), PlayType.STRIKE, 2, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(2), PlayType.STRIKE_OUT, 3, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(3), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter2);
+        //테스트데이터 입력
+        histories = game.showHistoriesOfCurrentInning();
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, 2, 0, pitcher, hitter1, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE_OUT, 3, 0, pitcher, hitter1, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, 1, 0, pitcher, hitter2, 0));
+        //테스트
+        testHistories(histories, historyTestDTOS);
 
         //1회초의 볼 기록도 기록되어야 합니다
+        IntStream.range(0,4).forEach(value -> game.pitch(PlayType.BALL));
+        int hitter3 = game.currentHitter();
         game.pitch(PlayType.BALL);
-        game.pitch(PlayType.BALL);
-        game.pitch(PlayType.BALL);
-        game.pitch(PlayType.BALL);
-        int awayTeamHitter3 = game.currentHitter();
-        game.pitch(PlayType.BALL);
-        testHistory(histories.get(0), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(1), PlayType.STRIKE, 2, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(2), PlayType.STRIKE_OUT, 3, 0, awayTeamPitcher, awayTeamHitter1);
-        testHistory(histories.get(3), PlayType.STRIKE, 1, 0, awayTeamPitcher, awayTeamHitter2);
-        testHistory(histories.get(4), PlayType.BALL, 1, 1, awayTeamPitcher, awayTeamHitter2);
-        testHistory(histories.get(5), PlayType.BALL, 1, 2, awayTeamPitcher, awayTeamHitter2);
-        testHistory(histories.get(6), PlayType.BALL, 1, 3, awayTeamPitcher, awayTeamHitter2);
-        testHistory(histories.get(7), PlayType.FOUR_BALL, 0, 0, awayTeamPitcher, awayTeamHitter2);
-        testHistory(histories.get(8), PlayType.BALL, 0, 1, awayTeamPitcher, awayTeamHitter3);
+        //테스트데이터 입력
+        histories = game.showHistoriesOfCurrentInning();
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 1, 1, pitcher, hitter2, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 1, 2, pitcher, hitter2, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 1, 3, pitcher, hitter2, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.FOUR_BALL, 1, 4, pitcher, hitter2, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 0, 1, pitcher, hitter3, 0));
+        //테스트
+        testHistories(histories, historyTestDTOS);
+
+        //1회초의 안타 기록도 기록되어야 합니다
+        game.pitch(PlayType.STRIKE);
+        game.pitch(PlayType.HITS);
+        int hitter4 = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        int hitter5 = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        int hitter6 = game.currentHitter();
+        game.pitch(PlayType.HITS);
+        //테스트데이터 입력
+        histories = game.showHistoriesOfCurrentInning();
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, 1, 1, pitcher, hitter3, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.HITS, 1, 1, pitcher, hitter3, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.HITS, 0, 0, pitcher, hitter4, 0));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.HITS, 0, 0, pitcher, hitter5, 1));
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.HITS, 0, 0, pitcher, hitter6, 1));
+        //테스트
+        testHistories(histories, historyTestDTOS);
+
+        //1회초의 홈런 기록도 기록되어야 합니다
+        int hitter7 = game.currentHitter();
+        IntStream.range(0,3).forEach(ballCount -> {
+            game.pitch(PlayType.BALL);
+            historyTestDTOS.add(new HistoryTestDTO(PlayType.BALL, 0, ballCount + 1, pitcher, hitter7, 0));
+        });
+        IntStream.range(0,2).forEach(strikeCount -> {
+            game.pitch(PlayType.STRIKE);
+            historyTestDTOS.add(new HistoryTestDTO(PlayType.STRIKE, strikeCount + 1, 3, pitcher, hitter7, 0));
+        });
+        game.pitch(PlayType.HOMERUN);
+
+        //테스트데이터 입력
+        histories = game.showHistoriesOfCurrentInning();
+        historyTestDTOS.add(new HistoryTestDTO(PlayType.HOMERUN, 2, 3, pitcher, hitter7, 4));
+        testHistories(histories, historyTestDTOS);
     }
 
-    private void testHistory(History history, PlayType playType, int strike, int ball, int pitcher, int hitter) {
-        assertThat(history.getPlayType()).isEqualTo(playType);
-        assertThat(history.getStrikeCount()).isEqualTo(strike);
-        assertThat(history.getBallCount()).isEqualTo(ball);
-        assertThat(history.getPitcher()).isEqualTo(pitcher);
-        assertThat(history.getHitter()).isEqualTo(hitter);
+    private void testHistories(List<History> histories, List<HistoryTestDTO> historyTestDTOS) {
+        assertThat(histories.size()).isEqualTo(historyTestDTOS.size());
+        for (int i = 0; i < histories.size(); i++) {
+            testHistory(histories.get(i), historyTestDTOS.get(i));
+        }
+    }
+
+    private static class HistoryTestDTO {
+        public PlayType playType;
+        public int strikeCount;
+        public int ballCount;
+        public int pitcher;
+        public int hitter;
+        public int earnedScore;
+
+        public HistoryTestDTO(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
+            this.playType = playType;
+            this.strikeCount = strikeCount;
+            this.ballCount = ballCount;
+            this.pitcher = pitcher;
+            this.hitter = hitter;
+            this.earnedScore = earnedScore;
+        }
+    }
+
+    private void testHistory(History history, HistoryTestDTO historyTestDTO) {
+        assertThat(history.getPlayType()).isEqualTo(historyTestDTO.playType);
+        assertThat(history.getStrikeCount()).isEqualTo(historyTestDTO.strikeCount);
+        assertThat(history.getBallCount()).isEqualTo(historyTestDTO.ballCount);
+        assertThat(history.getPitcher()).isEqualTo(historyTestDTO.pitcher);
+        assertThat(history.getHitter()).isEqualTo(historyTestDTO.hitter);
+        assertThat(history.getEarnedScore()).isEqualTo(historyTestDTO.earnedScore);
     }
 
     private void threeOut(Game game) {
