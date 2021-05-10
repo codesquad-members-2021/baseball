@@ -56,10 +56,7 @@ public class GameController {
     @GetMapping("/games/{gameId}/players")
     @ResponseStatus(HttpStatus.OK)
     public GamePlayDTO showPlayer(@PathVariable Long gameId) {
-
         return gameService.findGamePlayDTOByGameId(gameId);
-
-
     }
 
 }

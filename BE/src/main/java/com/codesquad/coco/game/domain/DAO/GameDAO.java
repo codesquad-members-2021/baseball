@@ -26,7 +26,7 @@ public class GameDAO {
         this.template = template;
     }
 
-    public Long save(Game game) {
+    public Long makeGame(Game game) {
         Long gameId = saveGame(game);
         ScoreBoard away = new ScoreBoard(gameId, game.awayTeamName());
         ScoreBoard home = new ScoreBoard(gameId, game.homeTeamName());

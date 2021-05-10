@@ -34,7 +34,7 @@ public class TeamService {
         Team opponentTeam = getOpponentTeam(choiceDTO);
         Game game = new Game(opponentTeam, playerTeam, UserType.HOME);
 
-        Long gameId = gameDAO.save(game);
+        Long gameId = gameDAO.makeGame(game);
 
         TeamDTO homeTeam = findHomeTeamByGameId(gameId);
         TeamDTO awayTeam = findAwayTeamByGameId(gameId);
@@ -46,7 +46,7 @@ public class TeamService {
         Team opponentTeam = getOpponentTeam(choiceDTO);
         Game game = new Game(playerTeam, opponentTeam, UserType.AWAY);
 
-        Long gameId = gameDAO.save(game);
+        Long gameId = gameDAO.makeGame(game);
 
         TeamDTO homeTeam = findHomeTeamByGameId(gameId);
         TeamDTO awayTeam = findAwayTeamByGameId(gameId);
