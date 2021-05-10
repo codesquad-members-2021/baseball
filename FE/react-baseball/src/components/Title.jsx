@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 const Title = ({ type }) => (
   <TitleDiv type={type}>BASEBALL GAME ONLINE</TitleDiv>
 );
