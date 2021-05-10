@@ -18,10 +18,9 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     @Query("SELECT TEAM.id as id, TEAM.name as name, TEAM.is_home as is_home, TEAM.selected as selected, TEAM.game_id as game_id FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id AND TEAM.name = :title;")
     Optional<Team> findTeamByTitle(String title);
 
-
-    @Query("SELECT home_group.id AS game_id, home_group.home as home, home_group.selected as home_selected, away_group.away as away, away_group.selected as away_selected\n" +
+    @Query("SELECT home_group.id AS game_id, home_group.in_progress as in_progress ,home_group.home as home, away_group.away as away\n" +
             "FROM\n" +
-            "(SELECT GAME.id AS id, TEAM.name AS home, TEAM.selected as selected\n" +
+            "(SELECT GAME.id AS id, GAME.in_progress AS in_progress,  TEAM.name AS home, TEAM.selected as selected\n" +
             "FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id\n" +
             "WHERE TEAM.is_home = true) as home_group\n" +
             "INNER JOIN\n" +
