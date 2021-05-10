@@ -1,5 +1,5 @@
 import React from "react";
-import StatusBoardItems from "Components/GamePage/MainContainer/MainRight/StatusBoardItems";
+import StatusBoardItems from "./StatusBoardItems";
 import styled from "styled-components";
 
 const StatusBoard = (props) => {

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { fitToContainer, drawField } from "utils/canvasUtils";
-import RunnerImage from 'Components/GamePage/MainContainer/MainLeft/RunnerImage';
-import PitchButton from "Components/GamePage/MainContainer/MainLeft/PitchButton";
+import RunnerImage from "./RunnerImage";
+import PitchButton from "./PitchButton";
 
 const BaseballField = () => {
   let canvasRef = useRef();
@@ -23,7 +23,7 @@ const BaseballField = () => {
 };
 
 const BaseballFieldWrapper = styled.div`
-  position:relative;
+  position: relative;
   color: white;
   width: 65%;
   height: 100%;

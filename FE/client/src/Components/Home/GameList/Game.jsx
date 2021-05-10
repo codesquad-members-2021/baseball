@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Team from "Components/Home/GameList/Team";
+import Team from "./Team";
 
 const Game = ({ gameData }) => {
   return (

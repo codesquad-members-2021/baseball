@@ -1,14 +1,13 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import GameScoreTable from 'Components/GamePage/Popup/GameScoreTable';
+import React from "react";
+import styled, { css } from "styled-components";
+import GameScoreTable from "./GameScoreTable";
 
 const TopPopup = ({ isHidePopupState: { top }, distance }) => {
-
   return (
-    <TopPopupWrapper {...{ top, distance }} >
+    <TopPopupWrapper {...{ top, distance }}>
       <TeamNamesWrapper>
         <TeamName player>Captain</TeamName>
-        <TeamName >Marvel</TeamName>
+        <TeamName>Marvel</TeamName>
       </TeamNamesWrapper>
       <GameScoreTable />
     </TopPopupWrapper>
@@ -23,20 +22,20 @@ const TopPopupWrapper = styled.div`
   min-width: 38rem;
   margin: 0 auto;
   padding: 2rem 5rem 2rem 0;
-  border: .2rem solid #fff;
+  border: 0.2rem solid #fff;
   background: #000;
   box-sizing: border-box;
-  top:${({ distance }) => distance}px;
+  top: ${({ distance }) => distance}px;
   left: 0;
   right: 0;
   color: #fff;
-  transition:  all 0.5s ease-out;
-  transform: ${({ top }) => top ? 'translateY(-18rem)' : 'translateY(0px)'};
+  transition: all 0.5s ease-out;
+  transform: ${({ top }) => (top ? "translateY(-18rem)" : "translateY(0px)")};
   z-index: 1;
 `;
 
 const TeamNamesWrapper = styled.div`
-  width:12rem;
+  width: 12rem;
   margin: 4.2rem 1.5rem 0 0;
   font-size: 2rem;
   line-height: 3.7rem;
@@ -44,12 +43,14 @@ const TeamNamesWrapper = styled.div`
 `;
 
 const TeamName = styled.div`
-  position:relative;
+  position: relative;
   width: max-content;
   margin-left: auto;
-  ${({ player }) => player && css`
-      &::after{
-        content: 'Player';
+  ${({ player }) =>
+    player &&
+    css`
+      &::after {
+        content: "Player";
         position: absolute;
         display: block;
         width: 100%;
@@ -59,7 +60,7 @@ const TeamName = styled.div`
         font-weight: 700;
         text-align: center;
       }
-  `}
+    `}
 `;
 
 export default TopPopup;

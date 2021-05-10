@@ -1,5 +1,5 @@
 import React from "react";
-import StatusBoard from "Components/GamePage/MainContainer/MainRight/StatusBoard";
+import StatusBoard from "./StatusBoard";
 
 const StatusBoardList = () => {
   return (

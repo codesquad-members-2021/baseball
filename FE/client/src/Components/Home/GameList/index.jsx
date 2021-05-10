@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Game from "Components/Home/GameList/Game";
+import Game from "./Game";
 import { gameDatas } from "utils/mockDatas";
 
 const GameList = () => {

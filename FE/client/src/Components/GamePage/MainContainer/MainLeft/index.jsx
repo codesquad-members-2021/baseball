@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import SBOStatus from "Components/GamePage/MainContainer/MainLeft/SBOStatus.jsx";
-import BaseballField from "Components/GamePage/MainContainer/MainLeft/BaseballField";
-import AttackDefendStatus from "Components/GamePage/MainContainer/MainLeft/AttackDefendStatus";
+import SBOStatus from "./SBOStatus.jsx";
+import BaseballField from "./BaseballField";
+import AttackDefendStatus from "./AttackDefendStatus";
 import BackgroundImage from "Images/Background.jpg";
 
 const MainLeft = () => {

@@ -1,7 +1,7 @@
 import React from "react";
-import GamePageHeader from "Components/GamePage/GamePageHeader";
+import GamePageHeader from "./GamePageHeader";
 import MainContainer from "./MainContainer";
-import Popup from "Components/GamePage/Popup";
+import Popup from "./Popup";
 import styled from "styled-components";
 
 const GamePage = () => {

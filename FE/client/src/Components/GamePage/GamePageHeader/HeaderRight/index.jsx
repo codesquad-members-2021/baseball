@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CurrentPlayer from "Components/GamePage/GamePageHeader/HeaderRight/CurrentPlayer";
+import CurrentPlayer from "./CurrentPlayer";
 
 const HeaderRight = () => {
   return (
