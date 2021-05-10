@@ -5,14 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.domain.enums.ResourceServer;
 import team9.baseball.domain.enums.Venue;
 import team9.baseball.exception.BadStatusException;
-import team9.baseball.exception.NotFoundException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -27,20 +22,11 @@ public class User {
 
     private Venue currentGameVenue;
 
-    @MappedCollection(idColumn = "user_id", keyColumn = "resource_owner")
-    private Map<String, OauthAccessToken> oauthAccessTokenMap = new HashMap<>();
+    private ResourceServer oauthResourceServer;
 
-    public User(String email, OauthAccessToken oauthAccessToken) {
+    public User(String email, ResourceServer oauthResourceServer) {
         this.email = email;
-        this.oauthAccessTokenMap.put(oauthAccessToken.getResourceServer(), oauthAccessToken);
-    }
-
-    public String getAccessToken(ResourceServer resourceServer) {
-        OauthAccessToken oauthAccessToken = oauthAccessTokenMap.getOrDefault(resourceServer.name(), null);
-        if (oauthAccessToken == null) {
-            throw new NotFoundException(resourceServer.name() + "의 access token이 존재하지 않습니다.");
-        }
-        return oauthAccessToken.getAccessToken();
+        this.oauthResourceServer = oauthResourceServer;
     }
 
     public void checkUserJoining() {
