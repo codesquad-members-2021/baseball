@@ -9,7 +9,11 @@ import Foundation
 import RxSwift
 import Alamofire
 
-class NetworkService {
+protocol NetworkServiceable {
+    func get<T: Codable>(path: APIPath, id: String?) -> Observable<T>
+}
+
+class NetworkService: NetworkServiceable {
     func get<T: Codable>(path: APIPath, id: String? = nil) -> Observable<T> {
         return Observable<T>.create({ observer in
             let endPoint = EndPoint.init(method: .get, path: path, id: id)

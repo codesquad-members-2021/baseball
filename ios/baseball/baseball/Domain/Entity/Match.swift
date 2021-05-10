@@ -1,14 +1,12 @@
-//
-//  match.swift
+//  Match.swift
 //  baseball
 //
-//  Created by 이다훈 on 2021/05/07.
-//
+//  Created by zombietux on 2021/05/04.
 
 import Foundation
 
 struct Match : Codable {
-    private let home : String
-    private let away : String
-    private let id : String
+    private(set) var home : String
+    private(set) var away : String
+    private(set) var id : String
 }
