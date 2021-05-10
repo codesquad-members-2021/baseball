@@ -42,7 +42,8 @@ public class MatchInfo {
                 .collect(Collectors.toList());
     }
 
-    public void pushPitchResult(PitchResult pitchResult) {
+    public void update(PitchResult pitchResult) {
+        // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
         pitchResults.add(pitchResult);
     }
 }

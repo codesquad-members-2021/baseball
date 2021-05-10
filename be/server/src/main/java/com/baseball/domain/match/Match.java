@@ -44,9 +44,8 @@ public class Match {
 
     public void play(String pitch) {
         PitchResult pitchResult = PitchResult.of(pitch);
-        // TODO: pitchResult 에 따라, teams 와 matchInfo 를 업데이트 해주어야 함
         Pitcher pitcher = teams.getPitcher();
         Batter batter = teams.getBatter();
-        matchInfo.pushPitchResult(pitchResult);
+        matchInfo.update(pitchResult);
     }
 }
