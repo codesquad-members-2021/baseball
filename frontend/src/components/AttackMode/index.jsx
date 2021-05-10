@@ -5,7 +5,7 @@ const AttackMode = ({ match }) => {
 	return (
 		<>
 			<div>어택모드</div>
-			<GamePage data={match.params} />
+			<GamePage data={match.params} type="Attack" />
 		</>
 	);
 };

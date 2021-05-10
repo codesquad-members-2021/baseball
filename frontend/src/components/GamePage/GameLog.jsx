@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../Style/Theme';
+import { theme, Span } from '../Style/Theme';
 import Scroll from '../Style/Scroll';
 const GameLog = () => {
 	return (
@@ -114,12 +114,7 @@ const GameLog = () => {
 	);
 };
 const GameLogScroll = styled(Scroll)``;
-const Span = styled.span`
-	display: inline-block;
-	text-align: center;
-	font-size: ${theme.fontSize.medium};
-	font-weight: ${theme.fontWeight.light};
-`;
+
 const PlayerWrapper = styled.div`
 	padding-left: 20px;
 `;

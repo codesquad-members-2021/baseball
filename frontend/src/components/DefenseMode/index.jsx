@@ -4,7 +4,7 @@ const DefenseMode = ({ match }) => {
 	const id = match.params;
 	return (
 		<>
-			<GamePage data={id} />
+			<GamePage data={id} type="Defense" />
 		</>
 	);
 };
