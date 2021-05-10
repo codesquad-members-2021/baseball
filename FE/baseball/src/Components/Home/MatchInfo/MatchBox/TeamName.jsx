@@ -1,7 +1,7 @@
 import { MatchBox as S } from '@/Components/Home/HomeStyles';
 
-const TeamName = () => {
-  return <S.TeamName>TeamName</S.TeamName>;
+const TeamName = ({ teamName, isPlaying }) => {
+  return <S.TeamName disabled={isPlaying}>{teamName}</S.TeamName>;
 };
 
 export default TeamName;
