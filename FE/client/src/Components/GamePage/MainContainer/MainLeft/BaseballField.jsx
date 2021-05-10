@@ -5,10 +5,10 @@ import RunnerImage from "./RunnerImage";
 import PitchButton from "./PitchButton";
 
 const BaseballField = () => {
-  let canvasRef = useRef();
+  const canvasRef = useRef();
   useEffect(() => {
-    let canvas = canvasRef.current;
-    let ctx = canvas.getContext("2d");
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
     fitToContainer(canvas);
     drawField(ctx, canvas.offsetWidth, canvas.offsetHeight);
   }, []);
