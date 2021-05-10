@@ -1,5 +1,8 @@
 package codesquad.team7.baseball.view;
 
+import codesquad.team7.baseball.game.BaseballGame;
+import codesquad.team7.baseball.team.Team;
+
 public class BaseballGameTitle {
 
     private final Long gameId;
@@ -24,7 +27,7 @@ public class BaseballGameTitle {
         return away;
     }
 
-    public static BaseballGameTitle of(Long gameId, String home, String away) {
-        return new BaseballGameTitle(gameId, home, away);
+    public static BaseballGameTitle of(BaseballGame game, Team home, Team away) {
+        return new BaseballGameTitle(game.getId(), home.getName(), away.getName());
     }
 }

@@ -31,13 +31,6 @@ public class BaseballController {
         this.baseballGameRepository = baseballGameRepository;
         this.teamRepository = teamRepository;
 
-        List<BaseballGameTitle> games = new ArrayList<>();
-        games.add(BaseballGameTitle.of(1L, "Marvel", "Captain"));
-        games.add(BaseballGameTitle.of(2L, "Tigers", "Twins"));
-        games.add(BaseballGameTitle.of(3L, "Dinos", "Eagles"));
-        games.add(BaseballGameTitle.of(4L, "Pintos", "Heros"));
-        baseballGames = BaseballGames.of(games);
-
         dinos = Team.newTeam("NC Dinos", 0);
         dinos.addPlayer(new Player("김준완"));
         dinos.addPlayer(new Player("박민우"));
@@ -64,6 +57,10 @@ public class BaseballController {
 
         baseballGame = BaseballGame.newGame(dinos, eagles);
         baseballGame = baseballGameRepository.save(baseballGame);
+
+        List<BaseballGameTitle> games = new ArrayList<>();
+        games.add(BaseballGameTitle.of(baseballGame, dinos, eagles));
+        baseballGames = BaseballGames.of(games);
     }
 
     @GetMapping
