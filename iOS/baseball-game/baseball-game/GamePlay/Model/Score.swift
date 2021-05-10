@@ -10,7 +10,6 @@ import Foundation
 struct Score: Decodable {
     
     var home: Int
-    
     var away: Int
     
     init() {

@@ -21,14 +21,16 @@ class GamePlayViewModel {
         self.isUserHomeSide = isUserHomeSide
     }
     
+    
+    //GameManager -> GameDTO에 따른 대대적인 변경 필요
     func requestGame() {
-        NetworkManager.get(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
-            .sink { error in
-            self.error = error as? Error
-        } receiveValue: { data in
-            self.gameManager = data
-            self.pitches = self.gameManager.pitchInfo()
-        }.store(in: &cancelBag)
+//        NetworkManager.get(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
+//            .sink { error in
+//            self.error = error as? Error
+//        } receiveValue: { data in
+//            self.gameManager = data
+//            self.pitches = self.gameManager.pitchInfo()
+//        }.store(in: &cancelBag)
     }
     
 }

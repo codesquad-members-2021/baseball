@@ -7,13 +7,27 @@
 
 import Foundation
 
-class BaseManager: Decodable {
+struct BaseChanged: Decodable {
+    var first: BaseStatus?
+    var second: BaseStatus?
+    var third: BaseStatus?
     
-    var first: Bool
+    struct BaseStatus: Decodable {
+        var baseIn: Bool
+        var baseOut: Bool
+        
+        enum CodingKeys: String, CodingKey{
+            case baseIn = "in"
+            case baseOut = "out"
+        }
+    }
+}
+
+class BaseManager {
     
-    var second: Bool
-    
-    var third: Bool
+    private var first: Bool
+    private var second: Bool
+    private var third: Bool
     
     init(first: Bool, second: Bool, third: Bool) {
         self.first = first
@@ -25,5 +39,45 @@ class BaseManager: Decodable {
         self.init(first: false, second: false, third: false)
     }
     
-    //변경하는 메소드
+    func reset() {
+        self.first = false
+        self.second = false
+        self.third = false
+    }
+    
+    func update(with baseInfo: BaseChanged) {
+        
+        if let thirdChanged = baseInfo.third {
+            if thirdChanged.baseOut { thirdToHome() }
+        }
+        
+        if let secondChanged = baseInfo.second {
+            if secondChanged.baseOut { secondToThird() }
+        }
+        
+        if let firstChanged = baseInfo.first {
+            if firstChanged.baseOut { firstToSecond() }
+            if firstChanged.baseIn { homeToFirst() }
+        }
+        
+    }
+    
+    private func thirdToHome() {
+        self.third = false
+    }
+    
+    private func secondToThird() {
+        self.second = false
+        self.third = true
+    }
+    
+    private func firstToSecond() {
+        self.first = false
+        self.second = true
+    }
+    
+    private func homeToFirst() {
+        self.first = true
+    }
+    
 }
