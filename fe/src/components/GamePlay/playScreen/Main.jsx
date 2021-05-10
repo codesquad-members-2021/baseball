@@ -8,5 +8,5 @@ export default Main
 const StyldeMain = styled.main`
   display: flex;
   width: 100%;
-  height: -webkit-fill-available;
+  height: 80%;
 `
