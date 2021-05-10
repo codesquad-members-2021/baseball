@@ -28,9 +28,7 @@ class PlayViewController: UIViewController {
     func configureDataSource() -> UICollectionViewDiffableDataSource<BallCountSection, String> {
         let dataSource = UICollectionViewDiffableDataSource<BallCountSection, String>(collectionView: ballCountCollectionView) { (collectionView, indexPath, icon) -> UICollectionViewCell? in
      
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BallCountCollectionViewCell", for: indexPath) as! BallCountCollectionViewCell
-//            cell.homeTeamLabel.text = "hhhh"
-            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BallCountCollectionViewCell", for: indexPath) as! BallCountCollectionViewCell            
             return cell
         }
         return dataSource

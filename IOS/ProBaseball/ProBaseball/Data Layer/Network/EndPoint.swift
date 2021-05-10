@@ -17,18 +17,14 @@ class Endpoint {
 }
 
 extension Endpoint {
-    var url: URL {
+    var url: URL? {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "87d10a6c-c551-4948-98bf-9b748675f31d.mock.pstmn.io"
         components.path = self.path
         components.queryItems = queryItems
         
-        guard let url = components.url else {
-            preconditionFailure("Invalid URL components: \(components)")
-        }
-        
-        return url
+        return components.url
     }
     
     var headers: [String: Any] {

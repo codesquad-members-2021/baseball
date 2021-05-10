@@ -12,14 +12,18 @@ protocol NetworkControllerProtocol {
     typealias Headers = [String: Any]
     
     func get<T>(type: T.Type,
-                url: URL,
+                url: URL?,
                 method: HTTPMethod
     ) -> AnyPublisher<T, NetworkError> where T: Codable
 }
 
 final class NetworkController: NetworkControllerProtocol {
-    func get<T>(type: T.Type, url: URL, method: HTTPMethod) -> AnyPublisher<T, NetworkError> where T : Codable {
-        var urlRequest = URLRequest(url: url)
+    func get<T>(type: T.Type, url: URL?, method: HTTPMethod) -> AnyPublisher<T, NetworkError> where T : Codable {
+        guard let safeURL = url else {
+            return Fail(error: NetworkError.invalidURL).eraseToAnyPublisher()
+        }
+        
+        var urlRequest = URLRequest(url: safeURL)
         urlRequest.httpMethod = method.rawValue
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
