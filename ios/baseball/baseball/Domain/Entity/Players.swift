@@ -8,6 +8,11 @@
 import Foundation
 
 struct Players: Codable {
-    private let pitchers: [Pitcher]
-    private let batters: [Batter]
+    private(set) var pitchers: [Pitcher]
+    private(set) var batters: [Batter]
+    
+    init() {
+        self.pitchers = []
+        self.batters = []
+    }
 }
