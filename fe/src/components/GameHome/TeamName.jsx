@@ -19,11 +19,11 @@ const TeamName = ({ type }) => {
     <TeamNameWrap>
       {isStart ? (
         <Link to="" onClick={changeNotice}>
-          <Span>{type === 'home' ? home : away}</Span>
+          <Span color="black">{type === 'home' ? home : away}</Span>
         </Link>
       ) : (
         <Link to={pathFinder(type)}>
-          <Span>{type === 'home' ? home : away}</Span>
+          <Span color="black">{type === 'home' ? home : away}</Span>
         </Link>
       )}
     </TeamNameWrap>

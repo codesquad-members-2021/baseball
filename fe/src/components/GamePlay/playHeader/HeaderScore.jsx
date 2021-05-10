@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { gamePlayContext } from 'pages/Game';
 import styled from 'styled-components';
 import Span from 'components/common/Span';
-import VsSpan from 'components/common/VsSpan';
 import FlexCenter from 'styles/FlexCenter';
 
 const HeaderScore = () => {
