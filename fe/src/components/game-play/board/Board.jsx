@@ -4,14 +4,14 @@ import Inning from './Inning';
 import Screen from './Screen';
 
 const Board = (props) => (
-  <StyledBoard>
+  <StyleddBoard>
     <BallCount ballCount={ ballCount}></BallCount>
     <Screen></Screen>
     <Inning inning={inning} isHome = {isHome}></Inning>
-  </StyledBoard>
+  </StyleddBoard>
 );
 
-const StyledBoard = styled.div`
+const StyleddBoard = styled.div`
   display: grid;
   grid-template-columns: 10rem 1fr 10rem;
 `;

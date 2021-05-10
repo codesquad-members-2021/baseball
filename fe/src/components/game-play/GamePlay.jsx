@@ -45,24 +45,24 @@ const GamePlay = ({ home, away, game_id }) => {
   const memberList = { home: data.home.member_list, away: data.home.member_list };
   const pitchers = { home: data.home.pitcher, away: data.home.pitcher };
   return (
-    <StyleGamePlay>
+    <StyledGamePlay>
       <PopUp position='top'><PopUpScore /></PopUp>
       <PopUp position='bottom'><PopUpRoster /></PopUp>
-      <StyleGamePlayGrid>
+      <StyledGamePlayGrid>
         {/* {/* <ScoreContext.Provider value={score}> */}
           <Score teamName={teamName} score={score} turn={data.turn}></Score>
         {/* </ScoreContext.Provider> */}
         <Player memberList={memberList} turn={data.turn} pitchers={pitchers}></Player>
         <Board></Board>
         <Log data={data}></Log>
-      </StyleGamePlayGrid>
-    </StyleGamePlay>
+      </StyledGamePlayGrid>
+    </StyledGamePlay>
   );
 };
 
-const StyleGamePlay = styled.div``;
+const StyledGamePlay = styled.div``;
 
-const StyleGamePlayGrid = styled.div`
+const StyledGamePlayGrid = styled.div`
   display: grid;
   grid-template-columns: 3fr minmax(19.5rem, 1fr);
   grid-template-rows: minmax(14.5rem, 25vh) 75vh;

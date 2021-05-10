@@ -4,24 +4,24 @@ import styled from 'styled-components';
 
 const Screen = (props) => {
   return (
-    <StyleScreen>
-      <StylePitch>PITCH</StylePitch>
-      <StyleGround>
+    <StyledScreen>
+      <StyledPitch>PITCH</StyledPitch>
+      <StyledGround>
         <div className="base home">
         </div>
         <div className="base"></div>
         <div className="base"></div>
         <div className="base"></div>
-      </StyleGround>
-    </StyleScreen>
+      </StyledGround>
+    </StyledScreen>
   );
 }
 
-const StyleScreen = styled.div`
+const StyledScreen = styled.div`
   position:relative;
   align-self: center;
 `;
-const StylePitch = styled.button`
+const StyledPitch = styled.button`
   position: absolute;
   top: calc(50% - 1.5rem);
   left: calc(50% - 5rem);
@@ -43,7 +43,7 @@ const StylePitch = styled.button`
   }
 `
 
-const StyleGround = styled.div`
+const StyledGround = styled.div`
   border: 3px solid #fff;
   width: 20rem;
   height: 20rem;

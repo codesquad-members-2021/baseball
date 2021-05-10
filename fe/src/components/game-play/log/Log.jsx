@@ -31,15 +31,15 @@ const Log = (props) => {
     </div>
   ));
   return (
-    <StyleLog>
+    <StyledLog>
       <div className="logs">
         {log_list}
       </div>
-    </StyleLog>
+    </StyledLog>
   );
 };
 
-const StyleLog = styled.div`
+const StyledLog = styled.div`
   .logs {
     display: flex;
     flex-flow: column-reverse;

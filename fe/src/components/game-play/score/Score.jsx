@@ -4,7 +4,7 @@ const Score = ({ teamName, score, turn }) => {
   const TITLE = 'BASEBALL GAME ONLINE';
   const TURN = 'Player';
   return (
-    <StyleScore>
+    <StyledScore>
       <div className='title'>{TITLE}</div>
       <div className='teams'>
         <div className='home'>
@@ -24,11 +24,11 @@ const Score = ({ teamName, score, turn }) => {
           </div>
         </div>
       </div>
-    </StyleScore>
+    </StyledScore>
   );
 };
 
-const StyleScore = styled.div`
+const StyledScore = styled.div`
   .title {
     font-size: 3rem;
     font-weight: 600;

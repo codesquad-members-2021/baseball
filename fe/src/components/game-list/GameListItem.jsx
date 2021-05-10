@@ -2,24 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 const GameListItem = ({ home, away, game_id, idx }) => {
   return (
-    <StyleGameItem>
+    <StyledGameItem>
       <div className='title'>GAME {idx + 1}</div>
       <div className='teams'>
         <div className='teams-name'>{home}</div>
         <div className='teams-vs'>vs</div>
         <div className='teams-name'>{away}</div>
       </div>
-    </StyleGameItem>
+    </StyledGameItem>
   );
 };
 
-const StyleGameItem = styled.div`
+const StyledGameItem = styled.div`
   margin: 0 auto;
   margin-bottom: 1.5rem;
   padding: 1rem 0;
   border-radius: 1rem;
-  opacity: 0.95;
-  background-color: #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.95);
   .title {
     color: #ff4545;
     text-align: center;
@@ -32,7 +31,7 @@ const StyleGameItem = styled.div`
     text-align: center;
     align-items: center;
     padding: 1rem 0;
-    .teams-name {
+    &-name {
       font-size: 2rem;
       font-weight: 600;
       cursor: pointer;
@@ -40,7 +39,7 @@ const StyleGameItem = styled.div`
         color: #ff4545;
       }
     }
-    .teams-vs {
+    &-vs {
       padding-bottom: 0.5rem;
       font-size: 2.5rem;
       font-weight: 600;

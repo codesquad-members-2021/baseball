@@ -6,14 +6,14 @@ import background from './images/background.png';
 function App() {
   return (
     <>
-      <StyleBackground src={background}></StyleBackground>
+      <StyledBackground src={background}></StyledBackground>
       {/* <GameList /> */}
       <GamePlay />
     </>
   );
 }
 
-const StyleBackground = styled.div`
+const StyledBackground = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
   position: absolute;

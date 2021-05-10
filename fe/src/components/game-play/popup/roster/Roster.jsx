@@ -3,15 +3,15 @@ import TeamRoster from './TeamRoster';
 const Roster = () => {
   // team_name 필요
   return (
-    <StyleRoster>
+    <StyledRoster>
       <TeamRoster {...game_roster.home}/>
       <TeamRoster {...game_roster.away} player={true}/>
-    </StyleRoster>
+    </StyledRoster>
   );
 }
 
 // 90vw는 돼야하는데 그러면 이상함...;
-const StyleRoster = styled.div`
+const StyledRoster = styled.div`
   margin: 0 auto;
   max-width: 60vw;
   margin-top: 5rem;
