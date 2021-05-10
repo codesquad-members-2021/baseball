@@ -3,12 +3,12 @@ import styled, { keyframes } from 'styled-components';
 
 const PopUp = ({ children, position }) => {
   const [active, setActive] = useState(false);
-  const handleClick = ({target}) => !target.closest('.childrenWrapper') && setActive(false);
-  return active ? <StylePopUp onClick={handleClick} className={active ? 'active' : ''} position={position}>
+  const handleClick = ({target}) => (target.className === 'childrenWrapper' || !target.closest('.childrenWrapper')) && setActive(false);
+  return active ? <StyledPopUp onClick={handleClick} className={active ? 'active' : ''} position={position}>
     <div className='childrenWrapper'>
       {children}
     </div>
-  </StylePopUp> : <StyleEmpty position={position} onMouseEnter={() => setActive(true)} />;
+  </StyledPopUp> : <StyledEmpty position={position} onMouseEnter={() => setActive(true)} />;
 };
 
 const toBottom = keyframes`
@@ -29,12 +29,13 @@ const toTop = keyframes`
 }
 `;
 
-const StylePopUp = styled.div`
+const StyledPopUp = styled.div`
   position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
   z-index: 2;
+  text-align: center;
   &:before {
     background-color: rgba(0, 0, 0, 0.9);
     content: '';
@@ -50,7 +51,7 @@ const StylePopUp = styled.div`
   }
 `;
 
-const StyleEmpty = styled.div`
+const StyledEmpty = styled.div`
   width:100vw;
   height:5rem;
   position: absolute;
@@ -62,10 +63,10 @@ const StyleEmpty = styled.div`
 export default PopUp;
 
 // const PopUp = ({ children }) => {
-//   return <StylePopUp>{children}</StylePopUp>;
+//   return <StyledPopUp>{children}</StyledPopUp>;
 // };
 
-// const StylePopUp = styled.div`
+// const StyledPopUp = styled.div`
 //   position: fixed;
 //   width: 100vw;
 //   height: 100vh;

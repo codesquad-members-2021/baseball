@@ -4,28 +4,21 @@ const Player = ({ memberList, turn, pitchers }) => {
   const HOME = 'home';
   const AWAY = 'away';
 
-  const getMember = (id, members) => {
+  const getPlayer = (members, id) => {
+    const result = {};
     for (const member of members) {
-      if (member.id === id) return member;
+      if (member.id === id) result.pitcher = member;
+      if (member.state) result.batter = member;
     }
-    return null;
+    return result;
   };
 
-  const getBatter = (members) => {
-    for (const member of members) {
-      if (member.state) return member;
-    }
-    return null;
-  };
-
-  const pitcher = turn
-    ? getMember(pitchers[HOME], memberList[HOME])
-    : getMember(pitchers[AWAY], memberList[AWAY]);
-
-  const batter = turn ? getBatter(memberList[HOME]) : getBatter(memberList[AWAY]);
+  const { pitcher, batter } = turn
+    ? getPlayer(memberList[HOME], pitchers[HOME])
+    : getPlayer(memberList[AWAY], pitchers[AWAY]);
 
   return (
-    <StylePlayer>
+    <StyledPlayer>
       <div className='player'>
         <div className='player-type'>투수</div>
         <div className='player-detail'>
@@ -42,11 +35,11 @@ const Player = ({ memberList, turn, pitchers }) => {
           </div>
         </div>
       </div>
-    </StylePlayer>
+    </StyledPlayer>
   );
 };
 
-const StylePlayer = styled.div`
+const StyledPlayer = styled.div`
   height: 100%;
   padding-bottom: 1.5rem;
   display: flex;

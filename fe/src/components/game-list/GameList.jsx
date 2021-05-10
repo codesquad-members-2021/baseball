@@ -10,20 +10,20 @@ const GameList = (props) => {
   ));
 
   return (
-    <StyleGameList>
-      <StyleTitle>{TITLE}</StyleTitle>
-      <StyleDescription>{DESCRIPTION}</StyleDescription>
-      <StyleList>{gameList}</StyleList>
-    </StyleGameList>
+    <StyledGameList>
+      <StyledTitle>{TITLE}</StyledTitle>
+      <StyledDescription>{DESCRIPTION}</StyledDescription>
+      <StyledList>{gameList}</StyledList>
+    </StyledGameList>
   );
 };
 
-const StyleGameList = styled.div`
+const StyledGameList = styled.div`
   padding: 0 15vw;
   margin-top: 2.5rem;
 `;
 
-const StyleTitle = styled.div`
+const StyledTitle = styled.div`
   margin-bottom: 5rem;
   font-size: 3rem;
   font-weight: 600;
@@ -31,14 +31,14 @@ const StyleTitle = styled.div`
   text-align: center;
 `;
 
-const StyleDescription = styled.div`
+const StyledDescription = styled.div`
   margin-bottom: 2rem;
   font-size: 2rem;
   color: #fff;
   text-align: center;
 `;
 
-const StyleList = styled.div`
+const StyledList = styled.div`
   max-width: 50rem;
   margin: 0 auto;
   padding-left: 1.0625rem;

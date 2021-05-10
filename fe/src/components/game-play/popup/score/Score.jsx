@@ -7,15 +7,15 @@ const Score = (props) => {
   const ROUND = new Array(12).fill().map((_, idx) => idx + 1);
 
   return (
-    <StyleScore>
+    <StyledScore>
       <ScoreList dataType='round' data={ROUND} />
       <ScoreList team='Captain' dataType='home' data={data.home} isPlayer={true} />
       <ScoreList team='Marvel' dataType='away' data={data.away} isPlayer={false} />
-    </StyleScore>
+    </StyledScore>
   );
 };
 
-const StyleScore = styled.div`
+const StyledScore = styled.div`
   width: 70rem;
   min-width: 63rem;
   display: flex;
