@@ -1,24 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
+const Screen = ({ handleStrike, handleBall, handleSafety }) => {
+  const [baseData, setBaseData] = useState({
+    1: false,
+    2: false,
+    3: false,
+  });
 
-const Screen = (props) => {
+  const handlePitchClick = () => {
+    const randomNum = Math.ceil(Math.random() * 100);
+    if (randomNum <= 50) {
+      //스트라이크
+      handleStrike();
+      // ballCountDispatch({ type: 'strike' });
+    } else if (randomNum <= 80) {
+      //볼
+      handleBall();
+    } else {
+      handleSafety();
+      //안타
+      //멤버변경
+      if (randomNum <= 90) {
+        //1루타
+      } else if (randomNum <= 96) {
+        //2루타
+      } else if (randomNum <= 99) {
+        //3루타
+      } else {
+        //홈런
+      }
+    }
+  };
+
   return (
     <StyledScreen>
-      <StyledPitch>PITCH</StyledPitch>
+      <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>
       <StyledGround>
-        <div className="base home">
-        </div>
-        <div className="base"></div>
-        <div className="base"></div>
-        <div className="base"></div>
+        <div className='base home'></div>
+        <div className='base'></div>
+        <div className='base'></div>
+        <div className='base'></div>
       </StyledGround>
     </StyledScreen>
   );
-}
+};
 
 const StyledScreen = styled.div`
-  position:relative;
+  position: relative;
   align-self: center;
 `;
 const StyledPitch = styled.button`
@@ -39,9 +68,9 @@ const StyledPitch = styled.button`
   z-index: 1;
   &:hover {
     background-color: #fff;
-    color:#000;
+    color: #000;
   }
-`
+`;
 
 const StyledGround = styled.div`
   border: 3px solid #fff;
@@ -59,7 +88,7 @@ const StyledGround = styled.div`
       bottom: -1rem;
       left: -1rem;
       &:before {
-        content: "";
+        content: '';
         background-color: #fff;
         width: 2.8284712rem;
         height: 4rem;
@@ -78,10 +107,10 @@ const StyledGround = styled.div`
       right: -1rem;
     }
     &:nth-child(4) {
-      top:-1rem;;
-      left:-1rem;
+      top: -1rem;
+      left: -1rem;
     }
   }
-`
+`;
 
 export default Screen;
