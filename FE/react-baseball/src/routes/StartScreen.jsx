@@ -7,10 +7,11 @@ import styled from 'styled-components';
 const playable = {
   // 임시 데이터
   id: 1,
-  home_team_status: true,
   away_team_status: true,
+  home_team_status: false,
 };
-
+// const [playable, setPlayable]
+// const [clicked, setClicked] 팀 클릭했을 때 홈, 원정 어떤게 선택됐는지 저장
 export const PlayableContext = createContext();
 
 const StartScreen = (props) => {
