@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
-
+import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
 const Stadium = () => {
+  const boardHistory = useContext(BoardHistoryContext);
+
   return (
     <StadiumDiv>
       <PlayDiv>
@@ -32,8 +35,13 @@ const Stadium = () => {
 var tempBoardLst = ['S', 'B', 'O'];
 
 const playPitch = () => {
-  console.log(tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)]);
+  var randomBoard =
+    tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
+  // console.log(randomBoard);
+  boardHistory[randomBoard] += 1;
+  // console.log('바꿨다', boardHistory);
 };
+
 const StadiumDiv = styled.div`
   box-sizing: border-box;
   opacity: 90%;

@@ -1,7 +1,10 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
-
+import {
+  boardHistory,
+  BoardHistoryContext,
+} from './components/provider/ContextB';
 import './App.css';
 import PlayScreen from './routes/PlayScreen';
 import StartScreen from './routes/StartScreen';
@@ -34,9 +37,11 @@ function App() {
             <Route path='/' exact>
               <StartScreen />
             </Route>
-            <Route path='/play-screen'>
-              <PlayScreen />
-            </Route>
+            <BoardHistoryContext.Provider value={boardHistory}>
+              <Route path='/play-screen'>
+                <PlayScreen />
+              </Route>
+            </BoardHistoryContext.Provider>
           </AppDiv>
         </Switch>
       </BrowserRouter>
