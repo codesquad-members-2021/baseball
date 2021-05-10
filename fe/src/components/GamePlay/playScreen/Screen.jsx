@@ -1,12 +1,18 @@
 import styled from 'styled-components'
 
 const Screen = () => {
-  return <StyledScreen></StyledScreen>
+  return (
+    <StyledScreen>
+      <ScreenField src='field.svg' alt='field' />
+    </StyledScreen>
+  )
 }
 
 export default Screen
 
 const StyledScreen = styled.section`
+  display: flex;
+  justify-content: center;
   width: 70%;
   height: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -15,4 +21,7 @@ const StyledScreen = styled.section`
   background-size: cover;
 `
 
-const ScreenField  = styled.img``
+const ScreenField = styled.img`
+  width: 34%;
+  transform: rotate(45deg);
+`
