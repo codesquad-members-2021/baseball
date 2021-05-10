@@ -1,6 +1,5 @@
 package codesquad.team7.baseball.game;
 
-import codesquad.team7.baseball.team.Player;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 
@@ -8,7 +7,6 @@ public class PlayerStatistics {
 
     @Column("player_name")
     private final String name;
-
     private Integer atBat;
     private Integer hits;
     private Integer out;
@@ -21,13 +19,6 @@ public class PlayerStatistics {
         this.atBat = atBat;
         this.hits = hits;
         this.out = out;
-    }
-
-    public static PlayerStatistics newPlayerStatistics(Player player) {
-        return new PlayerStatistics(
-                player.getName(),
-                0, 0, 0
-        );
     }
 
     public void hit() {

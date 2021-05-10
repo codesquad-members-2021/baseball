@@ -103,8 +103,8 @@ public class BaseballGameView {
         private final InningScoreView inningScore;
 
         public Builder(BaseballGame baseballGame) {
-            BaseballGameTeamInformation homeTeamInformation = baseballGame.getHomeTeamInformation();
-            BaseballGameTeamInformation awayTeamInformation = baseballGame.getAwayTeamInformation();
+            TeamInformation homeTeamInformation = baseballGame.getHomeTeamInformation();
+            TeamInformation awayTeamInformation = baseballGame.getAwayTeamInformation();
 
             this.home = new TeamInfoView.Builder(homeTeamInformation).build();
             this.away = new TeamInfoView.Builder(awayTeamInformation).build();

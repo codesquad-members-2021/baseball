@@ -16,71 +16,88 @@ public class BaseballGame {
     private final Long id;
 
     @Embedded.Empty
-    private final TeamInformationMap teamInformation;
-
-    @Embedded.Empty
     private final Inning inning;
 
-    private String homeUser;
-    private Integer homeHistoryIndex;
+    @Embedded.Empty
+    private final Home home;
 
-    private String awayUser;
-    private Integer awayHistoryIndex;
+    @Embedded.Empty
+    private final Away away;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
     private final List<BatterInningHistory> history;
 
-    BaseballGame(Long id, TeamInformationMap teamInformation, Inning inning, Integer homeHistoryIndex, Integer awayHistoryIndex, List<BatterInningHistory> history) {
+    BaseballGame(Long id,
+                 Inning inning,
+                 Home home,
+                 Away away,
+                 List<BatterInningHistory> history) {
         this.id = id;
-        this.teamInformation = teamInformation;
         this.inning = inning;
-        this.homeHistoryIndex = homeHistoryIndex;
-        this.awayHistoryIndex = awayHistoryIndex;
+        this.home = home;
+        this.away = away;
         this.history = history;
     }
 
     public static BaseballGame newGame(Team home, Team away) {
         return new BaseballGame(
                 null,
-                TeamInformationMap.newTeamInformation(home, away),
                 Inning.newInning(),
-                0,
-                0,
+                Home.newInstance(home),
+                Away.newInstance(away),
                 new ArrayList<>()
         );
     }
 
     public void pitch(Pitch pitch) {
-        TeamEnum attackTeam = inning.getAttackTeam();
-        teamInformation.pitch(attackTeam.opposite());
+        TeamInformation attack = getAttackTeam();
+        TeamInformation defence = getDefenceTeam();
+
+        defence.pitch();
 
         if (pitch == Pitch.HIT) {
-            hit(attackTeam);
+            hit(attack);
             return;
         }
 
         if (pitch == Pitch.BALL) {
-            ball(attackTeam);
+            ball(attack);
             return;
         }
 
         if (pitch == Pitch.OUT) {
-            out(attackTeam);
+            out(attack, defence);
             return;
         }
 
         if (pitch == Pitch.STRIKE) {
-            strike(attackTeam);
+            strike(attack, defence);
         }
 
     }
 
-    private void hit(TeamEnum attackTeam) {
+    private TeamInformation getAttackTeam() {
+        TeamEnum attackTeam = inning.getAttackTeam();
+        if (attackTeam == TeamEnum.HOME) {
+            return home;
+        }
+        return away;
+    }
+
+    private TeamInformation getDefenceTeam() {
+        TeamEnum attackTeam = inning.getAttackTeam();
+        if (attackTeam == TeamEnum.AWAY) {
+            return home;
+        }
+        return away;
+    }
+
+    private void hit(TeamInformation attackTeam) {
         inning.hit();
         teamInformationHit(attackTeam);
     }
 
-    private void ball(TeamEnum attackTeam) {
+    private void ball(TeamInformation attackTeam) {
         inning.ball();
         if (inning.isFourBall()) {
             inning.fourBall();
@@ -88,29 +105,29 @@ public class BaseballGame {
         }
     }
 
-    private void teamInformationHit(TeamEnum attackTeam) {
-        teamInformation.hit(attackTeam);
-        teamInformation.setNextBatter(attackTeam);
+    private void teamInformationHit(TeamInformation attack) {
+        attack.hit();
+        attack.setNextBatter();
 
         if (inning.homeIn()) {
-            teamInformation.scoreUp(attackTeam, inning.getOrdinal());
+            attack.scoreUp(inning.getOrdinal());
         }
     }
 
-    private void out(TeamEnum attackTeam) {
+    private void out(TeamInformation attack, TeamInformation defence) {
         inning.out();
-        teamInformation.out(attackTeam);
-        teamInformation.setNextBatter(attackTeam);
+        attack.out();
+        attack.setNextBatter();
         if (inning.isThreeOut()) {
             inning.threeOut();
-            teamInformation.nextInning(attackTeam.opposite());
+            defence.nextInning();
         }
     }
 
-    private void strike(TeamEnum attackTeam) {
+    private void strike(TeamInformation attack, TeamInformation defence) {
         inning.strike();
         if (inning.isThreeStrike()) {
-            out(attackTeam);
+            out(attack, defence);
         }
     }
 
@@ -118,12 +135,12 @@ public class BaseballGame {
         return id;
     }
 
-    public BaseballGameTeamInformation getHomeTeamInformation() {
-        return teamInformation.getHome();
+    public TeamInformation getHomeTeamInformation() {
+        return home;
     }
 
-    public BaseballGameTeamInformation getAwayTeamInformation() {
-        return teamInformation.getAway();
+    public TeamInformation getAwayTeamInformation() {
+        return away;
     }
 
     public Integer getInningOrdinal() {
@@ -135,7 +152,8 @@ public class BaseballGame {
     }
 
     public Integer getBatterNumber() {
-        return teamInformation.getBatter(inning.getAttackTeam());
+        TeamInformation attack = getAttackTeam();
+        return attack.getBatterNumber();
     }
 
     public Integer getStrike() {
@@ -159,19 +177,19 @@ public class BaseballGame {
     }
 
     public Long getHomeTeamId() {
-        return teamInformation.getTeamId(TeamEnum.HOME);
+        return home.getTeamId();
 
     }
 
     public Long getAwayTeamId() {
-        return teamInformation.getTeamId(TeamEnum.AWAY);
+        return away.getTeamId();
     }
 
     public String getHomeTeamName() {
-        return teamInformation.getTeamName(TeamEnum.HOME);
+        return home.getTeamName();
     }
 
     public String getAwayTeamName() {
-        return teamInformation.getTeamName(TeamEnum.AWAY);
+        return away.getTeamName();
     }
 }

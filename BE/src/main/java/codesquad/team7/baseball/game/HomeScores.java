@@ -5,21 +5,21 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamScores {
+public class HomeScores {
 
     private Integer totalScore;
 
     @MappedCollection(idColumn = "information_id", keyColumn = "inning")
-    private final List<InningScore> inningScore;
+    private final List<HomeInningScore> homeInningScore;
 
-    TeamScores(Integer totalScore, List<InningScore> inningScore) {
+    HomeScores(Integer totalScore, List<HomeInningScore> homeInningScore) {
         this.totalScore = totalScore;
-        this.inningScore = inningScore;
+        this.homeInningScore = homeInningScore;
     }
 
     public void scoreUp(int inning) {
         totalScore++;
-        InningScore score = inningScore.get(inningIndex(inning));
+        HomeInningScore score = homeInningScore.get(inningIndex(inning));
         score.scoreUp();
     }
 
@@ -28,18 +28,18 @@ public class TeamScores {
     }
 
     public void nextInning() {
-        inningScore.add(new InningScore(0));
+        homeInningScore.add(new HomeInningScore(0));
     }
 
     public Integer getTotalScore() {
         return totalScore;
     }
 
-    public List<InningScore> getInningScore() {
-        return inningScore;
+    public List<HomeInningScore> getInningScore() {
+        return homeInningScore;
     }
 
-    public static TeamScores newTeamScores() {
-        return new TeamScores(0, new ArrayList<>());
+    public static HomeScores newTeamScores() {
+        return new HomeScores(0, new ArrayList<>());
     }
 }

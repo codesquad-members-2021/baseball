@@ -22,19 +22,19 @@ public class BaseballController {
         return baseballGameService.baseballGames();
     }
 
-    @GetMapping("/3")
+    @GetMapping("/1")
     public BaseballGameView baseballGame() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(3L)).bulid();
+        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
     }
 
-    @GetMapping("/3/pitch/hit")
+    @GetMapping("/1/pitch/hit")
     public BaseballGameView hit() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(3L)).bulid();
+        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
     }
 
-    @GetMapping("/3/pitch/ball")
+    @GetMapping("/1/pitch/ball")
     public BaseballGameView ball() {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(3L)).bulid();
+        return new BaseballGameView.Builder(baseballGameService.baseballGame(1L)).bulid();
     }
 
     @GetMapping("/3/pitch/out")

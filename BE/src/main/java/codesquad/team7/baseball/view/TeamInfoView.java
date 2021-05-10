@@ -1,15 +1,15 @@
 package codesquad.team7.baseball.view;
 
-import codesquad.team7.baseball.game.BaseballGameTeamInformation;
 import codesquad.team7.baseball.game.Pitcher;
 import codesquad.team7.baseball.game.PlayerStatistics;
+import codesquad.team7.baseball.game.TeamInformation;
 
 import java.util.List;
 
 public class TeamInfoView {
     private final String name;
     private final Integer score;
-    private final List<PlayerStatistics> players;
+    private final List<? extends PlayerStatistics> players;
     private final Pitcher pitcher;
 
     private TeamInfoView(Builder builder) {
@@ -27,7 +27,7 @@ public class TeamInfoView {
         return score;
     }
 
-    public List<PlayerStatistics> getPlayers() {
+    public List<? extends PlayerStatistics> getPlayers() {
         return players;
     }
 
@@ -38,10 +38,10 @@ public class TeamInfoView {
     public static class Builder {
         private final String name;
         private final Integer score;
-        private final List<PlayerStatistics> players;
+        private final List<? extends PlayerStatistics> players;
         private final Pitcher pitcher;
 
-        public Builder(BaseballGameTeamInformation teamInformation) {
+        public Builder(TeamInformation teamInformation) {
             this.name = teamInformation.getTeamName();
             this.score = teamInformation.getTotalScore();
             this.players = teamInformation.getPlayersStatistics();
