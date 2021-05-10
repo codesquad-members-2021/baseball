@@ -7,8 +7,8 @@ drop table if exists score;
 create table game
 (
     id   int primary key auto_increment,
-    home_team_id int,
-    away_team_id int
+    home_team_id int references team (id),
+    away_team_id int references team (id)
 );
 
 create table team
