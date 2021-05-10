@@ -1,12 +1,8 @@
 package com.codesquad.team12.baseball.model;
 
 import com.codesquad.team12.baseball.dto.PlayerDto;
-import org.springframework.data.annotation.Id;
 
 public class Player {
-    @Id
-    private Long id;
-
     private Integer number;
     private String name;
     private Integer pa;
@@ -14,8 +10,7 @@ public class Player {
     private Integer out;
     private Double average;
 
-    public Player(Long id, Integer number, String name, Integer pa, Integer hit, Integer out, Double average) {
-        this.id = id;
+    public Player(Integer number, String name, Integer pa, Integer hit, Integer out, Double average) {
         this.number = number;
         this.name = name;
         this.pa = pa;

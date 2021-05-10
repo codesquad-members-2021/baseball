@@ -6,7 +6,7 @@ public class Playing {
     @Id
     private Long id;
 
-    private Long teamId;
+    private String teamName;
     private Integer playerNumber;
     private String playerName;
     private Integer pa;
@@ -14,9 +14,9 @@ public class Playing {
     private Integer out;
     private Double average;
 
-    public Playing(Long id, Long teamId, Integer playerNumber, String playerName, Integer pa, Integer hit, Integer out, Double average) {
+    public Playing(Long id, String teamName, Integer playerNumber, String playerName, Integer pa, Integer hit, Integer out, Double average) {
         this.id = id;
-        this.teamId = teamId;
+        this.teamName = teamName;
         this.playerNumber = playerNumber;
         this.playerName = playerName;
         this.pa = pa;

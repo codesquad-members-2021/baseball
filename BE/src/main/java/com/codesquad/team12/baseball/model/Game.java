@@ -18,11 +18,11 @@ public class Game {
     private String homeName;
     private String awayName;
 
-//    @MappedCollection(keyColumn = "id")
-//    private Map<Long, Inning> innings = new HashMap<>();
-//
-//    @MappedCollection(keyColumn = "id")
-//    private Map<Long, Playing> playings = new HashMap<>();
+    @MappedCollection(idColumn = "game_id", keyColumn = "id")
+    private Map<Long, Inning> innings = new HashMap<>();
+
+    @MappedCollection(idColumn = "game_id", keyColumn = "id")
+    private Map<Long, Playing> playings = new HashMap<>();
 
 
     public Game(Long id, Integer homeScore, Integer awayScore, boolean isEnd, String homeName, String awayName) {
@@ -35,6 +35,7 @@ public class Game {
     }
 
     public static GameDto createGameDto(Game game) {
+//        TODO: findTeamById needed to get isPlaying
         TeamDto home = Team.createTeamDto(new Team(game.homeName, false));
         TeamDto away = Team.createTeamDto(new Team(game.awayName, false));
         return new GameDto(game.id, home, away);
