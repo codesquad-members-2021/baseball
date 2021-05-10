@@ -8,9 +8,6 @@
 import UIKit
 
 class PlayerScoreHeaderTableViewCell: UITableViewHeaderFooterView {
-    static var identifier: String {
-        return String(describing: self)
-    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

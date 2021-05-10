@@ -35,8 +35,8 @@ class ScoreBoardViewController: UIViewController {
     }
     
     private func tableViewCellRegisterNib() {
-        let nib = UINib(nibName: PlayerScoreTableViewCell.identifier, bundle: nil)
-        self.playerScoreTableView.register(nib, forCellReuseIdentifier: PlayerScoreTableViewCell.identifier)
+        let nib = UINib(nibName: PlayerScoreTableViewCell.className, bundle: nil)
+        self.playerScoreTableView.register(nib, forCellReuseIdentifier: PlayerScoreTableViewCell.className)
 
     }
     
@@ -52,7 +52,7 @@ class ScoreBoardViewController: UIViewController {
     
     private func makeDataSource() -> DataSource {
         return DataSource(tableView: self.playerScoreTableView) { (tableView, indexPath, playerScoreBoard) -> PlayerScoreTableViewCell? in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: PlayerScoreTableViewCell.identifier, for: indexPath) as? PlayerScoreTableViewCell else { return PlayerScoreTableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: PlayerScoreTableViewCell.className, for: indexPath) as? PlayerScoreTableViewCell else { return PlayerScoreTableViewCell() }
             cell.configure(playerScoreBoard: playerScoreBoard)
             return cell
         }
@@ -67,12 +67,12 @@ extension ScoreBoardViewController {
 
 extension ScoreBoardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = Bundle.main.loadNibNamed(PlayerScoreHeaderTableViewCell.identifier, owner: self, options: nil)?.last as! PlayerScoreHeaderTableViewCell
+        let header = Bundle.main.loadNibNamed(PlayerScoreHeaderTableViewCell.className, owner: self, options: nil)?.last as! PlayerScoreHeaderTableViewCell
         return header
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = Bundle.main.loadNibNamed(PlayerScoreFooterTableViewCell.identifier, owner: self, options: nil)?.last as! PlayerScoreFooterTableViewCell
+        let footer = Bundle.main.loadNibNamed(PlayerScoreFooterTableViewCell.className, owner: self, options: nil)?.last as! PlayerScoreFooterTableViewCell
         return footer
     }
     

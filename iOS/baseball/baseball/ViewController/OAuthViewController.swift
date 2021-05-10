@@ -39,7 +39,7 @@ class OAuthViewController: UIViewController, ASWebAuthenticationPresentationCont
             self.gameManager.postLoginCode(callBackURLCode: String(callBackURLCode)) { (result) in
                 switch result {
                 case .success(let userDTO):
-                    guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.identifier) as? MainViewController else { return }
+                    guard let vc = self.storyboard?.instantiateViewController(identifier: MainViewController.className) as? MainViewController else { return }
                     vc.user = userDTO
                     self.navigationController?.pushViewController(vc, animated: true)
                 case .failure(let error):

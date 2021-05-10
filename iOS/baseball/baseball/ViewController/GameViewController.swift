@@ -47,12 +47,12 @@ class GameViewController: UIViewController {
     
     func registerNib() {
         let nibName = UINib(nibName: "GameStoryTableViewCell", bundle: nil)
-        ballCount.register(nibName, forCellReuseIdentifier: GameStoryTableViewCell.identifier)
+        ballCount.register(nibName, forCellReuseIdentifier: GameStoryTableViewCell.className)
     }
     
     func makeDataSource() -> Datasource {
         let dataSource = Datasource(tableView: ballCount) { (tableView, indexPath, item) -> UITableViewCell? in
-            let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.identifier, for: indexPath) as? GameStoryTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: GameStoryTableViewCell.className, for: indexPath) as? GameStoryTableViewCell
             cell?.countLabel.text = "스트라이크"
             cell?.countImage.image = UIImage(systemName: "doc.fill")
             return cell

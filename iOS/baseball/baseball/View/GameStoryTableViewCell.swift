@@ -8,9 +8,6 @@
 import UIKit
 
 class GameStoryTableViewCell: UITableViewCell {
-    
-    static let identifier = "GameCell"
-    
     @IBOutlet weak var countImage: UIImageView!
     @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var countNumberLabel: UILabel!
