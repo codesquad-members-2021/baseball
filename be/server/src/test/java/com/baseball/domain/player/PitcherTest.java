@@ -52,7 +52,7 @@ class PitcherTest {
     void scenario_ball() {
         pitcher.play(BALL);
         softly.assertThat(pitcher.getBaseOnBalls())
-                .isEqualTo(1);
+                .isEqualTo(0);
         softly.assertThat(pitcher.getInnings())
                 .isEqualTo(1);
         softly.assertThat(pitcher.getHit())

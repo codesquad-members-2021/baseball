@@ -4,7 +4,7 @@ import com.baseball.domain.match.PitchResult;
 
 public class Pitcher extends Player {
     private Integer numberOfPitching = 0;
-    private Integer baseOnBalls = 0;
+    private Integer ballCount = 0;
     private Integer innings = 0;
 
     public Pitcher(String name) {
@@ -20,7 +20,7 @@ public class Pitcher extends Player {
         }
         if (pitchResult == PitchResult.BALL) {
             numberOfPitching++;
-            baseOnBalls++;
+            ballCount++;
             innings++;
         }
     }
@@ -30,7 +30,7 @@ public class Pitcher extends Player {
     }
 
     public Integer getBaseOnBalls() {
-        return baseOnBalls;
+        return ballCount / 4;
     }
 
     public Integer getInnings() {
