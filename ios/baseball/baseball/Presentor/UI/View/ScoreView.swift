@@ -22,4 +22,9 @@ class ScoreView: UIView {
         view.frame = self.bounds
         self.addSubview(view)
     }
+    
+    func configureScore(score: Score) {
+        homeScoreLabel.text = "\(score.homeScore)"
+        awayScoreLabel.text = "\(score.awayScore)"
+    }
 }

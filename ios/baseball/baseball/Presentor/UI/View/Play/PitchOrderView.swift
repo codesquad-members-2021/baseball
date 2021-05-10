@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PicthOrderView: UIView {
+final class PitchOrderView: UIView {
     let pitchOrderLabel = PitchOrderLabel()
     
     override init(frame: CGRect) {

@@ -2,13 +2,13 @@
 //  SBO.swift
 //  baseball
 //
-//  Created by zombietux on 2021/05/06.
+//  Created by zombietux on 2021/05/10.
 //
 
 import Foundation
 
 struct SBO {
-    private(set) var strikeCount: Int
-    private(set) var ballCount: Int
-    private(set) var outCount: Int
+    private(set) var strike: Int
+    private(set) var ball: Int
+    private(set) var out: Int
 }
