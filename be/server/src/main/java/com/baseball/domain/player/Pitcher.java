@@ -27,8 +27,8 @@ public class Pitcher extends Player {
         return numberOfPitching;
     }
 
-    public Float getBaseOnBalls() {
-        return (float) ballCount / 4;
+    public Integer getBaseOnBalls() {
+        return ballCount / 4;
     }
 
     private Integer getOutCount() {

@@ -7,7 +7,7 @@ public class PitcherDto {
     private final String name;
     private final Integer numberOfPitching;
     private final Integer hit;
-    private final Float baseOnBalls;
+    private final Integer baseOnBalls;
     private final Float innings;
 
     private PitcherDto(Builder builder) {
@@ -22,7 +22,7 @@ public class PitcherDto {
         private String name;
         private Integer numberOfPitching;
         private Integer hit;
-        private Float baseOnBalls;
+        private Integer baseOnBalls;
         private Float innings;
 
         private Builder name(String name) {
@@ -40,7 +40,7 @@ public class PitcherDto {
             return this;
         }
 
-        private Builder baseOnBalls(Float baseOnBalls) {
+        private Builder baseOnBalls(Integer baseOnBalls) {
             this.baseOnBalls = baseOnBalls;
             return this;
         }
@@ -67,7 +67,7 @@ public class PitcherDto {
         return hit;
     }
 
-    public Float getBaseOnBalls() {
+    public Integer getBaseOnBalls() {
         return baseOnBalls;
     }
 
