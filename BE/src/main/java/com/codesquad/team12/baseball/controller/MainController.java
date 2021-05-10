@@ -22,7 +22,7 @@ public class MainController {
     }
 
     @GetMapping
-    public List<GameDto> getMain() {
-        return gameService.findAll();
+    public MainDto getMain() {
+        return new MainDto(gameService.findAll());
     }
 }

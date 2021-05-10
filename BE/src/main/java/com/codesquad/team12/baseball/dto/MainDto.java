@@ -2,13 +2,13 @@ package com.codesquad.team12.baseball.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Set;
+import java.util.List;
 
 public class MainDto {
     @JsonProperty
-    private Set<GameDto> games;
+    private List<GameDto> games;
 
-    public MainDto(Set<GameDto> games) {
+    public MainDto(List<GameDto> games) {
         this.games = games;
     }
 }
