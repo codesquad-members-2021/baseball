@@ -32,8 +32,13 @@ public class Pitcher extends Player {
         return (float) ballCount / 4;
     }
 
+    private Integer getOutCount() {
+        return strikeCount / 3;
+    }
+
     public Float getInnings() {
-        return (float) strikeCount / 9;
+        return (float) getOutCount() / 3;
+
     }
 
 }
