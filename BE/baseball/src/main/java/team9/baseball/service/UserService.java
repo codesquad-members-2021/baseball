@@ -1,10 +1,12 @@
 package team9.baseball.service;
 
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team9.baseball.domain.aggregate.user.User;
 import team9.baseball.domain.enums.ResourceServer;
 import team9.baseball.exception.NotFoundException;
+import team9.baseball.exception.UnauthorizedException;
 import team9.baseball.repository.UserRepository;
 import team9.baseball.util.JwtUtil;
 
@@ -33,6 +35,22 @@ public class UserService {
 
         User user = getUser(email);
         return getJsonWebToken(user);
+    }
+
+    public Long getUserIdFromJwt(String jwt) {
+        Claims claims = JwtUtil.getTokenData(jwt);
+        System.out.println(claims.getSubject());
+        if (!JWT_SIGN_IN_SUBJECT.equals(claims.getSubject())) {
+            throw new UnauthorizedException("토큰의 주제가 로그인 확인과 다릅니다.");
+        }
+        Long id = claims.get(JWT_ID, Long.class);
+        String email = claims.get(JWT_EMAIL, String.class);
+        String resourceServer = claims.get(JWT_RESOURCE_SERVER, String.class);
+
+        User user = userRepository.findByIdAndEmailAndOauthResourceServer(id, email, resourceServer)
+                .orElseThrow(() -> new UnauthorizedException("토큰 정보에 해당하는 사용자를 찾을 수 없습니다."));
+
+        return user.getId();
     }
 
     private String getJsonWebToken(User user) {
