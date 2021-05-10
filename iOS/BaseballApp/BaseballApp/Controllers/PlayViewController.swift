@@ -47,6 +47,7 @@ class PlayViewController: UIViewController {
                 self?.currentPlayerView.configure(batter: game.batter, status: game.batter_status)
                 self?.currentPlayerView.configure(pitcher: game.pitcher, status: game.pitcher_status)
                 self?.currentPlayerView.configure(playerRole: game.my_role)
+                self?.pitcherHistoryTableView.reloadData()
             }
         }
     }
@@ -81,8 +82,11 @@ extension PlayViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PitcherRecordTableViewCell.identifier, for: indexPath) as! PitcherRecordTableViewCell
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PitcherRecordTableViewCell.identifier, for: indexPath) as? PitcherRecordTableViewCell,
+              let record = viewModel.game?.data.pitch_histories[indexPath.row] else {
+            return UITableViewCell()
+        }
+        cell.configure(record: record)
         return cell
     }
 }
