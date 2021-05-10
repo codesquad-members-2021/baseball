@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components";
 import Home from "./components/Home/Home";
@@ -33,7 +34,21 @@ function App() {
 	);
 }
 
-const Main = styled.div`
+export const MainContext = React.createContext();
+
+const Main = ({ children }) => {
+	const [gameId, setGameId] = useState(1); 
+	// gameId가 undefined일 땐 fetch가 난리가 난다
+	// gameId가 정해지지 않는, 그러니까 바로 InGame으로 들어갈 수 없게 철저히 막거나
+	// 임의의 gameId(0따위)를 넣고 프레디에게 0번게임은 가짜게임, 가짜데이터로 채워달라고 하거나
+	return (
+		<MainContext.Provider value={{ gameId, setGameId }}>
+			<StyledMain>{children}</StyledMain>
+		</MainContext.Provider>
+	);
+};
+
+const StyledMain = styled.div`
 	background-image: url("image/mlbground_edit.jpg");
 	background-repeat: no-repeat;
 	min-width: 1280px;
