@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from 'Components/Home';
 import GamePage from "Components/GamePage";
-import { Router, Route } from "utils/Router";
+import { Router, Route } from "utils/BeemoRouter";
 
 const Page = () => {
   return (

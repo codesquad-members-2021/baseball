@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 const HistoryContext = React.createContext();
 
 export const Router = ({ children }) => {
-  const [currentPath, setCurrentPath] = useState('/');
   const { history, location: { pathname } } = window;
+  const [currentPath, setCurrentPath] = useState(pathname);
 
   useEffect(() => {
     //popstate 이벤트 등록.  
@@ -16,7 +16,6 @@ export const Router = ({ children }) => {
         setCurrentPath(e.state.to);
       }
     });
-    setCurrentPath(pathname); //처음 url 입력시 path 지정하게하는것 
   }, []);
 
   return (
