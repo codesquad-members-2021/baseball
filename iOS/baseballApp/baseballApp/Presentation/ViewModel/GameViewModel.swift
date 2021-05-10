@@ -25,7 +25,7 @@ class GameViewModel: CommonViewModel {
     
     private func transformDTO(to game: GameDTO, completion: @escaping (Game)->Void
     ){
-        game.body.forEach { data in
+        game.games.forEach { data in
             completion(data)
         }
     }
