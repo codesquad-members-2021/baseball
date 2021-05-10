@@ -15,6 +15,18 @@ public class TeamInformationMap {
         this.teamInformationMap = teamInformationMap;
     }
 
+    public static TeamInformationMap newTeamInformation(Team home, Team away) {
+        Map<TeamEnum, BaseballGameTeamInformation> teamInformationMap = new HashMap<>();
+
+        teamInformationMap.put(TeamEnum.HOME, BaseballGameTeamInformation.newTeamInfo(home));
+
+        BaseballGameTeamInformation awayTeamInfo = BaseballGameTeamInformation.newTeamInfo(away);
+        awayTeamInfo.nextInning();
+
+        teamInformationMap.put(TeamEnum.AWAY, awayTeamInfo);
+        return new TeamInformationMap(teamInformationMap);
+    }
+
     public BaseballGameTeamInformation getHome() {
         return teamInformationMap.get(TeamEnum.HOME);
     }
@@ -26,18 +38,6 @@ public class TeamInformationMap {
     public Integer getBatter(TeamEnum teamEnum) {
         BaseballGameTeamInformation teamInformation = teamInformationMap.get(teamEnum);
         return teamInformation.getBatter();
-    }
-
-    public static TeamInformationMap newTeamInformation(Team home, Team away) {
-        Map<TeamEnum, BaseballGameTeamInformation> teamInformationMap = new HashMap<>();
-
-        teamInformationMap.put(TeamEnum.HOME, BaseballGameTeamInformation.newTeamInfo(home));
-
-        BaseballGameTeamInformation awayTeamInfo = BaseballGameTeamInformation.newTeamInfo(away);
-        awayTeamInfo.nextInning();
-
-        teamInformationMap.put(TeamEnum.AWAY, awayTeamInfo);
-        return new TeamInformationMap(teamInformationMap);
     }
 
     public void hit(TeamEnum attackTeam) {

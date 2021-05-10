@@ -59,15 +59,33 @@ public class BaseballGame {
             return;
         }
 
+        if (pitch == Pitch.BALL) {
+            ball(attackTeam);
+            return;
+        }
+
     }
 
-    private void hit(TeamEnum attack) {
+    private void hit(TeamEnum attackTeam) {
         inning.hit();
-        teamInformation.hit(attack);
-        if (inning.isScored()) {
-            teamInformation.scoreUp(attack, inning.getOrdinal());
+        teamInformationHit(attackTeam);
+    }
+
+    private void ball(TeamEnum attackTeam) {
+        inning.ball();
+        if (inning.isFourBall()) {
+            inning.fourBall();
+            teamInformationHit(attackTeam);
         }
-        teamInformation.setNextBatter(attack);
+    }
+
+    private void teamInformationHit(TeamEnum attackTeam) {
+        teamInformation.hit(attackTeam);
+        teamInformation.setNextBatter(attackTeam);
+
+        if (inning.homeIn()) {
+            teamInformation.scoreUp(attackTeam, inning.getOrdinal());
+        }
     }
 
     public Long getId() {

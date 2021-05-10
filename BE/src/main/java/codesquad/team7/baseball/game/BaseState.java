@@ -14,6 +14,12 @@ public class BaseState {
         this.homeBase = homeBase;
     }
 
+    public static BaseState newBaseState() {
+        return new BaseState(
+                false, false, false, false
+        );
+    }
+
     public Boolean getFirstBase() {
         return firstBase;
     }
@@ -30,12 +36,6 @@ public class BaseState {
         return homeBase;
     }
 
-    public static BaseState newBaseState() {
-        return new BaseState(
-                false, false, false, false
-        );
-    }
-
     public boolean hit() {
         homeBase = thirdBase;
         thirdBase = secondBase;
@@ -44,26 +44,25 @@ public class BaseState {
         return homeBase;
     }
 
-    public boolean fourBall() {
+    public void fourBall() {
         if (!firstBase) {
             firstBase = true;
-            return false;
+            return;
         }
 
         if (!secondBase) {
             secondBase = true;
-            return false;
+            return;
         }
 
         if (!thirdBase) {
             thirdBase = true;
-            return false;
+            return;
         }
 
         if (!homeBase) {
             homeBase = true;
         }
-        return true;
     }
 
     public void flushHome() {

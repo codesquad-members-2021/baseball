@@ -34,8 +34,7 @@ public class Inning {
         );
     }
 
-
-    public boolean isScored() {
+    public boolean homeIn() {
         return baseState.getHomeBase();
     }
 
@@ -48,10 +47,15 @@ public class Inning {
     public void ball() {
         ball += 1;
         baseState.flushHome();
-        if (ball >= 4) {
-            ball = 0;
-            baseState.fourBall();
-        }
+    }
+
+    public boolean isFourBall() {
+        return ball >= 4;
+    }
+
+    public void fourBall() {
+        ball = 0;
+        baseState.fourBall();
     }
 
     public void strike() {

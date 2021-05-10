@@ -19,12 +19,10 @@ public class BaseballGameTeamInformation {
 
     @Embedded.Empty
     private final PlayersStatistics playersStatistics;
-
-    private Integer batterNumber;
-    private Integer pitches;
-
     @Embedded.Empty
     private final TeamScores teamScores;
+    private Integer batterNumber;
+    private Integer pitches;
 
     BaseballGameTeamInformation(Long id, Long teamId, PlayersStatistics playersStatistics, Integer batterNumber, Integer pitches, TeamScores teamScores) {
         this.id = id;
@@ -35,9 +33,19 @@ public class BaseballGameTeamInformation {
         this.teamScores = teamScores;
     }
 
+    public static BaseballGameTeamInformation newTeamInfo(Team team) {
+        return new BaseballGameTeamInformation(
+                null,
+                team.getId(),
+                PlayersStatistics.newStatistics(),
+                0,
+                0,
+                TeamScores.newTeamScores()
+        );
+    }
+
     public void hit() {
         playersStatistics.hit(batterNumber);
-
     }
 
     public void out() {
@@ -80,17 +88,6 @@ public class BaseballGameTeamInformation {
         return teamScores.getInningScore().stream()
                 .map(InningScore::getInningScore)
                 .collect(Collectors.toList());
-    }
-
-    public static BaseballGameTeamInformation newTeamInfo(Team team) {
-        return new BaseballGameTeamInformation(
-                null,
-                team.getId(),
-                PlayersStatistics.newStatistics(),
-                0,
-                0,
-                TeamScores.newTeamScores()
-        );
     }
 
     public void nextInning() {
