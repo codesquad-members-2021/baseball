@@ -6,7 +6,6 @@ import com.codesquad.coco.game.domain.model.ScoreBoard;
 import com.codesquad.coco.team.TeamService;
 import com.codesquad.coco.team.domain.DTO.MainPageTeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamChoiceDTO;
-import com.codesquad.coco.team.domain.DTO.TeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -57,15 +56,10 @@ public class GameController {
     @GetMapping("/games/{gameId}/players")
     @ResponseStatus(HttpStatus.OK)
     public GamePlayDTO showPlayer(@PathVariable Long gameId) {
-        String userTeamName = gameService.findUserTeamNameByGameId(gameId);
 
-        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
-        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
+        return gameService.findGamePlayDTOByGameId(gameId);
 
-        if (homeTeam.getTeamName().equals(userTeamName)) {
-            return new GamePlayDTO(gameId, homeTeam, awayTeam);
-        }
-        return new GamePlayDTO(gameId, awayTeam, homeTeam);
+
     }
 
 }

@@ -2,9 +2,12 @@ package com.codesquad.coco.game;
 
 import com.codesquad.coco.game.domain.DAO.GameDAO;
 import com.codesquad.coco.game.domain.DAO.ScoreBoardDAO;
+import com.codesquad.coco.game.domain.model.DTO.GamePlayDTO;
 import com.codesquad.coco.game.domain.model.DTO.GameScoreDTO;
 import com.codesquad.coco.game.domain.model.Innings;
 import com.codesquad.coco.game.domain.model.ScoreBoard;
+import com.codesquad.coco.team.TeamService;
+import com.codesquad.coco.team.domain.DTO.TeamDTO;
 import com.codesquad.coco.team.domain.DTO.TeamPointDTO;
 import com.codesquad.coco.team.domain.DTO.TeamScoreDTO;
 import com.codesquad.coco.utils.DTOConverter;
@@ -17,10 +20,12 @@ public class GameService {
 
     private GameDAO gameDAO;
     private ScoreBoardDAO boardDAO;
+    private TeamService teamService;
 
-    public GameService(GameDAO gameDAO, ScoreBoardDAO boardDAO) {
+    public GameService(GameDAO gameDAO, ScoreBoardDAO boardDAO, TeamService teamService) {
         this.gameDAO = gameDAO;
         this.boardDAO = boardDAO;
+        this.teamService = teamService;
     }
 
     public ScoreBoard findScoreBoardByTeamName(Long gameId, TeamPointDTO teamPointDTO) {
@@ -49,9 +54,20 @@ public class GameService {
         return boardDAO.findByGameId(gameId);
     }
 
+    public GamePlayDTO findGamePlayDTOByGameId(Long gameId) {
+        String userTeamName = findUserTeamNameByGameId(gameId);
+
+        TeamDTO homeTeam = teamService.findHomeTeamByGameId(gameId);
+        TeamDTO awayTeam = teamService.findAwayTeamByGameId(gameId);
+
+        if (homeTeam.getTeamName().equals(userTeamName)) {
+            return new GamePlayDTO(gameId, homeTeam, awayTeam);
+        }
+        return new GamePlayDTO(gameId, awayTeam, homeTeam);
+    }
+
     public String findUserTeamNameByGameId(Long gameId) {
         return gameDAO.findUserTeamNameByGameId(gameId);
     }
-
 
 }
