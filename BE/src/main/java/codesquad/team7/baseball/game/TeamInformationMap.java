@@ -69,4 +69,14 @@ public class TeamInformationMap {
         BaseballGameTeamInformation teamInformation = teamInformationMap.get(team);
         teamInformation.nextInning();
     }
+
+    public Long getTeamId(TeamEnum team) {
+        BaseballGameTeamInformation teamInformation = teamInformationMap.get(team);
+        return teamInformation.getTeamId();
+    }
+
+    public String getTeamName(TeamEnum team) {
+        BaseballGameTeamInformation teamInformation = teamInformationMap.get(team);
+        return teamInformation.getTeamName();
+    }
 }

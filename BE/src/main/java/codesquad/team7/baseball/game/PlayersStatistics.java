@@ -1,13 +1,13 @@
 package codesquad.team7.baseball.game;
 
+import codesquad.team7.baseball.team.Player;
+import codesquad.team7.baseball.team.Team;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayersStatistics {
-
-    private static final int PLAYER_NUMBER = 9;
 
     @MappedCollection(idColumn = "information_id", keyColumn = "player_statistics_index")
     private final List<PlayerStatistics> players;
@@ -16,11 +16,11 @@ public class PlayersStatistics {
         this.players = players;
     }
 
-    public static PlayersStatistics newStatistics() {
+    public static PlayersStatistics newStatistics(Team team) {
         List<PlayerStatistics> playerStatisticsList = new ArrayList<>();
 
-        for (int i = 0; i < PLAYER_NUMBER; i++) {
-            playerStatisticsList.add(PlayerStatistics.newPlayerStatistics());
+        for (Player player : team.getPlayers()) {
+            playerStatisticsList.add(PlayerStatistics.newPlayerStatistics(player));
         }
 
         return new PlayersStatistics(playerStatisticsList);
@@ -41,6 +41,6 @@ public class PlayersStatistics {
     }
 
     public int size() {
-        return PLAYER_NUMBER;
+        return players.size();
     }
 }

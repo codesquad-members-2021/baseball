@@ -157,4 +157,21 @@ public class BaseballGame {
     public List<BatterInningHistory> getHistory() {
         return history;
     }
+
+    public Long getHomeTeamId() {
+        return teamInformation.getTeamId(TeamEnum.HOME);
+
+    }
+
+    public Long getAwayTeamId() {
+        return teamInformation.getTeamId(TeamEnum.AWAY);
+    }
+
+    public String getHomeTeamName() {
+        return teamInformation.getTeamName(TeamEnum.HOME);
+    }
+
+    public String getAwayTeamName() {
+        return teamInformation.getTeamName(TeamEnum.AWAY);
+    }
 }

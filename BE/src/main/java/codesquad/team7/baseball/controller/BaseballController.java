@@ -61,7 +61,7 @@ public class BaseballController {
         baseballGame = baseballGameRepository.save(baseballGame);
 
         List<BaseballGameTitle> games = new ArrayList<>();
-        games.add(BaseballGameTitle.of(baseballGame, dinos, eagles));
+        games.add(BaseballGameTitle.of(baseballGame));
         baseballGames = BaseballGames.of(games);
     }
 

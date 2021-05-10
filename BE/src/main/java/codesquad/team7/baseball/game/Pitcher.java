@@ -1,8 +1,12 @@
-package codesquad.team7.baseball.view;
+package codesquad.team7.baseball.game;
+
+import org.springframework.data.relational.core.mapping.Column;
 
 public class Pitcher {
 
+    @Column("pitcher_number")
     private Integer number;
+
     private Integer pitches;
 
     public Pitcher(Integer number, Integer pitches) {
@@ -16,5 +20,9 @@ public class Pitcher {
 
     public Integer getPitches() {
         return pitches;
+    }
+
+    public void pitchUp() {
+        pitches++;
     }
 }

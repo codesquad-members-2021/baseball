@@ -27,7 +27,7 @@ public class BaseballGameTitle {
         return away;
     }
 
-    public static BaseballGameTitle of(BaseballGame game, Team home, Team away) {
-        return new BaseballGameTitle(game.getId(), home.getName(), away.getName());
+    public static BaseballGameTitle of(BaseballGame game) {
+        return new BaseballGameTitle(game.getId(), game.getHomeTeamName(), game.getAwayTeamName());
     }
 }

@@ -1,13 +1,20 @@
 package codesquad.team7.baseball.game;
 
+import codesquad.team7.baseball.team.Player;
+import org.springframework.data.relational.core.mapping.Column;
+
 public class PlayerStatistics {
+
+    @Column("player_name")
+    private final String name;
 
     private Integer atBat;
     private Integer hits;
     private Integer out;
     private Double average;
 
-    PlayerStatistics(Integer atBat, Integer hits, Integer out, Double average) {
+    PlayerStatistics(String name, Integer atBat, Integer hits, Integer out, Double average) {
+        this.name = name;
         this.atBat = atBat;
         this.hits = hits;
         this.out = out;
@@ -47,8 +54,9 @@ public class PlayerStatistics {
         return average;
     }
 
-    public static PlayerStatistics newPlayerStatistics() {
+    public static PlayerStatistics newPlayerStatistics(Player player) {
         return new PlayerStatistics(
+                player.getName(),
                 0, 0, 0, 0.0
         );
     }

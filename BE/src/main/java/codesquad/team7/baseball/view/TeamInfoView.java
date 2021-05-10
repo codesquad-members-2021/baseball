@@ -1,7 +1,7 @@
 package codesquad.team7.baseball.view;
 
 import codesquad.team7.baseball.game.BaseballGameTeamInformation;
-import codesquad.team7.baseball.game.PlayerStatistics;
+import codesquad.team7.baseball.game.Pitcher;
 import codesquad.team7.baseball.game.PlayersStatistics;
 import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;

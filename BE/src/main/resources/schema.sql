@@ -39,8 +39,12 @@ CREATE TABLE IF NOT EXISTS baseball_game_team_information (
     baseball_game_team CHAR(4),
 
     team_id BIGINT,
+    team_name VARCHAR(30),
     batter_number INT,
+
+    pitcher_number INT,
     pitches INT,
+
     total_score INT,
 
     CONSTRAINT team_information_team_id FOREIGN KEY (team_id) REFERENCES team (team_id),
@@ -50,6 +54,7 @@ CREATE TABLE IF NOT EXISTS baseball_game_team_information (
 CREATE TABLE IF NOT EXISTS player_statistics (
     information_id BIGINT,
     player_statistics_index INT,
+    player_name VARCHAR (30),
     at_bat INT,
     hits INT,
     `out` INT,

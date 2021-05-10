@@ -17,19 +17,27 @@ public class BaseballGameTeamInformation {
 
     private final Long teamId;
 
+    @Column("team_name")
+    private final String name;
+
     @Embedded.Empty
     private final PlayersStatistics playersStatistics;
+
+    @Embedded.Empty
+    private Pitcher pitcher;
+
+    private Integer batterNumber;
+
     @Embedded.Empty
     private final TeamScores teamScores;
-    private Integer batterNumber;
-    private Integer pitches;
 
-    BaseballGameTeamInformation(Long id, Long teamId, PlayersStatistics playersStatistics, Integer batterNumber, Integer pitches, TeamScores teamScores) {
+    BaseballGameTeamInformation(Long id, Long teamId, String name, PlayersStatistics playersStatistics, Integer batterNumber, Pitcher pitcher, TeamScores teamScores) {
         this.id = id;
         this.teamId = teamId;
+        this.name = name;
         this.playersStatistics = playersStatistics;
         this.batterNumber = batterNumber;
-        this.pitches = pitches;
+        this.pitcher = pitcher;
         this.teamScores = teamScores;
     }
 
@@ -37,9 +45,10 @@ public class BaseballGameTeamInformation {
         return new BaseballGameTeamInformation(
                 null,
                 team.getId(),
-                PlayersStatistics.newStatistics(),
+                team.getName(),
+                PlayersStatistics.newStatistics(team),
                 0,
-                0,
+                new Pitcher(team.getPitcherNumber(), 0),
                 TeamScores.newTeamScores()
         );
     }
@@ -57,7 +66,7 @@ public class BaseballGameTeamInformation {
     }
 
     public void pitch() {
-        pitches++;
+        pitcher.pitchUp();
     }
 
     public void scoreUp(int inning) {
@@ -81,7 +90,7 @@ public class BaseballGameTeamInformation {
     }
 
     public Integer getPitches() {
-        return pitches;
+        return pitcher.getPitches();
     }
 
     public List<Integer> getInningScore() {
@@ -92,5 +101,9 @@ public class BaseballGameTeamInformation {
 
     public void nextInning() {
         teamScores.nextInning();
+    }
+
+    public String getTeamName() {
+        return name;
     }
 }
