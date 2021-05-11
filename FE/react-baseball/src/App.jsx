@@ -29,23 +29,23 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-     <PlayableContext.Provider value={{ playable, setPlayable }}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Switch>
-          <AppDiv>
-            <Route path='/' exact>
-              <StartScreen />
-            </Route>
-            <Provider value={{ ballCnt, dispatch }}>
-              <Route path='/play-screen'>
-                <PlayScreen />
+      <PlayableContext.Provider value={{ playable, setPlayable }}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <Switch>
+            <AppDiv>
+              <Route path='/' exact>
+                <StartScreen />
               </Route>
-            </Provider>
-          </AppDiv>
-        </Switch>
-      </BrowserRouter>
-     </PlayableContext.Provider>
+              <Provider value={{ ballCnt, dispatch }}>
+                <Route path='/play-screen'>
+                  <PlayScreen />
+                </Route>
+              </Provider>
+            </AppDiv>
+          </Switch>
+        </BrowserRouter>
+      </PlayableContext.Provider>
     </ThemeProvider>
   );
 }
