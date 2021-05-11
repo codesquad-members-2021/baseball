@@ -10,13 +10,21 @@ public class GameListDTO {
     @Column("homeTeamName")
     private String homeTeamName;
 
+    @Column("homeTeamId")
+    private Long homeTeamId;
+
     @Column("awayTeamName")
     private String awayTeamName;
 
-    public GameListDTO(Long gameId, String homeTeamName, String awayTeamName) {
+    @Column("awayTeamId")
+    private Long awayTeamId;
+
+    public GameListDTO(Long gameId, String homeTeamName, Long homeTeamId, String awayTeamName, Long awayTeamId) {
         this.gameId = gameId;
         this.homeTeamName = homeTeamName;
+        this.homeTeamId = homeTeamId;
         this.awayTeamName = awayTeamName;
+        this.awayTeamId = awayTeamId;
     }
 
     public Long getGameId() {
@@ -31,6 +39,14 @@ public class GameListDTO {
         return awayTeamName;
     }
 
+    public Long getHomeTeamId() {
+        return homeTeamId;
+    }
+
+    public Long getAwayTeamId() {
+        return awayTeamId;
+    }
+
     public void setGameId(Long gameId) {
         this.gameId = gameId;
     }
@@ -41,5 +57,13 @@ public class GameListDTO {
 
     public void setAwayTeamName(String awayTeamName) {
         this.awayTeamName = awayTeamName;
+    }
+
+    public void setHomeTeamId(Long homeTeamId) {
+        this.homeTeamId = homeTeamId;
+    }
+
+    public void setAwayTeamId(Long awayTeamId) {
+        this.awayTeamId = awayTeamId;
     }
 }
