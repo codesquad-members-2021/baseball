@@ -1,12 +1,7 @@
-const END_POINT = "http://ec2-13-125-90-225.ap-northeast-2.compute.amazonaws.com:8080";
-
 const API = {
   get: {
-    teams: async () => {
-      const response = await fetch(`/teams`);
-      return response.json();
-    },
-
+    teams: () => customFetch(`/teams`),
+    games: () => customFetch(`/games`),
   },
   post: {}
 };

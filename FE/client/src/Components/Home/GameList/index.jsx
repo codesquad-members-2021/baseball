@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import Game from "./Game";
-import { gameDatas } from "utils/mockDatas";
+import useAsync from "utils/hooks/useAsync";
+import API from "utils/API";
 
 const GameList = () => {
+  const [gameState] = useAsync(API.get.games);
+  const { data, loading, error } = gameState;
+
   return (
     <GameBoxList>
-      {gameDatas.map((gameData) => {
-        return <Game gameData={gameData} />;
+      {loading && <>loading...</>}
+
+      {data && Object.entries(data).map(([_, gameData], idx) => {
+        return <Game key={`Game-${idx}`} {...{ gameData }} />
       })}
+
+      {error && <>error...</>}
     </GameBoxList>
   );
 };

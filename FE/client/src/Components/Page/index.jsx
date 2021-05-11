@@ -1,34 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import Home from 'Components/Home';
 import GamePage from "Components/GamePage";
 import { Router, Route } from "utils/BeemoRouter";
 import io from 'socket.io-client';
-import API from 'utils/API';
+
+export const PageContext = createContext();
+const socket = io.connect('http://localhost:3001');
+
 const Page = () => {
+  const [playerId, setPlayerId] = useState();
 
   useEffect(() => {
-    const socket = io.connect('http://localhost:3001');
     const connectSocket = () => {
-      socket.emit('init', { name: 'bella' });
-      socket.on('welcome', (msg) => {
-        console.log(msg);
+      socket.emit('init');
+      socket.on('playerId', (playerId) => {
+        setPlayerId(playerId);
       });
     };
     connectSocket();
   }, []);
 
   useEffect(() => {
-    const getTeams = async () => {
-      const teams = await API.get.teams();
-      console.log(teams);
-    }
-    getTeams();
-  }, []);
+    console.log(playerId)
+  }, [playerId]);
 
   return (
+
     <Router>
-      <Route path="/" component={Home} />
-      <Route path="/GamePage" component={GamePage} />
+      <PageContext.Provider value={{ playerId, socket }}>
+        <Route path="/" component={Home} />
+        <Route path="/GamePage" component={GamePage} />
+      </PageContext.Provider>
     </Router>
   );
 };
