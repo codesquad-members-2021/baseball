@@ -1,15 +1,16 @@
 package com.baseball.domain.team;
 
+import com.baseball.domain.match.PlayResult;
 import com.baseball.domain.player.Batter;
 import com.baseball.domain.player.Pitcher;
-import com.baseball.exception.MatchOccupiedException;
 
-import static com.baseball.domain.team.SelectedTeam.*;
+import static com.baseball.domain.team.TeamType.AWAY;
+import static com.baseball.domain.team.TeamType.HOME;
 
 public class Teams {
     private final Team awayTeam;
     private final Team homeTeam;
-    private SelectedTeam selectedTeam = NONE;
+    private TeamType offenseTeam = AWAY;
 
     public Teams(Team awayTeam, Team homeTeam) {
         this.awayTeam = awayTeam;
@@ -24,30 +25,37 @@ public class Teams {
         return homeTeam;
     }
 
-    public SelectedTeam getSelectedTeam() {
-        return selectedTeam;
+    public void switchRole() {
+        offenseTeam = offenseTeam == AWAY ? HOME : AWAY;
     }
 
-    public void selectTeam(String teamName) {
-        if (selectedTeam != NONE) {
-            throw new MatchOccupiedException();
+    public void increaseScore() {
+        if (offenseTeam == AWAY) {
+            awayTeam.increaseScore();
         }
-        selectedTeam = homeTeam.getName().equals(teamName) ? HOME : AWAY;
+        if (offenseTeam == HOME) {
+            homeTeam.increaseScore();
+        }
+    }
+
+    public void play(PlayResult playResult) {
+        Pitcher pitcher = getPitcher();
+        Batter batter = getBatter();
+        pitcher.play(playResult);
+        batter.play(playResult);
     }
 
     public Pitcher getPitcher() {
-        /**
-         * TODO: Inning에 따라 달라지도록 해야함
-         * - 홈팀이 먼저 수비
-         */
-        return homeTeam.getPlayers().getPitchers().get(0);
+        if (offenseTeam == AWAY) {
+            return homeTeam.getPitcher();
+        }
+        return awayTeam.getPitcher();
     }
 
     public Batter getBatter() {
-        /**
-         * TODO: 경기 진행에 따라 달라지도록 해야함
-         * - 원정팀이 먼저 공격
-         */
-        return awayTeam.getPlayers().getBatters().get(0);
+        if (offenseTeam == AWAY) {
+            return awayTeam.getBatter();
+        }
+        return homeTeam.getBatter();
     }
 }

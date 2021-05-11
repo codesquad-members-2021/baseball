@@ -1,5 +1,7 @@
 package com.baseball.domain.team;
 
+import com.baseball.domain.player.Batter;
+import com.baseball.domain.player.Pitcher;
 import com.baseball.domain.player.Players;
 
 import java.util.ArrayList;
@@ -19,6 +21,11 @@ public class Team {
         scores.add(score);
     }
 
+    public void increaseScore() {
+        int lastIndex = scores.size() - 1;
+        scores.set(lastIndex, scores.get(lastIndex) + 1);
+    }
+
     public Integer totalScore() {
         return scores.stream()
                 .reduce(Integer::sum)
@@ -35,5 +42,21 @@ public class Team {
 
     public List<Integer> getScores() {
         return scores;
+    }
+
+    public Pitcher getPitcher() {
+        return players.getPitcher();
+    }
+
+    public Batter getBatter() {
+        return players.getBatter();
+    }
+
+    public void changePitcher() {
+        players.changePitcher();
+    }
+
+    public void changeBatter() {
+        players.changeBatter();
     }
 }

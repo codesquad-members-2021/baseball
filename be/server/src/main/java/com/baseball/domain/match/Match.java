@@ -1,14 +1,15 @@
 package com.baseball.domain.match;
 
-import com.baseball.domain.player.Batter;
-import com.baseball.domain.player.Pitcher;
+import com.baseball.domain.team.TeamType;
 import com.baseball.domain.team.Teams;
+import com.baseball.exception.MatchOccupiedException;
 
-import static com.baseball.domain.team.SelectedTeam.AWAY;
+import static com.baseball.domain.team.TeamType.*;
 
 public class Match {
-    private final Teams teams;
     private final MatchInfo matchInfo = new MatchInfo();
+    private final Teams teams;
+    private TeamType selectedTeam = NONE;
 
     public Match(Teams teams) {
         this.teams = teams;
@@ -22,8 +23,16 @@ public class Match {
         return matchInfo;
     }
 
+    public TeamType getSelectedTeam() {
+        return selectedTeam;
+    }
+
     public void selectTeam(String teamName) {
-        teams.selectTeam(teamName);
+        if (selectedTeam != NONE) {
+            throw new MatchOccupiedException();
+        }
+        String homeTeamName = teams.getHomeTeam().getName();
+        selectedTeam = homeTeamName.equals(teamName) ? HOME : AWAY;
     }
 
     public Integer getInningCount() {
@@ -39,15 +48,12 @@ public class Match {
     }
 
     public Boolean getUserOffense() {
-        return teams.getSelectedTeam() == AWAY ? getUserTop() : !getUserTop();
+        return selectedTeam == AWAY ? getUserTop() : !getUserTop();
     }
 
     public void play(String pitch) {
         PlayResult playResult = PlayResult.of(pitch);
-        Pitcher pitcher = teams.getPitcher();
-        Batter batter = teams.getBatter();
-        pitcher.play(playResult);
-        batter.play(playResult);
         matchInfo.update(playResult);
+        teams.play(playResult);
     }
 }
