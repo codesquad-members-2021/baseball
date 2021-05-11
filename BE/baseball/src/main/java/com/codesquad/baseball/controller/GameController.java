@@ -55,4 +55,9 @@ public class GameController {
         TeamScoreDTO awayTeamScoreDTO = teamService.browseTeamScore(game.getAwayTeamId());
         return GameScoreDTO.of(game, homeTeamScoreDTO, awayTeamScoreDTO);
     }
+
+    @PatchMapping("/play/{teamId}/record")
+    public void updatePlayerRecord(@PathVariable Long teamId, @RequestBody RequestPlayerRecordDTO record) {
+        teamService.updatePlayerRecord(teamId, record);
+    }
 }
