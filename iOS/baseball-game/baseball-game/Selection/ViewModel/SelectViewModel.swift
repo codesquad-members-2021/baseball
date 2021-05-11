@@ -11,8 +11,16 @@ import Combine
 class SelectViewModel {
     
     private(set) var gameInfo: GameInfo!
+    private var networkManager: NetworkManageable
     private var cancellable = Set<AnyCancellable>()
     
+    init(networkManager: NetworkManageable = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+}
+
+
+extension SelectViewModel {
     
     func setModel(with gameInfo: GameInfo) {
         self.gameInfo = gameInfo
@@ -20,7 +28,7 @@ class SelectViewModel {
     
     //MARK: GET
     func request() {
-        NetworkManager.get(type: [Game].self, url: EndPoint.url(path: "")!)
+        networkManager.get(type: [Game].self, url: EndPoint.url(path: "")!)
             .receive(on: DispatchQueue.main)
             .sink { error in
                 print(error) ///사용자에게 에러 표시하는 부분 미구현
@@ -44,7 +52,7 @@ class SelectViewModel {
     
     //MARK: POST
     func postSelection(with gameInfo: GameInfo) {
-        NetworkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
+        networkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
             .receive(on: DispatchQueue.main)
             .sink { error in
                 print(error) ///사용자에게 에러 표시하는 부분 미구현

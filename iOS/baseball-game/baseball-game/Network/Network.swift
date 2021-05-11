@@ -30,11 +30,28 @@ enum EndPoint {
 }
 
 
+protocol NetworkManageable {
+    func get<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error>
+    func post<T: Codable>(url: URL, data: T) -> AnyPublisher<Void, Error>
+}
+
+
 class NetworkManager {
     
-    static func get<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
+    private let session: URLSession
+    
+    init(session: URLSession = .shared) {
+      self.session = session
+    }
+    
+}
+
+
+extension NetworkManager: NetworkManageable {
+    
+    func get<T: Decodable>(type: T.Type, url: URL) -> AnyPublisher<T, Error> {
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return self.session.dataTaskPublisher(for: url)
             .tryMap { element -> Data in
                 guard let httpResponse = element.response as? HTTPURLResponse,
                     httpResponse.statusCode == 200 else {
@@ -49,7 +66,7 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
     
-    static func post<T: Codable>(url: URL, data: T) -> AnyPublisher<Void, Error> {
+    func post<T: Codable>(url: URL, data: T) -> AnyPublisher<Void, Error> {
 
         return Just(data)
             .encode(encoder: JSONEncoder())
@@ -67,7 +84,7 @@ class NetworkManager {
                 return request
             }
             .flatMap { request in
-                return URLSession.shared.dataTaskPublisher(for: request)
+                return self.session.dataTaskPublisher(for: request)
                     .tryMap { element -> Void in
                         guard let httpResponse = element.response as? HTTPURLResponse,
                               httpResponse.statusCode == 200 else {

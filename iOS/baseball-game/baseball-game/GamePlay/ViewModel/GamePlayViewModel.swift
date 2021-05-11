@@ -15,14 +15,16 @@ class GamePlayViewModel {
     @Published var error: Error!
     
     private let isUserHomeSide: Bool
+    private var networkManager: NetworkManageable
     private var cancelBag = Set<AnyCancellable>()
     
-    init(_ isUserHomeSide: Bool) {
+    init(_ isUserHomeSide: Bool, networkManager: NetworkManageable = NetworkManager()) {
         self.isUserHomeSide = isUserHomeSide
+        self.networkManager = networkManager
     }
     
     func requestGame() {
-        NetworkManager.get(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
+        networkManager.get(type: GameManager.self, url: EndPoint.url(path: "/1/attack")!)
             .sink { error in
             self.error = error as? Error
         } receiveValue: { data in
