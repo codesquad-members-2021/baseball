@@ -42,8 +42,9 @@ const ScoreBoardRow = styled.div`
 `;
 
 const ScoreBoardTitle = styled.span`
-  /* display:flex;  */
   font-size: 4rem;
+  font-weight: bold;
+  color: white;
 `
 
 const ScoreBoardMatch = styled.div`
@@ -54,13 +55,16 @@ const ScoreBoardMatch = styled.div`
   display: flex;
   align-items: baseline;
   justify-content: space-evenly;
+  font-weight: bold;
 `
 
 const ScoreBoardTeam = styled.span`
   font-size: 8rem;
+  color: white;
 `
 const ScoreBoardPoint = styled.span`
   font-size: 8rem;
+  color: white;
 `
 const ScoreBaordVersus = styled.span`
   font-size: 4rem;

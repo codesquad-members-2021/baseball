@@ -32,11 +32,11 @@ const MainPageLayout = styled.div`
 
   .grid-area__Score {
     grid-area: Score;
-    background-color: #fcb4b4;
+    background-color: black;
   }
   .grid-area__CurrentPlayer {
     grid-area: CurrentPlayer;
-    background-color: #859096;
+    background-color: black;
   }
   .grid-area__Play {
     position: relative;
@@ -44,7 +44,7 @@ const MainPageLayout = styled.div`
   }
   .grid-area__History {
     grid-area: History;
-    background-color: #a4a5a7;
+    background-color: black;
   }
 `;
 export default MainPage;

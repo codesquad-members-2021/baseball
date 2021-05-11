@@ -42,6 +42,7 @@ const CurrentPlayerRow = styled.div`
 `
 const CurrentPlayerPosition = styled.span`
   font-size: 4rem;
+  font-weight: 500;
   color:white;
   
   /* ::after {
@@ -51,18 +52,20 @@ const CurrentPlayerPosition = styled.span`
 `
 
 const CurrentPlayerStatus = styled.div`
-  display: flex;
   font-size: 3rem;
+  font-weight: 600;
+  
+  display: flex;
   
   span + span {
     padding-left: 3%;
   }
 `
 const CurrentPlayerName = styled.span`
-  color: blue;
+  color: rgb(189, 228, 235);
 `
 const CurrentPlayerDetails = styled.span`
-  color: blue;
+  color: rgb(103, 166, 192);
 `
 
 export default CurrentPlayer;
