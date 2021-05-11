@@ -13,9 +13,12 @@ import java.util.List;
 public class TeamLogDTO {
     private List<PlayerLogDTO> playerLog = new ArrayList<>();
 
-    public TeamLogDTO(Team team) {
-        for(Player player : team.getPlayerList()) {
-            this.playerLog.add(new PlayerLogDTO(player, team.getId()));
+    public TeamLogDTO(Team team, Player player) {
+        int playerIndex = team.getPlayerList().indexOf(player);
+        for (int i = 0; i < playerIndex; i++) {
+            Player targetPlayer = team.getPlayerList().get(i);
+            this.playerLog.add(new PlayerLogDTO(targetPlayer, team.getId()));
         }
+
     }
 }
