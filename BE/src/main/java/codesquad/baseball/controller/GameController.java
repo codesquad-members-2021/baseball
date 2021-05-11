@@ -88,17 +88,17 @@ public class GameController {
             defenseTeam = teamRepository.findById(offenseTeamId).orElseThrow(RuntimeException::new);
             nextHitter = offenseTeam.getFirstHitter();
             pitcher = defenseTeam.getPitcher();
-            offenseTeam.initializeTotalScore(currentInning.getInningNumber());
+            offenseTeam.addTotalScore(currentInning.getInningNumber());
             teamRepository.save(offenseTeam);
         }
 
-        TeamLogDTO teamLogDTO = new TeamLogDTO(offenseTeam);
+        TeamLogDTO teamLogDTO = new TeamLogDTO(offenseTeam, nextHitter);
         matchRepository.save(match);
         Team homeTeam = teamRepository.findById(match.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
         Team expeditionTeam = teamRepository.findById(match.getExpeditionTeamId()).orElseThrow(TeamNotFoundException::new);
 
         ApiResponse apiResponse = new ApiResponse(matchId, currentInning, new PlayerLogDTO(nextHitter, offenseTeamId),
-                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO(pitcher), new PlayerDTO(nextHitter), teamLogDTO);
+                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO("투수", pitcher), new PlayerDTO("타자", nextHitter), teamLogDTO);
         return new ResponseEntity(apiResponse, HttpStatus.OK);
     }
 
