@@ -5,21 +5,15 @@ import com.codesquad.team12.baseball.dto.PlayerDto;
 public class Player {
     private Integer number;
     private String name;
-    private Integer pa;
-    private Integer hit;
-    private Integer out;
-    private Double average;
+    private String position;
 
-    public Player(Integer number, String name, Integer pa, Integer hit, Integer out, Double average) {
+    public Player(Integer number, String name, String position) {
         this.number = number;
         this.name = name;
-        this.pa = pa;
-        this.hit = hit;
-        this.out = out;
-        this.average = average;
+        this.position = position;
     }
 
     public static PlayerDto createPlayerDto(Player player) {
-        return new PlayerDto(player.number, player.name);
+        return new PlayerDto(player.number, player.name, player.position);
     }
 }

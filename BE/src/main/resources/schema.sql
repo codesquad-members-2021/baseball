@@ -45,10 +45,7 @@ CREATE TABLE IF NOT EXISTS `baseball`.`player`
     `id`        INT         NOT NULL,
     `number`    INT         NOT NULL,
     `name`      VARCHAR(45) NOT NULL,
-    `pa`        INT         NULL,
-    `hit`       INT         NULL,
-    `out`       INT         NULL,
-    `average`   DOUBLE      NULL,
+    `position`  VARCHAR(45) NOT NULL,
     `team_name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `fk_player_team1_idx` (`team_name` ASC) VISIBLE,
@@ -102,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `baseball`.`playing`
     `team_name`     VARCHAR(45) NOT NULL,
     `player_number` INT         NOT NULL,
     `player_name`   VARCHAR(45) NOT NULL,
+    `position`      VARCHAR(45) NOT NULL,
     `pa`            INT         NULL,
     `hit`           INT         NULL,
     `out`           INT         NULL,
@@ -127,13 +125,13 @@ DROP TABLE IF EXISTS `baseball`.`inning`;
 
 CREATE TABLE IF NOT EXISTS `baseball`.`inning`
 (
-    `id`      INT NOT NULL,
-    `team_id` INT NOT NULL,
-    `number`  INT NULL,
-    `score`   INT NULL,
-    `game_id` INT NOT NULL,
+    `id`        INT         NOT NULL,
+    `team_name` VARCHAR(45) NOT NULL,
+    `number`    INT         NULL,
+    `score`     INT         NULL,
+    `game_id`   INT         NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `team_id_UNIQUE` (`team_id` ASC) VISIBLE,
+    UNIQUE INDEX `team_id_UNIQUE` (`team_name` ASC) VISIBLE,
     INDEX `fk_inning_game1_idx` (`game_id` ASC) VISIBLE,
     CONSTRAINT `fk_inning_game1`
         FOREIGN KEY (`game_id`)
