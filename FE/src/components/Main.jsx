@@ -8,10 +8,11 @@ import NoMatch from "./NoMatch/NoMatch";
 
 const Main = () => {
 	const [gameId, setGameId] = useState();
+	const [teamId, setTeamId] = useState();
 	const [loginStatus, setLoginStatus] = useState(false);
 	const [userId, setUserId] = useState();
 	return (
-		<MainContext.Provider value={{ gameId, setGameId, loginStatus, setLoginStatus, userId, setUserId }}>
+		<MainContext.Provider value={{ gameId, setGameId, teamId, setTeamId, loginStatus, setLoginStatus, userId, setUserId }}>
 			<StyledMain>
 				<RouterComponent />
 			</StyledMain>

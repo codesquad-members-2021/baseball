@@ -4,15 +4,19 @@ import { useContext } from "react";
 import { MainContext } from "../Main";
 
 const Game = ({ id, homeTeam, awayTeam }) => {
-	const { setGameId } = useContext(MainContext);
+	const { setGameId, setTeamId } = useContext(MainContext);
+	const clickHandler = (type) => {
+		setGameId(() => id);
+		setTeamId(() => (type === "AWAY" ? awayTeam.id : homeTeam.id));
+	};
 	return (
 		<StyledGame>
 			<Index>GAME {id}</Index>
-			<Link to="/ingame" onClick={() => setGameId(() => id)}>
+			<Link to="/ingame" onClick={clickHandler("AWAY")}>
 				<Team>{awayTeam.name}</Team>
 			</Link>
 			<Versus>VS</Versus>
-			<Link to="/ingame" onClick={() => setGameId(() => id)}>
+			<Link to="/ingame" onClick={clickHandler("HOME")}>
 				<Team>{homeTeam.name}</Team>
 			</Link>
 		</StyledGame>
