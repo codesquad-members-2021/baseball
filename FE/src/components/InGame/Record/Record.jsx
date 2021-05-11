@@ -3,7 +3,6 @@ import Top from "./Top";
 import Bottom from "./Bottom";
 
 const Record = ({ data }) => {
-  console.log(data);
   return (
     <StyledRecord>
       <Top currentHitter={data.currentHitter} currentPitcher={data.currentPitcher}></Top>

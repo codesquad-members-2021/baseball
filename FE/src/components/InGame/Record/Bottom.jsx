@@ -2,46 +2,19 @@ import styled from "styled-components";
 import RecordOfPlayer from "./RecordOfPlayer";
 
 const Bottom = ({ hitterRecords }) => {
+  const hitterRecordList = hitterRecords.map((hitter) => {
+    return (
+      <Player key={hitter.id}>
+        <PlayerInfo>
+          <PlayerNum>{hitter.battingOrder}</PlayerNum> <PlayerName>{hitter.name}</PlayerName>
+        </PlayerInfo>
+        <RecordOfPlayer results={hitter.results} />
+      </Player>
+    );
+  });
   return (
     <StyledBottom>
-      <RecordWrapper>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>7</PlayerNum> <PlayerName>류현진</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>6</PlayerNum> <PlayerName>선동렬</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>5</PlayerNum> <PlayerName>김광현</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>5</PlayerNum> <PlayerName>김광현</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>5</PlayerNum> <PlayerName>김광현</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-        <Player>
-          <PlayerInfo>
-            <PlayerNum>5</PlayerNum> <PlayerName>김광현</PlayerName>
-          </PlayerInfo>
-          <RecordOfPlayer />
-        </Player>
-      </RecordWrapper>
+      <RecordWrapper>{hitterRecordList}</RecordWrapper>
     </StyledBottom>
   );
 };
