@@ -3,23 +3,36 @@ import BallCount from "./BallCount";
 import { GamePlayground as S } from "@/Components/Game/GameStyles";
 import * as CS from "@/Styles/CommonStyles";
 
-const BallCountBoard = () => {
-  // 나중엔 ballcountrow쯤으로 관리하고 type이랑 count props를 내려주는 방향으로 리펙토링
+const BallCountBoard = ({ ballCount }) => {
+  const sortBall = (type) => {
+    let sortedBall = [];
+    let ballCountLength;
+    if (type === "STRIKE") {
+      ballCountLength = ballCount.strike;
+    } else if (type === "BALL") {
+      ballCountLength = ballCount.ball;
+    } else {
+      ballCountLength = ballCount.out;
+    }
+
+    for (let i = 0; i < ballCountLength; i++) {
+      sortedBall.push(<BallCount key={i} type={type} />);
+    }
+    return sortedBall;
+  };
   return (
     <S.BallCountBoard.BallCountBoard>
       <CS.BOX.FLEX_ROW_CENTER_BOX>
         <BallJudgement type={"S"} />
-        <BallCount type={"STRIKE"} />
-        <BallCount type={"STRIKE"} />
+        {sortBall("STRIKE")}
       </CS.BOX.FLEX_ROW_CENTER_BOX>
       <CS.BOX.FLEX_ROW_CENTER_BOX>
         <BallJudgement type={"B"} />
-        <BallCount type={"BALL"} />
-        <BallCount type={"BALL"} />
+        {sortBall("BALL")}
       </CS.BOX.FLEX_ROW_CENTER_BOX>
       <CS.BOX.FLEX_ROW_CENTER_BOX>
         <BallJudgement type={"O"} />
-        <BallCount type={"OUT"} />
+        {sortBall("OUT")}
       </CS.BOX.FLEX_ROW_CENTER_BOX>
     </S.BallCountBoard.BallCountBoard>
   );
