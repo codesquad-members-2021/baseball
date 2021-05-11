@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useFetch from 'hooks/useFetch';
 import Header from 'components/GamePlay/playHeader/Header';
 import Main from 'components/GamePlay/playScreen/Main';
@@ -14,15 +14,32 @@ const Game = () => {
   const { response, loading, error } = useFetch(
     process.env.REACT_APP_API_URL + `/select-${team}.json`
   );
+
+  const [ballCount, setBallCount] = useState({
+    count: 1,
+    type: '스트라이크',
+    s: 0,
+    b: 0,
+    isHit: false,
+  });
+
+  // const [homePrevPlayer, setHomePrevPlayer] = useState({});
+  // const [awayPrevPlayer, setAwayPrevPlayer] = useState([{}]);
+  const [currentPlayer, setCurrentPlayer] = useState({
+    playerName: '류현진',
+    uniform_number: 2,
+    turn: 1,
+    hit: 0,
+    history: [ballCount],
+  });
+
+  // useEffect(() => {}, [ballCount]);
+
+  // useEffect(() => {}, [out]);
+
   if (loading) return <div>loading</div>;
   const [home, away] = response.team_info;
-
-  //   const isFirstAttack = away.selected
-
-  // 여기에서 함수를 다 정의해야할 것 같다.
-  // action.type
-  // reducer => dispatch => state 상태변경 > useEffect deps => render
-  // useEffect
+  const isFirstAttack = away.selected;
 
   return (
     <gamePlayContext.Provider value={{ home, away }}>

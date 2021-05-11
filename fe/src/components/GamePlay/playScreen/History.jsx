@@ -1,16 +1,11 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import Board from 'components/GamePlay/playScreen/Board';
-import { v4 as uuidv4 } from 'uuid';
 
 const History = () => {
-  const [homePrevPlayer, setHomePrevPlayer] = useState({});
-  const [awayPrevPlayer, setAwayPrevPlayer] = useState([{}]);
-  const [currentPlayer, setCurrentPlayer] = useState({});
-
   return (
     <HistoryWrap>
-      <Board currentPlayer={currentPlayer} />
+      {/* 아래 보드는 currentPlayer */}
+      <Board />
       {/* {homePrevPlayer.map((player) => (
         <Board key={uuidv4()} player={player} />
       ))} */}
