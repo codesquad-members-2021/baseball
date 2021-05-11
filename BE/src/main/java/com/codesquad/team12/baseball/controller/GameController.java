@@ -7,6 +7,7 @@ import com.codesquad.team12.baseball.service.GameService;
 import com.codesquad.team12.baseball.service.TeamService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/games/{gameId}")
 public class GameController {
@@ -17,6 +18,7 @@ public class GameController {
         this.gameService = gameService;
         this.teamService = teamService;
     }
+
 
     @GetMapping
     public GameInitDto getGame(@PathVariable Long gameId) {
