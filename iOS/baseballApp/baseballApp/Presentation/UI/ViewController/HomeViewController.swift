@@ -30,8 +30,8 @@ class HomeViewController: UIViewController {
     private func setupCollectionViewDelegate() {
         mainCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-                let tabBarVC = self?.storyboard?.instantiateViewController(identifier: "TabBar")
-                self?.present(tabBarVC!, animated: true, completion: nil)
+                let tabBarController = self?.storyboard?.instantiateViewController(identifier: "TabBarController")
+                self?.present(tabBarController!, animated: true, completion: nil)
             }, onError: { error in
                 print(error.localizedDescription)
             })

@@ -2,8 +2,8 @@ import Foundation
 import RxSwift
 import Alamofire
 
-class API {
-    static let shared: API = API()
+class APIService {
+    static let shared: APIService = APIService()
 
     func requestGames() throws -> Observable<GameDTO> {
         guard  let url = URL(string: Endpoint.getGame) else {
