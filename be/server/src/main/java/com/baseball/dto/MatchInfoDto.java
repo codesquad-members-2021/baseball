@@ -135,8 +135,8 @@ public class MatchInfoDto {
         MatchInfo matchInfo = match.getMatchInfo();
         Builder builder = new Builder()
                 .scores(ScoreDto.from(awayTeam, homeTeam))
-                .strike(matchInfo.getStrike())
-                .ball(matchInfo.getBall())
+                .strike(matchInfo.getStrikeCount())
+                .ball(matchInfo.getBallCount())
                 .outCount(matchInfo.getOutCount())
                 .bases(matchInfo.getBases())
                 .inningInfo(InningInfoDto.from(match))

@@ -25,9 +25,9 @@ class MatchInfoTest {
     void scenario_initial() {
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -44,9 +44,9 @@ class MatchInfoTest {
         matchInfo.update(STRIKE);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -65,9 +65,9 @@ class MatchInfoTest {
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(3);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(1);
@@ -81,14 +81,17 @@ class MatchInfoTest {
     @Test
     @DisplayName("피쳐가 strike를 9번 던졌을 경우에 대한 테스트")
     void scenario_strike_9() {
+        /**
+         * TODO: 논의 필요. 아웃이 3번 되면 MatchInfo 는 초기화 되어야 하지 않을까?
+         */
         for (int i = 0; i < 9; i++) {
             matchInfo.update(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(2);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(9);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(3);
@@ -105,9 +108,9 @@ class MatchInfoTest {
         matchInfo.update(BALL);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -124,9 +127,9 @@ class MatchInfoTest {
         matchInfo.update(HIT);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -145,9 +148,9 @@ class MatchInfoTest {
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -166,9 +169,9 @@ class MatchInfoTest {
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -188,9 +191,9 @@ class MatchInfoTest {
 
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);

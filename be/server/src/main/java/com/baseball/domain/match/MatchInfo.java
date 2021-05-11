@@ -16,20 +16,20 @@ public class MatchInfo {
         return halvesCount;
     }
 
-    public Integer getStrike() {
+    public Integer getStrikeCount() {
         return (int) playResults.stream()
                 .filter(pitch -> pitch == PlayResult.STRIKE)
                 .count();
     }
 
-    public Integer getBall() {
+    public Integer getBallCount() {
         return (int) playResults.stream()
                 .filter(pitch -> pitch == PlayResult.BALL)
                 .count();
     }
 
     public Integer getOutCount() {
-        return getStrike() / 3;
+        return getStrikeCount() / 3;
     }
 
     public List<Boolean> getBases() {
@@ -55,17 +55,22 @@ public class MatchInfo {
         return halvesCount % 2 == 1;
     }
 
+    public Boolean isBaseFull() {
+        return bases.stream().reduce(true, Boolean::logicalAnd);
+    }
+
     public void update(PlayResult playResult) {
-        // TODO: playResult 에 따른 상태변화를 TDD 로 구현
         playResults.add(playResult);
 
         if (playResult == PlayResult.HIT) {
             bases.removeLast();
             bases.addFirst(Boolean.TRUE);
         }
+    }
 
-        if (playResult == PlayResult.STRIKE && getOutCount() == 3) {
-            halvesCount++;
-        }
+    public void proceedToNextHalve() {
+        halvesCount++;
+        bases = new LinkedList<>(Arrays.asList(false, false, false));
+        playResults = new ArrayList<>();
     }
 }
