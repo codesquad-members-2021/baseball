@@ -19,6 +19,7 @@ const GameGeneralInfo = ({ data }) => {
 };
 
 const InfoWrapper = styled.div`
+	box-sizing: border-box;
 	padding: 30px;
 	text-align: center;
 	border-bottom: 5px solid ${theme.colors.white};

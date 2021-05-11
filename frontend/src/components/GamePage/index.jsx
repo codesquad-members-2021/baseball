@@ -1,22 +1,32 @@
-import { useState, useEffect } from 'react';
+import {
+	useState,
+	useEffect,
+	createContext,
+	useContext,
+	useReducer,
+} from 'react';
 import GamePlayersList from './GamePlayersList';
 import GameDetailScore from './GameDetailScore';
 import GameGrid from './GameGrid';
-
+import useFetch from '../Hook/useFetch';
+import { GameProvider } from '../GameContext';
 const GamePage = ({ data, type }) => {
+	const [gameData, loadingState, error] = useFetch(
+		'patch',
+		'initGame',
+		data.id,
+	);
+	console.log(gameData);
 	const [upState, setUpState] = useState(false);
 	const [downState, setDownState] = useState(false);
 
 	useEffect(() => {
 		const handle = (event) => {
-			console.log(event, upState, downState);
 			const { clientY } = event;
 			if (clientY < 5) {
 				setUpState(true);
-				console.log('UP');
 			} else if (clientY > 750) {
 				setDownState(true);
-				console.log('Down');
 			} else {
 				setUpState(false);
 				setDownState(false);
@@ -29,11 +39,11 @@ const GamePage = ({ data, type }) => {
 	});
 
 	return (
-		<>
+		<GameProvider value={gameData}>
 			{upState && <GameDetailScore />}
-			<GameGrid data={data} type={type} />
+			<GameGrid type={type} />
 			{downState && <GamePlayersList />}
-		</>
+		</GameProvider>
 	);
 };
 

@@ -8,14 +8,13 @@ import GameLog from './GameLog';
 import GamePlayersList from './GamePlayersList';
 import GameDetailScore from './GameDetailScore';
 import useSlide from '../Hook/useSlide';
-
-const GameGrid = ({ data, type }) => {
-	const gameId = data.id;
-	const [gameInfo, loading, error] = useFetch('patch', 'initGame', gameId);
-
+import { useGameState } from '../GameContext';
+const GameGrid = () => {
+	const state = useGameState();
+	console.log(state);
 	return (
 		<>
-			{loading ? (
+			{/* {loading ? (
 				console.log('Loading...')
 			) : (
 				<GridBox>
@@ -24,18 +23,16 @@ const GameGrid = ({ data, type }) => {
 					<GameFieldArea type={type} />
 					<GameLog data={gameInfo}></GameLog>
 				</GridBox>
-			)}
+			)} */}
 		</>
 	);
 };
 
 const GridBox = styled.div`
-	width: 100vw;
-	height: 100vh;
 	display: grid;
 	grid-template-columns: 80% 20%;
 	grid-template-rows: 20% 80%;
-	grid-gap: 5px;
+	box-sizing: border-box;
 `;
 
 export default GameGrid;

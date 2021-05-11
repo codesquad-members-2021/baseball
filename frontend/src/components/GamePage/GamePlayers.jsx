@@ -19,9 +19,11 @@ const GamePlayers = () => {
 };
 const PlayerWrapper = styled.div`
 	border-bottom: 5px solid ${theme.colors.white};
+	box-sizing: border-box;
 `;
 const Team = styled.div`
 	margin: 20px;
+	box-sizing: border-box;
 `;
 const Role = styled.span`
 	font-size: ${theme.fontSize.large};
