@@ -5,7 +5,7 @@ import HistoryCard from './HistoryCard.js';
 const HistoryList = (props) => {
   return (
     <HistoryListLayout className={props.className}>
-      <HistoryCard className={'history-card'} />
+      <HistoryCard className={'history-card'} isCurrent={true}/>
       <HistoryCard className={'history-card'} />
       <HistoryCard className={'history-card'} />
     </HistoryListLayout>
