@@ -6,9 +6,7 @@ import com.codesquad.team12.baseball.dto.TeamPlayerDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Team {
@@ -33,6 +31,7 @@ public class Team {
         List<PlayerDto> playerDtos = team.players
                 .values()
                 .stream()
+                .sorted(Comparator.comparing(Player::getNumber))
                 .map(Player::createPlayerDto)
                 .collect(Collectors.toList());
 

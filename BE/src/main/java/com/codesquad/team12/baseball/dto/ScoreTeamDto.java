@@ -1,6 +1,5 @@
 package com.codesquad.team12.baseball.dto;
 
-import com.codesquad.team12.baseball.model.Inning;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;

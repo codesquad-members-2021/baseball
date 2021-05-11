@@ -2,8 +2,6 @@ package com.codesquad.team12.baseball.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
 public class ScoreDto {
     @JsonProperty
     private ScoreTeamDto home;
