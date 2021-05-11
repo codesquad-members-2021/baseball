@@ -13,7 +13,7 @@ public class Player {
 
     private int out;
 
-    private int atBat;
+    private int plateAppearance;
 
     private int battingOrder;
 
@@ -44,8 +44,8 @@ public class Player {
         return out;
     }
 
-    public int getAtBat() {
-        return atBat;
+    public int getPlateAppearance() {
+        return plateAppearance;
     }
 
     public int getBattingOrder() {
@@ -72,8 +72,8 @@ public class Player {
         this.out = out;
     }
 
-    public void setAtBat(int atBat) {
-        this.atBat = atBat;
+    public void setPlateAppearance(int plateAppearance) {
+        this.plateAppearance = plateAppearance;
     }
 
     public void setBattingOrder(int battingOrder) {
