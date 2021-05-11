@@ -1,4 +1,5 @@
 # use baseball;
+DROP TABLE IF EXISTS score;
 DROP TABLE IF EXISTS game;
 DROP TABLE IF EXISTS player;
 DROP TABLE IF EXISTS team;
@@ -22,12 +23,21 @@ CREATE TABLE IF NOT EXISTS `baseball`.`game` (
 CREATE TABLE IF NOT EXISTS `baseball`.`player` (
     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(45) NOT NULL,
-    `at_bat` INT DEFAULT 0,
+    `plate_appearance` INT DEFAULT 0,
     `hit` INT DEFAULT 0,
     `out` INT DEFAULT 0,
-    `batting_order` INT DEFAULT 0,
-    `back_number` INT DEFAULT 0,
-    `is_pitcher` TINYINT(1) DEFAULT 0,
+    `batting_order` INT,
+    `back_number` INT,
+    `is_pitcher` TINYINT(1),
     `team` BIGINT,
     FOREIGN KEY (`team`) REFERENCES `team`(`id`)
 );
+
+CREATE TABLE IF NOT EXISTS `baseball`.`score` (
+    `inning` INT,
+    `score` INT,
+    `team` BIGINT,
+    FOREIGN KEY (`team`) REFERENCES `team`(`id`)
+);
+
+select * from team;
