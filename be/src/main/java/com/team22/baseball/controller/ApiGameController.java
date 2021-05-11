@@ -53,7 +53,7 @@ public class ApiGameController {
 
     @PutMapping("/update_player")
     @ResponseStatus(HttpStatus.OK)
-    private void updatePlayerInfo(UpdatePlayerInfoDto req) throws Exception {
+    private void updatePlayerInfo(@RequestBody UpdatePlayerInfoDto req) throws Exception {
         int[] scores = gameService.calculatePlayerScore(req);
 
         gameService.updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);

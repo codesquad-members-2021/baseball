@@ -1,6 +1,10 @@
 package com.team22.baseball.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UpdatePlayerInfoDto {
+
 
     private int round;
 
@@ -12,7 +16,8 @@ public class UpdatePlayerInfoDto {
 
     private boolean hit;
 
-    public UpdatePlayerInfoDto(int round, String teamName, int teamScore, String playerName, boolean hit) {
+    @JsonCreator
+    public UpdatePlayerInfoDto(@JsonProperty("round") int round, @JsonProperty("teamName") String teamName, @JsonProperty("teamScore") int teamScore, @JsonProperty("playerName") String playerName, @JsonProperty("hit") boolean hit) {
         this.round = round;
         this.teamName = teamName;
         this.teamScore = teamScore;
