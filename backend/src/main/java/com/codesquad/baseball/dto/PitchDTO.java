@@ -1,11 +1,11 @@
 package com.codesquad.baseball.dto;
 
 public class PitchDTO {
+    private PitchResultDTO pitchResult;
+    private GameScoreDTO score;
+    private GameStatusDTO gameStatusDTO;
     private TeamDetailDTO homeTeam;
     private TeamDetailDTO awayTeam;
-    private GameStatusDTO gameStatusDTO;
-    private GameScoreDTO score;
-    private PitchResultDTO pitchResult;
 
     public PitchDTO(TeamDetailDTO homeTeam, TeamDetailDTO awayTeam, GameStatusDTO gameStatusDTO, GameScoreDTO score, PitchResultDTO pitchResult) {
         this.homeTeam = homeTeam;
