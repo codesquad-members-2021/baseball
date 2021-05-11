@@ -19,19 +19,19 @@ function GameListItem({ match, idx, isLoading }) {
     : <StyledGameListItem>
         <GameNumber>Game {idx + 1}</GameNumber>
         <MatchInformation>
-            <TeamHome onClick={() => handleClickTeam({
-              playTeam: match.home.name,
-              home: true
-            })}>
-              {match.home.name}
-            </TeamHome>
-            vs.
             <TeamAway onClick={() => handleClickTeam({
               playTeam: match.away.name,
               home: false
             })}>
               {match.away.name}
             </TeamAway>
+            vs.
+            <TeamHome onClick={() => handleClickTeam({
+              playTeam: match.home.name,
+              home: true
+            })}>
+              {match.home.name}
+            </TeamHome>
         </MatchInformation>
     </StyledGameListItem>
   );

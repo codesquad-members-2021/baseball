@@ -1,14 +1,15 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 
 import BallCount from './BallCount.js';
-import Field from './Field.js';
+import Field from './Field/Field.js';
 import Baseball from 'util/baseball.js';
 
 function SituationBoard({ className }) {
   const { gameState, gameDispatch } = useContext(GameContext);
+  const [showPitchBtn, setShowPitchBtn] = useState(false);
 
   const handleClickPitch = () => {
     const result = Baseball.pitch();
@@ -23,8 +24,8 @@ function SituationBoard({ className }) {
           {gameState.halfInning.frame === "top" ? " 초" : " 말"}
           {gameState.mode === "fielding" ? " 수비" : " 공격"}
         </div>
-      <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>
       <Field/>
+      <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>
     </StyledSituationBoard>
   )
 }
@@ -38,6 +39,10 @@ const StyledSituationBoard = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  background-color: black;
+  color: white;
+  font-weight: 800;
+  overflow: hidden;
   
   .inning {
     box-shadow: 0 0 0 1px red inset;
@@ -48,6 +53,11 @@ const StyledSituationBoard = styled.div`
   }
 
   .pitch-btn {
-    
+    width: 12rem;
+    height: 4rem;
+    position: absolute;
+
+    top: calc(50% - 1rem);
+    left: calc(50% - 6rem);
   }
 `;

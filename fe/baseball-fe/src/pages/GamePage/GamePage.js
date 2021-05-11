@@ -18,11 +18,15 @@ const _initialState = {
   mode: null,
   home: null,
   away: null,
-  latestResult: null,
+  latestAction: {
+    result: null,
+    time: null,
+  },
   currPitcherNum: null,
   currPitcher: null,
-  currHitterNum: null,
-  currHitter: null,
+  currBatterNum: null,
+  currBatter: null,
+  nthBatter: null,
   base: {
     first: null,
     second: null,
@@ -56,14 +60,24 @@ function GamePage() {
 
     const mode = getCurrMode(response);
 
-    if (!gameState.mode) gameDispatch({ type: GameAction.START, payload: {
-      ...response,
-      mode
-    }});
+    if (!gameState.mode)
+      gameDispatch({
+        type: GameAction.START,
+        payload: {
+          ...response,
+          mode
+        }
+      });
     // TODO: else ..
 
-    if (mode === 'fielding') setPolling(false);
+    if (mode === 'fielding') {
+      setPolling(false);
+    }
   }, [response]);
+
+  useEffect(() => {
+
+  }, []);
 
   const getCurrMode = (data) =>  {
     return globalState.home ? data.home.mode : data.away.mode;

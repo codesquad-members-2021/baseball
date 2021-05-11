@@ -14,3 +14,10 @@ export const GameAction = {
   BALL: 'ball',
   OUT: 'out',
 };
+
+
+export const RunnerAction = {
+  RUN: 'run',
+  STAY: 'stay',
+  BAT: 'bat',
+};

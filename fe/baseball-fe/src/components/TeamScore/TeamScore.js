@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { GameContext } from 'util/context.js';
+import { GlobalContext, GameContext } from 'util/context.js';
 
-function TeamScore({ className, playTeam }) {
+function TeamScore({ className }) {
+  const { globalState } = useContext(GlobalContext);
   const { gameState } = useContext(GameContext);
 
   return (
@@ -11,7 +12,7 @@ function TeamScore({ className, playTeam }) {
       <div className='score-board'>
         <div className='away-team'>
           {gameState.away.name}
-          {playTeam === gameState.away.name &&
+          {globalState.playTeam === gameState.away.name &&
             <div className='player'>Player</div>}
         </div>
         <span className='score'>{gameState.away.score}</span>
@@ -19,7 +20,7 @@ function TeamScore({ className, playTeam }) {
         <span className='score'>{gameState.home.score}</span>
         <div className='home-team'>
           {gameState.home.name}
-          {playTeam === gameState.home.name &&
+          {globalState.playTeam === gameState.home.name &&
             <div className='player'>Player</div>}
         </div>
       </div>
