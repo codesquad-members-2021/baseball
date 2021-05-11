@@ -4,33 +4,12 @@ import useFetch from '../../../../../hooks/useFetch';
 import { useEffect, useState } from "react";
 
 const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc}) => {
-    const [boolean, setBoolean] = useState(false);
     console.log(awayBoolean,homeBoolean) // false true 나타내주는거 개발자도구창에서 보면됨.
-    const options = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"user" : home, "opponent" : away})
-    }
-    const fetchData = async (url) => {
-        const res = await fetch(url, options);
-        console.log(res);
-        const result = await res.json();
-        return result;
-    };
-    useEffect(() => {
-        if(!boolean) return;
-        console.log("fetch요청 갔다!")
-        fetchData("/api/games/type-away");
-        setBoolean(false);
-    }, [boolean])
     
     const awaySelect = (e) => {
         if(awayBoolean === "true") {
             delay();
             return e.preventDefault();
-        } else {
-            console.log("z")
-            return setBoolean(true);
         }
     }
 
@@ -38,9 +17,6 @@ const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc
         if(homeBoolean === "true") {
             delay();
             return e.preventDefault();
-        } else {
-            console.log("z")
-            return setBoolean(true);            
         }
     }
 

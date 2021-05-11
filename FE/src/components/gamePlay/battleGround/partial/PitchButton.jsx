@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { cssTranslate } from '../../../utilComponent/CommonStyledCSS';
 
-const PitchButton = () => {
+const PitchButton = ({onClick}) => {
     return (
-        <StyledPitchButton onClick={() => alert('PitchButton (임시)')}>
+        <StyledPitchButton onClick={onClick}>
             PITCH
         </StyledPitchButton>
     );
