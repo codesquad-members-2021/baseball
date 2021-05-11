@@ -3,6 +3,7 @@ package com.codesquad.baseball.domain;
 import com.codesquad.baseball.error.exception.PlayerNotFoundException;
 import org.springframework.data.annotation.Id;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Team {
@@ -20,9 +21,9 @@ public class Team {
 
     private boolean userSelected;
 
-    private Set<Player> players;
+    private Set<Player> players = new HashSet<>();
 
-    private Set<Score> scores;
+    private Set<Score> scores = new HashSet<>();
 
     public Team(String name, boolean isHome, boolean isPlayable) {
         this.name = name;
