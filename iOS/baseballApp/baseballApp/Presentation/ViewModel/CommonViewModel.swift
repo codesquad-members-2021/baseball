@@ -1,7 +1,7 @@
 import Foundation
 
 class CommonViewModel {
-    let gameUsecase: GameUsecasePort
+    let gameUsecase: UsecasePort
     
     init() {
         gameUsecase = GameUsecase()

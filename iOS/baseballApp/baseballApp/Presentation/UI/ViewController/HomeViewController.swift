@@ -16,18 +16,24 @@ class HomeViewController: UIViewController {
     private func bindCollectionView() {
         viewModel.getGameInfo()
         viewModel.games
-            .bind(to: mainCollectionView.rx.items(cellIdentifier: Identifier.GameCell, cellType: GameCell.self)) {
-            _, game, cell in
-            cell.configureCell(game: game)
+            .bind(to: mainCollectionView.rx.items(cellIdentifier: GameCell.identifier, cellType: GameCell.self)) {
+            row, game, cell in
+                
+                cell.configureCell(game: game)
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.5, delay: 0.5 * Double(row)) {
+                    cell.alpha = 1
+                }
         }.disposed(by: disposeBag)
     }
     
     private func setupCollectionViewDelegate() {
         mainCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-                let tabBarVC = self?.storyboard?.instantiateViewController(identifier: "TabBar")
-                self?.present(tabBarVC!, animated: true, completion: nil)
+                let tabBarController = self?.storyboard?.instantiateViewController(identifier: "TabBarController")
+                self?.present(tabBarController!, animated: true, completion: nil)
             }, onError: { error in
+                
                 print(error.localizedDescription)
             })
             .disposed(by: disposeBag)

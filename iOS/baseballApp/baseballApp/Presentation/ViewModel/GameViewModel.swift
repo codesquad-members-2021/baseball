@@ -13,7 +13,7 @@ class GameViewModel: CommonViewModel {
     }
     
     func getGameInfo() {
-        try? API.shared.requestGames()
+        try? APIService.shared.requestGames()
             .subscribe { gameData in
                 self.transformDTO(to: gameData) { game in
                     self.saveGame(game: game)

@@ -1,12 +1,8 @@
 import UIKit
 
-enum Identifier {
-    static let GameCell = "GameCell"
-}
-
 class GameCell: UICollectionViewCell {
+    static let identifier = "GameCell"
     
-
     @IBOutlet weak var gameIdLabel: UILabel!
     @IBOutlet weak var homeTeamLabel: UILabel!
     @IBOutlet weak var awayTeamLabel: UILabel!

@@ -1,8 +1,7 @@
 import Foundation
 import RxSwift
 
-protocol GameUsecasePort {
-    
+protocol UsecasePort {
     @discardableResult
     func appendGame(from data: Game) -> Observable<Game>
     
