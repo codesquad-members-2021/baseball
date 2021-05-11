@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useContext } from "react";
 import GameHeader from './GameHeader/GameHeader';
 import GamePlayground from './GamePlayground/GamePlayground';
 import GamePlayLog from './GamePlayLog/GamePlayLog';
@@ -7,10 +8,15 @@ import ScoreBoard from './ScoreBoard/ScoreBoard';
 import { gameMockData, squadMockData } from '@/Utils/mockData';
 import { Game as S } from '@/Components/Game/GameStyles';
 import { BACKGROUND_URL } from '@/Utils/const';
+import { RouterContext } from "@/Routes/Router";
+
+
 
 const GameContext = React.createContext();
 
 const Game = ({ location }) => {
+    const { gameData, selectedTeam } = useContext(RouterContext);
+  
   const gameData = location.state;
   const { gameId, teamName } = gameData;
   console.log(gameId, teamName);
@@ -26,6 +32,9 @@ const Game = ({ location }) => {
 
   // 셀렉팀을 무조건 먼저 수비로 두자. (1회초 수비)
   // 아웃 3카운트 이후 데이터를 받아올때 defenseTeam을 바꿔주자.
+  
+  // 선택한 팀을 먼저 수비로 지정한다.
+  // 추후 아웃 3카운트 이후 데이터를 받아올때 defenseTeam을 바꿔줄 예정
   squadMockData.defenseTeam = selectedTeam;
 
   return (
@@ -47,8 +56,3 @@ const Game = ({ location }) => {
 };
 
 export { Game, GameContext };
-
-/*
-1. /home에서 선택한 게임의 데이터를 get해온다. (GET /games/game_id)
-2. 선택한 팀에 isSelected라는 flag를 프롭스로 줘야 한다. (1,2를 합쳐서 useReducer를 이용하자)
-*/

@@ -1,10 +1,11 @@
 import { GamePlayground as S } from "@/Components/Game/GameStyles";
 
-const PitchButton = () => {
-  const test = () => {
-    console.log("pitched!");
-  };
-  return <S.PitchButton onClick={test}>Pitch</S.PitchButton>;
+const PitchButton = ({ dispatch }) => {
+  return (
+    <S.PitchButton onClick={() => dispatch({ type: "STRIKE" })}>
+      Pitch
+    </S.PitchButton>
+  );
 };
 
 export default PitchButton;
