@@ -1,22 +1,29 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import { MainContext } from "../Main";
 
-const Game = ({ index, homeTeam, awayTeam }) => {
+const Game = ({ id, homeTeam, awayTeam }) => {
+	const { setGameId, setTeamId } = useContext(MainContext);
+	const clickHandler = (type) => {
+		setGameId(() => id);
+		setTeamId(() => (type === "AWAY" ? awayTeam.id : homeTeam.id));
+	};
 	return (
-		<Wrapper>
-			<Index>GAME {index + 1}</Index>
-			<Link to="/ingame">
+		<StyledGame>
+			<Index>GAME {id}</Index>
+			<Link to="/ingame" onClick={() => clickHandler("AWAY")}>
 				<Team>{awayTeam.name}</Team>
 			</Link>
 			<Versus>VS</Versus>
-			<Link to="/ingame">
+			<Link to="/ingame" onClick={() => clickHandler("HOME")}>
 				<Team>{homeTeam.name}</Team>
 			</Link>
-		</Wrapper>
+		</StyledGame>
 	);
 };
 
-const Wrapper = styled.li`
+const StyledGame = styled.li`
 	position: relative;
 	width: 720px;
 	height: 115px;

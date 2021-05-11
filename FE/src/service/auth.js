@@ -1,15 +1,13 @@
-import firebase from '../config/firebase-config';
+import firebase from "../config/firebase-config";
 
-const socialMediaAuth = (provider) => {
-  return firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then((res) => {
-      return res.user;
-    })
-    .catch((er) => {
-      return er;
-    });
+const socialMediaAuth = async (provider) => {
+  try {
+    const auth = await firebase.auth();
+    const res = await auth.signInWithPopup(provider);
+    return res.user;
+  } catch (error) {
+    return error;
+  }
 };
 
 export default socialMediaAuth;

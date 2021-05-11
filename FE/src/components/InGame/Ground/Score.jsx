@@ -1,21 +1,21 @@
 import styled from "styled-components";
 
-const Header = () => {
+const Score = ({homeTeam, awayTeam}) => {
 	return (
-		<StyledHeader>
+		<StyledScore>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<Team>
-				<TeamName>Bears</TeamName>
-				<TeamScore>14</TeamScore>
+				<TeamName>{awayTeam.name}</TeamName>
+				<TeamScore>{awayTeam.score}</TeamScore>
 				vs
-				<TeamScore>1</TeamScore>
-				<TeamName>Eagles</TeamName>
+				<TeamScore>{homeTeam.score}</TeamScore>
+				<TeamName>{homeTeam.name}</TeamName>
 			</Team>
-		</StyledHeader>
+		</StyledScore>
 	);
 };
 
-const StyledHeader = styled.div`
+const StyledScore = styled.div`
 	height: 180px;
 	border-bottom: 3px solid gray;
 	background-color: #000;
@@ -44,4 +44,4 @@ const TeamScore = styled.div`
 	color: #fff;
 	font-size: 60px;
 `;
-export default Header;
+export default Score;

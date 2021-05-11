@@ -7,23 +7,30 @@ const TeamSelect = () => {
 	const [isHover, setHover] = useState(false);
 	const [alertMessage, setAlertMessage] = useState("참가할 게임을 선택해주세요");
 	useEffect(() => {
-		fetch("https://baseball-ahpuh.herokuapp.com/games")
-			.then((res) => res.json())
-			.then((json) => setGameList(() => json))
-			.catch((res) => console.log("loading error in TeamSelect : ", res));
+		const fetchGames = async () => {
+			try {
+				const response = await fetch("https://baseball-ahpuh.herokuapp.com/games");
+				const json = await response.json();
+				setGameList(() => json);
+			} catch (error) {
+				console.log("fetch error in TeamSelect : ", error);
+				setAlertMessage("게임 목록을 불러올 수 없습니다")
+			}
+		};
+		fetchGames();
 	}, []);
 
 	return (
-		<Wrapper>
+		<StyledTeamSelect>
 			<Alert>{alertMessage}</Alert>
 			<GameList isHover={isHover} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-				{gameList ? gameList.map((el, i) => <Game {...el} key={i} index={i} />) : "loading..."}
+				{gameList ? gameList.map((el, i) => <Game {...el} key={i} />) : "loading..."}
 			</GameList>
-		</Wrapper>
+		</StyledTeamSelect>
 	);
 };
 
-const Wrapper = styled.div`
+const StyledTeamSelect = styled.div`
 	height: 500px;
 	display: flex;
 	flex-direction: column;
