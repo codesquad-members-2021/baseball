@@ -5,6 +5,7 @@ const boardHistory = {
   B: 0,
   O: 0,
   H: 0,
+  HitInfo: ' ',
 };
 
 const BoardHistoryContext = createContext();

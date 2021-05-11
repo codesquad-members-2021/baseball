@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
 
@@ -17,6 +17,17 @@ const Stadium = () => {
       return <>{arr}</>;
     }
   };
+
+  useEffect(() => {
+    if (ballCnt.S === 3) {
+      console.log('S가 3개다');
+      setTimeout(() => dispatch({ type: 'hitO' }), 1000);
+    }
+    if (ballCnt.B === 4) {
+      console.log('B가 4개다');
+      setTimeout(() => dispatch({ type: 'hitH' }), 1000);
+    }
+  }, [ballCnt]);
 
   return (
     <StadiumDiv>
@@ -59,18 +70,8 @@ const playPitch = (ballCnt, dispatch) => {
   const tempBoardLst = ['S', 'B'];
   const randomHit =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
-
-  if (ballCnt.S < 2 && ballCnt.B < 3) {
-    dispatch({ type: 'hit' + randomHit });
-  }
-  if (ballCnt.S === 2) {
-    dispatch({ type: 'hit' + randomHit });
-    setTimeout(() => dispatch({ type: 'hitO' }), 1000);
-  }
-  if (ballCnt.B === 3) {
-    dispatch({ type: 'hit' + randomHit });
-    setTimeout(() => dispatch({ type: 'hitH' }), 1000);
-  }
+  dispatch({ type: 'hitInfo', payload: randomHit });
+  dispatch({ type: 'hit' + randomHit });
 };
 
 const StadiumDiv = styled.div`
