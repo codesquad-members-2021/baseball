@@ -12,7 +12,6 @@ import codesquad.baseball.repository.TeamRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 
 @CrossOrigin
@@ -52,7 +51,8 @@ public class GameController {
         Player pitcher = isHome ? homeTeam.getPitcher() : expeditionTeam.getPitcher();
 
         ApiResponse apiResponse = new ApiResponse(matchId, match.getCurrentInning(),
-                new PlayerLogDTO(firstHitter, homeTeam.getId()), new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO(pitcher), new PlayerDTO(firstHitter), new TeamLogDTO(homeTeam));
+                new PlayerLogDTO(firstHitter, homeTeam.getId()), new TeamDTO(expeditionTeam), new TeamDTO(homeTeam),
+                new PlayerDTO("투수", pitcher), new PlayerDTO("타자", firstHitter), new TeamLogDTO(homeTeam, firstHitter));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
@@ -102,7 +102,6 @@ public class GameController {
         return new ResponseEntity(apiResponse, HttpStatus.OK);
     }
 
-
     @GetMapping("/{matchId}/playerListPopUp")
     public ResponseEntity<PlayerListPopUpDTO[]> showPlayerList(@PathVariable Long matchId) {
         Match match = matchRepository.findById(matchId).orElseThrow(RuntimeException::new);
@@ -113,7 +112,6 @@ public class GameController {
         return new ResponseEntity<>(new PlayerListPopUpDTO[]{LeftTeamPlayerList, rightTeamPlayerList}, HttpStatus.OK);
     }
 
-
     @GetMapping("/{matchId}/detailScore")
     public ResponseEntity<TeamGameScoreDTO[]> showDetailScoreList(@PathVariable Long matchId) {
         Match match = matchRepository.findById(matchId).orElseThrow(RuntimeException::new);
@@ -123,6 +121,4 @@ public class GameController {
         TeamGameScoreDTO rightTeamScore = new TeamGameScoreDTO(counterTeam);
         return new ResponseEntity<>(new TeamGameScoreDTO[]{leftTeamScore, rightTeamScore}, HttpStatus.OK);
     }
-
-
 }
