@@ -7,7 +7,9 @@ import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
 import { cssScrollbar } from '../utilComponent/CommonStyledCSS';
 import { createContext } from 'react';
+
 import PlayerListPopup from '../playerListPopup/PlayerListPopup';
+import TeamScorePopup from '../teamScorePopup/TeamScorePopup';
 
 export const PostsContext = createContext();
 
@@ -26,10 +28,12 @@ const GamePlay = ({ location }) => {
         </GamePlayItem>
     ));
 
-    return (
 
+    return (
         <PostsContext.Provider value={{team}}>
             <StyledGamePlay>
+                {/* <PlayerListPopup/> */}
+                <TeamScorePopup />
                 <GamePlayItems>{gamePlayItems}</GamePlayItems>
             </StyledGamePlay>
         </PostsContext.Provider>
@@ -43,6 +47,7 @@ const StyledGamePlay = styled.div`
     width: 60%;
     color: ${({ theme }) => theme.colors.white};
     position: relative;
+    overflow: hidden;
 `;
 
 const GamePlayItems = styled.ul`

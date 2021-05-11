@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PopupFrame from '../utilComponent/popupFrame/PopupFrame';
 import ScoreTable from './partial/ScoreTable';
 import Turn from './partial/Turn';
 
@@ -7,10 +8,12 @@ const TeamScorePopup = () => {
     // Turn 은 position absolute를 통해 top 값을 상황에 따라 주어지게 하여 위치조절하기.
 
     return (
-        <Scoreboard>
-            <Turn />
-            <ScoreTable />
-        </Scoreboard>
+        <PopupFrame zIndex={10}>
+            <Scoreboard>
+                <Turn />
+                <ScoreTable />
+            </Scoreboard>
+        </PopupFrame>
     );
 };
 
