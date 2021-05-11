@@ -18,6 +18,8 @@ public class Team {
 
     private Long pitcherId;
 
+    private boolean userSelected;
+
     private Set<Player> players;
 
     private Set<Score> scores;
@@ -48,6 +50,10 @@ public class Team {
         return pitcherId;
     }
 
+    public boolean isUserSelected() {
+        return userSelected;
+    }
+
     public Set<Player> getPlayers() {
         return players;
     }
@@ -70,6 +76,11 @@ public class Team {
 
     public void setPitcherId(Long pitcherId) {
         this.pitcherId = pitcherId;
+    }
+
+    public Team setUserSelected(boolean userSelected) {
+        this.userSelected = userSelected;
+        return this;
     }
 
     public void addPlayer(Player player) {

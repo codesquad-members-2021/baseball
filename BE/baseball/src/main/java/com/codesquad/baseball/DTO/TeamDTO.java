@@ -12,12 +12,15 @@ public class TeamDTO {
 
     private String teamName;
 
+    private boolean userSelected;
+
     private List<PlayerRecordDTO> players;
 
-    private TeamDTO(Long id, String name, List<PlayerRecordDTO> players) {
+    private TeamDTO(Long id, String name, List<PlayerRecordDTO> players, boolean userSelected) {
         this.teamId = id;
         this.teamName = name;
         this.players = players;
+        this.userSelected = userSelected;
     }
 
     public static TeamDTO of(Team team) {
@@ -25,7 +28,7 @@ public class TeamDTO {
                 .map(PlayerRecordDTO::of)
                 .sorted(Comparator.comparing(PlayerRecordDTO::getId))
                 .collect(Collectors.toList());
-        return new TeamDTO(team.getId(), team.getName(), playerRecords);
+        return new TeamDTO(team.getId(), team.getName(), playerRecords, team.isUserSelected());
     }
 
     public Long getTeamId() {
@@ -38,5 +41,9 @@ public class TeamDTO {
 
     public List<PlayerRecordDTO> getPlayers() {
         return players;
+    }
+
+    public boolean isUserSelected() {
+        return userSelected;
     }
 }

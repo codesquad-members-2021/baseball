@@ -1,5 +1,6 @@
 package com.codesquad.baseball.service;
 
+import com.codesquad.baseball.DTO.GameScoreDTO;
 import com.codesquad.baseball.DTO.RequestPlayerRecordDTO;
 import com.codesquad.baseball.DTO.TeamDTO;
 import com.codesquad.baseball.DTO.TeamScoreDTO;
@@ -33,6 +34,7 @@ public class TeamService {
         if (!team.isPlayable()) {
             throw new TeamNotPlayableException();
         }
+        save(team.setUserSelected(true));
         return TeamDTO.of(team);
     }
 
