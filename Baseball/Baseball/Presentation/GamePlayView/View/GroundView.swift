@@ -27,6 +27,13 @@ class GroundView: UIView {
         thirdBase()
         UIColor.white.set()
         homeBase()
+        setSBO()
+    }
+    
+    func setSBO() {
+        strikeHistoryView.setKind(kind: SBO.Strike)
+        ballHistoryView.setKind(kind: SBO.Ball)
+        outHistoryView.setKind(kind: SBO.Out)
     }
     
     func groundPath() {
