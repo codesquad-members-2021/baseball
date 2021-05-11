@@ -30,12 +30,4 @@ public class GameService {
                 .map(Game::createGameDto)
                 .collect(Collectors.toList());
     }
-
-    public List<InningDto> findAllInningByTeam(Long gameId, String teamName) {
-        return gameRepository.findInningByTeam(gameId, teamName)
-                .stream()
-                .map(Inning::createInningDto)
-                .collect(Collectors.toList());
-    }
-
 }
