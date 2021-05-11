@@ -5,7 +5,7 @@ const Game = ({ game }) => {
   return (
     <GameLi>
       <Wrapper>
-        <MatchNumber>GAME {game.id}</MatchNumber>
+        <MatchNumber>GAME {game.gameId}</MatchNumber>
       </Wrapper>
       <Wrapper>
         <Team type='home' game={game} />

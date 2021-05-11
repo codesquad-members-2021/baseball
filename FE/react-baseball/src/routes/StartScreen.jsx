@@ -1,35 +1,17 @@
-
-
-import { createContext } from 'react';
-
-import Caption from '../components/Caption';
-import GameList from '../components/GameList';
-import Title from '../components/Title';
+import Caption from '../components/startScreen/Caption';
+import GameList from '../components/startScreen/GameList';
+import Title from '../components/startScreen/Title';
 import styled from 'styled-components';
-
-
-const playable = {
-  // 임시 데이터
-  id: 1,
-  away_team_status: true,
-  home_team_status: false,
-};
-// const [playable, setPlayable]
-// const [clicked, setClicked] 팀 클릭했을 때 홈, 원정 어떤게 선택됐는지 저장
-export const PlayableContext = createContext();
 
 const StartScreen = (props) => {
   return (
-    <PlayableContext.Provider value={playable}>
-      <StartDiv>
-        <Title />
-        <Caption />
-        <GameList />
-      </StartDiv>
-    </PlayableContext.Provider>
+    <StartDiv>
+      <Title />
+      <Caption />
+      <GameList />
+    </StartDiv>
   );
 };
-
 
 const StartDiv = styled.div`
   margin: 0 auto;

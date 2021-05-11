@@ -1,30 +1,26 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { useContext } from 'react';
-import { PlayableContext } from '../routes/StartScreen';
+import { PlayableContext } from '../../App';
 
 const Team = ({ type, game }) => {
-  const playable = useContext(PlayableContext);
+  const { playable, setPlayable } = useContext(PlayableContext);
   const history = useHistory();
-  const handleClickHomeTeam = () => {
-    if (playable.home_team_status === true) {
-      // setPlayable(playable.home_team_status === false);
-      history.push('/play-screen');
-    }
-  };
-  const handleClickAwayTeam = () => {
-    if (playable.away_team_status === true) {
-      // setPlayable(playable.away_team_status === false);
-      history.push('/play-screen');
-    }
+  const handleClickTeam = () => {
+    // 서버에 gameId 담아 POST 요청
+    // 200 OK 시, 응답 받은 데이터를 context에 세팅 (?) (then 또는 await)
+    // 그리고 '/play-screen' 으로 라우팅
+    // history.push('/play-screen');
+    // 에러 시, Caption의 메시지를 바꿔줌
+    setPlayable(false);
   };
 
   return type === 'away' ? (
-    <TeamDiv type={type} onClick={handleClickAwayTeam}>
+    <TeamDiv type={type} onClick={handleClickTeam}>
       {game.away_team.name}
     </TeamDiv>
   ) : (
-    <TeamDiv type={type} onClick={handleClickHomeTeam}>
+    <TeamDiv type={type} onClick={handleClickTeam}>
       {game.home_team.name}
     </TeamDiv>
   );

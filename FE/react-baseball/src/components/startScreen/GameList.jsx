@@ -1,13 +1,24 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import games from '../mockData';
 import Game from './Game';
 
 const GameList = (props) => {
+  const [games, setGames] = useState([]);
+  const fetchData = async () => {
+    const {
+      data: { games },
+    } = await axios.get('http://localhost:3002/games.json');
+    setGames(games);
+  };
+
+  useEffect(fetchData, []);
+
   return (
     <GameUl>
       <GamesWrapper>
         {games.map((game) => (
-          <Game key={game.id} game={game} />
+          <Game key={game.gameId} game={game} />
         ))}
       </GamesWrapper>
     </GameUl>
