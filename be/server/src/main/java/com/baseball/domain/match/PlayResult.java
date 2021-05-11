@@ -15,9 +15,8 @@ public enum PlayResult {
     }
 
     public static PlayResult of(String name) {
-        name = name.toUpperCase();
         try {
-            return valueOf(name);
+            return valueOf(name.toUpperCase());
         } catch (IllegalArgumentException e) {
             return getRandomPitch();
         }
