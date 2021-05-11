@@ -62,8 +62,8 @@ const PlaySBOInfo = ({ SBOState }) => {
 
 const SBOInfoLayout = styled.div`
   position: absolute;
-  top: 6%;
-  left: 1%;
+  top: 4%;
+  left: 4%;
 `;
 
 const BallType = styled.div`
@@ -73,7 +73,14 @@ const BallType = styled.div`
   text-align: center;
 
   color: white;
-  font-size: 2.2rem;
+  font-size: 3.4rem;
+
+  @media (max-width: 1200px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Row = styled.div`
@@ -82,14 +89,23 @@ const Row = styled.div`
 
 const Light = styled.div`
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   background-color: ${props => props.active && props.bgColor};
   border: 1px solid white;
   border-radius: 50%;
 
   & + & {
     margin-left: 2%;
+  }
+
+  @media (max-width: 1200px) {
+    width: 2rem;
+    height: 2rem;
+  }
+  @media (max-width: 768px) {
+    width: 1rem;
+    height: 1rem;
   }
 `;
 export default PlaySBOInfo;

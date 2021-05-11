@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useState, useEffect } from "react";
 const pitchResultList = ["⚡️STRIKE⚡️", "💥BALL💥", "☠️OUT☠️"];
 
 const judge = ({ SBOState, dispatch }) => {
@@ -14,32 +14,41 @@ const judge = ({ SBOState, dispatch }) => {
 };
 
 const getRandomPitchResult = () => {
-  const SBO = ["STRIKE", "BALL"];
+  const SB = ["STRIKE", "BALL"];
   const radomNumber = Math.floor(Math.random() * 2);
-  return SBO[`${radomNumber}`];
+  return SB[`${radomNumber}`];
 };
+let playSectionWidth, playSectionHeight;
 
 const PlayPitch = ({ SBOState, dispatch }) => {
   const updateSBO = () => {
-    const pitchResult = getRandomPitchResult(SBOState);
-    dispatch({ type: pitchResult });
+    const pitchResult = getRandomPitchResult();
+    dispatch({ type: pitchResult }); //strike 3이랑 ball 4가 화면에 보임 ...
     judge({ SBOState, dispatch });
   };
 
   return (
-    <>
-      <Ball />
-      <PitchResult>{pitchResultList[0]}</PitchResult>
-      <PitchButton onClick={updateSBO}>PITCH</PitchButton>
-    </>
+    <PitchButtonLayout>
+      {/* <Ball /> */}
+      {/* <PitchResult>{pitchResult}</PitchResult> */}
+      <PitchButton _left={playSectionWidth} onClick={updateSBO}>
+        PITCH
+      </PitchButton>
+    </PitchButtonLayout>
   );
 };
 
+const PitchButtonLayout = styled.div`
+  outline: 10px solid red;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
 const PitchResult = styled.div`
   position: absolute;
   width: 400px;
-  top: 40%;
-  left: 30%;
+  top: 30%;
+  left: 50%;
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
@@ -48,20 +57,32 @@ const PitchResult = styled.div`
 
 const PitchButton = styled.div`
   position: absolute;
-  top: 60%;
-  left: 40%;
-  width: 150px;
+  top: 50%;
+  left: 45%;
+  width: 13rem;
   padding: 10px;
   border: 1px solid white;
   border-radius: 30px;
   text-align: center;
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: bold;
   color: white;
+
   cursor: pointer;
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  @media (max-width: 1200px) {
+    width: 12rem;
+    left: 41%;
+    font-size: 2rem;
+  }
+  @media (max-width: 768px) {
+    width: 8rem;
+    left: 40%;
+    font-size: 1rem;
   }
 `;
 
