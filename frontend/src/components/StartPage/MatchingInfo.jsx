@@ -6,31 +6,38 @@ import { useState, useEffect, useCallback } from 'react';
 
 const MatchingInfo = ({ setMessage, data }) => {
   const [currentID, setID] = useState(null);
-  const [occupiedState, loadingOccupiedState, occupied] = useFetch(
-    'patch',
-    'initGame',
-    currentID
-  );
+  const [currentType, setType] = useState(null);
+  console.log(data.occupied);
+  // const [occupiedState, loadingOccupiedState, occupied] = useFetch(
+  //   'patch',
+  //   'initGame',
+  //   currentID
+  // );
+
+  // useEffect(() => {
+  //   // console.log(occupiedState, loadingOccupiedState, occupied);
+  //   if (occupied && currentType === 'HOME') {
+  //     history.push(`/defense/${currentID}`);
+  //   } else if (occupied && currentType === 'AWAY') {
+  //     history.push(`/attack/${currentID}`);
+  //   } else {
+  //     setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
+  //     //occupied=true인경우(409error)
+  //   }
+  // }, [occupied]);
 
   const history = useHistory();
 
   const handleClick = (id, type) => {
-    // setID(id);
-    if (occupied && type === 'HOME') {
-      history.push(`/defense/${id}`);
-    } else if (occupied && type === 'AWAY') {
-      history.push(`/attack/${id}`);
-    } else {
-      setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
-      //occupied=true인경우(409error)
-    }
+    setID(id);
+    setType(type);
   };
 
-  const TeamStatus = occupied => {
+  const TeamStatus = () => {
     return (
       <>
         <TeamName
-          className={occupied ? 'occupied' : ''}
+          className={data.occupied ? 'occupied' : ''}
           onClick={() => {
             handleClick(data.id, 'AWAY');
           }}
@@ -39,7 +46,7 @@ const MatchingInfo = ({ setMessage, data }) => {
         </TeamName>
         <VS>VS</VS>
         <TeamName
-          className={occupied ? 'occupied' : ''}
+          className={data.occupied ? 'occupied' : ''}
           onClick={() => handleClick(data.id, 'HOME')}
         >
           {data.homeTeam.teamName}
@@ -50,7 +57,7 @@ const MatchingInfo = ({ setMessage, data }) => {
 
   return (
     <TeamWrapper>
-      {data.occupied ? <TeamStatus occupied /> : <TeamStatus />}
+      <TeamStatus />
     </TeamWrapper>
   );
 };
@@ -67,7 +74,7 @@ const TeamName = styled.span`
     color: ${theme.colors.red};
   }
 
-  .occupied {
+  &.occupied {
     pointer-events: none;
     color: ${theme.colors.grey_deep};
   }
