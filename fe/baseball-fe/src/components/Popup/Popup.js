@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { ReactComponent as Arrow } from 'rsc/arrow.svg'
 
 function Popup({ direction, children }) {
     const [ active, setActive ] = useState(false);
 
     const closePopup = ({ target }) => {
-        console.log(target)
         !target.closest('.wrapper') && setActive(false);
     }
 
@@ -16,7 +16,10 @@ function Popup({ direction, children }) {
                 {children}
             </div>
         </StlyedPopup>
-        : <StyleEmpty direction={direction} onMouseEnter={() => setActive(true)}/>
+        : <StyleEmpty direction={direction} onMouseEnter={() => setActive(true)}>
+            {direction === "top" ? "SCORE " : "PLAYERS "}
+            <Arrow className="arrow" fill="#555"/>
+        </StyleEmpty>
     )
 }
 
@@ -64,10 +67,23 @@ z-index: 1;
 `
 
 const StyleEmpty = styled.div`
+  color: #fff;
+  text-align: center;
+  font-weight:700;
+  padding-top: 0.4rem;
+  background-color: #95afc0;
   display: block;
-  height: 5rem;
-  width: 100%;
+  height: 2rem;
+  width: 11%;
   position: absolute;
   top: ${props => props.direction === "top" && "0px"};
   bottom: ${props => props.direction === "bottom" && "0px"};
+  left: ${props => props.direction === "top" ? "38rem" : "5rem"};
+
+  .arrow {
+    transform: ${props => props.direction === "top" ? "rotate(90deg)" : "rotate(270deg)"};
+    height: 1rem;
+    width: auto;
+  }
 `
+
