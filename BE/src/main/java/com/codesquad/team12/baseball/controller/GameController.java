@@ -1,13 +1,17 @@
 package com.codesquad.team12.baseball.controller;
 
 import com.codesquad.team12.baseball.dto.GameInitDto;
+import com.codesquad.team12.baseball.dto.InningDto;
 import com.codesquad.team12.baseball.dto.ScoreDto;
+import com.codesquad.team12.baseball.dto.ScoreTeamDto;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.service.GameService;
 import com.codesquad.team12.baseball.service.InningService;
 import com.codesquad.team12.baseball.service.PlayingService;
 import com.codesquad.team12.baseball.service.TeamService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -38,9 +42,16 @@ public class GameController {
     }
 
     @GetMapping("/scores")
-    public ScoreDto getScores(@PathVariable Long gameId, @PathVariable String teamName) {
+    public ScoreDto getScores(@PathVariable Long gameId) {
         Game game = gameService.findById(gameId);
-        return Game.createScoreDto(game);
+
+        List<InningDto> homeInnings = inningService.findAllByTeam(game.getHomeName());
+        List<InningDto> awayInnings = inningService.findAllByTeam(game.getAwayName());
+
+        ScoreTeamDto home = new ScoreTeamDto(game.getHomeName(), homeInnings);
+        ScoreTeamDto away = new ScoreTeamDto(game.getAwayName(), awayInnings);
+
+        return new ScoreDto(home, away);
     }
 
     @GetMapping("/players")
