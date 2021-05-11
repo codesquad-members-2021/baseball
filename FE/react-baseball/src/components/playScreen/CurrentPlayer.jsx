@@ -32,7 +32,7 @@ const Player = styled.div`
   text-align: center;
 `;
 const PlayerName = styled.div`
-  color: ${({ theme }) => theme.colors.grey};
+  color: ${({ theme }) => theme.colors.gray};
   font-size: ${({ theme }) => theme.fontSizes.XXS};
 `;
 const PitcherNum = styled.div`
