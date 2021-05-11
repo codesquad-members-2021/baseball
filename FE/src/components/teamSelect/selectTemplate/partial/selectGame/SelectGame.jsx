@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SelectGameItem from './SelectGameItem';
 
-const SelectGame = ({ refinedTeamData }) => {
+const SelectGame = ({ refinedTeamData, TeamDataBoolean, setDesc }) => {
     const gameItems =
         refinedTeamData &&
         refinedTeamData.length > 0 &&
@@ -11,8 +11,11 @@ const SelectGame = ({ refinedTeamData }) => {
                 key={i}
                 idx={i + 1}
                 away={arr[0]}
+                awayBoolean={TeamDataBoolean[i][0]}
                 home={arr[1]}
-                to={`/game/${arr[0]}/VS/${arr[1]}`}
+                homeBoolean={TeamDataBoolean[i][1]}
+                setDesc={setDesc}
+                to={`/game/?away=${arr[0]}&home=${arr[1]}`}
             />
         ));
 
