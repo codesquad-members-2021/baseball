@@ -3,10 +3,12 @@ package com.codesquad.team12.baseball.model;
 import com.codesquad.team12.baseball.dto.InningDto;
 
 public class Inning {
+    private String teamName;
     private Integer number;
     private Integer score;
 
-    public Inning(Integer number, Integer score) {
+    public Inning(String teamName, Integer number, Integer score) {
+        this.teamName = teamName;
         this.number = number;
         this.score = score;
     }

@@ -10,9 +10,9 @@ public class ScoreTeamDto {
     private String teamName;
 
     @JsonProperty
-    private List<Inning> innings;
+    private List<InningDto> innings;
 
-    public ScoreTeamDto(String teamName, List<Inning> innings) {
+    public ScoreTeamDto(String teamName, List<InningDto> innings) {
         this.teamName = teamName;
         this.innings = innings;
     }

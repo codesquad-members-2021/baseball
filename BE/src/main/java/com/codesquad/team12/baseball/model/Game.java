@@ -7,7 +7,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Game {
     @Id
@@ -51,6 +50,7 @@ public class Game {
     }
 
     public static ScoreDto createScoreDto(Game game) {
+
         ScoreTeamDto home = new ScoreTeamDto(game.homeName, null);
         ScoreTeamDto away = new ScoreTeamDto(game.awayName, null);
 
