@@ -14,10 +14,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonPropertyOrder({"teamId", "totalTeamScore", "playerBattingOrder", "playerName", "lastAction", "historyList"})
 public class PlayerLogDTO {
-    private int playerBattingOrder;
+
     private Long teamId;
+    private int totalTeamScore;
+    private int playerBattingOrder;
     private String playerName;
+    private String lastAction;
     private List<History> historyList;
 
     public PlayerLogDTO(Player player, Long teamId) {
