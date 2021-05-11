@@ -35,23 +35,6 @@ class APIService {
             return Disposables.create()
         }
     }
-    
-    private func post<T: Codable>(_ url: URL) -> Observable<T> {
-        return Observable.create { observer in
-            AF.request(url, method: .post)
-                .responseDecodable(of: T.self) { response in
-                    switch response.result {
-                    case .failure(let error):
-                        observer.onError(error)
-                    case .success(let data):
-                        observer.onNext(data)
-                        observer.onCompleted()
-                    }
-                }
-            return Disposables.create()
-        }
-       
-    }
 }
 
 enum APIError: LocalizedError {
