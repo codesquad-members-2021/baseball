@@ -6,15 +6,15 @@ import VS from "./VS";
 import { GameHeader as S } from "@/Components/Game/GameStyles";
 
 const GameProgress = () => {
-  const { gameData, selectedTeam } = useContext(GameContext);
+  const { gameData, teamName } = useContext(GameContext);
 
   return gameData ? (
     <S.GameProgress.GameProgress>
-      <TeamName teamName={gameData.away.teamName} selectedTeam={selectedTeam} />
+      <TeamName teamName={gameData.away.teamName} selectedTeam={teamName} />
       <Score score={1} />
       <VS />
       <Score score={5} />
-      <TeamName teamName={gameData.home.teamName} selectedTeam={selectedTeam} />
+      <TeamName teamName={gameData.home.teamName} selectedTeam={teamName} />
     </S.GameProgress.GameProgress>
   ) : null;
 };

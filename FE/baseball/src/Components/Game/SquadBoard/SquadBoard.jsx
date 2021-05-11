@@ -5,7 +5,7 @@ import SquadTable from "./SquadTable/SquadTable";
 import { SquadBoard as S } from "@/Components/Game/GameStyles";
 
 const SquadBoard = () => {
-  const { gameData, squadMockData, selectedTeam } = useContext(GameContext);
+  const { gameData, squadMockData, teamName } = useContext(GameContext);
 
   const [mouseOverFlag, setMouseOverFlag] = useState(false);
 
@@ -23,13 +23,13 @@ const SquadBoard = () => {
           teamName={gameData.away.teamName}
           squads={squadMockData.away}
           isDefenseTeam={squadMockData.defenseTeam}
-          selectedTeam={selectedTeam}
+          selectedTeam={teamName}
         />
         <SquadTable
           teamName={gameData.home.teamName}
           squads={squadMockData.home}
           isDefenseTeam={squadMockData.defenseTeam}
-          selectedTeam={selectedTeam}
+          selectedTeam={teamName}
         />
       </S.SquadBoard>
     </S.SquadBoardWrapper>
