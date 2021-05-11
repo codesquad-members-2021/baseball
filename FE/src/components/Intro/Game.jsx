@@ -12,11 +12,11 @@ const Game = ({ id, homeTeam, awayTeam }) => {
 	return (
 		<StyledGame>
 			<Index>GAME {id}</Index>
-			<Link to="/ingame" onClick={clickHandler("AWAY")}>
+			<Link to="/ingame" onClick={() => clickHandler("AWAY")}>
 				<Team>{awayTeam.name}</Team>
 			</Link>
 			<Versus>VS</Versus>
-			<Link to="/ingame" onClick={clickHandler("HOME")}>
+			<Link to="/ingame" onClick={() => clickHandler("HOME")}>
 				<Team>{homeTeam.name}</Team>
 			</Link>
 		</StyledGame>
