@@ -2,6 +2,8 @@ package com.codesquad.baseball.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 public class Player {
 
     @Id
@@ -86,6 +88,25 @@ public class Player {
 
     public void setPitcher(boolean pitcher) {
         isPitcher = pitcher;
+    }
+
+    public void updateRecord(int plateAppearance, int hit, int out) {
+        this.plateAppearance = plateAppearance;
+        this.hit = hit;
+        this.out = out;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(id, player.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
