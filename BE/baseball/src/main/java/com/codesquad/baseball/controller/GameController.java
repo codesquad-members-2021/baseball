@@ -41,4 +41,17 @@ public class GameController {
         Team awayTeam = teamService.browseTeamById(game.getAwayTeamId());
         return new TeamRecordDTO(homeTeam, awayTeam);
     }
+
+    @PostMapping("/play/{teamId}/score")
+    public void addScore(@PathVariable Long teamId, @RequestBody Score score) {
+        teamService.addScore(teamId, score);
+    }
+
+    @GetMapping("/play/{gameId}/score")
+    public GameScoreDTO browseAllScore(@PathVariable Long gameId) {
+        Game game = gameService.findGameById(gameId);
+        TeamScoreDTO homeTeamScoreDTO = teamService.browseTeamScore(game.getHomeTeamId());
+        TeamScoreDTO awayTeamScoreDTO = teamService.browseTeamScore(game.getAwayTeamId());
+        return GameScoreDTO.of(game, homeTeamScoreDTO, awayTeamScoreDTO);
+    }
 }
