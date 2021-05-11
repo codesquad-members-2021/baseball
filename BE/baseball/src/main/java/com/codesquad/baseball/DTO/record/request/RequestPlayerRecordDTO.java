@@ -2,7 +2,7 @@ package com.codesquad.baseball.DTO.record.request;
 
 public class RequestPlayerRecordDTO {
 
-    private Long id;
+    private Long playerId;
 
     private int plateAppearance;
 
@@ -10,8 +10,8 @@ public class RequestPlayerRecordDTO {
 
     private int out;
 
-    public Long getId() {
-        return id;
+    public Long getPlayerId() {
+        return playerId;
     }
 
     public int getPlateAppearance() {
