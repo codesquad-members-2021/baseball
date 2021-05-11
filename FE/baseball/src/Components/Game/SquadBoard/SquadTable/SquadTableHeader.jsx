@@ -1,12 +1,12 @@
 import CurrentPlayerTag from "./CurrentPlayerTag";
 import { SquadBoard as S } from "@/Components/Game/GameStyles";
 
-const SquadTableHeader = ({ teamName, isCurrentPlayer }) => {
+const SquadTableHeader = ({ teamName, selectedTeam }) => {
   return (
     <>
       <S.SquadTable.SquadTableHeader>
         {teamName}
-        {isCurrentPlayer ? <CurrentPlayerTag /> : null}
+        {teamName === selectedTeam ? <CurrentPlayerTag /> : null}
       </S.SquadTable.SquadTableHeader>
     </>
   );

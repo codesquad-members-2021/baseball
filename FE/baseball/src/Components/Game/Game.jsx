@@ -1,15 +1,33 @@
+import React from "react";
 import GameHeader from "./GameHeader/GameHeader";
 import GamePlayground from "./GamePlayground/GamePlayground";
 import GamePlayLog from "./GamePlayLog/GamePlayLog";
 import SquadBoard from "./SquadBoard/SquadBoard";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
+import { gameMockData, squadMockData } from "@/Utils/mockData";
 import { Game as S } from "@/Components/Game/GameStyles";
+
+const GameContext = React.createContext();
 
 const Game = () => {
   const backgroundUrl =
     "https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png";
+
+  // 팀네임을 눌렀을때 isSelected를 넘겨주면 되는데...
+  // 아마 눌리는 이벤트에 dispatch를 걸어서 메시지에 game_id랑 SelectedTeam을 주면 될 것 같다 !
+  // 그럼 game_id를 받아와서 데이터 패칭하고, SelectedTeam정보를 progress까지 내려주면 될 것 같다 !
+  // const [data,setData] = useState(null);
+  // setData(game_id)
+
+  // 추후 받아온 셀렉팀 네임을 내려줄 예정
+  const selectedTeam = "Marvel";
+
+  // 셀렉팀을 무조건 먼저 수비로 두자. (1회초 수비)
+  // 아웃 3카운트 이후 데이터를 받아올때 defenseTeam을 바꿔주자.
+  squadMockData.defenseTeam = selectedTeam;
+
   return (
-    <>
+    <GameContext.Provider value={{ gameMockData, squadMockData, selectedTeam }}>
       <S.Background src={backgroundUrl} />
       <S.Game>
         <S.GameLeftSection>
@@ -22,46 +40,13 @@ const Game = () => {
         <ScoreBoard />
         <SquadBoard />
       </S.Game>
-    </>
+    </GameContext.Provider>
   );
 };
 
-export { Game };
+export { Game, GameContext };
 
 /*
-## 프로젝트 2주차 Task
-
-- 화면 상단에 현재 팀 정보 (팀 네임) 와 스코어 가 나와야한다.
-- 앞서 클릭한 팀 네임에 현재 내가 플레이한 팀임을 알 수 있는 flag를 준다. (reducer로 메시지를 주어야 할 듯 ex. dispatch({isClicked : true})
-- 스트라이크 , 볼 , 아웃에 따라 볼 보드를 최신화 시켜준다.
-- 주자 진루 알고리즘에 따라 애니메이션을 준다.
-- [Pitch] 버튼을 누르면 스트라이크 , 볼 , 안타 중에 랜덤한 액션을 보낸다.
-- 버튼을 누르면 pitch 카운트가 올라가며, 액션 로그에 기록된다.
-- 액션 로그에서 현재 선수는 하이라이트를 준다.
-- 선수 로그에는 현재 투수의 이름과 투구갯수 , 현재 타자의 이름과 타석, 안타가 나온다.
-- 공격 상황일때는 몇초 간격으로 게임이 진행되는 것처럼 pitch를 누를때와 동일한 액션을 준다.
-- 하단 팝업에는 팀 정보가 나온다. (선수들의 정보가 받아질 예정 , 토탈은 따로 해주어야 함)
-- 현재 선수에 하이라이트를 주어야 한다.
-
-## 주자 진루 알고리즘
-
-### 진루 현황
-
-1. 주자가 없을 때
-2. 주자가 1루에 있을 때
-3. 주자가 1,2루에 있을 때
-4. 주자가 1,3루에 있을 때
-5. 주자가 1,2,3루에 있을 때
-6. 주자가 2루에 있을 때
-7. 주자가 2,3루에 있을 때
-8. 주자가 3루에 있을 때
-
-### 출루 액션
-
-1. 1루타 (볼넷 포함)
-2. 2루타
-3. 3루타
-4. 홈런
-
-총 32개의 시나리오가 있음
+1. /home에서 선택한 게임의 데이터를 get해온다. (GET /games/game_id)
+2. 선택한 팀에 isSelected라는 flag를 프롭스로 줘야 한다. (1,2를 합쳐서 useReducer를 이용하자)
 */
