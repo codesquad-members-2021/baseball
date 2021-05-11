@@ -19,6 +19,8 @@
 		A05951C1264A27FC002B759A /* BaseballSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05951C0264A27FC002B759A /* BaseballSceneDIContainer.swift */; };
 		A05951C3264A2AB5002B759A /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05951C2264A2AB5002B759A /* AppFlowCoordinator.swift */; };
 		A05951C6264A2C18002B759A /* BaseballSceneFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05951C5264A2C18002B759A /* BaseballSceneFlowCoordinator.swift */; };
+		A05951C9264A69F1002B759A /* GameScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05951C8264A69F1002B759A /* GameScoreViewController.swift */; };
+		A05951CE264A7921002B759A /* GameScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */; };
 		A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06524AA2643B7C700CF375D /* PitchHistoryView.swift */; };
 		A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098D28B264383D700950F8F /* GamePlayViewController.swift */; };
 		A09F9F2C26490CD700A78969 /* FetchGameListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F2B26490CD700A78969 /* FetchGameListUseCase.swift */; };
@@ -50,6 +52,8 @@
 		A05951C0264A27FC002B759A /* BaseballSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballSceneDIContainer.swift; sourceTree = "<group>"; };
 		A05951C2264A2AB5002B759A /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
 		A05951C5264A2C18002B759A /* BaseballSceneFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseballSceneFlowCoordinator.swift; sourceTree = "<group>"; };
+		A05951C8264A69F1002B759A /* GameScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreViewController.swift; sourceTree = "<group>"; };
+		A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScoreTableViewCell.swift; sourceTree = "<group>"; };
 		A06524AA2643B7C700CF375D /* PitchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchHistoryView.swift; sourceTree = "<group>"; };
 		A098D28B264383D700950F8F /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
 		A09F9F2B26490CD700A78969 /* FetchGameListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGameListUseCase.swift; sourceTree = "<group>"; };
@@ -113,6 +117,7 @@
 				FFDD3A8A264137080037622A /* Common */,
 				A025C3472641160400C9B8C7 /* GamePlayView */,
 				A025C33E2640EC6200C9B8C7 /* GameListView */,
+				A05951C7264A69C2002B759A /* GameScoreView */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -198,6 +203,15 @@
 				A05951C5264A2C18002B759A /* BaseballSceneFlowCoordinator.swift */,
 			);
 			path = Flow;
+			sourceTree = "<group>";
+		};
+		A05951C7264A69C2002B759A /* GameScoreView */ = {
+			isa = PBXGroup;
+			children = (
+				A05951C8264A69F1002B759A /* GameScoreViewController.swift */,
+				A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */,
+			);
+			path = GameScoreView;
 			sourceTree = "<group>";
 		};
 		A09F9F2A26490CBE00A78969 /* UseCase */ = {
@@ -358,12 +372,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05951CE264A7921002B759A /* GameScoreTableViewCell.swift in Sources */,
 				FF57667E2649324200F46A43 /* Alertable.swift in Sources */,
 				FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */,
 				FFDD3A90264138800037622A /* MatchUp.swift in Sources */,
 				A05951C6264A2C18002B759A /* BaseballSceneFlowCoordinator.swift in Sources */,
 				A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */,
 				A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */,
+				A05951C9264A69F1002B759A /* GameScoreViewController.swift in Sources */,
 				A05951C1264A27FC002B759A /* BaseballSceneDIContainer.swift in Sources */,
 				A09F9F3826491ECE00A78969 /* GameListDTO+Mapping.swift in Sources */,
 				A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */,
