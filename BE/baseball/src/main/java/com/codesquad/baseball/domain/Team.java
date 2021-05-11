@@ -20,6 +20,8 @@ public class Team {
 
     private Set<Player> players;
 
+    private Set<Score> scores;
+
     public Team(String name, boolean isHome, boolean isPlayable) {
         this.name = name;
         this.isHome = isHome;
@@ -50,6 +52,10 @@ public class Team {
         return players;
     }
 
+    public Set<Score> getScores() {
+        return scores;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -70,6 +76,11 @@ public class Team {
         players.add(player);
     }
 
+    public void updatePlayerSet(Player player) {
+        players.remove(getPlayerById(player.getId()));
+        addPlayer(player);
+    }
+
     public Player getPlayerById(Long id) {
         for (Player player : players) {
             if (id.equals(player.getId())) {
@@ -77,6 +88,10 @@ public class Team {
             }
         }
         throw new PlayerNotFoundException();
+    }
+
+    public void addScore(Score score) {
+        scores.add(score);
     }
 
     @Override
