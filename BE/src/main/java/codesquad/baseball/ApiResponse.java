@@ -8,12 +8,13 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-@JsonPropertyOrder({"inning", "nextHitter", "leftTeam", "rightTeam", "pitcher", "hitter", "teamLog"})
+@JsonPropertyOrder({"matchId", "inning", "nextHitter", "expeditionTeam", "homeTeam", "pitcher", "hitter", "teamLog"})
 public class ApiResponse {
+    Long matchId;
     Inning inning;
     PlayerLogDTO nextHitter;
-    TeamDTO leftTeam;
-    TeamDTO rightTeam;
+    TeamDTO expeditionTeam;
+    TeamDTO homeTeam;
     PlayerDTO pitcher;
     PlayerDTO hitter;
     TeamLogDTO teamLog;

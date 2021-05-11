@@ -2,16 +2,18 @@ package codesquad.baseball.controller;
 
 import codesquad.baseball.ApiResponse;
 import codesquad.baseball.DTO.*;
-import codesquad.baseball.domain.*;
+import codesquad.baseball.domain.Inning;
+import codesquad.baseball.domain.Match;
+import codesquad.baseball.domain.Player;
+import codesquad.baseball.domain.Team;
+import codesquad.baseball.exception.TeamNotFoundException;
 import codesquad.baseball.repository.MatchRepository;
 import codesquad.baseball.repository.TeamRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -27,37 +29,79 @@ public class GameController {
     }
 
     @PostMapping
-    public RedirectView initialize(@RequestBody HashMap<String, String> teamInfo) {
+    public ResponseEntity<ApiResponse> initialize(@RequestBody HashMap<String, String> teamInfo) {
         Long myTeamId = Long.valueOf(teamInfo.get("myTeamId"));
         Long counterTeamId = Long.valueOf(teamInfo.get("counterTeamId"));
         boolean isHome = Boolean.parseBoolean(teamInfo.get("isHome"));
-        Inning inning = new Inning(0, 1, "수비", "초");
+        Inning inning = Inning.initiateInning(isHome);
         Match match = new Match(myTeamId, counterTeamId, inning, isHome);
+
         Long matchId = matchRepository.save(match).getId();
-        return new RedirectView("/game/" + matchId);
-    }
 
-    @GetMapping("/{matchId}")
-    public ResponseEntity<ApiResponse> game(@PathVariable Long matchId) {
-        Match match = matchRepository.findById(matchId).orElseThrow(RuntimeException::new);
-        Team myTeam = teamRepository.findById(match.getMyTeamId()).orElseThrow(RuntimeException::new);
-        Team counterTeam = teamRepository.findById(match.getCounterTeamId()).orElseThrow(RuntimeException::new);
+        Team homeTeam = teamRepository.findById(match.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team expeditionTeam = teamRepository.findById(match.getExpeditionTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team myTeam = teamRepository.findById(match.getMyTeamId()).orElseThrow(TeamNotFoundException::new);
+        myTeam.setUser(true);
+        teamRepository.save(myTeam);
 
-        List<History> historyList = myTeam.getHistoryList();
-        TeamDTO leftTeam = new TeamDTO(myTeam.getName(), 5);
-        TeamDTO rightTeam = new TeamDTO(counterTeam.getName(), 5);
+        Team offenseTeam = isHome ? expeditionTeam : homeTeam;
+        offenseTeam.initializeTotalScore(1);
+        teamRepository.save(offenseTeam);
 
-        TeamLogDTO teamLog = new TeamLogDTO(myTeam);
-        Player player = myTeam.getPlayerList().get(0);
+        Player firstHitter = isHome ? expeditionTeam.getFirstHitter() : homeTeam.getFirstHitter();
+        Player pitcher = isHome ? homeTeam.getPitcher() : expeditionTeam.getPitcher();
 
-        PlayerDTO pitcher = new PlayerDTO("Pitcher", "Jung", 39, 1, 0);
-        PlayerDTO hitter = new PlayerDTO("Hitter", "Jane", 0, 1, 0);
-        //TeamLogDTO teamLog = new TeamLogDTO(myTeam);
-        ApiResponse apiResponse = new ApiResponse(match.getCurrentInning(),
-                new PlayerLogDTO(player, myTeam.getId()), leftTeam, rightTeam, pitcher, hitter, teamLog);
-
+        ApiResponse apiResponse = new ApiResponse(matchId, match.getCurrentInning(),
+                new PlayerLogDTO(firstHitter, homeTeam.getId()), new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO(pitcher), new PlayerDTO(firstHitter), new TeamLogDTO(homeTeam));
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @PostMapping("/{matchId}/exchange")
+    public ResponseEntity<ApiResponse> exchange(@PathVariable Long matchId, @RequestBody PlayerLogDTO playerLog) {
+        Match match = matchRepository.findById(matchId).orElseThrow(RuntimeException::new);
+        Inning currentInning = match.getCurrentInning();
+
+        Long offenseTeamId = playerLog.getTeamId();
+        Team offenseTeam = teamRepository.findById(offenseTeamId).orElseThrow(RuntimeException::new);
+        Player hitter = offenseTeam.findPlayerByName(playerLog.getPlayerName());
+        hitter.addHistory(playerLog.getHistoryList());
+        hitter.updatePlayerGameInfo(playerLog.getLastAction());
+        offenseTeam.setTotalScore(currentInning.getInningNumber(), playerLog.getTotalTeamScore());
+        teamRepository.save(offenseTeam);
+
+        Long defenseTeamId = match.getOtherTeamId(offenseTeamId);
+        Team defenseTeam = teamRepository.findById(defenseTeamId).orElseThrow(RuntimeException::new);
+        Player pitcher = defenseTeam.getPitcher();
+        pitcher.addPitchCount(playerLog.getHistoryList().size() + 1);
+        teamRepository.save(defenseTeam);
+
+        currentInning.updateOut(playerLog.isLastActionOut());
+
+        Player nextHitter = offenseTeam.getNextPlayer(playerLog.getPlayerBattingOrder());
+
+        if (currentInning.needChange()) {
+            currentInning = currentInning.changeInning();
+            offenseTeam.clearAllHistory();
+            teamRepository.save(offenseTeam);
+
+            offenseTeam = teamRepository.findById(defenseTeamId).orElseThrow(RuntimeException::new);
+            defenseTeam = teamRepository.findById(offenseTeamId).orElseThrow(RuntimeException::new);
+            nextHitter = offenseTeam.getFirstHitter();
+            pitcher = defenseTeam.getPitcher();
+            offenseTeam.initializeTotalScore(currentInning.getInningNumber());
+            teamRepository.save(offenseTeam);
+        }
+
+        TeamLogDTO teamLogDTO = new TeamLogDTO(offenseTeam);
+        matchRepository.save(match);
+        Team homeTeam = teamRepository.findById(match.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team expeditionTeam = teamRepository.findById(match.getExpeditionTeamId()).orElseThrow(TeamNotFoundException::new);
+
+        ApiResponse apiResponse = new ApiResponse(matchId, currentInning, new PlayerLogDTO(nextHitter, offenseTeamId),
+                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO(pitcher), new PlayerDTO(nextHitter), teamLogDTO);
+        return new ResponseEntity(apiResponse, HttpStatus.OK);
+    }
+
 
     @GetMapping("/{matchId}/playerListPopUp")
     public ResponseEntity<PlayerListPopUpDTO[]> showPlayerList(@PathVariable Long matchId) {
@@ -80,42 +124,5 @@ public class GameController {
         return new ResponseEntity<>(new TeamGameScoreDTO[]{leftTeamScore, rightTeamScore}, HttpStatus.OK);
     }
 
-    @PostMapping("/{matchId}/exchange")
-    public ResponseEntity exchange(@PathVariable Long matchId, @RequestBody PlayerLogDTO history) {
-        Match match = matchRepository.findById(matchId).orElseThrow(RuntimeException::new);
-
-        //이닝 정보 얻어오기
-        Inning currentInning = match.getCurrentInning();
-        int playerBattingOrder = history.getPlayerBattingOrder();
-
-        // 현재 팀의 out 가져오기
-        Team currentTeam = teamRepository.findById(history.getTeamId()).orElseThrow(RuntimeException::new);
-        Player nextPlayer = currentTeam.getPlayerList().get(playerBattingOrder);
-        int out = nextPlayer.getHistoryList().get(0).getOut();
-
-        // 현재 회차에 업데이트 후 저장
-        currentInning.update(out);
-        matchRepository.save(match);
-
-        //기타 전체 정보 조회
-        ApiResponse apiResponse = getGameInfo(match, currentInning, nextPlayer, history);
-        return new ResponseEntity(apiResponse, HttpStatus.OK);
-    }
-
-    private ApiResponse getGameInfo(Match match, Inning currentInning, Player nextPlayer, PlayerLogDTO history) {
-        Team myTeam = teamRepository.findById(match.getMyTeamId()).orElseThrow(RuntimeException::new);
-        Team counterTeam = teamRepository.findById(match.getCounterTeamId()).orElseThrow(RuntimeException::new);
-        TeamDTO leftTeam = new TeamDTO(myTeam.getName(), 5);
-        TeamDTO rightTeam = new TeamDTO(counterTeam.getName(), 5);
-        PlayerDTO pitcher = new PlayerDTO("Pitcher", "Jung", 39, 1, 0);
-        PlayerDTO hitter = new PlayerDTO("Hitter", "Jane", 0, 1, 0);
-        TeamLogDTO teamLog = new TeamLogDTO(myTeam);
-        PlayerLogDTO playerLog = new PlayerLogDTO(nextPlayer, history.getTeamId());
-        return new ApiResponse(currentInning, playerLog, leftTeam, rightTeam, pitcher, hitter, teamLog);
-    }
-
-    private boolean needExchange(Inning inning) {
-        return inning.getOut() == 3;
-    }
 
 }

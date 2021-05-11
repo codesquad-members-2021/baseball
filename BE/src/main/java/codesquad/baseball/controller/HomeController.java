@@ -1,17 +1,12 @@
 package codesquad.baseball.controller;
 
-import codesquad.baseball.ApiResponse;
-import codesquad.baseball.DTO.*;
 import codesquad.baseball.domain.*;
-import codesquad.baseball.repository.HistoryRepository;
 import codesquad.baseball.repository.MatchRepository;
 import codesquad.baseball.repository.TeamRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -26,7 +21,7 @@ public class HomeController {
     }
 
     @GetMapping("/totalTeamList")
-    public ResponseEntity home() {
+    public ResponseEntity<List<Team>> home() {
         List<Team> teamList = (List<Team>) teamRepository.findAll();
         return new ResponseEntity(teamList, HttpStatus.OK);
     }
