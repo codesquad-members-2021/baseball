@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface InningRepository extends CrudRepository<Inning, Long> {
-    @Query("SELECT team_name, number, score, game_id FROM inning WHERE team_name=:teamName")
-    List<Inning> findAllByTeam(String teamName);
+    @Query("SELECT team_name, number, score, game_id FROM inning WHERE game_id=:gameId and team_name=:teamName")
+    List<Inning> findAllByTeam(Long gameId, String teamName);
 }

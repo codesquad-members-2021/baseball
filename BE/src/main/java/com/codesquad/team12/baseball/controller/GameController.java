@@ -45,8 +45,8 @@ public class GameController {
     public ScoreDto getScores(@PathVariable Long gameId) {
         Game game = gameService.findById(gameId);
 
-        List<InningDto> homeInnings = inningService.findAllByTeam(game.getHomeName());
-        List<InningDto> awayInnings = inningService.findAllByTeam(game.getAwayName());
+        List<InningDto> homeInnings = inningService.findAllByTeam(gameId, game.getHomeName());
+        List<InningDto> awayInnings = inningService.findAllByTeam(gameId, game.getAwayName());
 
         ScoreTeamDto home = new ScoreTeamDto(game.getHomeName(), homeInnings);
         ScoreTeamDto away = new ScoreTeamDto(game.getAwayName(), awayInnings);

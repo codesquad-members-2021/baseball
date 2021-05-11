@@ -24,9 +24,9 @@ public class InningService {
         }
     }
 
-    public List<InningDto> findAllByTeam(String teamName) {
+    public List<InningDto> findAllByTeam(Long gameId, String teamName) {
         return inningRepository
-                .findAllByTeam(teamName)
+                .findAllByTeam(gameId, teamName)
                 .stream()
                 .map(Inning::createInningDto)
                 .collect(Collectors.toList());
