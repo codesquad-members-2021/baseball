@@ -4,20 +4,20 @@ import com.codesquad.baseball.domain.Team;
 
 public class TeamRecordDTO {
 
-    private TeamDTO homeTeam;
-
     private TeamDTO awayTeam;
 
-    public TeamRecordDTO(Team homeTeam, Team awayTeam) {
-        this.homeTeam = TeamDTO.of(homeTeam);
-        this.awayTeam = TeamDTO.of(awayTeam);
-    }
+    private TeamDTO homeTeam;
 
-    public TeamDTO getHomeTeam() {
-        return homeTeam;
+    public TeamRecordDTO(Team awayTeam, Team homeTeam) {
+        this.awayTeam = TeamDTO.of(awayTeam);
+        this.homeTeam = TeamDTO.of(homeTeam);
     }
 
     public TeamDTO getAwayTeam() {
         return awayTeam;
+    }
+
+    public TeamDTO getHomeTeam() {
+        return homeTeam;
     }
 }
