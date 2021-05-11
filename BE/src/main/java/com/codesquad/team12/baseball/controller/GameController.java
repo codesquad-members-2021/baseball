@@ -1,9 +1,6 @@
 package com.codesquad.team12.baseball.controller;
 
-import com.codesquad.team12.baseball.dto.GameInitDto;
-import com.codesquad.team12.baseball.dto.InningDto;
-import com.codesquad.team12.baseball.dto.ScoreDto;
-import com.codesquad.team12.baseball.dto.ScoreTeamDto;
+import com.codesquad.team12.baseball.dto.*;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.service.GameService;
 import com.codesquad.team12.baseball.service.InningService;
@@ -54,8 +51,14 @@ public class GameController {
         return new ScoreDto(home, away);
     }
 
-    @GetMapping("/players")
-    public void getPlayers(@PathVariable Long gameId) {
+    @GetMapping("/squads")
+    public PlayingsDto getPlayers(@PathVariable Long gameId) {
+        Game game = gameService.findById(gameId);
+
+        List<PlayingDto> homePlayings = playingService.findAllByTeam(gameId, game.getHomeName());
+        List<PlayingDto> awayPlayings = playingService.findAllByTeam(gameId, game.getAwayName());
+
+        return new PlayingsDto(homePlayings, awayPlayings);
     }
 
     @PutMapping

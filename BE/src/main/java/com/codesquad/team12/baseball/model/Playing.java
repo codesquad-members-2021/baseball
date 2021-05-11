@@ -1,5 +1,6 @@
 package com.codesquad.team12.baseball.model;
 
+import com.codesquad.team12.baseball.dto.PlayingDto;
 import org.springframework.data.annotation.Id;
 
 public class Playing {
@@ -42,5 +43,13 @@ public class Playing {
         this.out = out;
         this.average = average;
         this.gameId = gameId;
+    }
+
+    public static PlayingDto createPlayingDto(Playing playing) {
+        return new PlayingDto(playing.playerName, playing.position, playing.pa, playing.hit, playing.out, playing.average);
+    }
+
+    public Integer getPlayerNumber() {
+        return playerNumber;
     }
 }

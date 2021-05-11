@@ -1,5 +1,6 @@
 package com.codesquad.team12.baseball.service;
 
+import com.codesquad.team12.baseball.dto.PlayingDto;
 import com.codesquad.team12.baseball.model.Player;
 import com.codesquad.team12.baseball.model.Playing;
 import com.codesquad.team12.baseball.model.Team;
@@ -7,7 +8,10 @@ import com.codesquad.team12.baseball.repository.PlayingRepository;
 import com.codesquad.team12.baseball.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayingService {
@@ -27,6 +31,14 @@ public class PlayingService {
             Playing playing = new Playing(team.getName(), player.getNumber(), player.getName(), player.getPosition(), gameId);
             playingRepository.save(playing);
         }
+    }
 
+    public List<PlayingDto> findAllByTeam(Long gameId, String teamName) {
+        return playingRepository
+                .findAllByTeam(gameId, teamName)
+                .stream()
+                .sorted(Comparator.comparing(Playing::getPlayerNumber))
+                .map(Playing::createPlayingDto)
+                .collect(Collectors.toList());
     }
 }
