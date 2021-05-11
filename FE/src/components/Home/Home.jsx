@@ -78,6 +78,12 @@ const SelectTeam = styled.button`
 	align-items: center;
 `;
 
+const LoginRequire = styled.div`
+  font-size: 26px;
+  color: white;
+  text-align: center;
+`;
+
 const UserInfo = styled.div`
 	color: white;
 	justify-self: center;

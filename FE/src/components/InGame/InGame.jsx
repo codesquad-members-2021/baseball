@@ -4,6 +4,7 @@ import ScoreBoard from "./ScoreBoard/ScoreBoard";
 import LineUp from "./LineUp/LineUp";
 import Ground from "./Ground/Ground";
 import Record from "./Record/Record";
+
 import { MainContext } from "../Main";
 
 const InGame = () => {
@@ -29,6 +30,7 @@ const InGame = () => {
 	) : (
 		<WrongApproach>올바르지 않은 접근입니다</WrongApproach>
 	);
+
 };
 
 export default InGame;
@@ -39,9 +41,11 @@ const StyledInGame = styled.div`
 	margin-top: 30px;
 `;
 const Main = styled.div`
+
 	height: 720px;
 	filter: ${({ isDark }) => (isDark ? "brightness(20%)" : "")};
 	transition: filter 400ms;
+
 
 	font-size: 5rem;
 	color: #fff;
