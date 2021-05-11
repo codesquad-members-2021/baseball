@@ -5,16 +5,16 @@ import com.codesquad.baseball.domain.Game;
 public class GameDetailDTO {
     private TeamDetailDTO homeTeam;
     private TeamDetailDTO awayTeam;
-    private GameStatus gameStatus;
+    private GameStatusDTO gameStatusDTO;
 
-    public GameDetailDTO(TeamDetailDTO homeTeam, TeamDetailDTO awayTeam, GameStatus gameStatus) {
+    public GameDetailDTO(TeamDetailDTO homeTeam, TeamDetailDTO awayTeam, GameStatusDTO gameStatusDTO) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.gameStatus = gameStatus;
+        this.gameStatusDTO = gameStatusDTO;
     }
 
     public static GameDetailDTO from(TeamDetailDTO homeTeam, TeamDetailDTO awayTeam, Game game) {
-        return new GameDetailDTO(homeTeam, awayTeam, GameStatus.from(game));
+        return new GameDetailDTO(homeTeam, awayTeam, GameStatusDTO.from(game));
     }
 
     public TeamDetailDTO getHomeTeam() {
@@ -25,35 +25,7 @@ public class GameDetailDTO {
         return awayTeam;
     }
 
-    public GameStatus getGameStatus() {
-        return gameStatus;
-    }
-
-    public static class GameStatus {
-        private int currentHitter;
-        private int nextHitter;
-        private int currentPitcher;
-
-        public GameStatus(int currentHitter, int nextHitter, int currentPitcher) {
-            this.currentHitter = currentHitter;
-            this.nextHitter = nextHitter;
-            this.currentPitcher = currentPitcher;
-        }
-
-        public static GameStatus from(Game game) {
-            return new GameStatus(game.currentHitter(), game.nextHitter(), game.currentPitcher());
-        }
-
-        public int getCurrentHitter() {
-            return currentHitter;
-        }
-
-        public int getNextHitter() {
-            return nextHitter;
-        }
-
-        public int getCurrentPitcher() {
-            return currentPitcher;
-        }
+    public GameStatusDTO getGameStatus() {
+        return gameStatusDTO;
     }
 }

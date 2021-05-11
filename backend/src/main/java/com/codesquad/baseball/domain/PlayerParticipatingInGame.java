@@ -3,6 +3,7 @@ package com.codesquad.baseball.domain;
 import org.springframework.data.annotation.Id;
 
 public class PlayerParticipatingInGame {
+
     @Id
     private Integer id;
     private int team_participating_in_game;

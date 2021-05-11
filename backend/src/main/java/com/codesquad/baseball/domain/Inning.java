@@ -40,8 +40,12 @@ public class Inning {
         }
     }
 
-    public void addHistory(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
-        histories.add(new History(playType, strikeCount, ballCount, pitcher, hitter, earnedScore));
+    public History createHistory(PlayType playType, int strikeCount, int ballCount, int pitcher, int hitter, int earnedScore) {
+        return new History(playType, strikeCount, ballCount, pitcher, hitter, earnedScore);
+    }
+
+    public void addHistory(History history) {
+        histories.add(history);
     }
 
     public List<History> showHistory() {
@@ -62,6 +66,10 @@ public class Inning {
 
     public int getAwayTeamScore() {
         return awayTeamScore;
+    }
+
+    public int getInningNumber() {
+        return inningNumber;
     }
 
     @Override

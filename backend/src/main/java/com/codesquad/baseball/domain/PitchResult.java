@@ -8,6 +8,7 @@ public class PitchResult {
     private PlayType playType;
     private List<Integer> backHomeRunners = new ArrayList<>();
     private GameState gameState;
+    private History history;
 
     public PitchResult(PlayType playType) {
         this.playType = playType;
@@ -59,5 +60,13 @@ public class PitchResult {
 
     public GameState getGameState() {
         return gameState;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
     }
 }

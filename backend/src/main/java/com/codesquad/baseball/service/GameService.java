@@ -5,6 +5,7 @@ import com.codesquad.baseball.dto.*;
 import com.codesquad.baseball.exceptions.GameAlreadyOccupiedException;
 import com.codesquad.baseball.exceptions.GameNotFoundException;
 import com.codesquad.baseball.exceptions.PlayerNotFoundException;
+import com.codesquad.baseball.utils.PitchRandomTable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +41,7 @@ public class GameService {
 
     @Transactional
     public void joinIn(int gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException(gameId));
+        Game game = findGame(gameId);
         if (game.isOccupied()) {
             throw new GameAlreadyOccupiedException(gameId);
         }
@@ -50,7 +51,7 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDetailDTO gameDetail(int gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException(gameId));
+        Game game = findGame(gameId);
         TeamDetailDTO homeTeamDetail = teamDetailDTO(game, TeamType.HOME);
         TeamDetailDTO awayTeamDetail = teamDetailDTO(game, TeamType.AWAY);
         return GameDetailDTO.from(homeTeamDetail, awayTeamDetail, game);
@@ -71,6 +72,28 @@ public class GameService {
         Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
         game.initializeGame();
         return gameRepository.save(game);
+    }
+
+    @Transactional
+    public PitchDTO doPitch(int gameId) {
+        Game game = findGame(gameId);
+        PitchResult pitchResult = game.pitch(PitchRandomTable.rollDice());
+        gameRepository.save(game);
+        return createPitchDTO(game, pitchResult);
+    }
+
+    private PitchDTO createPitchDTO(Game game, PitchResult pitchResult) {
+        TeamDetailDTO homeTeam = teamDetailDTO(game, TeamType.HOME);
+        TeamDetailDTO awayTeam = teamDetailDTO(game, TeamType.AWAY);
+        GameStatusDTO gameStatusDTO = GameStatusDTO.from(game);
+        GameScoreDTO gameScoreDTO = GameScoreDTO.from(game);
+        PitchResultDTO pitchResultDTO = PitchResultDTO.from(pitchResult, game);
+
+        return new PitchDTO(homeTeam, awayTeam, gameStatusDTO, gameScoreDTO, pitchResultDTO);
+    }
+
+    private Game findGame(int gameId) {
+        return gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException(gameId));
     }
 
     private TeamDetailDTO teamDetailDTO(Game game, TeamType teamType) {

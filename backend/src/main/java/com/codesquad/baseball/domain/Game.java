@@ -144,8 +144,10 @@ public class Game {
     }
 
     private void savePitchResult(PitchResult pitchResult) {
-        currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
+        History history = currentInning().createHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
                 defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter(), pitchResult.numberOfRunners());
+        pitchResult.setHistory(history);
+        currentInning().addHistory(history);
     }
 
     private PitchResult onStrike() {
@@ -491,6 +493,10 @@ public class Game {
 
     public String getGameTitle() {
         return gameTitle;
+    }
+
+    public List<Inning> getInnings() {
+        return innings;
     }
 
     @Override
