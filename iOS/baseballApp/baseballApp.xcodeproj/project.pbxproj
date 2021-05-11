@@ -251,7 +251,6 @@
 				7650A1E6264138A0006C1E5F /* Player.swift */,
 				7650A1E82641418B006C1E5F /* Record.swift */,
 				76619AA626437476004D31C6 /* Game.swift */,
-				76619AB326439866004D31C6 /* GameDTO.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -268,6 +267,7 @@
 		76619AA8264376C6004D31C6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				76AA2695264A89B600600D45 /* DataMapping */,
 				76619AA9264376D4004D31C6 /* Endpoint.swift */,
 				76619AB1264385BB004D31C6 /* APIService.swift */,
 			);
@@ -282,6 +282,14 @@
 				76AA2693264A73F500600D45 /* ScoreStoryboard.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		76AA2695264A89B600600D45 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				76619AB326439866004D31C6 /* GameDTO.swift */,
+			);
+			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		8C376B28B5FECA76AEC3D38C /* Frameworks */ = {

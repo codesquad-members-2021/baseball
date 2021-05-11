@@ -4,14 +4,12 @@ import Alamofire
 
 class APIService {
     static let shared: APIService = APIService()
-//    private let endPoint = Endpoint()
 
     func requestGames() throws -> Observable<GameDTO> {
-//        print(Endpoint.getGames(path: "/baseball"))
         guard  let url = Endpoint.getGames(path: "baseball") else {
             throw APIError.urlNotSupport
         }
-        return get(url)
+        return getAndDecode(url)
     }
     
 //    func checkGameStatus() throws -> Observable<Game> {
@@ -21,8 +19,7 @@ class APIService {
 //        return get(url)
 //    }
     
-    
-    private func get<T: Codable>(_ url: URL) -> Observable<T> {
+    private func getAndDecode<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in
             AF.request(url, method: .get)
                 .responseDecodable(of: T.self) { response in
