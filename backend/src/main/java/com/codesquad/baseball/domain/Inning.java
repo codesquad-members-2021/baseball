@@ -11,7 +11,7 @@ public class Inning {
     private static final int INITIAL_SCORE = 0;
 
     @Id
-    private int id;
+    private Integer id;
     private int game;
     private int inningNumber;
     private int homeTeamScore;

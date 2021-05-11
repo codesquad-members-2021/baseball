@@ -16,11 +16,11 @@ public class Team {
     }
 
     public TeamParticipatingInGame createParticipantAsHomeTeam() {
-        return new TeamParticipatingInGame(this.id, TeamType.HOME);
+        return new TeamParticipatingInGame(TeamType.HOME);
     }
 
     public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(this.id, TeamType.AWAY);
+        return new TeamParticipatingInGame(TeamType.AWAY);
     }
 
     public void addPlayer(Player player) {
@@ -32,7 +32,7 @@ public class Team {
     }
 
 
-    public boolean isSameName(String teamName) {
+    public boolean isSameTeam(String teamName) {
         return this.teamName.equals(teamName);
     }
 

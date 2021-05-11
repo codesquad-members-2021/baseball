@@ -31,11 +31,7 @@ create table game
     current_strike_count int         not null,
     current_out_count    int         not null,
     current_ball_count   int         not null,
-    current_pitcher      int references player (id),
-    current_hitter       int references player (id),
     is_occupied          bool        not null,
-    home_team            int references team_participating_in_game (id),
-    away_team            int references team_participating_in_game (id),
     first_base           int references player (id),
     second_base          int references player (id),
     third_base           int references player (id)
@@ -45,7 +41,7 @@ create table inning
 (
     id              int primary key auto_increment,
     game            int references game (id),
-    inning_number   int not null,
+    inning_number   int,
     home_team_score int not null,
     away_team_score int not null
 );
@@ -77,7 +73,7 @@ create table player_participating_in_game
 (
     id                         int primary key auto_increment,
     team_participating_in_game int references team_participating_in_game (id),
-    bat_order                  int         not null,
+    bat_order                  int,
     player                     int references player (id),
     plate_appearances          int         not null,
     hit_count                  int         not null,
