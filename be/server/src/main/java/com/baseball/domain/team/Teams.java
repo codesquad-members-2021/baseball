@@ -27,6 +27,12 @@ public class Teams {
 
     public void switchRole() {
         offenseTeam = offenseTeam == AWAY ? HOME : AWAY;
+        if (offenseTeam == AWAY) {
+            awayTeam.pushScore();
+        }
+        if (offenseTeam == HOME) {
+            homeTeam.pushScore();
+        }
     }
 
     public void increaseScore() {

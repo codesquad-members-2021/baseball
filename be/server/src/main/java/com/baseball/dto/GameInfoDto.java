@@ -73,8 +73,8 @@ public class GameInfoDto {
         Builder builder = new Builder()
                 .scores(ScoreDto.from(awayTeam, homeTeam))
                 .innings(InningsDto.from(awayTeam, homeTeam))
-                .awayPlayers(PlayersDto.from(awayTeam.getPlayers()))
-                .homePlayers(PlayersDto.from(homeTeam.getPlayers()));
+                .awayPlayers(PlayersDto.from(awayTeam))
+                .homePlayers(PlayersDto.from(homeTeam));
         return builder.build();
     }
 }

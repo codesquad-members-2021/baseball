@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Team {
+    private final List<Integer> scores = new ArrayList<>();
     private final String name;
     private Players players;
-    private final List<Integer> scores = new ArrayList<>();
 
     public Team(String name, Players players) {
         this.name = name;
         this.players = players;
     }
 
-    public void pushScore(Integer score) {
-        scores.add(score);
+    public void pushScore() {
+        scores.add(0);
     }
 
     public void increaseScore() {
@@ -32,16 +32,20 @@ public class Team {
                 .orElse(0);
     }
 
+    public List<Integer> getScores() {
+        return scores;
+    }
+
     public String getName() {
         return name;
     }
 
-    public Players getPlayers() {
-        return players;
+    public List<Pitcher> getPitchers() {
+        return players.getPitchers();
     }
 
-    public List<Integer> getScores() {
-        return scores;
+    public List<Batter> getBatters() {
+        return players.getBatters();
     }
 
     public Pitcher getPitcher() {

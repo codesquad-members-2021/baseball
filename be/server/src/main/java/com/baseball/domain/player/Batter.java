@@ -14,7 +14,7 @@ public class Batter extends Player {
     public void play(PlayResult playResult) {
 
         if (playResult == PlayResult.HIT) {
-            increseHit();
+            increaseHit();
         }
         if (playResult == PlayResult.STRIKE) {
             strikeCount++;

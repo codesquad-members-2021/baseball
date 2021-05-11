@@ -1,6 +1,6 @@
 package com.baseball.dto;
 
-import com.baseball.domain.player.Players;
+import com.baseball.domain.team.Team;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +41,10 @@ public class PlayersDto {
         return batters;
     }
 
-    public static PlayersDto from(Players players) {
+    public static PlayersDto from(Team team) {
         Builder builder = new Builder()
-                .pitchers(players.getPitchers().stream().map(PitcherDto::from).collect(Collectors.toList()))
-                .batters(players.getBatters().stream().map(BatterDto::from).collect(Collectors.toList()));
+                .pitchers(team.getPitchers().stream().map(PitcherDto::from).collect(Collectors.toList()))
+                .batters(team.getBatters().stream().map(BatterDto::from).collect(Collectors.toList()));
         return builder.build();
 
     }
