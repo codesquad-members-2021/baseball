@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `baseball`.`team` (
                                                  `name` VARCHAR(45) NOT NULL,
                                                  `is_home` TINYINT(1) NOT NULL,
                                                  `is_playable` TINYINT(1),
+                                                 `user_selected` TINYINT(1) DEFAULT 0,
                                                  `pitcher_id` BIGINT
 );
 
@@ -39,5 +40,3 @@ CREATE TABLE IF NOT EXISTS `baseball`.`score` (
     `team` BIGINT,
     FOREIGN KEY (`team`) REFERENCES `team`(`id`)
 );
-
-select * from team;
