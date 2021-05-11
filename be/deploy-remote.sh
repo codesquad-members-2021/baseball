@@ -11,7 +11,8 @@ cd ./server
 ssh -i $KEY_PATH $AWS_PATH "rm -rf ~/$JAR_FILE"
 scp -i $KEY_PATH ./build/libs/$JAR_FILE $AWS_PATH:~
 
-# nohup으로 BE server 배포
+# 백그라운드로 BE server 배포
 TOMCAT_PROCESS=$(ssh -i $KEY_PATH $AWS_PATH "lsof -t -i tcp:8080")
 ssh -i $KEY_PATH $AWS_PATH "kill -9 $TOMCAT_PROCESS"
-ssh -i $KEY_PATH $AWS_PATH "nohup java -jar ~/$JAR_FILE & >> log.txt 2>&1"
+ssh -i $KEY_PATH $AWS_PATH "java -jar ~/$JAR_FILE & >> log.txt 2>&1"
+# ssh -i $KEY_PATH $AWS_PATH "nohup java -jar ~/$JAR_FILE & >> log.txt 2>&1"

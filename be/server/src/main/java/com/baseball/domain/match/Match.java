@@ -1,14 +1,15 @@
 package com.baseball.domain.match;
 
-import com.baseball.domain.player.Batter;
-import com.baseball.domain.player.Pitcher;
+import com.baseball.domain.team.TeamType;
 import com.baseball.domain.team.Teams;
+import com.baseball.exception.MatchOccupiedException;
 
-import static com.baseball.domain.team.SelectedTeam.AWAY;
+import static com.baseball.domain.team.TeamType.*;
 
 public class Match {
-    private final Teams teams;
     private final MatchInfo matchInfo = new MatchInfo();
+    private final Teams teams;
+    private TeamType selectedTeam = NONE;
 
     public Match(Teams teams) {
         this.teams = teams;
@@ -22,30 +23,32 @@ public class Match {
         return matchInfo;
     }
 
+    public TeamType getSelectedTeam() {
+        return selectedTeam;
+    }
+
     public void selectTeam(String teamName) {
-        teams.selectTeam(teamName);
-    }
-
-    public Integer getInningCount() {
-        /**
-         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
-         * 출처: https://en.wikipedia.org/wiki/Inning
-         */
-        return 1 + (matchInfo.getHalvesCount() / 2);
-    }
-
-    public Boolean getUserTop() {
-        return matchInfo.getHalvesCount() % 2 == 0;
+        if (selectedTeam != NONE) {
+            throw new MatchOccupiedException();
+        }
+        String homeTeamName = teams.getHomeTeam().getName();
+        selectedTeam = homeTeamName.equals(teamName) ? HOME : AWAY;
     }
 
     public Boolean getUserOffense() {
-        return teams.getSelectedTeam() == AWAY ? getUserTop() : !getUserTop();
+        /**
+         * NOTE: 만약 유저가 AWAY 팀을 선택했다면, 초반부가 공격이다.
+         * 반대로 유저가 HOME 팀을 선택헀다면, 후반부가 공격이다.
+         */
+        if (selectedTeam == AWAY) {
+            return matchInfo.getUserTop();
+        }
+        return !matchInfo.getUserTop();
     }
 
     public void play(String pitch) {
-        PitchResult pitchResult = PitchResult.of(pitch);
-        Pitcher pitcher = teams.getPitcher();
-        Batter batter = teams.getBatter();
-        matchInfo.update(pitchResult);
+        PlayResult playResult = PlayResult.of(pitch);
+        matchInfo.update(playResult);
+        teams.play(playResult);
     }
 }

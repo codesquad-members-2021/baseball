@@ -1,19 +1,29 @@
 package com.baseball.domain.player;
 
-import com.baseball.domain.match.PitchResult;
+import com.baseball.domain.match.PlayResult;
 
 public class Pitcher extends Player {
     private Integer numberOfPitching = 0;
-    private Integer baseOnBalls = 0;
-    private Integer innings = 0;
+    private Integer ballCount = 0;
+    private Integer strikeCount = 0;
 
     public Pitcher(String name) {
         super(name);
     }
 
     @Override
-    public void play(PitchResult pitchResult) {
-        // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
+    public void play(PlayResult playResult) {
+        numberOfPitching++;
+
+        if (playResult == PlayResult.STRIKE) {
+            strikeCount++;
+        }
+        if (playResult == PlayResult.BALL) {
+            ballCount++;
+        }
+        if (playResult == PlayResult.HIT) {
+            increaseHit();
+        }
     }
 
     public Integer getNumberOfPitching() {
@@ -21,10 +31,16 @@ public class Pitcher extends Player {
     }
 
     public Integer getBaseOnBalls() {
-        return baseOnBalls;
+        return ballCount / 4;
     }
 
-    public Integer getInnings() {
-        return innings;
+    private Integer getOutCount() {
+        return strikeCount / 3;
     }
+
+    public Float getInnings() {
+        return (float) getOutCount() / 3;
+
+    }
+
 }

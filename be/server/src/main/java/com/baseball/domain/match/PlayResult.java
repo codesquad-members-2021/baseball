@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public enum PitchResult {
+public enum PlayResult {
     BALL, HIT, STRIKE;
 
     private static final Random random = new Random();
-    private static final List<PitchResult> pitches = Arrays.asList(values());
+    private static final List<PlayResult> pitches = Arrays.asList(values());
 
-    private static PitchResult getRandomPitch() {
+    private static PlayResult getRandomPitch() {
         return pitches.get(random.nextInt(pitches.size()));
     }
 
-    public static PitchResult of(String name) {
+    public static PlayResult of(String name) {
         name = name.toUpperCase();
         return Optional.ofNullable(valueOf(name))
-                .orElseGet(PitchResult::getRandomPitch);
+                .orElseGet(PlayResult::getRandomPitch);
     }
 
     public Boolean toBoolean() {

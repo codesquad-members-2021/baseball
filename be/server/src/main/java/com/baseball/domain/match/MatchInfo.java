@@ -3,27 +3,28 @@ package com.baseball.domain.match;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MatchInfo {
-    private Integer halvesCount = 0;
-    private List<Boolean> bases = Arrays.asList(false, false, false);
-    private List<PitchResult> pitchResults = new ArrayList<>();
+    private Integer halvesCount = 1;
+    private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
+    private List<PlayResult> playResults = new ArrayList<>();
 
     public Integer getHalvesCount() {
         return halvesCount;
     }
 
     public Integer getStrike() {
-        return (int) pitchResults.stream()
-                .filter(pitch -> pitch == PitchResult.STRIKE)
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.STRIKE)
                 .count();
     }
 
     public Integer getBall() {
-        return (int) pitchResults.stream()
-                .filter(pitch -> pitch == PitchResult.BALL)
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.BALL)
                 .count();
     }
 
@@ -36,14 +37,35 @@ public class MatchInfo {
     }
 
     public List<Boolean> getPitcherInfo() {
-        return pitchResults.stream()
-                .filter(pitch -> pitch != PitchResult.HIT)
-                .map(PitchResult::toBoolean)
+        return playResults.stream()
+                .filter(pitch -> pitch != PlayResult.HIT)
+                .map(PlayResult::toBoolean)
                 .collect(Collectors.toList());
     }
 
-    public void update(PitchResult pitchResult) {
-        // TODO: pitchResult 에 따른 상태변화를 TDD 로 구현
-        pitchResults.add(pitchResult);
+    public Integer getInningCount() {
+        /**
+         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
+         * 출처: https://en.wikipedia.org/wiki/Inning
+         */
+        return (halvesCount + 1) / 2;
+    }
+
+    public Boolean getUserTop() {
+        return halvesCount % 2 == 1;
+    }
+
+    public void update(PlayResult playResult) {
+        // TODO: playResult 에 따른 상태변화를 TDD 로 구현
+        playResults.add(playResult);
+
+        if (playResult == PlayResult.HIT) {
+            bases.removeLast();
+            bases.addFirst(Boolean.TRUE);
+        }
+
+        if (playResult == PlayResult.STRIKE && getOutCount() == 3) {
+            halvesCount++;
+        }
     }
 }
