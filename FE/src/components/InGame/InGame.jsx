@@ -7,7 +7,7 @@ import Record from "./Record/Record";
 import { MainContext } from "../Main";
 
 const InGame = () => {
-	const { gameId } = useContext(MainContext);
+	const { gameId, loginStatus } = useContext(MainContext);
 
 	const [slideScoreBoard, toggleScoreBoard] = useState(false);
 	const [slideLineUp, toggleLineUp] = useState(false);
@@ -17,7 +17,7 @@ const InGame = () => {
 		toggleLineUp(false);
 		setDark(false);
 	};
-	return (
+	return loginStatus ? (
 		<StyledInGame>
 			<ScoreBoard slide={slideScoreBoard} toggle={toggleScoreBoard} isDark={isDark} setDark={setDark} gameId={gameId} />
 			<LineUp slide={slideLineUp} toggle={toggleLineUp} isDark={isDark} setDark={setDark} gameId={gameId} />
@@ -26,6 +26,8 @@ const InGame = () => {
 				<Record gameId={gameId} />
 			</Main>
 		</StyledInGame>
+	) : (
+		<WrongApproach>올바르지 않은 접근입니다</WrongApproach>
 	);
 };
 
@@ -42,5 +44,13 @@ const Main = styled.div`
 	transition: filter 400ms;
 
 	font-size: 5rem;
-	color: white;
+	color: #fff;
+`;
+const WrongApproach = styled.div`
+	height: 720px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 30px;
+	color:#fff;
 `;
