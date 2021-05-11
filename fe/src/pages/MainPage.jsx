@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PlaySection from "../components/PlaySection/PlaySection";
 
 import CurrentPlayer from "../components/CurrentPlayerSection/CurrentPlayer.js";
-import ScoreBoard from '../components/ScoreBoard/ScoreBoard.jsx'
+import ScoreBoard from "../components/ScoreBoard/ScoreBoard.jsx";
 import HistoryList from "../components/HistorySection/HistoryList.js";
 
 const MainPage = () => {
@@ -11,10 +11,9 @@ const MainPage = () => {
     <MainPageLayout>
       <ScoreBoard className={"grid-area__Score"} />
       <CurrentPlayer className={"grid-area__CurrentPlayer"} />
-      
-      <div className={"grid-area__Play"}>
-        <PlaySection></PlaySection>
-      </div>
+
+      <PlaySection className={"grid-area__Play"} />
+
       <HistoryList className={"grid-area__History"} />
     </MainPageLayout>
   );

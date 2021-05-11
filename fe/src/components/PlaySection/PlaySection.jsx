@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useReducer } from "react";
+import { useRef, useEffect, useReducer } from "react";
 import PlayInning from "./PlayInning";
 import PlayPitch from "./PlayPitch";
 import PlaySBOInfo from "./PlaySBOInfo";
@@ -28,14 +28,19 @@ const SBOReducer = (state, action) => {
   }
 };
 
-const PlaySection = () => {
+const PlaySection = props => {
   const [SBOState, dispatch] = useReducer(SBOReducer, initialSBOState);
 
   return (
-    <PlaySectionLayout>
+    <PlaySectionLayout className={props.className}>
       <PlaySBOInfo SBOState={SBOState} />
       <PlayField />
-      <PlayPitch {...{ SBOState, dispatch }} />
+      <PlayPitch
+        {...{
+          SBOState,
+          dispatch,
+        }}
+      />
       <PlayInning></PlayInning>
       <PlayBackgroundLayer>
         <PlayBlackLayer />

@@ -7,10 +7,17 @@ const PlayInning = ({ currentInning }) => {
 
 const Inning = styled.div`
   position: absolute;
-  top: 5%;
-  right: 2%;
+  top: 4%;
+  right: 4%;
   color: white;
-  font-size: 2rem;
+  font-size: 4rem;
+
+  @media (max-width: 1200px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export default PlayInning;
