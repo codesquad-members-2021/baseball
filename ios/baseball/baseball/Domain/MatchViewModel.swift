@@ -10,11 +10,11 @@ import RxSwift
 
 class MatchViewModel {
     private(set) var matchs = BehaviorSubject<[Match]>(value: [])
-    private var matchUseCase: MatchUseCasePort!
+    private var matchUseCase: ListUseCasePort!
     private(set) var id: Observable<String>?
     private var disposeBag = DisposeBag()
     
-    init(matchUseCase: MatchUseCasePort = MatchUseCase()) {
+    init(matchUseCase: ListUseCasePort = MatchUseCase()) {
         self.matchUseCase = matchUseCase
         self.fetchMatchs()
     }

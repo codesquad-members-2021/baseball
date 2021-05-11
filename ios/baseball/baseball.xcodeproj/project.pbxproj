@@ -42,6 +42,7 @@
 		93E9666326485DC0005C9F6C /* ScoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9666226485DC0005C9F6C /* ScoreUseCase.swift */; };
 		93E9666826485E5F005C9F6C /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9666726485E5F005C9F6C /* ScoreViewModel.swift */; };
 		93E9666D26486139005C9F6C /* PlayersHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E9666C26486139005C9F6C /* PlayersHistoryCell.swift */; };
+		93E966C7264A652F005C9F6C /* UseCasePort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E966C6264A652F005C9F6C /* UseCasePort.swift */; };
 		A03DB670041063072849A07E /* Pods_baseball.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E6185C5821FDF374680999A /* Pods_baseball.framework */; };
 		B04466A32640E5E900DAD616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04466A22640E5E900DAD616 /* AppDelegate.swift */; };
 		B04466A52640E5E900DAD616 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04466A42640E5E900DAD616 /* SceneDelegate.swift */; };
@@ -123,6 +124,7 @@
 		93E9666226485DC0005C9F6C /* ScoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreUseCase.swift; sourceTree = "<group>"; };
 		93E9666726485E5F005C9F6C /* ScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScoreViewModel.swift; path = baseball/Domain/UseCase/ScoreViewModel.swift; sourceTree = SOURCE_ROOT; };
 		93E9666C26486139005C9F6C /* PlayersHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersHistoryCell.swift; sourceTree = "<group>"; };
+		93E966C6264A652F005C9F6C /* UseCasePort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCasePort.swift; sourceTree = "<group>"; };
 		9DE1AC5DF34B16FA735B56F7 /* Pods_baseballTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6185C5821FDF374680999A /* Pods_baseball.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseball.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B044669F2640E5E800DAD616 /* baseball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseball.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 				93E9662326455E0F005C9F6C /* MatchUseCase.swift */,
 				93E9664626482098005C9F6C /* PlayUseCase.swift */,
 				93E9666226485DC0005C9F6C /* ScoreUseCase.swift */,
+				93E966C6264A652F005C9F6C /* UseCasePort.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				93E965752643A3AA005C9F6C /* GroundView.swift in Sources */,
 				93E9656426438E4E005C9F6C /* MatchBoardView.swift in Sources */,
 				93E9666326485DC0005C9F6C /* ScoreUseCase.swift in Sources */,
+				93E966C7264A652F005C9F6C /* UseCasePort.swift in Sources */,
 				93E965B92643CB3A005C9F6C /* RecodeHeaderView.swift in Sources */,
 				93E966592648367A005C9F6C /* InningInfo.swift in Sources */,
 				B04466A32640E5E900DAD616 /* AppDelegate.swift in Sources */,

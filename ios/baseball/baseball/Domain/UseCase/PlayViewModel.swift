@@ -10,7 +10,7 @@ import RxSwift
 
 class PlayViewModel {
     private(set) var matchInfo = BehaviorSubject<MatchInfo>(value: MatchInfo())
-    private var playUseCase: PlayUseCasePort!
+    private var playUseCase: UseCasePort!
     lazy private(set) var pitchInfo = matchInfo.map {
         $0.pitcherInfo
     }
@@ -35,7 +35,7 @@ class PlayViewModel {
         return SBO(strike: matchInfo.strike, ball: matchInfo.ball, out: matchInfo.outCount)
     }
     
-    init(playUseCase: PlayUseCasePort = PlayUseCase(), id: String) {
+    init(playUseCase: UseCasePort = PlayUseCase(), id: String) {
         self.playUseCase = playUseCase
         self.fetchMatchInfo(id: id)
     }

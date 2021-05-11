@@ -10,7 +10,7 @@ import RxSwift
 
 class ScoreViewModel {
     private(set) var gameInfo = BehaviorSubject<GameInfo>(value: GameInfo())
-    private var scoreUseCase: ScoreUseCasePort!
+    private var scoreUseCase: UseCasePort!
     lazy private(set) var scores = gameInfo.map {
         $0.scores
     }
@@ -19,7 +19,7 @@ class ScoreViewModel {
         $0.innings
     }
     
-    init(scoreUseCase: ScoreUseCasePort = ScoreUseCase(), id: String) {
+    init(scoreUseCase: UseCasePort = ScoreUseCase(), id: String) {
         self.scoreUseCase = scoreUseCase
         self.fetchGameInfo(id: id)
     }
