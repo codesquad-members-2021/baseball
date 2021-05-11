@@ -3,9 +3,9 @@ import BallCountItem from 'components/GamePlay/playScreen/BallCountItem'
 const BallCount = () => {
   return (
     <StyledBallCount>
-      <BallCountItem BSO={'B'} count={3} />
-      <BallCountItem BSO={'S'} count={3} />
-      <BallCountItem BSO={'O'} count={2} />
+      <BallCountItem type={'B'} count={3} />
+      <BallCountItem type={'S'} count={3} />
+      <BallCountItem type={'O'} count={2} />
     </StyledBallCount>
   )
 }

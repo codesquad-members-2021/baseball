@@ -41,25 +41,33 @@ const ScreenRound = styled.span`
   right: 2%;
   top: 4%;
 `
-const buttonAnimation = keyframes`
+const rotateAnimation = keyframes`
+100%{
+  transform: rotate(360deg);
+}
+`
 
-100% {
-    	transform: rotate(360deg);
-    }
+const scaleAnimation = keyframes`
+100%{
+  transform: scale(1.2)
+}
 `
 
 const PitchButton = styled.button`
   height: 5rem;
   position: absolute;
-  left: 47%;
-  top: 43%;
+  left: 50%;
+  top: 50%;
   cursor: pointer;
   font-size: 5rem;
   color: white;
   background: none;
+  transform: translate(-50%, -50%);
+
   &:hover {
-    /* transition: ease-in 0.5s; */
-    animation: ${buttonAnimation} 5s linear infinite;
-    transform-origin: 50% 50%;
+    svg {
+      animation: ${rotateAnimation} 5s linear infinite,
+        ${scaleAnimation} 2.5s ease-in infinite ;
+    }
   }
 `
