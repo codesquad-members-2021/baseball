@@ -39,4 +39,11 @@ public class Team {
         return new TeamPlayerDto(team.name, playerDtos);
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Map<Long, Player> getPlayers() {
+        return players;
+    }
 }

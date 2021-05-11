@@ -106,8 +106,6 @@ CREATE TABLE IF NOT EXISTS `baseball`.`playing`
     `average`       DOUBLE      NULL,
     `game_id`       INT         NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `player_number_UNIQUE` (`player_number` ASC) VISIBLE,
-    UNIQUE INDEX `team_name_UNIQUE` (`team_name` ASC) VISIBLE,
     INDEX `fk_playing_game1_idx` (`game_id` ASC) VISIBLE,
     CONSTRAINT `fk_playing_game1`
         FOREIGN KEY (`game_id`)

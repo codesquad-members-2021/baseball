@@ -4,6 +4,7 @@ import com.codesquad.team12.baseball.dto.GameInitDto;
 import com.codesquad.team12.baseball.dto.ScoreDto;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.service.GameService;
+import com.codesquad.team12.baseball.service.PlayingService;
 import com.codesquad.team12.baseball.service.TeamService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +14,20 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
     private final GameService gameService;
     private final TeamService teamService;
+    private final PlayingService playingService;
 
-    public GameController(GameService gameService, TeamService teamService) {
+    public GameController(GameService gameService, TeamService teamService, PlayingService playingService) {
         this.gameService = gameService;
         this.teamService = teamService;
+        this.playingService = playingService;
     }
-
 
     @GetMapping
     public GameInitDto getGame(@PathVariable Long gameId) {
         Game game = gameService.findById(gameId);
+        playingService.initPlaying(gameId, game.getHomeName());
+        playingService.initPlaying(gameId, game.getAwayName());
+
         return new GameInitDto(teamService.findById(game.getHomeName()),
                 teamService.findById(game.getAwayName()));
     }

@@ -16,4 +16,16 @@ public class Player {
     public static PlayerDto createPlayerDto(Player player) {
         return new PlayerDto(player.number, player.name, player.position);
     }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPosition() {
+        return position;
+    }
 }
