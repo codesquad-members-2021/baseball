@@ -23,8 +23,9 @@ public class TeamParticipatingInGame {
     protected TeamParticipatingInGame() {
     }
 
-    public TeamParticipatingInGame(TeamType teamType) {
+    public TeamParticipatingInGame(TeamType teamType, int teamId) {
         this.teamType = teamType;
+        this.team = teamId;
     }
 
     public void initializeTeam() {
@@ -110,6 +111,10 @@ public class TeamParticipatingInGame {
 
     public TeamType getTeamType() {
         return teamType;
+    }
+
+    public int getTeam() {
+        return team;
     }
 
     @Override

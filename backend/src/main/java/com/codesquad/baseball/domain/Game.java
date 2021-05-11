@@ -424,6 +424,14 @@ public class Game {
         return this.gameTitle.equals(title);
     }
 
+    public int homeTeamId() {
+        return homeTeam().getTeam();
+    }
+
+    public int awayTeamId() {
+        return awayTeam().getTeam();
+    }
+
     public TeamParticipatingInGame homeTeam() {
         return teams.stream()
                 .filter(TeamParticipatingInGame::isHomeTeam)
@@ -476,6 +484,10 @@ public class Game {
 
     public boolean isTop() {
         return isTop;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
     }
 
     @Override

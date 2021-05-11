@@ -16,11 +16,11 @@ public class Team {
     }
 
     public TeamParticipatingInGame createParticipantAsHomeTeam() {
-        return new TeamParticipatingInGame(TeamType.HOME);
+        return new TeamParticipatingInGame(TeamType.HOME, this.id);
     }
 
     public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(TeamType.AWAY);
+        return new TeamParticipatingInGame(TeamType.AWAY,  this.id);
     }
 
     public void addPlayer(Player player) {
@@ -46,6 +46,10 @@ public class Team {
 
     public Set<Player> getPlayers() {
         return players;
+    }
+
+    public String getTeamName() {
+        return teamName;
     }
 
     @Override
