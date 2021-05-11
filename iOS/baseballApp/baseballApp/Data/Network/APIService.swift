@@ -4,20 +4,22 @@ import Alamofire
 
 class APIService {
     static let shared: APIService = APIService()
+//    private let endPoint = Endpoint()
 
     func requestGames() throws -> Observable<GameDTO> {
-        guard  let url = URL(string: Endpoint.getGame) else {
+//        print(Endpoint.getGames(path: "/baseball"))
+        guard  let url = Endpoint.getGames(path: "baseball") else {
             throw APIError.urlNotSupport
         }
         return get(url)
     }
     
-    func checkGameStatus() throws -> Observable<Game> {
-        guard let url = URL(string: Endpoint.postGame) else {
-            throw APIError.urlNotSupport
-        }
-        return get(url)
-    }
+//    func checkGameStatus() throws -> Observable<Game> {
+//        guard let url = URL(string: Endpoint.postGame) else {
+//            throw APIError.urlNotSupport
+//        }
+//        return get(url)
+//    }
     
     
     private func get<T: Codable>(_ url: URL) -> Observable<T> {

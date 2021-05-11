@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
                 let tabBarController = self?.storyboard?.instantiateViewController(identifier: "TabBarController")
                 self?.present(tabBarController!, animated: true, completion: nil)
             }, onError: { error in
+                
                 print(error.localizedDescription)
             })
             .disposed(by: disposeBag)
