@@ -1,36 +1,40 @@
-import useFetch from '../Hook/useFetch';
-import styled from 'styled-components';
-import GameGeneralInfo from './GameGeneralInfo';
-import GamePlayers from './GamePlayers';
-import GameFieldArea from './GameFieldArea';
-import GameLog from './GameLog';
+import { useState, useEffect } from 'react';
 import GamePlayersList from './GamePlayersList';
+import GameDetailScore from './GameDetailScore';
+import GameGrid from './GameGrid';
+
 const GamePage = ({ data, type }) => {
-	const gameId = data.id;
-	const [gameInfo, loading, error] = useFetch('patch', 'initGame', gameId);
+	const [upState, setUpState] = useState(false);
+	const [downState, setDownState] = useState(false);
+
+	useEffect(() => {
+		const handle = (event) => {
+			console.log(event, upState, downState);
+			const { clientY } = event;
+			if (clientY < 5) {
+				setUpState(true);
+				console.log('UP');
+			} else if (clientY > 750) {
+				setDownState(true);
+				console.log('Down');
+			} else {
+				setUpState(false);
+				setDownState(false);
+			}
+		};
+		document.addEventListener('mousemove', handle);
+		return () => {
+			document.removeEventListener('mousemove', handle);
+		};
+	});
 
 	return (
 		<>
-			{loading ? (
-				console.log('Loading...')
-			) : (
-				<GridBox>
-					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
-					<GamePlayers />
-					<GameFieldArea type={type} />
-					<GameLog data={gameInfo}></GameLog>
-				</GridBox>
-			)}
+			{upState && <GameDetailScore />}
+			<GameGrid data={data} type={type} />
+			{downState && <GamePlayersList />}
 		</>
 	);
 };
 
-const GridBox = styled.div`
-	width: 100vw;
-	height: 100vh;
-	display: grid;
-	grid-template-columns: 80% 20%;
-	grid-template-rows: 20% 80%;
-	grid-gap: 5px;
-`;
 export default GamePage;
