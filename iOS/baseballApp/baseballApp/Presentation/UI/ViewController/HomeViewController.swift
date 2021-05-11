@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     private func bindCollectionView() {
         viewModel.getGameInfo()
         viewModel.games
-            .bind(to: mainCollectionView.rx.items(cellIdentifier: Identifier.GameCell, cellType: GameCell.self)) {
+            .bind(to: mainCollectionView.rx.items(cellIdentifier: GameCell.identifier, cellType: GameCell.self)) {
             row, game, cell in
                 
                 cell.configureCell(game: game)
