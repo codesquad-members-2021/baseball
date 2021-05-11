@@ -34,4 +34,11 @@ public class TeamService {
         }
         return TeamDTO.of(team);
     }
+
+    public void updatePlayerRecord(Long teamId, RequestPlayerRecordDTO playerRecord) {
+        Team team = browseTeamById(teamId);
+        Player player = team.getPlayerById(playerRecord.getId());
+        player.updateRecord(playerRecord.getPlateAppearance(), playerRecord.getHit(), playerRecord.getOut());
+        team.updatePlayerSet(player);
+    }
 }
