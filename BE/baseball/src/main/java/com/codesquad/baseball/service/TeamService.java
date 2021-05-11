@@ -35,6 +35,12 @@ public class TeamService {
         return TeamDTO.of(team);
     }
 
+    public void addScore(Long id, Score score) {
+        Team team = browseTeamById(id);
+        team.addScore(score);
+        save(team);
+    }
+
     public void updatePlayerRecord(Long teamId, RequestPlayerRecordDTO playerRecord) {
         Team team = browseTeamById(teamId);
         Player player = team.getPlayerById(playerRecord.getId());
