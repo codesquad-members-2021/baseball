@@ -34,12 +34,12 @@ public class GameController {
         return gameService.matchInformations(matchId);
     }
 
-    @GetMapping("/progress/offense")
+    @GetMapping("/progress/offense/{matchId}")
     public ProgressDTO offeseInfo() {
         return new ProgressDTO("");
     }
 
-    @GetMapping("/progress/defense")
+    @GetMapping("/progress/defense/{matchId}")
     public ProgressDTO defenseInfo() {
         return new ProgressDTO("");
     }

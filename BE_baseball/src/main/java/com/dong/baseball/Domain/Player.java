@@ -10,16 +10,16 @@ public class Player {
     private Integer hit;
     private Integer ball;
     private Integer strike;
-    private Double  battingAverage;
+    private Double battingAverage;
 
     /**
-     *     `ball`,
+     * `ball`,
      * `name`,
-     *  `at_bat`,
+     * `at_bat`,
      * strike`,
      * `played_games`,
      * ``uniform_number`,
-     *  `batting_average`,
+     * `batting_average`,
      * `player_index`
      */
 
@@ -71,12 +71,12 @@ public class Player {
         this.strike = strike;
     }
 
-    public Double  getBattingAverage() {
+    public Double getBattingAverage() {
         return battingAverage;
     }
 
-    public void setBattingAverage(Double  battingAverage) {
-        this.battingAverage = battingAverage;
+    public void setBattingAverage(Double battingAverage) {
+        this.battingAverage = (double) (this.hit + this.strike) / (double) (this.atBat);
     }
 
     public String getName() {
