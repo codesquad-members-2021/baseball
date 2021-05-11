@@ -7,9 +7,8 @@
 
 import UIKit
 
-class GameCell: UITableViewCell {
+class GameCell: UITableViewCell, IdentifierReusable {
     
-    static let reuseIdentifier = "GameCell"
     static let nib = UINib(nibName: GameCell.reuseIdentifier, bundle: nil)
     
     private var viewModel: SelectViewModel!
@@ -23,11 +22,15 @@ class GameCell: UITableViewCell {
     private var awayTeam: String!
     private var homeTeam: String!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
+}
+
+
+extension GameCell {
+
     func fill(_ viewModel: SelectViewModel, state: Game) {
         self.viewModel = viewModel
         self.gameInfo = GameInfo(userID: viewModel.gameInfo.userID, gameID: state.id)
