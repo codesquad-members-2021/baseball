@@ -1,5 +1,6 @@
-package com.codesquad.baseball.DTO;
+package com.codesquad.baseball.DTO.record;
 
+import com.codesquad.baseball.DTO.TeamDTO;
 import com.codesquad.baseball.domain.Team;
 
 public class TeamRecordDTO {

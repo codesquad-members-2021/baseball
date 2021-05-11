@@ -1,4 +1,4 @@
-package com.codesquad.baseball.DTO;
+package com.codesquad.baseball.DTO.record.request;
 
 public class RequestPlayerRecordDTO {
 
