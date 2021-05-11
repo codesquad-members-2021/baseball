@@ -43,12 +43,23 @@ class GamePlayViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         ballCountView.reset()
-        ballCountView.fillStrike(upto: 1)
-        ballCountView.fillBall(upto: 4)
-        ballCountView.fillOut(upto: 2)
-        groundView.firstBaseOn()
-        groundView.firstBaseToSecondBase()
-        //groundView.secondBaseToThirdBase()
+        
+        //애니메이션 test
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.groundView.homeTofirstBase()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.groundView.firstBaseToSecondBase()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 9) {
+            self.groundView.secondBaseToThirdBase()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 14) {
+            self.groundView.thirdBaseToHome()
+        }
     }
     
     @IBOutlet weak var ballCountView: BallCountView!

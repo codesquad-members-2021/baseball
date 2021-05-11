@@ -92,13 +92,21 @@ class GroundView: UIView {
         let id: Int
         let origin: CGPoint
         let size: CGSize
+        
+        func originMovedBy(x: CGFloat, y: CGFloat) -> CGPoint {
+            let newX = origin.x + x
+            let newY = origin.y + y
+            return CGPoint(x: newX, y: newY)
+        }
     }
     
     private var firstBaseProperty: BaseDrawingProperty?
     private var secondBaseProperty: BaseDrawingProperty?
     private var thirdBaseProperty: BaseDrawingProperty?
+    private var homeBaseProperty: BaseDrawingProperty?
     
     private var baseLayers: [Int: CALayer] = [:]
+    private var playerLayer: PlayerLayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -128,16 +136,19 @@ class GroundView: UIView {
         let firstBaseOrigin = CGPoint(x: baseXPosition + distance, y: baseYPosition)
         let secondBaseOrigin = CGPoint(x: baseXPosition, y: baseYPosition - distance)
         let thirdBaseOrigin = CGPoint(x: baseXPosition - distance, y: baseYPosition)
+        let homeBaseOrigin = CGPoint(x: baseXPosition, y: baseYPosition + distance)
         
         self.firstBaseProperty = BaseDrawingProperty(id: 1, origin: firstBaseOrigin, size: baseSize)
         self.secondBaseProperty = BaseDrawingProperty(id: 2, origin: secondBaseOrigin, size: baseSize)
         self.thirdBaseProperty = BaseDrawingProperty(id: 3, origin: thirdBaseOrigin, size: baseSize)
+        self.homeBaseProperty = BaseDrawingProperty(id: 4, origin: homeBaseOrigin, size: baseSize)
+        
     }
     
     private func addBases() {
         
         guard let firstBaseProperty = self.firstBaseProperty, let secondBaseProperty = self.secondBaseProperty,
-              let thirdBaseProperty = self.thirdBaseProperty else { return }
+              let thirdBaseProperty = self.thirdBaseProperty, let homeBaseProperty = self.homeBaseProperty else { return }
         
         let baseProperties = [firstBaseProperty, secondBaseProperty, thirdBaseProperty]
         
@@ -145,6 +156,9 @@ class GroundView: UIView {
             self.addBase(id: baseProperty.id, origin: baseProperty.origin, size: baseProperty.size)
         }
 
+        let homeOrigin = homeBaseProperty.origin
+        addPlayer(to: homeOrigin)
+        
     }
     
     private func addBase(id: Int, origin: CGPoint, size: CGSize) {
@@ -161,52 +175,123 @@ class GroundView: UIView {
         
     }
 
+    private func addPlayer(to baseOrigin: CGPoint) {
+        
+        let playerHeight = height * 0.1
+        let playerWidth = playerHeight * 0.53
+        let playerSize = CGSize(width: playerWidth, height: playerHeight)
+        
+        let playerXPosition = baseOrigin.x + playerWidth
+        let playerYPosition = baseOrigin.y
+        let playerOrigin = CGPoint(x: playerXPosition, y: playerYPosition)
+        
+        let player = PlayerLayer(origin: playerOrigin, size: playerSize)
+        layer.addSublayer(player)
+    
+        self.playerLayer = player
+        
+    }
+    
 }
 
 //MARK: - Animation Methods
 extension GroundView {
     
     func homeTofirstBase() {
-        animateBase(id: 1, toSelected: true, duration: 1, delay: 7)
+        guard let homeBaseProperty = homeBaseProperty, let firstBaseProperty = firstBaseProperty else { return }
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(6)
+        
+        animatePlayer(with: homeBaseProperty, firstBaseProperty, duration: 1, delay: 3)
+        animateBase(id: 1, toSelected: true, duration: 1, delay: 5)
+        
+        CATransaction.commit()
+        
     }
 
     func firstBaseToSecondBase() {
-        animateBase(id: 1, toSelected: false, duration: 1, delay: 5)
-        animateBase(id: 2, toSelected: true, duration: 1, delay: 7)
+        guard let firstBaseProperty = firstBaseProperty, let secondBaseProperty = secondBaseProperty else { return }
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(6)
+        
+        animatePlayer(with: firstBaseProperty, secondBaseProperty, duration: 1, delay: 3)
+        animateBase(id: 1, toSelected: false, duration: 1, delay: 3)
+        animateBase(id: 2, toSelected: true, duration: 1, delay: 5)
+        
+        CATransaction.commit()
+        
     }
 
     func secondBaseToThirdBase() {
-        animateBase(id: 2, toSelected: false, duration: 1, delay: 5)
-        animateBase(id: 3, toSelected: true, duration: 1, delay: 7)
+        guard let secondBaseProperty = secondBaseProperty, let thirdBaseProperty = thirdBaseProperty else { return }
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(6)
+        
+        animatePlayer(with: secondBaseProperty, thirdBaseProperty, duration: 1, delay: 3)
+        animateBase(id: 2, toSelected: false, duration: 1, delay: 3)
+        animateBase(id: 3, toSelected: true, duration: 1, delay: 5)
+        
+        CATransaction.commit()
     }
 
     func thirdBaseToHome() {
-        animateBase(id: 3, toSelected: false, duration: 1, delay: 5)
+        guard let thirdBaseProperty = thirdBaseProperty, let homeBaseProperty = homeBaseProperty else { return }
+        
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(6)
+        
+        animatePlayer(with: thirdBaseProperty, homeBaseProperty, duration: 1, delay: 3)
+        animateBase(id: 3, toSelected: false, duration: 1, delay: 3)
+        
+        CATransaction.commit()
+    }
+    
+    private func animatePlayer(with fromBaseInfo: BaseDrawingProperty,_ toBaseInfo: BaseDrawingProperty, duration: Double, delay: Double) {
+        
+        guard let player = playerLayer else { return }
+        
+        let offsetX = player.frame.width
+        let fromPosition = fromBaseInfo.originMovedBy(x: offsetX, y: 0)
+        let toPosition = toBaseInfo.originMovedBy(x: offsetX, y: 0)
+        
+        let positionAnimation = CASpringAnimation(keyPath: #keyPath(PlayerLayer.position))
+        positionAnimation.damping = 10
+        positionAnimation.mass = 0.7
+        positionAnimation.fromValue = fromPosition
+        positionAnimation.toValue = toPosition
+        positionAnimation.timeOffset = delay
+        positionAnimation.duration = duration
+
+        player.add(positionAnimation, forKey: #keyPath(PlayerLayer.position))
+
+        CATransaction.setCompletionBlock {
+            player.position = toPosition
+        }
+        
     }
     
     private func animateBase(id: Int, toSelected: Bool, duration: Double, delay: Double) {
         
         guard let firstBase = baseLayers[id] else { return }
-        
-        CATransaction.begin()
-        
+    
         let fromColor = toSelected ? Color.base : Color.baseSelected
         let toColor = toSelected ? Color.baseSelected : Color.base
         
-        let background = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
-        background.fromValue = fromColor
-        background.toValue = toColor
-        background.beginTime = CACurrentMediaTime() + delay
-        background.duration = duration
+        let backgroundAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
+        backgroundAnimation.fromValue = fromColor
+        backgroundAnimation.toValue = toColor
+        backgroundAnimation.timeOffset = delay
+        backgroundAnimation.duration = duration
         
-        firstBase.add(background, forKey: #keyPath(CALayer.backgroundColor))
+        firstBase.add(backgroundAnimation, forKey: #keyPath(CALayer.backgroundColor))
         
         CATransaction.setCompletionBlock {
             firstBase.backgroundColor = toColor
         }
-        
-        CATransaction.commit()
-        
+
     }
     
 }
