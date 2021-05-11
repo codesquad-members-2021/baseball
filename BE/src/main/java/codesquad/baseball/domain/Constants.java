@@ -1,18 +1,23 @@
 package codesquad.baseball.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 public class Constants {
-    public final static String HIT_ACTION = "안타";
-    public final static String OUT_ACTION = "아웃";
-    public final static String FOUR_BALL_ACTION = "볼넷";
+    public static final String HIT_ACTION = "안타";
+    public static final String OUT_ACTION = "아웃";
+    public static final String FOUR_BALL_ACTION = "볼넷";
 
-    public final static int MAX_OUT_NUMBER = 3;
+    public static final int MAX_OUT_NUMBER = 3;
 
-    public final static String PITCHER = "투수";
-    public final static String HITTER = "타자";
-    static final String OFFENSE = "공격";
-    static final String DEFENSE = "수비";
-    static final String TOP = "초";
-    static final String BOTTOM = "말";
+    public static final String PITCHER = "투수";
+    public static final String HITTER = "타자";
+    public static final String OFFENSE = "공격";
+    public static final String DEFENSE = "수비";
+    public static final String TOP = "초";
+    public static final String BOTTOM = "말";
+
+    public static final String STRIKE = "strike";
+    public static final String BALL = "ball";
+    public static final String HIT = "hit";
+    public static final String OUT = "out";
 }

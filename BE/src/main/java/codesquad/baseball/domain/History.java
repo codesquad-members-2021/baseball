@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
+import static codesquad.baseball.domain.Constants.HIT;
+import static codesquad.baseball.domain.Constants.OUT;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class History {
-
     @Id
     @JsonIgnore
     private Long id;
@@ -20,11 +22,6 @@ public class History {
     private int strike;
     private int ball;
     private int out;
-
-    private final static String STRIKE = "strike";
-    private final static String BALL = "ball";
-    private final static String HIT = "hit";
-    private final static String OUT = "out";
 
     @JsonIgnore
     public boolean isActionOut() {

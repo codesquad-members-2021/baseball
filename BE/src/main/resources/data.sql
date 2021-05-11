@@ -68,7 +68,6 @@ insert into player(name, team) values ('토르', 6);
 insert into player(name, team) values ('그루트', 6);
 
 
-
 insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)
 values (1, '투수', 0, 0, 0, 0, 0, 1);
 insert into player_game_info(batting_order, role, pitch_count, plate_appearance, hits, `out`, average, player)

@@ -29,17 +29,16 @@ public class PlayerGameInfo {
     }
 
     @JsonIgnore
-    public PlayerGameInfo updatePlayerGameInfo(boolean hitSuccess, boolean isOut) {
+    public void updatePlayerGameInfo(boolean hitSuccess, boolean isOut) {
         this.plateAppearance += 1;
         if (hitSuccess) {
             this.hits += 1;
-            return this;
+            return;
         }
         if (isOut) {
             this.out += 1;
         }
         this.average = (long) hits / (long) plateAppearance;
-        return this;
     }
 
 }

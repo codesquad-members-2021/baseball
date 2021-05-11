@@ -43,9 +43,14 @@ public class Team {
     }
 
     @JsonIgnore
-    public void initializeTotalScore(int inningNumber) {
-        TeamGameScore teamGameScore = new TeamGameScore(inningNumber, 0);
+    public Team initializeTotalScore() {
         teamGameScoreList.clear();
+        return this;
+    }
+
+    @JsonIgnore
+    public void addDefaultScore(int inningNumber) {
+        TeamGameScore teamGameScore = new TeamGameScore(inningNumber, 0);
         teamGameScoreList.add(teamGameScore);
     }
 

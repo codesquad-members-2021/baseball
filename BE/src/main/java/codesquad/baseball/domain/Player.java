@@ -21,9 +21,8 @@ public class Player {
     private List<History> historyList;
     private String lastAction;
 
-    public Player addHistory(List<History> histories) {
+    public void addHistory(List<History> histories) {
         historyList.addAll(histories);
-        return this;
     }
 
     public void clearHistory() {

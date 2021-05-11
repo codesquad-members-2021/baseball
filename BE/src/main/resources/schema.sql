@@ -61,8 +61,6 @@ create table `match`
     my_team_id      bigint(20),
     counter_team_id bigint(20),
     is_home         boolean
--- ,
---     inning          bigint(20) references inning(id)
 );
 
 
