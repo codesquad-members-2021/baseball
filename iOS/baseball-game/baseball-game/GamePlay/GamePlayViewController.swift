@@ -44,10 +44,8 @@ class GamePlayViewController: UIViewController {
         super.viewDidAppear(animated)
         ballCountView.reset()
         ballCountView.fillStrike(upto: 1)
-        ballCountView.fillStrike(upto: 2)
-        ballCountView.fillBall(upto: 1)
-        ballCountView.fillOut(upto: 1)
-        //ballCountView.fillStrike(upto: 3)
+        ballCountView.fillBall(upto: 4)
+        ballCountView.fillOut(upto: 2)
     }
     
     @IBOutlet weak var ballCountView: BallCountView!
