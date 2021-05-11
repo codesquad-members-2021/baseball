@@ -1,5 +1,6 @@
 package com.team22.baseball.service;
 
+import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
@@ -127,4 +128,7 @@ public class GameService {
 
     }
 
+    public Game findGameById(Long gameId) throws Exception {
+        return gameRepository.findGameById(gameId).orElseThrow(Exception::new);
+    }
 }

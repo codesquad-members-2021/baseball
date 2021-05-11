@@ -81,5 +81,8 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     @Query("UPDATE GAME SET GAME.in_progress = :inProgress WHERE GAME.id = ( SELECT TEAM.id FROM TEAM WHERE TEAM.name = :teamTitle );")
     void updateGameStatusByTitle(@Param("teamTitle") String teamTitle, @Param("inProgress") boolean inProgress);
 
+    @Query("SELECT * FROM GAME WHERE GAME.id = :id;")
+    Optional<Game> findGameById(@Param("id") Long id);
+
 }
 

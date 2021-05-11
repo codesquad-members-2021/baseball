@@ -1,8 +1,14 @@
 package com.team22.baseball.controller;
 
+import com.team22.baseball.domain.Game;
+import com.team22.baseball.domain.Player;
+import com.team22.baseball.domain.Team;
 import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
 import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
 import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.PlayerScoreList.PlayerDto;
+import com.team22.baseball.dto.response.PlayerScoreList.PlayerScoreDto;
+import com.team22.baseball.dto.response.PlayerScoreList.TeamDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
 import org.slf4j.Logger;
@@ -11,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +65,28 @@ public class ApiGameController {
     private List<detailScoreDto> detailScore(@PathVariable Long gameID) {
 
         return gameService.getDetailScoreOfEachTeam(gameID);
+    }
+
+    @GetMapping("/playerList/{gameId}")
+    @ResponseStatus(HttpStatus.OK)
+    private  List<PlayerScoreDto> playerScoreList(@PathVariable Long gameId ) throws Exception {
+
+        Game findGame = gameService.findGameById(gameId);
+        List<PlayerScoreDto> responseDto = new ArrayList<>();
+
+
+        for(Team team : findGame.getTeams()){
+
+            List<PlayerDto> playerDtos = new ArrayList<>();
+            TeamDto teamDto = TeamDto.of(team.getName(),team.isHome(),team.isSelected());
+
+            for(Player player : team.getPlayers()){
+                playerDtos.add(PlayerDto.of(player.getUniformNumber(),player.getName(),player.getPlateAppearance(),player.getHits(),player.getOuts()));
+            }
+            responseDto.add(PlayerScoreDto.of(teamDto,playerDtos));
+        }
+
+        return responseDto;
     }
 
 }
