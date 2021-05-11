@@ -1,20 +1,24 @@
 package com.dong.baseball.Domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
-enum Team_enum {
-    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants
-}
+import java.util.ArrayList;
+import java.util.List;
 
+//    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants
 public class Team {
     @Id
     private Long teamId;
 
-    private String TeamName;
+    private String teamName;
     private int win;
     private int lose;
     private int draw;
     private int victoryPoint;
+
+    @MappedCollection(idColumn = "team_id", keyColumn = "player_index")
+    List<Player> members = new ArrayList<>();
 
     public Long getTeamId() {
         return teamId;
@@ -25,11 +29,11 @@ public class Team {
     }
 
     public String getTeamName() {
-        return TeamName;
+        return teamName;
     }
 
     public void setTeamName(String teamName) {
-        TeamName = teamName;
+        this.teamName = teamName;
     }
 
     public int getWin() {
@@ -62,5 +66,9 @@ public class Team {
 
     public void setVictoryPoint(int victoryPoint) {
         this.victoryPoint = victoryPoint;
+    }
+
+    public List<Player> getMembers() {
+        return members;
     }
 }
