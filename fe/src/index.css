@@ -9,7 +9,16 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  font-size: 10px; /* rem단위 편하게 쓰자~ */
 }
+	
+/* reference : https://nykim.work/85  */
+@media all and (max-width: 768px) { /* aka bootstrap md */
+  html { font-size: 8px; }
+} 
+@media all and (max-width: 576px) { /* aka bootstrap sm */
+  html { font-size: 6px; }
+} 
 
 /* Sections
    ========================================================================== */
