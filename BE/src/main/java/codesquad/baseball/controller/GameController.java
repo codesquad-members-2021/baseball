@@ -29,7 +29,7 @@ public class GameController {
     }
 
     @PostMapping
-    public RedirectView initialize(@RequestBody HashMap<String, String> teamInfo) {
+    public ResponseEntity<ApiResponse> initialize(@RequestBody HashMap<String, String> teamInfo) {
         Long myTeamId = Long.valueOf(teamInfo.get("myTeamId"));
         Long counterTeamId = Long.valueOf(teamInfo.get("counterTeamId"));
         boolean isHome = Boolean.parseBoolean(teamInfo.get("isHome"));
@@ -37,7 +37,23 @@ public class GameController {
         Match match = new Match(myTeamId, counterTeamId, inning, isHome);
 
         Long matchId = matchRepository.save(match).getId();
-        return new RedirectView("/game/" + matchId);
+
+        Team homeTeam = teamRepository.findById(match.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team expeditionTeam = teamRepository.findById(match.getExpeditionTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team myTeam = teamRepository.findById(match.getMyTeamId()).orElseThrow(TeamNotFoundException::new);
+        myTeam.setUser(true);
+        teamRepository.save(myTeam);
+
+        Team offenseTeam = isHome ? expeditionTeam : homeTeam;
+        offenseTeam.initializeTotalScore(1);
+        teamRepository.save(offenseTeam);
+
+        Player firstHitter = isHome ? expeditionTeam.getFirstHitter() : homeTeam.getFirstHitter();
+        Player pitcher = isHome ? homeTeam.getPitcher() : expeditionTeam.getPitcher();
+
+        ApiResponse apiResponse = new ApiResponse(matchId, match.getCurrentInning(),
+                new PlayerLogDTO(firstHitter, homeTeam.getId()), new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO(pitcher), new PlayerDTO(firstHitter), new TeamLogDTO(homeTeam));
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @PostMapping("/{matchId}/exchange")
