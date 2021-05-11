@@ -3,6 +3,7 @@ import InningInfo from "./InningInfo";
 import PitchButton from "./PitchButton";
 import GameDisplay from "./GameDisplay/GameDisplay";
 import BallCountBoard from "./BallCountBoard/BallCountBoard";
+import { BACKGROUND_URL } from "@/Utils/const";
 import { GamePlayground as S } from "@/Components/Game/GameStyles";
 
 const reducer = (state, action) => {
@@ -17,9 +18,6 @@ const reducer = (state, action) => {
 };
 
 const GamePlayground = () => {
-  const backgroundUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png";
-
   const initialState = {
     strike: 2,
     ball: 2,
@@ -32,7 +30,7 @@ const GamePlayground = () => {
 
   return (
     <S.GamePlayground>
-      <S.Background src={backgroundUrl} />
+      <S.Background src={BACKGROUND_URL} />
       <BallCountBoard ballCount={state} />
       <InningInfo inningInfo={state} />
       <GameDisplay />

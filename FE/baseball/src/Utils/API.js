@@ -6,14 +6,14 @@ const api = axios.create({
 
 const getAPI = {
 	main: () => api.get("main"),
-	game: (gameID) => api.get(`games/${gameID}`),
-	score: (gameID) => api.get(`games/${gameID}/scores`),
-	squads: (gameID) => api.get(`games/${gameID}/squads`)
+	game: (gameId) => api.get(`games/${gameId}`),
+	score: (gameId) => api.get(`games/${gameId}/scores`),
+	squads: (gameId) => api.get(`games/${gameId}/squads`)
 }
 
 const putAPI = {
-	endInning: ({ gameID, inningNumber, body }) => api.put(`games/${gameID}/${inningNumber}`, body),
-	pitch: (gameID, body) => api.put(`games/${gameID}`, body),
+	endInning: ({ gameId, inningNumber, body }) => api.put(`games/${gameId}/${inningNumber}`, body),
+	pitch: (gameId, body) => api.put(`games/${gameId}`, body),
 }
 
 export { getAPI, putAPI }
