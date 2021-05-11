@@ -203,4 +203,16 @@ class MatchInfoTest {
                 .isEqualTo(Arrays.asList(true, false));
         softly.assertAll();
     }
+
+    @Test
+    @DisplayName("공수가 바뀌면, MatchInfo 가 초기화 되어야 한다.")
+    void proceedToNextHalve_reset() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("공수가 2번 바뀌면, 이닝이 바뀌어야 한다.")
+    void proceedToNextHalve_increaseInning() {
+        // TODO:
+    }
 }
