@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E95E2C5264A457B00EDDE28 /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95E2C4264A457B00EDDE28 /* PlayViewModel.swift */; };
+		1E95E2C7264A47FF00EDDE28 /* PlaySceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95E2C6264A47FF00EDDE28 /* PlaySceneDIContainer.swift */; };
+		1E95E2C9264A4CF600EDDE28 /* PlayUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E95E2C8264A4CF600EDDE28 /* PlayUseCase.swift */; };
 		1ED6F9452643837300FEFADF /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6F9442643837300FEFADF /* PlayView.swift */; };
 		1ED6F947264389B400FEFADF /* DiamondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6F946264389B400FEFADF /* DiamondView.swift */; };
 		1ED6F94926438E9300FEFADF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED6F94826438E9300FEFADF /* HomeView.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E95E2C4264A457B00EDDE28 /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
+		1E95E2C6264A47FF00EDDE28 /* PlaySceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySceneDIContainer.swift; sourceTree = "<group>"; };
+		1E95E2C8264A4CF600EDDE28 /* PlayUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayUseCase.swift; sourceTree = "<group>"; };
 		1ED6F9442643837300FEFADF /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		1ED6F946264389B400FEFADF /* DiamondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondView.swift; sourceTree = "<group>"; };
 		1ED6F94826438E9300FEFADF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -214,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				8872EC402646A77600EDB038 /* GameListUseCase.swift */,
+				1E95E2C8264A4CF600EDDE28 /* PlayUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -222,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				8872EC6326479E1900EDB038 /* GameListViewModel.swift */,
+				1E95E2C4264A457B00EDDE28 /* PlayViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -240,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				8872EC722647A0A800EDB038 /* GameListSceneDIContainer.swift */,
+				1E95E2C6264A47FF00EDDE28 /* PlaySceneDIContainer.swift */,
 			);
 			path = DIContainers;
 			sourceTree = "<group>";
@@ -350,13 +359,16 @@
 			files = (
 				8872EC6426479E1900EDB038 /* GameListViewModel.swift in Sources */,
 				8872EBED2640EFED00EDB038 /* GameListCollectionViewCell.swift in Sources */,
+				1E95E2C5264A457B00EDDE28 /* PlayViewModel.swift in Sources */,
 				8872EC0F2643BF6200EDB038 /* BallCountCollectionViewCell.swift in Sources */,
 				8872EC332645A74500EDB038 /* NetworkError.swift in Sources */,
 				1ED6F947264389B400FEFADF /* DiamondView.swift in Sources */,
+				1E95E2C7264A47FF00EDDE28 /* PlaySceneDIContainer.swift in Sources */,
 				8872EBE42640EAF300EDB038 /* PlayViewController.swift in Sources */,
 				8872EC732647A0A800EDB038 /* GameListSceneDIContainer.swift in Sources */,
 				8872EBA5263FD2F900EDB038 /* GameListViewController.swift in Sources */,
 				1ED6F94926438E9300FEFADF /* HomeView.swift in Sources */,
+				1E95E2C9264A4CF600EDDE28 /* PlayUseCase.swift in Sources */,
 				8872EBE82640EB0C00EDB038 /* ScoreViewController.swift in Sources */,
 				8872EBA1263FD2F900EDB038 /* AppDelegate.swift in Sources */,
 				1ED6F9452643837300FEFADF /* PlayView.swift in Sources */,

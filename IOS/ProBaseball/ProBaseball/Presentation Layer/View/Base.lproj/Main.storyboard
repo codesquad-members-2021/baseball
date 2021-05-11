@@ -67,7 +67,7 @@
         <!--Item-->
         <scene sceneID="9GR-ne-mMK">
             <objects>
-                <viewController id="zfi-xC-Wwz" customClass="PlayViewController" customModule="ProBaseball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayViewController" id="zfi-xC-Wwz" customClass="PlayViewController" customModule="ProBaseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j2H-Pc-fI3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,6 +384,15 @@
                     <tabBarItem key="tabBarItem" title="Item" id="GKC-em-Qw8"/>
                     <connections>
                         <outlet property="ballCountCollectionView" destination="eP6-Mw-TE0" id="nRn-7o-PpV"/>
+                        <outlet property="ballStackView" destination="rPl-XI-xUI" id="Leb-au-Nyi"/>
+                        <outlet property="currentBatter" destination="Tzy-cC-FLl" id="2F5-cV-gGP"/>
+                        <outlet property="currentBatterDescription" destination="eAs-bt-t2f" id="C4h-OV-AsL"/>
+                        <outlet property="currentPitcher" destination="bpd-UV-rdg" id="Egg-u0-x0H"/>
+                        <outlet property="currentPitcherNum" destination="JiE-60-Lty" id="KyQ-Ms-jYf"/>
+                        <outlet property="inningLabel" destination="XFt-NA-Kdb" id="62p-kB-eji"/>
+                        <outlet property="offenseOrDefense" destination="YED-QM-syP" id="n4e-f2-qOz"/>
+                        <outlet property="outStackView" destination="Aa4-tJ-87E" id="ntz-iS-imd"/>
+                        <outlet property="strikeStackView" destination="NmS-pl-kB9" id="JGI-fZ-s01"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sku-MA-nku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

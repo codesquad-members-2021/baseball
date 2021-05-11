@@ -9,6 +9,10 @@ import UIKit
 
 class BallCountCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var cellCount: UIButton!
+    @IBOutlet weak var ballState: UILabel!
+    @IBOutlet weak var ballStateHistoryNum: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

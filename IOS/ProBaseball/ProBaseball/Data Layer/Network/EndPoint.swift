@@ -37,6 +37,10 @@ extension Endpoint {
         return Endpoint(path: "/test") as! Self
     }
     
+    static var game: Self {
+        return Endpoint(path: "/game") as! Self
+    }
+    
 //    static func users(count: Int) -> Self {
 //           return Endpoint(path: "/user",
 //                           queryItems: [
