@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import RecordOfPlayer from './RecordOfPlayer';
+import styled from "styled-components";
+import RecordOfPlayer from "./RecordOfPlayer";
 
-const Bottom = () => {
+const Bottom = ({ hitterRecords }) => {
   return (
     <StyledBottom>
       <RecordWrapper>
@@ -81,7 +81,7 @@ const PlayerInfo = styled.div`
 `;
 const PlayerNum = styled.span`
   &::after {
-    content: '번 타자';
+    content: "번 타자";
   }
 `;
 const PlayerName = styled.span``;
