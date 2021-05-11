@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import TeamRoster from './TeamRoster';
-const Roster = () => {
+const Roster = ({ memberList }) => {
   // team_name 필요
   return (
     <StyledRoster>
-      <TeamRoster {...game_roster.home}/>
-      <TeamRoster {...game_roster.away} player={true}/>
+      <TeamRoster memberList={memberList.home}/>
+      <TeamRoster memberList={memberList.away} player={true}/>
     </StyledRoster>
   );
 }
@@ -26,128 +26,5 @@ const StyledRoster = styled.div`
     border-left: 1.5px solid #fff;
   }
 `;
-
-const game_roster = {
-  // 평균은 fe에서
-  'home': {
-    'member_list' : [
-      {
-        'name': '김광진',
-        'at_bat': 7, // 타석
-        'safety': 3, // 안타
-        'out': 4, // 아웃
-      },
-      {
-        'name': '추신수',
-        'at_bat': 7, // 타석
-        'safety': 5, // 안타
-        'out': 2, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 11, // 타석
-        'safety': 4, // 안타
-        'out': 7, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 10, // 타석
-        'safety': 2, // 안타
-        'out': 8, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 3, // 타석
-        'safety': 2, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 4, // 타석
-        'safety': 1, // 안타
-        'out': 3, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 6, // 타석
-        'safety': 2, // 안타
-        'out': 4, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 5, // 타석
-        'safety': 4, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 7, // 타석
-        'safety': 7, // 안타
-        'out': 0, // 아웃
-      },
-    ],
-    'player_name' : '추신수'
-  },
-  'away':{
-    'member_list' : [
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '이대호',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-      {
-        'name': '김광진',
-        'at_bat': 2, // 타석
-        'safety': 1, // 안타
-        'out': 1, // 아웃
-      },
-    ],
-    'player_name' : '이대호'
-  }
-}
-
 
 export default Roster;
