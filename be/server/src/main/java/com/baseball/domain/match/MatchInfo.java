@@ -3,12 +3,13 @@ package com.baseball.domain.match;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MatchInfo {
     private Integer halvesCount = 1;
-    private List<Boolean> bases = new ArrayList<>(Arrays.asList(false, false, false));
+    private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
     private List<PlayResult> playResults = new ArrayList<>();
 
     public Integer getHalvesCount() {
@@ -47,14 +48,12 @@ public class MatchInfo {
         playResults.add(playResult);
 
         if (playResult == PlayResult.HIT) {
-            bases.remove(2);
-            bases.add(0, Boolean.TRUE);
+            bases.removeLast();
+            bases.addFirst(Boolean.TRUE);
         }
 
-        if (playResult == PlayResult.STRIKE) {
-            if (getOutCount() == 3) {
-                halvesCount++;
-            }
+        if (playResult == PlayResult.STRIKE && getOutCount() == 3) {
+            halvesCount++;
         }
     }
 }

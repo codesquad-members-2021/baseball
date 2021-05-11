@@ -15,7 +15,7 @@ class BatterTest {
     @BeforeEach
     void setUp() {
         softly = new SoftAssertions();
-        batter = new Batter("Better");
+        batter = new Batter("Batter");
     }
 
     @Test
@@ -65,7 +65,7 @@ class BatterTest {
     @Test
     @DisplayName("베터에서 out이 3번 일어났을 경우에 대한 테스트")
     void scenario_out_3() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 9; i++) {
             batter.play(STRIKE);
         }
         softly.assertThat(batter.getPlateAppearances())
