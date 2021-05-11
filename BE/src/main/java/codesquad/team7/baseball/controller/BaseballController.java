@@ -1,12 +1,10 @@
 package codesquad.team7.baseball.controller;
 
+import codesquad.team7.baseball.game.BaseballGame;
 import codesquad.team7.baseball.service.BaseballGameService;
 import codesquad.team7.baseball.view.BaseballGameView;
 import codesquad.team7.baseball.view.BaseballGames;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/games")
@@ -25,7 +23,15 @@ public class BaseballController {
 
     @GetMapping("/{gameId}")
     public BaseballGameView baseballGame(@PathVariable Long gameId) {
-        return new BaseballGameView.Builder(baseballGameService.baseballGame(gameId)).bulid();
+        return buildGameView(baseballGameService.baseballGame(gameId));
     }
 
+    @PostMapping("/{gameId}/pitch")
+    public BaseballGameView pitch(@PathVariable Long gameId) {
+        return buildGameView(baseballGameService.pitch(gameId));
+    }
+
+    private BaseballGameView buildGameView(BaseballGame game) {
+        return new BaseballGameView.Builder(game).bulid();
+    }
 }

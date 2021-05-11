@@ -1,6 +1,7 @@
 package codesquad.team7.baseball.service;
 
 import codesquad.team7.baseball.game.BaseballGame;
+import codesquad.team7.baseball.game.Pitching;
 import codesquad.team7.baseball.repository.BaseballGameRepository;
 import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;
@@ -8,6 +9,7 @@ import codesquad.team7.baseball.team.TeamRepository;
 import codesquad.team7.baseball.view.BaseballGameTitle;
 import codesquad.team7.baseball.view.BaseballGames;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,4 +74,10 @@ public class BaseballGameService {
         return baseballGameRepository.findById(gameId).orElseThrow(RuntimeException::new);
     }
 
+    @Transactional
+    public BaseballGame pitch(Long gameId) {
+        BaseballGame game = baseballGameRepository.findById(gameId).orElseThrow(RuntimeException::new);
+        game.pitch(Pitching.pitch());
+        return baseballGameRepository.save(game);
+    }
 }
