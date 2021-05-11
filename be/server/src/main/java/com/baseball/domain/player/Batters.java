@@ -8,7 +8,6 @@ public class Batters {
 
     public Batters(List<Batter> batters) {
         this.batters = batters;
-        getBatter().increasePlateAppearances();
     }
 
 
