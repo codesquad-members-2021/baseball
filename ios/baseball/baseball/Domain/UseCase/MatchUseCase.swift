@@ -8,18 +8,14 @@
 import Foundation
 import RxSwift
 
-protocol MatchUseCasePort {
-    func get(path: APIPath, id: String?) -> Observable<[Match]>
-}
-
-class MatchUseCase: MatchUseCasePort {
+class MatchUseCase: ListUseCasePort {
     private var networkService: NetworkServiceable
     
     init(networkService: NetworkServiceable = NetworkService()) {
         self.networkService = networkService
     }
-    
-    func get(path: APIPath, id: String?) -> Observable<[Match]> {
+
+    func get<T>(path: APIPath, id: String?) -> Observable<[T]> where T : Decodable, T : Encodable {
         return networkService.get(path: .match, id: nil)
     }
 }

@@ -22,9 +22,10 @@ final class MatchUpView: UIView {
     }
     
     func commonInit() {
-        let view = Bundle.main.loadNibNamed("MatchUpView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+        if let view = Bundle.main.loadNibNamed("MatchUpView", owner: self, options: nil)?.first as? UIView {
+            view.frame = self.bounds
+            self.addSubview(view)
+        }
     }
     
     func configurePitcherMatchUpView(_ pitcher: Pitcher) {

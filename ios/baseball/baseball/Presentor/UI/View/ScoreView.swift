@@ -18,9 +18,10 @@ class ScoreView: UIView {
     }
     
     func commonInit() {
-        let view = Bundle.main.loadNibNamed("ScoreView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+        if let view = Bundle.main.loadNibNamed("ScoreView", owner: self, options: nil)?.first as? UIView {
+            view.frame = self.bounds
+            self.addSubview(view)
+        }
     }
     
     func configureScore(score: Score) {
