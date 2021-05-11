@@ -39,7 +39,6 @@ public class UserService {
 
     public Long getUserIdFromJwt(String jwt) {
         Claims claims = JwtUtil.getTokenData(jwt);
-        System.out.println(claims.getSubject());
         if (!JWT_SIGN_IN_SUBJECT.equals(claims.getSubject())) {
             throw new UnauthorizedException("토큰의 주제가 로그인 확인과 다릅니다.");
         }
