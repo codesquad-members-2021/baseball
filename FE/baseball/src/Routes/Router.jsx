@@ -1,9 +1,12 @@
 import { createContext, useState } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { Intro } from "@/Routes/Intro";
-import { Home } from "@/Routes/Home";
-import Game from "@/Routes/Game";
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Intro } from '@/Routes/Intro';
+import { Home } from '@/Routes/Home';
+import { Game } from '@/Routes/Game';
 import { getAPI } from "@/Utils/API";
+
+
+
 
 export const RouterContext = createContext();
 

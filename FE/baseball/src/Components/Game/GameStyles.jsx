@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import * as CS from "@/Styles/CommonStyles";
-import theme from "@/Styles/theme";
+import styled, { keyframes } from 'styled-components';
+import * as CS from '@/Styles/CommonStyles';
+import theme from '@/Styles/theme';
 
 const ArrowFade = keyframes`
 0% {
@@ -128,7 +128,7 @@ const GamePlayground = {
     border-radius: 8px;
     background: #222;
     color: ${theme.COLOR.DEFAULT};
-    font-family: "Orbitron", sans-serif;
+    font-family: 'Orbitron', sans-serif;
     font-size: ${theme.FONTSIZE.M};
     padding: 10px;
     z-index: 999;
@@ -138,6 +138,58 @@ const GamePlayground = {
     position: absolute;
     bottom: -3%;
     left: 9%;
+  `,
+
+  Runner: styled(CS.BOX.FLEX_CENTER_BOX)`
+    position: absolute;
+    font-size: 80px;
+    transition: all ease-in-out 1s;
+
+    /* base */
+    /* top: 740px;
+    left: 440px; */
+    /* 1 */
+    /* top: 450px;
+    left: 650px; */
+    /* 2 */
+    top: 230px;
+    left: 440px;
+    /* 3 */
+    /* top: 450px;
+    left: 230px; */
+  `,
+
+  Base: styled(CS.BOX.FLEX_CENTER_BOX)`
+    width: 49px;
+    height: 49px;
+    border: 1px solid red;
+    background: red;
+    opacity: 0.8;
+    transform: rotate(45deg);
+    position: absolute;
+    z-index: -1;
+    /* 1 */
+    top: 491px;
+    left: 669px;
+    /* 2 */
+    top: 272px;
+    left: 451px;
+    /* 3 */
+    top: 491px;
+    left: 231px;
+  `,
+
+  HomeBase: styled(CS.BOX.FLEX_CENTER_BOX)`
+    width: 114px;
+    height: 114px;
+    border: 1px solid red;
+    border-radius: 50%;
+    background: red;
+    opacity: 0.8;
+    position: absolute;
+    z-index: -1;
+    top: 732px;
+    left: 418px;
   `,
 
   BallCountBoard: {
@@ -160,11 +212,11 @@ const GamePlayground = {
       margin-right: 3px;
       background: ${({ type }) => {
         switch (type) {
-          case "STRIKE":
+          case 'STRIKE':
             return theme.COLOR.BALLCOUNT_STRIKE;
-          case "BALL":
+          case 'BALL':
             return theme.COLOR.BALLCOUNT_BALL;
-          case "OUT":
+          case 'OUT':
             return theme.COLOR.BALLCOUNT_OUT;
           default:
             return;
@@ -209,7 +261,7 @@ const GamePlayLog = {
     LogTitle: styled.div`
       font-weight: 600;
       color: ${({ isCurrentPlayer }) =>
-        isCurrentPlayer ? "red" : theme.COLOR.PLAYER_NAME};
+        isCurrentPlayer ? 'red' : theme.COLOR.PLAYER_NAME};
     `,
     Log: styled.div`
       padding: 20px 0px;
@@ -242,7 +294,7 @@ const GamePlayLog = {
 const SquadBoard = {
   SquadBoard: styled(CS.BOX.FLEX_ROW_BOX)`
     position: absolute;
-    bottom: ${({ isMouseOver }) => (isMouseOver ? "5px" : "-1080px")};
+    bottom: ${({ isMouseOver }) => (isMouseOver ? '5px' : '-1080px')};
     left: 5%;
     width: 70%;
     height: 77%;
@@ -263,7 +315,7 @@ const SquadBoard = {
   `,
   PopUpBackground: styled.div`
     position: absolute;
-    display: ${({ isMouseOver }) => (isMouseOver ? "block" : "none")};
+    display: ${({ isMouseOver }) => (isMouseOver ? 'block' : 'none')};
     left: 0;
     width: 99.6%;
     height: 99.4%;
@@ -330,7 +382,7 @@ const SquadBoard = {
       border-bottom: 1px solid ${theme.COLOR.PLAYER_DESCRIPTION};
       text-align: center;
       color: ${({ isCurrentPlayer }) =>
-        isCurrentPlayer ? "red" : theme.COLOR.DEFAULT};
+        isCurrentPlayer ? 'red' : theme.COLOR.DEFAULT};
     `,
     SquadTableData: styled.td`
       vertical-align: middle;

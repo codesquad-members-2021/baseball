@@ -1,5 +1,5 @@
 export const matchInfoData = {
-  game: [
+  games: [
     {
       gameId: 1,
       home: {

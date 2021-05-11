@@ -11,8 +11,13 @@ const Match = ({ gameId, match }) => {
     <S.Match>
       <S.Link>
         <Link
-          to="/game"
-          onClick={() => setGame({ gameID: 1, selectedTeam: "Samsung Lions" })}
+          to={{
+            pathname: '/game',
+            state: {
+              gameId: gameId,
+              teamName: match.away.teamName,
+            },
+          }}
         >
           <TeamName
             teamName={match.away.teamName}
@@ -23,8 +28,13 @@ const Match = ({ gameId, match }) => {
       <VS />
       <S.Link>
         <Link
-          to="/game"
-          onClick={() => setGame({ gameID: 1, selectedTeam: "KIA Tigers" })}
+          to={{
+            pathname: '/game',
+            state: {
+              gameId: gameId,
+              teamName: match.home.teamName,
+            },
+          }}
         >
           <TeamName
             teamName={match.home.teamName}
