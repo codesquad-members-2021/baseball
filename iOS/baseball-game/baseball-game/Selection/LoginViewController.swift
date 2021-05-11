@@ -7,8 +7,12 @@
 
 import UIKit
 
+
+
 class LoginViewController: UIViewController {
     
+    static let storyboard = "Main"
+        
     @IBOutlet weak var IDTextField: UITextField!
     
     @IBAction func okButtonTouched(_ sender: UIButton) {
@@ -22,10 +26,10 @@ class LoginViewController: UIViewController {
 }
 
 
-extension LoginViewController: Instantiatable {
+extension LoginViewController: Instantiatable, IdentifierReusable {
     
     static func instantiate() -> UIViewController {
-        let myViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        let myViewController = UIStoryboard(name: self.storyboard, bundle: nil).instantiateViewController(withIdentifier: self.reuseIdentifier) as? LoginViewController
         
         return myViewController ?? LoginViewController()
     }

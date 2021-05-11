@@ -12,7 +12,9 @@ protocol GameCellDelegate {
 }
 
 class SelectionViewController: UIViewController {
-
+    
+    static let storyboard = "Main"
+    
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var gameListTableView: UITableView!
     
@@ -69,10 +71,10 @@ extension SelectionViewController {
 }
 
 
-extension SelectionViewController: Instantiatable {
+extension SelectionViewController: Instantiatable, IdentifierReusable {
     
     static func instantiate() -> UIViewController {
-        let myViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectionViewController") as? SelectionViewController
+        let myViewController = UIStoryboard(name: self.storyboard, bundle: nil).instantiateViewController(withIdentifier: self.reuseIdentifier) as? SelectionViewController
         
         return myViewController ?? SelectionViewController()
     }

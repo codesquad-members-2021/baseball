@@ -20,9 +20,7 @@ class GamePlayViewController: UIViewController {
 
     enum ViewID {
         static let storyboard = "GamePlay"
-        static let controller = "gamePlay"
         static let segue = "selectPitcher"
-        static let cell = "pitchListCell"
     }
     
     private var gamePlayViewModel: GamePlayViewModel!
@@ -106,7 +104,7 @@ extension GamePlayViewController {
         self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) {
             (tableView, indexPath, pitch) -> UITableViewCell in
             
-            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: ViewID.cell) as? PitchListTableViewCell else {
+            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
             }
             
@@ -128,10 +126,10 @@ extension GamePlayViewController {
 }
 
 
-extension GamePlayViewController: Instantiatable {
+extension GamePlayViewController: Instantiatable, IdentifierReusable {
     
     static func instantiate() -> UIViewController {
-        let myViewController = UIStoryboard(name: "GamePlay", bundle: nil).instantiateViewController(withIdentifier: "GamePlayViewController") as? GamePlayViewController
+        let myViewController = UIStoryboard(name: ViewID.storyboard, bundle: nil).instantiateViewController(withIdentifier: self.reuseIdentifier) as? GamePlayViewController
         
         return myViewController ?? GamePlayViewController()
     }
