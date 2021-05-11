@@ -3,6 +3,7 @@ const API = {
 	get: {
 		teamList: async () => {
 			const response = await fetch(`${url}/games`);
+			console.log(response);
 			return response.json();
 		},
 	},

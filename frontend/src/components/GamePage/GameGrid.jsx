@@ -1,5 +1,11 @@
 import useFetch from '../Hook/useFetch';
-import { useState, useEffect } from 'react';
+import {
+	useState,
+	useEffect,
+	createContext,
+	useContext,
+	useReducer,
+} from 'react';
 import styled from 'styled-components';
 import GameGeneralInfo from './GameGeneralInfo';
 import GamePlayers from './GamePlayers';
@@ -8,9 +14,9 @@ import GameLog from './GameLog';
 import GamePlayersList from './GamePlayersList';
 import GameDetailScore from './GameDetailScore';
 import useSlide from '../Hook/useSlide';
-import { useGameState } from '../GameContext';
+import { GameStateContext } from '../GameContext';
 const GameGrid = () => {
-	const state = useGameState();
+	const state = useContext(GameStateContext);
 	console.log(state);
 	return (
 		<>

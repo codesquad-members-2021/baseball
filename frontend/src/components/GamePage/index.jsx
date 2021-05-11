@@ -39,7 +39,7 @@ const GamePage = ({ data, type }) => {
 	});
 
 	return (
-		<GameProvider value={gameData}>
+		<GameProvider gameData={gameData}>
 			{upState && <GameDetailScore />}
 			<GameGrid type={type} />
 			{downState && <GamePlayersList />}

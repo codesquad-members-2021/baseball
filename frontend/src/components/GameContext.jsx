@@ -6,12 +6,13 @@ import {
 	useReducer,
 } from 'react';
 
-const GameStateContext = createContext();
+export const GameStateContext = createContext();
 const DispatchContext = createContext();
 
 const gameReducer = () => {};
-export function GameProvider({ data, children }) {
-	const [state, dispatch] = useReducer(gameReducer, data);
+export function GameProvider({ children, gameData }) {
+	console.log(gameData);
+	const [state, dispatch] = useReducer(gameReducer, gameData);
 	return (
 		<GameStateContext.Provider value={state}>
 			<DispatchContext.Provider value={dispatch}>
