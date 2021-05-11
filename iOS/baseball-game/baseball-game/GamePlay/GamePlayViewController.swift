@@ -42,6 +42,10 @@ class GamePlayViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        ballCountView.configure()
+        groundView.configure()
+        
         ballCountView.reset()
         
         //애니메이션 test

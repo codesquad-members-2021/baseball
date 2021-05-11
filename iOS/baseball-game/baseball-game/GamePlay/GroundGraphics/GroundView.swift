@@ -108,17 +108,7 @@ class GroundView: UIView {
     private var baseLayers: [Int: CALayer] = [:]
     private var playerLayer: PlayerLayer?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    private func configure() {
+    func configure() {
         self.backgroundColor = UIColor(cgColor: Color.groundGreen)
         configureBaseProperties()
         addBases()
@@ -177,15 +167,19 @@ class GroundView: UIView {
 
     private func addPlayer(to baseOrigin: CGPoint) {
         
-        let playerHeight = height * 0.1
-        let playerWidth = playerHeight * 0.53
+        let playerWidth = width * 0.07
+        let playerHeight = playerWidth * 1.5
+        
         let playerSize = CGSize(width: playerWidth, height: playerHeight)
         
         let playerXPosition = baseOrigin.x + playerWidth
         let playerYPosition = baseOrigin.y
         let playerOrigin = CGPoint(x: playerXPosition, y: playerYPosition)
         
-        let player = PlayerLayer(origin: playerOrigin, size: playerSize)
+        let player = PlayerLayer()
+        player.frame = CGRect(origin: playerOrigin, size: playerSize)
+        player.configure()
+        
         layer.addSublayer(player)
     
         self.playerLayer = player

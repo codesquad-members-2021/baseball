@@ -45,17 +45,7 @@ class BallCountView: UIView {
     
     private var countCircleLayers: [Int: [CALayer]] = [:]
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    private func configure() {
+    func configure() {
         let drawingProperties = [strikeProperty, ballProperty, outProperty]
 
         for property in drawingProperties {
