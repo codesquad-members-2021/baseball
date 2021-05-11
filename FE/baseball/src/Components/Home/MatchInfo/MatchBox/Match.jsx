@@ -7,7 +7,15 @@ const Match = ({ gameId, match }) => {
   return (
     <S.Match>
       <S.Link>
-        <Link to="/game">
+        <Link
+          to={{
+            pathname: '/game',
+            state: {
+              gameId: gameId,
+              teamName: match.away.teamName,
+            },
+          }}
+        >
           <TeamName
             teamName={match.away.teamName}
             isPlaying={match.away.isPlaying}
@@ -16,7 +24,15 @@ const Match = ({ gameId, match }) => {
       </S.Link>
       <VS />
       <S.Link>
-        <Link to="/game">
+        <Link
+          to={{
+            pathname: '/game',
+            state: {
+              gameId: gameId,
+              teamName: match.home.teamName,
+            },
+          }}
+        >
           <TeamName
             teamName={match.home.teamName}
             isPlaying={match.home.isPlaying}

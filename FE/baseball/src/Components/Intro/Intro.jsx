@@ -1,12 +1,11 @@
 import GameStartButton from '@/Components/Intro/GameStartButton';
 import { IntroStyles as S } from '@/Components/Intro/IntroStyles';
+import { BACKGROUND_URL } from '@/Utils/const';
 
 const Intro = () => {
-  const backgroundUrl =
-    'https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png';
   return (
     <>
-      <S.Background src={backgroundUrl} />
+      <S.Background src={BACKGROUND_URL} />
       <S.Intro>
         <GameStartButton />
       </S.Intro>

@@ -1,7 +1,7 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { Intro } from "@/Routes/Intro";
-import { Home } from "@/Routes/Home";
-import Game from "./Game";
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { Intro } from '@/Routes/Intro';
+import { Home } from '@/Routes/Home';
+import { Game } from '@/Routes/Game';
 
 const Router = () => {
   return (

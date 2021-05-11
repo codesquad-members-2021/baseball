@@ -1,13 +1,12 @@
 import HomeTitle from '@/Components/Home/HomeTitle';
 import MatchInfo from './MatchInfo/MatchInfo';
 import { HomeStyles as S } from '@/Components/Home/HomeStyles';
+import { BACKGROUND_URL } from '@/Utils/const';
 
 const Home = () => {
-  const backgroundUrl =
-    'https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png';
   return (
     <>
-      <S.Background src={backgroundUrl} />
+      <S.Background src={BACKGROUND_URL} />
       <S.Home>
         <HomeTitle />
         <MatchInfo />
