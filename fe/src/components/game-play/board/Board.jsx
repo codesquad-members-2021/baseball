@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
 import BallCount from './BallCount';
 import Inning from './Inning';
 import Screen from './Screen';
+import { fetchPUT } from '../../../util/api.js';
 
 const ballCountReducer = (state, action) => {
   let newState = { ...state };
@@ -29,7 +30,7 @@ const ballCountReducer = (state, action) => {
   return newState;
 };
 
-const Board = (props) => {
+const Board = ({ memberListDispatch, inning, setInning }) => {
   const [ballCount, ballCountDispatch] = useReducer(ballCountReducer, {
     strike: 0,
     ball: 0,
@@ -53,19 +54,23 @@ const Board = (props) => {
   const handleOut = () => {
     if (ballCount.out === 2) {
       ballCountDispatch({ type: 'clear' });
-      // 공수교대
-      // if(turn)
-      // setTurn(false);
-      // else
-      // setRound(round + 1);
-      // setTurn(true);
+      if(inning.turn) setInning({...inning, turn: !inning.turn});
+      else setInning({...inning, round: inning.round + 1, turn: !inning.turn});
     } else {
       ballCountDispatch({ type: 'out' });
     }
+    // 멤버 아웃 1, 타석 1 증가
+    memberListDispatch({ type: 'out', turn: inning.turn });
   };
   const handleSafety = () => {
     ballCountDispatch({ type: 'safety' });
+    memberListDispatch({ type: 'safety', turn: inning.turn });
+    // 멤버 안타 1, 타석 1 증가
   };
+
+  useEffect(() => {
+    return () => fetchPUT(inning);
+  }, [inning]);
 
   return (
     <StyledBoard>
@@ -84,8 +89,3 @@ const StyledBoard = styled.div`
 export default Board;
 
 const isHome = true;
-
-const inning = {
-  turn: true,
-  round: 4,
-};
