@@ -20,4 +20,9 @@ public class TeamGameScore {
 
     private int score;
 
+    public TeamGameScore(int inningNumber, int score) {
+        this.inningNumber = inningNumber;
+        this.score = score;
+    }
+
 }
