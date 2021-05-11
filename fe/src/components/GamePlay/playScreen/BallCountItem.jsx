@@ -1,11 +1,12 @@
 import styled from 'styled-components'
+import { v4 as uuidv4 } from 'uuid'
 
-
-const BallCountItem = ({ BSO, count }) => {
-  let counts = new Array(count).fill(<StyledCount BSO={BSO} />)
+const BallCountItem = ({ type, count }) => {
+  let counts = Array(count).fill(type).map((v) => <StyledCount type={v} key={uuidv4()} />)
+  console.log(counts)
   return (
     <StyledCountItem>
-      <BsoSpan>{BSO}</BsoSpan>
+      <BsoSpan>{type}</BsoSpan>
       {counts}
     </StyledCountItem>
   )
@@ -31,7 +32,7 @@ const StyledCount = styled.div`
   width: 2rem;
   height: 2rem;
   background-color: ${props => {
-    switch (props.BSO) {
+    switch (props.type) {
       case 'B':
         return props.theme.colors.ballGreen
       case 'S':
