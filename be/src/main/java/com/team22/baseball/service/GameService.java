@@ -65,10 +65,6 @@ public class GameService {
         return teamListDtos;
     }
 
-    public void updateSelectedTeamByTitle(String title) {
-        gameRepository.updateSelectedTeamByTitle(title);
-    }
-
     public void updatePlayerInfo(String name, int plate_appearance, int hits, int outs) {
         gameRepository.updatePlayerInfo(name, plate_appearance, hits, outs);
     }
@@ -122,5 +118,13 @@ public class GameService {
         return detailScoreDtos;
     }
 
+    public void updateGameStatusByTitle(String teamTitle) {
+
+        boolean gameStatus = true; //TODO. 나중에 검증 로직 만들기
+
+        gameRepository.updateGameStatusByTitle(teamTitle, gameStatus);
+        gameRepository.updateSelectedTeamByTitle(teamTitle, gameStatus);
+
+    }
 
 }

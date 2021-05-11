@@ -53,8 +53,8 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     List<PlayerInfoDto> findPlayerListByTeamTitle(@Param("title") String title);
 
     @Modifying
-    @Query("UPDATE TEAM SET TEAM.selected=true WHERE TEAM.name = :teamTitle;")
-    void updateSelectedTeamByTitle(@Param("teamTitle") String teamTitle);
+    @Query("UPDATE TEAM SET TEAM.selected=:selected WHERE TEAM.name = :teamTitle;")
+    void updateSelectedTeamByTitle(@Param("teamTitle") String teamTitle, @Param("selected") boolean selected);
 
     @Modifying
     @Query("UPDATE PLAYER SET plate_appearance= :plate_appearance, hits= :hits, outs= :outs WHERE PLAYER.name = :name;")
@@ -77,6 +77,9 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "WHERE TEAM_SCORE.team_id = (SELECT TEAM.id FROM TEAM WHERE TEAM.name = :name);")
     List<TeamScore> findTeamScoreByName(@Param("name") String name);
 
+    @Modifying
+    @Query("UPDATE GAME SET GAME.in_progress = :inProgress WHERE GAME.id = ( SELECT TEAM.id FROM TEAM WHERE TEAM.name = :teamTitle );")
+    void updateGameStatusByTitle(@Param("teamTitle") String teamTitle, @Param("inProgress") boolean inProgress);
 
 }
 
