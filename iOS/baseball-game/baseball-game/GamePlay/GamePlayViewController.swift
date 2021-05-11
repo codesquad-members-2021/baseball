@@ -41,6 +41,11 @@ class GamePlayViewController: UIViewController {
         bind()
     }
     
+}
+
+
+extension GamePlayViewController {
+
     private func bind() {
         gamePlayViewModel.$gameManager
             .receive(on: DispatchQueue.main)
@@ -94,6 +99,7 @@ class GamePlayViewController: UIViewController {
     
 }
 
+
 extension GamePlayViewController {
     
     private func configureDataSource() {
@@ -120,6 +126,18 @@ extension GamePlayViewController {
     }
     
 }
+
+
+extension GamePlayViewController: Instantiatable {
+    
+    static func instantiate() -> UIViewController {
+        let myViewController = UIStoryboard(name: "GamePlay", bundle: nil).instantiateViewController(withIdentifier: "GamePlayViewController") as? GamePlayViewController
+        
+        return myViewController ?? GamePlayViewController()
+    }
+    
+}
+
 
 extension GamePlayViewController {
     

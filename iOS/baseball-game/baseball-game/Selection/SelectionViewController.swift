@@ -68,11 +68,24 @@ extension SelectionViewController {
     
 }
 
+
+extension SelectionViewController: Instantiatable {
+    
+    static func instantiate() -> UIViewController {
+        let myViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectionViewController") as? SelectionViewController
+        
+        return myViewController ?? SelectionViewController()
+    }
+    
+}
+
+
 extension SelectionViewController: GameCellDelegate {
     
     func didPressButton(with gameInfo: GameInfo) {
-        let nextVC = UIStoryboard(name: "GamePlay", bundle: nil).instantiateViewController(identifier: "GamePlayViewController") as GamePlayViewController
+        let nextVC = ControllerFactory.instantiate(viewController: GamePlayViewController.self) as! GamePlayViewController
         nextVC.getInfo(with: gameInfo)
+        
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
