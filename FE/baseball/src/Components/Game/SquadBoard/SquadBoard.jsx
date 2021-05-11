@@ -5,11 +5,7 @@ import SquadTable from "./SquadTable/SquadTable";
 import { SquadBoard as S } from "@/Components/Game/GameStyles";
 
 const SquadBoard = () => {
-  const {
-    squadMockData,
-    gameMockData: { game },
-    selectedTeam,
-  } = useContext(GameContext);
+  const { gameData, squadMockData, selectedTeam } = useContext(GameContext);
 
   const [mouseOverFlag, setMouseOverFlag] = useState(false);
 
@@ -18,26 +14,26 @@ const SquadBoard = () => {
     setMouseOverFlag((prev) => !prev);
   };
 
-  return (
+  return gameData ? (
     <S.SquadBoardWrapper>
       <S.PopUpBackground isMouseOver={mouseOverFlag} />
       <PopUpButton handleMouseOver={handleMouseOver} />
       <S.SquadBoard isMouseOver={mouseOverFlag} onMouseLeave={handleMouseOver}>
         <SquadTable
-          teamName={game.away.teamName}
+          teamName={gameData.away.teamName}
           squads={squadMockData.away}
           isDefenseTeam={squadMockData.defenseTeam}
           selectedTeam={selectedTeam}
         />
         <SquadTable
-          teamName={game.home.teamName}
+          teamName={gameData.home.teamName}
           squads={squadMockData.home}
           isDefenseTeam={squadMockData.defenseTeam}
           selectedTeam={selectedTeam}
         />
       </S.SquadBoard>
     </S.SquadBoardWrapper>
-  );
+  ) : null;
 };
 
 export default SquadBoard;
