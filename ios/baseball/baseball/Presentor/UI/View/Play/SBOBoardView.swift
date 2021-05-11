@@ -25,9 +25,10 @@ final class SBOBoardView: UIView {
     }
     
     func commonInit() {
-        let view = Bundle.main.loadNibNamed("SBOBoardView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+        if let view = Bundle.main.loadNibNamed("SBOBoardView", owner: self, options: nil)?.first as? UIView {
+            view.frame = self.bounds
+            self.addSubview(view)
+        }
     }
     
     private func configureUI() {

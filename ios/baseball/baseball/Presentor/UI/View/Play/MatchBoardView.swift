@@ -19,9 +19,10 @@ final class MatchBoardView: UIView {
     }
     
     func commonInit() {
-        let view = Bundle.main.loadNibNamed("MatchBoardView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+        if let view = Bundle.main.loadNibNamed("MatchBoardView", owner: self, options: nil)?.first as? UIView {
+            view.frame = self.bounds
+            self.addSubview(view)
+        }
     }
     
     func configureSBOBoardView(sbo: SBO) {

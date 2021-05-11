@@ -18,12 +18,6 @@ class PlayersHistoryCell: UICollectionViewCell {
     @IBOutlet weak var outLabel: UILabel!
     @IBOutlet weak var avgLabel: UILabel!
     
-//    func configureCell(pitchInfo: Players.) {
-//        pitchOrderView.pitchOrderLabel.text = "\(order)"
-//        sboLabel.text = "스트라이크" //변경
-//        countLabel.text = "1-3" //변경
-//    }
-    
     override func prepareForReuse() {
         disposeBag = DisposeBag()
     }

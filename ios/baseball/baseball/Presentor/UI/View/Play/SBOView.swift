@@ -12,8 +12,8 @@ final class SBOView: UIView {
     @IBOutlet weak var sboLabel: UILabel!
     @IBOutlet weak var countStack: UIStackView!
     
-    private var countViews: [CountView]!
-    var countColor: UIColor!
+    private var countViews = [CountView]()
+    var countColor = UIColor()
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -22,9 +22,10 @@ final class SBOView: UIView {
     }
     
     func commonInit() {
-        let view = Bundle.main.loadNibNamed("SBOView", owner: self, options: nil)?.first as! UIView
-        view.frame = self.bounds
-        self.addSubview(view)
+        if let view = Bundle.main.loadNibNamed("SBOView", owner: self, options: nil)?.first as? UIView {
+            view.frame = self.bounds
+            self.addSubview(view)
+        }
     }
     
     private func insertCountViews() {
