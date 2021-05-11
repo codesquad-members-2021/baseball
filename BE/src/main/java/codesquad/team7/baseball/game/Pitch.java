@@ -1,9 +1,9 @@
 package codesquad.team7.baseball.game;
 
-public enum Pictch {
+public enum Pitch {
+    HIT,
     BALL,
     STRIKE,
-    HIT,
     OUT,
     FOUR_BALL
 }

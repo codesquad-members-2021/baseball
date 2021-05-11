@@ -8,6 +8,6 @@ public class BaseballGameHistory {
     private Long baseballGameHistory;
     private Long gameId;
 
-    private Pictch pictch;
+    private Pitch pitch;
     private String state;
 }

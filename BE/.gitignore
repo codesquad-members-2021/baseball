@@ -212,4 +212,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# github properties
+application-github.properties
+
 # End of https://www.toptal.com/developers/gitignore/api/linux,windows,intellij,java,vscode

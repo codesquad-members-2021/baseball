@@ -1,6 +1,6 @@
 package codesquad.team7.baseball.view;
 
-import codesquad.team7.baseball.game.BaseballGameTeamInformation;
+import codesquad.team7.baseball.game.TeamInformation;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ public class InningScoreView {
         this.away = away;
     }
 
-    public static InningScoreView of(BaseballGameTeamInformation homeTeamInformation, BaseballGameTeamInformation awayTeamInformation) {
+    public static InningScoreView of(TeamInformation homeTeamInformation, TeamInformation awayTeamInformation) {
         return new InningScoreView(
-            homeTeamInformation.getInningScore(),
-            awayTeamInformation.getInningScore()
+                homeTeamInformation.getInningScore(),
+                awayTeamInformation.getInningScore()
         );
     }
 

@@ -15,7 +15,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -49,14 +48,14 @@ class BaseballControllerTest {
     @Test
     @DisplayName("게임을 가져온다.")
     void baseballGame() throws Exception {
-        FieldDescriptor[] team = new FieldDescriptor[] {
+        FieldDescriptor[] team = new FieldDescriptor[]{
                 fieldWithPath("name").description("팀 이름"),
                 fieldWithPath("score").description("현재 팀 점수"),
                 fieldWithPath("players").description("팀 선수 목록"),
                 fieldWithPath("pitcher").description("팀 투수 정보")
         };
 
-        FieldDescriptor[] player = new FieldDescriptor[] {
+        FieldDescriptor[] player = new FieldDescriptor[]{
                 fieldWithPath("name").description("선수 이름"),
                 fieldWithPath("atBat").description("타석"),
                 fieldWithPath("hits").description("안타"),
@@ -64,7 +63,7 @@ class BaseballControllerTest {
                 fieldWithPath("average").description("평균")
         };
 
-        FieldDescriptor[] pitcher = new FieldDescriptor[] {
+        FieldDescriptor[] pitcher = new FieldDescriptor[]{
                 fieldWithPath("number").description("투수 번호"),
                 fieldWithPath("pitches").description("투구 수")
         };
@@ -88,12 +87,12 @@ class BaseballControllerTest {
                                 fieldWithPath("game.inningScore.home").description("홈 팀의 이닝별 득점"),
                                 fieldWithPath("game.inningScore.away").description("어웨이 팀의 이닝별 득점")
                         )
-                        .andWithPrefix("game.home.", team)
-                        .andWithPrefix("game.away.", team)
-                        .andWithPrefix("game.home.players.[]", player)
-                        .andWithPrefix("game.away.players.[]", player)
-                        .andWithPrefix("game.home.pitcher.", pitcher)
-                        .andWithPrefix("game.away.pitcher.", pitcher)
+                                .andWithPrefix("game.home.", team)
+                                .andWithPrefix("game.away.", team)
+                                .andWithPrefix("game.home.players.[]", player)
+                                .andWithPrefix("game.away.players.[]", player)
+                                .andWithPrefix("game.home.pitcher.", pitcher)
+                                .andWithPrefix("game.away.pitcher.", pitcher)
                 ));
     }
 }

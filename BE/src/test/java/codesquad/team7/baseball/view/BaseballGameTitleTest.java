@@ -22,9 +22,6 @@ class BaseballGameTitleTest {
     @Test
     @DisplayName("BaseballGameTitle을 json 형태로 구성한다.")
     void testJson() throws JsonProcessingException {
-        BaseballGameTitle gameTitle = BaseballGameTitle.of(1L, "Marvel", "Captain");
-        assertThat(objectMapper.writeValueAsString(gameTitle))
-                .isEqualTo(serialized(gameTitle));
     }
 
     private String serialized(BaseballGameTitle gameTitle) {

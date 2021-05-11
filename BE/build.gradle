@@ -16,7 +16,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'com.auth0:java-jwt:3.15.0'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

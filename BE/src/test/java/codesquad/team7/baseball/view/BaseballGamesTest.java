@@ -19,15 +19,6 @@ class BaseballGamesTest {
     @Test
     @DisplayName("BaseballGame을 json 형태로 구성한다.")
     void serializeToJson() throws JsonProcessingException {
-        BaseballGames games = BaseballGames.of(Lists.list(
-                BaseballGameTitle.of(1L, "Marvel", "Captain"),
-                BaseballGameTitle.of(2L, "Tigers", "Twins"),
-                BaseballGameTitle.of(3L, "Dodgers", "Rockets"),
-                BaseballGameTitle.of(4L, "Pintos", "Heros")
-        ));
-        assertThat(objectMapper.writeValueAsString(games))
-                .startsWith("{\"games\":[")
-                .endsWith("]}");
     }
 
 }

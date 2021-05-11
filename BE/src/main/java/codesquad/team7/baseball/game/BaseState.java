@@ -14,6 +14,12 @@ public class BaseState {
         this.homeBase = homeBase;
     }
 
+    public static BaseState newBaseState() {
+        return new BaseState(
+                false, false, false, false
+        );
+    }
+
     public Boolean getFirstBase() {
         return firstBase;
     }
@@ -30,9 +36,43 @@ public class BaseState {
         return homeBase;
     }
 
-    public static BaseState newBaseState() {
-        return new BaseState(
-                false, false, false, false
-        );
+    public boolean hit() {
+        homeBase = thirdBase;
+        thirdBase = secondBase;
+        secondBase = firstBase;
+        firstBase = true;
+        return homeBase;
+    }
+
+    public void fourBall() {
+        if (!firstBase) {
+            firstBase = true;
+            return;
+        }
+
+        if (!secondBase) {
+            secondBase = true;
+            return;
+        }
+
+        if (!thirdBase) {
+            thirdBase = true;
+            return;
+        }
+
+        if (!homeBase) {
+            homeBase = true;
+        }
+    }
+
+    public void flushHome() {
+        homeBase = false;
+    }
+
+    public void nextInning() {
+        firstBase = false;
+        secondBase = false;
+        thirdBase = false;
+        homeBase = false;
     }
 }
