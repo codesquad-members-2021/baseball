@@ -40,12 +40,19 @@ public class Match {
 
     public void play(String pitch) {
         PlayResult playResult = PlayResult.of(pitch);
-        if (matchInfo.isBaseFull() && playResult == PlayResult.HIT) {
-            teams.increaseScore();
+        Boolean isBaseFull = matchInfo.isBaseFull();
+        if (playResult == PlayResult.HIT) {
+            teams.proceedToNextBase(isBaseFull);
+            matchInfo.proceedToNextBase();
         }
         teams.play(playResult);
-        matchInfo.update(playResult);
-        if (matchInfo.getBallCount() >= 3) {
+        matchInfo.pushPlayResult(playResult);
+        if (matchInfo.getBallCount() >= 4) {
+            teams.proceedToNextBase(isBaseFull);
+            matchInfo.proceedToNextBase();
+            matchInfo.resetPlayResults();
+        }
+        if (matchInfo.getOutCount() >= 3) {
             teams.switchRole();
             matchInfo.proceedToNextHalve();
         }

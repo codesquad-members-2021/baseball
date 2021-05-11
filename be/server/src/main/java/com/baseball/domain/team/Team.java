@@ -33,6 +33,19 @@ public class Team {
                 .orElse(0);
     }
 
+    public void playOffense(PlayResult playResult) {
+        Batter batter = players.getBatter();
+        batter.play(playResult);
+        if (playResult == PlayResult.HIT) {
+            players.changeBatter();
+        }
+    }
+
+    public void playDefense(PlayResult playResult) {
+        Pitcher pitcher = players.getPitcher();
+        pitcher.play(playResult);
+    }
+
     public List<Integer> getScores() {
         return scores;
     }
@@ -61,16 +74,7 @@ public class Team {
         players.changePitcher();
     }
 
-    public void playOffense(PlayResult playResult) {
-        Batter batter = players.getBatter();
-        batter.play(playResult);
-        if (playResult == PlayResult.HIT) {
-            players.changeBatter();
-        }
-    }
-
-    public void playDefense(PlayResult playResult) {
-        Pitcher pitcher = players.getPitcher();
-        pitcher.play(playResult);
+    public void changeBatter() {
+        players.changeBatter();
     }
 }

@@ -41,7 +41,7 @@ class MatchInfoTest {
     @Test
     @DisplayName("피쳐가 strike를 던졌을 경우에 대한 테스트")
     void scenario_strike() {
-        matchInfo.update(STRIKE);
+        matchInfo.pushPlayResult(STRIKE);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
@@ -61,7 +61,7 @@ class MatchInfoTest {
     @DisplayName("피쳐가 strike를 3번 던졌을 경우에 대한 테스트")
     void scenario_strike_3() {
         for (int i = 0; i < 3; i++) {
-            matchInfo.update(STRIKE);
+            matchInfo.pushPlayResult(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
@@ -85,7 +85,7 @@ class MatchInfoTest {
          * TODO: 논의 필요. 아웃이 3번 되면 MatchInfo 는 초기화 되어야 하지 않을까?
          */
         for (int i = 0; i < 9; i++) {
-            matchInfo.update(STRIKE);
+            matchInfo.pushPlayResult(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(2);
@@ -105,7 +105,7 @@ class MatchInfoTest {
     @Test
     @DisplayName("피쳐가 ball을 던졌을 경우에 대한 테스트")
     void scenario_ball() {
-        matchInfo.update(BALL);
+        matchInfo.pushPlayResult(BALL);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
@@ -124,7 +124,7 @@ class MatchInfoTest {
     @Test
     @DisplayName("베가 hit을 던졌을 경우에 대한 테스트")
     void scenario_hit() {
-        matchInfo.update(HIT);
+        matchInfo.pushPlayResult(HIT);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
@@ -144,7 +144,7 @@ class MatchInfoTest {
     @DisplayName("베터가 hit을 연속으로 2번 냈을 경우에 대한 테스트")
     void scenario_hit_2() {
         for (int i = 0; i < 2; i++) {
-            matchInfo.update(HIT);
+            matchInfo.pushPlayResult(HIT);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
@@ -165,7 +165,7 @@ class MatchInfoTest {
     @DisplayName("베터가 hit을 연속으로 3번 냈을 경우에 대한 테스트")
     void scenario_hit_3() {
         for (int i = 0; i < 3; i++) {
-            matchInfo.update(HIT);
+            matchInfo.pushPlayResult(HIT);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
@@ -185,9 +185,9 @@ class MatchInfoTest {
     @Test
     @DisplayName("베터가 strike, ball hit를 차례로 냈을 경우에 대한 테스트")
     void scenario_variety() {
-        matchInfo.update(STRIKE);
-        matchInfo.update(BALL);
-        matchInfo.update(HIT);
+        matchInfo.pushPlayResult(STRIKE);
+        matchInfo.pushPlayResult(BALL);
+        matchInfo.pushPlayResult(HIT);
 
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);

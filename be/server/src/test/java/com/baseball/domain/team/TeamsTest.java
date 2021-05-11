@@ -22,4 +22,16 @@ class TeamsTest {
     void switchRole() {
         // TODO:
     }
+
+    @Test
+    @DisplayName("proceedToNextBase 를 하면 타자가 바뀐다.")
+    void proceedToNextBase_changePitcher() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("만루일 경우에만, proceedToNextBase 를 했을 때 점수가 증가해야한다.")
+    void proceedToNextBase_fullBase() {
+        // TODO:
+    }
 }

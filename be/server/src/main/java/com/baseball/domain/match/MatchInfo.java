@@ -59,18 +59,22 @@ public class MatchInfo {
         return bases.stream().reduce(true, Boolean::logicalAnd);
     }
 
-    public void update(PlayResult playResult) {
+    public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
+    }
 
-        if (playResult == PlayResult.HIT) {
-            bases.removeLast();
-            bases.addFirst(Boolean.TRUE);
-        }
+    public void resetPlayResults() {
+        playResults = new ArrayList<>();
+    }
+
+    public void proceedToNextBase() {
+        bases.removeLast();
+        bases.addFirst(Boolean.TRUE);
     }
 
     public void proceedToNextHalve() {
         halvesCount++;
         bases = new LinkedList<>(Arrays.asList(false, false, false));
-        playResults = new ArrayList<>();
+        resetPlayResults();
     }
 }

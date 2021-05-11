@@ -41,12 +41,6 @@ class MatchTest {
     }
 
     @Test
-    @DisplayName("만루인 상태에서, HIT 이 일어나면 공격팀의 점수가 증가해야한다.")
-    void increaseScore() {
-        // TODO:
-    }
-
-    @Test
     @DisplayName("아웃이 3개 일어나면, 공수가 바뀌어야 한다.")
     void threeOut() {
         // TODO:
@@ -54,7 +48,37 @@ class MatchTest {
 
     @Test
     @DisplayName("공수가 3번 바뀌면, 이닝이 바뀌어야 한다.")
-    void test3() {
+    void changeInning() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("HIT 이 발생하면, 1루 전진하고 공격 팀의 Batter 가 바뀌어야 한다.")
+    void changeBatter_hit() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("Ball 이 4번 일어나면, 1루 전진하고 공격팀의 Batter 가 바뀌어야 한다.")
+    void changeBatter_fourBall() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("Ball 이 4번 일어나면, playResults 가 초기화 되어야 한다. 즉 ballCount가 다시 0이 되어야 한다.")
+    void resetPlayResults_fourBall() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("만루인 상태에서, HIT 이 일어나면 공격팀의 점수가 증가해야한다.")
+    void increaseScore_hit() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("만루인 상태에서, BALL 이 4번 일어나면 공격팀의 점수가 증가해야한다.")
+    void increaseScore_fourBall() {
         // TODO:
     }
 }

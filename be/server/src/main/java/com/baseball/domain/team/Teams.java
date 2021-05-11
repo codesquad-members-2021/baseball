@@ -18,27 +18,30 @@ public class Teams {
         awayTeam.getBatter().increasePlateAppearances();
     }
 
-    public Team getAwayTeam() {
-        return awayTeam;
-    }
-
-    public Team getHomeTeam() {
-        return homeTeam;
-    }
-
     public void switchRole() {
         offenseTeamType = offenseTeamType == AWAY ? HOME : AWAY;
         offenseTeam().pushScore();
         defenseTeam().changePitcher();
     }
 
-    public void increaseScore() {
-        offenseTeam().increaseScore();
+    public void proceedToNextBase(Boolean isBaseFull) {
+        offenseTeam().changeBatter();
+        if (isBaseFull) {
+            offenseTeam().increaseScore();
+        }
     }
 
     public void play(PlayResult playResult) {
         offenseTeam().playOffense(playResult);
         defenseTeam().playDefense(playResult);
+    }
+
+    public Team getAwayTeam() {
+        return awayTeam;
+    }
+
+    public Team getHomeTeam() {
+        return homeTeam;
     }
 
     public Pitcher getPitcher() {
