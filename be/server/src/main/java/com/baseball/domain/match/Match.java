@@ -35,20 +35,15 @@ public class Match {
         selectedTeam = homeTeamName.equals(teamName) ? HOME : AWAY;
     }
 
-    public Integer getInningCount() {
-        /**
-         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
-         * 출처: https://en.wikipedia.org/wiki/Inning
-         */
-        return 1 + (matchInfo.getHalvesCount() / 2);
-    }
-
-    public Boolean getUserTop() {
-        return matchInfo.getHalvesCount() % 2 == 0;
-    }
-
     public Boolean getUserOffense() {
-        return selectedTeam == AWAY ? getUserTop() : !getUserTop();
+        /**
+         * NOTE: 만약 유저가 AWAY 팀을 선택했다면, 초반부가 공격이다.
+         * 반대로 유저가 HOME 팀을 선택헀다면, 후반부가 공격이다.
+         */
+        if (selectedTeam == AWAY) {
+            return matchInfo.getUserTop();
+        }
+        return !matchInfo.getUserTop();
     }
 
     public void play(String pitch) {

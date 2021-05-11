@@ -43,6 +43,18 @@ public class MatchInfo {
                 .collect(Collectors.toList());
     }
 
+    public Integer getInningCount() {
+        /**
+         * NOTE: 한 이닝은 2개의 halves 로 이루어져있다.
+         * 출처: https://en.wikipedia.org/wiki/Inning
+         */
+        return (halvesCount + 1) / 2;
+    }
+
+    public Boolean getUserTop() {
+        return halvesCount % 2 == 1;
+    }
+
     public void update(PlayResult playResult) {
         // TODO: playResult 에 따른 상태변화를 TDD 로 구현
         playResults.add(playResult);
