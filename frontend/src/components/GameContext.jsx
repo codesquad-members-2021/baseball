@@ -9,12 +9,19 @@ import {
 export const GameStateContext = createContext();
 const DispatchContext = createContext();
 
-const gameReducer = () => {};
+//useReducer에 useEffect적용해보기
+const gameReducer = (state, action) => {
+	if (action.type === 'init') {
+		return action.data;
+	}
+};
 export function GameProvider({ children, gameData }) {
-	console.log(gameData);
 	const [state, dispatch] = useReducer(gameReducer, gameData);
+	useEffect(() => {
+		dispatch({ type: 'init', data: gameData });
+	}, [gameData]);
 	return (
-		<GameStateContext.Provider value={state}>
+		<GameStateContext.Provider value={{ state }}>
 			<DispatchContext.Provider value={dispatch}>
 				{children}
 			</DispatchContext.Provider>

@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../Style/Theme';
 import Scroll from '../Style/Scroll';
+import { useGameState } from '../GameContext';
 const GameLog = () => {
+	const { state } = useGameState();
+
 	return (
 		<GameLogScroll>
 			<PlayerWrapper>

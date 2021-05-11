@@ -1,10 +1,4 @@
-import {
-	useState,
-	useEffect,
-	createContext,
-	useContext,
-	useReducer,
-} from 'react';
+import { useState, useEffect } from 'react';
 import GamePlayersList from './GamePlayersList';
 import GameDetailScore from './GameDetailScore';
 import GameGrid from './GameGrid';
@@ -16,7 +10,6 @@ const GamePage = ({ data, type }) => {
 		'initGame',
 		data.id,
 	);
-	console.log(gameData);
 	const [upState, setUpState] = useState(false);
 	const [downState, setDownState] = useState(false);
 

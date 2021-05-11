@@ -15,7 +15,6 @@ const MatchingInfo = ({ setMessage, data }) => {
 	const history = useHistory();
 
 	const handleClick = (id, type) => {
-		// setID(id);
 		if (occupied && type === 'HOME') {
 			history.push(`/defense/${id}`);
 		} else if (occupied && type === 'AWAY') {
@@ -31,9 +30,7 @@ const MatchingInfo = ({ setMessage, data }) => {
 			<>
 				<TeamName
 					className={occupied ? 'occupied' : ''}
-					onClick={() => {
-						handleClick(data.id, 'AWAY');
-					}}
+					onClick={() => handleClick(data.id, 'AWAY')}
 				>
 					{data.awayTeam.teamName}
 				</TeamName>

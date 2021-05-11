@@ -12,6 +12,7 @@ const TeamList = ({ setMessage }) => {
 			<SingleList key={i}>
 				<GameTitle>{team.gameTitle}</GameTitle>
 				<MatchingInfo setMessage={setMessage} data={team}></MatchingInfo>
+				{/* //이유!!!!! */}
 			</SingleList>
 		))
 	);

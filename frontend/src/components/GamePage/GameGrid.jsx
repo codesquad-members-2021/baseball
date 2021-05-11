@@ -14,23 +14,14 @@ import GameLog from './GameLog';
 import GamePlayersList from './GamePlayersList';
 import GameDetailScore from './GameDetailScore';
 import useSlide from '../Hook/useSlide';
-import { GameStateContext } from '../GameContext';
-const GameGrid = () => {
-	const state = useContext(GameStateContext);
-	console.log(state);
+const GameGrid = ({ type }) => {
 	return (
-		<>
-			{/* {loading ? (
-				console.log('Loading...')
-			) : (
-				<GridBox>
-					<GameGeneralInfo data={gameInfo}></GameGeneralInfo>
-					<GamePlayers />
-					<GameFieldArea type={type} />
-					<GameLog data={gameInfo}></GameLog>
-				</GridBox>
-			)} */}
-		</>
+		<GridBox>
+			<GameGeneralInfo type={type} />
+			<GamePlayers />
+			<GameFieldArea type={type} />
+			<GameLog></GameLog>
+		</GridBox>
 	);
 };
 
