@@ -1,13 +1,16 @@
 package com.dong.baseball.Domain;
 
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+
+import java.time.LocalDateTime;
 
 public class Board {
 
     @Id
-    private Long board_Id;
+    private Long id;
 
-    private Long matchId;
     private int inning;
     private String turn;
     private int strike;
@@ -18,21 +21,25 @@ public class Board {
     private String pitcher;
     private String batter;
 
-    public Long getBoard_Id() {
-        return board_Id;
+    //@CreatedDate
+    //private LocalDateTime createdAt;
+
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                ", inning=" + inning +
+                ", turn='" + turn + '\'' +
+                ", strike=" + strike +
+                ", ball=" + ball +
+                ", out=" + out +
+                ", HomePoint=" + HomePoint +
+                ", AwayPoint=" + AwayPoint +
+                ", pitcher='" + pitcher + '\'' +
+                ", batter='" + batter + '\'' +
+                '}';
     }
 
-    public void setBoard_Id(Long board_Id) {
-        this.board_Id = board_Id;
-    }
-
-    public Long getMatchId() {
-        return matchId;
-    }
-
-    public void setMatchId(Long matchId) {
-        this.matchId = matchId;
-    }
 
     public int getInning() {
         return inning;

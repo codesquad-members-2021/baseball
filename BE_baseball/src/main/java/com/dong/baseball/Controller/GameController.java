@@ -1,6 +1,7 @@
 package com.dong.baseball.Controller;
 
 import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.ProgressDTO;
 import com.dong.baseball.DTO.SituationBoardDTO;
 import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
@@ -33,6 +34,15 @@ public class GameController {
         return gameService.matchInformations(matchId);
     }
 
+    @GetMapping("/progress/offense")
+    public ProgressDTO offeseInfo() {
+        return new ProgressDTO("");
+    }
+
+    @GetMapping("/progress/defense")
+    public ProgressDTO defenseInfo() {
+        return new ProgressDTO("");
+    }
 
 
 }

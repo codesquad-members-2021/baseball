@@ -19,7 +19,7 @@ public class SituationBoardDTO {
         this.inning = board.getInning();
         this.turn = board.getTurn();
         this.strike = board.getStrike();
-        this.ball =board.getBall();
+        this.ball = board.getBall();
         //@ Todo 할일더많음
     }
 

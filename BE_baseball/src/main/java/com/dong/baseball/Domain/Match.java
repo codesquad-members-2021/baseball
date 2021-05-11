@@ -1,17 +1,19 @@
 package com.dong.baseball.Domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Match {
     @Id
-    private Long matchId;
+    private Long id;
 
     private String home;
     private String away;
 
+    @MappedCollection(keyColumn = "match_id")
     List<Board> gameBoards = new ArrayList<>();
 
     public void addGameBoards(Board... boards) {
@@ -24,12 +26,12 @@ public class Match {
         return gameBoards;
     }
 
-    public Long getMatchId() {
-        return matchId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMatchId(Long matchId) {
-        this.matchId = matchId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getHome() {
@@ -51,7 +53,7 @@ public class Match {
     @Override
     public String toString() {
         return "Match{" +
-                "matchId=" + matchId +
+                "id=" + id +
                 ", home='" + home + '\'' +
                 ", away='" + away + '\'' +
                 ", gameBoards=" + gameBoards +
