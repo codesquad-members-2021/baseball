@@ -9,7 +9,8 @@ target 'baseballApp' do
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'Alamofire'
-  target 'baseballAppTests' do
+pod 'RxDataSources'
+target 'baseballAppTests' do
     inherit! :search_paths
     # Pods for testing
   end

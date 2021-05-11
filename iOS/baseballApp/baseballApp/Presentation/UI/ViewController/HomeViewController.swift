@@ -17,8 +17,13 @@ class HomeViewController: UIViewController {
         viewModel.getGameInfo()
         viewModel.games
             .bind(to: mainCollectionView.rx.items(cellIdentifier: Identifier.GameCell, cellType: GameCell.self)) {
-            _, game, cell in
-            cell.configureCell(game: game)
+            row, game, cell in
+                
+                cell.configureCell(game: game)
+                cell.alpha = 0
+                UIView.animate(withDuration: 0.5, delay: 0.5 * Double(row)) {
+                    cell.alpha = 1
+                }
         }.disposed(by: disposeBag)
     }
     

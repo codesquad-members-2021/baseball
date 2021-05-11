@@ -41,8 +41,8 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="346" height="139"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-vA-mfu">
-                                                            <rect key="frame" x="143" y="29.5" width="60" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-vA-mfu">
+                                                            <rect key="frame" x="173" y="39.5" width="0.0" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="3FB-vA-mfu" secondAttribute="height" multiplier="59:20" id="QBY-wP-aJn"/>
                                                             </constraints>
@@ -53,7 +53,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="O8d-u4-vK3">
                                                             <rect key="frame" x="57" y="69" width="232" height="41"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-NF-G8J">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="w5u-NF-G8J">
                                                                     <rect key="frame" x="0.0" y="0.0" width="94.5" height="41"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                                                     <nil key="textColor"/>
@@ -68,7 +68,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Away" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VqJ-U7-lsZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VqJ-U7-lsZ">
                                                                     <rect key="frame" x="144.5" y="0.0" width="87.5" height="41"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                                                     <nil key="textColor"/>
