@@ -2,7 +2,7 @@ package com.codesquad.baseball.controller;
 
 import com.codesquad.baseball.DTO.*;
 import com.codesquad.baseball.DTO.record.TeamRecordDTO;
-import com.codesquad.baseball.DTO.record.request.RequestPlayerRecordDTO;
+import com.codesquad.baseball.DTO.record.request.PlayerRecordRequest;
 import com.codesquad.baseball.DTO.score.GameScoreDTO;
 import com.codesquad.baseball.DTO.score.TeamScoreDTO;
 import com.codesquad.baseball.domain.Game;
@@ -61,7 +61,7 @@ public class GameController {
 
     @PatchMapping("/play/{teamId}/record")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePlayerRecord(@PathVariable Long teamId, @RequestBody RequestPlayerRecordDTO record) {
+    public void updatePlayerRecord(@PathVariable Long teamId, @RequestBody PlayerRecordRequest record) {
         teamService.updatePlayerRecord(teamId, record);
     }
 }

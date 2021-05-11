@@ -1,6 +1,6 @@
 package com.codesquad.baseball.DTO.record.request;
 
-public class RequestPlayerRecordDTO {
+public class PlayerRecordRequest {
 
     private Long playerId;
 
