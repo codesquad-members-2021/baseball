@@ -8,6 +8,7 @@ import PopUpScore from './popup/score/Score';
 import PopUpRoster from './popup/roster/Roster';
 import PopUp from '../ui/PopUp';
 import useScoreNBase from '../../hooks/useScoreNBase';
+import { fetchPUT } from '../../util/api.js';
 
 export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
@@ -15,49 +16,49 @@ const LogContext = createContext();
 
 const memberListReducer = (state, action) => {
   let next = 0;
-  const newState = state.map((member, idx) => {
+  const team = action.turn ? 'home' : 'away';
+  const newTeam = state[team].map((member, idx, arr) => {
     let { safety, at_bat, out, state } = member;
-    if (action.type === 'out') out++;
-    else safety++;
-    at_bat++;
-    if (action.id === member.id) {
-      next = idx + 1 === member.length ? 0 : idx + 1;
+    if (member.state) {
+      if (action.type === 'out') out++;
+      else safety++;
+      at_bat++;
+      next = idx + 1 === arr.length ? 0 : idx + 1;
       return { ...member, safety, at_bat, out, state: !state };
+    } else {
+      return member;
     }
   });
-  newState[next].state = true;
-  return newState;
+  newTeam[next].state = true;
+  return { ...state, [team]: newTeam };
 };
 
 const GamePlay = ({ home, away, game_id }) => {
   const [turn, round, member_list] = [null, null, null];
   const [inning, setInning] = useState({
-    turn,
-    round,
+    turn: true,
+    round: 1,
   });
   const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
-  // const [score, setScore] = useState(null);
-  // const [memberList, memberListDispatch] = useReducer(memberListReducer, member_list); //member_list fetch해서 받아올아이
-  /*
-  data,
+  const [memberList, memberListDispatch] = useReducer(memberListReducer, {
+    home: data.home.member_list,
+    away: data.away.member_list,
+  }); //member_list fetch해서 받아올아이
 
-  */
-  const memberList = { home: data.home.member_list, away: data.home.member_list };
-  const pitchers = { home: data.home.pitcher, away: data.home.pitcher };
-  console.log(pitchers);
+  const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
     <StyledGamePlay>
       <PopUp position='top'>
         <PopUpScore />
       </PopUp>
       <PopUp position='bottom'>
-        <PopUpRoster />
+        <PopUpRoster memberList={memberList} />
       </PopUp>
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={data.turn}></Score>
-          <Player memberList={memberList} turn={data.turn} pitchers={pitchers}></Player>
-          <Board></Board>
+          <Score teamName={teamName} turn={inning.turn}></Score>
+          <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
+          <Board {...{ inning, setInning, memberListDispatch }}></Board>
           <Log data={data}></Log>
         </ScoreNBaseContext.Provider>
       </StyledGamePlayGrid>
@@ -111,7 +112,7 @@ const teamName = {
 };
 
 const data = {
-  round: 4, // 게임 시작시는 round,turn X
+  round: 1, // 게임 시작시는 round,turn X
   turn: true, //(false : 말)
   home: {
     member_list: [
@@ -196,7 +197,7 @@ const data = {
         state: false,
       },
     ],
-    pitcher: 3,
+    pitcher: 5,
     score: 0, // 재접속 시에도 유지할 수 있도록 팀 별 점수를 받을 수 있어야 합니다!
   },
   away: {

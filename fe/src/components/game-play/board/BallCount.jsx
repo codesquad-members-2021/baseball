@@ -23,7 +23,7 @@ const BallCount = ({ ballCount: { strike, ball, out } }) => {
 function createBallCountTag(count) {
   const result = [];
   for(let i = 0; i < count; i++) {
-    result.push(<div/>);
+    result.push(<div key={i}/>);
   }
   return result;
 }
