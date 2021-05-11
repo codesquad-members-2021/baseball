@@ -1,4 +1,5 @@
 import GlobalStyle from "./GlobalStyle";
+
 import Main from "./components/Main";
 
 function App() {
@@ -9,5 +10,6 @@ function App() {
 		</>
 	);
 }
+
 
 export default App;
