@@ -36,7 +36,7 @@ public class Player {
 
     @JsonIgnore
     public boolean isPitcher() {
-        return playerGameInfo.getRole().equals(PlayerGameInfo.PITCHER);
+        return playerGameInfo.getRole().equals(Constants.PITCHER);
     }
 
     @JsonIgnore

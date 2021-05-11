@@ -1,15 +1,9 @@
 package codesquad.baseball.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class Inning {
-
-    private static final String OFFENSE = "공격";
-    private static final String DEFENSE = "수비";
-    private static final String TOP = "초";
-    private static final String BOTTOM = "말";
 
     private int out;
     private int inningNumber;
@@ -25,45 +19,45 @@ public class Inning {
 
     public static Inning initiateInning(boolean isHome) {
         if (isHome) {
-            return new Inning(0, 1, DEFENSE, TOP);
+            return new Inning(0, 1, Constants.DEFENSE, Constants.TOP);
         }
-        return new Inning(0, 1, OFFENSE, TOP);
+        return new Inning(0, 1, Constants.OFFENSE, Constants.TOP);
     }
 
     public int updateOut(boolean isPlayerOut) {
-        if(isPlayerOut) {
+        if (isPlayerOut) {
             this.out += 1;
         }
         return out;
     }
 
     private Inning changeRole() {
-        if (this.role.equals(DEFENSE)) {
-            this.role = OFFENSE;
+        if (this.role.equals(Constants.DEFENSE)) {
+            this.role = Constants.OFFENSE;
             return this;
         }
-        this.role = DEFENSE;
+        this.role = Constants.DEFENSE;
         return this;
     }
 
     private Inning changeCycle() {
-        if (this.cycle.equals(TOP)) {
-            this.cycle = BOTTOM;
+        if (this.cycle.equals(Constants.TOP)) {
+            this.cycle = Constants.BOTTOM;
             return this;
         }
-        this.role = TOP;
+        this.cycle = Constants.TOP;
         this.inningNumber += 1;
         return this;
     }
 
     public boolean needChange() {
-        return this.out == 3;
+        return this.out == Constants.MAX_OUT_NUMBER;
     }
 
     public Inning changeInning() {
-            changeCycle();
-            changeRole();
-            this.out = 0;
+        changeCycle();
+        changeRole();
+        this.out = 0;
         return this;
     }
 
