@@ -2,6 +2,7 @@ package com.codesquad.baseball.controller;
 
 import com.codesquad.baseball.DTO.*;
 import com.codesquad.baseball.DTO.record.TeamRecordDTO;
+import com.codesquad.baseball.DTO.record.request.RequestPlayerRecordDTO;
 import com.codesquad.baseball.DTO.score.GameScoreDTO;
 import com.codesquad.baseball.DTO.score.TeamScoreDTO;
 import com.codesquad.baseball.domain.Game;
@@ -9,6 +10,7 @@ import com.codesquad.baseball.domain.Score;
 import com.codesquad.baseball.domain.Team;
 import com.codesquad.baseball.service.GameService;
 import com.codesquad.baseball.service.TeamService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +46,7 @@ public class GameController {
     }
 
     @PostMapping("/play/{teamId}/score")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void addScore(@PathVariable Long teamId, @RequestBody Score score) {
         teamService.addScore(teamId, score);
     }
@@ -57,6 +60,7 @@ public class GameController {
     }
 
     @PatchMapping("/play/{teamId}/record")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePlayerRecord(@PathVariable Long teamId, @RequestBody RequestPlayerRecordDTO record) {
         teamService.updatePlayerRecord(teamId, record);
     }
