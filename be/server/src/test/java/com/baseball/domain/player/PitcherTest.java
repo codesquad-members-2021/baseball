@@ -114,7 +114,7 @@ class PitcherTest {
     }
 
     @Test
-    @DisplayName("피쳐가 공을 던지고, HIT이벤트가 발생한다 하더라도 data는 달라지는게 없어야한다")
+    @DisplayName("피쳐가 공을 던지고, HIT이벤트가 발생하는 경우에 대한 테스트")
     void scenario_hit() {
         pitcher.play(HIT);
         softly.assertThat(pitcher.getBaseOnBalls())
@@ -122,10 +122,9 @@ class PitcherTest {
         softly.assertThat(pitcher.getInnings())
                 .isEqualTo(0);
         softly.assertThat(pitcher.getHit())
-                .isEqualTo(0);
+                .isEqualTo(1);
         softly.assertThat(pitcher.getNumberOfPitching())
                 .isEqualTo(1);
         softly.assertAll();
     }
-
 }

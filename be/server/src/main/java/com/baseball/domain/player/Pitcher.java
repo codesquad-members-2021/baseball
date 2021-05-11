@@ -21,6 +21,9 @@ public class Pitcher extends Player {
         if (playResult == PlayResult.BALL) {
             ballCount++;
         }
+        if (playResult == PlayResult.HIT) {
+            increaseHit();
+        }
     }
 
     public Integer getNumberOfPitching() {
