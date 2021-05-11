@@ -3,9 +3,8 @@ import styled from "styled-components";
 import delay from "../../../utils/delay/delay";
 import BallCount from "./BallCount";
 
-const Field = () => {
-	const gongSoo = "DEFENSE";
-	const count = { ball: 2, strike: 1, out: 1 };
+const Field = ({ inning, inningType, baseState, hitterRecords, userTeam, reloadData }) => {
+	const isOffence = userTeam === "AWAY" ^ inningType === "TOP" ? "공격" : "수비";
 
 	const [runnerList, setRunnerList] = useState([{ base: 0 }]);
 	const [isPlaying, setPlaying] = useState(false);
@@ -30,18 +29,19 @@ const Field = () => {
 	const arrive = () => setRunnerList((list) => [...list.map((el) => ({ ...el, isRunning: false }))]);
 
 	const play = async () => {
+		await reloadData();
 		await pitch();
 		await hit();
 	};
 	//prettier-ignore
 	return (
 		<StyledField>
-			<BallCount count={count} />
-			<CurrentInning>8회초 수비</CurrentInning>
+			<BallCount hitterRecords={hitterRecords} />
+			<CurrentInning>{inning}회{inningType==="TOP" ? "초" : "말"} {isOffence}</CurrentInning>
 			<Pitcher step={pitchingStep} />
 			{runnerList.map((el, i) => <Runner key={i} {...el} />)}
 			{isPlaying || <Batter src="image/batter.png" />}
-			{gongSoo === "DEFENSE" && <PitchButton onClick={play}>PITCH</PitchButton>}
+			{isOffence === "수비" && <PitchButton onClick={play}>PITCH</PitchButton>}
 		</StyledField>
 	);
 };

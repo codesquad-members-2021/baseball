@@ -11,10 +11,17 @@ const InGame = () => {
 	const { gameId, teamId, loginStatus } = useContext(MainContext);
 
 	const [data, setData] = useState();
-	const reloadData = () => {
-		fetch(`https://baseball-ahpuh.herokuapp.com/games/${gameId}?teamId=${teamId}`)
-			.then((res) => res.json())
-			.then((json) => setData(json));
+	const reloadData = async () => {
+		// pitch나 (공격시 일정간격으로 polling) 상황 때는 투구 결과, 즉 ball hit strike를 보내줄텐데
+		// 그때를 대비해 default parameter로 useEffect때는 결과만 받아오도록 하고
+		// 인자로 {result:ball} 따위를 POST나 PUT할 수 있게 만들어주자
+		try {
+			const response = await fetch(`https://baseball-ahpuh.herokuapp.com/games/${gameId}?teamId=${teamId}`)
+			const json = await response.json()
+			setData(()=>json)
+		} catch (error) {
+			console.log("fetch error in InGame : ",error)
+		}
 	};
 	useEffect(() => reloadData(), []);
 
@@ -26,12 +33,12 @@ const InGame = () => {
 		toggleLineUp(false);
 		setDark(false);
 	};
-	return (loginStatus && data) ? (
+	return loginStatus && data ? (
 		<StyledInGame>
 			<ScoreBoard slide={slideScoreBoard} toggle={toggleScoreBoard} isDark={isDark} setDark={setDark} gameId={gameId} />
 			<LineUp slide={slideLineUp} toggle={toggleLineUp} isDark={isDark} setDark={setDark} gameId={gameId} />
 			<Main onClick={clickMain} isDark={isDark}>
-				<Ground reloadData={reloadData} data={data} />
+				<Ground reloadData={reloadData} data={data} teamId={teamId} />
 				<Record data={data} />
 			</Main>
 		</StyledInGame>
