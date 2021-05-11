@@ -1,8 +1,10 @@
 package com.dong.baseball.Controller;
 
+import com.dong.baseball.DTO.TeamRankDTO;
 import com.dong.baseball.Domain.Team;
 import com.dong.baseball.Service.TeamService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,17 @@ public class TeamController {
     }
 
     @GetMapping
-    public List<Team> teamRanking() {
+    public List<TeamRankDTO> teamRanking() {
         return teamService.teamRanking();
+    }
+
+    @GetMapping("/num/{teamId}")
+    public Team teamInfoById(@PathVariable Long teamId) {
+        return teamService.teamInfoById(teamId);
+    }
+
+    @GetMapping("/{teamName}")
+    public Team teamInfoByName(@PathVariable String teamName) {
+        return teamService.teamInfoByName(teamName);
     }
 }
