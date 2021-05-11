@@ -1,5 +1,6 @@
 package codesquad.baseball.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.Id;
 @Setter
 @AllArgsConstructor
 public class PlayerGameInfo {
+
     @Id
     private Long id;
 
@@ -20,5 +22,24 @@ public class PlayerGameInfo {
     private int hits;
     private int out;
     private Long average;
+
+    @JsonIgnore
+    public void addPitchCount(int pitches) {
+        pitchCount += pitches;
+    }
+
+    @JsonIgnore
+    public PlayerGameInfo updatePlayerGameInfo(boolean hitSuccess, boolean isOut) {
+        this.plateAppearance += 1;
+        if (hitSuccess) {
+            this.hits += 1;
+            return this;
+        }
+        if (isOut) {
+            this.out += 1;
+        }
+        this.average = (long) hits / (long) plateAppearance;
+        return this;
+    }
 
 }
