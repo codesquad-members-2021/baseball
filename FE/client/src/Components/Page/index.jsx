@@ -23,14 +23,11 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    const getTeams = async () => {
-      const teams = await API.get.teams();
-      console.log(teams);
-    }
-    getTeams();
-  }, []);
+    console.log(playerId)
+  }, [playerId]);
 
   return (
+
     <Router>
       <PageContext.Provider value={{ socket }}>
         <Route path="/" >
