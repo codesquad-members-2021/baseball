@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 
 public class PlayerRecordDTO {
 
-    private static final DecimalFormat AVERAGE_FORMAT = new DecimalFormat("#.###");
+    private static final DecimalFormat AVERAGE_FORMAT = new DecimalFormat("0.000");
     private Long id;
 
     private String name;
@@ -29,6 +29,7 @@ public class PlayerRecordDTO {
         String average = "0";
         if (player.getPlateAppearance() > 0) {
             average = AVERAGE_FORMAT.format(player.getHit() / (float) player.getPlateAppearance());
+            System.out.println(average);
         }
         return new PlayerRecordDTO(
                 player.getId(),
