@@ -63,9 +63,6 @@ public class GameService {
         TeamParticipatingInGame aTeamParticipant = teamA.createParticipantAsHomeTeam();
         TeamParticipatingInGame bTeamParticipant = teamB.createParticipantAsAwayTeam();
 
-        teamA.getPlayers().stream().filter(Player::isHitter).forEach(aTeamParticipant::addPlayer);
-        teamB.getPlayers().stream().filter(Player::isHitter).forEach(bTeamParticipant::addPlayer);
-
         registerPlayersInGame(teamA, aTeamParticipant);
         registerPlayersInGame(teamB, bTeamParticipant);
 
