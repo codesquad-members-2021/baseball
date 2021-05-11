@@ -15,8 +15,8 @@ public class PlayerDTO {
     private int plateAppearances;
     private int hits;
 
-    public PlayerDTO(Player player) {
-        this.role = player.getPlayerGameInfo().getRole();
+    public PlayerDTO(String role, Player player) {
+        this.role = role;
         this.name = player.getName();
         this.pitchCount = player.getPlayerGameInfo().getPitchCount();
         this.plateAppearances = player.getPlayerGameInfo().getPlateAppearance();
