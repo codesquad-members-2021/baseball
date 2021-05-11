@@ -11,8 +11,13 @@ class Endpoint {
     private var path: String
     private var queryItems: [URLQueryItem] = []
     
-    init(path: String) {
+    init(path: String, queryItems: [URLQueryItem]) {
         self.path = path
+        self.queryItems = queryItems
+    }
+    
+    convenience init(path: String) {
+        self.init(path: path, queryItems: [])
     }
 }
 
@@ -37,14 +42,9 @@ extension Endpoint {
         return Endpoint(path: "/test") as! Self
     }
     
-//    static func users(count: Int) -> Self {
-//           return Endpoint(path: "/user",
-//                           queryItems: [
-//                               URLQueryItem(name: "limit",
-//                                            value: "\(count)")
-//               ]
-//           )
-//       }
+    static var game: Self {
+           return Endpoint(path: "/game") as! Self
+       }
 //
 //       static func user(id: String) -> Self {
 //           return Endpoint(path: "/user/\(id)")
