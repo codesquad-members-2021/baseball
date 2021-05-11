@@ -2,9 +2,6 @@ package com.dong.baseball.Controller;
 
 import com.dong.baseball.DTO.MatchUpListDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.SituationBoardDTO;
-import com.dong.baseball.Domain.Board;
-import com.dong.baseball.Domain.Match;
 import com.dong.baseball.Service.GameService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,18 +27,22 @@ public class GameController {
     }
 
     @GetMapping("/{matchId}")
-    public List<SituationBoardDTO> matchInfos(@PathVariable Long matchId) {
+    public List<ProgressDTO> matchInfos(@PathVariable Long matchId) {
         return gameService.matchInformations(matchId);
     }
 
-    @GetMapping("/progress/offense/{matchId}")
-    public ProgressDTO offeseInfo() {
-        return new ProgressDTO("");
+    @GetMapping("/offense/{matchId}")
+    public ProgressDTO offeseInfo(@PathVariable Long matchId) {
+
+        gameService.matchInformations(matchId);
+        return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @GetMapping("/progress/defense/{matchId}")
-    public ProgressDTO defenseInfo() {
-        return new ProgressDTO("");
+    @GetMapping("/defense/{matchId}")
+    public ProgressDTO defenseInfo(@PathVariable Long matchId) {
+
+        gameService.matchInformations(matchId);
+        return new ProgressDTO(gameService.matchStream(matchId));
     }
 
 

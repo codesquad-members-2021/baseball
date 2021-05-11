@@ -21,6 +21,7 @@ public class Board {
     private String pitcher;
     private String batter;
 
+    //@Todo 시간 기입해주기
     //@CreatedDate
     //private LocalDateTime createdAt;
 
@@ -40,6 +41,9 @@ public class Board {
                 '}';
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public int getInning() {
         return inning;
