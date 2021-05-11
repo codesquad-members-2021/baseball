@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import Top from './Top';
-import Bottom from './Bottom';
+import styled from "styled-components";
+import Top from "./Top";
+import Bottom from "./Bottom";
 
-const Record = () => {
+const Record = ({ data }) => {
   return (
     <StyledRecord>
-      <Top></Top>
-      <Bottom></Bottom>
+      <Top currentHitter={data.currentHitter} currentPitcher={data.currentPitcher}></Top>
+      <Bottom hitterRecords={data.hitterRecords}></Bottom>
     </StyledRecord>
   );
 };

@@ -1,23 +1,54 @@
-import styled from 'styled-components';
+import { useRef } from "react";
+import styled from "styled-components";
 
-const RecordOfPlayer = () => {
+const RecordOfPlayer = ({ results }) => {
+  const ballCnt = useRef(0);
+  const strikeCnt = useRef(0);
+  strikeCnt.current = 0;
+  ballCnt.current = 0;
+  let consequnece = "진행중";
+
+  const getPlayerConsquence = (type) => {
+    const consequence = {
+      FOUR_BALL: "진루!",
+      THREE_STRIKE: "아웃!",
+      HIT: "안타!",
+    };
+    return consequence[type];
+  };
+  const recordList = results.map((result, idx) => {
+    const type = {
+      B: "볼",
+      S: "스트라이크",
+    };
+
+    result === "B" ? (ballCnt.current += 1) : (strikeCnt.current += 1);
+
+    const finalResult = () => {
+      if (ballCnt.current === 4) {
+        consequnece = getPlayerConsquence("FOUR_BALL");
+      } else if (strikeCnt.current === 3) {
+        consequnece = getPlayerConsquence("THREE_STRIKE");
+      } else {
+        consequnece = getPlayerConsquence("HIT");
+      }
+    };
+    finalResult();
+
+    return (
+      <Record key={idx}>
+        <Idx>{idx + 1}</Idx> <Type>{type[result]}</Type>
+        <Counter>
+          <BallCnt>{ballCnt.current}</BallCnt>
+          <StrikeCnt>{strikeCnt.current}</StrikeCnt>
+        </Counter>
+      </Record>
+    );
+  });
   return (
     <StyledRecordOfPlayer>
-      <Result>안타!</Result>
-      <Record>
-        <Idx>5</Idx> <Type>스트라이크</Type>{' '}
-        <Counter>
-          <BallCnt>2</BallCnt>
-          <StrikeCnt>3</StrikeCnt>
-        </Counter>
-      </Record>
-      <Record>
-        <Idx>4</Idx> <Type>볼</Type>{' '}
-        <Counter>
-          <BallCnt>1</BallCnt>
-          <StrikeCnt>3</StrikeCnt>
-        </Counter>
-      </Record>
+      <Result>{consequnece}</Result>
+      {recordList.reverse()}
     </StyledRecordOfPlayer>
   );
 };
@@ -60,11 +91,11 @@ const Counter = styled.span`
 const BallCnt = styled.span`
   padding: 0 0.5rem;
   &::before {
-    content: 'B';
+    content: "B";
   }
 `;
 const StrikeCnt = styled.span`
   &::before {
-    content: 'S';
+    content: "S";
   }
 `;

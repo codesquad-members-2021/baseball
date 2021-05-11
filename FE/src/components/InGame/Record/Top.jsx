@@ -1,20 +1,24 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-const Top = () => {
+const Top = ({ currentHitter, currentPitcher }) => {
+  const { name: pitcherName, pitchCount } = currentPitcher;
+  const { name: hitterName, plateAppearanceCount, hitCount } = currentHitter;
   return (
     <StyledTop>
       <Atk>
         <Role>투수</Role>
         <Player>
-          <PlayerName>최동원</PlayerName>
-          <PitcherInfo>39</PitcherInfo>
+          <PlayerName>{pitcherName}</PlayerName>
+          <PitcherInfo>{pitchCount}</PitcherInfo>
         </Player>
       </Atk>
       <Def>
         <Role>타자</Role>
         <Player>
-          <PlayerName>류현진</PlayerName>
-          <BatterInfo>1타석 0안타</BatterInfo>
+          <PlayerName>{hitterName}</PlayerName>
+          <BatterInfo>
+            {plateAppearanceCount}타석 {hitCount}안타
+          </BatterInfo>
         </Player>
       </Def>
     </StyledTop>
@@ -52,7 +56,7 @@ const PitcherInfo = styled.span`
   color: #488b9b;
   margin-left: 0.5rem;
   &::before {
-    content: '#';
+    content: "#";
   }
 `;
 
