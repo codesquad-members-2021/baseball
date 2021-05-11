@@ -69,7 +69,7 @@ public class Inning {
     }
 
     public int getInningNumber() {
-        return inningNumber;
+        return inningNumber + 1;
     }
 
     @Override
