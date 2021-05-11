@@ -7,9 +7,10 @@ import Log from './log/Log';
 import PopUpScore from './popup/score/Score';
 import PopUpRoster from './popup/roster/Roster';
 import PopUp from '../ui/PopUp';
+import useScoreNBase from '../../hooks/useScoreNBase';
 import { fetchPUT } from '../../util/api.js';
 
-const ScoreContext = createContext();
+export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
 const LogContext = createContext();
 
@@ -18,47 +19,48 @@ const memberListReducer = (state, action) => {
   const team = action.turn ? 'home' : 'away';
   const newTeam = state[team].map((member, idx, arr) => {
     let { safety, at_bat, out, state } = member;
-    if(member.state) {
-      if(action.type === 'out') out++
-      else safety++
-      at_bat++
+    if (member.state) {
+      if (action.type === 'out') out++;
+      else safety++;
+      at_bat++;
       next = idx + 1 === arr.length ? 0 : idx + 1;
-      return {...member, safety, at_bat, out, state: !state};
+      return { ...member, safety, at_bat, out, state: !state };
     } else {
       return member;
     }
   });
   newTeam[next].state = true;
   return { ...state, [team]: newTeam };
-}
+};
 
 const GamePlay = ({ home, away, game_id }) => {
-  
   const [turn, round, member_list] = [null, null, null];
   const [inning, setInning] = useState({
     turn: true,
-    round: 1
+    round: 1,
   });
-  // const [score, setScore] = useState(null);
-  const [memberList, memberListDispatch] = useReducer(memberListReducer, { home: data.home.member_list, away: data.away.member_list }); //member_list fetch해서 받아올아이
-  /*
-  data,
+  const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
+  const [memberList, memberListDispatch] = useReducer(memberListReducer, {
+    home: data.home.member_list,
+    away: data.away.member_list,
+  }); //member_list fetch해서 받아올아이
 
-  */
-  const score = { home: data.home.score, away: data.away.score };
-  // const memberList = ;
   const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
     <StyledGamePlay>
-      <PopUp position='top'><PopUpScore /></PopUp>
-      <PopUp position='bottom'><PopUpRoster memberList={memberList}/></PopUp>
+      <PopUp position='top'>
+        <PopUpScore />
+      </PopUp>
+      <PopUp position='bottom'>
+        <PopUpRoster memberList={memberList} />
+      </PopUp>
       <StyledGamePlayGrid>
-        {/* {/* <ScoreContext.Provider value={score}> */}
-          <Score teamName={teamName} score={score} turn={inning.turn}></Score>
-        {/* </ScoreContext.Provider> */}
-        <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-        <Board {...{inning, setInning, memberListDispatch}}></Board>
-        <Log data={data}></Log>
+        <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
+          <Score teamName={teamName} turn={inning.turn}></Score>
+          <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
+          <Board {...{ inning, setInning, memberListDispatch }}></Board>
+          <Log data={data}></Log>
+        </ScoreNBaseContext.Provider>
       </StyledGamePlayGrid>
     </StyledGamePlay>
   );

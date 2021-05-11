@@ -1,8 +1,15 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { ScoreNBaseContext } from '../GamePlay';
 
-const Score = ({ teamName, score, turn }) => {
+const Score = ({ teamName, turn }) => {
+  const { score } = useContext(ScoreNBaseContext);
   const TITLE = 'BASEBALL GAME ONLINE';
   const TURN = 'Player';
+
+  const homeScore = score.home.reduce((acc, cur) => acc + cur, 0);
+  const awayScore = score.away.reduce((acc, cur) => acc + cur, 0);
+
   return (
     <StyledScore>
       <div className='title'>{TITLE}</div>
@@ -13,11 +20,11 @@ const Score = ({ teamName, score, turn }) => {
             {turn && <div className='turn'>{TURN}</div>}
           </div>
 
-          <div className='teams-score'>{score.home}</div>
+          <div className='teams-score'>{homeScore}</div>
         </div>
         <div className='teams-vs'>vs</div>
         <div className='away'>
-          <div className='teams-score'>{score.away}</div>
+          <div className='teams-score'>{awayScore}</div>
           <div className='teams-name'>
             {teamName.away}
             {!turn && <div className='turn'>{TURN}</div>}

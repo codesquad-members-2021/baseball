@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useReducer, useEffect, useState } from 'react';
+import { useState, useReducer, useContext, useEffect } from 'react';
 import BallCount from './BallCount';
 import Inning from './Inning';
 import Screen from './Screen';
+import { ScoreNBaseContext } from '../GamePlay';
 import { fetchPUT } from '../../../util/api.js';
 
 const ballCountReducer = (state, action) => {
@@ -36,6 +37,7 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
     ball: 0,
     out: 0,
   });
+  const { safetyDispatch } = useContext(ScoreNBaseContext);
   const handleStrike = () => {
     if (ballCount.strike === 2) {
       handleOut();
@@ -54,18 +56,20 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
   const handleOut = () => {
     if (ballCount.out === 2) {
       ballCountDispatch({ type: 'clear' });
-      if(inning.turn) setInning({...inning, turn: !inning.turn});
-      else setInning({...inning, round: inning.round + 1, turn: !inning.turn});
+      if (inning.turn) setInning({ ...inning, turn: !inning.turn });
+      else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
+      safetyDispatch({ type: 'clear', turn: inning.turn });
     } else {
       ballCountDispatch({ type: 'out' });
     }
     // 멤버 아웃 1, 타석 1 증가
     memberListDispatch({ type: 'out', turn: inning.turn });
   };
-  const handleSafety = () => {
+  const handleSafety = (power) => {
     ballCountDispatch({ type: 'safety' });
-    memberListDispatch({ type: 'safety', turn: inning.turn });
     // 멤버 안타 1, 타석 1 증가
+    memberListDispatch({ type: 'safety', turn: inning.turn });
+    safetyDispatch({ turn: inning.turn, power });
   };
 
   useEffect(() => {

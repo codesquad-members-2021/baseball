@@ -3,19 +3,20 @@ import styled from 'styled-components';
 const Player = ({ memberList, turn, pitchers }) => {
   const HOME = 'home';
   const AWAY = 'away';
-
-  const getPlayer = (members, id) => {
+  const getPlayer = () => {
     const result = {};
-    for (const member of members) {
-      if (member.id === id) result.pitcher = member;
+    const batterTeam = turn ? HOME : AWAY;
+    const pitcherTeam = turn ? AWAY : HOME;
+    for (const member of memberList[batterTeam]) {
       if (member.state) result.batter = member;
+    }
+    for (const member of memberList[pitcherTeam]) {
+      if (member.id === pitchers[pitcherTeam]) result.pitcher = member;
     }
     return result;
   };
 
-  const { pitcher, batter } = turn
-    ? getPlayer(memberList[HOME], pitchers[HOME])
-    : getPlayer(memberList[AWAY], pitchers[AWAY]);
+  const { pitcher, batter } = getPlayer();
 
   return (
     <StyledPlayer>
