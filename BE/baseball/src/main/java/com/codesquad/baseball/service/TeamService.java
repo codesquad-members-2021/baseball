@@ -1,6 +1,5 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.DTO.GameScoreDTO;
 import com.codesquad.baseball.DTO.RequestPlayerRecordDTO;
 import com.codesquad.baseball.DTO.TeamDTO;
 import com.codesquad.baseball.DTO.TeamScoreDTO;
