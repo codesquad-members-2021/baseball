@@ -1,6 +1,12 @@
 import styled from 'styled-components';
+import History from 'components/GamePlay/playScreen/History';
+
 const Main = () => {
-  return <StyldeMain></StyldeMain>;
+  return (
+    <StyldeMain>
+      <History />
+    </StyldeMain>
+  );
 };
 
 export default Main;

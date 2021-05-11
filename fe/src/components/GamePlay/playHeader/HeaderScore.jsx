@@ -7,7 +7,10 @@ import FlexCenter from 'styles/FlexCenter';
 
 const HeaderScore = () => {
   const { home, away } = useContext(gamePlayContext);
+
+  // 함수 GAME에서 넘겨줘야함
   const [scores, setScores] = useState({ home: 0, away: 0 });
+
   return (
     <GameScoreWrap>
       <Span selected={home.selected}>{home.teamName}</Span>
