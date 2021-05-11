@@ -17,6 +17,12 @@
 		A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A025C34B2641164000C9B8C7 /* GroundView.swift */; };
 		A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06524AA2643B7C700CF375D /* PitchHistoryView.swift */; };
 		A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098D28B264383D700950F8F /* GamePlayViewController.swift */; };
+		A09F9F2C26490CD700A78969 /* FetchGameListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F2B26490CD700A78969 /* FetchGameListUseCase.swift */; };
+		A09F9F3126490F4B00A78969 /* GameListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F3026490F4B00A78969 /* GameListRepository.swift */; };
+		A09F9F3326490FC800A78969 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F3226490FC800A78969 /* NetworkService.swift */; };
+		A09F9F352649102D00A78969 /* NetworkEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F342649102D00A78969 /* NetworkEndpoint.swift */; };
+		A09F9F3826491ECE00A78969 /* GameListDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F3726491ECE00A78969 /* GameListDTO+Mapping.swift */; };
+		FF57667E2649324200F46A43 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57667D2649324200F46A43 /* Alertable.swift */; };
 		FFDD3A8C2641371C0037622A /* GameScoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */; };
 		FFDD3A90264138800037622A /* MatchUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A8F264138800037622A /* MatchUp.swift */; };
 		FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A91264138F40037622A /* GameListViewModel.swift */; };
@@ -38,6 +44,12 @@
 		A025C34B2641164000C9B8C7 /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
 		A06524AA2643B7C700CF375D /* PitchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchHistoryView.swift; sourceTree = "<group>"; };
 		A098D28B264383D700950F8F /* GamePlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayViewController.swift; sourceTree = "<group>"; };
+		A09F9F2B26490CD700A78969 /* FetchGameListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGameListUseCase.swift; sourceTree = "<group>"; };
+		A09F9F3026490F4B00A78969 /* GameListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListRepository.swift; sourceTree = "<group>"; };
+		A09F9F3226490FC800A78969 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A09F9F342649102D00A78969 /* NetworkEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndpoint.swift; sourceTree = "<group>"; };
+		A09F9F3726491ECE00A78969 /* GameListDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameListDTO+Mapping.swift"; sourceTree = "<group>"; };
+		FF57667D2649324200F46A43 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Alertable.swift; path = ../../../../../../Alertable.swift; sourceTree = "<group>"; };
 		FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreHeader.xib; sourceTree = "<group>"; };
 		FFDD3A8F264138800037622A /* MatchUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUp.swift; sourceTree = "<group>"; };
 		FFDD3A91264138F40037622A /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
@@ -76,6 +88,7 @@
 		A025C3282640E8E700C9B8C7 /* Baseball */ = {
 			isa = PBXGroup;
 			children = (
+				A09F9F2D26490F1300A78969 /* Data */,
 				FFDD3A8D264138600037622A /* Domain */,
 				A025C3462640EF7400C9B8C7 /* SupportingFile */,
 				A025C3452640EF6600C9B8C7 /* Application */,
@@ -87,6 +100,7 @@
 		A025C33D2640EC4D00C9B8C7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FF57667C2649323600F46A43 /* Utils */,
 				FFDD3A8A264137080037622A /* Common */,
 				A025C3472641160400C9B8C7 /* GamePlayView */,
 				A025C33E2640EC6200C9B8C7 /* GameListView */,
@@ -123,6 +137,7 @@
 		A025C3452640EF6600C9B8C7 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				A09F9F3B2649264700A78969 /* DIContainer */,
 				A025C3292640E8E700C9B8C7 /* AppDelegate.swift */,
 				A025C32B2640E8E700C9B8C7 /* SceneDelegate.swift */,
 			);
@@ -167,6 +182,64 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A09F9F2A26490CBE00A78969 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				A09F9F2B26490CD700A78969 /* FetchGameListUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		A09F9F2D26490F1300A78969 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A09F9F2F26490F3700A78969 /* Network */,
+				A09F9F2E26490F2D00A78969 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A09F9F2E26490F2D00A78969 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				A09F9F3026490F4B00A78969 /* GameListRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		A09F9F2F26490F3700A78969 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A09F9F3626491DBF00A78969 /* DataMapping */,
+				A09F9F3226490FC800A78969 /* NetworkService.swift */,
+				A09F9F342649102D00A78969 /* NetworkEndpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A09F9F3626491DBF00A78969 /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				A09F9F3726491ECE00A78969 /* GameListDTO+Mapping.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		A09F9F3B2649264700A78969 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		FF57667C2649323600F46A43 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FF57667D2649324200F46A43 /* Alertable.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		FFDD3A8A264137080037622A /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +253,7 @@
 		FFDD3A8D264138600037622A /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				A09F9F2A26490CBE00A78969 /* UseCase */,
 				FFDD3A8E264138680037622A /* Entity */,
 			);
 			path = Domain;
@@ -264,18 +338,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF57667E2649324200F46A43 /* Alertable.swift in Sources */,
 				FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */,
 				FFDD3A90264138800037622A /* MatchUp.swift in Sources */,
 				A025C3422640ECF100C9B8C7 /* GameListViewController.swift in Sources */,
 				A06524AB2643B7C700CF375D /* PitchHistoryView.swift in Sources */,
+				A09F9F3826491ECE00A78969 /* GameListDTO+Mapping.swift in Sources */,
 				A025C34C2641164000C9B8C7 /* GroundView.swift in Sources */,
+				A09F9F2C26490CD700A78969 /* FetchGameListUseCase.swift in Sources */,
 				A025C32A2640E8E700C9B8C7 /* AppDelegate.swift in Sources */,
 				A025C32C2640E8E700C9B8C7 /* SceneDelegate.swift in Sources */,
 				FFDD3A9C2643C25F0037622A /* PaddingLabel.swift in Sources */,
 				A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */,
+				A09F9F3326490FC800A78969 /* NetworkService.swift in Sources */,
+				A09F9F352649102D00A78969 /* NetworkEndpoint.swift in Sources */,
 				A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */,
 				FFDD3A9E2643C3960037622A /* PitchHistoryCell.swift in Sources */,
 				FFDD3AA62644FD9B0037622A /* CALayer+Extension.swift in Sources */,
+				A09F9F3126490F4B00A78969 /* GameListRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
