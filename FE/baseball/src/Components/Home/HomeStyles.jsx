@@ -33,17 +33,17 @@ const HomeStyles = {
 
 const MatchInfo = {
   MatchInfo: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)`
-    width: 500px;
+    width: 800px;
   `,
 
   MatchInfoTitle: styled.div`
-    padding: 40px 40px 20px 40px;
+    padding: 40px;
     font-size: 24px;
     letter-spacing: 3px;
   `,
   MatchInfoBody: styled.div`
     width: 100%;
-    height: 340px;
+    height: 670px;
     padding: 0px 20px 0px 10px;
     overflow-y: scroll;
 
@@ -87,13 +87,18 @@ const MatchBox = {
     width: 100%;
     height: 100px;
     justify-content: center;
+    transition: all ease-in-out 0.4s;
+
+    :hover {
+      background: #333;
+    }
   `,
 
   GameNumber: styled(CS.BOX.FLEX_CENTER_BOX)`
     width: 100%;
     height: 50%;
     padding: 15px 10px 0px 10px;
-    font-size: 12px;
+    font-size: 14px;
     color: #ffa7c4;
   `,
 
@@ -106,20 +111,29 @@ const MatchBox = {
     justify-content: space-evenly;
   `,
 
-  TeamName: styled(CS.BOX.FLEX_CENTER_BOX)`
+  TeamName: styled.button`
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 23px;
+    font-size: 29px;
     font-weight: 900;
     cursor: pointer;
     transition: all ease-in-out 0.2s;
+    background: transparent;
+    border: none;
+    color: #fff;
 
     :hover {
       color: #ffa7c4;
-      font-size: 24px;
+      font-size: 30px;
+    }
+
+    :disabled {
+      color: #666;
+      font-size: 29px;
+      cursor: default;
     }
   `,
 
@@ -132,7 +146,7 @@ const MatchBox = {
     display: flex;
     align-items: center;
     font-weight: 900;
-    font-size: 14px;
+    font-size: 16px;
   `,
 };
 

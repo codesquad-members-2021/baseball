@@ -1,7 +1,12 @@
 import { MatchBox as S } from '@/Components/Home/HomeStyles';
+import { GAME } from '@/Utils/const';
 
-const GameNumber = () => {
-  return <S.GameNumber>GameNumber</S.GameNumber>;
+const GameNumber = ({ idx }) => {
+  return (
+    <S.GameNumber>
+      {GAME} {idx + 1}
+    </S.GameNumber>
+  );
 };
 
 export default GameNumber;

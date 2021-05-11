@@ -32,9 +32,14 @@ const ScoreBoardStyles = {
     z-index: 20;
   `,
 
-  ScoreTable: styled(CS.BOX.FLEX_COLUMN_CENTER_BOX)``,
+  ScoreTable: styled.div``,
 
-  ScoreRow: styled(CS.BOX.FLEX_CENTER_BOX)``,
+  ScoreRow: styled.div`
+    display: flex;
+    /* :last-child {
+      ${({ isOffense }) => isOffense && `color: yellow`}
+    } */
+  `,
 
   ScoreRowHead: styled(CS.BOX.FLEX_CENTER_BOX)`
     width: 100%;
@@ -90,7 +95,7 @@ const ScoreBoardStyles = {
     text-align: center;
     padding: 3px;
     z-index: 9999;
-    border: 1px solid #fff;
+
     cursor: pointer;
     transition: all ease-in-out 0.4s;
 
