@@ -1,17 +1,17 @@
 package com.codesquad.team12.baseball.model;
 
-import org.springframework.data.annotation.Id;
+import com.codesquad.team12.baseball.dto.InningDto;
 
 public class Inning {
-    @Id
-    private Long id;
-
     private Integer number;
     private Integer score;
 
-    public Inning(Long id, Integer number, Integer score) {
-        this.id = id;
+    public Inning(Integer number, Integer score) {
         this.number = number;
         this.score = score;
+    }
+
+    public static InningDto createInningDto(Inning inning) {
+        return new InningDto(inning.number, inning.score);
     }
 }
