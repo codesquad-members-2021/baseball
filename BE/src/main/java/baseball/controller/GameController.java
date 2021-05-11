@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@RequestMapping("/games")
 public class GameController {
 
     private GameService gameService;
@@ -17,17 +18,17 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/games")
+    @GetMapping
     public List<GameDTO> showGames() {
         return gameService.getGameDTOList();
     }
 
-    @PostMapping("/games/{teamId}/score")
+    @PostMapping("/{teamId}/score")
     public void saveScore(@PathVariable Long teamId, @RequestBody RequestScoreDTO scoreDTO) {
         gameService.saveScore(teamId, scoreDTO.getInningNumber(), scoreDTO.getScore());
     }
 
-    @GetMapping("/games/{gameId}/scores")
+    @GetMapping("/{gameId}/scores")
     public GameScoreDTO showScore(@PathVariable Long gameId) {
         return gameService.convertToGameScoreDTO(gameId);
     }
