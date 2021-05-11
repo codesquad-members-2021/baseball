@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useReducer, useEffect } from 'react';
+import { useReducer, useContext, useEffect } from 'react';
 import BallCount from './BallCount';
 import Inning from './Inning';
 import Screen from './Screen';
+import { ScoreNBaseContext } from '../GamePlay';
 
 const ballCountReducer = (state, action) => {
   let newState = { ...state };
@@ -35,6 +36,7 @@ const Board = (props) => {
     ball: 0,
     out: 0,
   });
+  const { safetyDispatch } = useContext(ScoreNBaseContext);
   const handleStrike = () => {
     if (ballCount.strike === 2) {
       handleOut();
@@ -53,18 +55,14 @@ const Board = (props) => {
   const handleOut = () => {
     if (ballCount.out === 2) {
       ballCountDispatch({ type: 'clear' });
-      // 공수교대
-      // if(turn)
-      // setTurn(false);
-      // else
-      // setRound(round + 1);
-      // setTurn(true);
+      safetyDispatch({ type: 'clear', turn: true });
     } else {
       ballCountDispatch({ type: 'out' });
     }
   };
-  const handleSafety = () => {
+  const handleSafety = (power) => {
     ballCountDispatch({ type: 'safety' });
+    safetyDispatch({ turn: true, power });
   };
 
   return (

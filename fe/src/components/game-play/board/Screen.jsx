@@ -18,17 +18,20 @@ const Screen = ({ handleStrike, handleBall, handleSafety }) => {
       //볼
       handleBall();
     } else {
-      handleSafety();
       //안타
       //멤버변경
       if (randomNum <= 90) {
         //1루타
+        handleSafety(1);
       } else if (randomNum <= 96) {
         //2루타
+        handleSafety(2);
       } else if (randomNum <= 99) {
         //3루타
+        handleSafety(3);
       } else {
         //홈런
+        handleSafety(4);
       }
     }
   };
