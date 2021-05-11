@@ -6,7 +6,8 @@ public enum ErrorCode {
     // NotFoundExceptions
     GAME_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "해당하는 게임을 찾을 수 없습니다."),
     TEAM_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "해당하는 팀을 찾을 수 없습니다."),
-    PLAYER_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "해당하는 선수를 찾을 수 없습니다.");
+    PLAYER_NOT_FOUND_EXCEPTION(HttpStatus.NOT_FOUND, "해당하는 선수를 찾을 수 없습니다."),
+    TEAM_NOT_PLAYABLE_EXCEPTION(HttpStatus.BAD_REQUEST, "해당하는 팀은 이미 선점되어 있습니다.");
 
     private final HttpStatus status;
     private final String message;
