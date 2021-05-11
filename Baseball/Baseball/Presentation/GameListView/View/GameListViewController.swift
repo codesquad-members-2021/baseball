@@ -13,7 +13,9 @@ class GameListViewController: UIViewController, Alertable {
     static let storyboardName = "Main"
     static let storyboardID = "GameListViewController"
     
+    @IBOutlet weak var retryButton: UIButton!
     @IBOutlet weak var gameListCollectionView: UICollectionView!
+    
     private var viewModel: GameListViewModel!
     private var subscriptions = Set<AnyCancellable>()
     
@@ -31,6 +33,11 @@ class GameListViewController: UIViewController, Alertable {
         bind(to: viewModel)
         gameListCollectionView.dataSource = self
         gameListCollectionView.delegate = self
+    }
+    
+    @IBAction func didTappedRetryButton(_ sender: Any) {
+        viewModel.fetchGameList()
+        retryButton.isHidden = true
     }
     
     private func bind(to viewModel: GameListViewModel) {
@@ -56,6 +63,7 @@ class GameListViewController: UIViewController, Alertable {
     
     private func showError(with error: String) {
         guard !error.isEmpty else { return }
+        retryButton.isHidden = false
         showAlert(title: "Error", message: error)
     }
 }

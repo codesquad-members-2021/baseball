@@ -22,7 +22,7 @@ class GameListViewModel {
         fetchGameList()
     }
     
-    private func fetchGameList() {
+    func fetchGameList() {
         fetchGameListUseCase.execute { result in
             switch result {
             case .success(let matchUpGames):
