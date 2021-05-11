@@ -12,11 +12,11 @@ struct InningInfo: Codable {
     private(set) var userTop: Bool
     private(set) var userOffense: Bool
     
-    func makeTopOrBottom() -> String {
+    func isUserTop() -> String {
         return userTop ? "초" : "말"
     }
     
-    func makeOffenseOrDefence() -> String {
+    func isUserOffense() -> String {
         return userOffense ? "공격" : "수비"
     }
 }
