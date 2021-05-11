@@ -9,16 +9,16 @@ import Foundation
 
 class GameManager: Decodable {
     
-    private var isUserHomeSide: Bool?
+    private var userTeamSide: TeamSide?
     var turn: Turn
     
-    init(isUserHomeSide: Bool, turn: Turn) {
-        self.isUserHomeSide = isUserHomeSide
+    init(userTeamSide: TeamSide, turn: Turn) {
+        self.userTeamSide = userTeamSide
         self.turn = turn
     }
     
     enum CodingKeys: String, CodingKey {
-        case isUserHomeSide
+        case userTeamSide
         case turn = "game"
     }
     
@@ -67,9 +67,9 @@ extension GameManager: GameManagable {
     }
     
     func isUserDefense() -> Bool? {
-        guard let isUserHomeSide = isUserHomeSide else { return nil }
+        guard let userTeamSide = userTeamSide else { return nil }
         
-        if isUserHomeSide {
+        if userTeamSide == TeamSide.home {
             return isHomeDefense()
         } else {
             return turn.away.role == Role.defense

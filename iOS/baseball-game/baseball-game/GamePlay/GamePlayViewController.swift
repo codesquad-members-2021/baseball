@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+enum TeamSide: String, Codable {
+    case home
+    case away
+}
+
 class GamePlayViewController: UIViewController {
 
     @IBOutlet weak var pitchListTableView: UITableView!
@@ -26,13 +31,13 @@ class GamePlayViewController: UIViewController {
     private var gamePlayViewModel: GamePlayViewModel!
     private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
-    private let isUserHomeSide = true
+    private let userTeamSide = TeamSide.home
     private var gameInfo: GameInfo!
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gamePlayViewModel = GamePlayViewModel(isUserHomeSide)
+        self.gamePlayViewModel = GamePlayViewModel(userTeamSide)
         self.pitchButton.isHidden = true
         gamePlayViewModel.requestGame()
         configureDataSource()
