@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect } from 'react';
 import Home from 'Components/Home';
 import GamePage from "Components/GamePage";
 import BeemoRouter from "utils/BeemoRouter";
@@ -22,12 +22,7 @@ const Page = () => {
     connectSocket();
   }, []);
 
-  useEffect(() => {
-    console.log(playerId)
-  }, [playerId]);
-
   return (
-
     <Router>
       <PageContext.Provider value={{ socket }}>
         <Route path="/" >

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react";
-=======
-import React from "react";
->>>>>>> 4175b3e... Feat. mockData 띄워보기
 import styled from "styled-components";
 import Game from "./Game";
 import useAsync from "utils/hooks/useAsync";
