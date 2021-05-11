@@ -1,9 +1,6 @@
 package com.baseball.controller;
 
-import com.baseball.dto.GameInfoDto;
-import com.baseball.dto.MatchDto;
-import com.baseball.dto.MatchInfoDto;
-import com.baseball.dto.MatchRequestDto;
+import com.baseball.dto.*;
 import com.baseball.service.BaseballService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,12 +42,21 @@ public class BaseballController {
         return ResponseEntity.ok().body(gameInfo);
     }
 
-    @PutMapping("/match")
+    @PostMapping("/match")
     @ApiOperation(value = "게임 입장 요청", notes = "게임에 입장하면서 응원할 팀을 선택합니다.")
     public ResponseEntity<Void> selectTeam(@RequestBody MatchRequestDto matchRequestDto) {
         String matchId = matchRequestDto.getId();
         String teamName = matchRequestDto.getSelectedTeam();
         baseballService.selectTeam(matchId, teamName);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/progress/{id}")
+    @ApiOperation(value = "게임 진행", notes = "게임을 진행합니다. hit, strike, ball 을 입력할 수 있습니다. 입력하지 않으면 랜덤하게 진행됩니다.")
+    public ResponseEntity<MatchInfoDto> progressGame(@ApiParam("게임의 식별자") @PathVariable String id, @RequestBody ProgressRequestDto progressRequestDto) {
+        String result = progressRequestDto.getResult();
+        baseballService.playGame(id, result);
+        MatchInfoDto matchInfo = baseballService.getProgress(id);
+        return ResponseEntity.ok().body(matchInfo);
     }
 }
