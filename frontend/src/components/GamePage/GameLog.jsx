@@ -6,7 +6,7 @@ const GameLog = () => {
 	return (
 		<GameLogScroll>
 			<PlayerWrapper>
-				<Player now={true}>7번 타자 류현진</Player>
+				<Player now={true}>7번 타자 류진</Player>
 				<LogWrapper>
 					<Number>&#9316;</Number>
 					<Log>스트라이크</Log>
