@@ -52,7 +52,7 @@ public class BaseballController {
     }
 
     @PostMapping("/progress/{id}")
-    @ApiOperation(value = "게임 진행", notes = "게임을 진행합니다. hit, strike, ball 을 입력할 수 있습니다. 입력하지 않으면 랜덤하게 진행됩니다.")
+    @ApiOperation(value = "게임 진행", notes = "게임을 진행합니다. hit, strike, ball 을 입력할 수 있습니다.")
     public ResponseEntity<MatchInfoDto> progressGame(@ApiParam("게임의 식별자") @PathVariable String id, @RequestBody ProgressRequestDto progressRequestDto) {
         String result = progressRequestDto.getResult();
         baseballService.playGame(id, result);
