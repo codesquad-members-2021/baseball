@@ -56,9 +56,9 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
   const handleOut = () => {
     if (ballCount.out === 2) {
       ballCountDispatch({ type: 'clear' });
-      safetyDispatch({ type: 'clear', turn: true });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
+      safetyDispatch({ type: 'clear', turn: inning.turn });
     } else {
       ballCountDispatch({ type: 'out' });
     }
@@ -69,7 +69,7 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
     memberListDispatch({ type: 'safety', turn: inning.turn });
-    safetyDispatch({ turn: true, power });
+    safetyDispatch({ turn: inning.turn, power });
   };
 
   useEffect(() => {
