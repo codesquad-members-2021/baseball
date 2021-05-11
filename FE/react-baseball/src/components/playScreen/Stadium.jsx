@@ -4,21 +4,18 @@ import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
 
 const Stadium = () => {
   const { ballCnt, dispatch } = useContext(BoardHistoryContext);
-  // var boardHistoryLst = [boardHistory[S],boardHistory[B],boardHistory[O]]
+  // const boardHistoryLst = [boardHistory[S],boardHistory[B],boardHistory[O]]
 
   const PlayBoardTemp = ({ type }) => {
     if (type === 'S') {
-      var arr = new Array(ballCnt.S).fill(0);
-      var temp = arr.map((ele) => (ele = '🟡'));
-      return <>{temp}</>;
+      const arr = new Array(ballCnt.S).fill('🟡'); //[[0,0,0]]
+      return <>{arr}</>; //{🟡🟡🟡}
     } else if (type === 'B') {
-      var arr = new Array(ballCnt.B).fill(0);
-      var temp = arr.map((ele) => (ele = '🟢'));
-      return <>{temp}</>;
+      const arr = new Array(ballCnt.B).fill('🟢');
+      return <>{arr}</>;
     } else if (type === 'O') {
-      var arr = new Array(ballCnt.O).fill(0);
-      var temp = arr.map((ele) => (ele = '🔴'));
-      return <>{temp}</>;
+      const arr = new Array(ballCnt.O).fill('🔴');
+      return <>{arr}</>;
     }
   };
 
@@ -52,18 +49,18 @@ const Stadium = () => {
       <PlayerDiv>
         <Player />
       </PlayerDiv>
-      <PlayButton onClick={() => playPitch(dispatch, ballCnt)}>
+      <PlayButton onClick={() => playPitch(ballCnt, dispatch)}>
         PITCH
       </PlayButton>
     </StadiumDiv>
   );
 };
-var tempBoardLst = ['S', 'B', 'O'];
 
-const playPitch = (callback, ballCnt) => {
-  var randomBoard =
+const playPitch = (ballCnt, dispatch) => {
+  const tempBoardLst = ['S', 'B'];
+  const randomBoard =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
-  callback({ type: randomBoard });
+  dispatch({ type: randomBoard });
 
   // boardHistory[randomBoard] += 1;
 
