@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ScoreTable from './partial/ScoreTable';
 import Turn from './partial/Turn';
 
-const TeamScore = () => {
+const TeamScorePopup = () => {
     // Turn 은 position absolute를 통해 top 값을 상황에 따라 주어지게 하여 위치조절하기.
 
     return (
@@ -27,4 +27,4 @@ const Scoreboard = styled.div`
     font-size: 25px;
 `;
 
-export default TeamScore;
+export default TeamScorePopup;
