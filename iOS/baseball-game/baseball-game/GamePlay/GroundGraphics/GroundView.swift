@@ -11,7 +11,7 @@ class GroundView: UIView {
 
     enum Color {
         static let groundGreen = (UIColor(named: "GroundGreen") ?? UIColor.green).cgColor
-        static let groundBrown = (UIColor(named: "GroundBrown") ?? UIColor.brown ).cgColor
+        static let groundBrown = (UIColor(named: "GroundBrown") ?? UIColor.brown).cgColor
         static let base = (UIColor(named: "Base") ?? UIColor.white).cgColor
         static let baseSelected = (UIColor(named: "BaseSelected") ?? UIColor.blue).cgColor
         static let home = (UIColor(named: "Home") ?? UIColor.blue).cgColor
@@ -161,4 +161,52 @@ class GroundView: UIView {
         
     }
 
+}
+
+//MARK: - Animation Methods
+extension GroundView {
+    
+    func homeTofirstBase() {
+        animateBase(id: 1, toSelected: true, duration: 1, delay: 7)
+    }
+
+    func firstBaseToSecondBase() {
+        animateBase(id: 1, toSelected: false, duration: 1, delay: 5)
+        animateBase(id: 2, toSelected: true, duration: 1, delay: 7)
+    }
+
+    func secondBaseToThirdBase() {
+        animateBase(id: 2, toSelected: false, duration: 1, delay: 5)
+        animateBase(id: 3, toSelected: true, duration: 1, delay: 7)
+    }
+
+    func thirdBaseToHome() {
+        animateBase(id: 3, toSelected: false, duration: 1, delay: 5)
+    }
+    
+    private func animateBase(id: Int, toSelected: Bool, duration: Double, delay: Double) {
+        
+        guard let firstBase = baseLayers[id] else { return }
+        
+        CATransaction.begin()
+        
+        let fromColor = toSelected ? Color.base : Color.baseSelected
+        let toColor = toSelected ? Color.baseSelected : Color.base
+        
+        let background = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
+        background.fromValue = fromColor
+        background.toValue = toColor
+        background.beginTime = CACurrentMediaTime() + delay
+        background.duration = duration
+        
+        firstBase.add(background, forKey: #keyPath(CALayer.backgroundColor))
+        
+        CATransaction.setCompletionBlock {
+            firstBase.backgroundColor = toColor
+        }
+        
+        CATransaction.commit()
+        
+    }
+    
 }

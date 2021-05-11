@@ -46,9 +46,13 @@ class GamePlayViewController: UIViewController {
         ballCountView.fillStrike(upto: 1)
         ballCountView.fillBall(upto: 4)
         ballCountView.fillOut(upto: 2)
+        groundView.firstBaseOn()
+        groundView.firstBaseToSecondBase()
+        //groundView.secondBaseToThirdBase()
     }
     
     @IBOutlet weak var ballCountView: BallCountView!
+    @IBOutlet weak var groundView: GroundView!
     
     private func bind() {
         gamePlayViewModel.$gameManager

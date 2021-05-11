@@ -399,6 +399,7 @@
                     <connections>
                         <outlet property="ballCountView" destination="X46-so-drB" id="cRm-iR-GZI"/>
                         <outlet property="batterInfoView" destination="9vJ-MP-eiP" id="Qk7-Rg-ieX"/>
+                        <outlet property="groundView" destination="F4x-6W-2hJ" id="fn9-1z-YC8"/>
                         <outlet property="inningLabel" destination="u08-VH-Cxe" id="wlU-uc-koK"/>
                         <outlet property="pitchButton" destination="h44-ox-CWT" id="6M5-Oz-dqq"/>
                         <outlet property="pitchListTableView" destination="Sa2-pc-HmI" id="0yS-4J-Y3h"/>
