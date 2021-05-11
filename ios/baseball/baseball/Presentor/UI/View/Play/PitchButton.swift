@@ -20,6 +20,5 @@ final class PitchButton: UIButton {
     
     private func configureUI() {
         layer.cornerRadius = 6
-//        isHidden = true
     }
 }
