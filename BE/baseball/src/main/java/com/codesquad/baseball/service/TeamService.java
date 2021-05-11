@@ -45,9 +45,10 @@ public class TeamService {
 
     public void updatePlayerRecord(Long teamId, RequestPlayerRecordDTO playerRecord) {
         Team team = browseTeamById(teamId);
-        Player player = team.getPlayerById(playerRecord.getId());
+        Player player = team.getPlayerById(playerRecord.getPlayerId());
         player.updateRecord(playerRecord.getPlateAppearance(), playerRecord.getHit(), playerRecord.getOut());
         team.updatePlayerSet(player);
+        save(team);
     }
 
     public TeamScoreDTO browseTeamScore(Long teamId) {
