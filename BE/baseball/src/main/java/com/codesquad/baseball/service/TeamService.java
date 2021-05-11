@@ -2,6 +2,7 @@ package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.DTO.RequestPlayerRecordDTO;
 import com.codesquad.baseball.DTO.TeamDTO;
+import com.codesquad.baseball.DTO.TeamScoreDTO;
 import com.codesquad.baseball.domain.Player;
 import com.codesquad.baseball.domain.Score;
 import com.codesquad.baseball.domain.Team;
@@ -46,5 +47,10 @@ public class TeamService {
         Player player = team.getPlayerById(playerRecord.getId());
         player.updateRecord(playerRecord.getPlateAppearance(), playerRecord.getHit(), playerRecord.getOut());
         team.updatePlayerSet(player);
+    }
+
+    public TeamScoreDTO browseTeamScore(Long teamId) {
+        Team team = browseTeamById(teamId);
+        return TeamScoreDTO.of(team);
     }
 }
