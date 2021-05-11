@@ -49,6 +49,12 @@ public class Team {
     }
 
     @JsonIgnore
+    public void addTotalScore(int inningNumber) {
+        TeamGameScore teamGameScore = new TeamGameScore(inningNumber, 0);
+        teamGameScoreList.add(teamGameScore);
+    }
+
+    @JsonIgnore
     public void setTotalScore(int inningNumber, int totalScore) {
         teamGameScoreList.get(inningNumber - 1).setScore(totalScore);
     }
