@@ -27,6 +27,7 @@ public class GameDTO {
                 .gameTitle(game.getGameTitle())
                 .homeTeam(TeamDTO.from(homeTeam))
                 .awayTeam(TeamDTO.from(awayTeam))
+                .occupied(game.isOccupied())
                 .build();
     }
 

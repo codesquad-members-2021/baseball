@@ -72,9 +72,8 @@ public class Game {
         return game;
     }
 
-    public List<History> findHistoriesByInningNumber(int inningNumber) {
-        Inning inning = innings.get(inningNumber);
-        return inning.showHistory();
+    public void joinGame() {
+        isOccupied = true;
     }
 
     public List<History> showHistoriesOfCurrentInning() {
@@ -422,6 +421,10 @@ public class Game {
 
     public boolean isSameTitle(String title) {
         return this.gameTitle.equals(title);
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
     }
 
     public int homeTeamId() {

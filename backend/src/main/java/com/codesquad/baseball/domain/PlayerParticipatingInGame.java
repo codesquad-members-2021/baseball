@@ -32,6 +32,13 @@ public class PlayerParticipatingInGame {
         this.pitcherPosition = pitcherPosition;
     }
 
+    public float avg() {
+        if (plateAppearances == 0) {
+            return 0.0f;
+        }
+        return (float)hitCount / (float)plateAppearances;
+    }
+
     public void increasePlateAppearances() {
         this.plateAppearances++;
     }

@@ -1,10 +1,9 @@
 package com.codesquad.baseball.controller;
 
+import com.codesquad.baseball.dto.GameDetailDTO;
 import com.codesquad.baseball.dto.GamesDTO;
 import com.codesquad.baseball.service.GameService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/games")
@@ -20,4 +19,15 @@ public class GameController {
     public GamesDTO showGames() {
         return gameService.showGames();
     }
+
+    @PatchMapping("/{gameId}")
+    public void joinIn(@PathVariable("gameId") int gameId) {
+        gameService.joinIn(gameId);
+    }
+
+    @GetMapping("/{gameId}")
+    public GameDetailDTO showGameDetail(@PathVariable("gameId") int gameId) {
+        return gameService.gameDetail(gameId);
+    }
+
 }

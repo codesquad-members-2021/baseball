@@ -34,6 +34,14 @@ public class Player {
         return id;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public PlayerRole getRole() {
+        return role;
+    }
+
     @Override
     public String toString() {
         return "Player{" +

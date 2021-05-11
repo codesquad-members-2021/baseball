@@ -1,12 +1,14 @@
 package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.domain.*;
-import com.codesquad.baseball.dto.GameDTO;
-import com.codesquad.baseball.dto.GamesDTO;
+import com.codesquad.baseball.dto.*;
+import com.codesquad.baseball.exceptions.GameAlreadyOccupiedException;
+import com.codesquad.baseball.exceptions.GameNotFoundException;
 import com.codesquad.baseball.exceptions.PlayerNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -15,10 +17,12 @@ import java.util.stream.StreamSupport;
 public class GameService {
 
     private final GameRepository gameRepository;
+    private final PlayerRepository playerRepository;
     private final TeamService teamService;
 
-    public GameService(GameRepository gameRepository, TeamService teamService) {
+    public GameService(GameRepository gameRepository, PlayerRepository playerRepository, TeamService teamService) {
         this.gameRepository = gameRepository;
+        this.playerRepository = playerRepository;
         this.teamService = teamService;
     }
 
@@ -35,6 +39,25 @@ public class GameService {
     }
 
     @Transactional
+    public void joinIn(int gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException(gameId));
+        if (game.isOccupied()) {
+            throw new GameAlreadyOccupiedException(gameId);
+        }
+        game.joinGame();
+        gameRepository.save(game);
+    }
+
+    @Transactional(readOnly = true)
+    public GameDetailDTO gameDetail(int gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException(gameId));
+        TeamDetailDTO homeTeamDetail = teamDetailDTO(game, TeamType.HOME);
+        TeamDetailDTO awayTeamDetail = teamDetailDTO(game, TeamType.AWAY);
+        return GameDetailDTO.from(homeTeamDetail, awayTeamDetail, game);
+    }
+
+
+    @Transactional
     public Game createGame(String gameTitle, Team teamA, Team teamB) {
         TeamParticipatingInGame aTeamParticipant = teamA.createParticipantAsHomeTeam();
         TeamParticipatingInGame bTeamParticipant = teamB.createParticipantAsAwayTeam();
@@ -48,6 +71,30 @@ public class GameService {
         Game game = Game.createGame(gameTitle, aTeamParticipant, bTeamParticipant);
         game.initializeGame();
         return gameRepository.save(game);
+    }
+
+    private TeamDetailDTO teamDetailDTO(Game game, TeamType teamType) {
+        if (teamType == TeamType.HOME) {
+            return teamDetailDTO(game.homeTeam());
+        } else {
+            return teamDetailDTO(game.awayTeam());
+        }
+    }
+
+    private TeamDetailDTO teamDetailDTO(TeamParticipatingInGame teamParticipant) {
+        Team team = teamService.findTeam(teamParticipant.getTeam());
+        List<PlayerDTO> players = playerDTOsByTeamParticipant(teamParticipant);
+        return TeamDetailDTO.from(team, players);
+    }
+
+    private List<PlayerDTO> playerDTOsByTeamParticipant(TeamParticipatingInGame participant) {
+        List<PlayerDTO> playerDTOS = new ArrayList<>();
+        for (PlayerParticipatingInGame playerParticipant : participant.getPlayers()) {
+            Player player = playerRepository.findById(playerParticipant.getPlayer())
+                    .orElseThrow(() -> new PlayerNotFoundException(PlayerNotFoundException.FIND_PLAYER_FAILED));
+            playerDTOS.add(PlayerDTO.from(player, playerParticipant));
+        }
+        return playerDTOS;
     }
 
     private void registerPlayersInGame(Team team, TeamParticipatingInGame teamParticipant) {
