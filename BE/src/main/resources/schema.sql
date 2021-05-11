@@ -123,13 +123,12 @@ DROP TABLE IF EXISTS `baseball`.`inning`;
 
 CREATE TABLE IF NOT EXISTS `baseball`.`inning`
 (
-    `id`        INT         NOT NULL,
+    `id`        INT         NOT NULL AUTO_INCREMENT,
     `team_name` VARCHAR(45) NOT NULL,
     `number`    INT         NULL,
     `score`     INT         NULL,
     `game_id`   INT         NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE INDEX `team_id_UNIQUE` (`team_name` ASC) VISIBLE,
     INDEX `fk_inning_game1_idx` (`game_id` ASC) VISIBLE,
     CONSTRAINT `fk_inning_game1`
         FOREIGN KEY (`game_id`)
