@@ -8,7 +8,7 @@ const GameList = (props) => {
   const fetchData = async () => {
     const {
       data: { games },
-    } = await axios.get('http://localhost:3002/games.json');
+    } = await axios.get('http://localhost:3002/games-modi.json');
     setGames(games);
   };
 

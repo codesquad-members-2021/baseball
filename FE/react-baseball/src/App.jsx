@@ -38,7 +38,7 @@ function App() {
   const [currH, setCurrH] = useState(0);
   const [currB, setCurrB] = useState(0);
   const [currO, setCurrO] = useState(0);
-  const [isHome, setIsHome] = useState(null);
+  const [isHome, setIsHome] = useState(false);
 
   const baseballState = {
     teamInfo: {

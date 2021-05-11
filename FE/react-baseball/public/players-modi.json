@@ -1,0 +1,82 @@
+{
+  "awayTeam": {
+    "teamId": 1,
+    "teamName": "Captain",
+    "userSelected": false,
+    "players": [
+      {
+        "id": 1,
+          "name": "뿌꾸",
+          "plateAppearance": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 1,
+          "backNumber": 1,
+		      "pitcher": true
+      },
+      {
+        "id": 2,
+          "name": "크롱",
+          "plateAppearance": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2,
+          "backNumber": 2,
+      		"pitcher": false
+      },
+      {
+        "id": 3,
+          "name": "호눅스",
+          "plateAppearance": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2,
+          "backNumber": 3,
+		      "pitcher": false
+      }
+    ]
+  },
+  "homeTeam": {
+    "teamId": 2,
+    "teamName": "Marvel",
+    "userSelected": true,
+    "players": [
+      {
+        "id": 3,
+        "name": "JK",
+        "plateAppearance": 1,
+        "hit": 1,
+        "out": 0,
+        "average": 1.000,
+        "batting_order": 1,
+        "backNumber": 10,
+		    "pitcher": true
+      },
+      {
+        "id": 4,
+        "name": "타미",
+        "plateAppearance": 1,
+        "hit": 1,
+        "out": 0,
+        "average": 1.000,
+        "batting_order": 2,
+        "backNumber": 20,
+      	"pitcher": false
+      },
+      {
+        "id": 4,
+        "name": "아델라",
+        "plateAppearance": 1,
+        "hit": 1,
+        "out": 0,
+        "average": 1.000,
+        "batting_order": 2,
+        "backNumber": 30,
+		    "pitcher": false
+      }
+  ]
+  }
+}

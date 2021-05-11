@@ -8,9 +8,9 @@ const Game = ({ game }) => {
         <MatchNumber>GAME {game.gameId}</MatchNumber>
       </Wrapper>
       <Wrapper>
-        <Team type='home' game={game} />
-        <Versus>vs</Versus>
         <Team type='away' game={game} />
+        <Versus>vs</Versus>
+        <Team type='home' game={game} />
       </Wrapper>
     </GameLi>
   );
