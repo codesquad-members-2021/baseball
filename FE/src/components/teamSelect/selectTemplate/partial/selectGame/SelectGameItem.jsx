@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc}) => {
     const [boolean, setBoolean] = useState(false);
+    console.log(awayBoolean,homeBoolean) // false true 나타내주는거 개발자도구창에서 보면됨.
     const options = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -18,20 +19,17 @@ const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc
     };
     useEffect(() => {
         if(!boolean) return;
+        console.log("fetch요청 갔다!")
         fetchData("/api/games/type-away");
         setBoolean(false);
-    },[boolean])
-
-    // let teamPlayer = useFetch('/api/games/type-home', {
-    //     options,
-    //     addProps: [boolean], // useState 값 넣어주기. 
-    // });
+    }, [boolean])
     
     const awaySelect = (e) => {
         if(awayBoolean === "true") {
             delay();
             return e.preventDefault();
         } else {
+            console.log("z")
             return setBoolean(true);
         }
     }
@@ -41,6 +39,7 @@ const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc
             delay();
             return e.preventDefault();
         } else {
+            console.log("z")
             return setBoolean(true);            
         }
     }

@@ -6,21 +6,27 @@ import SelectGame from './partial/selectGame/SelectGame';
 import useFetch from '../../../hooks/useFetch';
 
 const SelectTemplate = () => {
-    const [teamData, setTeamData] = useState([]);
-
+    const [teamName, setTeamName] = useState([]);
+    const [test,setTest] = useState([]);
+    const [desc, setDesc] = useState("참가할 게임을 선택하세요.");
     const { response, loading, error } = useFetch('/api/intro');
 
     useEffect(() => {
         if (loading) return;
         console.log(error, response);
-        setTeamData(response.teams.map(v => v.name));
+        setTeamName(response.teams.map(v => v.name.split(" ").join("")));
+
+        let boolean = ["true","true","true","true","true","false"].sort(() => {
+            return Math.random() - Math.random();
+        });
+        setTest(boolean);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loading]);
 
     return (
         <StyledSelectTemplate>
-            <Desc>참가할 게임을 선택하세요.</Desc>
-            {teamData && teamData.length && <SelectGame refinedTeamData={divideArray(teamData, 2)} />}
+            <Desc>{desc}</Desc>
+            {teamName && teamName.length && <SelectGame refinedTeamData={divideArray(teamName, 2)} TeamDataBoolean={divideArray(test, 2)} setDesc={setDesc} />}
         </StyledSelectTemplate>
     );
 };

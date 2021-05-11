@@ -1,12 +1,16 @@
 import styled from 'styled-components';
+import { useContext } from "react"
+import { PostsContext } from "../GamePlay";
 
-const ScoreStatus = ({ data = true, playerTeam = 'teamName' }) => {
+const ScoreStatus = ({ data = true}) => {
+    const { team } = useContext(PostsContext);
+
     return (
         data && (
             <StyledScoreStatus>
                 <Status>
                     <StatusItem type="team">
-                        <span>Rockets</span>
+                        <span>{team.away}</span>
                         <span className="score">1</span>
                     </StatusItem>
                 </Status>
@@ -14,9 +18,8 @@ const ScoreStatus = ({ data = true, playerTeam = 'teamName' }) => {
                 <Status>
                     <StatusItem type="team">
                         <span className="score">2</span>
-                        <span>Dodgers</span>
+                        <span>{team.home}</span>
                     </StatusItem>
-                    {/* {playerTeam && <IsPlayer />} */}
                     <IsPlayer>Player</IsPlayer>
                 </Status>
             </StyledScoreStatus>
@@ -51,7 +54,7 @@ const StatusItem = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    font-size: ${({ theme }) => theme.fontSize.TEAM};
+    font-size: ${({ theme }) => theme.fontSize.XXL};
     font-weight: ${({ theme }) => theme.fontWeight.bold2};
 
     color: ${({ theme }) => theme.colors.white};
@@ -65,7 +68,8 @@ const IsPlayer = styled.p`
     font-size: ${({ theme }) => theme.fontSize.L};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
     color: ${({ theme }) => theme.colors.red};
-    text-align: center;
+    text-align:right;
+    padding-right:55px;
 
     ${StatusItem} + & {
         margin-top: 16px;

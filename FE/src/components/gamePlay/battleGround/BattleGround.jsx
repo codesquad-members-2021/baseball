@@ -4,13 +4,19 @@ import BaseballStadium from './partial/BaseballStadium';
 import PitchButton from './partial/PitchButton';
 import Round from './partial/Round';
 import SBO from './partial/SBO';
+import { useState } from "react";
 
 const BattleGround = () => {
+
+    const pitchEvent = () => {
+        
+    }
+
     return (
         <StyledBattleGround>
             <BaseballStadium />
             <StadiumPartial>
-                <div className="position__center--all"><PitchButton /></div>
+                <div className="position__center--all"><PitchButton onClick={pitchEvent}/></div>
                 <div className="position__right--top"><Round /></div>
                 <div className="position__left--top"><SBO /></div>
             </StadiumPartial>

@@ -1,13 +1,19 @@
 import styled, { css } from 'styled-components';
+import { withRouter } from "react-router-dom";
+import queryString from "query-string";
 import GameScore from './gameScore/GameScore';
 import MatchScreen from './matchScreen/MatchScreen';
 import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
 import { cssScrollbar } from '../utilComponent/CommonStyledCSS';
-
+import { createContext } from 'react';
 import PlayerListPopup from '../playerListPopup/PlayerListPopup';
 
-const GamePlay = () => {
+export const PostsContext = createContext();
+
+const GamePlay = ({ location }) => {
+    const team = queryString.parse(location.search);
+
     const childComponents = [
         <GameScore />,
         <MatchScreen />,
@@ -21,14 +27,16 @@ const GamePlay = () => {
     ));
 
     return (
-        <StyledGamePlay>
-            <PlayerListPopup/>
-            <GamePlayItems>{gamePlayItems}</GamePlayItems>
-        </StyledGamePlay>
+
+        <PostsContext.Provider value={{team}}>
+            <StyledGamePlay>
+                <GamePlayItems>{gamePlayItems}</GamePlayItems>
+            </StyledGamePlay>
+        </PostsContext.Provider>
     );
 };
 
-export default GamePlay;
+export default withRouter(GamePlay);
 
 // --- Styled Components ---
 const StyledGamePlay = styled.div`
