@@ -1,4 +1,4 @@
-import Title from '../Title';
+import Title from '../startScreen/Title';
 import styled from 'styled-components';
 
 const Score = () => {
