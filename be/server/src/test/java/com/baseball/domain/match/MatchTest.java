@@ -39,4 +39,22 @@ class MatchTest {
                 .isThrownBy(() -> match.selectTeam("HOME"))
                 .withMessage("다른 사람이 선점한 경우에는 게임에 참가할 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("만루인 상태에서, HIT 이 일어나면 공격팀의 점수가 증가해야한다.")
+    void increaseScore() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("아웃이 3개 일어나면, 공수가 바뀌어야 한다.")
+    void threeOut() {
+        // TODO:
+    }
+
+    @Test
+    @DisplayName("공수가 3번 바뀌면, 이닝이 바뀌어야 한다.")
+    void test3() {
+        // TODO:
+    }
 }
