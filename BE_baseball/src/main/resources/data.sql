@@ -5,6 +5,7 @@ use baseball;
 
 -- ----------------------------------------------------------
 -- match 관련 데이터
+-- ----------------------------------------------------------
 DESC `match`;
 INSERT INTO `match`(home,away) values
     ('Tigers','Bears'),
@@ -20,6 +21,7 @@ INSERT INTO `match`(home,away) values
 
 -- ----------------------------------------------------------
 -- board 관련 데이터
+-- ----------------------------------------------------------
 -- -- turn 은 둘중하나 TOP/AWAY or BOT/HOME
 desc `board`;
 INSERT INTO `board`(`match`,`inning`,`turn`,`strike`,`ball`,`out`,`home_point`,`away_point`,`pitcher`,`batter`) values
@@ -36,19 +38,19 @@ INSERT INTO `board`(`match`,`inning`,`turn`,`strike`,`ball`,`out`,`home_point`,`
 (1,1,'TOP/AWAY',2,0,1,0,0,'kim','honux'), -- 앞에서 안타 쳐서 호눅스로 타자변경
 (1,1,'TOP/AWAY',3,0,1,0,0,'kim','honux'), -- 앞에서 안타 쳐서 호눅스로 타자변경
 
-
 (1,1,'BOT/HOME',0,0,0,0,0,'kim','dong'); -- */
 select * from board;
 -- ----------------------------------------------------------
 
 
 
-
 -- ----------------------------------------------------------
 -- team 관련 데이터
+-- ----------------------------------------------------------
 -- Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants;
 DESC `team`;
 -- DELETE FROM `team` WHERE team_id = *;
+/*
 INSERT INTO `team`(`team_id`,`team_name`,`win`,`lose`,`draw`,`victory_point`) values
 (1,'Tigers',10,10,2,10*3+2),
 (2,'Bears',1,19,2,1*3+2),
