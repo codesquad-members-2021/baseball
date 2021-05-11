@@ -7,33 +7,26 @@ const io = require("socket.io")(http, {
 });
 
 const baseball = {
-  playerId: 0,
-  playerCount: 0,
-  roomNumber: 0,
-  gameId: 0,
-  playerList: []
-
+  games: [],
 }
 
 io.on("connection", (socket) => {
-  const connectPlayerId = ++baseball.playerId;
+  const connectPlayerId = socket.id;
   socket.on('init', () => {
     console.log('init');
     socket.join('room1');
-    socket.emit('playerId', connectPlayerId);
+    socket.emit('selectedTeam', baseball.games);
   });
 
-
-
-  socket.on('choiceTeam', ({ playerId, gameId, teamName }) => {
-
-
-    // io.to('room1').emit('selectedTeam', teamName);
-    console.log(teamName)
+  socket.on('choiceTeam', ({ gameId, teamKind }) => {
+    baseball.games = baseball.games.filter(({ playerId }) => playerId !== connectPlayerId);
+    baseball.games.push({ playerId: connectPlayerId, gameId, teamKind });
+    console.log(baseball.games)
+    io.to('room1').emit('selectedTeam', baseball.games);
   });
 
   socket.on('disconnect', () => {
-    console.log(connectPlayerId)
+    baseball.games = baseball.games.filter(({ playerId }) => playerId !== connectPlayerId);
     // socket.leave('room1'); //disconnect하면 자동으로 leave가 됨
     console.log('disconnected');
   });

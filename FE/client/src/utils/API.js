@@ -1,7 +1,10 @@
+const END_POINT = "http://ec2-13-125-90-225.ap-northeast-2.compute.amazonaws.com"
+
+
 const API = {
   get: {
-    teams: () => customFetch(`/teams`),
-    games: () => customFetch(`/games`),
+    teams: () => customFetch(`${END_POINT}/teams`),
+    games: () => customFetch(`${END_POINT}/games`),
   },
   post: {}
 };

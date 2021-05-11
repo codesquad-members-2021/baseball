@@ -2,20 +2,22 @@ import { PageContext } from "Components/Page";
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-const Team = ({ teamName, gameId }) => {
-  const { playerId, socket } = useContext(PageContext);
+const Team = ({ teamName, gameId, teamKind, selected }) => {
+  const { socket } = useContext(PageContext);
 
-  const handleTeamChoice = () => {
-    socket.emit('choiceTeam', { playerId, gameId, teamName });
+  const handleChoiceTeam = () => {
+    socket.emit('choiceTeam', { gameId, teamKind });
   };
-
-  socket.on('selectedTeam', (teamName) => {
-
-  });
 
   return (
     <TeamLabel>
-      <RadioButton type="radio" name={playerId} onClick={handleTeamChoice} />
+      <RadioButton
+        type="radio"
+        name={selected ? selected : "teamName"}
+        onClick={handleChoiceTeam}
+        onChange={() => { }}
+        disabled={!!selected}
+      />
       <TeamName>
         {teamName}
       </TeamName>
@@ -29,7 +31,8 @@ const TeamLabel = styled.label`
 
 const RadioButton = styled.input`
  display: none;
-  &:checked+span{
+  &:disabled+span{
+    cursor:default;
     color: orchid;
   }
 `;

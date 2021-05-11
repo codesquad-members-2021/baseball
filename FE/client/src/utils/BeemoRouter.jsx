@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 const HistoryContext = React.createContext();
 
@@ -12,7 +11,6 @@ export const Router = ({ children }) => {
     //setCurrentPath 실행
     window.addEventListener('popstate', e => {
       if (e.state !== null) {
-        console.log(e.state)
         setCurrentPath(e.state.to);
       }
     });
@@ -28,8 +26,6 @@ export const Router = ({ children }) => {
 export const Route = ({ path, children, component }) => {
   //useContext 를 사용해서 currentPath를 얻어오고 path와 일치하는치 확인 후 렌더링
   const { currentPath } = useContext(HistoryContext);
-  console.log(path)
-  console.log(currentPath)
   return (
     <>
       {path === currentPath && component ? component() : children}
