@@ -11,26 +11,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let screen = (scene as? UIWindowScene) else { return }
+//        guard let screen = (scene as? UIWindowScene) else { return }
 //        let diContainer = GameListSceneDIContainer()
-    
+//    
 //        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
 //        let initialViewController = storyboard.instantiateViewController(identifier: "GameListViewController") as! GameListViewController
-//
+//        
 //        initialViewController.depend(viewModel: diContainer.makeGameListViewModel())
-//
+//        
 //        window = UIWindow(frame: screen.coordinateSpace.bounds)
 //        window?.windowScene = screen
 //        window?.rootViewController = initialViewController
 //        window?.makeKeyAndVisible()
+        guard let screen = (scene as? UIWindowScene) else { return }
         
-        let diContainer = ScoreViewSceneDIContainer()
-        
+        let diContainer = PlaySceneDIContainer()
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewController(identifier: "ScoreViewController") as! ScoreViewController
-
-        initialViewController.depend(viewModel: diContainer.makeScoreViewModel())
-
+        let initialViewController = storyboard.instantiateViewController(identifier: "PlayViewController") as! PlayViewController
+        initialViewController.depend(viewModel: diContainer.makePlayViewModel())
+        
         window = UIWindow(frame: screen.coordinateSpace.bounds)
         window?.windowScene = screen
         window?.rootViewController = initialViewController

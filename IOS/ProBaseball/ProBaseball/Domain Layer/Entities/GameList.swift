@@ -20,6 +20,7 @@ struct Game: Codable, CustomStringConvertible, Hashable {
     let opponentTeam: Team
     let inning: Inning
     let ballCount: BallCount
+
 }
 
 struct BallCount: Codable, CustomStringConvertible, Hashable {
