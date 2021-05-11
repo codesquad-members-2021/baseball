@@ -23,6 +23,7 @@ public class Batter extends Player {
     }
 
     public void increasePlateAppearances() {
+        plateAppearances++;
     }
 
     public Integer getPlateAppearances() {
@@ -34,6 +35,9 @@ public class Batter extends Player {
     }
 
     public Float getAverage() {
+        if (plateAppearances == 0) {
+            return 0F;
+        }
         return (float) getHit() / plateAppearances;
     }
 }

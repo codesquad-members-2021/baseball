@@ -3,7 +3,7 @@ package com.baseball.domain.player;
 import java.util.List;
 
 public class Pitchers {
-    private Integer pitcherIndex;
+    private Integer pitcherIndex = 0;
     private final List<Pitcher> pitchers;
 
     public Pitchers(List<Pitcher> pitchers) {
