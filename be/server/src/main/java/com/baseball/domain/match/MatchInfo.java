@@ -79,9 +79,9 @@ public class MatchInfo {
     }
 
     public void proceedToNextHalve() {
-        outCount = 0;
         halvesCount++;
         bases = new LinkedList<>(Arrays.asList(false, false, false));
         resetPlayResults();
+        outCount = 0;
     }
 }

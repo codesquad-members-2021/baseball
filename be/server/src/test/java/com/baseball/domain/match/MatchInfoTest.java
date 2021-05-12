@@ -211,13 +211,13 @@ class MatchInfoTest {
     }
 
     @Test
-    @DisplayName("공수가 바뀌면, MatchInfo 가 초기화 되어야 한다.")
+    @DisplayName("공수가 바뀌면, MatchInfo 가 halvesCount 를 제외하고 초기화 되야 한다.")
     void proceedToNextHalve_reset() {
         // TODO:
     }
 
     @Test
-    @DisplayName("공수가 2번 바뀌면, 이닝이 바뀌어야 한다.")
+    @DisplayName("공수가 2번 바뀌면, 이닝이 증가해야 한다.")
     void proceedToNextHalve_increaseInning() {
         // TODO:
     }
