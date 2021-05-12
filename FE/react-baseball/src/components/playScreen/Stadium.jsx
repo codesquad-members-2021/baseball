@@ -20,12 +20,13 @@ const Stadium = () => {
 
   useEffect(() => {
     if (ballCnt.S === 3) {
-      console.log('S가 3개다');
       setTimeout(() => dispatch({ type: 'hitO' }), 1000);
     }
     if (ballCnt.B === 4) {
-      console.log('B가 4개다');
       setTimeout(() => dispatch({ type: 'hitH' }), 1000);
+    }
+    if (ballCnt.O === 3) {
+      setTimeout(() => dispatch({ type: 'resetAll' }), 1000);
     }
   }, [ballCnt]);
 

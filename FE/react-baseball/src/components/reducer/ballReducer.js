@@ -12,6 +12,9 @@ const ballReducer = (ballCnt, action) => {
     case 'hitH':
       return { ...ballCnt, S: 0, B: 0, H: ballCnt.H + 1 };
 
+    case 'resetAll':
+      return { ...ballCnt, S: 0, B: 0, O: 0, H: 0 };
+
     case 'hitInfo':
       return { ...ballCnt, HitInfo: action.payload };
 

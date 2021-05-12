@@ -55,13 +55,19 @@ const LogListDiv = styled.div`
   border-right: none;
 `;
 const LogBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 550px;
   font-size: ${({ theme }) => theme.fontSizes.XXS};
+  overflow: auto;
 `;
 const LogPitcher = styled.div`
   margin: 10px 0;
   color: ${({ theme }) => theme.colors.green};
 `;
 const LogIdx = styled.div`
+  width: 18px;
+  height: 18px;
   padding: 2px 6px 0 6px;
   text-align: center;
   color: ${({ theme }) => theme.colors.black};
