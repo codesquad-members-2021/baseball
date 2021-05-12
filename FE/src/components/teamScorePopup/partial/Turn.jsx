@@ -1,4 +1,4 @@
-import React from 'react';
+// -- 미사용
 import styled from 'styled-components';
 
 const Turn = () => {
@@ -17,6 +17,7 @@ const Turn = () => {
 };
 export default Turn;
 
+// --- Styled Components ---
 const Name = styled.div``;
 const TeamName = styled.div`
     position: absolute;
