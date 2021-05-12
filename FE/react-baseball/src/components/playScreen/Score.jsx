@@ -4,21 +4,32 @@ import { useContext } from 'react';
 import { GlobalContext } from '../../App';
 
 const Score = () => {
-  const { isHome } = useContext(GlobalContext);
+  const { isHome, myTeamName, counterTeamName } = useContext(GlobalContext);
 
   return (
     <ScoreDiv>
       <Title type='play' />
       <TeamDiv>
         <TeamSingleDiv>
-          <AwayTeam>Captain</AwayTeam>
+          {/* <AwayTeam>{counterTeamName}</AwayTeam> */}
+          {!isHome ? (
+            <AwayTeam>{myTeamName}</AwayTeam>
+          ) : (
+            <AwayTeam>{counterTeamName}</AwayTeam>
+          )}
+
           {!isHome && <TeamCurrent>Player</TeamCurrent>}
         </TeamSingleDiv>
         <TeamScore>1</TeamScore>
         <VSDiv>vs</VSDiv>
         <TeamScore>5</TeamScore>
         <TeamSingleDiv>
-          <HomeTeam>Marvel</HomeTeam>
+          {/* <HomeTeam>Marvel</HomeTeam> */}
+          {isHome ? (
+            <HomeTeam>{myTeamName}</HomeTeam>
+          ) : (
+            <HomeTeam>{counterTeamName}</HomeTeam>
+          )}
           {isHome && <TeamCurrent>Player</TeamCurrent>}
         </TeamSingleDiv>
       </TeamDiv>

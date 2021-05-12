@@ -16,7 +16,9 @@ function App() {
   const [ballCnt, dispatch] = useReducer(ballReducer, boardHistory);
   const [playable, setPlayable] = useState(true);
   const [myTeam, setMyTeam] = useState([]);
+  const [myTeamName, setMyTeamName] = useState('');
   const [counterTeam, setCounterTeam] = useState([]);
+  const [counterTeamName, setCounterTeamName] = useState('');
   const [homeTeam, setHomeTeam] = useState(null);
   const [awayTeam, setAwayTeam] = useState(null);
   const [currInning, setCurrInning] = useState(1);
@@ -32,8 +34,12 @@ function App() {
     teamInfo: {
       myTeam,
       setMyTeam,
+      myTeamName,
+      setMyTeamName,
       counterTeam,
       setCounterTeam,
+      counterTeamName,
+      setCounterTeamName,
       homeTeam,
       setHomeTeam,
       awayTeam,

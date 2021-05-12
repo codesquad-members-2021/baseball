@@ -1,18 +1,12 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { GlobalContext, PlayableContext } from '../../App';
 import axios from 'axios';
 
 const Team = ({ type, game }) => {
   const { setPlayable } = useContext(PlayableContext);
-  const {
-    setMyTeam,
-    setCounterTeam,
-    isHome,
-    setIsHome,
-    setIsDefense,
-  } = useContext(GlobalContext);
+  const { setAwayTeam, setHomeTeam, setIsHome } = useContext(GlobalContext);
   const history = useHistory();
   const handleClickTeam = async () => {
     let teamId;
@@ -26,15 +20,9 @@ const Team = ({ type, game }) => {
         `http://13.209.109.186/baseball/games/${game.gameId}/${teamId}`
       );
       const [awayInfo, homeInfo] = [data.awayTeam, data.homeTeam];
+      setAwayTeam(awayInfo);
+      setHomeTeam(homeInfo);
       homeInfo.userSelected && setIsHome(true);
-      if (isHome) {
-        setMyTeam(homeInfo.players);
-        setCounterTeam(awayInfo.players);
-        setIsDefense(isHome);
-      } else {
-        setMyTeam(awayInfo.players);
-        setCounterTeam(homeInfo.players);
-      }
       history.push('/play-screen');
     } catch {
       setPlayable(false);
