@@ -1,6 +1,7 @@
 package codesquad.team7.baseball.game;
 
 import codesquad.team7.baseball.team.Team;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
@@ -27,16 +28,20 @@ public class BaseballGame {
     @MappedCollection(idColumn = "game_id", keyColumn = "batter_inning_history_index")
     private final List<BatterInningHistory> history;
 
+    private TeamEnum winner;
+
     BaseballGame(Long id,
                  Inning inning,
                  Home home,
                  Away away,
-                 List<BatterInningHistory> history) {
+                 List<BatterInningHistory> history,
+                 TeamEnum winner) {
         this.id = id;
         this.inning = inning;
         this.home = home;
         this.away = away;
         this.history = history;
+        this.winner = winner;
     }
 
     public static BaseballGame newGame(Team home, Team away) {
@@ -45,11 +50,16 @@ public class BaseballGame {
                 Inning.newInning(),
                 Home.newInstance(home),
                 Away.newInstance(away),
-                new ArrayList<>()
+                new ArrayList<>(),
+                null
         );
     }
 
     public void pitch(Pitch pitch) {
+        if (winner != null) {
+            return;
+        }
+
         if (!history.isEmpty()) {
             BatterInningHistory lastHistory = history.get(history.size() - 1);
             if (lastHistory.checkBatterChangeEvent()) {
@@ -85,7 +95,7 @@ public class BaseballGame {
     }
 
     private void batterChangeEvent(BatterInningHistory lastHistory) {
-        Pitch lastHistoryEvent = lastHistory.getPictch();
+        Pitch lastHistoryEvent = lastHistory.getPitch();
         history.clear();
         TeamInformation attack = getAttackTeam();
         attack.setNextBatter();
@@ -215,5 +225,9 @@ public class BaseballGame {
 
     public String getAwayTeamName() {
         return away.getTeamName();
+    }
+
+    public TeamEnum getWinner() {
+        return winner;
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 public class Away implements TeamInformation {
 
     private String awayUser;
-    private Integer awayHistoryIndex;
 
     private final Long awayTeamId;
     private final String awayTeamName;
@@ -31,7 +29,6 @@ public class Away implements TeamInformation {
     private Integer awayBatterNumber;
 
     Away(String awayUser,
-         Integer awayHistoryIndex,
          Long awayTeamId,
          String awayTeamName,
          List<AwayInningScore> awayInningScores,
@@ -40,7 +37,6 @@ public class Away implements TeamInformation {
          AwayPitcher awayPitcher,
          Integer awayBatterNumber) {
         this.awayUser = awayUser;
-        this.awayHistoryIndex = awayHistoryIndex;
         this.awayTeamId = awayTeamId;
         this.awayTeamName = awayTeamName;
         this.awayInningScores = awayInningScores;
@@ -57,7 +53,6 @@ public class Away implements TeamInformation {
         }
         return new Away(
                 null,
-                0,
                 away.getId(),
                 away.getName(),
                 Collections.singletonList(new AwayInningScore(0)),

@@ -1,7 +1,5 @@
 package codesquad.team7.baseball.game;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class BatterInningHistory {
 
     private final Pitch pitch;
@@ -12,7 +10,7 @@ public class BatterInningHistory {
         this.state = state;
     }
 
-    public Pitch getPictch() {
+    public Pitch getPitch() {
         return pitch;
     }
 

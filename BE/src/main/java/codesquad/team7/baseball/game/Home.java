@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class Home implements TeamInformation {
 
     private String homeUser;
-    private Integer homeHistoryIndex;
 
     private final Long homeTeamId;
     private final String homeTeamName;
@@ -29,7 +28,6 @@ public class Home implements TeamInformation {
     private Integer homeBatterNumber;
 
     Home(String homeUser,
-         Integer homeHistoryIndex,
          Long homeTeamId,
          String homeTeamName,
          List<HomeInningScore> homeInningScores,
@@ -38,7 +36,6 @@ public class Home implements TeamInformation {
          HomePitcher homePitcher,
          Integer homeBatterNumber) {
         this.homeUser = homeUser;
-        this.homeHistoryIndex = homeHistoryIndex;
         this.homeTeamId = homeTeamId;
         this.homeTeamName = homeTeamName;
         this.homeInningScores = homeInningScores;
@@ -55,7 +52,6 @@ public class Home implements TeamInformation {
         }
         return new Home(
                 null,
-                0,
                 home.getId(),
                 home.getName(),
                 new ArrayList<>(),

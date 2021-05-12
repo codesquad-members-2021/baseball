@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS baseball_game (
 
     ordinal INT,
     attack_team CHAR(4),
+    winner CHAR(4),
 
     strike INT,
     ball INT,
