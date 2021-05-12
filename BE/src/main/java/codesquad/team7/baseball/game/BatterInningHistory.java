@@ -17,7 +17,7 @@ public class BatterInningHistory {
     public String getState() {
         return state;
     }
-    
+
     public boolean checkBatterChangeEvent() {
         return pitch == Pitch.HIT || pitch == Pitch.OUT || pitch == Pitch.FOUR_BALL;
     }

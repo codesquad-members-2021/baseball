@@ -124,4 +124,13 @@ public class Inning {
         strike = 0;
         ball = 0;
     }
+
+    public boolean canBeEndHomeWinner() {
+        return out >= 3 && ordinal >= 9 && attackTeam == TeamEnum.AWAY ||
+                ordinal >= 9 && attackTeam == TeamEnum.HOME;
+    }
+
+    public boolean canBeEndAwayWinner() {
+        return out >= 3 && ordinal >= 9 && attackTeam == TeamEnum.HOME;
+    }
 }

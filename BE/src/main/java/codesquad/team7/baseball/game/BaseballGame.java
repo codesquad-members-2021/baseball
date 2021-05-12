@@ -147,12 +147,40 @@ public class BaseballGame {
         if (inning.homeIn()) {
             attack.scoreUp(inning.getOrdinal());
         }
+
+        if (inning.homeIn() && isHomeWinner()) {
+            winner = TeamEnum.HOME;
+        }
     }
 
     private void out(TeamInformation attack) {
         inning.out();
         attack.out();
         history.add(new BatterInningHistory(Pitch.OUT, inning.getHistoryState()));
+        if (isHomeWinner()) {
+            winner = TeamEnum.HOME;
+            return;
+        }
+
+        if (isAwayWinner()) {
+            winner = TeamEnum.AWAY;
+        }
+    }
+
+    private boolean isHomeWinner() {
+        return inning.canBeEndHomeWinner() && homeScoreGreaterThanAway();
+    }
+
+    private boolean isAwayWinner() {
+        return inning.canBeEndAwayWinner() && awayScoreGreaterThanHome();
+    }
+
+    private boolean homeScoreGreaterThanAway() {
+        return home.getTotalScore() > away.getTotalScore();
+    }
+
+    private boolean awayScoreGreaterThanHome() {
+        return away.getTotalScore() > home.getTotalScore();
     }
 
     private void strike(TeamInformation attack) {

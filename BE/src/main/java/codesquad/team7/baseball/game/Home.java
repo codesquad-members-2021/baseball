@@ -11,20 +11,20 @@ import java.util.stream.Collectors;
 
 public class Home implements TeamInformation {
 
-    private String homeUser;
-
     private final Long homeTeamId;
     private final String homeTeamName;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "inning")
     private final List<HomeInningScore> homeInningScores;
-    private Integer homeScore;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "player_statistics_index")
     private final List<HomePlayerStatistics> playersStatistics;
 
     @Embedded.Empty
     private final HomePitcher homePitcher;
+
+    private String homeUser;
+    private Integer homeScore;
     private Integer homeBatterNumber;
 
     Home(String homeUser,

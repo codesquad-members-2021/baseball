@@ -12,20 +12,20 @@ import java.util.stream.Collectors;
 
 public class Away implements TeamInformation {
 
-    private String awayUser;
-
     private final Long awayTeamId;
     private final String awayTeamName;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "inning")
     private final List<AwayInningScore> awayInningScores;
-    private Integer awayScore;
 
     @MappedCollection(idColumn = "game_id", keyColumn = "player_statistics_index")
     private final List<AwayPlayerStatistics> playersStatistics;
 
     @Embedded.Empty
     private final AwayPitcher awayPitcher;
+
+    private String awayUser;
+    private Integer awayScore;
     private Integer awayBatterNumber;
 
     Away(String awayUser,

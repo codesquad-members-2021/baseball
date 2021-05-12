@@ -13,8 +13,6 @@ public interface TeamInformation {
 
     void scoreUp(Integer ordinal);
 
-
-
     void nextInning();
 
     Integer getBatterNumber();

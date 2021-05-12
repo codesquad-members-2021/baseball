@@ -11,7 +11,7 @@ public class HomePlayerStatistics extends PlayerStatistics {
     public static HomePlayerStatistics newInstance(Player player) {
         return new HomePlayerStatistics(
                 player.getName(),
-                0,0,0
+                0, 0, 0
         );
     }
 }
