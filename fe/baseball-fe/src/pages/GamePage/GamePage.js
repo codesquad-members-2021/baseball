@@ -39,9 +39,11 @@ const _initialState = {
 }
 
 /*
-{
   {
-    "pitch_result": "strike",
+    "home_id": 1,
+    "away_id": 2,
+    "batting_team_id": 1,
+    "pitch_result": "strike", // strike, ball, out, hit
     "batter": {
         "player_id": 1,
         "player_name": "김종수",
@@ -53,17 +55,17 @@ const _initialState = {
         "ball": 1,
         "out": 2
     },
-    "base": {
-        "first_base_player_id": 1,
-        "second_base_player_id": 2,
-        "third_base_player_id": null
-    },
+    "runners": [
+        {
+          playerId: 123,
+          mode: 
+        }, ...
+    ],
     "score": {
         "home_score": 2,
         "away_score": 1
     }
   }
-}
 */
 
 function GamePage() {

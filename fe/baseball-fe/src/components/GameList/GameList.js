@@ -14,6 +14,8 @@ function GameList() {
   }, [response]);
 
   useEffect(() => {
+    if (!error) return;
+
     console.error(error);
   }, [error]);
 
@@ -30,9 +32,9 @@ function GameList() {
 export default GameList;
 
 const StyledGameList = styled.ul`
- & > * {
-   font-size: 1.4rem;
- }
+  & > * {
+    font-size: 1.4rem;
+  }
   width: 30rem;
   height: 20rem;
   padding: 0;
