@@ -21,9 +21,9 @@ public class GameController {
         return gameService.getGameDTOList();
     }
 
-    @PostMapping("/{teamId}/score")
-    public void saveScore(@PathVariable Long teamId, @RequestBody ScoreRequest scoreRequest) {
-        gameService.saveScore(teamId, scoreRequest);
+    @PostMapping("/{gameId}/{teamId}/score")
+    public void saveScore(@PathVariable Long gameId, @PathVariable Long teamId, @RequestBody ScoreRequest scoreRequest) {
+        gameService.saveScore(gameId, teamId, scoreRequest);
     }
 
     @GetMapping("/{gameId}/scores")

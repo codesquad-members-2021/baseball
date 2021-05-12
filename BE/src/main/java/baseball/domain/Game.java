@@ -26,4 +26,8 @@ public class Game {
     public Long getAwayTeamId() {
         return awayTeamId;
     }
+
+    public boolean isTeamInGame(Team team) {
+        return team.getId() == homeTeamId || team.getId() == awayTeamId;
+    }
 }

@@ -50,9 +50,13 @@ public class GameService {
         gameRepository.saveAll(games);
     }
 
-    public void saveScore(Long teamId, ScoreRequest scoreRequest) {
+    public void saveScore(Long gameId, Long teamId, ScoreRequest scoreRequest) {
+        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
         Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
 
+        if (!game.isTeamInGame(team)) {
+            throw new TeamNotFoundException();
+        }
         Score newScore = scoreRequest.toScore();
         team.setScore(newScore);
 
