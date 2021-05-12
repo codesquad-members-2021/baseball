@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
+import { useGameState } from '../GameContext';
+
 const GamePlayers = () => {
+	const { state } = useGameState();
+
 	return (
 		<PlayerWrapper>
 			<Team>
@@ -11,7 +15,7 @@ const GamePlayers = () => {
 			</Team>
 			<Team>
 				<Role>타자</Role>
-				<Name>류현진</Name>
+				<Name>둥이</Name>
 				<State> 1타석 0안타</State>
 			</Team>
 		</PlayerWrapper>
@@ -19,9 +23,11 @@ const GamePlayers = () => {
 };
 const PlayerWrapper = styled.div`
 	border-bottom: 5px solid ${theme.colors.white};
+	box-sizing: border-box;
 `;
 const Team = styled.div`
 	margin: 20px;
+	box-sizing: border-box;
 `;
 const Role = styled.span`
 	font-size: ${theme.fontSize.large};
@@ -29,6 +35,7 @@ const Role = styled.span`
 	color: ${theme.colors.white};
 `;
 const Name = styled.span`
+	margin-left: 10px;
 	font-size: ${theme.fontSize.medium};
 	font-weight: ${theme.fontWeight.bold};
 	color: ${theme.colors.skyblue_log};

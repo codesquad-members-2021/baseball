@@ -5,35 +5,36 @@ import MatchingInfo from './MatchingInfo';
 import { useState, useEffect, useCallback } from 'react';
 
 const TeamList = ({ setMessage }) => {
-  const [teamData, loading, error] = useFetch('get', 'teamList');
-  const teamListData = !loading && teamData.games;
-  // useEffect(() => {}, [teamData]);
+	const [teamData, loading, error] = useFetch('get', 'teamList');
+	const teamListData = !loading && teamData.games;
+	// useEffect(() => {}, [teamData]);
 
-  return (
-    teamListData &&
-    teamListData.map((team, i) => (
-      <SingleList key={i}>
-        <GameTitle>{team.gameTitle}</GameTitle>
-        <MatchingInfo setMessage={setMessage} data={team}></MatchingInfo>
-      </SingleList>
-    ))
-  );
+	return (
+		!loading &&
+		teamListData.map((team, i) => (
+			<SingleList key={i}>
+				<GameTitle>{team.gameTitle}</GameTitle>
+				<MatchingInfo setMessage={setMessage} data={team}></MatchingInfo>
+				{/* //이유!!!!! */}
+			</SingleList>
+		))
+	);
 };
 
 const SingleList = styled.div`
-  width: 337px;
-  height: 85px;
-  margin: 10px;
-  background: ${theme.colors.grey_list};
-  border-radius: 12px;
+	width: 337px;
+	height: 85px;
+	margin: 10px;
+	background: ${theme.colors.grey_list};
+	border-radius: 12px;
 `;
 
 const GameTitle = styled.div`
-  font-size: ${theme.fontSize.medium};
-  font-weight: ${theme.fontWeight.normal};
-  color: ${theme.colors.red};
-  padding-top: 15px;
-  text-align: center;
+	font-size: ${theme.fontSize.medium};
+	font-weight: ${theme.fontWeight.normal};
+	color: ${theme.colors.red};
+	padding-top: 15px;
+	text-align: center;
 `;
 
 export default TeamList;

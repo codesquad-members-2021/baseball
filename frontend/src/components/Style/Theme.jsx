@@ -3,7 +3,7 @@ import styled from 'styled-components/';
 export const theme = {
 	colors: {
 		white: '#FFFFFF',
-		black: '#3333333',
+		black: '#333333',
 		red: '#e05858',
 		red_log: '#db5f28',
 		skyblue_log: '#9bc6c9',
