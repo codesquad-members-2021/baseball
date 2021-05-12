@@ -6,6 +6,11 @@ const cssFlexAlignCenter = css`
     align-items: center;
 `;
 
+const cssInheritSize = css`
+    height: inherit;
+    width: inherit;
+`;
+
 const cssFullAbsolutePosition = css`
     position: absolute;
     top: 0;
@@ -51,4 +56,4 @@ const cssOpacityBackground = css`
 `;
 
 
-export { cssFlexAlignCenter, cssFullAbsolutePosition, cssTranslate, cssScrollbar, cssOpacityBackground };
+export { cssFlexAlignCenter, cssInheritSize, cssFullAbsolutePosition, cssTranslate, cssScrollbar, cssOpacityBackground };

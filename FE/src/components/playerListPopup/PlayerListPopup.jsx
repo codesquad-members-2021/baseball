@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import ListTable from './partial/ListTable';
 import PopupFrame from '../utilComponent/popupFrame/PopupFrame';
 
-const PlayerListPopup = ({ visible, callBackFrameLeave }) => {
+const PlayerListPopup = ({ visible }) => {
 
     const popupOptions = {
         zIndex: 10,
         isBottom: true,
         visible,
-        callBackFrameLeave,
     };
 
     return (

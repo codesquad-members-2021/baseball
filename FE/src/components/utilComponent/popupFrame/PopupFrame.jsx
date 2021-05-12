@@ -4,24 +4,16 @@ import { cssFullAbsolutePosition } from '../CommonStyledCSS';
 
 const PopupFrame = ({
     children,
-    options: {
-        zIndex = null,
-        isBottom = false,
-        visible = false,
-        callBackFrameLeave = null
-    } = {
+    options: { zIndex = null, isBottom = false, visible = false } = {
         zIndex: null,
         isBottom: false,
         visible: false,
-        callBackFrameLeave: null,
     },
 }) => {
-    const handleMouseLeave = () => callBackFrameLeave && callBackFrameLeave(false);
-
     return (
-        <StyledPopupFrame visible={visible} >
+        <StyledPopupFrame visible={visible}>
             <PopupFrameBackground zIndex={zIndex} />
-            <Frame zIndex={zIndex} isBottom={isBottom} onMouseLeave={handleMouseLeave}>
+            <Frame zIndex={zIndex} isBottom={isBottom} visible={visible}>
                 {children}
             </Frame>
         </StyledPopupFrame>
@@ -40,4 +32,14 @@ const Frame = styled.div`
     top: ${({ isBottom }) => (isBottom ? 'auto' : 0)};
     bottom: ${({ isBottom }) => (isBottom ? 0 : 'auto')};
     z-index: ${({ zIndex }) => zIndex || 0};
+
+    transition: all 0.5s ease-in;
+    transform: ${({ visible, isBottom }) =>
+        isBottom
+            ? visible   // isBottom - true
+                ? `translateY(0%)`
+                : `translateY(100%)`
+            : visible   // isBottom - false
+                ? `translateY(0%)`
+                : `translateY(-100%)`};
 `;
