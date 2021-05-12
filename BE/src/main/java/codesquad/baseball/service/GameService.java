@@ -29,10 +29,9 @@ public class GameService {
     public ApiResponse getGameInfo(HashMap<String, String> teamInfo) {
         Match match = createMatch(teamInfo);
 
-        setMyTeamIsUserToTrue(match);
+        setMyTeamIsUserTrue(match);
 
         initializeTeamScore(match);
-
         Team offenseTeam = findFirstOffenseTeam(match);
         setOffenseTeamDefaultScore(offenseTeam);
 
@@ -47,7 +46,7 @@ public class GameService {
                 new PlayerDTO("투수", pitcher), new PlayerDTO("타자", hitter), new TeamLogDTO(offenseTeam, hitter));
     }
 
-    private void setMyTeamIsUserToTrue(Match match) {
+    private void setMyTeamIsUserTrue(Match match) {
         Team myTeam = findTeam(match.getMyTeamId());
         myTeam.setUser(true);
         saveTeam(myTeam);
@@ -72,14 +71,14 @@ public class GameService {
     }
 
     private Team findFirstOffenseTeam(Match match) {
-        if(match.isHome()) {
+        if (match.isHome()) {
             return findTeam(match.getExpeditionTeamId());
         }
         return findTeam(match.getHomeTeamId());
     }
 
     private Team findFirstDefenseTeam(Match match) {
-        if(match.isHome()){
+        if (match.isHome()) {
             return findTeam(match.getHomeTeamId());
         }
         return findTeam(match.getExpeditionTeamId());
@@ -89,15 +88,15 @@ public class GameService {
         Match match = findMatch(matchId);
         Team myTeam = findTeam(match.getMyTeamId());
         Team counterTeam = findTeam(match.getCounterTeamId());
-        PlayerListPopUpDTO LeftTeamPlayerList = new PlayerListPopUpDTO(myTeam);
-        PlayerListPopUpDTO rightTeamPlayerList = new PlayerListPopUpDTO(counterTeam);
-        return new PlayerListPopUpDTO[]{LeftTeamPlayerList, rightTeamPlayerList};
+        PlayerListPopUpDTO expeditionTeamPlayerList = new PlayerListPopUpDTO(myTeam);
+        PlayerListPopUpDTO homeTeamPlayerList = new PlayerListPopUpDTO(counterTeam);
+        return new PlayerListPopUpDTO[]{expeditionTeamPlayerList, homeTeamPlayerList};
     }
 
     public TeamGameScoreDTO[] getTeamGameScores(Long matchId) {
         Match match = findMatch(matchId);
-        Team homeTeam = findTeam(match.getHomeTeamId());
-        Team expeditionTeam = findTeam(match.getExpeditionTeamId());
+        Team homeTeam = findHomeTeam(match);
+        Team expeditionTeam = findExpeditionTeam(match);
         return new TeamGameScoreDTO[]{new TeamGameScoreDTO(expeditionTeam), new TeamGameScoreDTO(homeTeam)};
     }
 
@@ -142,16 +141,16 @@ public class GameService {
 
         Long defenseTeamId = match.getOtherTeamId(offenseTeamId);
         Team defenseTeam = findTeam(defenseTeamId);
-        Player pitcher = defenseTeam.getPitcher();
-        pitcher.addPitchCount(playerLog.getHistoryList().size() + 1);
-        saveTeam(defenseTeam);
+        Player pitcher = updatePitcher(defenseTeam, playerLog);
 
         currentInning.updateOut(playerLog.isLastActionOut());
+        saveMatch(match);
 
         Player nextHitter = offenseTeam.getNextPlayer(playerLog.getPlayerBattingOrder());
 
         if (currentInning.needChange()) {
             currentInning = currentInning.changeInning();
+            saveMatch(match);
             clearHistoryAndSave(offenseTeam);
 
             defenseTeam = findTeam(offenseTeamId);
@@ -159,28 +158,31 @@ public class GameService {
 
             offenseTeam = findTeam(defenseTeamId);
             nextHitter = offenseTeam.getFirstHitter();
-            offenseTeam.addTotalScore(currentInning.getInningNumber());
+            offenseTeam.createTotalScore(currentInning.getInningNumber());
             saveTeam(offenseTeam);
         }
 
-        TeamLogDTO teamLogDTO = new TeamLogDTO(offenseTeam, nextHitter);
-        saveMatch(match);
-        Team homeTeam = findTeam(match.getHomeTeamId());
-        Team expeditionTeam = findTeam(match.getExpeditionTeamId());
+        return createApiResponse(match, offenseTeam, nextHitter, pitcher);
+    }
 
-        return new ApiResponse(matchId, currentInning, new PlayerLogDTO(nextHitter, offenseTeamId),
-                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam),
-                new PlayerDTO("투수", pitcher), new PlayerDTO("타자", nextHitter), teamLogDTO);
+    private Player updatePitcher(Team defenseTeam, PlayerLogDTO playerLog) {
+        Player pitcher = defenseTeam.getPitcher();
+        pitcher.addPitchCount(playerLog.getHistoryList().size() + 1);
+        return saveTeam(defenseTeam).getPitcher();
     }
 
     public Team updateOffenseTeam(PlayerLogDTO playerLog, int inningNumber) {
-        Long offenseTeamId = playerLog.getTeamId();
-        Team offenseTeam = findTeam(offenseTeamId);
+        Team offenseTeam = findOffenseTeam(playerLog);
         Player hitter = offenseTeam.findPlayerByName(playerLog.getPlayerName());
         hitter.addHistory(playerLog.getHistoryList());
         hitter.updatePlayerGameInfo(playerLog.getLastAction());
         offenseTeam.setTotalScore(inningNumber, playerLog.getTotalTeamScore());
         return saveTeam(offenseTeam);
+    }
+
+    private Team findOffenseTeam(PlayerLogDTO playerLog) {
+        Long offenseTeamId = playerLog.getTeamId();
+        return findTeam(offenseTeamId);
     }
 
     public void clearHistoryAndSave(Team offenseTeam) {
