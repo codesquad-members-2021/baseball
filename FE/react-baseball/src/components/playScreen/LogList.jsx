@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
 import { boardHistory, BoardHistoryContext } from '../provider/Context';
-
+import { GlobalContext } from '../../App';
 const LogList = () => {
   const { ballCnt } = useContext(BoardHistoryContext);
   const [logArr, setLogArr] = useState([]);
+  const { totalOutCount, setTotalOutCount } = useContext(GlobalContext);
 
   useEffect(() => {
     setLogArr((logArr) => [...logArr, ballCnt]);
@@ -12,18 +13,30 @@ const LogList = () => {
 
   const LogCards = () => {
     return logArr.map((ele, i) => {
-      if (ele.HitInfo !== ' ') {
+      // if (ele.O !== 0) {
+      //   var prevTotalCnt = totalOutCount;
+      //   setTotalOutCount((totalOutCount) => totalOutCount + 1);
+      //   return <LogLine key={i}>아웃입니다</LogLine>;
+      // }
+      if (ele.HitInfo !== ' ' && (ele.HitInfo === 'S' || ele.HitInfo === 'B')) {
         // if (ele.H === 1) return <LogLine key={i}>안타입니다</LogLine>;
         // if (ele.O === 1) return <LogLine key={i}>아웃입니다</LogLine>;
         return (
           <LogLine key={i}>
             <LogIdx>{i}</LogIdx>
-            <LogName>{ele.HitInfo}</LogName>
+            <LogName>{ele.HitInfo === 'S' ? '스트라이크' : '볼'}</LogName>
             <LogBoard>
               S{ele.S} B{ele.B}
             </LogBoard>
           </LogLine>
         );
+      }
+
+      if (ele.HitInfo === 'O') {
+        return <LogLine key={i}>아웃입니다</LogLine>;
+      }
+      if (ele.HitInfo === 'H') {
+        return <LogLine key={i}>안타입니다</LogLine>;
       }
       // if (ele.H === 1) {
       //   return <LogLine>안타입니다</LogLine>;
