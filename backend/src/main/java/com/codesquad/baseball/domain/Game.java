@@ -1,5 +1,6 @@
 package com.codesquad.baseball.domain;
 
+import com.codesquad.baseball.exceptions.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -72,9 +73,8 @@ public class Game {
         return game;
     }
 
-    public List<History> findHistoriesByInningNumber(int inningNumber) {
-        Inning inning = innings.get(inningNumber);
-        return inning.showHistory();
+    public void joinGame() {
+        isOccupied = true;
     }
 
     public List<History> showHistoriesOfCurrentInning() {
@@ -145,8 +145,10 @@ public class Game {
     }
 
     private void savePitchResult(PitchResult pitchResult) {
-        currentInning().addHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
+        History history = currentInning().createHistory(pitchResult.getPlayType(), currentStrikeCount, currentBallCount,
                 defendingTeam().getCurrentPitcher(), attackingTeam().getCurrentHitter(), pitchResult.numberOfRunners());
+        pitchResult.setHistory(history);
+        currentInning().addHistory(history);
     }
 
     private PitchResult onStrike() {
@@ -424,6 +426,24 @@ public class Game {
         return this.gameTitle.equals(title);
     }
 
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public void verifyGameIsPlayable() {
+        if (!isOccupied) {
+            throw new GameIsNotStartedException();
+        }
+    }
+
+    public int homeTeamId() {
+        return homeTeam().getTeam();
+    }
+
+    public int awayTeamId() {
+        return awayTeam().getTeam();
+    }
+
     public TeamParticipatingInGame homeTeam() {
         return teams.stream()
                 .filter(TeamParticipatingInGame::isHomeTeam)
@@ -476,6 +496,14 @@ public class Game {
 
     public boolean isTop() {
         return isTop;
+    }
+
+    public String getGameTitle() {
+        return gameTitle;
+    }
+
+    public List<Inning> getInnings() {
+        return innings;
     }
 
     @Override

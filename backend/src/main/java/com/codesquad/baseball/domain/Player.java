@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Player {
 
     @Id
-    private int id;
+    private Integer id;
     private int uniformNumber;
     private String playerName;
     private PlayerRole role;
@@ -30,8 +30,16 @@ public class Player {
         return role == PlayerRole.HITTER;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public PlayerRole getRole() {
+        return role;
     }
 
     @Override
@@ -46,7 +54,7 @@ public class Player {
     }
 
     public static class Builder {
-        private int id;
+        private Integer id;
         private int uniformNumber;
         private String playerName;
         private PlayerRole role;

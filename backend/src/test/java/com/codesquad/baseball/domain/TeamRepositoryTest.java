@@ -66,7 +66,7 @@ class TeamRepositoryTest {
 
     private void testCreateTeam(Team team, String teamName) {
         logger.debug("saved team : {}", team);
-        assertThat(team.isSameName(teamName)).isTrue();
+        assertThat(team.isSameTeam(teamName)).isTrue();
     }
 
     private Team createTeam(String teamName) {

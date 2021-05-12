@@ -3,6 +3,7 @@ package com.codesquad.baseball.domain;
 import org.springframework.data.annotation.Id;
 
 public class PlayerParticipatingInGame {
+
     @Id
     private Integer id;
     private int team_participating_in_game;
@@ -30,6 +31,13 @@ public class PlayerParticipatingInGame {
         this.hitCount = 0;
         this.outCount = 0;
         this.pitcherPosition = pitcherPosition;
+    }
+
+    public float avg() {
+        if (plateAppearances == 0) {
+            return 0.0f;
+        }
+        return (float) hitCount / (float) plateAppearances;
     }
 
     public void increasePlateAppearances() {

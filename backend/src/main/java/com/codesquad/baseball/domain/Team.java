@@ -16,11 +16,11 @@ public class Team {
     }
 
     public TeamParticipatingInGame createParticipantAsHomeTeam() {
-        return new TeamParticipatingInGame(this.id, TeamType.HOME);
+        return new TeamParticipatingInGame(TeamType.HOME, this.id);
     }
 
     public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(this.id, TeamType.AWAY);
+        return new TeamParticipatingInGame(TeamType.AWAY, this.id);
     }
 
     public void addPlayer(Player player) {
@@ -32,7 +32,7 @@ public class Team {
     }
 
 
-    public boolean isSameName(String teamName) {
+    public boolean isSameTeam(String teamName) {
         return this.teamName.equals(teamName);
     }
 
@@ -46,6 +46,10 @@ public class Team {
 
     public Set<Player> getPlayers() {
         return players;
+    }
+
+    public String getTeamName() {
+        return teamName;
     }
 
     @Override

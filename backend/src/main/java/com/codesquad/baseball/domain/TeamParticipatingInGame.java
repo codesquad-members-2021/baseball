@@ -12,7 +12,7 @@ public class TeamParticipatingInGame {
     private static final int BAT_ORDER_OF_FIRST_HITTER = 0;
 
     @Id
-    private int id;
+    private Integer id;
     private int team;
     @MappedCollection(idColumn = "team_participating_in_game", keyColumn = "bat_order")
     private List<PlayerParticipatingInGame> players = new ArrayList<>();
@@ -23,9 +23,9 @@ public class TeamParticipatingInGame {
     protected TeamParticipatingInGame() {
     }
 
-    public TeamParticipatingInGame(int id, TeamType teamType) {
-        this.id = id;
+    public TeamParticipatingInGame(TeamType teamType, int teamId) {
         this.teamType = teamType;
+        this.team = teamId;
     }
 
     public void initializeTeam() {
@@ -69,7 +69,7 @@ public class TeamParticipatingInGame {
         return next;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -111,6 +111,10 @@ public class TeamParticipatingInGame {
 
     public TeamType getTeamType() {
         return teamType;
+    }
+
+    public int getTeam() {
+        return team;
     }
 
     @Override
