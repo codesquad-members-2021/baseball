@@ -8,9 +8,7 @@ import com.codesquad.team12.baseball.repository.PlayingRepository;
 import com.codesquad.team12.baseball.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,8 +24,10 @@ public class PlayingService {
     public void initPlaying(Long gameId, String teamName) {
         Team team = teamRepository.findById(teamName).orElseThrow(IllegalArgumentException::new);
         Map<Long, Player> players = team.getPlayers();
+        List<Player> playerList = new ArrayList<>(players.values());
+        playerList.sort(Comparator.comparingInt(Player::getNumber));
 
-        for (Player player : players.values()) {
+        for (Player player : playerList) {
             Playing playing = new Playing(team.getName(), player.getNumber(), player.getName(), player.getPosition(), gameId);
             if (findByTeam(gameId, teamName, player.getNumber()) == null) {
                 playingRepository.save(playing);
