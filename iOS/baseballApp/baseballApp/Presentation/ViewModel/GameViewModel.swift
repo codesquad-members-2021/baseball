@@ -2,21 +2,26 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class GameViewModel: CommonViewModel {
+class GameViewModel: GameViewModelType {
+    private var games = [Game]()
+    private lazy var gameStorage = BehaviorSubject<[Game]>(value: games)
     private var disposeBag = DisposeBag()
-    var games: Observable<[Game]> {
-        return gameUsecase.gameList()
+    
+    func saveGame(from data: Game) -> Observable<Game> {
+        games.append(data)
+        gameStorage.onNext(games)
+        return Observable.just(data)
     }
     
-    func saveGame(game: Game) {
-        self.gameUsecase.appendGame(from: game)
+    func getGames() -> Observable<[Game]> {
+        return gameStorage
     }
-    
+
     func getGameInfo() {
         try? APIService.shared.requestGames()
             .subscribe { gameData in
-                self.transformDTO(to: gameData) { game in
-                    self.saveGame(game: game)
+                self.transformDTO(to: gameData) { data in
+                    self.saveGame(from: data)
                 }
             } onError: { error in
                 print(error.localizedDescription)

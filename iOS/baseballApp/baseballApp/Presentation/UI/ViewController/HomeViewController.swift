@@ -2,7 +2,6 @@ import UIKit
 import RxSwift
 
 class HomeViewController: UIViewController {
- 
     @IBOutlet weak var mainCollectionView: UICollectionView!
     private let viewModel = GameViewModel()
     private var disposeBag = DisposeBag()
@@ -15,7 +14,7 @@ class HomeViewController: UIViewController {
     
     private func bindCollectionView() {
         viewModel.getGameInfo()
-        viewModel.games
+        viewModel.getGames()
             .bind(to: mainCollectionView.rx.items(cellIdentifier: GameCell.identifier, cellType: GameCell.self)) {
             row, game, cell in
                 

@@ -11,14 +11,7 @@ class APIService {
         }
         return getAndDecode(url)
     }
-    
-//    func checkGameStatus() throws -> Observable<Game> {
-//        guard let url = URL(string: Endpoint.postGame) else {
-//            throw APIError.urlNotSupport
-//        }
-//        return get(url)
-//    }
-    
+
     private func getAndDecode<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in
             AF.request(url, method: .get)

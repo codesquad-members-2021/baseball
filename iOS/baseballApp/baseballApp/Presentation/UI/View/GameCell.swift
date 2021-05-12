@@ -25,7 +25,6 @@ class GameCell: UICollectionViewCell {
 }
 
 //MARK: -AddTapGesture
-
 private extension GameCell {
     private func setupCellView() {
         layer.masksToBounds = true
