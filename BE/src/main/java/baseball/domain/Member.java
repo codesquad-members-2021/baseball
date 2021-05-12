@@ -2,6 +2,8 @@ package baseball.domain;
 
 import org.springframework.data.annotation.Id;
 
+import java.util.Objects;
+
 public class Member {
 
     @Id
@@ -35,5 +37,19 @@ public class Member {
 
     public boolean hasRecord() {
         return record != null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(id, member.id) && Objects.equals(name, member.name)
+                && Objects.equals(position, member.position) && Objects.equals(record, member.record);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, position, record);
     }
 }
