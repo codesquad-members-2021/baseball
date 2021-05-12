@@ -7,10 +7,9 @@ class GameViewModel: GameViewModelType {
     private lazy var gameStorage = BehaviorSubject<[Game]>(value: games)
     private var disposeBag = DisposeBag()
     
-    func saveGame(from data: Game) -> Observable<Game> {
+    func saveGame(from data: Game) {
         games.append(data)
         gameStorage.onNext(games)
-        return Observable.just(data)
     }
     
     func getGames() -> Observable<[Game]> {
