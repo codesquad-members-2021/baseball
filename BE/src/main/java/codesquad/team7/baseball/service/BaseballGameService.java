@@ -77,7 +77,12 @@ public class BaseballGameService {
     @Transactional
     public BaseballGame pitch(Long gameId) {
         BaseballGame game = baseballGameRepository.findById(gameId).orElseThrow(RuntimeException::new);
-        game.pitch(Pitching.pitch());
-        return baseballGameRepository.save(game);
+
+        if (game.isGameNotFinished()) {
+            game.pitch(Pitching.pitch());
+            game = baseballGameRepository.save(game);
+        }
+
+        return game;
     }
 }

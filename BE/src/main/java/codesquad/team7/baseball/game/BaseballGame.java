@@ -257,4 +257,8 @@ public class BaseballGame {
     public TeamEnum getWinner() {
         return winner;
     }
+
+    public boolean isGameNotFinished() {
+        return winner == null;
+    }
 }
