@@ -1,12 +1,28 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { GlobalContext } from '../../App';
 
 const CurrentPlayer = () => {
+  const { isHome, myTeam, counterTeam } = useContext(GlobalContext);
+  const myPitcher = myTeam.filter((player) => player.pitcher === true)[0];
+  const counterPitcher = counterTeam.filter(
+    (player) => player.pitcher === true
+  )[0];
+
   return (
     <CurrentPlayerDiv>
       <PlayerTag>PITCHER</PlayerTag>
       <Player>
-        <PlayerName>아이언맨</PlayerName>
-        <PitcherNum>39</PitcherNum>
+        {isHome ? (
+          <PlayerName>{myPitcher?.name}</PlayerName>
+        ) : (
+          <PlayerName>{counterPitcher?.name}</PlayerName>
+        )}
+        {isHome ? (
+          <PitcherNum>#{myPitcher?.backNumber}</PitcherNum>
+        ) : (
+          <PitcherNum>#{counterPitcher?.backNumber}</PitcherNum>
+        )}
       </Player>
       <PlayerTag>HITTER</PlayerTag>
       <Player>
