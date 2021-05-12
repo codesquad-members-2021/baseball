@@ -71,7 +71,7 @@ extension GamePlayViewController {
         self.groundView.addSubview(batterView)
         batterView.center = basePoint?[0] ?? CGPoint()
         
-        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 2, delay: 0, options: [], animations: {
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [], animations: {
             self.animation(runner: batterView)
         }, completion: { _ in
             self.movingRunners()
@@ -88,7 +88,6 @@ extension GamePlayViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PitchHistoryCell") as? PitchHistoryCell else {
             return UITableViewCell()
         }
-        
         return cell
     }
     
