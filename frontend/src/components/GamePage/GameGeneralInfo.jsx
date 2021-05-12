@@ -5,9 +5,13 @@ import { useGameState } from '../GameContext';
 
 const GameGeneralInfo = ({ type }) => {
 	const { state } = useGameState();
-	const [away_score, setAwayScore] = useState(0);
-	const [home_score, setHomeScore] = useState(0);
-	console.log(state);
+	const [away_score, setAwayScore] = useState(
+		state.score ? state.score.awayTeamScore : 0,
+	);
+	const [home_score, setHomeScore] = useState(
+		state.score ? state.score.homeTeamScore : 0,
+	);
+
 	return (
 		<InfoWrapper>
 			<Title>BASEBALL GAME ONLINE</Title>

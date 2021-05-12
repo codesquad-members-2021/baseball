@@ -1,54 +1,60 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
 import { ReactComponent as Ghost } from './ghost.svg';
 import API from '../../Hook/API';
-import { useGameState, useDispatch } from '../../GameContext';
+import { GameProvider, useGameState, useDispatch } from '../../GameContext';
+
+const run = keyframes`
+from {
+	transform: translateX(0rem) translateY(0rem);
+}
+to {
+	transform: translateX(15rem) translateY(-12.5rem);
+}`;
 
 const GPA_Field = ({ type, gameId }) => {
 	const { state } = useGameState();
-	const [move, setMove] = useState('');
+	const [move, setMove] = useState(false);
 	const dispatch = useDispatch();
-	const GhostSVG = styled(Ghost)`
-		position: absolute;
-		width: 3rem;
-		top: 52.5rem;
-		left: 23rem;
-		animation: run 2s forwards;
-		${move}
-	`;
 
+	const [inning, setInning] = useState(
+		state.score ? state.gameStatusDTO.inning : 1,
+	);
 	const handleClick = () => {
 		const pitchResult = async () => {
 			const response = await API.post.pitch(gameId);
 			dispatch({ type: 'pitch', payload: response });
-			console.log(state);
 		};
 		pitchResult();
-
-		setMove(`
-    @keyframes run {
-      from {
-        transform: translateX(0rem) translateY(0rem);
-      }
-      to {
-        transform: translateX(15rem) translateY(-12.5rem);
-      }
-    }`);
+		setMove(true);
 	};
 
 	return (
 		<>
 			{type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
 			<FieldArea>
-				<GameState>2회초 공격</GameState>
+				<GameState>{inning}회초 공격</GameState>
 				<FieldSVG />
-				<GhostSVG />
+				<GhostSVG move={move} />
 			</FieldArea>
 		</>
 	);
 };
+
+const GhostSVG = styled(Ghost)`
+	position: absolute;
+	width: 3rem;
+	top: 52.5rem;
+	left: 23rem;
+	animation: run 2s forwards;
+	${(props) =>
+		props.move &&
+		css`
+			animation-name: ${run};
+		`};
+`; //트랜지션
 
 const PITCH = styled.button`
 	position: absolute;

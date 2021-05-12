@@ -5,7 +5,7 @@ import { useGameState } from '../GameContext';
 
 const GamePlayers = () => {
 	const { state } = useGameState();
-
+	console.log(state);
 	return (
 		<PlayerWrapper>
 			<Team>
