@@ -60,7 +60,7 @@ public class BaseballGameService {
     }
 
     public BaseballGames baseballGames() {
-        List<BaseballGame> baseballGames = baseballGameRepository.findAll();
+        List<BaseballGame> baseballGames = baseballGameRepository.findAllByWinnerIsNull();
 
         List<BaseballGameTitle> baseballGameTitleList = new ArrayList<>();
         for (BaseballGame baseballGame : baseballGames) {

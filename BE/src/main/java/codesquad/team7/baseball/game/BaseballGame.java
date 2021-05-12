@@ -1,7 +1,6 @@
 package codesquad.team7.baseball.game;
 
 import codesquad.team7.baseball.team.Team;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Embedded;
