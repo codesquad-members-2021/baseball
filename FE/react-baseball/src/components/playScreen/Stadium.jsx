@@ -21,10 +21,10 @@ const Stadium = () => {
 
   useEffect(() => {
     if (ballCnt.S === 3) {
-      setTimeout(() => dispatch({ type: 'hitO' }), 1000);
+      setTimeout(() => dispatch({ type: 'hitO', payload: 'O' }), 1000);
     }
     if (ballCnt.B === 4) {
-      setTimeout(() => dispatch({ type: 'hitH' }), 1000);
+      setTimeout(() => dispatch({ type: 'hitH', payload: 'H' }), 1000);
     }
     if (ballCnt.O === 3) {
       setTimeout(() => dispatch({ type: 'resetAll' }), 1000);
@@ -67,9 +67,10 @@ const Stadium = () => {
 };
 
 const playPitch = (ballCnt, dispatch) => {
-  const tempBoardLst = ['S', 'B'];
+  const tempBoardLst = ['S', 'B', 'H'];
   const randomHit =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
+
   dispatch({ type: 'hitInfo', payload: randomHit });
   dispatch({ type: 'hit' + randomHit });
 };
