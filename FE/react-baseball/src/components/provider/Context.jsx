@@ -1,14 +1,13 @@
-// import { createContext, useState } from 'react';
+import { createContext } from 'react';
 
-// // const playable = {
-// //   // 임시 데이터
-// //   id: 1,
-// //   away_team_status: true,
-// //   home_team_status: false,
-// // };
+const boardHistory = {
+  S: 0,
+  B: 0,
+  O: 0,
+  H: 0,
+  HitInfo: ' ',
+};
 
-// const [playable, setPlayable] = useState(true);
+const BoardHistoryContext = createContext();
 
-// const PlayableContext = createContext();
-
-// export { playable, setPlayable, PlayableContext };
+export { boardHistory, BoardHistoryContext };

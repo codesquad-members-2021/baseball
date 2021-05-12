@@ -5,7 +5,7 @@ import ballReducer from './components/reducer/ballReducer';
 import {
   boardHistory,
   BoardHistoryContext,
-} from './components/provider/ContextB';
+} from './components/provider/Context';
 import './App.css';
 import PlayScreen from './routes/PlayScreen';
 import StartScreen from './routes/StartScreen';
@@ -68,7 +68,7 @@ function App() {
                 <Route path='/' exact>
                   <StartScreen />
                 </Route>
-                 <BoardHistoryContext.Provider value={{ ballCnt, dispatch }}>
+                <BoardHistoryContext.Provider value={{ ballCnt, dispatch }}>
                   <Route path='/play-screen'>
                     <PlayScreen />
                   </Route>

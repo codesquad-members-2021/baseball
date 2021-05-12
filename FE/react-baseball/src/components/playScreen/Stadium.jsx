@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
+import { boardHistory, BoardHistoryContext } from '../provider/Context';
 import PlayInning from './PlayInning';
 
 const Stadium = () => {

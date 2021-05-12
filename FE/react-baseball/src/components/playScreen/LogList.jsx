@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
-import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
+import { boardHistory, BoardHistoryContext } from '../provider/Context';
 
 const LogList = () => {
   const { ballCnt } = useContext(BoardHistoryContext);
@@ -15,7 +15,6 @@ const LogList = () => {
       if (ele.HitInfo !== ' ') {
         // if (ele.H === 1) return <LogLine key={i}>안타입니다</LogLine>;
         // if (ele.O === 1) return <LogLine key={i}>아웃입니다</LogLine>;
-
         return (
           <LogLine key={i}>
             <LogIdx>{i}</LogIdx>
@@ -41,7 +40,7 @@ const LogList = () => {
   return (
     <LogListDiv>
       <LogBox>
-        <LogPitcher>7번타자 류현진</LogPitcher>
+        <LogHitter>7번타자 류현진</LogHitter>
         <LogCards />
       </LogBox>
     </LogListDiv>
@@ -61,7 +60,7 @@ const LogBox = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.XXS};
   overflow: auto;
 `;
-const LogPitcher = styled.div`
+const LogHitter = styled.div`
   margin: 10px 0;
   color: ${({ theme }) => theme.colors.green};
 `;
