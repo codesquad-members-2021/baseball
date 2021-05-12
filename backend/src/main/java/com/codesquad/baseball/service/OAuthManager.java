@@ -15,6 +15,7 @@ public class OAuthManager {
 
     private static final Logger logger = LoggerFactory.getLogger(OAuthManager.class);
     private static final String LOADING_OAUTH_CONFIG_FAILED_ERROR_MESSAGE = "OAuth 설정파일을 읽는 과정에서 문제가 발생했습니다. 프로그램을 종료합니다";
+    private static final String LOADING_OAUTH_CONFIG_COMPLETE = "loading oauth config complete!";
     private final ServerSecretDTO serverSecretDTO;
 
     public OAuthManager() {
@@ -33,7 +34,7 @@ public class OAuthManager {
             e.printStackTrace();
             System.exit(1);
         }
-        logger.info("loading oauth config complete!");
+        logger.info(LOADING_OAUTH_CONFIG_COMPLETE);
         return serverSecretDTO;
     }
 
