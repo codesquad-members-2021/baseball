@@ -9,6 +9,7 @@ import PopUpRoster from './popup/roster/Roster';
 import PopUp from '../ui/PopUp';
 import useScoreNBase from '../../hooks/useScoreNBase';
 import { fetchPUT } from '../../util/api.js';
+import useFetch from '../../hooks/useFetch';
 
 export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
@@ -34,7 +35,10 @@ const memberListReducer = (state, action) => {
 };
 
 const GamePlay = ({ home, away, game_id }) => {
-  const [turn, round, member_list] = [null, null, null];
+  const path = window.location.pathname;
+  const gameID = +path.slice(7);
+  const GAME_PLAY_URL = `http://52.78.184.142${path}`;
+  const { data: gamePlayData } = useFetch(GAME_PLAY_URL, 'get');
   const [inning, setInning] = useState({
     turn: true,
     round: 1,
@@ -44,25 +48,33 @@ const GamePlay = ({ home, away, game_id }) => {
     home: data.home.member_list,
     away: data.away.member_list,
   }); //member_list fetch해서 받아올아이
+  debugger;
+  const homePitch = gamePlayData !== null ? gamePlayData.home.pitcherID : '모디';
+  console.log('홈투수', homePitch);
+  const pitchers = {
+    home: data?.home.pitcher,
+    away: data?.away.pitcher,
+  };
 
-  const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
-    <StyledGamePlay>
-      {/* <PopUp position='top'>
+    { gamePlayData } && (
+      <StyledGamePlay>
+        {/* <PopUp position='top'>
         <PopUpScore />
       </PopUp>
       <PopUp position='bottom'>
         <PopUpRoster memberList={memberList} />
       </PopUp> */}
-      <StyledGamePlayGrid>
-        <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={inning.turn}></Score>
-          <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-          <Board {...{ inning, setInning, memberListDispatch }}></Board>
-          <Log data={data}></Log>
-        </ScoreNBaseContext.Provider>
-      </StyledGamePlayGrid>
-    </StyledGamePlay>
+        <StyledGamePlayGrid>
+          <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
+            <Score teamName={teamName} turn={inning.turn}></Score>
+            <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
+            <Board {...{ inning, setInning, memberListDispatch }}></Board>
+            <Log data={data}></Log>
+          </ScoreNBaseContext.Provider>
+        </StyledGamePlayGrid>
+      </StyledGamePlay>
+    )
   );
 };
 

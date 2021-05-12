@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Player = ({ memberList, turn, pitchers }) => {
   const HOME = 'home';
   const AWAY = 'away';
+  console.log('pitchers', pitchers);
   const getPlayer = () => {
     const result = {};
     const batterTeam = turn ? HOME : AWAY;
@@ -23,14 +24,14 @@ const Player = ({ memberList, turn, pitchers }) => {
       <div className='player'>
         <div className='player-type'>투수</div>
         <div className='player-detail'>
-          <div className='name'>{pitcher.name}</div>
-          <div className='detail'>#{pitcher.id}</div>
+          <div className='name'>{pitcher?.name}</div>
+          <div className='detail'>#{pitcher?.id}</div>
         </div>
       </div>
       <div className='player'>
         <div className='player-type'>타자</div>
         <div className='player-detail'>
-          <div className='name'>{batter.name}</div>
+          <div className='name'>{batter?.name}</div>
           <div className='detail'>
             {batter.at_bat}타석 {batter.safety}안타
           </div>
