@@ -63,7 +63,7 @@ public class MatchInfo {
 
     public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
-        if (getStrikeCount() == 3) {
+        if (getStrikeCount() % 3 == 0) {
             outCount++;
         }
     }

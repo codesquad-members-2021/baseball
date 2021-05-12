@@ -79,6 +79,27 @@ class MatchInfoTest {
     }
 
     @Test
+    @DisplayName("피쳐가 strike를 6번 던졌을 경우에 대한 테스트")
+    void scenario_strike_6() {
+        for (int i = 0; i < 6; i++) {
+            matchInfo.pushPlayResult(STRIKE);
+        }
+        softly.assertThat(matchInfo.getHalvesCount())
+                .isEqualTo(1);
+        softly.assertThat(matchInfo.getStrikeCount())
+                .isEqualTo(6);
+        softly.assertThat(matchInfo.getBallCount())
+                .isEqualTo(0);
+        softly.assertThat(matchInfo.getOutCount())
+                .isEqualTo(2);
+        softly.assertThat(matchInfo.getBases())
+                .isEqualTo(Arrays.asList(false, false, false));
+        softly.assertThat(matchInfo.getPitcherInfo())
+                .isEqualTo(Arrays.asList(true, true, true, true, true, true));
+        softly.assertAll();
+    }
+
+    @Test
     @DisplayName("피쳐가 strike를 9번 던졌을 경우에 대한 테스트")
     void scenario_strike_9() {
         /**
@@ -88,7 +109,7 @@ class MatchInfoTest {
             matchInfo.pushPlayResult(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
-                .isEqualTo(2);
+                .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(9);
         softly.assertThat(matchInfo.getBallCount())
