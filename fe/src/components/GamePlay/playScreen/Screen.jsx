@@ -8,10 +8,10 @@ import Span from 'components/common/Span'
 
 const Screen = () => {
   const { dispatchBallCount } = useContext(gamePlayContext)
-  
-  const chooseNumber = () => Math.floor(Math.random() * 4);
 
-  const getAction = (number) =>{
+  const chooseNumber = () => Math.floor(Math.random() * 4)
+
+  const getAction = number => {
     return {
       0: 'strike',
       1: 'ball',
@@ -22,9 +22,9 @@ const Screen = () => {
 
   const handleClickPitch = () => {
     const action = getAction(chooseNumber())
-    dispatchBallCount({payload : action})
+    dispatchBallCount({ payload: action })
   }
-  
+
   return (
     <StyledScreen>
       <ScreenField src='field.svg' alt='field' />
@@ -79,6 +79,7 @@ const rotateAnimation = keyframes`
 
 const PitchButton = styled.button`
   height: 5rem;
+  width:fit-content;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -91,6 +92,13 @@ const PitchButton = styled.button`
   &:hover {
     svg {
       animation: ${rotateAnimation} 4s linear infinite;
+    }
+    &:active {
+      svg {
+        border-radius:50%;
+        background-color:#e84545;
+        animation: none;
+      }
     }
   }
 `
