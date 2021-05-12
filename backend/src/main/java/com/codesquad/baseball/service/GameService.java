@@ -3,6 +3,7 @@ package com.codesquad.baseball.service;
 import com.codesquad.baseball.domain.*;
 import com.codesquad.baseball.dto.*;
 import com.codesquad.baseball.exceptions.GameAlreadyOccupiedException;
+import com.codesquad.baseball.exceptions.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.GameNotFoundException;
 import com.codesquad.baseball.exceptions.PlayerNotFoundException;
 import com.codesquad.baseball.utils.PitchRandomTable;
@@ -74,6 +75,7 @@ public class GameService {
     @Transactional
     public PitchDTO doPitch(int gameId) {
         Game game = findGame(gameId);
+        game.verifyGameIsPlayable();
         PitchResult pitchResult = game.pitch(PitchRandomTable.rollDice());
         gameRepository.save(game);
         return createPitchDTO(game, pitchResult);

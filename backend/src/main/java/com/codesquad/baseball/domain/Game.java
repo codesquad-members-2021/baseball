@@ -1,5 +1,6 @@
 package com.codesquad.baseball.domain;
 
+import com.codesquad.baseball.exceptions.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -427,6 +428,12 @@ public class Game {
 
     public boolean isOccupied() {
         return isOccupied;
+    }
+
+    public void verifyGameIsPlayable() {
+        if (!isOccupied) {
+            throw new GameIsNotStartedException();
+        }
     }
 
     public int homeTeamId() {

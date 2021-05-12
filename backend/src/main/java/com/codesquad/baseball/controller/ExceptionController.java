@@ -23,6 +23,13 @@ public class ExceptionController {
         return new ErrorDTO(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(GameIsNotStartedException.class)
+    public ErrorDTO handleGameIsNotStartedException(GameIsNotStartedException exception) {
+        return new ErrorDTO(HttpStatus.CONFLICT, exception.getMessage());
+    }
+
+
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ErrorDTO handleInternalServerError(HttpRequestMethodNotSupportedException exception) {
