@@ -29,31 +29,30 @@ public class GameController {
         return gameService.matchInformations(matchId);
     }
 
-    @GetMapping("/offense/{matchId}")
+    @GetMapping("/{matchId}/offense")
     public ProgressDTO offeseInfo(@PathVariable Long matchId) {
-
         gameService.matchInformations(matchId);
         return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @GetMapping("/defense/{matchId}")
+    @GetMapping("/{matchId}/defense")
     public ProgressDTO defenseInfo(@PathVariable Long matchId) {
 
         gameService.matchInformations(matchId);
         return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @PostMapping("/start/{matchId}")
+    @PostMapping("/{matchId}/start")
     public ResponseDTO gameStart(@PathVariable Long matchId) {
         return gameService.gameStart(matchId);
     }
 
-    @PostMapping("/end/{matchId}")
+    @PostMapping("/{matchId}/end")
     public ResponseDTO gameEnd(@PathVariable Long matchId) {
         return gameService.gameEnd(matchId);
     }
 
-    @PostMapping("/throws/{matchId}")
+    @PostMapping("/{matchId}/throws")
     public ResponseDTO gameProgress(@PathVariable Long matchId) {
         return gameService.gameProgress(matchId);
     }
