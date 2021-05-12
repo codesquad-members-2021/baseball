@@ -28,6 +28,6 @@ public class GameController {
 
     @GetMapping("/{gameId}/scores")
     public GameScoreDTO showScore(@PathVariable Long gameId) {
-        return gameService.convertToGameScoreDTO(gameId);
+        return gameService.getGameScoreDTO(gameId);
     }
 }

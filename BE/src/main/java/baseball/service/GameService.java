@@ -63,7 +63,7 @@ public class GameService {
         teamRepository.save(team);
     }
 
-    public GameScoreDTO convertToGameScoreDTO(Long gameId) {
+    public GameScoreDTO getGameScoreDTO(Long gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
 
         Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
