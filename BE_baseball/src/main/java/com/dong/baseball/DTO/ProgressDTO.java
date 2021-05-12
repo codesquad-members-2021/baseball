@@ -57,8 +57,8 @@ public class ProgressDTO {
         //this.secondBase = secondBase;
         //this.thirdBase = thirdBase;
         this.firstBase = new ArrayList<>();
-        this.secondBase = new ArrayList<>();;
-        this.thirdBase = new ArrayList<>();;
+        this.secondBase = new ArrayList<>();
+        this.thirdBase = new ArrayList<>();
 
         this.pitcher = board.getPitcher();
         this.batter = board.getBatter();

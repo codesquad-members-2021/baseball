@@ -22,9 +22,9 @@ public class GameService {
     }
 
     public List<MatchUpListDTO> matchList() {
-        List<Match> matchList =  leagueRepository.findAll();
+        List<Match> matchList = leagueRepository.findAll();
         List<MatchUpListDTO> dtoList = new ArrayList<>();
-        for(Match match : matchList) {
+        for (Match match : matchList) {
             dtoList.add(new MatchUpListDTO(match));
         }
         return dtoList;
@@ -35,7 +35,7 @@ public class GameService {
         List<Board> matchBoards = match.getGameBoards();
         List<ProgressDTO> matchBoardInfo = new ArrayList<>();
 
-        for(Board board : matchBoards) {
+        for (Board board : matchBoards) {
             matchBoardInfo.add(new ProgressDTO(board));
         }
 
@@ -45,7 +45,7 @@ public class GameService {
     public Board matchStream(Long matchId) {
         Match match = leagueRepository.findById(matchId).get();//@Todo get
         List<Board> matchBoards = match.getGameBoards();
-        return matchBoards.get(matchBoards.size()-1);
+        return matchBoards.get(matchBoards.size() - 1);
     }
 
 

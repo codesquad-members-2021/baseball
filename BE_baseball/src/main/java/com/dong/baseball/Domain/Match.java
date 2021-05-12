@@ -7,14 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Match {
-    @Id
-    private Long id;
-
-    private String home;
-    private String away;
-
     @MappedCollection(keyColumn = "match_id")
     List<Board> gameBoards = new ArrayList<>();
+    @Id
+    private Long id;
+    private String home;
+    private String away;
 
     public void addGameBoards(Board... boards) {
         for (Board board : boards) {

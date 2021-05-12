@@ -1,10 +1,7 @@
 package com.dong.baseball.Domain;
 
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-
-import java.time.LocalDateTime;
 
 public class Board {
 

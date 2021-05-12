@@ -8,17 +8,15 @@ import java.util.List;
 
 //    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants
 public class Team {
+    @MappedCollection(idColumn = "team_id", keyColumn = "player_index")
+    List<Player> members = new ArrayList<>();
     @Id
     private Long teamId;
-
     private String teamName;
     private int win;
     private int lose;
     private int draw;
     private int victoryPoint;
-
-    @MappedCollection(idColumn = "team_id", keyColumn = "player_index")
-    List<Player> members = new ArrayList<>();
 
     public Long getTeamId() {
         return teamId;
