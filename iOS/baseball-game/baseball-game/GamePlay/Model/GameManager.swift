@@ -9,7 +9,7 @@ import Foundation
 
 class GameManager {
     
-    private var isUserHomeSide: Bool?
+    private var userTeamSide: TeamSide?
     private var teams: Teams
     private var inning: Inning
     private var score: Score
@@ -19,8 +19,8 @@ class GameManager {
     private var batter: Player
     private var pitcher: Player
     
-    init(isUserHomeSide: Bool, teams: Teams, inning: Inning, score: Score, pitchList: [Pitch], ballCounter: BallCounter, baseManager: BaseManager, batter: Player, pitcher: Player) {
-        self.isUserHomeSide = isUserHomeSide
+    init(userTeamSide: TeamSide, teams: Teams, inning: Inning, score: Score, pitchList: [Pitch], ballCounter: BallCounter, baseManager: BaseManager, batter: Player, pitcher: Player) {
+        self.userTeamSide = userTeamSide
         self.teams = teams
         self.inning = inning
         self.score = score
@@ -31,8 +31,8 @@ class GameManager {
         self.pitcher = pitcher
     }
     
-    convenience init(isUserHomeSide: Bool, teams: Teams, batter: Player, pitcher: Player) {
-        self.init(isUserHomeSide: isUserHomeSide,
+    convenience init(userTeamSide: TeamSide, teams: Teams, batter: Player, pitcher: Player) {
+        self.init(userTeamSide: userTeamSide,
                   teams: teams,
                   inning: Inning(),
                   score: Score(),
@@ -52,6 +52,7 @@ class GameManager {
         static let offense = "offense"
         static let defense = "defense"
     }
+    
 }
 
 ///View Controller 이하의 레벨에서 게임 정보 표시하기 위해 사용
@@ -91,14 +92,16 @@ extension GameManager: GameInformable {
     }
 
     func isUserDefense() -> Bool? {
-        guard let isUserHomeSide = isUserHomeSide else { return nil }
 
-        if isUserHomeSide {
+        guard let userTeamSide = userTeamSide else { return nil }
+        
+        if userTeamSide == TeamSide.home {
             return isHomeDefense()
         } else {
             return !isHomeDefense()
         }
     }
+    
 }
 
 ///ViewModel 이상의 레벨에서 서버에서 받아온 데이터를 프로퍼티에 업데이트하기 위해 사용

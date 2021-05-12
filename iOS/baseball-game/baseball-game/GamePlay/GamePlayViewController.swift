@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+enum TeamSide: String, Codable {
+    case home
+    case away
+}
+
 class GamePlayViewController: UIViewController {
 
     @IBOutlet weak var pitchListTableView: UITableView!
@@ -20,20 +25,19 @@ class GamePlayViewController: UIViewController {
 
     enum ViewID {
         static let storyboard = "GamePlay"
-        static let controller = "gamePlay"
         static let segue = "selectPitcher"
-        static let cell = "pitchListCell"
     }
     
     private var gamePlayViewModel: GamePlayViewModel!
     private var dataSource: UITableViewDiffableDataSource<Int, Pitch>!
 
-    private let isUserHomeSide = true
+    private let userTeamSide = TeamSide.home
+    private var gameInfo: GameInfo!
     private var cancelBag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gamePlayViewModel = GamePlayViewModel(isUserHomeSide)
+        self.gamePlayViewModel = GamePlayViewModel(userTeamSide)
         self.pitchButton.isHidden = true
         gamePlayViewModel.requestGame()
         configureDataSource()
@@ -68,6 +72,11 @@ class GamePlayViewController: UIViewController {
     
     @IBOutlet weak var ballCountView: BallCountView!
     @IBOutlet weak var groundView: GroundView!
+
+}
+
+
+extension GamePlayViewController {
     
     private func bind() {
         gamePlayViewModel.$gameManager
@@ -119,7 +128,9 @@ class GamePlayViewController: UIViewController {
             batterInfoView.highlight()
         }
     }
+    
 }
+
 
 extension GamePlayViewController {
     
@@ -127,7 +138,7 @@ extension GamePlayViewController {
         self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) {
             (tableView, indexPath, pitch) -> UITableViewCell in
             
-            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: ViewID.cell) as? PitchListTableViewCell else {
+            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
             }
             
@@ -145,4 +156,25 @@ extension GamePlayViewController {
         snapshot.appendItems(pitches, toSection: 0)
         self.dataSource.apply(snapshot)
     }
+    
+}
+
+
+extension GamePlayViewController: Instantiatable, IdentifierReusable {
+    
+    static func instantiate() -> UIViewController {
+        let myViewController = UIStoryboard(name: ViewID.storyboard, bundle: nil).instantiateViewController(withIdentifier: self.reuseIdentifier) as? GamePlayViewController
+        
+        return myViewController ?? GamePlayViewController()
+    }
+    
+}
+
+
+extension GamePlayViewController {
+    
+    func getInfo(with gameInfo: GameInfo) {
+        self.gameInfo = gameInfo
+    }
+    
 }

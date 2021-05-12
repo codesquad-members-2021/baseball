@@ -7,11 +7,12 @@
 
 import UIKit
 
-class GameCell: UITableViewCell {
-    static let reuseIdentifier = "GameCell"
+class GameCell: UITableViewCell, IdentifierReusable {
+    
     static let nib = UINib(nibName: GameCell.reuseIdentifier, bundle: nil)
     
     private var viewModel: SelectViewModel!
+    var delegate: GameCellDelegate!
     
     @IBOutlet weak var gameIdLabel: UILabel!
     @IBOutlet weak var awayTeamButton: UIButton!
@@ -21,11 +22,15 @@ class GameCell: UITableViewCell {
     private var awayTeam: String!
     private var homeTeam: String!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
+}
+
+
+extension GameCell {
+
     func fill(_ viewModel: SelectViewModel, state: Game) {
         self.viewModel = viewModel
         self.gameInfo = GameInfo(userID: viewModel.gameInfo.userID, gameID: state.id)
@@ -50,6 +55,7 @@ class GameCell: UITableViewCell {
         self.viewModel.postSelection(with: self.gameInfo)
         self.awayTeamButton.isEnabled = false
         
+        self.delegate.didPressButton(with: self.gameInfo)
     }
     
     @IBAction func homeButtonTouched(_ sender: UIButton) {
@@ -57,6 +63,8 @@ class GameCell: UITableViewCell {
         self.viewModel.setModel(with: self.gameInfo)
         self.viewModel.postSelection(with: self.gameInfo)
         self.homeTeamButton.isEnabled = false
+        
+        self.delegate.didPressButton(with: self.gameInfo)
     }
     
 }

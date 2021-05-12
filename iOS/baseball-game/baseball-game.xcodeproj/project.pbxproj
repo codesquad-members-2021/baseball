@@ -13,6 +13,8 @@
 		AE5C79B426412B830075EBC3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C79B326412B830075EBC3 /* Network.swift */; };
 		AE5C79B7264138E70075EBC3 /* SelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5C79B6264138E70075EBC3 /* SelectViewModel.swift */; };
 		AE7A1542263FE4DE005EBAB9 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE7A1541263FE4DE005EBAB9 /* SelectionViewController.swift */; };
+		AEF435B8264A60C5007EA537 /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF435B7264A60C5007EA537 /* ControllerFactory.swift */; };
+		AEF435BA264A73E3007EA537 /* IdentifierReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF435B9264A73E3007EA537 /* IdentifierReusable.swift */; };
 		AEFE32DA2643971B0077AA5F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE32D92643971B0077AA5F /* LoginViewController.swift */; };
 		E47234E02649223D009508A8 /* GroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47234DF2649223D009508A8 /* GroundView.swift */; };
 		E47234E226492255009508A8 /* BallCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47234E126492255009508A8 /* BallCountView.swift */; };
@@ -52,6 +54,8 @@
 		AE5C79B326412B830075EBC3 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AE5C79B6264138E70075EBC3 /* SelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectViewModel.swift; sourceTree = "<group>"; };
 		AE7A1541263FE4DE005EBAB9 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		AEF435B7264A60C5007EA537 /* ControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactory.swift; sourceTree = "<group>"; };
+		AEF435B9264A73E3007EA537 /* IdentifierReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierReusable.swift; sourceTree = "<group>"; };
 		AEFE32D92643971B0077AA5F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E47234DF2649223D009508A8 /* GroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundView.swift; sourceTree = "<group>"; };
 		E47234E126492255009508A8 /* BallCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCountView.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 			children = (
 				E4AA6896263FDDD400139BD6 /* AppCycle */,
 				E4FE76E42643B57400151B35 /* Main.storyboard */,
+				AEF435B7264A60C5007EA537 /* ControllerFactory.swift */,
+				AEF435B9264A73E3007EA537 /* IdentifierReusable.swift */,
 				AE7A1543263FE4FE005EBAB9 /* Selection */,
 				E4FE76E72643B5DD00151B35 /* GamePlay */,
 				AE5C79B526412B900075EBC3 /* Network */,
@@ -331,7 +337,9 @@
 				E4FE76FA2644108900151B35 /* PitcherInfoView.swift in Sources */,
 				E4FE76DA26412ACD00151B35 /* GameManager.swift in Sources */,
 				E4FE76DF26438ABC00151B35 /* PitchListTableViewCell.swift in Sources */,
+				AEF435B8264A60C5007EA537 /* ControllerFactory.swift in Sources */,
 				E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */,
+				AEF435BA264A73E3007EA537 /* IdentifierReusable.swift in Sources */,
 				AEFE32DA2643971B0077AA5F /* LoginViewController.swift in Sources */,
 				E4FE77062644DCBC00151B35 /* Team.swift in Sources */,
 				AE5C79AF2640E8710075EBC3 /* GameCell.swift in Sources */,
