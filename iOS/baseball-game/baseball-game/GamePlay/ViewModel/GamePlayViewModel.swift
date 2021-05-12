@@ -23,16 +23,23 @@ class GamePlayViewModel {
         self.networkManager = networkManager
     }
     
-    
     //GameManager -> GameDTO에 따른 대대적인 변경 필요
     func requestGame() {
-//        networkManager.get(type: GameDTO.self, url: EndPoint.url(path: "/1/attack")!)
-//            .sink { error in
-//            self.error = error as? Error
-//        } receiveValue: { data in
-//            self.pitches = data.turn.pitches
-//            self.gameManager = GameManager(userTeamSide: self.userTeamSide, turn: data.turn)
-//        }.store(in: &cancelBag)
+        networkManager.get(type: DataDTO<GameDTO>.self, url: EndPoint.url(path: "/1/start")!)
+            .sink { error in
+            self.error = error as? Error
+        } receiveValue: { value in
+            if let data = value.data,
+               let teams = data.teams, let batter = data.batter, let pitcher = data.pitcher {
+                self.gameManager = GameManager(userTeamSide: self.userTeamSide,
+                                              teams: teams,
+                                              batter: batter,
+                                              pitcher: pitcher)
+                self.pitches = self.gameManager.pitchInfo()
+                
+            }
+            
+        }.store(in: &cancelBag)
     }
     
 }

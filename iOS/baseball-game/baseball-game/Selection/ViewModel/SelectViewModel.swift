@@ -28,12 +28,14 @@ extension SelectViewModel {
     
     //MARK: GET
     func request() {
-        networkManager.get(type: [Game].self, url: EndPoint.url(path: "")!)
+        networkManager.get(type: DataDTO<[Game]>.self, url: EndPoint.url(path: "")!)
             .receive(on: DispatchQueue.main)
             .sink { error in
                 print(error) ///사용자에게 에러 표시하는 부분 미구현
-            } receiveValue: { games in
-                self.fetch(data: games)
+            } receiveValue: { value in
+                if let games = value.data {
+                    self.fetch(data: games)
+                }
             }
             .store(in: &cancellable)
     }

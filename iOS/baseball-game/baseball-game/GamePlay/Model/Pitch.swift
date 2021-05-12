@@ -14,8 +14,6 @@ struct Pitch: Decodable, Hashable {
     var log: String
     
     enum CodingKeys: String, CodingKey {
-        case count
-        case result = "pitch"
-        case log = "status"
+        case count, result, log
     }
 }

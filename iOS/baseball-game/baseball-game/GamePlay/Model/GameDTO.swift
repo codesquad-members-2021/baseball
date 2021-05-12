@@ -10,12 +10,6 @@ import Foundation
 struct GameDTO: Decodable {
     
     var teams: Teams?
-    
-    struct Teams: Decodable {
-        var home: String
-        var away: String
-    }
-    
     var inning: Inning?
     var score: Score?
     var batter: Player?

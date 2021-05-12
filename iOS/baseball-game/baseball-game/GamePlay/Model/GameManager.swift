@@ -60,8 +60,8 @@ extension GameManager: GameInformable {
 
     func teamInfo() -> [String: String] {
         let home = Side.home, away = Side.away
-        let homeName = teams.find(status: home)
-        let awayName = teams.find(status: away)
+        let homeName = teams.home
+        let awayName = teams.away
         return [home: homeName, away: awayName]
     }
 

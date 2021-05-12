@@ -10,7 +10,6 @@ import Foundation
 struct Inning: Decodable {
     
     var counter: Int
-    
     var isTop: Bool
     
     init() {
@@ -20,6 +19,11 @@ struct Inning: Decodable {
     
     func isHomeDefense() -> Bool {
         return isTop
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case counter
+        case isTop = "top"
     }
     
 }
