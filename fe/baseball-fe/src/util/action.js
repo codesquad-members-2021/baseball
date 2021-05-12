@@ -1,5 +1,6 @@
 export const GlobalAction = {
   SELECT_TEAM: 'select-team',
+  LOGIN: 'login'
 };
 
 export const GameAction = {

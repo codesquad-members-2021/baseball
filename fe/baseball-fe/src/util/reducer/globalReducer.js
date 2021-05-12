@@ -5,6 +5,10 @@ function globalReducer(state, { type, payload }) {
     case GlobalAction.SELECT_TEAM: {
       return { ...state, ...payload }
     }
+    
+    case GlobalAction.LOGIN: {
+      return { ...state, ...payload }
+    }
   }
 };
 
