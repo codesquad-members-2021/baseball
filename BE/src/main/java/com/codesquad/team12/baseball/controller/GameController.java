@@ -61,9 +61,9 @@ public class GameController {
         return new PlayingsDto(homePlayings, awayPlayings);
     }
 
-    @PutMapping
-    public void putGame(@PathVariable Long gameId) {
-//        TODO: To get parameter from request body using DTO
+    @PutMapping("/innings")
+    public void putGame(@PathVariable Long gameId, @RequestBody InningRequestDto inningRequestDto) {
+        inningService.updateInning(gameId, inningRequestDto);
     }
 
     @PutMapping("/{teamId}")

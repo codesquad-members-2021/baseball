@@ -1,6 +1,7 @@
 package com.codesquad.team12.baseball.service;
 
 import com.codesquad.team12.baseball.dto.InningDto;
+import com.codesquad.team12.baseball.dto.InningRequestDto;
 import com.codesquad.team12.baseball.model.*;
 import com.codesquad.team12.baseball.repository.InningRepository;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,11 @@ public class InningService {
                 .stream()
                 .map(Inning::createInningDto)
                 .collect(Collectors.toList());
+    }
+
+    public void updateInning(Long gameId, InningRequestDto inningRequestDto) {
+        System.out.println(inningRequestDto);
+        inningRepository.updateInning(gameId, inningRequestDto.getTeamName(), inningRequestDto.getNumber(), inningRequestDto.getScore());
     }
 
     private Inning findByTeam(Long gameId, String teamName, Integer number) {
