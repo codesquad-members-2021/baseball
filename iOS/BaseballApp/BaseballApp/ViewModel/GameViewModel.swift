@@ -6,22 +6,27 @@
 //
 
 import Foundation
+import Combine
 
 class GameViewModel {
-    @Published var game: Game?
-    
+    @Published var game: GameResponse?
     let gameUseCase = GameUseCase()
+    var cancelBag = Set<AnyCancellable>()
     
-    func load() {
-        guard let url = Endpoint.url(path: "/room/playInfo") else { return }
-        gameUseCase.start(url: url)
-    }
-    
-    func getAwayScore() -> Int {
-        return game?.away.score ?? 0
-    }
-    
-    func getHomeScore() -> Int {
-        return game?.home.score ?? 0
+    func load(completionHandler: @escaping (Game) -> Void) {
+        guard let url = Endpoint.url(path: Endpoint.Path.gameStatus) else { return }
+        let publisher = gameUseCase.start(url: url)
+        publisher.sink { (completion) in
+            switch completion {
+            case .finished:
+                break
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        } receiveValue: { (response) in
+            self.game = response
+            completionHandler(response.data)
+        }
+        .store(in: &cancelBag)
     }
 }

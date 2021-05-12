@@ -18,11 +18,11 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var playInformationStackView: UIStackView!
     @IBOutlet weak var scoreHeaderView: ScoreHeaderView!
     
-    var cancelBag = Set<AnyCancellable>()
+    var currentPlayerView: CurrentPlayerView!
     var count: Int = 0
-    var viewModel: GameViewModel? {
+    var viewModel: GameViewModel! {
         didSet {
-            count = viewModel?.game?.pitcherHistory.count ?? 0
+            count = viewModel?.game?.data.pitchHistories.count ?? 0
         }
     }
     
@@ -40,17 +40,16 @@ class PlayViewController: UIViewController {
         
         viewModel = GameViewModel()
         configureUI()
-    }
-    
-    // MARK: - Private Functions
-    private func bind() {
-        viewModel?.$game
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] game in
-                self?.scoreHeaderView.configureAway(score: game?.away.score ?? 0)
-                self?.scoreHeaderView.configureHome(score: game?.home.score ?? 0)
-            })
-            .store(in: &self.cancelBag)
+        viewModel.load { game in
+            DispatchQueue.main.async { [weak self] in
+                self?.scoreHeaderView.configureAway(score: game.awayTeam.score)
+                self?.scoreHeaderView.configureHome(score: game.homeTeam.score)
+                self?.currentPlayerView.configure(batter: game.batter, status: game.batterStatus)
+                self?.currentPlayerView.configure(pitcher: game.pitcher, status: game.pitcherStatus)
+                self?.currentPlayerView.configure(playerRole: game.myRole)
+                self?.pitcherHistoryTableView.reloadData()
+            }
+        }
     }
     
     private func configureUI() {
@@ -62,7 +61,7 @@ class PlayViewController: UIViewController {
                                                                options: nil)?.first as? CurrentPlayerView else {
             return
         }
-        
+        self.currentPlayerView = currentPlayerView
         playInformationStackView.addArrangedSubview(groundView)
         playInformationStackView.addArrangedSubview(currentPlayerView)
         playInformationStackView.addArrangedSubview(pitcherHistoryTableView)
@@ -79,12 +78,15 @@ class PlayViewController: UIViewController {
 
 extension PlayViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.game?.pitcherHistory.count ?? 0
+        return viewModel?.game?.data.pitchHistories.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PitcherRecordTableViewCell.identifier, for: indexPath) as! PitcherRecordTableViewCell
-        cell.backgroundColor = .systemRed
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PitcherRecordTableViewCell.identifier, for: indexPath) as? PitcherRecordTableViewCell,
+              let record = viewModel.game?.data.pitchHistories[indexPath.row] else {
+            return UITableViewCell()
+        }
+        cell.configure(record: record)
         return cell
     }
 }

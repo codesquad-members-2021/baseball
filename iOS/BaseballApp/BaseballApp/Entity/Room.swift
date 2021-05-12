@@ -8,13 +8,13 @@
 import Foundation
 
 struct RoomResponse: Decodable {
-    let rooms: [Room]
+    let data: [Room]
 }
 
 struct Room: Decodable {
     let id: Int
-    let number: String
-    let away: String
-    let home: String
-    let available: Bool
+    let awayTeam: String?
+    let homeTeam: String?
+    let awayUserEmail: String?
+    let homeUserEmail: String?
 }

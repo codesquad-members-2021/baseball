@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import Combine
 
 class GameUseCase {
     let apiRequestManager = APIRequestManager()
     
-    func start(url: URL) {
-        apiRequestManager.fetchGame(url: url, method: .get)
+    func start(url: URL) -> AnyPublisher<GameResponse, Error> {
+        return apiRequestManager.fetch(url: url, method: .get)
     }
 }
