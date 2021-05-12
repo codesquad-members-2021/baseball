@@ -1,6 +1,7 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.team;
 
 import com.codesquad.baseball.domain.team.Team;
+import com.codesquad.baseball.dto.player.PlayerDTO;
 
 import java.util.List;
 

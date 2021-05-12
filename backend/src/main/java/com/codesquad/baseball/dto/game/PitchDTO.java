@@ -1,4 +1,6 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.game;
+
+import com.codesquad.baseball.dto.team.TeamDetailDTO;
 
 public class PitchDTO {
     private PitchResultDTO pitchResult;

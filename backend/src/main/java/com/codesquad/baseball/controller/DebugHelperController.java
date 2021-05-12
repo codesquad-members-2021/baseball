@@ -1,6 +1,6 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.service.Initializer;
+import com.codesquad.baseball.service.DataInitializer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/reset")
 public class DebugHelperController {
 
-    private final Initializer initializer;
+    private final DataInitializer dataInitializer;
 
-    public DebugHelperController(Initializer initializer) {
-        this.initializer = initializer;
+    public DebugHelperController(DataInitializer dataInitializer) {
+        this.dataInitializer = dataInitializer;
     }
 
     @CrossOrigin
     @PatchMapping
     public void reset() {
-        initializer.reset();
+        dataInitializer.reset();
     }
 
 }

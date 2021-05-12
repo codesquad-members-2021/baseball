@@ -1,4 +1,4 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.player;
 
 import com.codesquad.baseball.domain.team.Player;
 import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;

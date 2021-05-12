@@ -1,6 +1,6 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.dto.ErrorDTO;
+import com.codesquad.baseball.dto.etc.ErrorDTO;
 import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.notfound.GameNotFoundException;

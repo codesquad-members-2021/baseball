@@ -1,4 +1,4 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.game;
 
 import java.util.List;
 

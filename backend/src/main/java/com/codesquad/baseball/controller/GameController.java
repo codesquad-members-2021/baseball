@@ -1,8 +1,8 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.dto.GameDetailDTO;
-import com.codesquad.baseball.dto.GamesDTO;
-import com.codesquad.baseball.dto.PitchDTO;
+import com.codesquad.baseball.dto.game.GameDetailDTO;
+import com.codesquad.baseball.dto.game.GamesDTO;
+import com.codesquad.baseball.dto.game.PitchDTO;
 import com.codesquad.baseball.service.GameService;
 import org.springframework.web.bind.annotation.*;
 

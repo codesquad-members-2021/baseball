@@ -1,7 +1,8 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.game;
 
 import com.codesquad.baseball.domain.game.Game;
 import com.codesquad.baseball.domain.team.Team;
+import com.codesquad.baseball.dto.team.TeamDTO;
 
 public class GameDTO {
     private Integer id;

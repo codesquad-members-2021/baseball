@@ -1,4 +1,4 @@
-package com.codesquad.baseball.dto;
+package com.codesquad.baseball.dto.etc;
 
 import org.springframework.http.HttpStatus;
 
