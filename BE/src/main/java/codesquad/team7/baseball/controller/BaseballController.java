@@ -31,6 +31,11 @@ public class BaseballController {
         return buildGameView(baseballGameService.pitch(gameId));
     }
 
+    @PostMapping("/new")
+    public BaseballGameView newGame(Long home, Long away) {
+        return buildGameView(baseballGameService.newGame(home, away));
+    }
+
     private BaseballGameView buildGameView(BaseballGame game) {
         return new BaseballGameView.Builder(game).build();
     }

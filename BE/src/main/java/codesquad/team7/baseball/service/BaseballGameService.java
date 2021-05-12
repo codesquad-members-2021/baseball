@@ -3,7 +3,6 @@ package codesquad.team7.baseball.service;
 import codesquad.team7.baseball.game.BaseballGame;
 import codesquad.team7.baseball.game.Pitching;
 import codesquad.team7.baseball.repository.BaseballGameRepository;
-import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;
 import codesquad.team7.baseball.team.TeamRepository;
 import codesquad.team7.baseball.view.BaseballGameTitle;
@@ -23,40 +22,6 @@ public class BaseballGameService {
     public BaseballGameService(BaseballGameRepository baseballGameRepository, TeamRepository teamRepository) {
         this.baseballGameRepository = baseballGameRepository;
         this.teamRepository = teamRepository;
-
-        initGame();
-    }
-
-    private void initGame() {
-        Team dinos = Team.newTeam("NC Dinos", 0);
-        dinos.addPlayer(new Player("김준완"));
-        dinos.addPlayer(new Player("박민우"));
-        dinos.addPlayer(new Player("김철호"));
-        dinos.addPlayer(new Player("최보성"));
-        dinos.addPlayer(new Player("김민수"));
-        dinos.addPlayer(new Player("김찬형"));
-        dinos.addPlayer(new Player("김주원"));
-        dinos.addPlayer(new Player("김기환"));
-        dinos.addPlayer(new Player("최승민"));
-        dinos = teamRepository.save(dinos);
-
-        Team eagles = Team.newTeam("Eagles", 2);
-        eagles.addPlayer(new Player("조현진"));
-        eagles.addPlayer(new Player("노태형"));
-        eagles.addPlayer(new Player("강재민"));
-        eagles.addPlayer(new Player("조한민"));
-        eagles.addPlayer(new Player("김현민"));
-        eagles.addPlayer(new Player("오선진"));
-        eagles.addPlayer(new Player("강경학"));
-        eagles.addPlayer(new Player("노시환"));
-        eagles.addPlayer(new Player("박정현"));
-        eagles = teamRepository.save(eagles);
-
-        BaseballGame newBaseballGame = BaseballGame.newGame(dinos, eagles);
-        baseballGameRepository.save(newBaseballGame);
-        baseballGameRepository.save(newBaseballGame);
-        baseballGameRepository.save(newBaseballGame);
-        baseballGameRepository.save(newBaseballGame);
     }
 
     public BaseballGames baseballGames() {
@@ -84,5 +49,18 @@ public class BaseballGameService {
         }
 
         return game;
+    }
+
+    public BaseballGame newGame(Long home, Long away) {
+        if (home.equals(away)) {
+            throw new RuntimeException("같은 팀으로 게임을 생성할 수 없습니다.");
+        }
+
+        Team homeTeam = teamRepository.findById(home).orElseThrow(RuntimeException::new);
+        Team awayTeam = teamRepository.findById(away).orElseThrow(RuntimeException::new);
+
+        BaseballGame game = BaseballGame.newGame(homeTeam, awayTeam);
+
+        return baseballGameRepository.save(game);
     }
 }
