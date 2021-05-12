@@ -26,7 +26,7 @@ public class BaseballController {
         return buildGameView(baseballGameService.baseballGame(gameId));
     }
 
-    @GetMapping("/{gameId}/pitch")
+    @PostMapping("/{gameId}/pitch")
     public BaseballGameView pitch(@PathVariable Long gameId) {
         return buildGameView(baseballGameService.pitch(gameId));
     }

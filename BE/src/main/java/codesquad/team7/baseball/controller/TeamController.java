@@ -1,6 +1,5 @@
 package codesquad.team7.baseball.controller;
 
-
 import codesquad.team7.baseball.team.Player;
 import codesquad.team7.baseball.team.Team;
 import codesquad.team7.baseball.team.TeamRepository;
