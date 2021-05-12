@@ -8,25 +8,33 @@ const io = require("socket.io")(http, {
 
 const baseball = {
   games: [],
-}
+  users: []
+};
 
 io.on("connection", (socket) => {
   const connectPlayerId = socket.id;
   socket.on('init', () => {
     console.log('init');
     socket.join('room1');
+    baseball.users.push({ playerId: connectPlayerId, socket });
     socket.emit('selectedTeam', baseball.games);
   });
 
   socket.on('choiceTeam', ({ gameId, teamKind }) => {
     baseball.games = baseball.games.filter(({ playerId }) => playerId !== connectPlayerId);
+
+    const isMatchGame = baseball.games.some(game => game.gameId === gameId);
     baseball.games.push({ playerId: connectPlayerId, gameId, teamKind });
-    console.log(baseball.games)
+
     io.to('room1').emit('selectedTeam', baseball.games);
+
+    if (isMatchGame) startGame({ gameId });
   });
+
 
   socket.on('disconnect', () => {
     baseball.games = baseball.games.filter(({ playerId }) => playerId !== connectPlayerId);
+    baseball.users = baseball.users.filter(({ playerId }) => playerId !== connectPlayerId);
     // socket.leave('room1'); //disconnect하면 자동으로 leave가 됨
     console.log('disconnected');
   });
@@ -35,3 +43,23 @@ io.on("connection", (socket) => {
 http.listen(port, () => {
   console.log(`app listening on port : ${port}`);
 });
+
+function startGame({ gameId }) {
+  const matchTeams = baseball.games.filter(game => game.gameId === gameId);
+  const matchUsers = baseball.users.filter(user => matchTeams.find(matchTeam => {
+    return user.playerId === matchTeam.playerId;
+  }));
+
+  const matchCombinedData = matchUsers.map(user => (
+    {
+      ...matchTeams.find(game => {
+        return user.playerId === game.playerId;
+      }),
+      ...user
+    }
+  ));
+
+  matchCombinedData.forEach((user) => {
+    user.socket.emit('matchingGame', { gamePageUrl: '/GamePage', gameId: user.gameId, teamKind: user.teamKind });
+  });
+}

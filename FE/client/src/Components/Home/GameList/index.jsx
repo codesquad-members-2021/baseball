@@ -4,7 +4,6 @@ import Game from "./Game";
 import useAsync from "utils/hooks/useAsync";
 import API from "utils/API";
 import { PageContext } from "Components/Page";
-import { isCompositeComponent } from "react-dom/test-utils";
 
 const GameList = () => {
   const { socket } = useContext(PageContext);

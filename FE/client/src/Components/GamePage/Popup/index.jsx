@@ -1,8 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import TopPopup from "./TopPopup";
 import BottomPopup from "./BottomPopup";
 import useTogglePopup from "utils/hooks/useTogglePopup";
+import useAsync from "utils/hooks/useAsync";
+import API from "utils/API";
+import { GamePageContext } from "Components/GamePage";
 
 const Popup = () => {
   const [isHidePopupState, setTogglePopupState] = useTogglePopup({
@@ -11,6 +14,13 @@ const Popup = () => {
   });
   const $PopupBackground = useRef(null);
   const distance = 15;
+  const { teamState: { gameId } } = useContext(GamePageContext);
+  const [scoreState, fetchScoreState] = useAsync(API.get.scores, [], true);
+
+  const loadTopPopupState = () => {
+    setTogglePopupState("top")
+    fetchScoreState(gameId);
+  }
 
   const handleMoveShowPopup = ({ target, clientY }) => {
     if (target === $PopupBackground.current) return;
@@ -19,6 +29,7 @@ const Popup = () => {
       return setTogglePopupState("bottom");
     }
   };
+
 
   const handleClickHidePopup = ({ target }) => {
     if (target === $PopupBackground.current) setTogglePopupState("all");

@@ -8,9 +8,9 @@ const Game = ({ gameData: { id, awayTeamName, homeTeamName, home, away } }) => {
     <GameBox>
       <GameNumber>GAME {id}</GameNumber>
       <TeamDiv>
-        <Team teamName={awayTeamName} gameId={id} teamKind="away" selected={away} />
-        <VsSpan>VS</VsSpan>
         <Team teamName={homeTeamName} gameId={id} teamKind="home" selected={home} />
+        <VsSpan>VS</VsSpan>
+        <Team teamName={awayTeamName} gameId={id} teamKind="away" selected={away} />
       </TeamDiv>
     </GameBox>
   );

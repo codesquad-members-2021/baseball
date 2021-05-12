@@ -5,6 +5,7 @@ const API = {
   get: {
     teams: () => customFetch(`${END_POINT}/teams`),
     games: () => customFetch(`${END_POINT}/games`),
+    scores: (gameId) => customFetch(`${END_POINT}/games/${gameId}/scores`),
   },
   post: {}
 };

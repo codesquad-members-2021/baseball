@@ -15,7 +15,6 @@ const Team = ({ teamName, gameId, teamKind, selected }) => {
         type="radio"
         name={selected ? selected : "teamName"}
         onClick={handleChoiceTeam}
-        onChange={() => { }}
         disabled={!!selected}
       />
       <TeamName>

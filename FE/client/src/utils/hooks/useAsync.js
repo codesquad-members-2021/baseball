@@ -34,7 +34,7 @@ const reducerInitialState = {
 const useAsync = (apiFunction, deps = [], skip = false) => {
   const [state, dispatch] = useReducer(reducer, reducerInitialState);
 
-  const fetchData = (addParam, addData) => async () => {
+  const fetchData = async (addParam, addData) => {
     dispatch({ type: 'LOADING' });
     try {
       const data = await apiFunction(addParam);
@@ -46,7 +46,7 @@ const useAsync = (apiFunction, deps = [], skip = false) => {
 
   useEffect(() => {
     if (skip) return;
-    fetchData()();
+    fetchData();
   }, deps);
 
   return [state, fetchData];
