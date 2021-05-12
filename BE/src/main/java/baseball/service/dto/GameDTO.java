@@ -1,27 +1,18 @@
 package baseball.service.dto;
 
+import baseball.domain.Game;
+
+import java.util.List;
+
 public class GameDTO {
 
-    private Long id;
+    private List<Game> games;
 
-    private String homeTeamName;
-    private String awayTeamName;
-
-    public GameDTO(Long id, String homeTeamName, String awayTeamName) {
-        this.id = id;
-        this.homeTeamName = homeTeamName;
-        this.awayTeamName = awayTeamName;
+    public GameDTO(Iterable<Game> games) {
+        this.games = (List<Game>) games;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getHomeTeamName() {
-        return homeTeamName;
-    }
-
-    public String getAwayTeamName() {
-        return awayTeamName;
+    public List<Game> getGames() {
+        return games;
     }
 }

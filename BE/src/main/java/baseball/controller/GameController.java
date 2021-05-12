@@ -6,20 +6,18 @@ import baseball.service.dto.GameScoreDTO;
 import baseball.service.dto.RequestScoreDTO;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
 @RestController
 @RequestMapping("/games")
 public class GameController {
 
-    private GameService gameService;
+    private final GameService gameService;
 
     public GameController(GameService gameService) {
         this.gameService = gameService;
     }
 
     @GetMapping
-    public List<GameDTO> showGames() {
+    public GameDTO showGames() {
         return gameService.getGameDTOList();
     }
 
