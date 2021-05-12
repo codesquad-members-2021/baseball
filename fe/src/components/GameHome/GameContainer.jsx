@@ -8,7 +8,7 @@ export const GameContext = React.createContext()
 
 const GameContainer = () => {
   const { response, loading, error } = useFetch(
-    process.env.REACT_APP_API_URL + '/data.json'
+    process.env.REACT_APP_API_HOME 
   )
 
   const [toggle, setToggle] = useState(false);
@@ -21,7 +21,7 @@ const GameContainer = () => {
       <Title size={'L'}>BASEBALL GAME ONLINE</Title>
       <GameNotice>{toggle ? '이미 진행중인 게임입니다! ㅡㅡ':'참가할 게임을 선택하세요.'}</GameNotice>
       {!loading && (
-          <GameLists data={response.game_list}/>
+          <GameLists data={response}/>
       )}
     </GameSection>
      </GameContext.Provider>
