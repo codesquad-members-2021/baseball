@@ -8,10 +8,12 @@ function useFetch(method, type, value = null) {
 		async function fetchUrl() {
 			try {
 				const response = await API[method][type](value ? String(value) : '');
-				setState({ ...state, loading: false, data: response });
+				setState({ ...state, loading: false, data: response, err: null });
+				// console.log(1, state);
 			} catch (err) {
 				setState({ ...state, loading: false, error: err });
 				console.error('요청주소에 문제가 있어요😯', err);
+				// console.log(2, state);
 			}
 		}
 		fetchUrl();

@@ -2,9 +2,12 @@ import styled from 'styled-components';
 import { theme } from '../Style/Theme';
 import useFetch from '../Hook/useFetch';
 import MatchingInfo from './MatchingInfo';
+import { useState, useEffect, useCallback } from 'react';
+
 const TeamList = ({ setMessage }) => {
 	const [teamData, loading, error] = useFetch('get', 'teamList');
 	const teamListData = !loading && teamData.games;
+	// useEffect(() => {}, [teamData]);
 
 	return (
 		!loading &&

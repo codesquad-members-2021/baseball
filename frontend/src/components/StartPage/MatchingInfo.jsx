@@ -1,53 +1,64 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { theme } from '../Style/Theme';
-// import { useState, useEffect, useCallback } from 'react';
-// import useFetch from '../Hook/useFetch';
+import { useState, useEffect } from 'react';
 
 const MatchingInfo = ({ setMessage, data }) => {
-	// const [currentID, setID] = useState(null);
-	// const [occupiedState, loadingOccupiedState, occupied] = useFetch(
-	// 	'patch',
-	// 	'initGame',
-	// 	currentID,
-	// );
+	const [currentID, setID] = useState(null);
+	const [currentType, setType] = useState(null);
+
+	useEffect(() => {
+		const getResponse = async () => {
+			if (!currentID) return;
+			// const foo = await API.patch.initGame(currentID);
+			// console.log(foo);
+			const response = await fetch(
+				`http://13.124.70.38:8080/games/${currentID}`,
+				{
+					method: 'PATCH',
+					headers: {
+						'Content-Type': 'application/json',
+						'API-Key': 'secret',
+					},
+				},
+			);
+			const status = response.status;
+			if (status === 200 && currentType === 'HOME') {
+				history.push(`/defense/${currentID}`);
+			} else if (status === 200 && currentType === 'AWAY') {
+				history.push(`/attack/${currentID}`);
+			} else if (status === 409) {
+				setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
+				//occupied=true인경우(409error)
+			}
+		};
+		getResponse();
+	}, [currentID, currentType]);
 
 	const history = useHistory();
 
 	const handleClick = (id, type) => {
-		if (type === 'HOME') {
-			history.push(`/defense/${id}`);
-		} else if (type === 'AWAY') {
-			history.push(`/attack/${id}`);
-		} else {
-			setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
-			//occupied=true인경우(409error)
-		}
-	};
-
-	const TeamStatus = (occupied) => {
-		return (
-			<>
-				<TeamName
-					className={occupied ? 'occupied' : ''}
-					onClick={() => handleClick(data.id, 'AWAY')}
-				>
-					{data.awayTeam.teamName}
-				</TeamName>
-				<VS>VS</VS>
-				<TeamName
-					className={occupied ? 'occupied' : ''}
-					onClick={() => handleClick(data.id, 'HOME')}
-				>
-					{data.homeTeam.teamName}
-				</TeamName>
-			</>
-		);
+		setID(id);
+		setType(type);
 	};
 
 	return (
 		<TeamWrapper>
-			{data.occupied ? <TeamStatus occupied /> : <TeamStatus />}
+			<TeamName
+				className={data.occupied ? 'occupied' : ''}
+				onClick={() => {
+					handleClick(data.id, 'AWAY');
+				}}
+			>
+				{data.awayTeam.teamName}
+			</TeamName>
+			<VS>VS</VS>
+			<TeamName
+				className={data.occupied ? 'occupied' : ''}
+				onClick={() => handleClick(data.id, 'HOME')}
+			>
+				{data.homeTeam.teamName}
+			</TeamName>
 		</TeamWrapper>
 	);
 };
@@ -63,7 +74,8 @@ const TeamName = styled.span`
 	&:hover {
 		color: ${theme.colors.red};
 	}
-	.occupied {
+
+	&.occupied {
 		pointer-events: none;
 		color: ${theme.colors.grey_deep};
 	}
