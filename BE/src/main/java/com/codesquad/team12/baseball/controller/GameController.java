@@ -66,7 +66,8 @@ public class GameController {
         inningService.updateInning(gameId, inningRequestDto);
     }
 
-    @PutMapping("/{teamId}")
-    public void putPlaying(@PathVariable Long gameId, @PathVariable Long teamId) {
+    @PutMapping("/squads")
+    public void putPlaying(@PathVariable Long gameId, @RequestBody PlayingRequestDto playingRequestDto) {
+        playingService.updatePlaying(gameId, playingRequestDto);
     }
 }
