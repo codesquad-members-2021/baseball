@@ -16,6 +16,7 @@ const MemberListContext = createContext();
 const LogContext = createContext();
 
 const memberListReducer = (state, action) => {
+  if (action.type === 'init') return action.value;
   let next = 0;
   const team = action.turn ? 'home' : 'away';
   const newTeam = state[team].map((member, idx, arr) => {
@@ -44,17 +45,19 @@ const GamePlay = ({ home, away, game_id }) => {
     round: 1,
   });
   const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
-  const [memberList, memberListDispatch] = useReducer(memberListReducer, {
-    home: data.home.member_list,
-    away: data.away.member_list,
-  }); //member_list fetch해서 받아올아이
-  debugger;
-  const homePitch = gamePlayData !== null ? gamePlayData.home.pitcherID : '모디';
-  console.log('홈투수', homePitch);
+  const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
   const pitchers = {
-    home: data?.home.pitcher,
-    away: data?.away.pitcher,
+    home: gamePlayData?.home.pitcherId,
+    away: gamePlayData?.away.pitcherId,
   };
+
+  useEffect(() => {
+    const memberListData = {
+      home: gamePlayData?.home.member_list,
+      away: gamePlayData?.away.member_list,
+    };
+    memberListDispatch({ type: 'init', value: memberListData });
+  }, [gamePlayData]);
 
   return (
     { gamePlayData } && (
