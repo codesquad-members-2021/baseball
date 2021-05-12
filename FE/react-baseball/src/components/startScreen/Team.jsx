@@ -25,7 +25,6 @@ const Team = ({ type, game }) => {
       const { data } = await axios.get(
         `http://13.209.109.186/baseball/games/${game.gameId}/${teamId}`
       );
-      console.log(data);
       const [awayInfo, homeInfo] = [data.awayTeam, data.homeTeam];
       homeInfo.userSelected && setIsHome(true);
       if (isHome) {
