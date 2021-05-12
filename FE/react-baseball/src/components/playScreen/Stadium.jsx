@@ -1,11 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { boardHistory, BoardHistoryContext } from '../provider/Context';
+import { useEffect, useContext } from 'react';
+import { BoardHistoryContext } from '../provider/Context';
 import PlayInning from './PlayInning';
 
 const Stadium = () => {
   const { ballCnt, dispatch } = useContext(BoardHistoryContext);
-
   const PlayBoardTemp = ({ type }) => {
     if (type === 'S') {
       const arr = new Array(ballCnt.S).fill(' 🟡');

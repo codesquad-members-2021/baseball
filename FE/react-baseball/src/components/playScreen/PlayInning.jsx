@@ -14,15 +14,15 @@ const PlayInning = (props) => {
     setIsDefense,
   } = useContext(GlobalContext);
 
-  if (!totalOutCount % 3) {
-    // 초, 말 바꿔주기
-    toggleIsTop();
-    // setIsDefense(); 이것도 토글해야하는데... 모르겠다.
-    if (totalOutCount === 6) {
-      setCurrInning(currInning + 1);
-      setTotalOutCount(0);
-    }
-  }
+  // if (!totalOutCount % 3) {
+  //   // 초, 말 바꿔주기
+  //   toggleIsTop();
+  //   // setIsDefense(); 이것도 토글해야하는데... 모르겠다.
+  //   if (totalOutCount === 6) {
+  //     setCurrInning(currInning + 1);
+  //     setTotalOutCount(0);
+  //   }
+  // }
 
   return (
     <PlayInningDiv>
