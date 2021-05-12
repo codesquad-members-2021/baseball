@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { useState } from "react";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import GameScore from './gameScore/GameScore';
@@ -7,18 +6,20 @@ import MatchScreen from './matchScreen/MatchScreen';
 import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
 import { cssScrollbar, cssTranslate } from '../utilComponent/CommonStyledCSS';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
+import { GamePlayContext } from "../utilComponent/context/GamePlayProvider";
 
 import PlayerListPopup from '../playerListPopup/PlayerListPopup';
 import TeamScorePopup from '../teamScorePopup/TeamScorePopup';
+import MainFrame from '../utilComponent/MainFrame';
 
 export const PostsContext = createContext();
 
 const GamePlay = ({ location }) => {
-    const [scorePopupVisible, setScorePopupVisible] = useState(false);
-    const [listPopupVisible, setListPopupVisible] = useState(false);
-
     const team = queryString.parse(location.search);
+    const { gamePlayState, gamePlayDispatch } = useContext(GamePlayContext);
+
+    // console.log(gamePlayState);
 
     const childComponents = [
         <GameScore />,
@@ -36,22 +37,33 @@ const GamePlay = ({ location }) => {
         if (!target || target.tagName !== "SECTION") return;
         const targetID = Number(target.dataset.id);
         if (targetID === 1) 
-            setScorePopupVisible(true)
+            gamePlayDispatch({type: "teamScoreVisibleControl"});
         else
-            setListPopupVisible(true);
+            gamePlayDispatch({type: "playerListVisibleControl"});
+    };
+
+    const handleMainFrameClick = ({ target }) => {
+        if (!target) return;
+        const targetDataSetName = target.dataset.name;
+        if (targetDataSetName !== "gameplay") return;
+        const { teamScorePopupVisible, playListPopupVisible } = gamePlayState;
+        teamScorePopupVisible && gamePlayDispatch({type: "teamScoreVisibleControl"});
+        playListPopupVisible && gamePlayDispatch({type: "playerListVisibleControl"});
     };
 
     return (
         <PostsContext.Provider value={{team}}>
-            <StyledGamePlay>
-                <GamePlayPopupSection data-id={1} onMouseEnter={handleMouseEnter} isTop />
-                <GamePlayPopupSection data-id={2} onMouseEnter={handleMouseEnter} />
+            <MainFrame onClick={handleMainFrameClick} data-name="gameplay">
+                <StyledGamePlay>
+                    <GamePlayPopupSection data-id={1} onMouseEnter={handleMouseEnter} isTop />
+                    <GamePlayPopupSection data-id={2} onMouseEnter={handleMouseEnter} />
 
-                <TeamScorePopup visible={scorePopupVisible} callBackFrameLeave={setScorePopupVisible} />
-                <PlayerListPopup visible={listPopupVisible} callBackFrameLeave={setListPopupVisible}/>
+                    <TeamScorePopup visible={gamePlayState.teamScorePopupVisible} />
+                    <PlayerListPopup visible={gamePlayState.playListPopupVisible} />
 
-                <GamePlayItems>{gamePlayItems}</GamePlayItems>
-            </StyledGamePlay>
+                    <GamePlayItems>{gamePlayItems}</GamePlayItems>
+                </StyledGamePlay>
+            </MainFrame>
         </PostsContext.Provider>
     );
 };
