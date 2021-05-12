@@ -9,4 +9,7 @@ import java.util.List;
 public interface PlayingRepository extends CrudRepository<Playing, Long> {
     @Query("SELECT `team_name`, `player_number`, `player_name`, `position`, `pa`, `hit`, `out`, `average`, `game_id` FROM playing WHERE game_id=:gameId and team_name=:teamName")
     List<Playing> findAllByTeam(Long gameId, String teamName);
+
+    @Query("SELECT `team_name`, `player_number`, `player_name`, `position`, `pa`, `hit`, `out`, `average`, `game_id` FROM playing WHERE game_id=:gameId and team_name=:teamName and player_number=:playerNumber")
+    Playing findByTeam(Long gameId, String teamName, Integer playerNumber);
 }

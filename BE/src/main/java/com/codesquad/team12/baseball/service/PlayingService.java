@@ -29,7 +29,9 @@ public class PlayingService {
 
         for (Player player : players.values()) {
             Playing playing = new Playing(team.getName(), player.getNumber(), player.getName(), player.getPosition(), gameId);
-            playingRepository.save(playing);
+            if (findByTeam(gameId, teamName, player.getNumber()) == null) {
+                playingRepository.save(playing);
+            }
         }
     }
 
@@ -41,4 +43,9 @@ public class PlayingService {
                 .map(Playing::createPlayingDto)
                 .collect(Collectors.toList());
     }
+
+    private Playing findByTeam(Long gameId, String teamName, Integer playerNumber) {
+        return playingRepository.findByTeam(gameId, teamName, playerNumber);
+    }
+
 }

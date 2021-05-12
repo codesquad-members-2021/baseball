@@ -18,9 +18,11 @@ public class InningService {
     }
 
     public void initInning(Long gameId, String teamName) {
-        for (int i = 1; i < 12; i++) {
+        for (int i = 1; i <= 12; i++) {
             Inning inning = new Inning(teamName, i, 0, gameId);
-            inningRepository.save(inning);
+            if (findByTeam(gameId,teamName,i) == null) {
+                inningRepository.save(inning);
+            }
         }
     }
 
@@ -30,5 +32,9 @@ public class InningService {
                 .stream()
                 .map(Inning::createInningDto)
                 .collect(Collectors.toList());
+    }
+
+    private Inning findByTeam(Long gameId, String teamName, Integer number) {
+        return inningRepository.findByTeam(gameId, teamName, number);
     }
 }

@@ -9,4 +9,7 @@ import java.util.List;
 public interface InningRepository extends CrudRepository<Inning, Long> {
     @Query("SELECT team_name, number, score, game_id FROM inning WHERE game_id=:gameId and team_name=:teamName")
     List<Inning> findAllByTeam(Long gameId, String teamName);
+
+    @Query("SELECT team_name, number, score, game_id FROM inning WHERE game_id=:gameId and team_name=:teamName and number=:number")
+    Inning findByTeam(Long gameId, String teamName, Integer number);
 }
