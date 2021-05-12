@@ -23,32 +23,16 @@ class PlayerLayer: CALayer {
     private var height: CGFloat {
         return self.frame.height
     }
-
-    override init(layer: Any) {
-        super.init(layer: layer)
-        configure()
-    }
     
-    init(origin: CGPoint, size: CGSize) {
-        super.init()
-        self.frame = CGRect(origin: origin, size: size)
-        configure()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        configure()
-    }
-    
-    private func configure() {
-        addFace()
+    func configure() {
         addBody()
+        addFace()
     }
     
     private func addBody() {
         
-        let bodyHeight = height * 0.65
-        let bodyWidth = bodyHeight * 0.7
+        let bodyWidth = width
+        let bodyHeight = width * 1.2
         let bodySize = CGSize(width: bodyWidth, height: bodyHeight)
         
         let bodyXPosition = width / 2 - bodyWidth / 2
@@ -68,8 +52,8 @@ class PlayerLayer: CALayer {
     
     private func addFace() {
         
-        let faceHeight = height * 0.35
-        let faceWidth = faceHeight
+        let faceWidth = width * 0.7
+        let faceHeight = faceWidth
         let faceSize = CGSize(width: faceWidth, height: faceHeight)
         
         let faceXPosition = width / 2 - faceWidth / 2

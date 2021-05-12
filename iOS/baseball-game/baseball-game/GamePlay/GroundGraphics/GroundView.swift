@@ -93,9 +93,9 @@ class GroundView: UIView {
         let origin: CGPoint
         let size: CGSize
         
-        func originMovedBy(x: CGFloat, y: CGFloat) -> CGPoint {
-            let newX = origin.x + x
-            let newY = origin.y + y
+        func centerMovedBy(x: CGFloat, y: CGFloat) -> CGPoint {
+            let newX = origin.x + x + size.width / 2
+            let newY = origin.y + y - size.height / 2
             return CGPoint(x: newX, y: newY)
         }
     }
@@ -146,8 +146,7 @@ class GroundView: UIView {
             self.addBase(id: baseProperty.id, origin: baseProperty.origin, size: baseProperty.size)
         }
 
-        let homeOrigin = homeBaseProperty.origin
-        addPlayer(to: homeOrigin)
+        addPlayer(to: homeBaseProperty)
         
     }
     
@@ -164,17 +163,15 @@ class GroundView: UIView {
         self.baseLayers[id] = base
         
     }
-
-    private func addPlayer(to baseOrigin: CGPoint) {
+    
+    private func addPlayer(to baseInfo: BaseDrawingProperty) {
         
-        let playerWidth = width * 0.07
+        let playerWidth = width * 0.06
         let playerHeight = playerWidth * 1.5
-        
         let playerSize = CGSize(width: playerWidth, height: playerHeight)
         
-        let playerXPosition = baseOrigin.x + playerWidth
-        let playerYPosition = baseOrigin.y
-        let playerOrigin = CGPoint(x: playerXPosition, y: playerYPosition)
+        let offsetX = playerWidth / 2
+        let playerOrigin = baseInfo.centerMovedBy(x: -offsetX, y: 0)
         
         let player = PlayerLayer()
         player.frame = CGRect(origin: playerOrigin, size: playerSize)
@@ -247,9 +244,9 @@ extension GroundView {
         
         guard let player = playerLayer else { return }
         
-        let offsetX = player.frame.width
-        let fromPosition = fromBaseInfo.originMovedBy(x: offsetX, y: 0)
-        let toPosition = toBaseInfo.originMovedBy(x: offsetX, y: 0)
+        let offsetY = player.frame.height / 2
+        let fromPosition = fromBaseInfo.centerMovedBy(x: 0, y: offsetY)
+        let toPosition = toBaseInfo.centerMovedBy(x: 0, y: offsetY)
         
         let positionAnimation = CASpringAnimation(keyPath: #keyPath(PlayerLayer.position))
         positionAnimation.damping = 10
