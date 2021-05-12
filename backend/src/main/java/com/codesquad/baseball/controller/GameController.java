@@ -1,5 +1,6 @@
 package com.codesquad.baseball.controller;
 
+import com.codesquad.baseball.annotation.Auth;
 import com.codesquad.baseball.dto.game.GameDetailDTO;
 import com.codesquad.baseball.dto.game.GamesDTO;
 import com.codesquad.baseball.dto.game.PitchDTO;
@@ -22,18 +23,21 @@ public class GameController {
         return gameService.showGames();
     }
 
+    @Auth
     @CrossOrigin
     @PatchMapping("/{gameId}")
     public void joinIn(@PathVariable("gameId") int gameId) {
         gameService.joinIn(gameId);
     }
 
+    @Auth
     @CrossOrigin
     @GetMapping("/{gameId}")
     public GameDetailDTO showGameDetail(@PathVariable("gameId") int gameId) {
         return gameService.gameDetail(gameId);
     }
 
+    @Auth
     @CrossOrigin
     @PostMapping("/{gameId}/pitch")
     public PitchDTO pitch(@PathVariable("gameId") int gameId) {

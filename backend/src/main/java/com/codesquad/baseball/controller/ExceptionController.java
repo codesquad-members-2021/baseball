@@ -7,6 +7,8 @@ import com.codesquad.baseball.exceptions.notfound.GameNotFoundException;
 import com.codesquad.baseball.exceptions.notfound.NotFoundException;
 import com.codesquad.baseball.exceptions.notfound.PlayerNotFoundException;
 import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
+import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
+import com.codesquad.baseball.exceptions.oauth.NoJwtTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -39,5 +41,11 @@ public class ExceptionController {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ErrorDTO handleInternalServerError(HttpRequestMethodNotSupportedException exception) {
         return new ErrorDTO(HttpStatus.METHOD_NOT_ALLOWED, exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({NoJwtTokenException.class, InvalidJwtTokenException.class})
+    public ErrorDTO handleNoJwtTokenException(RuntimeException exception) {
+        return new ErrorDTO(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 }
