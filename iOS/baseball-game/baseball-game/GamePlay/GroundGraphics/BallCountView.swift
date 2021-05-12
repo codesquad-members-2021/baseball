@@ -46,6 +46,39 @@ class BallCountView: UIView {
     private var countCircleLayers: [Int: [CALayer]] = [:]
 
     func configure() {
+        addCircles()
+        addTexts()
+    }
+    
+    private func addTexts() {
+        let strings = ["S", "B", "O"]
+        
+        for (row, string) in strings.enumerated() {
+            addText(string, to: row)
+        }
+    }
+    
+    private func addText(_ string: String, to row: Int) {
+
+        let textWidth = width * 0.2
+        let textHeight = width * 0.3
+        let textSize = CGSize(width: textWidth, height: textHeight)
+        
+        let rowInCGFloat = CGFloat(row)
+        let xPosition = width * 0.075
+        let yPosition = width * 0.1 + rowInCGFloat * width * 0.3
+        let textOrigin = CGPoint(x: xPosition, y: yPosition)
+        
+        let textLayer = CATextLayer()
+        textLayer.frame = CGRect(origin: textOrigin, size: textSize)
+        textLayer.string = string
+        textLayer.fontSize = textWidth * 0.8
+        textLayer.alignmentMode = .center
+        
+        layer.addSublayer(textLayer)
+    }
+    
+    private func addCircles() {
         let drawingProperties = [strikeProperty, ballProperty, outProperty]
 
         for property in drawingProperties {
@@ -58,20 +91,26 @@ class BallCountView: UIView {
     }
     
     private func addCircle(to row: Int, _ column: Int, color: CGColor) {
-        let rowInCGFloat = CGFloat(row), columnInCGFloat = CGFloat(column)
-        let circle = CALayer()
-        let circleWidth = width * 0.18
         
-        circle.frame = CGRect(x: width * 0.3 + columnInCGFloat * width * 0.2,
-                              y: width * 0.1 + rowInCGFloat * width * 0.3,
-                              width: circleWidth, height: circleWidth)
+        let circleWidth = width * 0.18
+        let circleHeight = circleWidth
+        let circleSize = CGSize(width: circleWidth, height: circleHeight)
+        
+        let rowInCGFloat = CGFloat(row), columnInCGFloat = CGFloat(column)
+        let circleXPosition = width * 0.3 + columnInCGFloat * width * 0.2
+        let circleYPosition = width * 0.1 + rowInCGFloat * width * 0.3
+        let circleOrigin = CGPoint(x: circleXPosition, y: circleYPosition)
+        
+        let circle = CALayer()
+        circle.frame = CGRect(origin: circleOrigin, size: circleSize)
         circle.backgroundColor = color
-        circle.borderWidth = width * 0.02
+        circle.borderWidth = circleWidth * 0.1
         circle.borderColor = Color.border
         circle.cornerRadius = circle.frame.width * 0.5
         
         layer.addSublayer(circle)
         append(layer: circle, to: row)
+        
     }
     
     private func append(layer: CALayer, to row: Int) {

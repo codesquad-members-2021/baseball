@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -104,47 +103,9 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X46-so-drB" userLabel="SBO View" customClass="BallCountView" customModule="baseball_game" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="110.5" height="110.5"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mMQ-eN-G3u">
-                                                <rect key="frame" x="5" y="10" width="27.5" height="90.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="aeY-Mu-BNP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="27.5" height="25"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tvu-La-YBz">
-                                                        <rect key="frame" x="0.0" y="33" width="27.5" height="24.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="O" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hou-li-q3f">
-                                                        <rect key="frame" x="0.0" y="65.5" width="27.5" height="25"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="mMQ-eN-G3u" secondAttribute="bottom" constant="10" id="7bx-K2-Lc0"/>
-                                            <constraint firstItem="mMQ-eN-G3u" firstAttribute="leading" secondItem="X46-so-drB" secondAttribute="leading" constant="5" id="94O-04-Bm2"/>
                                             <constraint firstAttribute="width" secondItem="X46-so-drB" secondAttribute="height" multiplier="1:1" id="GsY-Ii-6fq"/>
-                                            <constraint firstItem="mMQ-eN-G3u" firstAttribute="width" secondItem="X46-so-drB" secondAttribute="width" multiplier="0.25" id="ReI-s5-Cb0"/>
-                                            <constraint firstItem="mMQ-eN-G3u" firstAttribute="top" secondItem="X46-so-drB" secondAttribute="top" constant="10" id="jYj-9M-ARO"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
