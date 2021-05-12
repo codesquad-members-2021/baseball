@@ -6,28 +6,40 @@ import axios from 'axios';
 
 const Team = ({ type, game }) => {
   const { setPlayable } = useContext(PlayableContext);
-  const { setMyTeam, setCounterTeam, isHome, setIsHome, setIsDefense } =
-    useContext(GlobalContext);
+  const {
+    setMyTeam,
+    setCounterTeam,
+    isHome,
+    setIsHome,
+    setIsDefense,
+  } = useContext(GlobalContext);
   const history = useHistory();
   const handleClickTeam = async () => {
-    // 서버에 gameId 담아 POST 요청
-    // 200 OK 시, 응답 받은 데이터를 context에 세팅 (?) (then 또는 await)
-    const { data } = await axios.get('http://localhost:3000/players-modi.json');
-    const [awayInfo, homeInfo] = [data.awayTeam, data.homeTeam];
-    homeInfo.userSelected && setIsHome(true);
-    if (isHome) {
-      setMyTeam(homeInfo.players);
-      setCounterTeam(awayInfo.players);
-      setIsDefense(isHome);
+    let teamId;
+    if (type === 'home') {
+      teamId = game.homeTeamId;
     } else {
-      setMyTeam(awayInfo.players);
-      setCounterTeam(homeInfo.players);
+      teamId = game.awayTeamId;
     }
-
-    // 그리고 '/play-screen' 으로 라우팅
-    history.push('/play-screen');
-    // 에러 시, Caption의 메시지를 바꿔줌
-    setPlayable(false);
+    try {
+      const { data } = await axios.get(
+        `http://13.209.109.186/baseball/games/${game.gameId}/${teamId}`
+      );
+      console.log(data);
+      const [awayInfo, homeInfo] = [data.awayTeam, data.homeTeam];
+      homeInfo.userSelected && setIsHome(true);
+      if (isHome) {
+        setMyTeam(homeInfo.players);
+        setCounterTeam(awayInfo.players);
+        setIsDefense(isHome);
+      } else {
+        setMyTeam(awayInfo.players);
+        setCounterTeam(homeInfo.players);
+      }
+      history.push('/play-screen');
+    } catch {
+      setPlayable(false);
+    }
   };
 
   return type === 'away' ? (
