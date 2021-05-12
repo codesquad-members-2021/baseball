@@ -1,6 +1,8 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game.participant;
 
-import com.codesquad.baseball.exceptions.PlayerNotFoundException;
+import com.codesquad.baseball.domain.team.Player;
+import com.codesquad.baseball.domain.team.TeamType;
+import com.codesquad.baseball.exceptions.notfound.PlayerNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 

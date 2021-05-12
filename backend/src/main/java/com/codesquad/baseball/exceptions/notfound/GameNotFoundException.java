@@ -1,4 +1,4 @@
-package com.codesquad.baseball.exceptions;
+package com.codesquad.baseball.exceptions.notfound;
 
 public class GameNotFoundException extends NotFoundException {
     private static final String GAME_NOT_FOUND_ERROR_MESSAGE = "게임을 찾지 못했습니다. id : ";

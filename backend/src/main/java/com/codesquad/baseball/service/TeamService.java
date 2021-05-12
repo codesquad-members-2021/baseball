@@ -1,10 +1,10 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.domain.Player;
-import com.codesquad.baseball.domain.PlayerRole;
-import com.codesquad.baseball.domain.Team;
-import com.codesquad.baseball.domain.TeamRepository;
-import com.codesquad.baseball.exceptions.TeamNotFoundException;
+import com.codesquad.baseball.domain.team.Player;
+import com.codesquad.baseball.domain.team.PlayerRole;
+import com.codesquad.baseball.domain.team.Team;
+import com.codesquad.baseball.domain.team.TeamRepository;
+import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

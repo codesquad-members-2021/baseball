@@ -1,4 +1,4 @@
-package com.codesquad.baseball.exceptions;
+package com.codesquad.baseball.exceptions.notfound;
 
 public class TeamNotFoundException extends NotFoundException {
 

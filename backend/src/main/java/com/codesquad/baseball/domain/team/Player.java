@@ -1,4 +1,4 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.team;
 
 import org.springframework.data.annotation.Id;
 

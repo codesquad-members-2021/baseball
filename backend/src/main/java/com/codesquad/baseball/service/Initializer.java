@@ -1,7 +1,7 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.domain.Game;
-import com.codesquad.baseball.domain.Team;
+import com.codesquad.baseball.domain.game.Game;
+import com.codesquad.baseball.domain.team.Team;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

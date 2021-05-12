@@ -1,8 +1,8 @@
 package com.codesquad.baseball.dto;
 
-import com.codesquad.baseball.domain.Game;
-import com.codesquad.baseball.domain.PitchResult;
-import com.codesquad.baseball.domain.PlayType;
+import com.codesquad.baseball.domain.game.Game;
+import com.codesquad.baseball.domain.game.pitch.PitchResult;
+import com.codesquad.baseball.domain.game.PlayType;
 
 import java.util.List;
 

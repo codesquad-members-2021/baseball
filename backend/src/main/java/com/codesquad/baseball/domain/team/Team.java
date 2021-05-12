@@ -1,5 +1,6 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.team;
 
+import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
 import org.springframework.data.annotation.Id;
 
 import java.util.HashSet;

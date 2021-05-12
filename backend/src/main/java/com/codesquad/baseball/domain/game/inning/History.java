@@ -1,5 +1,6 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game.inning;
 
+import com.codesquad.baseball.domain.game.PlayType;
 import org.springframework.data.annotation.Id;
 
 public class History {

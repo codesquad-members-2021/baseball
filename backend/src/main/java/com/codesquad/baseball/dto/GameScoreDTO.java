@@ -1,6 +1,6 @@
 package com.codesquad.baseball.dto;
 
-import com.codesquad.baseball.domain.Game;
+import com.codesquad.baseball.domain.game.Game;
 
 import java.util.List;
 import java.util.stream.Collectors;

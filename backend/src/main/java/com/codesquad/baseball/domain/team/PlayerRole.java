@@ -1,4 +1,4 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.team;
 
 public enum PlayerRole {
     HITTER,

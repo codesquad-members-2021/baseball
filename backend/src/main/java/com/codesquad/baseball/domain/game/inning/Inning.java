@@ -1,5 +1,8 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game.inning;
 
+import com.codesquad.baseball.domain.game.PlayType;
+import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
+import com.codesquad.baseball.domain.team.TeamType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 

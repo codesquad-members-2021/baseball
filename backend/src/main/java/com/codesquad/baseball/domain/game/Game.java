@@ -1,7 +1,13 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game;
 
-import com.codesquad.baseball.exceptions.GameIsNotStartedException;
-import com.codesquad.baseball.exceptions.TeamNotFoundException;
+import com.codesquad.baseball.domain.game.inning.History;
+import com.codesquad.baseball.domain.game.inning.Inning;
+import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;
+import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
+import com.codesquad.baseball.domain.game.pitch.PitchResult;
+import com.codesquad.baseball.domain.team.TeamType;
+import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
+import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.MappedCollection;

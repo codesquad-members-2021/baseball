@@ -1,6 +1,6 @@
 package com.codesquad.baseball.dto;
 
-import com.codesquad.baseball.domain.Team;
+import com.codesquad.baseball.domain.team.Team;
 
 public class TeamDTO {
     private int id;

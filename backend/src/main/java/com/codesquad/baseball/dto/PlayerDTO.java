@@ -1,8 +1,8 @@
 package com.codesquad.baseball.dto;
 
-import com.codesquad.baseball.domain.Player;
-import com.codesquad.baseball.domain.PlayerParticipatingInGame;
-import com.codesquad.baseball.domain.PlayerRole;
+import com.codesquad.baseball.domain.team.Player;
+import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;
+import com.codesquad.baseball.domain.team.PlayerRole;
 
 public class PlayerDTO {
     private int id;

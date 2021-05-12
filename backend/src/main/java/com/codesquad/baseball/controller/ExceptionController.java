@@ -1,7 +1,12 @@
 package com.codesquad.baseball.controller;
 
 import com.codesquad.baseball.dto.ErrorDTO;
-import com.codesquad.baseball.exceptions.*;
+import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
+import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
+import com.codesquad.baseball.exceptions.notfound.GameNotFoundException;
+import com.codesquad.baseball.exceptions.notfound.NotFoundException;
+import com.codesquad.baseball.exceptions.notfound.PlayerNotFoundException;
+import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

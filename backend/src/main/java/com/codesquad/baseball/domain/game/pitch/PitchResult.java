@@ -1,4 +1,9 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game.pitch;
+
+import com.codesquad.baseball.domain.game.Game;
+import com.codesquad.baseball.domain.game.GameState;
+import com.codesquad.baseball.domain.game.inning.History;
+import com.codesquad.baseball.domain.game.PlayType;
 
 import java.util.ArrayList;
 import java.util.List;

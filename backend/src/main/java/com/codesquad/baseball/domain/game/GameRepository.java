@@ -1,4 +1,4 @@
-package com.codesquad.baseball.domain;
+package com.codesquad.baseball.domain.game;
 
 import org.springframework.data.repository.CrudRepository;
 

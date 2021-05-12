@@ -1,6 +1,6 @@
 package com.codesquad.baseball.dto;
 
-import com.codesquad.baseball.domain.Game;
+import com.codesquad.baseball.domain.game.Game;
 
 public class GameStatusDTO {
     private int inning;
