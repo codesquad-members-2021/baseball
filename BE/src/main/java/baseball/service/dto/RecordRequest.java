@@ -1,5 +1,7 @@
 package baseball.service.dto;
 
+import baseball.domain.Record;
+
 public class RecordRequest {
 
     private int atBat;
@@ -22,5 +24,9 @@ public class RecordRequest {
 
     public int getOut() {
         return out;
+    }
+
+    public Record toRecord() {
+        return new Record(atBat, hit, out);
     }
 }

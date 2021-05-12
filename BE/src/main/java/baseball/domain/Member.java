@@ -29,10 +29,6 @@ public class Member {
         return position;
     }
 
-    public Record getRecord() {
-        return record;
-    }
-
     public void setRecord(Record record) {
         this.record = record;
     }

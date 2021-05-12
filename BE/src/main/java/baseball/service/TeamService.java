@@ -4,12 +4,9 @@ import baseball.domain.Member;
 import baseball.domain.Record;
 import baseball.exception.RecordDTONotFoundException;
 import baseball.exception.TeamNotFoundException;
-import baseball.service.dto.RecordDTO;
+import baseball.service.dto.*;
 import baseball.domain.Team;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.TeamRequest;
-import baseball.service.dto.TeamDTO;
-import baseball.service.dto.TeamRecordsDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -43,10 +40,10 @@ public class TeamService {
         return teamDTOs;
     }
 
-    public void insertRecord(Long teamId, Long memberId, int atBat, int hit, int out) {
+    public void insertRecord(Long teamId, Long memberId, RecordRequest recordRequest) {
         Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
         Member member = team.getMemberById(memberId);
-        member.setRecord(new Record(atBat, hit, out));
+        member.setRecord(recordRequest.toRecord());
         teamRepository.save(team);
     }
 
