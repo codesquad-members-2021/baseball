@@ -1,6 +1,5 @@
 package com.codesquad.coco.utils;
 
-import com.codesquad.coco.user.domain.SecretServerKey;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

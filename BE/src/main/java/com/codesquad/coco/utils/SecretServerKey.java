@@ -1,4 +1,4 @@
-package com.codesquad.coco.user.domain;
+package com.codesquad.coco.utils;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,7 +1,7 @@
-package com.codesquad.coco.user.domain;
+package com.codesquad.coco.user;
 
-import com.codesquad.coco.user.UserService;
 import com.codesquad.coco.utils.FindSecretServerKey;
+import com.codesquad.coco.utils.SecretServerKey;
 import com.gitoauth.coco.JWT.JWTUtils;
 import com.gitoauth.coco.oauth.AccessToken;
 import com.gitoauth.coco.oauth.Oauth;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Base64;
 
-import static com.codesquad.coco.user.domain.GitURI.*;
+import static com.codesquad.coco.utils.GitURI.*;
 
 @RestController
 public class UserController {
