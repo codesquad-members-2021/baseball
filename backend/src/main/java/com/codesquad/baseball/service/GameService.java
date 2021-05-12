@@ -79,6 +79,11 @@ public class GameService {
         return createPitchDTO(game, pitchResult);
     }
 
+    @Transactional
+    public void removeAll() {
+        gameRepository.deleteAll();
+    }
+
     private PitchDTO createPitchDTO(Game game, PitchResult pitchResult) {
         TeamDetailDTO homeTeam = teamDetailDTO(game, TeamType.HOME);
         TeamDetailDTO awayTeam = teamDetailDTO(game, TeamType.AWAY);

@@ -40,6 +40,11 @@ public class TeamService {
         addPlayer(team, player);
     }
 
+    @Transactional
+    public void removeAll() {
+        teamRepository.deleteAll();
+    }
+
     private Player createPlayer(String playerName, int uniformNumber, PlayerRole playerRole) {
         return new Player.Builder()
                 .playerName(playerName)
