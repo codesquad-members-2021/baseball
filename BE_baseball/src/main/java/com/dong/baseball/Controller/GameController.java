@@ -1,6 +1,6 @@
 package com.dong.baseball.Controller;
 
-import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
 import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Service.GameService;
@@ -20,7 +20,7 @@ public class GameController {
     }
 
     @GetMapping("")
-    public List<MatchUpListDTO> allMatches() {
+    public MatchUpListsDTO allMatches() {
         return gameService.matchList();
     }
 

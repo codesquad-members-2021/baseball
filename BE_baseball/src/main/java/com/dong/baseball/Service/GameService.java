@@ -1,6 +1,7 @@
 package com.dong.baseball.Service;
 
-import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.MatchDTO;
+import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
 import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Domain.Board;
@@ -21,13 +22,13 @@ public class GameService {
         this.leagueRepository = leagueRepository;
     }
 
-    public List<MatchUpListDTO> matchList() {
+    public MatchUpListsDTO matchList() {
         List<Match> matchList = leagueRepository.findAll();
-        List<MatchUpListDTO> dtoList = new ArrayList<>();
+        List<MatchDTO> dtoList = new ArrayList<>();
         for (Match match : matchList) {
-            dtoList.add(new MatchUpListDTO(match));
+            dtoList.add(new MatchDTO(match));
         }
-        return dtoList;
+        return new MatchUpListsDTO(dtoList);
     }
 
     public List<ProgressDTO> matchInformations(Long matchId) {

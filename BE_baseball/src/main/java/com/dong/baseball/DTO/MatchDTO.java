@@ -2,13 +2,13 @@ package com.dong.baseball.DTO;
 
 import com.dong.baseball.Domain.Match;
 
-public class MatchUpListDTO {
+public class MatchDTO {
     private Long matchId;
     private String home;
     private String away;
 
 
-    public MatchUpListDTO(Match match) {
+    public MatchDTO(Match match) {
         this.matchId = match.getId();
         this.home = match.getHome();
         this.away = match.getAway();
