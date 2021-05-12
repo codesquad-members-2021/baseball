@@ -1,15 +1,10 @@
 package com.dong.baseball.Controller;
 
-import com.dong.baseball.DTO.MatchUpListDTO;
+import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.SituationBoardDTO;
-import com.dong.baseball.Domain.Board;
-import com.dong.baseball.Domain.Match;
+import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Service.GameService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,24 +20,41 @@ public class GameController {
     }
 
     @GetMapping("")
-    public List<MatchUpListDTO> allMatches() {
+    public MatchUpListsDTO allMatches() {
         return gameService.matchList();
     }
 
     @GetMapping("/{matchId}")
-    public List<SituationBoardDTO> matchInfos(@PathVariable Long matchId) {
+    public List<ProgressDTO> matchInfos(@PathVariable Long matchId) {
         return gameService.matchInformations(matchId);
     }
 
-    @GetMapping("/progress/offense")
-    public ProgressDTO offeseInfo() {
-        return new ProgressDTO("");
+    @GetMapping("/offense/{matchId}")
+    public ProgressDTO offeseInfo(@PathVariable Long matchId) {
+
+        gameService.matchInformations(matchId);
+        return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @GetMapping("/progress/defense")
-    public ProgressDTO defenseInfo() {
-        return new ProgressDTO("");
+    @GetMapping("/defense/{matchId}")
+    public ProgressDTO defenseInfo(@PathVariable Long matchId) {
+
+        gameService.matchInformations(matchId);
+        return new ProgressDTO(gameService.matchStream(matchId));
     }
 
+    @PostMapping("/start/{matchId}")
+    public ResponseDTO gameStart(@PathVariable Long matchId) {
+        return gameService.gameStart(matchId);
+    }
 
+    @PostMapping("/end/{matchId}")
+    public ResponseDTO gameEnd(@PathVariable Long matchId) {
+        return gameService.gameEnd(matchId);
+    }
+
+    @PostMapping("/throws/{matchId}")
+    public ResponseDTO gameProgress(@PathVariable Long matchId) {
+        return gameService.gameProgress(matchId);
+    }
 }

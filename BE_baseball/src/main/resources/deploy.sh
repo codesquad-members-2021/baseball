@@ -1,7 +1,7 @@
 # 설정
 LINE='#########################################################'
-SERVADDR='ec2-13-125-229-168.ap-northeast-2.compute.amazonaws.com' #배포할 AWS EC2 서버
-KEYFILE='~/Downloads/DongDong.pem' # 내 개발콤퓨터에서 AWS key 위치
+SERVADDR='ec2-3-35-226-74.ap-northeast-2.compute.amazonaws.com' #배포할 AWS EC2 서버
+KEYFILE='~/Downloads/Dong210511.pem' # 내 개발콤퓨터에서 AWS key 위치
 AUTOINJECT_JAR=1 #1:자동으로 scp명령어로 밀어넣기, #0=안밀어넣고 명령어만 보여주고 끝내기
 #
 echo $LINE
@@ -15,9 +15,11 @@ cd build/libs
 BINFILE=`ls | grep *.jar`
 echo $BINFILE
 echo $LINE
+echo "sdfwef"
 
 if [ ${AUTOINJECT_JAR} -eq 1 ];then
     scp -i $KEYFILE $BINFILE ubuntu@$SERVADDR:/home/ubuntu
+    echo "fffff"
     echo "JAR FILE SEND OK...!"
 
     echo ""

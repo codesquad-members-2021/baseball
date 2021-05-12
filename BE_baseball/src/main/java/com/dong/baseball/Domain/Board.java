@@ -1,10 +1,7 @@
 package com.dong.baseball.Domain;
 
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-
-import java.time.LocalDateTime;
 
 public class Board {
 
@@ -21,6 +18,7 @@ public class Board {
     private String pitcher;
     private String batter;
 
+    //@Todo 시간 기입해주기
     //@CreatedDate
     //private LocalDateTime createdAt;
 
@@ -40,6 +38,9 @@ public class Board {
                 '}';
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public int getInning() {
         return inning;

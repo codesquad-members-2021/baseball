@@ -7,7 +7,6 @@ import com.dong.baseball.Repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class TeamService {
         System.out.println("@@@@@@@@" + teamList + "  : " + teamList.size());
         List<TeamRankDTO> teamRankDTOList = new ArrayList<>();
 
-        for(Team team : teamList) {
+        for (Team team : teamList) {
             teamRankDTOList.add(new TeamRankDTO(team));
         }
 
@@ -40,7 +39,7 @@ public class TeamService {
     }
 
     public Team teamInfoById(Long teamId) {
-        return teamRepository.findByTeamId(teamId).orElseThrow (() -> new TeamNotFound());
+        return teamRepository.findByTeamId(teamId).orElseThrow(() -> new TeamNotFound());
     }
 
     public Team teamInfoByName(String teamName) {
