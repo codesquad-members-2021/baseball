@@ -6,9 +6,9 @@ import Game from './Game';
 const GameList = (props) => {
   const [games, setGames] = useState([]);
   const fetchData = async () => {
-    const {
-      data: { games },
-    } = await axios.get('http://localhost:3000/games-modi.json');
+    const { data: games } = await axios.get(
+      'http://13.209.109.186/baseball/games'
+    );
     setGames(games);
   };
 
