@@ -1,5 +1,6 @@
 package com.codesquad.baseball.domain.user;
 
+import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -17,12 +18,13 @@ public class User {
     private String givenName;
     private String picture;
     private String locale;
-    private String jwt;
+    private String accessToken;
+    private String refreshToken;
 
     protected User() {
     }
 
-    public User(UserInfoDTO userInfoDTO) {
+    public User(UserInfoDTO userInfoDTO, JwtTokenDTO jwtTokenDTO) {
         userId = userInfoDTO.getId();
         email = userInfoDTO.getEmail();
         verifiedEmail = userInfoDTO.getVerified_email();
@@ -31,6 +33,8 @@ public class User {
         givenName = userInfoDTO.getGiven_name();
         picture = userInfoDTO.getPicture();
         locale = userInfoDTO.getLocale();
+        this.accessToken = jwtTokenDTO.getAccessToken();
+        this.refreshToken = jwtTokenDTO.getRefreshToken();
     }
 
     public void update(UserInfoDTO userInfoDTO) {
@@ -44,8 +48,12 @@ public class User {
         locale = userInfoDTO.getLocale();
     }
 
-    public void updateToken(String jwt) {
-        this.jwt = jwt;
+    public void updateAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
     public Long getId() {
@@ -56,7 +64,11 @@ public class User {
         return userId;
     }
 
-    public String getJwt() {
-        return jwt;
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
     }
 }

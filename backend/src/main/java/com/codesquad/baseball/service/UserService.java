@@ -2,17 +2,14 @@ package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.domain.user.UserRepository;
+import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final JwtManager jwtManager;
@@ -22,27 +19,24 @@ public class UserService {
         this.jwtManager = jwtManager;
     }
 
-    public User login(UserInfoDTO userInfoDTO) {
+    public JwtTokenDTO login(UserInfoDTO userInfoDTO) {
         Optional<User> optionalUser = findUserByUserId(userInfoDTO.getId());
-        User user = userLoginCheck(userInfoDTO, optionalUser);
-        String jwtToken = jwtManager.createToken(user);
-        logger.info("jwtToken : {}", jwtToken);
-        user.updateToken(jwtToken);
-        userRepository.save(user);
-        return user;
+        JwtTokenDTO jwtTokenDTO = jwtManager.createToken(userInfoDTO.getId());
+        processUserData(userInfoDTO, optionalUser, jwtTokenDTO);
+        return jwtTokenDTO;
     }
 
-    private User userLoginCheck(UserInfoDTO userInfoDTO, Optional<User> optionalUser) {
+    private void processUserData(UserInfoDTO userInfoDTO, Optional<User> optionalUser, JwtTokenDTO jwtTokenDTO) {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.update(userInfoDTO);
-            return userRepository.save(user);
+            userRepository.save(user);
         }
-        return createUser(userInfoDTO);
+        createUser(userInfoDTO, jwtTokenDTO);
     }
 
-    public User createUser(UserInfoDTO userInfoDTO) {
-        return userRepository.save(new User(userInfoDTO));
+    public User createUser(UserInfoDTO userInfoDTO, JwtTokenDTO jwtTokenDTO) {
+        return userRepository.save(new User(userInfoDTO, jwtTokenDTO));
     }
 
     public Optional<User> findUserByUserId(String userId) {

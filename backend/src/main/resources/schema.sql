@@ -93,5 +93,6 @@ create table users
     given_name     varchar(20)  not null,
     picture        varchar(200) not null,
     locale         varchar(30)  not null,
-    jwt            varchar(300)
+    access_token   varchar(200),
+    refresh_token  varchar(200)
 );
