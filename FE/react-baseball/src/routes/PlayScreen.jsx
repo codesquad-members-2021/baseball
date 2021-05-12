@@ -3,15 +3,41 @@ import Score from '../components/playScreen/Score';
 import LogList from '../components/playScreen/LogList';
 import Stadium from '../components/playScreen/Stadium';
 import CurrentPlayer from '../components/playScreen/CurrentPlayer';
+import { useContext } from 'react';
+import { GlobalContext } from '../App';
 
-const PlayScreen = (props) => (
-  <PlayScreenDiv>
-    <Score />
-    <CurrentPlayer />
-    <Stadium />
-    <LogList />
-  </PlayScreenDiv>
-);
+const PlayScreen = (props) => {
+  const {
+    isHome,
+    homeTeam,
+    awayTeam,
+    setMyTeam,
+    setMyTeamName,
+    setCounterTeam,
+    setCounterTeamName,
+  } = useContext(GlobalContext);
+
+  if (isHome) {
+    setMyTeam(homeTeam.players);
+    setMyTeamName(homeTeam.teamName);
+    setCounterTeam(awayTeam.players);
+    setCounterTeamName(awayTeam.teamName);
+    // setIsDefense(isHome);
+  } else {
+    setMyTeam(awayTeam.players);
+    setMyTeamName(awayTeam.teamName);
+    setCounterTeam(homeTeam.players);
+    setCounterTeamName(homeTeam.teamName);
+  }
+  return (
+    <PlayScreenDiv>
+      <Score />
+      <CurrentPlayer />
+      <Stadium />
+      <LogList />
+    </PlayScreenDiv>
+  );
+};
 
 const PlayScreenDiv = styled.div`
   display: grid;
