@@ -50,6 +50,14 @@ public class BaseballGame {
     }
 
     public void pitch(Pitch pitch) {
+        if (!history.isEmpty()) {
+            BatterInningHistory lastHistory = history.get(history.size() - 1);
+            if (lastHistory.checkBatterChangeEvent()) {
+                batterChangeEvent(lastHistory);
+                return;
+            }
+        }
+
         TeamInformation attack = getAttackTeam();
         TeamInformation defence = getDefenceTeam();
 
@@ -66,12 +74,28 @@ public class BaseballGame {
         }
 
         if (pitch == Pitch.OUT) {
-            out(attack, defence);
+            out(attack);
             return;
         }
 
         if (pitch == Pitch.STRIKE) {
-            strike(attack, defence);
+            strike(attack);
+        }
+
+    }
+
+    private void batterChangeEvent(BatterInningHistory lastHistory) {
+        Pitch lastHistoryEvent = lastHistory.getPictch();
+        history.clear();
+        TeamInformation attack = getAttackTeam();
+        attack.setNextBatter();
+        inning.initStrikeAndBall();
+        inning.flushHome();
+
+        if (lastHistoryEvent == Pitch.OUT && inning.isThreeOut()) {
+            TeamInformation defence = getDefenceTeam();
+            defence.nextInning();
+            inning.threeOut();
         }
 
     }
@@ -95,40 +119,40 @@ public class BaseballGame {
     private void hit(TeamInformation attackTeam) {
         inning.hit();
         teamInformationHit(attackTeam);
+        history.add(new BatterInningHistory(Pitch.HIT, inning.getHistoryState()));
     }
 
     private void ball(TeamInformation attackTeam) {
         inning.ball();
         if (inning.isFourBall()) {
             inning.fourBall();
+            history.add(new BatterInningHistory(Pitch.FOUR_BALL, inning.getHistoryState()));
             teamInformationHit(attackTeam);
+            return;
         }
+        history.add(new BatterInningHistory(Pitch.BALL, inning.getHistoryState()));
     }
 
     private void teamInformationHit(TeamInformation attack) {
         attack.hit();
-        attack.setNextBatter();
-
         if (inning.homeIn()) {
             attack.scoreUp(inning.getOrdinal());
         }
     }
 
-    private void out(TeamInformation attack, TeamInformation defence) {
+    private void out(TeamInformation attack) {
         inning.out();
         attack.out();
-        attack.setNextBatter();
-        if (inning.isThreeOut()) {
-            inning.threeOut();
-            defence.nextInning();
-        }
+        history.add(new BatterInningHistory(Pitch.OUT, inning.getHistoryState()));
     }
 
-    private void strike(TeamInformation attack, TeamInformation defence) {
+    private void strike(TeamInformation attack) {
         inning.strike();
         if (inning.isThreeStrike()) {
-            out(attack, defence);
+            out(attack);
+            return;
         }
+        history.add(new BatterInningHistory(Pitch.STRIKE, inning.getHistoryState()));
     }
 
     public Long getId() {

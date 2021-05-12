@@ -39,8 +39,6 @@ public class Inning {
     }
 
     public void hit() {
-        strike = 0;
-        ball = 0;
         baseState.hit();
     }
 
@@ -54,13 +52,10 @@ public class Inning {
     }
 
     public void fourBall() {
-        ball = 0;
         baseState.fourBall();
     }
 
     public void out() {
-        strike = 0;
-        ball = 0;
         out += 1;
         baseState.flushHome();
     }
@@ -115,5 +110,18 @@ public class Inning {
 
     public BaseState getBaseState() {
         return baseState;
+    }
+
+    public String getHistoryState() {
+        return strike + "-" + ball;
+    }
+
+    public void flushHome() {
+        baseState.flushHome();
+    }
+
+    public void initStrikeAndBall() {
+        strike = 0;
+        ball = 0;
     }
 }
