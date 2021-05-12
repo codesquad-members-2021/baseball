@@ -13,10 +13,10 @@ class BallCountView: UIView {
         static let strike = (UIColor(named: "Strike") ?? UIColor.green).cgColor
         static let ball = (UIColor(named: "Ball") ?? UIColor.yellow).cgColor
         static let out = (UIColor(named: "Out") ?? UIColor.red).cgColor
+        static let border = (UIColor(named: "CounterBorder") ?? UIColor.lightGray).cgColor
+        static let text = (UIColor(named: "Text") ?? UIColor.white).cgColor
+        static let back = (UIColor(named: "Back") ?? UIColor.black).cgColor
         static let clear = UIColor.clear.cgColor
-        static let border = UIColor.lightGray.cgColor
-        static let text = UIColor.white.cgColor
-        static let back = UIColor.black.cgColor
     }
     
     private var width: CGFloat {
@@ -104,7 +104,7 @@ class BallCountView: UIView {
         let circle = CALayer()
         circle.frame = CGRect(origin: circleOrigin, size: circleSize)
         circle.backgroundColor = color
-        circle.borderWidth = circleWidth * 0.1
+        circle.borderWidth = circleWidth * 0.08
         circle.borderColor = Color.border
         circle.cornerRadius = circle.frame.width * 0.5
         

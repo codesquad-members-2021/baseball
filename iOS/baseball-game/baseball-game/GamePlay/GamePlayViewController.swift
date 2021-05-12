@@ -46,7 +46,7 @@ class GamePlayViewController: UIViewController {
         ballCountView.configure()
         groundView.configure()
         
-        ballCountView.reset()
+        //ballCountView.reset()
         
         //애니메이션 test
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

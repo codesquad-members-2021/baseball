@@ -10,10 +10,9 @@ import UIKit
 class PlayerLayer: CALayer {
     
     enum Color {
-        static let face = UIColor.purple.cgColor
-        static let eye = UIColor.black.cgColor
-        static let body = UIColor.purple.cgColor
-        static let border = UIColor.black.cgColor
+        static let face = (UIColor(named: "PlayerFace") ?? UIColor.purple).cgColor
+        static let body = (UIColor(named: "PlayerBody") ?? UIColor.purple).cgColor
+        static let border = (UIColor(named: "PlayerBorder") ?? UIColor.black).cgColor
     }
     
     private var width: CGFloat {

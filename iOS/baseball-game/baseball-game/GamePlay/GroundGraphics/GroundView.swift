@@ -15,7 +15,7 @@ class GroundView: UIView {
         static let base = (UIColor(named: "Base") ?? UIColor.white).cgColor
         static let baseSelected = (UIColor(named: "BaseSelected") ?? UIColor.blue).cgColor
         static let home = (UIColor(named: "Home") ?? UIColor.blue).cgColor
-        static let border = UIColor.lightGray.cgColor
+        static let border = (UIColor(named: "GroundBorder") ?? UIColor.black).cgColor
     }
     
     private var width: CGFloat {
@@ -155,8 +155,6 @@ class GroundView: UIView {
         let base = CALayer()
         base.frame = CGRect(origin: origin, size: size)
         base.backgroundColor = Color.base
-        base.borderColor = Color.border
-        base.borderWidth = base.frame.width * 0.02
         base.transform = CATransform3DMakeRotation(diamondAngle, 0.0, 0.0, 1.0)
         
         layer.addSublayer(base)
