@@ -29,25 +29,60 @@ public class GameService {
     public ApiResponse getGameInfo(HashMap<String, String> teamInfo) {
         Match match = createMatch(teamInfo);
 
+        setMyTeamIsUserToTrue(match);
+
+        initializeTeamScore(match);
+
+        Team offenseTeam = findFirstOffenseTeam(match);
+        setOffenseTeamDefaultScore(offenseTeam);
+
+        Player firstHitter = offenseTeam.getFirstHitter();
+        Player pitcher = findFirstDefenseTeam(match).getPitcher();
+        return createApiResponse(match, offenseTeam, firstHitter, pitcher);
+    }
+
+    public ApiResponse createApiResponse(Match match, Team offenseTeam, Player hitter, Player pitcher) {
+        return new ApiResponse(match.getId(), match.getCurrentInning(),
+                new PlayerLogDTO(hitter, offenseTeam.getId()), new TeamDTO(findExpeditionTeam(match)), new TeamDTO(findHomeTeam(match)),
+                new PlayerDTO("투수", pitcher), new PlayerDTO("타자", hitter), new TeamLogDTO(offenseTeam, hitter));
+    }
+
+    private void setMyTeamIsUserToTrue(Match match) {
         Team myTeam = findTeam(match.getMyTeamId());
         myTeam.setUser(true);
         saveTeam(myTeam);
+    }
 
-        Team homeTeam = findTeam(match.getHomeTeamId());
-        Team expeditionTeam = findTeam(match.getExpeditionTeamId());
+    private void initializeTeamScore(Match match) {
+        saveTeam(findExpeditionTeam(match).initializeTotalScore());
+        saveTeam(findHomeTeam(match).initializeTotalScore());
+    }
 
-        Team offenseTeam = match.isHome() ? expeditionTeam : homeTeam;
-        saveTeam(homeTeam.initializeTotalScore());
-        saveTeam(expeditionTeam.initializeTotalScore());
+    private void setOffenseTeamDefaultScore(Team offenseTeam) {
         offenseTeam.addDefaultScore(1);
         saveTeam(offenseTeam);
+    }
 
-        Player firstHitter = match.isHome() ? expeditionTeam.getFirstHitter() : homeTeam.getFirstHitter();
-        Player pitcher = match.isHome() ? homeTeam.getPitcher() : expeditionTeam.getPitcher();
+    private Team findHomeTeam(Match match) {
+        return findTeam(match.getHomeTeamId());
+    }
 
-        return new ApiResponse(getSavedMatchId(match), match.getCurrentInning(),
-                new PlayerLogDTO(firstHitter, homeTeam.getId()), new TeamDTO(expeditionTeam), new TeamDTO(homeTeam),
-                new PlayerDTO("투수", pitcher), new PlayerDTO("타자", firstHitter), new TeamLogDTO(homeTeam, firstHitter));
+    private Team findExpeditionTeam(Match match) {
+        return findTeam(match.getExpeditionTeamId());
+    }
+
+    private Team findFirstOffenseTeam(Match match) {
+        if(match.isHome()) {
+            return findTeam(match.getExpeditionTeamId());
+        }
+        return findTeam(match.getHomeTeamId());
+    }
+
+    private Team findFirstDefenseTeam(Match match) {
+        if(match.isHome()){
+            return findTeam(match.getHomeTeamId());
+        }
+        return findTeam(match.getExpeditionTeamId());
     }
 
     public PlayerListPopUpDTO[] getPlayerInfo(Long matchId) {
@@ -95,7 +130,7 @@ public class GameService {
         Long counterTeamId = Long.valueOf(teamInfo.get("counterTeamId"));
         boolean isHome = Boolean.parseBoolean(teamInfo.get("isHome"));
         Inning inning = Inning.initiateInning(isHome);
-        return new Match(myTeamId, counterTeamId, inning, isHome);
+        return saveMatch(new Match(myTeamId, counterTeamId, inning, isHome));
     }
 
     public ApiResponse exchangePlayer(Long matchId, PlayerLogDTO playerLog) {
@@ -134,7 +169,8 @@ public class GameService {
         Team expeditionTeam = findTeam(match.getExpeditionTeamId());
 
         return new ApiResponse(matchId, currentInning, new PlayerLogDTO(nextHitter, offenseTeamId),
-                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam), new PlayerDTO("투수", pitcher), new PlayerDTO("타자", nextHitter), teamLogDTO);
+                new TeamDTO(expeditionTeam), new TeamDTO(homeTeam),
+                new PlayerDTO("투수", pitcher), new PlayerDTO("타자", nextHitter), teamLogDTO);
     }
 
     public Team updateOffenseTeam(PlayerLogDTO playerLog, int inningNumber) {
