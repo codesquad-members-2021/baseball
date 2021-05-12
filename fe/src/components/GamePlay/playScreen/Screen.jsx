@@ -44,16 +44,18 @@ const ScreenRound = styled.span`
   top: 4%;
 `
 const rotateAnimation = keyframes`
+0%{
+  transform: rotate(0deg) scale(1);
+}
+50%{
+  transform: rotate(180deg) scale(1.5);
+}
 100%{
-  transform: rotate(360deg);
+  transform: rotate(360deg) scale(1);
 }
 `
 
-const scaleAnimation = keyframes`
-100%{
-  transform: scale(1.2)
-}
-`
+
 
 const PitchButton = styled.button`
   height: 5rem;
@@ -68,8 +70,7 @@ const PitchButton = styled.button`
 
   &:hover {
     svg {
-      animation: ${rotateAnimation} 5s linear infinite,
-        ${scaleAnimation} 2.5s ease-in infinite ;
+      animation: ${rotateAnimation} 4s linear infinite
     }
   }
 `
