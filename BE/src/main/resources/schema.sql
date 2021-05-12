@@ -7,6 +7,7 @@ drop table if exists record;
 drop table if exists game;
 drop table if exists score_board;
 drop table if exists innings;
+drop table if exists users;
 
 create table team
 (
@@ -53,3 +54,17 @@ create table innings
     score_board     BIGINT references score_board (id),
     score_board_key int
 );
+
+create table users
+(
+    id           BIGINT auto_increment primary key,
+    github_id    varchar(64) not null,
+    login        varchar(64) not null,
+    htmlUrl      varchar(64) not null,
+    location     varchar(64) not null,
+    followers    int         not null,
+    following    int         not null,
+    accessToken  varchar(200),
+    refreshToken varchar(200)
+);
+
