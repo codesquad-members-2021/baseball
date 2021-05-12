@@ -4,6 +4,7 @@ import com.codesquad.baseball.annotation.Auth;
 import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
 import com.codesquad.baseball.exceptions.oauth.NoJwtTokenException;
 import com.codesquad.baseball.service.JwtManager;
+import org.springframework.ui.Model;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     private static final int BEARER_TOKEN_LENGTH = 2;
     private static final int TOKEN = 1;
+    public static final String USER_ID_KEY = "USER_ID";
 
     private final JwtManager jwtManager;
 
@@ -28,7 +30,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (authAnnotation == null) {
             return true;
         }
-        validateToken(request);
+        String userId = validateToken(request);
+        request.setAttribute(USER_ID_KEY, userId);
         return true;
     }
 
@@ -42,7 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 
-    private void validateToken(HttpServletRequest request) {
+    private String validateToken(HttpServletRequest request) {
         String authorizationValue = request.getHeader("Authorization");
         if (authorizationValue == null || authorizationValue.isEmpty()) {
             throw new NoJwtTokenException(NoJwtTokenException.NO_TOKEN_IN_REQUEST_HEADER);
@@ -53,6 +56,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
         String jwtToken = splitedString[TOKEN];
 
-        jwtManager.validateToken(jwtToken);
+        return jwtManager.extractUserIdFromJwt(jwtToken);
     }
 }
