@@ -205,23 +205,25 @@ class MatchInfoTest {
     }
 
     @Test
-    @DisplayName("타자가 바뀌면, ball, strike 는 초기화 되어야하지만, out 은 초기화 되면 안된다.")
-    void proceedToNextBase_reset() {
+    @DisplayName("타자가 바뀌면, ball, strike 는 초기화 되어야한다.")
+    void proceedToNextBase_reset_ballAndStrike() {
         // TODO:
-        /**
-         * NOTE: pitcherInfo 혹은 playResults 도 초기화 하는게 맞는지 확인 필요
-         */
     }
 
+    @Test
+    @DisplayName("타자가 바뀌어, out 과 pitcherInfo 는 초기화 되면 안된다.")
+    void proceedToNextBase_remain_pitcherInfo() {
+        // TODO:
+    }
 
     @Test
-    @DisplayName("공수가 바뀌면, MatchInfo 가 초기화 되어야 한다.")
+    @DisplayName("공수가 바뀌면, bases와 pitcherInfo가 초기화 되어야 한다.")
     void proceedToNextHalve_reset() {
         // TODO:
     }
 
     @Test
-    @DisplayName("공수가 2번 바뀌면, 이닝이 바뀌어야 한다.")
+    @DisplayName("공수가 2번 바뀌면, 이닝이 증가해야 한다.")
     void proceedToNextHalve_increaseInning() {
         // TODO:
     }
