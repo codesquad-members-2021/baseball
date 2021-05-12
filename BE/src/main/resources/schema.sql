@@ -57,14 +57,14 @@ create table innings
 
 create table users
 (
-    id           BIGINT auto_increment primary key,
-    github_id    varchar(64) not null,
-    login        varchar(64) not null,
-    htmlUrl      varchar(64) not null,
-    location     varchar(64) not null,
-    followers    int         not null,
-    following    int         not null,
-    accessToken  varchar(200),
-    refreshToken varchar(200)
+    id            BIGINT auto_increment primary key,
+    github_id     varchar(64) not null,
+    login         varchar(64) not null,
+    html_url      varchar(64) not null,
+    location      varchar(64) not null,
+    followers     int         not null,
+    following     int         not null,
+    access_token  varchar(200),
+    refresh_token varchar(200)
 );
 

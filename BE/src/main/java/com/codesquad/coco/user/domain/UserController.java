@@ -54,7 +54,7 @@ public class UserController {
         AccessToken accessToken = oauth.requestAccessToken(code);
         UserInfoDTO userInfoDTO = oauth.requestUserInfo(accessToken);
 
-        userService.insertUser(userInfoDTO.getId());
+        userService.insertUser(userInfoDTO, accessToken);
 
         String jwt = JWTUtils.createJWTTypeBearer(userInfoDTO.getId(), key);
 

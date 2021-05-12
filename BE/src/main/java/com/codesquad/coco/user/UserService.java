@@ -2,6 +2,8 @@ package com.codesquad.coco.user;
 
 import com.codesquad.coco.user.domain.User;
 import com.codesquad.coco.user.domain.UserDao;
+import com.gitoauth.coco.oauth.AccessToken;
+import com.gitoauth.coco.oauth.UserInfoDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,14 +15,29 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public User insertUser(Long id) {
-
-        if (userDao.checkNewUser(id)) {
-            System.out.println("insert");
-        } else {
-            System.out.println("update");
+    public void insertUser(UserInfoDTO userInfoDTO, AccessToken accessToken) {
+        User user = new User.Builder()
+                .htmlUrl(userInfoDTO.getHtmlUrl())
+                .refreshToken(accessToken.getRefreshToken())
+                .accessToken(accessToken.getAccessToken())
+                .followers(userInfoDTO.getFollowers())
+                .following(userInfoDTO.getFollowing())
+                .githubId(userInfoDTO.getId())
+                .location(userInfoDTO.getLocation())
+                .login(userInfoDTO.getLogin())
+                .builder();
+        if (userDao.checkNewUser(userInfoDTO.getId())) {
+            createUser(user);
+            return;
         }
+        updateUser(user);
+    }
 
-        return null;
+    private void updateUser(User user) {
+        userDao.updateUser(user);
+    }
+
+    public void createUser(User user) {
+        userDao.createUser(user);
     }
 }

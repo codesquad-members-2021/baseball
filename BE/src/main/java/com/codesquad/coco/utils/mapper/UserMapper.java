@@ -10,14 +10,16 @@ public class UserMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new User(rs.getLong("id"),
-                rs.getLong("github_id"),
-                rs.getString("login"),
-                rs.getString("html_url"),
-                rs.getString("location"),
-                rs.getInt("followers"),
-                rs.getInt("following"),
-                rs.getString("access_token"),
-                rs.getString("refresh_token"));
+        return new User.Builder()
+                .id(rs.getLong("id"))
+                .githubId(rs.getLong("github_id"))
+                .login(rs.getString("login"))
+                .htmlUrl(rs.getString("html_url"))
+                .location(rs.getString("location"))
+                .followers(rs.getInt("followers"))
+                .following(rs.getInt("following"))
+                .accessToken(rs.getString("access_token"))
+                .refreshToken(rs.getString("refresh_token"))
+                .builder();
     }
 }

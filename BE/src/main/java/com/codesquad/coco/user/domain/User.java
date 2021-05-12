@@ -16,8 +16,8 @@ public class User {
     private String accessToken;
     private String refreshToken;
 
-    public User(Long id, Long githubId, String login, String htmlUrl, String location,
-                int followers, int following, String accessToken, String refreshToken) {
+    private User(Long githubId, String login, String htmlUrl, String location,
+                 int followers, int following, String accessToken, String refreshToken) {
         this.id = id;
         this.githubId = githubId;
         this.login = login;
@@ -63,5 +63,67 @@ public class User {
 
     public String getRefreshToken() {
         return refreshToken;
+    }
+
+    public static class Builder {
+        private Long id;
+        private Long githubId;
+        private String login;
+        private String htmlUrl;
+        private String location;
+        private int followers;
+        private int following;
+        private String accessToken;
+        private String refreshToken;
+
+        public Builder id(Long val) {
+            id = val;
+            return this;
+        }
+
+        public Builder githubId(Long val) {
+            githubId = val;
+            return this;
+        }
+
+        public Builder login(String val) {
+            login = val;
+            return this;
+        }
+
+        public Builder htmlUrl(String val) {
+            htmlUrl = val;
+            return this;
+        }
+
+        public Builder location(String val) {
+            location = val;
+            return this;
+        }
+
+        public Builder followers(int val) {
+            followers = val;
+            return this;
+        }
+
+        public Builder following(int val) {
+            following = val;
+            return this;
+        }
+
+        public Builder accessToken(String val) {
+            accessToken = val;
+            return this;
+        }
+
+        public Builder refreshToken(String val) {
+            refreshToken = val;
+            return this;
+        }
+
+        public User builder() {
+            return new User(githubId, login, htmlUrl, location, followers, following, accessToken, refreshToken);
+        }
+
     }
 }
