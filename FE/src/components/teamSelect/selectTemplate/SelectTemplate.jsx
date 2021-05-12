@@ -14,8 +14,7 @@ const SelectTemplate = () => {
     useEffect(() => {
         if (loading) return;
         console.log(error, response);
-        setTeamName(response.teams.map(v => v.name.split(" ").join("")));
-
+        setTeamName(response.teams.map(v => v.name));
         let boolean = ["true","true","true","true","true","false"].sort(() => {
             return Math.random() - Math.random();
         });

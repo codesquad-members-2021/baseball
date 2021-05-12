@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { cssFlexAlignCenter } from "../../../utilComponent/CommonStyledCSS";
+import Icon from "./Icon";
 
 const BaseballStadium = () => (
     <StyledBaseballStadium>
@@ -90,20 +91,4 @@ const StyledBaseballStadium = styled.div`
     /* ${cssFlexAlignCenter};
     margin: auto 0;
     height: inherit; */
-`;
-
-const Icon = styled.div`
-    z-index:999;
-    position:absolute;
-    width:100px;
-    height:100px;
-    /* bottom:30px; */ // 시작시
-    /* right:135px; */ // 1루진출
-    /* top:0; */ // 2루진출
-    top:38%;  // 3루진출
-    left:-3%; // 3루진출
-    /* bottom:30px; */ // 3루에서 홈으로 들어올때.
-    background-image:url("/images/라이언.gif");
-    background-size:contain;
-    transition: all 1s ease-in-out;
 `;

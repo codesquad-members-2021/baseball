@@ -4,23 +4,28 @@ import BaseballStadium from './partial/BaseballStadium';
 import PitchButton from './partial/PitchButton';
 import Round from './partial/Round';
 import SBO from './partial/SBO';
-import { useState } from "react";
+import { useState, createContext } from "react";
+import {uuid} from "uuidv4";
+
+export const BattleGroundContext = createContext();
 
 const BattleGround = () => {
-
+    const [test, setTest] = useState([[0,uuid()]]);
     const pitchEvent = () => {
-        
+        setTest(() => test.map((v) => [v[0]+1,v[1]]).concat([[0,uuid()]]).slice(-5));
     }
 
     return (
-        <StyledBattleGround>
-            <BaseballStadium />
-            <StadiumPartial>
-                <div className="position__center--all"><PitchButton onClick={pitchEvent}/></div>
-                <div className="position__right--top"><Round /></div>
-                <div className="position__left--top"><SBO /></div>
-            </StadiumPartial>
-        </StyledBattleGround>
+        <BattleGroundContext.Provider value={{test, setTest}}>
+            <StyledBattleGround>
+                <BaseballStadium/>
+                <StadiumPartial>
+                    <div className="position__center--all"><PitchButton  onClick={pitchEvent}/></div>
+                    <div className="position__right--top"><Round /></div>
+                    <div className="position__left--top"><SBO /></div>
+                </StadiumPartial>
+            </StyledBattleGround>
+        </BattleGroundContext.Provider>
     );
 };
 
@@ -35,6 +40,7 @@ const StyledBattleGround = styled.div`
 
 const StadiumPartial = styled.div`
     ${cssFullAbsolutePosition};
+
 
     .position__right--top {
         position: absolute;
@@ -55,5 +61,6 @@ const StadiumPartial = styled.div`
         justify-content: center;
         width: 100%;
         height: 100%;
+        /* z-index:-2; */
     }
 `;
