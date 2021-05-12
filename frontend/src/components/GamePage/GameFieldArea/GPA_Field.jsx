@@ -23,6 +23,7 @@ const GPA_Field = ({ type, gameId }) => {
 		const pitchResult = async () => {
 			const response = await API.post.pitch(gameId);
 			dispatch({ type: 'pitch', payload: response });
+			console.log(state);
 		};
 		pitchResult();
 

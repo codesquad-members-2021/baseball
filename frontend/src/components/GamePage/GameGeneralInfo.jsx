@@ -7,12 +7,12 @@ const GameGeneralInfo = ({ type }) => {
 	const { state } = useGameState();
 	const [away_score, setAwayScore] = useState(0);
 	const [home_score, setHomeScore] = useState(0);
-
+	console.log(state);
 	return (
 		<InfoWrapper>
 			<Title>BASEBALL GAME ONLINE</Title>
 			<FlexBox>
-				{/* <TeamName>{state.awayTeam.teamName}</TeamName> */}
+				<TeamName>{state.awayTeam.teamName}</TeamName>
 				<TeamBlock>
 					<TeamName>{away_score}</TeamName>
 					{type === 'Defense' && <MyTeam>Player</MyTeam>}
@@ -20,7 +20,7 @@ const GameGeneralInfo = ({ type }) => {
 				<VS>VS</VS>
 				<TeamName>{home_score}</TeamName>
 				<TeamBlock>
-					{/* <TeamName>{state.homeTeam.teamName}</TeamName> */}
+					<TeamName>{state.homeTeam.teamName}</TeamName>
 					{type === 'Attack' && <MyTeam>Player</MyTeam>}
 				</TeamBlock>
 			</FlexBox>

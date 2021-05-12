@@ -15,7 +15,7 @@ const gameReducer = (state, action) => {
 		case 'init':
 			return action.data;
 		case 'pitch':
-			return console.log(action);
+			return action.payload;
 	}
 };
 export function GameProvider({ children, gameData }) {
