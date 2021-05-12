@@ -17,5 +17,5 @@ export default History;
 
 const HistoryWrap = styled.section`
   background-color: ${({ theme }) => theme.colors.black};
-  width: 30%;
+  width: 20%;
 `;
