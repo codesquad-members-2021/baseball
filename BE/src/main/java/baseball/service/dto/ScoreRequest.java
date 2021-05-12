@@ -1,5 +1,7 @@
 package baseball.service.dto;
 
+import baseball.domain.Score;
+
 public class ScoreRequest {
 
     private int inningNumber;
@@ -16,5 +18,9 @@ public class ScoreRequest {
 
     public int getScore() {
         return score;
+    }
+
+    public Score toScore() {
+        return new Score(inningNumber, score);
     }
 }

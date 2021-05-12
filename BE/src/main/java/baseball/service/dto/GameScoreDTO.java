@@ -1,5 +1,6 @@
 package baseball.service.dto;
 
+import baseball.domain.Game;
 import baseball.domain.Team;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public class GameScoreDTO {
     private Long gameId;
     private List<TeamScoreDTO> teamScores;
 
-    public GameScoreDTO(Long gameId, Team homeTeam, Team awayTeam) {
-        this.gameId = gameId;
+    public GameScoreDTO(Game game, Team homeTeam, Team awayTeam) {
+        this.gameId = game.getId();
         this.teamScores = convertToTeamScoreDTOList(homeTeam, awayTeam);
     }
 

@@ -22,8 +22,8 @@ public class GameController {
     }
 
     @PostMapping("/{teamId}/score")
-    public void saveScore(@PathVariable Long teamId, @RequestBody ScoreRequest scoreDTO) {
-        gameService.saveScore(teamId, scoreDTO.getInningNumber(), scoreDTO.getScore());
+    public void saveScore(@PathVariable Long teamId, @RequestBody ScoreRequest scoreRequest) {
+        gameService.saveScore(teamId, scoreRequest);
     }
 
     @GetMapping("/{gameId}/scores")

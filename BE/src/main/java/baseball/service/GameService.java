@@ -9,6 +9,7 @@ import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
 import baseball.service.dto.GameDTO;
 import baseball.service.dto.GameScoreDTO;
+import baseball.service.dto.ScoreRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class GameService {
         if (gameRepository.count() != 5) {
             saveGames();
         }
-
         Iterable<Game> games = gameRepository.findAll();
 
         return new GameDTO(games);
@@ -50,10 +50,10 @@ public class GameService {
         gameRepository.saveAll(games);
     }
 
-    public void saveScore(Long teamId, int inningNumber, int score) {
+    public void saveScore(Long teamId, ScoreRequest scoreRequest) {
         Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
 
-        Score newScore = new Score(inningNumber, score);
+        Score newScore = scoreRequest.toScore();
         team.setScore(newScore);
 
         teamRepository.save(team);
@@ -61,9 +61,10 @@ public class GameService {
 
     public GameScoreDTO convertToGameScoreDTO(Long gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
+
         Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
         Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
 
-        return new GameScoreDTO(gameId, homeTeam, awayTeam);
+        return new GameScoreDTO(game, homeTeam, awayTeam);
     }
 }
