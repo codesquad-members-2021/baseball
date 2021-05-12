@@ -33,7 +33,12 @@ class GameListViewModel {
         }
     }
     
-    private func errorHandler(error: Error) {
-        self.error = error.localizedDescription
+    private func errorHandler(error: NetworkError) {
+        switch error {
+        case .network(description: let des):
+            self.error = des
+        case .parsing(description: let des):
+            self.error = des
+        }
     }
 }

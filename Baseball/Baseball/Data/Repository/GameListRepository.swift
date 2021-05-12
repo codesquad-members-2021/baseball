@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol GameListRepository {
-    func fetchGameList(completion: @escaping (Result<[MatchUp],Error>) -> Void)
+    func fetchGameList(completion: @escaping (Result<[MatchUp],NetworkError>) -> Void)
 }
 
 class DefaultGameListRepository: GameListRepository {
@@ -21,7 +21,7 @@ class DefaultGameListRepository: GameListRepository {
         self.networkService = networkService
     }
     
-    func fetchGameList(completion: @escaping (Result<[MatchUp],Error>) -> Void) {
+    func fetchGameList(completion: @escaping (Result<[MatchUp],NetworkError>) -> Void) {
         let endpoint = GameListEndpoint(httpMethod: .get)
         self.networkService.request(with: endpoint, dataType: GameListDTO.self)
             .sink { result in
