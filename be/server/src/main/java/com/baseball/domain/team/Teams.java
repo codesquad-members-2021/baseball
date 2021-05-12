@@ -15,6 +15,7 @@ public class Teams {
     public Teams(Team awayTeam, Team homeTeam) {
         this.awayTeam = awayTeam;
         this.homeTeam = homeTeam;
+        awayTeam.pushScore();
         awayTeam.getBatter().increasePlateAppearances();
     }
 
