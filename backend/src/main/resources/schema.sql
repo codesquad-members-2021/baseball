@@ -7,6 +7,7 @@ drop table if exists inning;
 drop table if exists history;
 drop table if exists team_participating_in_game;
 drop table if exists player_participating_in_game;
+drop table if exists users;
 
 create table player
 (
@@ -79,4 +80,18 @@ create table player_participating_in_game
     hit_count                  int         not null,
     out_count                  int         not null,
     pitcher_position           varchar(10) not null
+);
+
+create table users
+(
+    id             bigint primary key auto_increment,
+    user_id        varchar(30)  not null,
+    email          varchar(60)  not null,
+    verified_email varchar(60)  not null,
+    name           varchar(40)  not null,
+    family_name    varchar(20)  not null,
+    given_name     varchar(20)  not null,
+    picture        varchar(200) not null,
+    locale         varchar(30)  not null,
+    jwt            varchar(300)
 );

@@ -1,7 +1,6 @@
 package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.dto.oauth.ServerSecretDTO;
-import com.codesquad.baseball.utils.ApplicationInitializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
