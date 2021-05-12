@@ -31,6 +31,8 @@
 		7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */; };
 		76AA2694264A73F500600D45 /* ScoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76AA2693264A73F500600D45 /* ScoreStoryboard.storyboard */; };
 		76AF2BC4264B7D9900DC7782 /* GameViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */; };
+		76AF2BC7264BA5F600DC7782 /* BallListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF2BC5264BA5F600DC7782 /* BallListCell.swift */; };
+		76AF2BC8264BA5F600DC7782 /* BallListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76AF2BC6264BA5F600DC7782 /* BallListCell.xib */; };
 		F36C7CA9C029C0FB3B9C3E12 /* Pods_baseballApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D440DD687E5153149898B6E /* Pods_baseballApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayStoryboard.storyboard; sourceTree = "<group>"; };
 		76AA2693264A73F500600D45 /* ScoreStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScoreStoryboard.storyboard; sourceTree = "<group>"; };
 		76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelType.swift; sourceTree = "<group>"; };
+		76AF2BC5264BA5F600DC7782 /* BallListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallListCell.swift; sourceTree = "<group>"; };
+		76AF2BC6264BA5F600DC7782 /* BallListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallListCell.xib; sourceTree = "<group>"; };
 		9D440DD687E5153149898B6E /* Pods_baseballApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE39EEDB49C05D5593DD150 /* Pods-baseballAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballAppTests.debug.xcconfig"; path = "Target Support Files/Pods-baseballAppTests/Pods-baseballAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2922330279C4AAA4D13C84B /* Pods-baseballApp-baseballAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballApp-baseballAppUITests.release.xcconfig"; path = "Target Support Files/Pods-baseballApp-baseballAppUITests/Pods-baseballApp-baseballAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 			children = (
 				76619AC12643AE83004D31C6 /* GameCell.swift */,
 				76619B052644EE37004D31C6 /* StadiumView.swift */,
+				76AF2BC5264BA5F600DC7782 /* BallListCell.swift */,
+				76AF2BC6264BA5F600DC7782 /* BallListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */,
 				7650A1B42640E3A9006C1E5F /* LaunchScreen.storyboard in Resources */,
 				7650A1B12640E3A9006C1E5F /* Assets.xcassets in Resources */,
+				76AF2BC8264BA5F600DC7782 /* BallListCell.xib in Resources */,
 				7650A1AF2640E3A8006C1E5F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +555,7 @@
 			files = (
 				7650A1E326411A6B006C1E5F /* PlayViewController.swift in Sources */,
 				76619AAA264376D4004D31C6 /* Endpoint.swift in Sources */,
+				76AF2BC7264BA5F600DC7782 /* BallListCell.swift in Sources */,
 				7650A1A82640E3A8006C1E5F /* AppDelegate.swift in Sources */,
 				76AF2BC4264B7D9900DC7782 /* GameViewModelType.swift in Sources */,
 				76619AC22643AE83004D31C6 /* GameCell.swift in Sources */,

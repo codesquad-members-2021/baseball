@@ -33,4 +33,8 @@ class GameViewModel: GameViewModelType {
             completion(data)
         }
     }
+    
+    static func formatGameID(id: Int) -> String {
+        return "Game \(id)"
+    }
 }
