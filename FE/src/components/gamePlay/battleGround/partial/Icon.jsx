@@ -4,7 +4,6 @@ import { BattleGroundContext } from "../BattleGround";
 
 const Icon = () => {
     const { test } = useContext(BattleGroundContext);
-    console.log(test)
     return (
         <StadiumPlayer>
             {test.map((v) => {
@@ -26,7 +25,7 @@ const PlayerLocation = [
     {Player: 1, left: `84%`, top: `38%`},
     {Player: 2, left: `40%`, top: `-5%`},
     {Player: 3, left: `-3%`, top: `38%`},
-    {Player: 4, left: `40%`, top: `80%`},  // home으로 들어오는 번호
+    {Player: 4, left: `40%`, top: `80%`},
 ]
 
 const Player = styled.div.attrs(({Player}) => ({

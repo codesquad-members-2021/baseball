@@ -11,6 +11,7 @@ export const BattleGroundContext = createContext();
 
 const BattleGround = () => {
     const [test, setTest] = useState([[0,uuid()]]);
+    
     const pitchEvent = () => {
         setTest(() => test.map((v) => [v[0]+1,v[1]]).concat([[0,uuid()]]).slice(-5));
     }
@@ -18,9 +19,12 @@ const BattleGround = () => {
     return (
         <BattleGroundContext.Provider value={{test, setTest}}>
             <StyledBattleGround>
-                <BaseballStadium/>
+                
                 <StadiumPartial>
-                    <div className="position__center--all"><PitchButton  onClick={pitchEvent}/></div>
+                    <div className="position__center--all">
+                        <BaseballStadium/>
+                        <PitchButton  onClick={pitchEvent}/>
+                    </div>
                     <div className="position__right--top"><Round /></div>
                     <div className="position__left--top"><SBO /></div>
                 </StadiumPartial>
