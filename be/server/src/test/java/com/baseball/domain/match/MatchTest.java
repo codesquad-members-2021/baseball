@@ -71,13 +71,13 @@ class MatchTest {
     }
 
     @Test
-    @DisplayName("만루인 상태에서, HIT 이 일어나면 공격팀의 점수가 증가해야한다.")
+    @DisplayName("3루가 true인 상태에서, HIT 이 일어나면 공격팀의 점수가 증가해야한다.")
     void play_hit_increaseScore() {
         // TODO:
     }
 
     @Test
-    @DisplayName("만루인 상태에서, BALL 이 4번 일어나면 공격팀의 점수가 증가해야한다.")
+    @DisplayName("3루가 true인 상태에서, BALL 이 4번 일어나면 공격팀의 점수가 증가해야한다.")
     void play_fourBall_increaseScore() {
         // TODO:
     }
