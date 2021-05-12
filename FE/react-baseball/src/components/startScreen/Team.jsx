@@ -17,7 +17,7 @@ const Team = ({ type, game }) => {
   const handleClickTeam = async () => {
     // 서버에 gameId 담아 POST 요청
     // 200 OK 시, 응답 받은 데이터를 context에 세팅 (?) (then 또는 await)
-    const { data } = await axios.get('http://localhost:3002/players-modi.json');
+    const { data } = await axios.get('http://localhost:3000/players-modi.json');
     const [awayInfo, homeInfo] = [data.awayTeam, data.homeTeam];
     homeInfo.userSelected && setIsHome(true);
     if (isHome) {
