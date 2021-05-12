@@ -1,13 +1,35 @@
+import { useContext } from 'react'
 import styled, { keyframes } from 'styled-components'
-import BallCount from 'components/GamePlay/playScreen/BallCount'
 import { IoIosBaseball } from 'react-icons/io'
+
+import { gamePlayContext } from 'pages/Game'
+import BallCount from 'components/GamePlay/playScreen/BallCount'
 import Span from 'components/common/Span'
+
 const Screen = () => {
+  const { dispatchBallCount } = useContext(gamePlayContext)
+  
+  const chooseNumber = () => Math.floor(Math.random() * 4);
+
+  const getAction = (number) =>{
+    return {
+      0: 'strike',
+      1: 'ball',
+      2: 'out',
+      3: 'hit'
+    }[number]
+  }
+
+  const handleClickPitch = () => {
+    const action = getAction(chooseNumber())
+    dispatchBallCount({payload : action})
+  }
+  
   return (
     <StyledScreen>
       <ScreenField src='field.svg' alt='field' />
       <ScreenRound>2회 초 수비</ScreenRound>
-      <PitchButton>
+      <PitchButton onClick={handleClickPitch}>
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
@@ -20,7 +42,7 @@ export default Screen
 const StyledScreen = styled.section`
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   width: 80%;
   height: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
@@ -55,8 +77,6 @@ const rotateAnimation = keyframes`
 }
 `
 
-
-
 const PitchButton = styled.button`
   height: 5rem;
   position: absolute;
@@ -70,7 +90,7 @@ const PitchButton = styled.button`
 
   &:hover {
     svg {
-      animation: ${rotateAnimation} 4s linear infinite
+      animation: ${rotateAnimation} 4s linear infinite;
     }
   }
 `
