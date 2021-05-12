@@ -16,6 +16,8 @@ public class Match {
     @MappedCollection(keyColumn = "match_id")
     List<Board> gameBoards = new ArrayList<>();
 
+    private int inProgress;
+
     public void addGameBoards(Board... boards) {
         for (Board board : boards) {
             this.gameBoards.add(board);
@@ -48,6 +50,14 @@ public class Match {
 
     public void setAway(String away) {
         this.away = away;
+    }
+
+    public int getInProgress() {
+        return inProgress;
+    }
+
+    public void setInProgress(int inProgress) {
+        this.inProgress = inProgress;
     }
 
     @Override
