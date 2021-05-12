@@ -50,7 +50,7 @@ public class UserController {
 
     @GetMapping("/login/github")
     @ResponseStatus(HttpStatus.OK)
-    public void callBack(@RequestParam("code") String code, HttpServletResponse response) {
+    public void requestResourceServer(@RequestParam("code") String code, HttpServletResponse response) {
         AccessToken accessToken = oauth.requestAccessToken(code);
         UserInfoDTO userInfoDTO = oauth.requestUserInfo(accessToken);
 
@@ -63,5 +63,16 @@ public class UserController {
         return;
     }
 
-    //todo : 리프레쉬  토큰 받아오기, 밑 다시 세팅
+
+    @GetMapping("/login/refresh")
+    @ResponseStatus(HttpStatus.OK)
+    public void tokenRefresh(HttpServletRequest request) {
+        String jwt = request.getHeader("Authorization");
+        Long githubId = Long.parseLong(String.valueOf(JWTUtils.getInfoFromJWT(jwt, key, "id")));
+        String refreshToken = userService.findRefreshTokenByGithubId(githubId);
+
+        AccessToken accessToken = oauth.requestRefreshToken(refreshToken);
+
+        userService.updateTokenByGithubId(accessToken, githubId);
+    }
 }

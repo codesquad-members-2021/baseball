@@ -24,7 +24,17 @@ login = :login,html_url = :html_url,location = :location ,followers = :followers
 where github_id = :github_id
 """
 
+const val FIND_REFRESH_TOKEN_BY_GITHUB_ID: String = """
+select u.refresh_token
+from users u 
+where u.github_id = :github_id;
+"""
 
+const val UPDATE_TOKEN_BY_GITHUB_ID: String = """
+update users 
+set refresh_token = :refresh_token, access_token = :access_token
+where github_id = :github_id
+"""
 
 
 

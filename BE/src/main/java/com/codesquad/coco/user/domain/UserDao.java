@@ -2,6 +2,7 @@ package com.codesquad.coco.user.domain;
 
 import com.codesquad.coco.utils.mapper.UserCountMapper;
 import com.codesquad.coco.utils.mapper.UserMapper;
+import com.codesquad.coco.utils.mapper.UserRefreshTokenMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ public class UserDao {
     private NamedParameterJdbcTemplate template;
     private UserMapper userMapper = new UserMapper();
     private UserCountMapper countMapper = new UserCountMapper();
+    private UserRefreshTokenMapper tokenMapper = new UserRefreshTokenMapper();
 
     public UserDao(NamedParameterJdbcTemplate template) {
         this.template = template;
@@ -43,7 +45,7 @@ public class UserDao {
         insertData(UPDATE_USER, user);
     }
 
-    private void insertData(String updateUser, User user) {
+    private void insertData(String SQL, User user) {
         MapSqlParameterSource parameter = new MapSqlParameterSource();
         parameter.addValue("github_id", user.getGithubId());
         parameter.addValue("login", user.getLogin());
@@ -54,6 +56,23 @@ public class UserDao {
         parameter.addValue("access_token", user.getAccessToken());
         parameter.addValue("refresh_token", user.getRefreshToken());
 
-        template.update(updateUser, parameter);
+        template.update(SQL, parameter);
+    }
+
+    public String findRefreshTokenByGithubId(Long githubId) {
+        MapSqlParameterSource parameter = new MapSqlParameterSource();
+        parameter.addValue("github_id", githubId);
+
+        return template.queryForObject(FIND_REFRESH_TOKEN_BY_GITHUB_ID, parameter, tokenMapper);
+
+    }
+
+    public void updateTokenByGithubId(String accessToken, String refreshToken, Long githubId) {
+        MapSqlParameterSource parameter = new MapSqlParameterSource();
+        parameter.addValue("github_id", githubId);
+        parameter.addValue("access_token", accessToken);
+        parameter.addValue("refresh_token", refreshToken);
+
+        template.update(UPDATE_TOKEN_BY_GITHUB_ID, parameter);
     }
 }

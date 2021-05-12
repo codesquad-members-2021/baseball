@@ -40,4 +40,12 @@ public class UserService {
     public void createUser(User user) {
         userDao.createUser(user);
     }
+
+    public String findRefreshTokenByGithubId(Long githubId) {
+        return userDao.findRefreshTokenByGithubId(githubId);
+    }
+
+    public void updateTokenByGithubId(AccessToken accessToken, Long githubId) {
+        userDao.updateTokenByGithubId(accessToken.getAccessToken(), accessToken.getRefreshToken(), githubId);
+    }
 }

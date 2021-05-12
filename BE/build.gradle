@@ -19,7 +19,7 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation files('build/libs/gitOauthV3.jar')
+    implementation files('build/libs/gitOauthV4.jar')
 }
 
 test {
