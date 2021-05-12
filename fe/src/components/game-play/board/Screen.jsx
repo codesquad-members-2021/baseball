@@ -1,49 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import useScoreNBase from '../../../hooks/useScoreNBase';
+import { ScoreNBaseContext } from '../GamePlay';
 
-const Screen = ({ handleStrike, handleBall, handleSafety }) => {
-  const [baseData, setBaseData] = useState({
-    1: false,
-    2: false,
-    3: false,
-  });
+const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
+  const { base, safetyDispatch } = useContext(ScoreNBaseContext);
+  const [isTransition, setIsTransition] = useState(false);
+  const [runFirstBase, setRunFirstBase] = useState(false);
+  const [currentPower, setCurrentPower] = useState(0);
+
+  const playerRunType = [
+    'translateX(19.6rem)',
+    'translateY(-19.6rem)',
+    'translateX(-19.6rem)',
+    'translateY(19.6rem)',
+  ];
+
+  const handleTransitionEnd = async () => {
+    if (currentPower === 0) return;
+    setRunFirstBase(false);
+    setCurrentPower(currentPower - 1);
+    safetyDispatch({ type: 'onBase', turn, runFirstBase });
+    setIsTransition(false);
+  };
 
   const handlePitchClick = () => {
     const randomNum = Math.ceil(Math.random() * 100);
-    if (randomNum <= 50) {
+    if (randomNum <= 60) {
       //스트라이크
       handleStrike();
-      // ballCountDispatch({ type: 'strike' });
-    } else if (randomNum <= 80) {
+    } else if (randomNum <= 20) {
       //볼
       handleBall();
     } else {
       //안타
-      //멤버변경
-      if (randomNum <= 90) {
+      handleSafety();
+      setRunFirstBase(true);
+      setIsTransition(true);
+      if (randomNum <= 10) {
         //1루타
-        handleSafety(1);
-      } else if (randomNum <= 96) {
+        setCurrentPower(1);
+      } else if (randomNum <= 6) {
         //2루타
-        handleSafety(2);
-      } else if (randomNum <= 99) {
+        setCurrentPower(2);
+      } else if (randomNum <= 3) {
         //3루타
-        handleSafety(3);
+        setCurrentPower(3);
       } else {
         //홈런
-        handleSafety(4);
+        setCurrentPower(4);
       }
     }
   };
 
+  const baseList = Object.entries(base).map(([baseNum, status]) => {
+    if (status)
+      return (
+        <div className='base'>
+          <div className='runner'></div>
+        </div>
+      );
+    else
+      return (
+        <div className='base'>
+          <div className='runner'></div>
+        </div>
+      );
+  });
+
   return (
     <StyledScreen>
       <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>
-      <StyledGround>
-        <div className='base home'></div>
-        <div className='base'></div>
-        <div className='base'></div>
-        <div className='base'></div>
+      <StyledGround
+        playerRunType={playerRunType}
+        currentPower={currentPower}
+        runFirstBase={runFirstBase}
+        isTransition={isTransition}
+        base={base}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        <div className='base home'>
+          <div className='runner'></div>
+        </div>
+        {baseList}
       </StyledGround>
     </StyledScreen>
   );
@@ -76,20 +115,38 @@ const StyledPitch = styled.button`
 `;
 
 const StyledGround = styled.div`
+  position: relative;
   border: 3px solid #fff;
   width: 20rem;
   height: 20rem;
   margin: auto;
-  position: relative;
   transform: rotate(-45deg);
+  .runner {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    transition: ${({ isTransition }) => (isTransition ? 'all 0.5s' : '')};
+  }
+
+  .home {
+    z-index: 4;
+  }
   .base {
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #fff;
     width: 2rem;
     height: 2rem;
     &:nth-child(1) {
       bottom: -1rem;
       left: -1rem;
+      .runner {
+        background-color: ${({ runFirstBase }) => (runFirstBase ? 'red' : 'rgba(0,0,0,0)')};
+        transform: ${({ playerRunType, currentPower, runFirstBase }) =>
+          runFirstBase && currentPower > 0 ? `${playerRunType[0]} rotate(45deg)` : `rotate(45deg)`};
+      }
       &:before {
         content: '';
         background-color: #fff;
@@ -102,16 +159,34 @@ const StyledGround = styled.div`
       }
     }
     &:nth-child(2) {
+      z-index: 3;
       bottom: -1rem;
       right: -1rem;
+      .runner {
+        background-color: ${({ base }) => (base[1] ? 'red' : 'rgba(0,0,0,0)')};
+        transform: ${({ playerRunType, currentPower }) =>
+          currentPower > 0 ? `${playerRunType[1]} rotate(45deg)` : `rotate(45deg)`};
+      }
     }
     &:nth-child(3) {
+      z-index: 2;
       top: -1rem;
       right: -1rem;
+      .runner {
+        background-color: ${({ base }) => (base[2] ? 'red' : 'rgba(0,0,0,0)')};
+        transform: ${({ playerRunType, currentPower }) =>
+          currentPower > 0 ? `${playerRunType[2]} rotate(45deg)` : `rotate(45deg)`};
+      }
     }
     &:nth-child(4) {
+      z-index: 1;
       top: -1rem;
       left: -1rem;
+      .runner {
+        background-color: ${({ base }) => (base[3] ? 'red' : 'rgba(0,0,0,0)')};
+        transform: ${({ playerRunType, currentPower }) =>
+          currentPower > 0 ? `${playerRunType[3]} rotate(45deg)` : `rotate(45deg)`};
+      }
     }
   }
 `;

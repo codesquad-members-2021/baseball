@@ -6,7 +6,6 @@ const Score = ({ teamName, turn }) => {
   const { score } = useContext(ScoreNBaseContext);
   const TITLE = 'BASEBALL GAME ONLINE';
   const TURN = 'Player';
-
   const homeScore = score.home.reduce((acc, cur) => acc + cur, 0);
   const awayScore = score.away.reduce((acc, cur) => acc + cur, 0);
 

@@ -48,12 +48,12 @@ const GamePlay = ({ home, away, game_id }) => {
   const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
     <StyledGamePlay>
-      <PopUp position='top'>
+      {/* <PopUp position='top'>
         <PopUpScore />
       </PopUp>
       <PopUp position='bottom'>
         <PopUpRoster memberList={memberList} />
-      </PopUp>
+      </PopUp> */}
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
           <Score teamName={teamName} turn={inning.turn}></Score>
