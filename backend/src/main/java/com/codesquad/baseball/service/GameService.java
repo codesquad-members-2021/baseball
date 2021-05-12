@@ -1,7 +1,6 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.domain.game.Game;
-import com.codesquad.baseball.domain.game.GameRepository;
+import com.codesquad.baseball.domain.game.*;
 import com.codesquad.baseball.domain.game.participant.PitcherPosition;
 import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;
 import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
