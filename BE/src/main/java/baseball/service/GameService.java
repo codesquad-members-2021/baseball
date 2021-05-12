@@ -58,7 +58,7 @@ public class GameService {
             throw new TeamNotFoundException();
         }
         Score newScore = scoreRequest.toScore();
-        team.setScore(newScore);
+        team.addScore(newScore);
 
         teamRepository.save(team);
     }

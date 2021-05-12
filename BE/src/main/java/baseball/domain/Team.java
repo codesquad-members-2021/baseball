@@ -1,7 +1,9 @@
 package baseball.domain;
 
+import baseball.exception.MemberNotFoundException;
 import org.springframework.data.annotation.Id;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Team {
@@ -11,7 +13,7 @@ public class Team {
 
     private String name;
     private Set<Member> members;
-    private Set<Score> scores;
+    private Set<Score> scores = new HashSet<>();
 
     public Team(String name, Set<Member> members) {
         this.name = name;
@@ -34,7 +36,7 @@ public class Team {
         return scores;
     }
 
-    public void setScore(Score score) {
+    public void addScore(Score score) {
         scores.add(score);
     }
 
@@ -44,6 +46,6 @@ public class Team {
                 return member;
             }
         }
-        throw new NullPointerException();
+        throw new MemberNotFoundException();
     }
 }
