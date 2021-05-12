@@ -9,6 +9,7 @@ const GamePage = ({ data, type }) => {
 	const [gameData, loadingState, error] = useFetch('get', 'initGame', id);
 	const [upState, setUpState] = useState(false);
 	const [downState, setDownState] = useState(false);
+
 	useEffect(() => {
 		const handle = (event) => {
 			const { clientY } = event;

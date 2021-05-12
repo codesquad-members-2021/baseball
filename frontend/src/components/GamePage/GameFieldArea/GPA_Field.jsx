@@ -4,7 +4,7 @@ import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
 import { ReactComponent as Ghost } from './ghost.svg';
 import API from '../../Hook/API';
-import { GameProvider, useGameState, useDispatch } from '../../GameContext';
+import { useGameState, useDispatch } from '../../GameContext';
 
 const run = keyframes`
 from {

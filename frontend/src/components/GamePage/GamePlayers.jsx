@@ -1,23 +1,69 @@
-import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
 import { useGameState } from '../GameContext';
 
 const GamePlayers = () => {
-	const { state } = useGameState();
-	console.log(state);
+	// const { state } = useGameState();
+	const {
+		state: { gameStatusDTO, homeTeam, awayTeam },
+	} = useGameState();
+
+	// const { state: 이름 } = useGameState();
+
+	const TeamPlayersInfo = () => {
+		// if (state.gameStatusDTO) {
+		// 	const pitcher =
+		// 		state.homeTeam.players[state.gameStatusDTO.currentPitcher];
+		// 	const hitter = state.awayTeam.players[state.gameStatusDTO.currentHitter];
+		// 	console.log(pitcher, hitter);
+		// }
+
+		return gameStatusDTO ? (
+			<>
+				<Team>
+					<Role>투수</Role>
+					<Name>
+						{state.homeTeam.players[state.gameStatusDTO.currentPitcher].name}
+					</Name>
+					<State>
+						{state.homeTeam.players[state.gameStatusDTO.currentPitcher].id}
+					</State>
+				</Team>
+				<Team>
+					<Role>타자</Role>
+					<Name>
+						{state.awayTeam.players[state.gameStatusDTO.currentHitter].name}
+					</Name>
+					<State>
+						{
+							state.awayTeam.players[state.gameStatusDTO.currentHitter]
+								.plateAppearances
+						}
+						타석
+						{state.awayTeam.players[state.gameStatusDTO.currentHitter].hitCount}
+						안타
+					</State>
+				</Team>
+			</>
+		) : (
+			<>
+				<Team>
+					<Role>투수</Role>
+					<Name>{state.homeTeam.players[0].name}</Name>
+					<State>{state.homeTeam.players[0].id}</State>
+				</Team>
+				<Team>
+					<Role>타자</Role>
+					<Name>{state.awayTeam.players[0].name}</Name>
+					<State>0타석 0안타</State>
+				</Team>
+			</>
+		);
+	};
+
 	return (
 		<PlayerWrapper>
-			<Team>
-				<Role>투수</Role>
-				<Name>최동원</Name>
-				<State>#39</State>
-			</Team>
-			<Team>
-				<Role>타자</Role>
-				<Name>둥이</Name>
-				<State> 1타석 0안타</State>
-			</Team>
+			<TeamPlayersInfo />
 		</PlayerWrapper>
 	);
 };
