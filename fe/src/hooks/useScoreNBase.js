@@ -27,7 +27,6 @@ const useScoreNBase = ({
     return newBase;
   };
   const safetyDispatch = ({ type, turn, power }) => {
-    console.log(score, base);
     const team = turn ? 'home' : 'away';
     if (type === 'clear') {
       const newScore = { ...score };

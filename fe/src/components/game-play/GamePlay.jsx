@@ -12,12 +12,11 @@ import { fetchPUT } from '../../util/api.js';
 
 export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
-const LogContext = createContext();
 
 const memberListReducer = (state, action) => {
   let next = 0;
   const team = action.turn ? 'home' : 'away';
-  const newTeam = state[team].map((member, idx, arr) => {
+  const newTeam = [...state[team]].map((member, idx, arr) => {
     let { safety, at_bat, out, state } = member;
     if (member.state) {
       if (action.type === 'out') out++;
@@ -26,40 +25,69 @@ const memberListReducer = (state, action) => {
       next = idx + 1 === arr.length ? 0 : idx + 1;
       return { ...member, safety, at_bat, out, state: !state };
     } else {
-      return member;
+      return {...member};
     }
   });
   newTeam[next].state = true;
   return { ...state, [team]: newTeam };
 };
 
+const logListReducer = (state, action) => {
+  let newState = [...state];
+  const target = newState.length > 0 && {...(newState[newState.length - 1])};
+  switch(action.type) {
+    case 'next':
+      newState.push({ ...action.value, index : action.index, history: [] });
+      break;
+    case 'strike': case 'ball':
+      target.history = [...target.history, { ...action }];
+      newState[newState.length - 1] = target;
+      break;
+    case '4ball': case 'safety': case 'out':
+      target.history = [...target.history, { type: action.type, end : true }];
+      target.state = false;
+      newState[newState.length - 1] = target;
+      break;
+    case 'clear':
+      newState = [];
+      break;
+  }
+  return newState;
+};
+
 const GamePlay = ({ home, away, game_id }) => {
-  const [turn, round, member_list] = [null, null, null];
   const [inning, setInning] = useState({
     turn: true,
     round: 1,
   });
+  const [logList, logListDispatch] = useReducer(logListReducer, []);
   const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
   const [memberList, memberListDispatch] = useReducer(memberListReducer, {
     home: data.home.member_list,
     away: data.away.member_list,
   }); //member_list fetch해서 받아올아이
 
+  useEffect(() => {
+    memberList[inning.turn ? 'home' : 'away'].forEach((member, index) => {
+      if(member.state) logListDispatch({ value: {...member}, type: 'next', index: index + 1 })
+    })
+  }, [memberList]);
+
   const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
     <StyledGamePlay>
-      <PopUp position='top'>
+      <PopUp position='top' emptyText='상세 점수'>
         <PopUpScore />
       </PopUp>
-      <PopUp position='bottom'>
+      <PopUp position='bottom' emptyText='선수 명단'>
         <PopUpRoster memberList={memberList} />
       </PopUp>
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
           <Score teamName={teamName} turn={inning.turn}></Score>
           <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-          <Board {...{ inning, setInning, memberListDispatch }}></Board>
-          <Log data={data}></Log>
+          <Board {...{ inning, setInning, memberListDispatch, logListDispatch }}></Board>
+          <Log logList={logList}></Log>
         </ScoreNBaseContext.Provider>
       </StyledGamePlayGrid>
     </StyledGamePlay>

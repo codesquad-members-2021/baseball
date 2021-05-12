@@ -22,6 +22,7 @@ const ballCountReducer = (state, action) => {
       newState = { strike: 0, ball: 0, out: 0 };
       break;
     case 'out':
+      newState.ball = 0;
       newState.strike = 0;
       newState.out++;
       break;
@@ -31,7 +32,7 @@ const ballCountReducer = (state, action) => {
   return newState;
 };
 
-const Board = ({ memberListDispatch, inning, setInning }) => {
+const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   const [ballCount, ballCountDispatch] = useReducer(ballCountReducer, {
     strike: 0,
     ball: 0,
@@ -44,13 +45,17 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
       //필요한 것들
     } else {
       ballCountDispatch({ type: 'strike' });
+      logListDispatch({ type: 'strike', ...ballCount, strike: ballCount.strike + 1 });
     }
   };
   const handleBall = () => {
     if (ballCount.ball === 3) {
       ballCountDispatch({ type: 'safety' });
+      logListDispatch({ type: '4ball', end: true });
+      memberListDispatch({ type: 'safety', turn: inning.turn });
     } else {
       ballCountDispatch({ type: 'ball' });
+      logListDispatch({ type: 'ball', ...ballCount, ball: ballCount.ball + 1 });
     }
   };
   const handleOut = () => {
@@ -59,7 +64,9 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
       safetyDispatch({ type: 'clear', turn: inning.turn });
+      logListDispatch({ type: 'clear' });
     } else {
+      logListDispatch({ type: 'out', end: true });
       ballCountDispatch({ type: 'out' });
     }
     // 멤버 아웃 1, 타석 1 증가
@@ -69,6 +76,7 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
     memberListDispatch({ type: 'safety', turn: inning.turn });
+    logListDispatch({ type: 'safety', end: true });
     safetyDispatch({ turn: inning.turn, power });
   };
 
