@@ -2,7 +2,7 @@ package com.dong.baseball.Controller;
 
 import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.ResponseDTO;
+import com.dong.baseball.DTO.BaseballServerResponseDTO;
 import com.dong.baseball.Service.GameService;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,17 +43,17 @@ public class GameController {
     }
 
     @PostMapping("/{matchId}/start")
-    public ResponseDTO gameStart(@PathVariable Long matchId) {
+    public BaseballServerResponseDTO gameStart(@PathVariable Long matchId) {
         return gameService.gameStart(matchId);
     }
 
     @PostMapping("/{matchId}/end")
-    public ResponseDTO gameEnd(@PathVariable Long matchId) {
+    public BaseballServerResponseDTO gameEnd(@PathVariable Long matchId) {
         return gameService.gameEnd(matchId);
     }
 
     @PostMapping("/{matchId}/throws")
-    public ResponseDTO gameProgress(@PathVariable Long matchId) {
+    public BaseballServerResponseDTO gameProgress(@PathVariable Long matchId) {
         return gameService.gameProgress(matchId);
     }
 }
