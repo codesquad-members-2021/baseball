@@ -20,7 +20,7 @@ const BaseballHeaderScore = () => {
 const TeamDiv = styled.div`
   display:flex;
   justify-content:space-around;
-  font-size: 3.3rem;
+  font-size: 2.3rem;
   gap:2.5rem;
   font-weight:700;
 `;
@@ -35,7 +35,6 @@ const Team = styled.span`
       text-align: center;
     }
   `}
-
 `;
 const Score = styled.span`
   `;

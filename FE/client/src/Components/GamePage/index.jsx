@@ -35,12 +35,19 @@ const GamePage = ({ userState }) => {
   }, [data]);
 
   return (
-    <GamePageBackground>
-      <Popup />
-      {/*<TopPopup />*/}
-      <GamePageHeader />
-      <MainContainer />
-    </GamePageBackground>
+    <GamePageContext.Provider value={{ teamState, setTeamState }}>
+      <GamePageBackground>
+        {loading && <>loading ...</>}
+
+        {data && <>
+          <Popup />
+          <GamePageHeader {...{ data }} />
+          <MainContainer />
+        </>}
+
+        {error && <>error ...</>}
+      </GamePageBackground>
+    </GamePageContext.Provider>
   );
 };
 

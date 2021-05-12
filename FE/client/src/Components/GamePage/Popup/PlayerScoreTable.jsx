@@ -57,13 +57,11 @@ const PlayerTable = styled.table`
   padding-top: .4rem;
   font-size: 1.6rem;
   text-align: center;
-
   & > thead  {
     box-shadow:0px 2px 0px 0px #716E6E;
     color: #747171;
     line-height:2.5rem;
   } 
-
   & > tbody > tr {
     box-shadow:0px 2px 0px 0px #201F1F;
     &:last-child{
