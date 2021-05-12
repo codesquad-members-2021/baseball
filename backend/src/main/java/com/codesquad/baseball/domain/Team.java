@@ -20,7 +20,7 @@ public class Team {
     }
 
     public TeamParticipatingInGame createParticipantAsAwayTeam() {
-        return new TeamParticipatingInGame(TeamType.AWAY,  this.id);
+        return new TeamParticipatingInGame(TeamType.AWAY, this.id);
     }
 
     public void addPlayer(Player player) {

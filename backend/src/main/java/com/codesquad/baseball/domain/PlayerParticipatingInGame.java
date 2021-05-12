@@ -37,7 +37,7 @@ public class PlayerParticipatingInGame {
         if (plateAppearances == 0) {
             return 0.0f;
         }
-        return (float)hitCount / (float)plateAppearances;
+        return (float) hitCount / (float) plateAppearances;
     }
 
     public void increasePlateAppearances() {

@@ -4,9 +4,6 @@ import com.codesquad.baseball.domain.PlayType;
 
 public class PitchRandomTable {
 
-    private PitchRandomTable() {
-    }
-
     private static final PlayType[] PITCH_RANDOM_TABLE = {
             PlayType.STRIKE,
             PlayType.STRIKE,
@@ -35,7 +32,10 @@ public class PitchRandomTable {
             PlayType.STRIKE,
     };
 
+    private PitchRandomTable() {
+    }
+
     public static PlayType rollDice() {
-        return PITCH_RANDOM_TABLE[(int)(Math.random() * PITCH_RANDOM_TABLE.length)];
+        return PITCH_RANDOM_TABLE[(int) (Math.random() * PITCH_RANDOM_TABLE.length)];
     }
 }
