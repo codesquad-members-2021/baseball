@@ -57,13 +57,6 @@ extension SelectionViewController {
         viewModel.didFetchData { games in
             snapshot.appendItems(games)
             self.dataSource.apply(snapshot)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let storyboard = UIStoryboard(name: GamePlayViewController.ViewID.storyboard, bundle: nil)
-                let gameVC = storyboard.instantiateViewController(withIdentifier: GamePlayViewController.ViewID.controller)
-                self.present(gameVC, animated: true, completion: nil)
-
-            }
         }
     }
 }
