@@ -65,11 +65,10 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
     // 멤버 아웃 1, 타석 1 증가
     memberListDispatch({ type: 'out', turn: inning.turn });
   };
-  const handleSafety = (power) => {
+  const handleSafety = () => {
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
     memberListDispatch({ type: 'safety', turn: inning.turn });
-    safetyDispatch({ turn: inning.turn, power });
   };
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const Board = ({ memberListDispatch, inning, setInning }) => {
   return (
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
-      <Screen {...{ handleStrike, handleBall, handleSafety }}></Screen>
+      <Screen {...{ handleStrike, handleBall, handleSafety }} turn={inning.turn}></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>
     </StyledBoard>
   );
