@@ -1,30 +1,40 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import useFetch from '../Hook/useFetch';
+import API from '../Hook/API';
 import { theme } from '../Style/Theme';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 const MatchingInfo = ({ setMessage, data }) => {
   const [currentID, setID] = useState(null);
   const [currentType, setType] = useState(null);
-  console.log(data.occupied);
-  // const [occupiedState, loadingOccupiedState, occupied] = useFetch(
-  //   'patch',
-  //   'initGame',
-  //   currentID
-  // );
 
-  // useEffect(() => {
-  //   // console.log(occupiedState, loadingOccupiedState, occupied);
-  //   if (occupied && currentType === 'HOME') {
-  //     history.push(`/defense/${currentID}`);
-  //   } else if (occupied && currentType === 'AWAY') {
-  //     history.push(`/attack/${currentID}`);
-  //   } else {
-  //     setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
-  //     //occupied=true인경우(409error)
-  //   }
-  // }, [occupied]);
+  useEffect(() => {
+    const getResponse = async () => {
+      if (!currentID) return;
+      // const foo = await API.patch.initGame(currentID);
+      // console.log(foo);
+      const response = await fetch(
+        `http://13.124.70.38:8080/games/${currentID}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'API-Key': 'secret',
+          },
+        }
+      );
+      const status = response.status;
+      if (status === 200 && currentType === 'HOME') {
+        history.push(`/defense/${currentID}`);
+      } else if (status === 200 && currentType === 'AWAY') {
+        history.push(`/attack/${currentID}`);
+      } else if (status === 409) {
+        setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
+        //occupied=true인경우(409error)
+      }
+    };
+    getResponse();
+  }, [currentID, currentType]);
 
   const history = useHistory();
 

@@ -7,9 +7,7 @@ import { useState, useEffect, useCallback } from 'react';
 const TeamList = ({ setMessage }) => {
   const [teamData, loading, error] = useFetch('get', 'teamList');
   const teamListData = !loading && teamData.games;
-  useEffect(() => {
-    console.log(teamData);
-  }, [teamData]);
+  // useEffect(() => {}, [teamData]);
 
   return (
     teamListData &&
