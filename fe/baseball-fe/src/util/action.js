@@ -13,11 +13,8 @@ export const GameAction = {
   STRIKE: 'strike',
   BALL: 'ball',
   OUT: 'out',
-};
-
-
-export const RunnerAction = {
-  RUN: 'run',
-  STAY: 'stay',
-  BAT: 'bat',
+  RUN_START: 'run-start',
+  RUN_END: 'run-end',
+  KEEP_RUN: 'keep-run',
+  NEXT_BATTER: 'next-batter'
 };

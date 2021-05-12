@@ -6,6 +6,7 @@ import { GameContext, GlobalContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 import API from 'util/API.js';
 
+import { RunnerMode } from 'util/mode.js';
 import TeamScore from 'components/TeamScore/TeamScore.js';
 import SituationBoard from 'components/SituationBoard/SituationBoard.js';
 import CurrentPlayer from 'components/CurrentPlayer/CurrentPlayer.js';
@@ -18,20 +19,14 @@ const _initialState = {
   mode: null,
   home: null,
   away: null,
-  latestAction: {
-    result: null,
-    time: null,
-  },
-  currPitcherNum: null,
-  currPitcher: null,
-  currBatterNum: null,
-  currBatter: null,
+  // latestAction: {
+  //   result: null,
+  //   time: null,
+  // },
+  pitcher: null,
+  batter: null,
   nthBatter: null,
-  base: {
-    first: null,
-    second: null,
-    third: null
-  },
+  runners: [],
   ballCount: {
     strike: null,
     ball: null,
@@ -40,8 +35,36 @@ const _initialState = {
   halfInning: {
     currentInning: null,
     frame: null
+  },
+}
+
+/*
+{
+  {
+    "pitch_result": "strike",
+    "batter": {
+        "player_id": 1,
+        "player_name": "김종수",
+        "player_uniform_number": 1,
+        "is_out": true
+    },
+    "ball_count": {
+        "strike": 1,
+        "ball": 1,
+        "out": 2
+    },
+    "base": {
+        "first_base_player_id": 1,
+        "second_base_player_id": 2,
+        "third_base_player_id": null
+    },
+    "score": {
+        "home_score": 2,
+        "away_score": 1
+    }
   }
 }
+*/
 
 function GamePage() {
   const { globalState } = useContext(GlobalContext);
@@ -70,14 +93,26 @@ function GamePage() {
       });
     // TODO: else ..
 
-    if (mode === 'fielding') {
+    if (mode === 'fielding')
       setPolling(false);
-    }
+
   }, [response]);
 
   useEffect(() => {
+    for (let i = 0; i < gameState.runners.length; i++) {
+      if (gameState.runners[i].mode !== RunnerMode.SCORE)
+        continue;
 
-  }, []);
+      gameDispatch({
+        type: GameAction.SCORE,
+        payload: { isHomeFielding: globalState.home && gameState.mode === 'fielding' } });
+      break;
+    }
+  }, [gameState.runners]);
+
+  useEffect(() => {
+    // TODO: POST result
+  }, [gameState]);
 
   const getCurrMode = (data) =>  {
     return globalState.home ? data.home.mode : data.away.mode;

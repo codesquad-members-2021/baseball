@@ -1,57 +1,83 @@
-import { useRef, useState, useEffect, useReducer } from 'react';
-import styled from 'styled-components';
+import { useState, useEffect, useContext, useReducer } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { GlobalContext, GameContext } from 'util/context.js';
 import runnerReducer from 'util/reducer/runnerReducer.js';
-import { RunnerAction } from 'util/action.js';
+import { GameAction, RunnerAction } from 'util/action.js';
 
-import runnerBatSvg from 'rsc/runner_bat.svg';
+function Runner({ runnerIdx, onRunEnd }) {
+  const { globalState } = useContext(GlobalContext);
+  const { gameState, gameDispatch } = useContext(GameContext);
 
-const _initialState = {
-  mode: RunnerAction.BAT,
-  modeSvg: runnerBatSvg,
-  runFrom: null,
-  runTo: null,
-  base: 'home'
-}
 
-function Runner() {
-  const [runnerState, runnerDispatch] = useReducer(runnerReducer, _initialState);
-  const runnerRef = useRef();
-
-  useEffect(() => {
-    setTimeout(() => {
-      runnerDispatch({ type: RunnerAction.RUN });
-    }, 2000);
-  }, []);
+  const handleAnimationEnd = () => {
+    gameDispatch({ type: GameAction.RUN_END, payload: { runnerIdx }});
+    onRunEnd();
+  }
 
   return (
-    <StyledRunner ref={runnerRef} className={runnerState.base}>
-      <img src={runnerState.modeSvg} alt='runner mode'/>
+    <StyledRunner
+      className={gameState.runners[runnerIdx].mode}
+      onAnimationEnd={handleAnimationEnd}>
     </StyledRunner>
   );
 }
 
 export default Runner;
 
+const RunAnimation = (fromRight, fromTop, toRight, toTop) => keyframes`
+  from {
+    right: ${fromRight};
+    top: ${fromTop};
+  }
+
+  to {
+    right: ${toRight};
+    top: ${toTop};
+  }
+`;
+
 const StyledRunner = styled.div`
   width: 4rem;
   height: 4rem;
   position: absolute;
-  transition: position 5s linear;
+  transform: rotate(-45deg);
 
-  &.home {
-    right: 0;
-    bottom: 0;
+  &.run-to-home, &.run-to-first, &.run-to-second, &.run-to-third {
+    background-color: yellow;
   }
 
-  &.first {
-
+  &.stay-to-first, &.stay-to-second, &.stay-to-third {
+    background-color: blue;
   }
 
-  &.second {
-
+  &.run-to-home {
+    animation: ${RunAnimation('calc(100% - 2rem)', 'calc(100% - 2rem)', 0, '100%')} 1.5s linear;
   }
 
-  &.third {
-    
+  &.run-to-first {
+    animation: ${RunAnimation(0, '100%', '-2rem', '-2rem')} 1.5s linear;
+  }
+
+  &.stay-to-first {
+    right: -2rem;
+    top: -2rem;
+  }
+
+  &.run-to-second {
+    animation: ${RunAnimation('-2rem', '-2rem', 'calc(100% - 2rem)', '-2rem')} 1.5s linear;
+  }
+
+  &.stay-to-second {
+    right: calc(100% - 2rem);
+    top: -2rem;
+  }
+
+  &.run-to-third {
+    animation: ${RunAnimation('calc(100% - 2rem)', '-2rem', 'calc(100% - 2rem)', 'calc(100% - 2rem)')} 1.5s linear;
+  }
+
+  &.stay-to-third {
+    right: calc(100% - 2rem);
+    top: calc(100% - 2rem);
   }
 `;

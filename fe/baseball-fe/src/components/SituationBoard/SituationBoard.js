@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
@@ -9,7 +9,7 @@ import Baseball from 'util/baseball.js';
 
 function SituationBoard({ className }) {
   const { gameState, gameDispatch } = useContext(GameContext);
-  const [showPitchBtn, setShowPitchBtn] = useState(false);
+  // const [showPitchBtn, setShowPitchBtn] = useState(GameContext.mode === 'fielding');
 
   const handleClickPitch = () => {
     const result = Baseball.pitch();
@@ -25,9 +25,9 @@ function SituationBoard({ className }) {
           {gameState.mode === "fielding" ? " 수비" : " 공격"}
         </div>
       <Field/>
-      <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>
+      {gameState.batter && <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}
     </StyledSituationBoard>
-  )
+  );
 }
 
 export default SituationBoard;

@@ -1,12 +1,38 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 
 import Runner from './Runner.js';
+import Batter from './Batter.js';
 
 function Field() {
   const { gameState, gameDispatch } = useContext(GameContext);
+  const [runEndCnt, setRunEndCnt] = useState(0);
+
+  useEffect(() => {
+    if (runEndCnt !== gameState.runners.length) return;
+  
+    gameDispatch({ type: GameAction.NEXT_BATTER });
+    setRunEndCnt(0);
+  }, [runEndCnt]);
+
+  // useEffect(() => {
+  //   let isScore = false;
+
+  //   gameState
+    
+  // }, [gameState.runners]);
+
+  const handleRunEnd = () => {
+    setRunEndCnt(runEndCnt + 1);
+  }
+
+  const renderRunners = () => {
+    return gameState.runners.map((runner, idx) =>
+      <Runner key={runner.playerId} runnerIdx={idx} onRunEnd={handleRunEnd}/>
+    );
+  }
 
   return (
     <StyledField>
@@ -15,7 +41,8 @@ function Field() {
         <Base className='first'/>
         <Base className='second'/>
         <Base className='third'/>
-        <Runner/>
+        {gameState.batter && <Batter/>}
+        {gameState.runners.length && renderRunners()}
       </InField>
     </StyledField>
   );
