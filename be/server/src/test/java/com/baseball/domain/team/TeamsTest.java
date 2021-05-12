@@ -42,11 +42,11 @@ class TeamsTest {
 
     @Test
     @DisplayName("proceedToNextBase 를 하면 타자가 바뀐다.")
-    void proceedToNextBase_changePitcher() {
+    void proceedToNextBase_changeBatter() {
         softly.assertThat(teams.getAwayTeam().getBatter().getName())
                 .isEqualTo("AWAY1타자");
 
-        teams.proceedToNextBase(true);
+        teams.proceedToNextBase(Boolean.FALSE);
         softly.assertThat(teams.getAwayTeam().getBatter().getName())
                 .isEqualTo("AWAY2타자");
         softly.assertAll();

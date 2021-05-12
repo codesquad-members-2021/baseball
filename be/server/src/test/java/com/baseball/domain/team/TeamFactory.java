@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class TeamFactory {
+public class TeamFactory {
     private static List<Pitcher> createPitchers(String teamName, int size) {
         return IntStream.rangeClosed(1, size)
                 .mapToObj(i -> new Pitcher(String.format("%s%d투수", teamName, i)))
@@ -21,7 +21,7 @@ class TeamFactory {
                 .collect(Collectors.toList());
     }
 
-    static Team createTeam(String teamName) {
+    public static Team createTeam(String teamName) {
         return new Team(teamName, new Players(
                 createPitchers(teamName, 5),
                 createBatters(teamName, 9)

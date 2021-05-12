@@ -1,9 +1,5 @@
 package com.baseball.domain.match;
 
-import com.baseball.domain.player.Batter;
-import com.baseball.domain.player.Pitcher;
-import com.baseball.domain.player.Players;
-import com.baseball.domain.team.Team;
 import com.baseball.domain.team.Teams;
 import com.baseball.exception.MatchOccupiedException;
 import org.assertj.core.api.SoftAssertions;
@@ -13,7 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
+import static com.baseball.domain.team.TeamFactory.createTeam;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class MatchTest {
@@ -24,14 +22,8 @@ class MatchTest {
     public void setUp() {
         softly = new SoftAssertions();
         match = new Match(new Teams(
-                new Team("AWAY", new Players(
-                        Arrays.asList(new Pitcher("AWAY1투수"), new Pitcher("AWAY2투수")),
-                        Arrays.asList(new Batter("AWAY1타자"), new Batter("AWAY2타자"))
-                )),
-                new Team("HOME", new Players(
-                        Arrays.asList(new Pitcher("HOME1투수"), new Pitcher("HOME2투수")),
-                        Arrays.asList(new Batter("HOME1타자"), new Batter("HOME2타자"))
-                ))
+                createTeam("AWAY"),
+                createTeam("HOME")
         ));
     }
 
@@ -109,12 +101,31 @@ class MatchTest {
     }
 
     @Test
-    @DisplayName("ball, strike, hit를 차례로 냈을 경우에 대한 테스트")
+    @DisplayName("아무것도 하지 않았을 경우에 대한 테스트")
+    void scenario_initial() {
+        match.selectTeam("AWAY");
+
+        softly.assertThat(match.getMatchInfo().getHalvesCount())
+                .isEqualTo(1);
+        softly.assertThat(match.getMatchInfo().getStrikeCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getBallCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getOutCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getBases())
+                .isEqualTo(Arrays.asList(false, false, false));
+        softly.assertThat(match.getMatchInfo().getPitcherInfo())
+                .isEqualTo(Collections.EMPTY_LIST);
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("ball, strike를 차례로 냈을 경우에 대한 테스트")
     void scenario_variety() {
         match.selectTeam("AWAY");
         match.play("ball");
         match.play("strike");
-        match.play("hit");
 
         softly.assertThat(match.getMatchInfo().getHalvesCount())
                 .isEqualTo(1);
@@ -125,9 +136,32 @@ class MatchTest {
         softly.assertThat(match.getMatchInfo().getOutCount())
                 .isEqualTo(0);
         softly.assertThat(match.getMatchInfo().getBases())
-                .isEqualTo(Arrays.asList(true, false, false));
+                .isEqualTo(Arrays.asList(false, false, false));
         softly.assertThat(match.getMatchInfo().getPitcherInfo())
                 .isEqualTo(Arrays.asList(false, true));
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("hit이 발생하면, strikeCount 와 ballCount가  초기화 되어야 한다.")
+    void scenario_hit_reset() {
+        match.selectTeam("AWAY");
+        match.play("ball");
+        match.play("strike");
+        match.play("hit");
+
+        softly.assertThat(match.getMatchInfo().getHalvesCount())
+                .isEqualTo(1);
+        softly.assertThat(match.getMatchInfo().getStrikeCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getBallCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getOutCount())
+                .isEqualTo(0);
+        softly.assertThat(match.getMatchInfo().getBases())
+                .isEqualTo(Arrays.asList(true, false, false));
+        softly.assertThat(match.getMatchInfo().getPitcherInfo())
+                .isEqualTo(Collections.EMPTY_LIST);
         softly.assertAll();
     }
 

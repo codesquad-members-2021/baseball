@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static com.baseball.domain.match.PlayResult.HIT;
 import static com.baseball.domain.match.PlayResult.STRIKE;
 import static com.baseball.domain.team.TeamFactory.createTeam;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class TeamTest {
     private Team team;
@@ -56,21 +54,13 @@ class TeamTest {
     }
 
     @Test
-    @DisplayName("playOffense 를 하면, HIT 일 경우 다음 타자로 변경되어야 한다.")
-    void playOffense() {
-        assertThat(team.getBatter().getName()).isEqualTo("TEAM1타자");
-
-        team.playOffense(HIT);
-        assertThat(team.getBatter().getName()).isEqualTo("TEAM2타자");
-    }
-
-    @Test
     @DisplayName("playDefense 를 하면, 투수가 play 를 한 것과 동일한 효과가 나타나야 한다.")
     void playDefense() {
         team.playDefense(STRIKE);
-        assertThat(team.getPitcher().getNumberOfPitching()).isEqualTo(1);
+        softly.assertThat(team.getPitcher().getNumberOfPitching()).isEqualTo(1);
 
         team.getPitcher().play(STRIKE);
-        assertThat(team.getPitcher().getNumberOfPitching()).isEqualTo(2);
+        softly.assertThat(team.getPitcher().getNumberOfPitching()).isEqualTo(2);
+        softly.assertAll();
     }
 }

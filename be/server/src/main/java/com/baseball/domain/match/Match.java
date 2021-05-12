@@ -39,14 +39,14 @@ public class Match {
     }
 
     public void play(String pitch) {
-        PlayResult playResult = PlayResult.of(pitch);
         Boolean isThirdBaseTrue = matchInfo.isThirdBaseTrue();
+        PlayResult playResult = PlayResult.of(pitch);
+        teams.play(playResult);
+        matchInfo.pushPlayResult(playResult);
         if (playResult == PlayResult.HIT) {
             teams.proceedToNextBase(isThirdBaseTrue);
             matchInfo.proceedToNextBase();
         }
-        teams.play(playResult);
-        matchInfo.pushPlayResult(playResult);
         if (matchInfo.getBallCount() >= 4) {
             teams.proceedToNextBase(isThirdBaseTrue);
             matchInfo.proceedToNextBase();

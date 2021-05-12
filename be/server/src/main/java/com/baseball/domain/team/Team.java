@@ -36,9 +36,6 @@ public class Team {
     public void playOffense(PlayResult playResult) {
         Batter batter = players.getBatter();
         batter.play(playResult);
-        if (playResult == PlayResult.HIT) {
-            players.changeBatter();
-        }
     }
 
     public void playDefense(PlayResult playResult) {
