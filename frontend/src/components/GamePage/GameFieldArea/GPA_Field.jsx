@@ -14,7 +14,7 @@ to {
 	transform: translateX(15rem) translateY(-12.5rem);
 }`;
 
-const GPA_Field = ({ type, gameId }) => {
+const GpaField = ({ type, gameId }) => {
 	const { state } = useGameState();
 	const [move, setMove] = useState(false);
 	const dispatch = useDispatch();
@@ -86,4 +86,4 @@ const GameState = styled(Span)`
 	font-weight: ${theme.fontWeight.light};
 	color: ${theme.colors.white};
 `;
-export default GPA_Field;
+export default GpaField;

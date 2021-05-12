@@ -6,22 +6,21 @@ const GamePlayers = () => {
 	const {
 		state: { gameStatusDTO, homeTeam, awayTeam },
 	} = useGameState();
-	const { currentPitcher, currentHitter } = gameStatusDTO;
 
 	const TeamPlayersInfo = () => {
 		return gameStatusDTO ? (
 			<>
 				<Team>
 					<Role>투수</Role>
-					<Name>{homeTeam.players[currentPitcher].name}</Name>
-					<State>{homeTeam.players[currentPitcher].id}</State>
+					<Name>{homeTeam.players[gameStatusDTO.currentPitcher].name}</Name>
+					<State>{homeTeam.players[gameStatusDTO.currentPitcher].id}</State>
 				</Team>
 				<Team>
 					<Role>타자</Role>
-					<Name>{awayTeam.players[currentHitter].name}</Name>
+					<Name>{awayTeam.players[gameStatusDTO.currentHitter].name}</Name>
 					<State>
-						{awayTeam.players[currentHitter].plateAppearances}타석
-						{awayTeam.players[currentHitter].hitCount}안타
+						{awayTeam.players[gameStatusDTO.currentHitter].plateAppearances}타석
+						{awayTeam.players[gameStatusDTO.currentHitter].hitCount}안타
 					</State>
 				</Team>
 			</>
@@ -48,6 +47,7 @@ const GamePlayers = () => {
 	);
 };
 const PlayerWrapper = styled.div`
+	height: 12rem;
 	border-bottom: 5px solid ${theme.colors.white};
 	box-sizing: border-box;
 `;

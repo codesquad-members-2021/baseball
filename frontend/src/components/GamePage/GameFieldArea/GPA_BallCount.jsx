@@ -1,15 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
-import { useDispatch, useGameState } from '../../GameContext';
+import { useGameState } from '../../GameContext';
 
-const GPA_BallCount = () => {
+const GpaBallCount = () => {
 	const { state } = useGameState();
-	console.log(state);
-	// console.log(state.gameStatusDTO.ballCount);
-	// console.log(state.gameStatusDTO.strikeCount);
-	// console.log(state.gameStatusDTO.outCount);
-
 	const BallCount = (type, count) => {
 		return Array.from({ length: count }).map((v) => <Circle type={type} />);
 	};
@@ -24,7 +19,7 @@ const GPA_BallCount = () => {
 		: null;
 
 	return (
-		<GPA_BallCount_Wrapper>
+		<GpaBallCountWrapper>
 			<FlexWrapper>
 				<BallType>S</BallType>
 				{Strike}
@@ -39,10 +34,10 @@ const GPA_BallCount = () => {
 				<BallType>O</BallType>
 				{Out}
 			</FlexWrapper>
-		</GPA_BallCount_Wrapper>
+		</GpaBallCountWrapper>
 	);
 };
-const GPA_BallCount_Wrapper = styled.div`
+const GpaBallCountWrapper = styled.div`
 	position: inherit;
 	margin: 30px;
 `;
@@ -67,24 +62,4 @@ const BallType = styled(Span)`
 	font-weight: ${theme.fontWeight.light};
 	color: ${theme.colors.white};
 `;
-export default GPA_BallCount;
-
-// gameStatus:
-// ballCount: 0
-// currentHitter: 0
-// currentPitcher: 0
-// inning: 1
-// nextHitter: 1
-// outCount: 0
-// strikeCount: 0
-// top: true
-
-// gameStatusDTO:
-// ballCount: 0
-// currentHitter: 0
-// currentPitcher: 0
-// inning: 1
-// nextHitter: 1
-// outCount: 0
-// strikeCount: 1
-// top: true
+export default GpaBallCount;

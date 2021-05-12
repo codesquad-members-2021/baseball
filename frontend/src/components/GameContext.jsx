@@ -1,21 +1,16 @@
-import {
-	useState,
-	useEffect,
-	createContext,
-	useContext,
-	useReducer,
-} from 'react';
+import { useEffect, createContext, useContext, useReducer } from 'react';
 
 const GameStateContext = createContext();
 const DispatchContext = createContext();
 
-//useReducer에 useEffect적용해보기
 const gameReducer = (state, action) => {
 	switch (action.type) {
 		case 'init':
 			return action.data;
 		case 'pitch':
 			return action.payload;
+		default:
+			return;
 	}
 };
 function GameProvider({ children, gameData }) {

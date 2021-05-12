@@ -33,6 +33,7 @@ const GameGeneralInfo = ({ type }) => {
 };
 
 const InfoWrapper = styled.div`
+	height: 12rem;
 	box-sizing: border-box;
 	padding: 30px;
 	text-align: center;

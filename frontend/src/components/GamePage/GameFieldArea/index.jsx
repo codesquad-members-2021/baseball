@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../../Style/Theme';
-import GPA_Field from './GPA_Field';
-import GPA_BallCount from './GPA_BallCount';
+import GpaField from './GPA_Field';
+import GpaBallCount from './GPA_BallCount';
 const GamePlayArea = ({ type, id }) => {
 	return (
 		<GamePlayAreaWrapper>
-			<GPA_BallCount />
+			<GpaBallCount />
 			<AlignCenterWrapper>
-				<GPA_Field type={type} gameId={id} />
+				<GpaField type={type} gameId={id} />
 			</AlignCenterWrapper>
 		</GamePlayAreaWrapper>
 	);
