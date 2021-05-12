@@ -7,8 +7,7 @@ import com.codesquad.baseball.dto.oauth.ReceiveAccessTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
 import com.codesquad.baseball.service.GoogleApiRequester;
 import com.codesquad.baseball.service.UserService;
-import com.codesquad.baseball.utils.UrlConstant;
-import org.springframework.ui.Model;
+import com.codesquad.baseball.service.GoogleUrlService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,17 +21,17 @@ public class UserController {
 
     private final GoogleApiRequester googleApiRequester;
     private final UserService userService;
-    private final UrlConstant urlConstant;
+    private final GoogleUrlService googleUrlService;
 
-    public UserController(GoogleApiRequester googleApiRequester, UserService userService, UrlConstant urlConstant) {
+    public UserController(GoogleApiRequester googleApiRequester, UserService userService, GoogleUrlService googleUrlService) {
         this.googleApiRequester = googleApiRequester;
         this.userService = userService;
-        this.urlConstant = urlConstant;
+        this.googleUrlService = googleUrlService;
     }
 
     @GetMapping("/login")
     public void login(HttpServletResponse response) throws IOException {
-        response.sendRedirect(urlConstant.loginPageUrl());
+        response.sendRedirect(googleUrlService.loginPageUrl());
     }
 
     @GetMapping("/callback")

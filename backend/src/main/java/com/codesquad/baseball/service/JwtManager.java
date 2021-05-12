@@ -1,21 +1,20 @@
-package com.codesquad.baseball.utils;
+package com.codesquad.baseball.service;
 
 import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
-import com.codesquad.baseball.service.OAuthManager;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service
-public class JwtUtil {
+public class JwtManager {
     private static final String ISSUER = "sidedish";
     private static final long TOKEN_VALID_IME = 6 * 60 * 60 * 1000L;
-    private final OAuthManager oAuthManager;
+    private final OAuthConfigManager oAuthConfigManager;
 
-    public JwtUtil(OAuthManager oAuthManager) {
-        this.oAuthManager = oAuthManager;
+    public JwtManager(OAuthConfigManager oAuthConfigManager) {
+        this.oAuthConfigManager = oAuthConfigManager;
     }
 
     public String createToken(User user) {
@@ -23,7 +22,7 @@ public class JwtUtil {
         claims.put("userId", user.getUserId());
         Date now = new Date();
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, oAuthManager.serverSecret())
+                .signWith(SignatureAlgorithm.HS256, oAuthConfigManager.serverSecret())
                 .setClaims(claims)
                 .setIssuer(ISSUER)
                 .setIssuedAt(now)
@@ -33,7 +32,7 @@ public class JwtUtil {
 
     public boolean validateToken(String jwtToken) {
         try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(oAuthManager.serverSecret()).parseClaimsJws(jwtToken);
+            Jws<Claims> claims = Jwts.parser().setSigningKey(oAuthConfigManager.serverSecret()).parseClaimsJws(jwtToken);
             return !claims.getBody().getExpiration().before(new Date());
         } catch (ExpiredJwtException e) {
             throw new InvalidJwtTokenException(InvalidJwtTokenException.EXPIRED_JWT_EXCEPTION);

@@ -1,7 +1,7 @@
-package com.codesquad.baseball.utils;
+package com.codesquad.baseball.config;
 
 import com.codesquad.baseball.service.DataInitializer;
-import com.codesquad.baseball.service.OAuthManager;
+import com.codesquad.baseball.service.OAuthConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,11 +13,11 @@ public class ApplicationInitializer implements CommandLineRunner {
     private static final Logger logger = LoggerFactory.getLogger(ApplicationInitializer.class);
 
     private final DataInitializer dataInitializer;
-    private final OAuthManager oAuthManager;
+    private final OAuthConfigManager oAuthConfigManager;
 
-    public ApplicationInitializer(DataInitializer dataInitializer, OAuthManager oAuthManager) {
+    public ApplicationInitializer(DataInitializer dataInitializer, OAuthConfigManager oAuthConfigManager) {
         this.dataInitializer = dataInitializer;
-        this.oAuthManager = oAuthManager;
+        this.oAuthConfigManager = oAuthConfigManager;
     }
 
     @Override

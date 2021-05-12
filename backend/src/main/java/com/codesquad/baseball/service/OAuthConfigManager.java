@@ -10,21 +10,21 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Service
-public class OAuthManager {
+public class OAuthConfigManager {
 
-    private static final Logger logger = LoggerFactory.getLogger(OAuthManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(OAuthConfigManager.class);
     private static final String LOADING_OAUTH_CONFIG_FAILED_ERROR_MESSAGE = "OAuth 설정파일을 읽는 과정에서 문제가 발생했습니다. 프로그램을 종료합니다";
     private static final String LOADING_OAUTH_CONFIG_COMPLETE = "loading oauth config complete!";
     private final ServerSecretDTO serverSecretDTO;
 
-    public OAuthManager() {
+    public OAuthConfigManager() {
         serverSecretDTO = loadOAuthConfig();
     }
 
     public ServerSecretDTO loadOAuthConfig() {
         ServerSecretDTO serverSecretDTO = null;
         try {
-            InputStream inputStream = OAuthManager.class.getResourceAsStream("/server.secret.json");
+            InputStream inputStream = OAuthConfigManager.class.getResourceAsStream("/server.secret.json");
             ObjectMapper objectMapper = new ObjectMapper();
             serverSecretDTO = objectMapper.readValue(inputStream, ServerSecretDTO.class);
 

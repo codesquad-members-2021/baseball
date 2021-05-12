@@ -13,21 +13,21 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 
-import static com.codesquad.baseball.utils.UrlConstant.*;
+import static com.codesquad.baseball.service.GoogleUrlService.*;
 
 @Service
 public class GoogleApiRequester {
 
     private final RestTemplate restTemplate;
-    private final OAuthManager oAuthManager;
+    private final OAuthConfigManager oAuthConfigManager;
 
-    public GoogleApiRequester(RestTemplateBuilder templateBuilder, OAuthManager oAuthManager) {
+    public GoogleApiRequester(RestTemplateBuilder templateBuilder, OAuthConfigManager oAuthConfigManager) {
         this.restTemplate = templateBuilder.build();
-        this.oAuthManager = oAuthManager;
+        this.oAuthConfigManager = oAuthConfigManager;
     }
 
     public ReceiveAccessTokenDTO requestAccessToken(String authorizationCode) {
-        RequestAccessTokenDTO requestAccessTokenDTO = new RequestAccessTokenDTO(oAuthManager.clientId(), oAuthManager.clientSecret(), authorizationCode, REDIRECT_URI);
+        RequestAccessTokenDTO requestAccessTokenDTO = new RequestAccessTokenDTO(oAuthConfigManager.clientId(), oAuthConfigManager.clientSecret(), authorizationCode, REDIRECT_URI);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<RequestAccessTokenDTO> httpEntity = new HttpEntity<>(requestAccessTokenDTO, httpHeaders);

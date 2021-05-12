@@ -1,10 +1,9 @@
-package com.codesquad.baseball.utils;
+package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.service.OAuthManager;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UrlConstant {
+public class GoogleUrlService {
 
     //GOOGLE APIS
     private static final String GOOGLE_API_GET_LOGIN_PAGE = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -15,16 +14,16 @@ public class UrlConstant {
     public static final String GOOGLE_SCOPE_PROFILE = "https://www.googleapis.com/auth/userinfo.profile";
     public static final String REDIRECT_URI = "http://localhost:8080/users/callback";
 
-    private final OAuthManager oAuthManager;
+    private final OAuthConfigManager oAuthConfigManager;
 
-    public UrlConstant(OAuthManager oAuthManager) {
-        this.oAuthManager = oAuthManager;
+    public GoogleUrlService(OAuthConfigManager oAuthConfigManager) {
+        this.oAuthConfigManager = oAuthConfigManager;
     }
 
 
     public String loginPageUrl() {
         return GOOGLE_API_GET_LOGIN_PAGE + "?" +
-                "client_id=" + oAuthManager.clientId() +
+                "client_id=" + oAuthConfigManager.clientId() +
                 "&redirect_uri=" + REDIRECT_URI +
                 "&response_type=code" +
                 "&scope=" + GOOGLE_SCOPE_EMAIL + " " + GOOGLE_SCOPE_PROFILE;
