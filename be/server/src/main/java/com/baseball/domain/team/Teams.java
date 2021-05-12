@@ -24,9 +24,9 @@ public class Teams {
         defenseTeam().changePitcher();
     }
 
-    public void proceedToNextBase(Boolean isBaseFull) {
+    public void proceedToNextBase(Boolean isThirdBaseTrue) {
         offenseTeam().changeBatter();
-        if (isBaseFull) {
+        if (isThirdBaseTrue) {
             offenseTeam().increaseScore();
         }
     }

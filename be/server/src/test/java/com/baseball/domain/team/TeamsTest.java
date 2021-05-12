@@ -30,7 +30,7 @@ class TeamsTest {
     }
 
     @Test
-    @DisplayName("만루일 경우에만, proceedToNextBase 를 했을 때 점수가 증가해야한다.")
+    @DisplayName("삼루가 true 일 경우에만, proceedToNextBase 를 했을 때 점수가 증가해야한다.")
     void proceedToNextBase_fullBase() {
         // TODO:
     }

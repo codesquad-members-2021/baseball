@@ -55,8 +55,8 @@ public class MatchInfo {
         return halvesCount % 2 == 1;
     }
 
-    public Boolean isBaseFull() {
-        return bases.stream().reduce(true, Boolean::logicalAnd);
+    public Boolean isThirdBaseTrue() {
+        return bases.get(3);
     }
 
     public void pushPlayResult(PlayResult playResult) {
