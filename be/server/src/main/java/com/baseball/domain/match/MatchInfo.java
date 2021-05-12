@@ -7,16 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.baseball.domain.match.PlayResult.BALL;
-import static com.baseball.domain.match.PlayResult.STRIKE;
-
 public class MatchInfo {
     private Integer halvesCount = 1;
     private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
-    private List<PlayResult> pitcherInfo = new ArrayList<>();
+    private List<PlayResult> playResults = new ArrayList<>();
 
-    int strikeCount = 0;
-    int ballCount = 0;
     int outCount = 0;
 
     public Integer getHalvesCount() {
@@ -24,11 +19,15 @@ public class MatchInfo {
     }
 
     public Integer getStrikeCount() {
-        return strikeCount;
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.STRIKE)
+                .count();
     }
 
     public Integer getBallCount() {
-        return ballCount;
+        return (int) playResults.stream()
+                .filter(pitch -> pitch == PlayResult.BALL)
+                .count();
     }
 
     public Integer getOutCount() {
@@ -40,11 +39,7 @@ public class MatchInfo {
     }
 
     public List<Boolean> getPitcherInfo() {
-        /**
-         * HELP: 타자(Batter) 가 다음 루에 진출하면,
-         * pitcherInfo 를 초기화 하는게 맞는지 질문
-         */
-        return pitcherInfo.stream()
+        return playResults.stream()
                 .filter(pitch -> pitch != PlayResult.HIT)
                 .map(PlayResult::toBoolean)
                 .collect(Collectors.toList());
@@ -67,28 +62,26 @@ public class MatchInfo {
     }
 
     public void pushPlayResult(PlayResult playResult) {
-        if (playResult == STRIKE) {
-            strikeCount++;
-        } else if (playResult == BALL) {
-            ballCount++;
-        }
-        pitcherInfo.add(playResult);
+        playResults.add(playResult);
         if (getStrikeCount() == 3) {
             outCount++;
         }
     }
 
+    public void resetPlayResults() {
+        playResults = new ArrayList<>();
+    }
+
     public void proceedToNextBase() {
         bases.removeLast();
         bases.addFirst(Boolean.TRUE);
-        strikeCount = 0;
-        ballCount = 0;
+        resetPlayResults();
     }
 
     public void proceedToNextHalve() {
         outCount = 0;
         halvesCount++;
         bases = new LinkedList<>(Arrays.asList(false, false, false));
-        pitcherInfo = new ArrayList<>();
+        resetPlayResults();
     }
 }
