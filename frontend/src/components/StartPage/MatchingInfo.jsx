@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import useFetch from '../Hook/useFetch';
 import { theme } from '../Style/Theme';
-import { useState, useEffect, useCallback } from 'react';
+// import { useState, useEffect, useCallback } from 'react';
+// import useFetch from '../Hook/useFetch';
 
 const MatchingInfo = ({ setMessage, data }) => {
-	const [currentID, setID] = useState(null);
-	const [occupiedState, loadingOccupiedState, occupied] = useFetch(
-		'patch',
-		'initGame',
-		currentID,
-	);
+	// const [currentID, setID] = useState(null);
+	// const [occupiedState, loadingOccupiedState, occupied] = useFetch(
+	// 	'patch',
+	// 	'initGame',
+	// 	currentID,
+	// );
 
 	const history = useHistory();
 
 	const handleClick = (id, type) => {
-		if (occupied && type === 'HOME') {
+		if (type === 'HOME') {
 			history.push(`/defense/${id}`);
-		} else if (occupied && type === 'AWAY') {
+		} else if (type === 'AWAY') {
 			history.push(`/attack/${id}`);
 		} else {
 			setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
@@ -63,7 +63,6 @@ const TeamName = styled.span`
 	&:hover {
 		color: ${theme.colors.red};
 	}
-
 	.occupied {
 		pointer-events: none;
 		color: ${theme.colors.grey_deep};

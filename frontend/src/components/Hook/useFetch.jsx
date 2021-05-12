@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import API from './API';
 function useFetch(method, type, value = null) {
-	console.log(method, type, value);
 	const [state, setState] = useState({ data: [], loading: true, error: null });
 	const { data, loading, error } = state;
 

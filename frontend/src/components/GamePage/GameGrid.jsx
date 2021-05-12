@@ -1,25 +1,14 @@
-import useFetch from '../Hook/useFetch';
-import {
-	useState,
-	useEffect,
-	createContext,
-	useContext,
-	useReducer,
-} from 'react';
 import styled from 'styled-components';
 import GameGeneralInfo from './GameGeneralInfo';
 import GamePlayers from './GamePlayers';
 import GameFieldArea from './GameFieldArea';
 import GameLog from './GameLog';
-import GamePlayersList from './GamePlayersList';
-import GameDetailScore from './GameDetailScore';
-import useSlide from '../Hook/useSlide';
-const GameGrid = ({ type }) => {
+const GameGrid = ({ type, id }) => {
 	return (
 		<GridBox>
 			<GameGeneralInfo type={type} />
 			<GamePlayers />
-			<GameFieldArea type={type} />
+			<GameFieldArea type={type} id={id} />
 			<GameLog></GameLog>
 		</GridBox>
 	);

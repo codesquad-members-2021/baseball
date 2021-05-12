@@ -5,14 +5,10 @@ import GameGrid from './GameGrid';
 import useFetch from '../Hook/useFetch';
 import { GameProvider } from '../GameContext';
 const GamePage = ({ data, type }) => {
-	const [gameData, loadingState, error] = useFetch(
-		'patch',
-		'initGame',
-		data.id,
-	);
+	const id = data.id;
+	const [gameData, loadingState, error] = useFetch('get', 'initGame', id);
 	const [upState, setUpState] = useState(false);
 	const [downState, setDownState] = useState(false);
-
 	useEffect(() => {
 		const handle = (event) => {
 			const { clientY } = event;
@@ -32,11 +28,13 @@ const GamePage = ({ data, type }) => {
 	});
 
 	return (
-		<GameProvider gameData={gameData}>
-			{upState && <GameDetailScore />}
-			<GameGrid type={type} />
-			{downState && <GamePlayersList />}
-		</GameProvider>
+		!loadingState && (
+			<GameProvider gameData={gameData}>
+				{upState && <GameDetailScore />}
+				<GameGrid type={type} id={id} />
+				{downState && <GamePlayersList />}
+			</GameProvider>
+		)
 	);
 };
 

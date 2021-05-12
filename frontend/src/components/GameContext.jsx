@@ -11,8 +11,11 @@ const DispatchContext = createContext();
 
 //useReducer에 useEffect적용해보기
 const gameReducer = (state, action) => {
-	if (action.type === 'init') {
-		return action.data;
+	switch (action.type) {
+		case 'init':
+			return action.data;
+		case 'pitch':
+			return console.log(action);
 	}
 };
 export function GameProvider({ children, gameData }) {
