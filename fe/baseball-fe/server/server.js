@@ -9,19 +9,19 @@ app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get('/matches', (req, res) => {
+app.get('/games', (req, res) => {
   const json = {   
     matches : [
         {
           id : 1,
           home :  {
               id: 1,
-              name : "hanwha",
+              name : "Hanwha",
               selected : false
             },
           away : {
             id: 2,
-            name : "doosan",
+            name : "Doosan",
             selected : true
           }
         },
@@ -29,12 +29,12 @@ app.get('/matches', (req, res) => {
             id : 2,
             home :  {
                 id : 3,
-                name : "kia",
+                name : "Kia",
                 selected : true
             },
             away : {
               id: 4,
-              name : "samsung",
+              name : "Samsung",
               selected : true
             }
         },
@@ -42,12 +42,12 @@ app.get('/matches', (req, res) => {
             id : 3,
             home : {
               id : 5,
-              name : "lotte",
+              name : "Lotte",
               selected : true
             },
             away : {
               id : 6,
-              name : "lg",
+              name : "Lg",
               selected : true           
             }
         }

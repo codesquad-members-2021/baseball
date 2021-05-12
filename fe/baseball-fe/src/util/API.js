@@ -2,8 +2,9 @@
 const BASE = 'http://localhost:3030'
 
 const API = {
-  matches: () => BASE + '/matches',
+  games: () => BASE + '/games',
   start: ({ id }) => BASE + `/games/${id}/start`,
+  score: ({ id }) => BASE + `/games/${id}/score`
 }
 
 export default API;

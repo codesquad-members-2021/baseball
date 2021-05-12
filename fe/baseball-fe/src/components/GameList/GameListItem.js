@@ -25,7 +25,7 @@ function GameListItem({ match, idx, isLoading }) {
             })}>
               {match.away.name}
             </TeamAway>
-            vs.
+            <div className="versus">vs.</div>
             <TeamHome onClick={() => handleClickTeam({
               playTeam: match.home.name,
               home: true
@@ -63,17 +63,29 @@ const MatchInformation = styled.div`
     display: inline-block;
     font-size: 1.8rem;
     width: calc(100% / 3);
-
     &:hover {
+      cursor: pointer;
       color: red;
       transition: 0.3s;
     }
   }
+  .versus {
+    width: 30%;
+    font-size: 1.5rem;
+    &:hover {
+      color: unset;
+      cursor: unset;
+    }
+  }
 `;
 
-const TeamHome = styled.div``;
+const TeamHome = styled.div`
+  text-align: left;
+`;
 
-const TeamAway = styled.div``;
+const TeamAway = styled.div`
+  text-align: right;
+`;
 
 const StlyedLoadingListItem = styled.li`
   list-style: none;

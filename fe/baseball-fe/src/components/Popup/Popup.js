@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { ReactComponent as Arrow } from 'rsc/arrow.svg'
 
 function Popup({ direction, children }) {
     const [ active, setActive ] = useState(false);
+
+    useEffect(() => {
+        document.body.addEventListener('click', closePopup);
+        return function cleanup(){
+            window.removeEventListener('click', closePopup);
+        }
+    }, [])
 
     const closePopup = ({ target }) => {
         !target.closest('.wrapper') && setActive(false);
