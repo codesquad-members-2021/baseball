@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
+import PlayInning from './PlayInning';
 
 const Stadium = () => {
   const { ballCnt, dispatch } = useContext(BoardHistoryContext);
@@ -53,9 +54,7 @@ const Stadium = () => {
             </BoardNum>
           </PlayBoard>
         </PlayBoardDiv>
-        <PlayInningDiv>
-          <PlayInning>2회초 수비</PlayInning>
-        </PlayInningDiv>
+        <PlayInning />
       </PlayDiv>
       <PlayerDiv>
         <Player />
@@ -100,16 +99,6 @@ const BoardTag = styled.div`
 `;
 const BoardNum = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.S};
-`;
-const PlayInningDiv = styled.div``;
-const PlayInning = styled.div`
-  margin: 20px;
-  padding: 5px 12px;
-  border: dotted 2px white;
-  border-radius: 0.5rem;
-  color: ${({ theme }) => theme.colors.white};
-  font-size: ${({ theme }) => theme.fontSizes.S};
-  font-weight: 700;
 `;
 const PlayerDiv = styled.div`
   position: absolute;

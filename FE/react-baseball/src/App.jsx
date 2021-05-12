@@ -10,6 +10,7 @@ import './App.css';
 import PlayScreen from './routes/PlayScreen';
 import StartScreen from './routes/StartScreen';
 import theme from './theme';
+import useToggle from './components/hooks/useToggle';
 
 function App() {
   const [ballCnt, dispatch] = useReducer(ballReducer, boardHistory);
@@ -18,15 +19,14 @@ function App() {
   const [counterTeam, setCounterTeam] = useState([]);
   const [homeTeam, setHomeTeam] = useState(null);
   const [awayTeam, setAwayTeam] = useState(null);
-  const [currInning, setCurrInning] = useState(null);
+  const [currInning, setCurrInning] = useState(1);
   const [currPitcher, setCurrPitcher] = useState(null);
   const [currHitter, setCurrHitter] = useState(null);
   const [currTeamLog, setCurrTeamLog] = useState([]);
-  const [currS, setCurrS] = useState(0);
-  const [currH, setCurrH] = useState(0);
-  const [currB, setCurrB] = useState(0);
-  const [currO, setCurrO] = useState(0);
   const [isHome, setIsHome] = useState(false);
+  const [totalOutCount, setTotalOutCount] = useState(0);
+  const [isDefense, setIsDefense] = useState(false);
+  const [isTop, toggleIsTop] = useToggle(true);
 
   const baseballState = {
     teamInfo: {
@@ -46,16 +46,14 @@ function App() {
       setCurrInning,
       currTeamLog,
       setCurrTeamLog,
-      currS,
-      setCurrS,
-      currH,
-      setCurrH,
-      currB,
-      setCurrB,
-      currO,
-      setCurrO,
       isHome,
       setIsHome,
+      totalOutCount,
+      setTotalOutCount,
+      isDefense,
+      setIsDefense,
+      isTop,
+      toggleIsTop,
     },
   };
 
