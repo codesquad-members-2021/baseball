@@ -70,7 +70,7 @@ const playPitch = (ballCnt, dispatch) => {
   const tempBoardLst = ['S', 'B', 'H'];
   const randomHit =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
-  console.log(randomHit);
+
   dispatch({ type: 'hitInfo', payload: randomHit });
   dispatch({ type: 'hit' + randomHit });
 };

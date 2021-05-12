@@ -33,10 +33,10 @@ const LogList = () => {
       }
 
       if (ele.HitInfo === 'O') {
-        return <LogLine key={i}>아웃입니다</LogLine>;
+        return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
       }
       if (ele.HitInfo === 'H') {
-        return <LogLine key={i}>안타입니다</LogLine>;
+        return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
       }
       // if (ele.H === 1) {
       //   return <LogLine>안타입니다</LogLine>;
@@ -95,10 +95,11 @@ const LogName = styled.div`
   color: ${({ theme }) => theme.colors.white};
 `;
 const LogBoard = styled.div`
+  width: 52px;
+  text-align: center;
   color: ${({ theme }) => theme.colors.lightGray};
-  font-weight: 00;
+  font-weight: 500;
 `;
-
 const LogLine = styled.div`
   display: flex;
   flex-direction: row;
@@ -106,4 +107,10 @@ const LogLine = styled.div`
   margin: 7px 0;
   color: ${({ theme }) => theme.colors.white};
 `;
+
+const LogLineMsg = styled.div`
+  padding: 0 0 0 40px;
+  color: ${({ theme }) => theme.colors.gray};
+`;
+
 export default LogList;
