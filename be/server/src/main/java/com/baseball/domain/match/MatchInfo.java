@@ -58,12 +58,12 @@ public class MatchInfo {
     }
 
     public Boolean isThirdBaseTrue() {
-        return bases.get(3);
+        return bases.get(2);
     }
 
     public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
-        if (getStrikeCount() % 3 == 0) {
+        if (getStrikeCount() != 0 && getStrikeCount() % 3 == 0) {
             outCount++;
         }
     }
