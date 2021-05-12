@@ -7,10 +7,7 @@ import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
 import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
 import com.team22.baseball.dto.response.GameList.GameDto;
-import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamTypeDto;
+import com.team22.baseball.dto.response.TeamSelect.*;
 import com.team22.baseball.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,5 +127,9 @@ public class GameService {
 
     public Game findGameById(Long gameId) throws Exception {
         return gameRepository.findGameById(gameId).orElseThrow(Exception::new);
+    }
+
+    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName) throws Exception {
+        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber,teamName).orElseThrow(Exception::new);
     }
 }

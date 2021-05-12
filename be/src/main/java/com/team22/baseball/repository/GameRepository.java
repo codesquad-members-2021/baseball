@@ -5,6 +5,7 @@ import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamTypeDto;
@@ -83,6 +84,12 @@ public interface GameRepository extends CrudRepository<Game, Long> {
 
     @Query("SELECT * FROM GAME WHERE GAME.id = :id;")
     Optional<Game> findGameById(@Param("id") Long id);
+
+
+
+    @Query("SELECT P.name, P.uniform_number, P.plate_appearance, P.hits FROM PLAYER AS P INNER JOIN TEAM T on P.team_id = T.id\n" +
+            "WHERE uniform_number = :nextUniformNumber AND T.name = :teamName;")
+    Optional<NextPlayerInfoDto> findNextPlayerByNumberAndTeamName(@Param("nextUniformNumber") int nextUniformNumber, @Param("teamName") String teamName);
 
 }
 

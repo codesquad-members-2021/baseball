@@ -9,6 +9,7 @@ import com.team22.baseball.dto.response.GameList.GameDto;
 import com.team22.baseball.dto.response.PlayerScoreList.PlayerDto;
 import com.team22.baseball.dto.response.PlayerScoreList.PlayerScoreDto;
 import com.team22.baseball.dto.response.PlayerScoreList.TeamDto;
+import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ public class ApiGameController {
     @Autowired
     private ApiGameController(GameService gameService) {
         this.gameService = gameService;
+
     }
 
     @GetMapping("game_list")
@@ -53,11 +55,25 @@ public class ApiGameController {
 
     @PutMapping("/update_player")
     @ResponseStatus(HttpStatus.OK)
-    private void updatePlayerInfo(@RequestBody UpdatePlayerInfoDto req) throws Exception {
+    private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfoDto req) throws Exception {
         int[] scores = gameService.calculatePlayerScore(req);
 
         gameService.updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);
         gameService.insertTeamScore(req.getTeamName(), req.getRound(), req.getTeamScore());
+
+        // 다음 플레이어에 대한 정보 주기
+        Player prevPlayer = gameService.findPlayerByName(req.getPlayerName());
+
+        int prevUniformNumber = prevPlayer.getUniformNumber();
+        String teamName = req.getTeamName();
+
+        int nextUniformNumber = ++prevUniformNumber > 10 ? 1 : prevUniformNumber;
+
+
+        NextPlayerInfoDto response = gameService.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName);
+
+        return response;
+
     }
 
     @GetMapping("/detailScore/{gameID}")
@@ -69,21 +85,21 @@ public class ApiGameController {
 
     @GetMapping("/playerList/{gameId}")
     @ResponseStatus(HttpStatus.OK)
-    private  List<PlayerScoreDto> playerScoreList(@PathVariable Long gameId ) throws Exception {
+    private List<PlayerScoreDto> playerScoreList(@PathVariable Long gameId) throws Exception {
 
         Game findGame = gameService.findGameById(gameId);
         List<PlayerScoreDto> responseDto = new ArrayList<>();
 
 
-        for(Team team : findGame.getTeams()){
+        for (Team team : findGame.getTeams()) {
 
             List<PlayerDto> playerDtos = new ArrayList<>();
-            TeamDto teamDto = TeamDto.of(team.getName(),team.isHome(),team.isSelected());
+            TeamDto teamDto = TeamDto.of(team.getName(), team.isHome(), team.isSelected());
 
-            for(Player player : team.getPlayers()){
-                playerDtos.add(PlayerDto.of(player.getUniformNumber(),player.getName(),player.getPlateAppearance(),player.getHits(),player.getOuts()));
+            for (Player player : team.getPlayers()) {
+                playerDtos.add(PlayerDto.of(player.getUniformNumber(), player.getName(), player.getPlateAppearance(), player.getHits(), player.getOuts()));
             }
-            responseDto.add(PlayerScoreDto.of(teamDto,playerDtos));
+            responseDto.add(PlayerScoreDto.of(teamDto, playerDtos));
         }
 
         return responseDto;
