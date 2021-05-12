@@ -5,21 +5,18 @@ import PitchButton from './partial/PitchButton';
 import Round from './partial/Round';
 import SBO from './partial/SBO';
 import { useState, createContext } from "react";
+import {uuid} from "uuidv4";
 
 export const BattleGroundContext = createContext();
 
 const BattleGround = () => {
-    const [test, setTest] = useState([0]);
-    let arr = test;
+    const [test, setTest] = useState([[0,uuid()]]);
     const pitchEvent = () => {
-        // setTest(...arr,새로운주자);
-        arr = arr.map(v => v+1);
-        arr.push(0); // 1 2 // 새로운 주자 출발
-        setTest(arr);
+        setTest(() => test.map((v) => [v[0]+1,v[1]]).concat([[0,uuid()]]).slice(-5));
     }
 
     return (
-        <BattleGroundContext.Provider value={{test, setTest, arr}}>
+        <BattleGroundContext.Provider value={{test, setTest}}>
             <StyledBattleGround>
                 <BaseballStadium/>
                 <StadiumPartial>

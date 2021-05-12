@@ -1,16 +1,15 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import styled from "styled-components";
 import { BattleGroundContext } from "../BattleGround";
 
 const Icon = () => {
     const { test } = useContext(BattleGroundContext);
-    
+    console.log(test)
     return (
         <StadiumPlayer>
-            {test.map((v,i) => {
-                    return <Player key={i} Player={v}/>
-                })
-            }
+            {test.map((v) => {
+                return <Player key={v[1]} Player={v[0]}/>
+            })}
         </StadiumPlayer>
     )
 }

@@ -10,9 +10,7 @@ const ScoreStatus = ({ data = true}) => {
         body: JSON.stringify({"user" : team.home, "opponent" : team.away})
     }
     const fetchData = async (url) => {
-        console.log(options)
         const res = await fetch(url, options);
-        console.log(res);
         const result = await res.json();
         console.log(result)
         return result;

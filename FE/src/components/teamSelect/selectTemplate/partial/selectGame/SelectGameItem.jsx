@@ -1,7 +1,5 @@
 import styled, {css} from 'styled-components';
 import {Link} from "react-router-dom";
-import useFetch from '../../../../../hooks/useFetch';
-import { useEffect, useState } from "react";
 
 const SelectGameItem = ({ home, away, idx, to, awayBoolean, homeBoolean, setDesc}) => {
     console.log(awayBoolean,homeBoolean) // false true 나타내주는거 개발자도구창에서 보면됨.
