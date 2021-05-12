@@ -6,9 +6,13 @@ import axios from 'axios';
 
 const Team = ({ type, game }) => {
   const { setPlayable } = useContext(PlayableContext);
-  const { setMyTeam, setCounterTeam, isHome, setIsHome } = useContext(
-    GlobalContext
-  );
+  const {
+    setMyTeam,
+    setCounterTeam,
+    isHome,
+    setIsHome,
+    setIsDefense,
+  } = useContext(GlobalContext);
   const history = useHistory();
   const handleClickTeam = async () => {
     // 서버에 gameId 담아 POST 요청
@@ -19,6 +23,7 @@ const Team = ({ type, game }) => {
     if (isHome) {
       setMyTeam(homeInfo.players);
       setCounterTeam(awayInfo.players);
+      setIsDefense(isHome);
     } else {
       setMyTeam(awayInfo.players);
       setCounterTeam(homeInfo.players);
