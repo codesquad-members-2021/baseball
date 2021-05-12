@@ -12,6 +12,8 @@ public class MatchInfo {
     private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
     private List<PlayResult> playResults = new ArrayList<>();
 
+    int outCount = 0;
+
     public Integer getHalvesCount() {
         return halvesCount;
     }
@@ -29,7 +31,7 @@ public class MatchInfo {
     }
 
     public Integer getOutCount() {
-        return getStrikeCount() / 3;
+        return outCount;
     }
 
     public List<Boolean> getBases() {
@@ -37,6 +39,10 @@ public class MatchInfo {
     }
 
     public List<Boolean> getPitcherInfo() {
+        /**
+         * HELP: 타자(Batter) 가 다음 루에 진출하면,
+         * pitcherInfo 를 초기화 하는게 맞는지 질문
+         */
         return playResults.stream()
                 .filter(pitch -> pitch != PlayResult.HIT)
                 .map(PlayResult::toBoolean)
@@ -61,6 +67,9 @@ public class MatchInfo {
 
     public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
+        if (getStrikeCount() == 3) {
+            outCount++;
+        }
     }
 
     public void resetPlayResults() {
@@ -70,9 +79,11 @@ public class MatchInfo {
     public void proceedToNextBase() {
         bases.removeLast();
         bases.addFirst(Boolean.TRUE);
+        resetPlayResults();
     }
 
     public void proceedToNextHalve() {
+        outCount = 0;
         halvesCount++;
         bases = new LinkedList<>(Arrays.asList(false, false, false));
         resetPlayResults();

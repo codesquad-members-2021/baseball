@@ -50,7 +50,6 @@ public class Match {
         if (matchInfo.getBallCount() >= 4) {
             teams.proceedToNextBase(isThirdBaseTrue);
             matchInfo.proceedToNextBase();
-            matchInfo.resetPlayResults();
         }
         if (matchInfo.getOutCount() >= 3) {
             teams.switchRole();

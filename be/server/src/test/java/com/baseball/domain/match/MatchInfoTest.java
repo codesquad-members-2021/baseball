@@ -205,6 +205,16 @@ class MatchInfoTest {
     }
 
     @Test
+    @DisplayName("타자가 바뀌면, ball, strike 는 초기화 되어야하지만, out 은 초기화 되면 안된다.")
+    void proceedToNextBase_reset() {
+        // TODO:
+        /**
+         * NOTE: pitcherInfo 혹은 playResults 도 초기화 하는게 맞는지 확인 필요
+         */
+    }
+
+
+    @Test
     @DisplayName("공수가 바뀌면, MatchInfo 가 초기화 되어야 한다.")
     void proceedToNextHalve_reset() {
         // TODO:
