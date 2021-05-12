@@ -6,18 +6,32 @@
 //
 
 import UIKit
+import Combine
 
 class GamePlayViewController: UIViewController {
     
     @IBOutlet weak var groundView: GroundView!
     @IBOutlet weak var pitchHistoryTableView: UITableView!
     @IBOutlet weak var pitcherView: UIView!
-    
+
     //                                    홈   1루   2루  3루
     private var runners: [RunnerView?] = [nil, nil, nil, nil]
     private var animator: UIViewPropertyAnimator?
     private var basePoint: [CGPoint]?
+    private var viewModel: GamePlayViewModel!
+    private var subscriptions = Set<AnyCancellable>()
     
+    static let storyboardName = "Main"
+    static let storyboardID = "GamePlayViewController"
+    
+    static func create(with viewModel: GamePlayViewModel) -> GamePlayViewController {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+        guard let vc = storyboard.instantiateViewController(identifier: storyboardID) as? GamePlayViewController else {
+            return GamePlayViewController()
+        }
+        vc.viewModel = viewModel
+        return vc
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

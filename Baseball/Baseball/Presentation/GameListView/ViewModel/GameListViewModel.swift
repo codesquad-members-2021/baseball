@@ -8,17 +8,23 @@
 import Foundation
 import Combine
 
+struct GameListViewModelAction {
+    typealias MatchUpID = Int
+    let showGamePlayView: ((MatchUpID) -> Void)
+}
+
 class GameListViewModel {
     @Published private (set) var matchUpGames: [MatchUp]
     @Published private (set) var error: String
     
     private var fetchGameListUseCase: FetchGameListUseCase
+    private var action: GameListViewModelAction
     
-    init(fetchGameListUseCase: FetchGameListUseCase) {
+    init(fetchGameListUseCase: FetchGameListUseCase, action: GameListViewModelAction) {
         self.matchUpGames = []
         self.error = ""
         self.fetchGameListUseCase = fetchGameListUseCase
-        
+        self.action = action
         fetchGameList()
     }
     
@@ -40,5 +46,9 @@ class GameListViewModel {
         case .parsing(description: let des):
             self.error = des
         }
+    }
+    
+    func didSelectItem(indexPath: IndexPath) {
+        action.showGamePlayView(indexPath.item + 1)
     }
 }
