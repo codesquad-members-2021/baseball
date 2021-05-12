@@ -32,7 +32,7 @@ const GPA_Field = ({ type }) => {
     <>
       {type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
       <FieldArea>
-        <GameState>2회초 공격</GameState>
+        <GameState>3회초 공격</GameState>
         <FieldSVG />
         <GhostSVG />
       </FieldArea>
