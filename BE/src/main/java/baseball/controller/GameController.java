@@ -3,7 +3,7 @@ package baseball.controller;
 import baseball.service.GameService;
 import baseball.service.dto.GameDTO;
 import baseball.service.dto.GameScoreDTO;
-import baseball.service.dto.RequestScoreDTO;
+import baseball.service.dto.ScoreRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +22,7 @@ public class GameController {
     }
 
     @PostMapping("/{teamId}/score")
-    public void saveScore(@PathVariable Long teamId, @RequestBody RequestScoreDTO scoreDTO) {
+    public void saveScore(@PathVariable Long teamId, @RequestBody ScoreRequest scoreDTO) {
         gameService.saveScore(teamId, scoreDTO.getInningNumber(), scoreDTO.getScore());
     }
 

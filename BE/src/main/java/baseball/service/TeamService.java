@@ -7,7 +7,7 @@ import baseball.exception.TeamNotFoundException;
 import baseball.service.dto.RecordDTO;
 import baseball.domain.Team;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.RequestTeamDTO;
+import baseball.service.dto.TeamRequest;
 import baseball.service.dto.TeamDTO;
 import baseball.service.dto.TeamRecordsDTO;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,9 @@ public class TeamService {
         this.teamRepository = teamRepository;
     }
 
-    public void saveTeams(List<RequestTeamDTO> teamDTOs) {
+    public void saveTeams(List<TeamRequest> teamDTOs) {
         List<Team> teams = teamDTOs.stream()
-                .map(RequestTeamDTO::toTeam)
+                .map(TeamRequest::toTeam)
                 .collect(Collectors.toList());
         teamRepository.saveAll(teams);
     }

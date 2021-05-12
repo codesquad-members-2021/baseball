@@ -17,7 +17,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public void createTeams(@RequestBody List<RequestTeamDTO> teamDTOs) {
+    public void createTeams(@RequestBody List<TeamRequest> teamDTOs) {
         teamService.saveTeams(teamDTOs);
     }
 
@@ -27,7 +27,7 @@ public class TeamController {
     }
 
     @PostMapping("/{teamId}/{memberId}/record")
-    public void addRecord(@PathVariable Long teamId, @PathVariable Long memberId, @RequestBody RequestRecordDTO recordDTO) {
+    public void addRecord(@PathVariable Long teamId, @PathVariable Long memberId, @RequestBody RecordRequest recordDTO) {
         teamService.insertRecord(teamId, memberId, recordDTO.getAtBat(), recordDTO.getHit(), recordDTO.getOut());
     }
 

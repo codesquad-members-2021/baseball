@@ -1,11 +1,11 @@
 package baseball.service.dto;
 
-public class RequestScoreDTO {
+public class ScoreRequest {
 
     private int inningNumber;
     private int score;
 
-    public RequestScoreDTO(int inningNumber, int score) {
+    public ScoreRequest(int inningNumber, int score) {
         this.inningNumber = inningNumber;
         this.score = score;
     }
