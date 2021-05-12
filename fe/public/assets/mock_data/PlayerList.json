@@ -1,0 +1,158 @@
+{
+  "playerList": [
+    {
+      "teamName": "Captain_1",
+      "recordList": {
+        "정훈": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "손아섭": [
+          {
+            "atBat": 2,
+            "hits": 0,
+            "outs": 2,
+            "average": "0.000"
+          }
+        ],
+        "전준우": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "이대호": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "마차도": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "오윤석": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "이병규": [
+          {
+            "atBat": 2,
+            "hits": 1,
+            "outs": 1,
+            "average": "0.500"
+          }
+        ],
+        "김준태": [
+          {
+            "atBat": 2,
+            "hits": 0,
+            "outs": 2,
+            "average": "0.000"
+          }
+        ],
+        "노경은": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ]
+      }
+    }, 
+    {
+      "teamName": "SSG 랜더스",
+      "recordList": {
+        "최정": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "추신수": [
+          {
+            "atBat": 2,
+            "hits": 1,
+            "outs": 1,
+            "average": "0.500"
+          }
+        ],
+        "김성현": [
+          {
+            "atBat": 2,
+            "hits": 0,
+            "outs": 2,
+            "average": "0.000"
+          }
+        ],
+        "로맥": [
+          {
+            "atBat": 2,
+            "hits": 2,
+            "outs": 2,
+            "average": "1.000"
+          }
+        ],
+        "오태곤": [
+          {
+            "atBat": 2,
+            "hits": 0,
+            "outs": 2,
+            "average": "0.000"
+          }
+        ],
+        "정의윤": [
+          {
+            "atBat": 2,
+            "hits": 1,
+            "outs": 1,
+            "average": "0.500"
+          }
+        ],
+        "김강민": [
+          {
+            "atBat": 2,
+            "hits": 0,
+            "outs": 2,
+            "average": "0.000"
+          }
+        ],
+        "이재원": [
+          {
+            "atBat": 2,
+            "hits": 1,
+            "outs": 1,
+            "average": "0.500"
+          }
+        ],
+        "김광현": [
+          {
+            "atBat": 2,
+            "hits": 1,
+            "outs": 1,
+            "average": "0.500"
+          }
+        ]
+      }
+    }
+  ]
+}

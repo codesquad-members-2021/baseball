@@ -1,0 +1,20 @@
+{
+  "statusCode": 200,
+
+  "game" : [
+    ["Captain_1", "Marvel_1"],
+    ["Twins_1", "Tigers_1"],
+    ["Rockets_1", "Dodgers_1"],
+    ["Captain_2", "Marvel_2"],
+    ["Twins_2", "Tigers_2"],
+    ["Rockets_2", "Dodgers_2"],
+    ["Captain_3", "Marvel_2"],
+    ["Twins_3", "Tigers_3"],
+    ["Rockets_3", "Dodgers_3"]
+  ],
+    
+ "already_selected": [
+    ["Captain_1"], ["Twins_1"], [], [], ["Twins_2"], ["Dodgers_2"], [], [], []
+  ]
+
+}
