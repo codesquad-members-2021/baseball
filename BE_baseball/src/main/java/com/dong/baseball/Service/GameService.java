@@ -2,6 +2,7 @@ package com.dong.baseball.Service;
 
 import com.dong.baseball.DTO.MatchUpListDTO;
 import com.dong.baseball.DTO.ProgressDTO;
+import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
 import com.dong.baseball.Repository.LeagueRepository;
@@ -45,6 +46,22 @@ public class GameService {
         Match match = leagueRepository.findById(matchId).get();//@Todo get
         List<Board> matchBoards = match.getGameBoards();
         return matchBoards.get(matchBoards.size()-1);
+    }
+
+
+    public ResponseDTO gameStart(Long matchId) {
+        System.out.println("start!");
+        return new ResponseDTO();
+    }
+
+    public ResponseDTO gameEnd(Long matchId) {
+        System.out.println("end");
+        return new ResponseDTO();
+    }
+
+    public ResponseDTO gameProgress(Long matchId) {
+        System.out.println("progress");
+        return new ResponseDTO();
     }
 }
 
