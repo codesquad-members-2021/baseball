@@ -19,6 +19,7 @@ public class PlayerStatistics {
         this.atBat = atBat;
         this.hits = hits;
         this.out = out;
+        calculateAverage();
     }
 
     public void hit() {
@@ -28,8 +29,9 @@ public class PlayerStatistics {
     }
 
     public void calculateAverage() {
-        if (atBat != 0) {
+        if (atBat == 0) {
             average = 0.0;
+            return;
         }
         average = hits / (double) atBat;
     }

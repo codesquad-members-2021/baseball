@@ -1,6 +1,6 @@
 package codesquad.team7.baseball.game;
 
-public class AwayPitcher implements Pitcher{
+public class AwayPitcher implements Pitcher {
 
     private Integer awayPitcherNumber;
 

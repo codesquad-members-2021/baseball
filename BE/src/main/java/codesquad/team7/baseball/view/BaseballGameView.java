@@ -1,6 +1,7 @@
 package codesquad.team7.baseball.view;
 
 import codesquad.team7.baseball.game.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -10,6 +11,8 @@ import java.util.List;
 @JsonTypeName("game")
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 public class BaseballGameView {
+
+    private final TeamEnum winner;
 
     private final TeamInfoView home;
     private final TeamInfoView away;
@@ -28,9 +31,10 @@ public class BaseballGameView {
     private final InningScoreView inningScore;
 
     private BaseballGameView(Builder builder) {
-        home = builder.home;
-        away = builder.away;
-        inning = builder.inning;
+        this.winner = builder.winner;
+        this.home = builder.home;
+        this.away = builder.away;
+        this.inning = builder.inning;
         this.state = builder.state;
         this.batter = builder.batter;
         this.strike = builder.strike;
@@ -39,6 +43,11 @@ public class BaseballGameView {
         this.history = builder.history;
         this.baseState = builder.baseState;
         this.inningScore = builder.inningScore;
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public TeamEnum getWinner() {
+        return winner;
     }
 
     public TeamInfoView getHome() {
@@ -86,6 +95,8 @@ public class BaseballGameView {
     }
 
     public static class Builder {
+        private final TeamEnum winner;
+
         private final TeamInfoView home;
         private final TeamInfoView away;
 
@@ -105,6 +116,8 @@ public class BaseballGameView {
         public Builder(BaseballGame baseballGame) {
             TeamInformation homeTeamInformation = baseballGame.getHomeTeamInformation();
             TeamInformation awayTeamInformation = baseballGame.getAwayTeamInformation();
+
+            this.winner = baseballGame.getWinner();
 
             this.home = new TeamInfoView.Builder(homeTeamInformation).build();
             this.away = new TeamInfoView.Builder(awayTeamInformation).build();
@@ -134,7 +147,7 @@ public class BaseballGameView {
             return baseStateView;
         }
 
-        public BaseballGameView bulid() {
+        public BaseballGameView build() {
             return new BaseballGameView(this);
         }
     }

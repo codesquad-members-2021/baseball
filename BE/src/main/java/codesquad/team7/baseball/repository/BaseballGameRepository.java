@@ -10,4 +10,6 @@ public interface BaseballGameRepository extends CrudRepository<BaseballGame, Lon
     @Override
     List<BaseballGame> findAll();
 
+    List<BaseballGame> findAllByWinnerIsNull();
+
 }

@@ -32,6 +32,6 @@ public class BaseballController {
     }
 
     private BaseballGameView buildGameView(BaseballGame game) {
-        return new BaseballGameView.Builder(game).bulid();
+        return new BaseballGameView.Builder(game).build();
     }
 }
