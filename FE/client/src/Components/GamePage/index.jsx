@@ -48,7 +48,6 @@ const GamePage = ({ userState }) => {
         {error && <>error ...</>}
       </GamePageBackground>
     </GamePageContext.Provider>
-
   );
 };
 
