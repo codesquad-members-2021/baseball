@@ -1,23 +1,34 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { boardHistory, BoardHistoryContext } from '../provider/ContextB';
 
 const Stadium = () => {
   const { ballCnt, dispatch } = useContext(BoardHistoryContext);
-  // const boardHistoryLst = [boardHistory[S],boardHistory[B],boardHistory[O]]
 
   const PlayBoardTemp = ({ type }) => {
     if (type === 'S') {
-      const arr = new Array(ballCnt.S).fill('🟡'); //[[0,0,0]]
-      return <>{arr}</>; //{🟡🟡🟡}
+      const arr = new Array(ballCnt.S).fill(' 🟡');
+      return <>{arr}</>;
     } else if (type === 'B') {
-      const arr = new Array(ballCnt.B).fill('🟢');
+      const arr = new Array(ballCnt.B).fill(' 🟢');
       return <>{arr}</>;
     } else if (type === 'O') {
-      const arr = new Array(ballCnt.O).fill('🔴');
+      const arr = new Array(ballCnt.O).fill(' 🔴');
       return <>{arr}</>;
     }
   };
+
+  useEffect(() => {
+    if (ballCnt.S === 3) {
+      setTimeout(() => dispatch({ type: 'hitO' }), 1000);
+    }
+    if (ballCnt.B === 4) {
+      setTimeout(() => dispatch({ type: 'hitH' }), 1000);
+    }
+    if (ballCnt.O === 3) {
+      setTimeout(() => dispatch({ type: 'resetAll' }), 1000);
+    }
+  }, [ballCnt]);
 
   return (
     <StadiumDiv>
@@ -58,13 +69,10 @@ const Stadium = () => {
 
 const playPitch = (ballCnt, dispatch) => {
   const tempBoardLst = ['S', 'B'];
-  const randomBoard =
+  const randomHit =
     tempBoardLst[Math.floor(Math.random() * tempBoardLst.length)];
-  dispatch({ type: randomBoard });
-
-  // boardHistory[randomBoard] += 1;
-
-  // boardHistory[] += 1;
+  dispatch({ type: 'hitInfo', payload: randomHit });
+  dispatch({ type: 'hit' + randomHit });
 };
 
 const StadiumDiv = styled.div`
