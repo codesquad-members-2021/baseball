@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled, { css } from "styled-components";
 import GameScoreTable from "./GameScoreTable";
+import useAsync from "utils/hooks/useAsync";
+import API from "utils/API";
+import { GamePageContext } from "Components/GamePage";
 
 const TopPopup = ({ isHidePopupState: { top }, distance }) => {
+  const { teamState: { gameId, home, away } } = useContext(GamePageContext);
+  const [scoreState, fetchScoreState] = useAsync(API.get.scores, [], true);
+  const { loading, data, error } = scoreState;
+
+  useEffect(() => {
+    if (top) return;
+    fetchScoreState(gameId);
+  }, [top]);
+
   return (
     <TopPopupWrapper {...{ top, distance }}>
-      <TeamNamesWrapper>
-        <TeamName player>Captain</TeamName>
-        <TeamName>Marvel</TeamName>
-      </TeamNamesWrapper>
-      <GameScoreTable />
+      {loading && <>loading...</>}
+
+      {data && <>
+        <TeamNamesWrapper>
+          <TeamName player={home.isMyTeam}>{home.teamName}</TeamName>
+          <TeamName player={away.isMyTeam}>{away.teamName}</TeamName>
+        </TeamNamesWrapper>
+        <GameScoreTable teamScores={data.teamScores} />
+      </>}
+
+      {error && <>error...</>}
     </TopPopupWrapper>
   );
 };

@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled, { css } from "styled-components";
+import API from "utils/API";
+import useAsync from "utils/hooks/useAsync";
+import { GamePageContext } from "Components/GamePage";
 import PlayerScoreTable from "./PlayerScoreTable";
 
 const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
+  const { teamState: { home, away } } = useContext(GamePageContext);
+  const [homeTeamRecodes, fetchHomeTeamRecodes] = useAsync(API.get.records, [], true);
+  const [awayTeamRecodes, fetchAwayTeamRecodes] = useAsync(API.get.records, [], true);
+
+
+  useEffect(() => {
+    if (bottom) return;
+    fetchHomeTeamRecodes(home.teamId);
+    fetchAwayTeamRecodes(away.teamId);
+  }, [bottom]);
+
   return (
     <BottomPopupWrapper {...{ distance, bottom }}>
-      <TeamNamesWrapper player>Captain</TeamNamesWrapper>
-      <TeamNamesWrapper>Marvel</TeamNamesWrapper>
-      <PlayerScoreTable />
-      <PlayerScoreTable />
+
+      {awayTeamRecodes.loading && <>loading...</>}
+
+      {awayTeamRecodes.data && <>
+        <TeamNamesWrapper player={home.isMyTeam}>{home.teamName}</TeamNamesWrapper>
+        <TeamNamesWrapper player={away.isMyTeam}>{away.teamName}</TeamNamesWrapper>
+        <PlayerScoreTable records={homeTeamRecodes} />
+        <PlayerScoreTable records={awayTeamRecodes} />
+      </>}
+
+
+      {awayTeamRecodes.error && <>error...</>}
     </BottomPopupWrapper>
   );
 };
