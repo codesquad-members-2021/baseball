@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useScoreNBase from '../../../hooks/useScoreNBase';
 import { ScoreNBaseContext } from '../GamePlay';
 
-const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
+const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => {
   const { base, safetyDispatch } = useContext(ScoreNBaseContext);
   const [isTransition, setIsTransition] = useState(false);
   const [runFirstBase, setRunFirstBase] = useState(false);
@@ -31,12 +31,15 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
       handleStrike();
     } else if (randomNum <= 90) {
       //볼
+      if (ballCount.ball === 3) {
+        setIsTransition(true);
+        setRunFirstBase(true);
+        setCurrentPower(1);
+      }
       handleBall();
     } else {
       //안타
       handleSafety();
-      setRunFirstBase(true);
-      setIsTransition(true);
       if (randomNum <= 100) {
         //1루타
         setCurrentPower(1);
@@ -53,11 +56,11 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
     }
   };
 
-  const baseList = Object.entries(base).map(([baseNum, status], idx) => 
+  const baseList = Object.entries(base).map(([baseNum, status], idx) => (
     <div className='base' key={idx}>
       <div className='runner'></div>
     </div>
-  );
+  ));
 
   return (
     <StyledScreen>

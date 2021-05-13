@@ -86,7 +86,10 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   return (
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
-      <Screen {...{ handleStrike, handleBall, handleSafety }} turn={inning.turn}></Screen>
+      <Screen
+        {...{ handleStrike, handleBall, handleSafety, ballCount }}
+        turn={inning.turn}
+      ></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>
     </StyledBoard>
   );
