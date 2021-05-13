@@ -64,7 +64,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id
       ballCountDispatch({ type: 'clear' });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
-      safetyDispatch({ type: 'clear', turn: inning.turn });
+      safetyDispatch({ type: 'clear', turn: !inning.turn });
       logListDispatch({ type: 'clear' });
     } else {
       logListDispatch({ type: 'out', end: true });
@@ -87,7 +87,10 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id
   return (
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
-      <Screen {...{ handleStrike, handleBall, handleSafety, ballCount }} turn={inning.turn}></Screen>
+      <Screen
+        {...{ handleStrike, handleBall, handleSafety, ballCount }}
+        turn={inning.turn}
+      ></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>
     </StyledBoard>
   );

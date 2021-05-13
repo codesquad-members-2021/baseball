@@ -43,7 +43,7 @@ const memberListReducer = (state, action) => {
 // }
       return { ...member, safety, at_bat, out, status: !status };
     } else {
-      return {...member};
+      return { ...member };
     }
   });
   newTeam[next].status = true;
@@ -53,17 +53,20 @@ const memberListReducer = (state, action) => {
 const logListReducer = (state, action) => {
   let newState = [...state];
   console.log(newState);
-  const target = newState.length > 0 && {...newState[newState.length - 1]};
-  switch(action.type) {
+  const target = newState.length > 0 && { ...newState[newState.length - 1] };
+  switch (action.type) {
     case 'next':
-      newState.push({ ...action.value, index : action.index, history: [] });
+      newState.push({ ...action.value, index: action.index, history: [] });
       break;
-    case 'strike': case 'ball':
+    case 'strike':
+    case 'ball':
       target.history = [...target.history, { ...action }];
       newState[newState.length - 1] = target;
       break;
-    case '4ball': case 'safety': case 'out':
-      target.history = [...target.history, { type: action.type, end : true }];
+    case '4ball':
+    case 'safety':
+    case 'out':
+      target.history = [...target.history, { type: action.type, end: true }];
       target.status = false;
       newState[newState.length - 1] = target;
       break;
@@ -85,14 +88,19 @@ const GamePlay = ({ home, away, game_id }) => {
     round: 1,
   });
   const [logList, logListDispatch] = useReducer(logListReducer, []);
-  const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
+  const { score, base, safetyDispatch } = useScoreNBase({
+    score: { home: [0], away: [] },
+    base: undefined,
+  });
   const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
+  const teamName = {
+    home: 'json',
+    away: 'kyle',
+  };
   const pitchers = {
     home: gamePlayData?.home.pitcherId,
     away: gamePlayData?.away.pitcherId,
   };
-
-  const teamName = { home, away };
 
   useEffect(() => {
     const memberListData = {
@@ -103,9 +111,10 @@ const GamePlay = ({ home, away, game_id }) => {
   }, [gamePlayData]);
 
   useEffect(() => {
-    if(memberList && memberList.home) {
+    if (memberList && memberList.home) {
       memberList[inning.turn ? 'home' : 'away'].forEach((member, index) => {
-        if(member.status) logListDispatch({ value: {...member}, type: 'next', index: index + 1 })
+        if (member.status)
+          logListDispatch({ value: { ...member }, type: 'next', index: index + 1 });
       });
     }
   }, [memberList]);
@@ -129,14 +138,14 @@ const GamePlay = ({ home, away, game_id }) => {
   return (
     <StyledGamePlay>
       <PopUp position='top' emptyText='상세 점수'>
-        <PopUpScore />
+        <PopUpScore score={score} teamName={teamName} />
       </PopUp>
       <PopUp position='bottom' emptyText='선수 명단'>
         <PopUpRoster memberList={memberList} />
       </PopUp>
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={inning.turn}></Score>
+          <Score teamName={teamName} turn={inning.turn} gameID={gameID}></Score>
           <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
           <Board {...{ inning, setInning, memberListDispatch, logListDispatch, game_id : gameID }}></Board>
           <Log logList={logList}></Log>
