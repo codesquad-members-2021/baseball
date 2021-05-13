@@ -19,7 +19,8 @@ const globalReducer = (state, action) => {
                 ...state,
                 loginModalVisible: !state.loginModalVisible,
             };
-        default:    throw new Error();
+        default:
+            throw new Error('[Error] dispatch - global');
     }
 };
 

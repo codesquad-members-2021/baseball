@@ -6,7 +6,7 @@ import GameScoreStatus from "./GameScoreStatus";
 const GameScore = () => {
     return (
         <StyledGameScore>
-            <Logo>CPR BASSBALL GAME</Logo>
+            <Logo fontSize="32px">CPR BASSBALL GAME</Logo>
             <GameScoreStatus />
         </StyledGameScore>
     );

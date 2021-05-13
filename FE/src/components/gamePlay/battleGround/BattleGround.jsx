@@ -4,31 +4,66 @@ import BaseballStadium from './partial/BaseballStadium';
 import PitchButton from './partial/PitchButton';
 import Round from './partial/Round';
 import SBO from './partial/SBO';
-import { useState, createContext } from "react";
-import {uuid} from "uuidv4";
+import { useContext, useEffect } from 'react';
+import { uuid } from 'uuidv4';
+import { GamePlayContext } from '../../utilComponent/context/GamePlayProvider';
 
-export const BattleGroundContext = createContext();
+// export const BattleGroundContext = createContext();
 
 const BattleGround = () => {
-    const [test, setTest] = useState([[0,uuid()]]);
-    
+    const { gamePlayOptionsState, gamePlayOptionsDispatch } = useContext(GamePlayContext);
+    // const [test, setTest] = useState([ [ 0, uuid() ] ]);
+
+    useEffect(
+        () =>
+            gamePlayOptionsDispatch({
+                type: 'changeRyanIconStatus',
+                payload: [[0, uuid()]],
+            }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
+
     const pitchEvent = () => {
-        setTest(() => test.map((v) => [v[0]+1,v[1]]).concat([[0,uuid()]]).slice(-5));
+        const { ryanIconStatus } = gamePlayOptionsState;
+        if (!ryanIconStatus) return;
+
+        const currRyanIconStatus = 
+            ryanIconStatus
+                .map((v) => [v[0] + 1, v[1]])
+                .concat([[0, uuid()]])
+                .slice(-5);
+
+        gamePlayOptionsDispatch({
+            type: 'changeRyanIconStatus',
+            payload: currRyanIconStatus
+        });
     }
 
+    // const pitchEvent = () => {
+        // setTest(() =>
+        //     test
+        //         .map((v) => [v[0] + 1, v[1]])
+        //         .concat([[0, uuid()]])
+        //         .slice(-5),
+        // );
+    // };
+
     return (
-        <BattleGroundContext.Provider value={{test, setTest}}>
-            <StyledBattleGround>
-                <StadiumPartial>
-                    <div className="position__center--all">
-                        <BaseballStadium/>
-                        <PitchButton  onClick={pitchEvent}/>
-                    </div>
-                    <div className="position__right--top"><Round /></div>
-                    <div className="position__left--top"><SBO /></div>
-                </StadiumPartial>
-            </StyledBattleGround>
-        </BattleGroundContext.Provider>
+        <StyledBattleGround>
+            <StadiumPartial>
+                <div className="position__center--all">
+                    <BaseballStadium />
+                    <PitchButton onClick={pitchEvent} />
+                </div>
+                <div className="position__right--top">
+                    <Round />
+                </div>
+                <div className="position__left--top">
+                    <SBO />
+                </div>
+            </StadiumPartial>
+        </StyledBattleGround>
     );
 };
 
@@ -43,7 +78,6 @@ const StyledBattleGround = styled.div`
 
 const StadiumPartial = styled.div`
     ${cssFullAbsolutePosition};
-
 
     .position__right--top {
         position: absolute;
