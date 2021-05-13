@@ -1,15 +1,20 @@
 import { useContext } from 'react';
+
 import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
-const Hitter = ({ type }) => {
+const Hitter = () => {
   const { isAttacking, homeCurrentPlayerState, awayCurrentPlayerState } =
     useContext(gamePlayContext);
 
+  const { playerName, turn, hits } = isAttacking
+    ? awayCurrentPlayerState
+    : homeCurrentPlayerState;
+
   return (
     <>
-      <span>{homeCurrentPlayerState.playerName}</span>
+      <span>{playerName}</span>
       <span>
-        {homeCurrentPlayerState.turn}타석 {homeCurrentPlayerState.hit}안타
+        {turn}타석 {hits}안타
       </span>
     </>
   );

@@ -31,7 +31,7 @@ const GamePlay = ({ response }) => {
     )
   );
 
-  const [awayCurrentPlayerState, dispatcAwayCurrentPlayerState] = useReducer(
+  const [awayCurrentPlayerState, dispatchAwayCurrentPlayerState] = useReducer(
     playerReducer,
     new CurrentPlayer(
       awayPlayer[0].name,
@@ -78,6 +78,8 @@ const GamePlay = ({ response }) => {
       value={{
         homeCurrentPlayerState,
         awayCurrentPlayerState,
+        dispatchHomeCurrentPlayerState,
+        dispatchAwayCurrentPlayerState,
         round,
         isAttacking,
         pitcherName,

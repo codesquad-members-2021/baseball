@@ -6,7 +6,15 @@ import { gamePlayContext } from 'components/GamePlay/GamePlay';
 import BallCount from 'components/GamePlay/playScreen/BallCount';
 
 const Screen = () => {
-  const { dispatchBallCount, round, isAttacking } = useContext(gamePlayContext);
+  const {
+    ballCountState,
+    dispatchBallCount,
+    round,
+    isAttacking,
+    dispatchAwayCurrentPlayerState,
+    dispatchHomeCurrentPlayerState,
+  } = useContext(gamePlayContext);
+
   const initialAttackState = isAttacking ? ['초', '공격'] : ['초', '수비'];
   const [AttackState, setAttackState] = useState(initialAttackState);
   const currentRound = Math.floor(round / 2 + 1);
@@ -28,8 +36,15 @@ const Screen = () => {
   };
 
   const handleClickPitch = () => {
-    const action = getAction(chooseNumber());
-    dispatchBallCount({ payload: action, attackState: isAttacking });
+    const ballCountAction = getAction(chooseNumber());
+    const currentPlayeAction = {
+      payload: 'updatePlayerHistory',
+      ballCount: ballCountState,
+    };
+
+    dispatchBallCount({ payload: ballCountAction, attackState: isAttacking });
+    if (isAttacking) dispatchAwayCurrentPlayerState(currentPlayeAction);
+    if (!isAttacking) dispatchHomeCurrentPlayerState(currentPlayeAction);
   };
 
   useEffect(() => {
