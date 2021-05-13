@@ -5,6 +5,7 @@ import Popup from "./Popup";
 import styled from "styled-components";
 import useAsync from "utils/hooks/useAsync";
 import API from "utils/API";
+import { GAME1 } from "utils/mockDatas";
 
 export const GamePageContext = createContext();
 
@@ -20,6 +21,9 @@ const GamePage = ({ userState }) => {
     home: { isMyTeam: false, teamId: 0, teamName: "" },
     away: { isMyTeam: false, teamId: 0, teamName: "" },
   });
+  const [inGameData, setInGameData] = useState(GAME1);
+  const [attackState, setAttackState] = useState("away");
+  const [sequenceCount, setSequenceCount] = useState(0);
 
   useEffect(() => {
     if (!userState) return;
@@ -51,11 +55,13 @@ const GamePage = ({ userState }) => {
       },
     });
   }, [data]);
-
-  console.log("teamstate", teamState);
+  console.log(teamState);
+  console.log("인게임", inGameData);
 
   return (
-    <GamePageContext.Provider value={{ teamState }}>
+    <GamePageContext.Provider
+      value={{ teamState, inGameData, attackState, sequenceCount }}
+    >
       <GamePageBackground>
         {loading && <>loading ...</>}
 

@@ -196,4 +196,4 @@ const GAME1 = {
   ],
 };
 
-export { gameDatas };
+export { gameDatas, GAME1 };
