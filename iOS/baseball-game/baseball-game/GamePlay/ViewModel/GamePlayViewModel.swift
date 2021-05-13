@@ -10,8 +10,9 @@ import Combine
 
 class GamePlayViewModel {
     
-    @Published var gameManager: GameInformable!
-    @Published var pitches: [Pitch]!
+    private var gameManager: GameUpdatable!
+    @Published var gameUpdator: GameInformable!
+    @Published var pitchList: [Pitch]!
     @Published var error: Error!
     
     private let userTeamSide: TeamSide
@@ -23,7 +24,6 @@ class GamePlayViewModel {
         self.networkManager = networkManager
     }
     
-    //GameManager -> GameDTO에 따른 대대적인 변경 필요
     func requestGame() {
         networkManager.get(type: DataDTO<GameDTO>.self, url: EndPoint.url(path: "/1/start")!)
             .sink { error in
@@ -35,11 +35,52 @@ class GamePlayViewModel {
                                               teams: teams,
                                               batter: batter,
                                               pitcher: pitcher)
-                self.pitches = self.gameManager.pitchInfo()
-                
+                self.gameUpdator = self.gameManager
+                self.pitchList = self.gameUpdator.pitchInfo()
             }
             
         }.store(in: &cancelBag)
     }
     
+    func requestPitch() {
+        networkManager.get(type: DataDTO<GameDTO>.self, url: EndPoint.url(path: "/1/pitch")!)
+            .sink { error in
+            self.error = error as? Error
+        } receiveValue: { value in
+            if let data = value.data {
+                if let newInning = data.inning {
+                    self.gameManager.resetForNewInning(with: newInning)
+                }
+                
+                if let newScore = data.score {
+                    self.gameManager.updateScore(with: newScore)
+                }
+                
+                if let newBatter = data.batter {
+                    self.gameManager.changeBatter(to: newBatter)
+                }
+                
+                if let newPitcher = data.pitcher {
+                    self.gameManager.changePitcher(to: newPitcher)
+                }
+                
+                if let newPitch = data.newPitch {
+                    self.gameManager.updatePitchList(with: newPitch)
+                    self.pitchList = self.gameManager.pitchInfo()
+                }
+                
+                if let newBallInfo = data.ballChanged {
+                    self.gameManager.updateBallCount(with: newBallInfo)
+                }
+                
+                if let newBaseInfo = data.baseChanged {
+                    self.gameManager.updateBase(with: newBaseInfo)
+                }
+                
+                self.gameUpdator = self.gameManager
+            }
+            
+        }.store(in: &cancelBag)
+    }
+
 }

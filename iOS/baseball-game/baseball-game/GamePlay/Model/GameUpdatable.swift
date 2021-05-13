@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GameUpdatable {
+protocol GameUpdatable: GameInformable {
 
     func resetForNewInning(with newInning: Inning)
     

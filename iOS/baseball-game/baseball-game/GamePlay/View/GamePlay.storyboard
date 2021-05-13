@@ -129,6 +129,9 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="pitchButtonTouched:" destination="Vn8-LM-8qg" eventType="touchUpInside" id="mXt-L5-IEJ"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Ch-Kf-nPF">
                                         <rect key="frame" x="349.5" y="8" width="56.5" height="53"/>

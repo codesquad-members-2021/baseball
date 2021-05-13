@@ -54,6 +54,14 @@ class GamePlayViewController: UIViewController {
         
         ballCountView.reset()
     }
+    
+    @IBAction func pitchButtonTouched(_ sender: Any) {
+        gamePlayViewModel.requestPitch()
+    }
+    
+    @IBAction func pitcherChangeTouched(_ sender: Any) {
+        performSegue(withIdentifier: ViewID.segue, sender: nil)
+    }
 
 }
 
@@ -61,15 +69,15 @@ class GamePlayViewController: UIViewController {
 extension GamePlayViewController {
     
     private func bind() {
-        gamePlayViewModel.$gameManager
+        gamePlayViewModel.$gameUpdator
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] gameManager in
-                guard let gameManager = gameManager else { return }
-                self?.updateViews(with: gameManager)
+            .sink { [weak self] gameUpdator in
+                guard let gameUpdator = gameUpdator else { return }
+                self?.updateViews(with: gameUpdator)
             }
             .store(in: &cancelBag)
         
-        gamePlayViewModel.$pitches
+        gamePlayViewModel.$pitchList
             .receive(on: DispatchQueue.main)
             .sink { [weak self] pitches in
                 guard let pitches = pitches else { return }
@@ -83,10 +91,6 @@ extension GamePlayViewController {
                 guard let error = error else { return }
                 print(error) ///사용자에게 에러 표시하는 부분 미구현
             }.store(in: &cancelBag)
-    }
-
-    @IBAction func pitcherChangeTouched(_ sender: Any) {
-        performSegue(withIdentifier: ViewID.segue, sender: nil)
     }
     
     private func updateViews(with gameManager: GameInformable) {
