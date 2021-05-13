@@ -5,24 +5,36 @@ import { BoardHistoryContext } from '../provider/Context';
 
 const LogList = () => {
   const { ballCnt } = useContext(BoardHistoryContext);
-  const { myTeam, currHitter, setCurrHitter, totalOutCount, setTotalOutCount } =
-    useContext(GlobalContext);
+  const {
+    homeTeam,
+    myTeam,
+    currHitter,
+    setCurrHitter,
+    totalOutCount,
+    setTotalOutCount,
+  } = useContext(GlobalContext);
   const [logArr, setLogArr] = useState([]);
+  const [batOrder, setBatOrder] = useState(1);
+  console.log('⭐️', myTeam);
 
   useEffect(() => {
     setLogArr((logArr) => [...logArr, ballCnt]);
     if (ballCnt.HitInfo === 'O') {
       // console.log('현재 타자!', currHitter.id, currHitter);
-      // console.log('현재 타자!', currHitter);
+      console.log('토탈!', totalOutCount);
       setTotalOutCount((totalOutCount) => totalOutCount + 1);
       console.log('이제 하나씩 올렷다', totalOutCount);
     }
     if (ballCnt.HitInfo === 'H') {
       //한박자 느린 Hitter 변경
       //아웃과 안타시 타자 변경
-      console.log('🔥현재나의타자정보번호', currHitter);
+      console.log('🔥현재나의타자정보번호', currHitter, 'BBBb', batOrder);
       setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
-      console.log('⭐️현재나의타자정보번호', currHitter);
+      setBatOrder((batOrder) => batOrder + 1);
+      console.log('batOrder 바뀌지않앗겟지', batOrder);
+      //myTeam으로 가져올지 homeTeam으로 가져올지 모그렛음
+      setCurrHitter(myTeam[batOrder]);
+      console.log('⭐️현재나의타자정보번호', currHitter, 'BBB', batOrder);
     }
   }, [ballCnt]);
 
