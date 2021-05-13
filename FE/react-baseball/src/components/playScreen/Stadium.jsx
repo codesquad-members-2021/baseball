@@ -69,8 +69,8 @@ const playPitch = (ballCnt, dispatch) => {
   const tempBoardLst = ['S', 'B', 'H'];
   const getRandomNum = () => {
     const random = Math.random() * 10;
-    if (random >= 6) return 0;
-    if (random >= 3) return 1;
+    if (random >= 3) return 0;
+    if (random >= 1) return 1;
     return 2;
   };
   const randomHit = tempBoardLst[getRandomNum()];
