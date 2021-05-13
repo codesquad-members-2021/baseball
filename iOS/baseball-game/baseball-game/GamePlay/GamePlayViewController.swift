@@ -24,7 +24,10 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var batterInfoView: PitcherInfoView!
     @IBOutlet weak var ballCountView: BallCountView!
     @IBOutlet weak var groundView: GroundView!
-
+    
+    private let delayAmount = 0.2
+    private var totalDelay = -0.2
+    
     enum ViewID {
         static let storyboard = "GamePlay"
         static let segue = "selectPitcher"
@@ -137,7 +140,8 @@ extension GamePlayViewController {
             .publisher(for: BaseManager.notiName)
             .sink { data in
                 if let movementType = data.userInfo?["movement"] as? BaseMovement {
-                    DispatchQueue.main.async {
+                    self.totalDelay += self.delayAmount
+                    DispatchQueue.main.asyncAfter(deadline: .now() + self.totalDelay) {
                         switch movementType {
                         case .homeToFirst:
                             self.groundView.homeTofirstBase()
@@ -147,7 +151,10 @@ extension GamePlayViewController {
                             self.groundView.secondBaseToThirdBase()
                         case .thirdToHome:
                             self.groundView.thirdBaseToHome()
+                        case .reset:
+                            self.groundView.reset()
                         }
+                        self.totalDelay -= self.delayAmount
                     }
                 }
             }.store(in: &cancelBag)

@@ -26,6 +26,7 @@ class PlayerLayer: CALayer {
     func configure() {
         addBody()
         addFace()
+        self.opacity = 0
     }
     
     private func addBody() {
