@@ -3,6 +3,7 @@ import { createContext, useReducer, useMemo } from 'react';
 const globalInitialState = {
     clickLocation: "",
     loginModalVisible: false,
+    userLogin:"Login",
 };
 
 const globalReducer = (state, action) => {
@@ -19,7 +20,12 @@ const globalReducer = (state, action) => {
                 ...state,
                 loginModalVisible: !state.loginModalVisible,
             };
-        default:    throw new Error();
+        case 'userLogin':
+            return {
+                ...state,
+                userLogin: payload,
+            }
+        default: throw new Error();
     }
 };
 

@@ -20,8 +20,6 @@ const useFetch = (
                 setError(`Error: code ${res.status}`);
                 return;
             }
-            console.log(url);
-            console.log(res,options);
             const result = await res.json();
             if (!result) {
                 setError(`Error: NO JSON DATA`);
