@@ -336,7 +336,7 @@
                             <constraint firstItem="Svo-cR-Qhz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="zFs-hm-ILc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="baseball_player" selectedImage="score" id="fjd-0g-Opr"/>
+                    <tabBarItem key="tabBarItem" title="" image="score" selectedImage="score" id="fjd-0g-Opr"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outletCollection property="homeTeamScores" destination="OXX-5d-fy1" collectionClass="NSMutableArray" id="wlk-r3-W7k"/>
@@ -371,7 +371,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baseball_player" width="128" height="128"/>
         <image name="score" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
