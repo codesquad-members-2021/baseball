@@ -7,12 +7,16 @@ const gamePlayInitialState = {
         homeOrAway: '',
         userTeamName: '',
         opponentTeamName: '',
-        // attacker: 지금 누가 공격인지 (처음 공격은 항상 away 먼저)
         attacker: '',
-        strikeCount: 0,
-        ballCount: 0,
+
         awayScore: 0,
         homeScore: 0,
+
+        situation: null,
+        strikeCount: 0,
+        ballCount: 0,
+        outCount: 0,
+
         pitcher: null,
         hitter: null,
     },
@@ -28,7 +32,7 @@ const gamePlayReducer = (state, action) => {
                 teamsData: payload,
             };
         case 'changeGameProgress': {
-            if (!changeType || !payload)
+            if (!changeType)
                 throw new Error(
                     '[Error] dispatch - gamePlay(changeGameProgress)',
                 );

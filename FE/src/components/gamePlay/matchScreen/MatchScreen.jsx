@@ -1,29 +1,35 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { useContext } from 'react';
-import { GamePlayContext } from "../../utilComponent/context/GamePlayProvider";
+import { GamePlayContext } from '../../utilComponent/context/GamePlayProvider';
 
 const MatchScreen = () => {
-    const { gamePlayState: { gameProgress } } = useContext(GamePlayContext);
+    const {
+        gamePlayState: { gameProgress },
+    } = useContext(GamePlayContext);
     const { pitcher, hitter } = gameProgress;
-    console.log(pitcher, hitter)
 
-    return (pitcher&& hitter) && (
-        <StyledMatchScreen>
-            <div>
-                <Position>투수</Position>
-                <Info>
-                    <span className="name">{pitcher.name}</span>
-                    <span className="info">#{pitcher.id}</span>
-                </Info>
-            </div>
-            <div>
-                <Position>타자</Position>
-                <Info>
-                    <span className="name">{hitter.name}</span>
-                    <span className="info">{hitter.at_bat}타석 {hitter.hits}안타</span>
-                </Info>
-            </div>
-        </StyledMatchScreen>
+    return (
+        pitcher &&
+        hitter && (
+            <StyledMatchScreen>
+                <div>
+                    <Position>투수</Position>
+                    <Info>
+                        <span className="name">{pitcher.name}</span>
+                        <span className="info">#{pitcher.id}</span>
+                    </Info>
+                </div>
+                <div>
+                    <Position>타자</Position>
+                    <Info>
+                        <span className="name">{hitter.name}</span>
+                        <span className="info">
+                            {hitter.at_bat}타석 {hitter.hits}안타
+                        </span>
+                    </Info>
+                </div>
+            </StyledMatchScreen>
+        )
     );
 };
 
@@ -58,5 +64,7 @@ const Info = styled.div`
         color: ${({ theme }) => theme.colors.mint};
     }
 
-    span + span { margin-left: 16px; }
+    span + span {
+        margin-left: 16px;
+    }
 `;

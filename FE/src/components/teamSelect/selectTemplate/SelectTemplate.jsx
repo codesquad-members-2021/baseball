@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { API } from "../../../common/reference";
+
 import { divideArray } from "../../../common/util";
 import Desc from './partial/Desc';
 import SelectGame from './partial/selectGame/SelectGame';
@@ -9,7 +11,7 @@ const SelectTemplate = () => {
     const [teamName, setTeamName] = useState([]);
     const [test,setTest] = useState([]);
     const [desc, setDesc] = useState("참가할 게임을 선택하세요.");
-    const { response, loading, error } = useFetch('/api/intro');
+    const { response, loading, error } = useFetch(API + '/api/intro');
 
     useEffect(() => {
         if (loading) return;

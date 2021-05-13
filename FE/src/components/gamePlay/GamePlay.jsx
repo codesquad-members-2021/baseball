@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+
+import { API } from "../../common/reference";
 
 import { GamePlayContext } from '../utilComponent/context/GamePlayProvider';
 import { GlobalContext } from '../utilComponent/context/GlobalProvider';
@@ -77,8 +79,8 @@ const GamePlay = ({ location }) => {
     useEffect(() => {
         if (!globalState.clickLocation) return;
         globalState.clickLocation === 'away'
-            ? fetchData('/api/games/type-away')
-            : fetchData('/api/games/type-home');
+            ? fetchData(API + '/api/games/type-away')
+            : fetchData(API + '/api/games/type-home');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [globalState.clickLocation]);
     // useFetch로 --------------- 수정 예정  END

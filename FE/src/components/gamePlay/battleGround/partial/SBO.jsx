@@ -1,16 +1,21 @@
 import styled, { css } from 'styled-components';
+import { useContext } from 'react';
+import { GamePlayContext } from '../../../utilComponent/context/GamePlayProvider';
 
 const SBO = () => {
-    return (
+    const { gamePlayState: { gameProgress } } = useContext(GamePlayContext);
+    const { strikeCount, ballCount, outCount } = gameProgress;
+
+    return gameProgress && (
         <StyledSBO>
             <SBOList type="strike">
-                {[...Array(3)].map((_, i) => (<span key={i} />))}
+                {[...Array(strikeCount)].map((_, i) => (<span key={i} />))}
             </SBOList>
             <SBOList type="ball">
-                {[...Array(3)].map((_, i) => (<span key={i} />))}
+                {[...Array(ballCount)].map((_, i) => (<span key={i} />))}
             </SBOList>
             <SBOList type="out">
-                {[...Array(3)].map((_, i) => (<span key={i} />))}
+                {[...Array(outCount)].map((_, i) => (<span key={i} />))}
             </SBOList>
         </StyledSBO>
     );
