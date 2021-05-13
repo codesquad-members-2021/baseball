@@ -24,7 +24,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(handler instanceof HandlerMethod) {
+        if (handler instanceof HandlerMethod) {
             processAuth(request, handler);
         }
         return true;
