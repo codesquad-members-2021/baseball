@@ -2,13 +2,13 @@ INSERT INTO GAME(round,in_progress) VALUES(0,false);
 INSERT INTO GAME(round,in_progress) VALUES(0,false);
 INSERT INTO GAME(round,in_progress) VALUES(0,false);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend1', true, false, 1);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend1', false, false, 1);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Backend2', false, false, 1);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend1', true, false, 2);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend1', false, false, 2);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('Frontend2', false, false, 2);
 
-INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('BE+FE', true, false, 3);
+INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('BE+FE', false, false, 3);
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('IOS1', false, false, 3);
 
 
@@ -29,11 +29,11 @@ INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('이노',fa
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Jane',false,3,2);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Jung',false,4,2);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('August',false,5,2);
-INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('새리',true,6,2);
-INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Bat',true,7,2);
-INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('yeon',true,8,2);
-INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('coco',true,9,2);
-INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('프레디',true,10,2);
+INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('새리',false,6,2);
+INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Bat',false,7,2);
+INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('yeon',false,8,2);
+INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('coco',false,9,2);
+INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('프레디',false,10,2);
 
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Adela',true,1,3);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('eve',false,2,3);
