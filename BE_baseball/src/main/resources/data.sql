@@ -37,9 +37,7 @@ INSERT INTO `board`(`match`,`inning`,`turn`,`strike`,`ball`,`out`,`home_point`,`
 (1,1,'TOP/AWAY',1,0,1,0,0,'kim','honux'), -- 앞에서 안타 쳐서 호눅스로 타자변경
 (1,1,'TOP/AWAY',2,0,1,0,0,'kim','honux'), -- 앞에서 안타 쳐서 호눅스로 타자변경
 (1,1,'TOP/AWAY',3,0,1,0,0,'kim','honux'), -- 앞에서 안타 쳐서 호눅스로 타자변경
-
 (1,1,'BOT/HOME',0,0,0,0,0,'kim','dong'); -- */
-select * from board;
 -- ----------------------------------------------------------
 
 
@@ -50,19 +48,6 @@ select * from board;
 -- Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants;
 DESC `team`;
 -- DELETE FROM `team` WHERE team_id = *;
-/*
-INSERT INTO `team`(`team_id`,`team_name`,`win`,`lose`,`draw`,`victory_point`) values
-(1,'Tigers',10,10,2,10*3+2),
-(2,'Bears',1,19,2,1*3+2),
-(3,'Twins',3,17,2,3*3+2),
-(4,'Dinos',5,15,2,5*3+2),
-(5,'Lions',7,13,2,7*3+2),
-(6,'Eagles',9,11,2,9*3+2),
-(7,'Giants',12,8,2,12*3+2);
-SELECT * FROM team;
-
- */
-
 INSERT INTO `team`(`team_name`,`win`,`lose`,`draw`,`victory_point`) values
 ('Tigers',10,10,2,10*3+2),
 ('Bears',1,19,2,1*3+2),
@@ -71,8 +56,6 @@ INSERT INTO `team`(`team_name`,`win`,`lose`,`draw`,`victory_point`) values
 ('Lions',7,13,2,7*3+2),
 ('Eagles',9,11,2,9*3+2),
 ('Giants',12,8,2,12*3+2);
-SELECT * FROM team;
-
 -- ----------------------------------------------------------
 
 
@@ -102,7 +85,4 @@ INSERT INTO `player`(`team_id`, `name`,`uniform_number`,`played_games`,`at_bat`,
 (3,'한영준',224,839,144,445,456,485),
 (3,'강병철',345,345,123,235,152,998),
 (3,'레일리',247,567,546,346,823,662);
-
-
-SELECT * FROM `player`;
 -- ----------------------------------------------------------
