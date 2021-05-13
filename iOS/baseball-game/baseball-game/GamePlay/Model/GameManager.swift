@@ -123,6 +123,7 @@ extension GameManager: GameUpdatable {
     
     func changeBatter(to newBatter: Player) {
         self.batter = newBatter
+        self.ballCounter.reset()
     }
     
     func updateBallCount(with ballChanged: BallChanged) {
