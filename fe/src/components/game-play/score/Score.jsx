@@ -36,7 +36,7 @@ const Score = ({ teamName, turn }) => {
 
 const StyledScore = styled.div`
   .title {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 600;
     color: #fff;
     text-align: center;

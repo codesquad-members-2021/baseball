@@ -26,10 +26,10 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
 
   const handlePitchClick = () => {
     const randomNum = Math.ceil(Math.random() * 100);
-    if (randomNum <= 30) {
+    if (randomNum <= 60) {
       //스트라이크
       handleStrike();
-    } else if (randomNum <= 90) {
+    } else if (randomNum <= 80) {
       //볼
       if (ballCount.ball === 3) {
         setIsTransition(true);
@@ -39,6 +39,8 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
       handleBall();
     } else {
       //안타
+      setIsTransition(true);
+      setRunFirstBase(true);
       handleSafety();
       if (randomNum <= 100) {
         //1루타

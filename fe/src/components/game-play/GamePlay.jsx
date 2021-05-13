@@ -37,7 +37,6 @@ const memberListReducer = (state, action) => {
 
 const logListReducer = (state, action) => {
   let newState = [...state];
-  console.log(newState);
   const target = newState.length > 0 && { ...newState[newState.length - 1] };
   switch (action.type) {
     case 'next':
@@ -76,20 +75,21 @@ const GamePlay = ({ home, away, game_id }) => {
     score: { home: [0], away: [] },
     base: undefined,
   });
+  console.log(gamePlayData);
   const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
   const teamName = {
-    home: 'json',
-    away: 'kyle',
+    home: gamePlayData?.home?.name,
+    away: gamePlayData?.away?.name,
   };
   const pitchers = {
-    home: gamePlayData?.home.pitcherId,
-    away: gamePlayData?.away.pitcherId,
+    home: gamePlayData?.home?.pitcherId,
+    away: gamePlayData?.away?.pitcherId,
   };
 
   useEffect(() => {
     const memberListData = {
-      home: gamePlayData?.home.member_list,
-      away: gamePlayData?.away.member_list,
+      home: gamePlayData?.home?.member_list,
+      away: gamePlayData?.away?.member_list,
     };
     memberListDispatch({ type: 'init', value: memberListData });
   }, [gamePlayData]);
