@@ -5,132 +5,46 @@ import Scroll from '../Style/Scroll';
 import { useGameState } from '../GameContext';
 
 const GameLog = () => {
-  const { state } = useGameState();
-  const [logData, setLogData] = useState([]);
+  const { logState } = useLogState();
 
-  if (state.pitchResult) {
-    console.log(state.gameStatusDTO);
-  }
+  let processedLog = [];
 
-  const SingleLog = () => {};
+  logState.map((log, i) => {
+    processedLog[i] = {
+      hitter: `${log.gameStatusDTO.currentHitter + 1}번 타자 ${
+        log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
+      }`,
+      fragment: (
+        <LogWrapper>
+          <Number>{i}</Number>
+          <Log>{log.pitchResult.playType}</Log>
+          <AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
+        </LogWrapper>
+      ),
+    };
+  });
 
-  useEffect(() => {
-    if (state.pitchResult) {
-      console.log(
-        state.gameStatusDTO.currentHitter,
-        state.pitchResult.playType,
-        `S${state.gameStatusDTO.strikeCount} B${state.gameStatusDTO.ballCount}`
-      );
+  const gropuByHitter = processedLog.reduce((acc, obj) => {
+    if (!acc[obj.hitter]) {
+      acc[obj.hitter] = [];
     }
-  }, [logData]);
+    acc[obj.hitter].push(obj.fragment);
+    return acc;
+  }, {});
 
   return (
     <GameLogScroll>
-      <PlayerWrapper>
-        <Player now={true}>7번 타자 류진</Player>
-        <LogWrapper>
-          <Number>&#9316;</Number>
-          <Log>스트라이크</Log>
-          <AccLog>S2 B3</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9315;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B3</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9314;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B2</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9313;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B1</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9312;</Number>
-          <Log> 스트라이크</Log>
-          <AccLog>S1 B0</AccLog>
-        </LogWrapper>
-      </PlayerWrapper>
-
-      <PlayerWrapper>
-        <Player now={false}>6번 타자 시에나</Player>
-        <Result>안타!</Result>
-        <LogWrapper>
-          <Number>&#9314;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B2</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9313;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B1</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9312;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B0</AccLog>
-        </LogWrapper>
-      </PlayerWrapper>
-      <PlayerWrapper>
-        <Player now={false}>6번 타자 시에나</Player>
-        <Result>안타!</Result>
-        <LogWrapper>
-          <Number>&#9314;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B2</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9313;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B1</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9312;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B0</AccLog>
-        </LogWrapper>
-      </PlayerWrapper>
-      <PlayerWrapper>
-        <Player now={false}>6번 타자 시에나</Player>
-        <Result>안타!</Result>
-        <LogWrapper>
-          <Number>&#9314;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B2</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9313;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B1</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9312;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B0</AccLog>
-        </LogWrapper>
-      </PlayerWrapper>
-      <PlayerWrapper>
-        <Player now={false}>6번 타자 시에나</Player>
-        <Result>안타!</Result>
-        <LogWrapper>
-          <Number>&#9314;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B2</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9313;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B1</AccLog>
-        </LogWrapper>
-        <LogWrapper>
-          <Number>&#9312;</Number>
-          <Log>볼</Log>
-          <AccLog>S1 B0</AccLog>
-        </LogWrapper>
-      </PlayerWrapper>
+      {Object.entries(gropuByHitter).map(([key, value]) => {
+        const logList = value.map(log => log);
+        return (
+          <>
+            <PlayerWrapper>
+              <Player>{key}</Player>
+            </PlayerWrapper>
+            {logList}
+          </>
+        );
+      })}
     </GameLogScroll>
   );
 };
@@ -140,6 +54,7 @@ const PlayerWrapper = styled.div`
   padding-left: 20px;
 `;
 const LogWrapper = styled.div`
+  margin: 1rem;
   width: fit-content;
   padding-top: 10px;
   display: grid;
@@ -158,11 +73,15 @@ const Result = styled(Span)`
 `;
 const Number = styled(Span)`
   color: ${theme.colors.white};
+  background-color: #0073b1;
+  border-radius: 10px;
+  text-align: center;
 `;
 const Log = styled(Span)`
   color: ${theme.colors.white};
 `;
 const AccLog = styled(Span)`
+  text-align: left;
   color: ${theme.colors.grey};
 `;
 

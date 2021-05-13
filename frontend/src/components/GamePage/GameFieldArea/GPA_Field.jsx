@@ -4,46 +4,44 @@ import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
 import { ReactComponent as Ghost } from './ghost.svg';
 import API from '../../Hook/API';
-import { useGameState, useDispatch } from '../../GameContext';
+import {
+  useGameState,
+  useDispatch,
+  useLogState,
+  useLogDispatch,
+} from '../../GameContext';
+import GhostAnimation from './GPA_Animation';
 
-const GPA_Field = ({ type, gameId }) => {
+const GpaField = ({ type, gameId }) => {
   const { state } = useGameState();
-  const [move, setMove] = useState('');
   const dispatch = useDispatch();
-  const GhostSVG = styled(Ghost)`
-    position: absolute;
-    width: 3rem;
-    top: 52.5rem;
-    left: 23rem;
-    animation: run 2s forwards;
-    ${move}
-  `;
+  const logDispatch = useLogDispatch();
+  const [inning, setInning] = useState(
+    state.score ? state.gameStatusDTO.inning : 1
+  );
+
+  if (state.pitchResult) console.log(state.pitchResult.playType);
 
   const handleClick = () => {
-    const pitchResult = async () => {
+    const getPitchResult = async () => {
       const response = await API.post.pitch(gameId);
       dispatch({ type: 'pitch', payload: response });
+      logDispatch({ type: 'log', payload: response });
     };
-    pitchResult();
 
-    setMove(`
-    @keyframes run {
-      from {
-        transform: translateX(0rem) translateY(0rem);
-      }
-      to {
-        transform: translateX(15rem) translateY(-12.5rem);
-      }
-    }`);
+    getPitchResult();
   };
+
+  const move =
+    state.pitchResult && state.pitchResult.playType === 'HITS' ? true : false;
 
   return (
     <>
       {type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
       <FieldArea>
-        <GameState>2회초 공격</GameState>
+        <GameState>{inning}회초 공격</GameState>
         <FieldSVG />
-        <GhostSVG />
+        <GhostAnimation move={move} />
       </FieldArea>
     </>
   );
