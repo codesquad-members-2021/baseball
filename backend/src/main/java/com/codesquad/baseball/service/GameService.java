@@ -1,11 +1,21 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.domain.*;
-import com.codesquad.baseball.dto.*;
-import com.codesquad.baseball.exceptions.GameAlreadyOccupiedException;
-import com.codesquad.baseball.exceptions.GameIsNotStartedException;
-import com.codesquad.baseball.exceptions.GameNotFoundException;
-import com.codesquad.baseball.exceptions.PlayerNotFoundException;
+import com.codesquad.baseball.domain.game.Game;
+import com.codesquad.baseball.domain.game.GameRepository;
+import com.codesquad.baseball.domain.game.participant.PitcherPosition;
+import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;
+import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
+import com.codesquad.baseball.domain.game.pitch.PitchResult;
+import com.codesquad.baseball.domain.team.Player;
+import com.codesquad.baseball.domain.team.PlayerRepository;
+import com.codesquad.baseball.domain.team.Team;
+import com.codesquad.baseball.domain.team.TeamType;
+import com.codesquad.baseball.dto.game.*;
+import com.codesquad.baseball.dto.player.PlayerDTO;
+import com.codesquad.baseball.dto.team.TeamDetailDTO;
+import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
+import com.codesquad.baseball.exceptions.notfound.GameNotFoundException;
+import com.codesquad.baseball.exceptions.notfound.PlayerNotFoundException;
 import com.codesquad.baseball.utils.PitchRandomTable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,12 +51,12 @@ public class GameService {
     }
 
     @Transactional
-    public void joinIn(int gameId) {
+    public void joinIn(int gameId, String userId) {
         Game game = findGame(gameId);
         if (game.isOccupied()) {
             throw new GameAlreadyOccupiedException(gameId);
         }
-        game.joinGame();
+        game.joinGame(userId);
         gameRepository.save(game);
     }
 
@@ -73,9 +83,9 @@ public class GameService {
     }
 
     @Transactional
-    public PitchDTO doPitch(int gameId) {
+    public PitchDTO doPitch(int gameId, String userId) {
         Game game = findGame(gameId);
-        game.verifyGameIsPlayable();
+        game.verifyGameIsPlayable(userId);
         PitchResult pitchResult = game.pitch(PitchRandomTable.rollDice());
         gameRepository.save(game);
         return createPitchDTO(game, pitchResult);

@@ -1,6 +1,6 @@
 package com.codesquad.baseball.utils;
 
-import com.codesquad.baseball.domain.PlayType;
+import com.codesquad.baseball.domain.game.PlayType;
 
 public class PitchRandomTable {
 
