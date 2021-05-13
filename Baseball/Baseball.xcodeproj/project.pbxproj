@@ -35,6 +35,8 @@
 		A09F9F3826491ECE00A78969 /* GameListDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09F9F3726491ECE00A78969 /* GameListDTO+Mapping.swift */; };
 		FF57667E2649324200F46A43 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57667D2649324200F46A43 /* Alertable.swift */; };
 		FF576684264BA70A00F46A43 /* RunnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576683264BA70A00F46A43 /* RunnerView.swift */; };
+		FF576687264BCC2100F46A43 /* GameScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576686264BCC2100F46A43 /* GameScoreViewModel.swift */; };
+		FF57668B264BCE0C00F46A43 /* InGameTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57668A264BCE0C00F46A43 /* InGameTabBarController.swift */; };
 		FFDD3A8C2641371C0037622A /* GameScoreHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */; };
 		FFDD3A90264138800037622A /* MatchUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A8F264138800037622A /* MatchUp.swift */; };
 		FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A91264138F40037622A /* GameListViewModel.swift */; };
@@ -74,6 +76,8 @@
 		A09F9F3726491ECE00A78969 /* GameListDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameListDTO+Mapping.swift"; sourceTree = "<group>"; };
 		FF57667D2649324200F46A43 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		FF576683264BA70A00F46A43 /* RunnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RunnerView.swift; path = Baseball/Presentation/Utils/RunnerView.swift; sourceTree = SOURCE_ROOT; };
+		FF576686264BCC2100F46A43 /* GameScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameScoreViewModel.swift; path = Baseball/Presentation/Utils/GameScoreViewModel.swift; sourceTree = SOURCE_ROOT; };
+		FF57668A264BCE0C00F46A43 /* InGameTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InGameTabBarController.swift; sourceTree = "<group>"; };
 		FFDD3A8B2641371C0037622A /* GameScoreHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameScoreHeader.xib; sourceTree = "<group>"; };
 		FFDD3A8F264138800037622A /* MatchUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUp.swift; sourceTree = "<group>"; };
 		FFDD3A91264138F40037622A /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 		A025C33D2640EC4D00C9B8C7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FF576689264BCDB300F46A43 /* TabBar */,
 				A05951C4264A2C02002B759A /* Flow */,
 				FF57667C2649323600F46A43 /* Utils */,
 				FFDD3A8A264137080037622A /* Common */,
@@ -222,8 +227,8 @@
 		A05951C7264A69C2002B759A /* GameScoreView */ = {
 			isa = PBXGroup;
 			children = (
-				A05951C8264A69F1002B759A /* GameScoreViewController.swift */,
-				A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */,
+				FF576688264BCC3D00F46A43 /* View */,
+				FF576685264BCC1700F46A43 /* ViewModel */,
 			);
 			path = GameScoreView;
 			sourceTree = "<group>";
@@ -289,6 +294,31 @@
 				FF57667D2649324200F46A43 /* Alertable.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		FF576685264BCC1700F46A43 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FF576686264BCC2100F46A43 /* GameScoreViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FF576688264BCC3D00F46A43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A05951C8264A69F1002B759A /* GameScoreViewController.swift */,
+				A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FF576689264BCDB300F46A43 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				FF57668A264BCE0C00F46A43 /* InGameTabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		FFDD3A8A264137080037622A /* Common */ = {
@@ -394,6 +424,7 @@
 				A0907C2F264BB7F1007ABB1F /* GamePlayRepository.swift in Sources */,
 				A0907C37264BC1B1007ABB1F /* GamePlayViewModel.swift in Sources */,
 				FF57667E2649324200F46A43 /* Alertable.swift in Sources */,
+				FF576687264BCC2100F46A43 /* GameScoreViewModel.swift in Sources */,
 				FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */,
 				FFDD3A90264138800037622A /* MatchUp.swift in Sources */,
 				A05951C6264A2C18002B759A /* BaseballSceneFlowCoordinator.swift in Sources */,
@@ -413,6 +444,7 @@
 				A098D28C264383D700950F8F /* GamePlayViewController.swift in Sources */,
 				A09F9F3326490FC800A78969 /* NetworkService.swift in Sources */,
 				A09F9F352649102D00A78969 /* NetworkEndpoint.swift in Sources */,
+				FF57668B264BCE0C00F46A43 /* InGameTabBarController.swift in Sources */,
 				A025C3442640ED1C00C9B8C7 /* GameListCell.swift in Sources */,
 				FFDD3A9E2643C3960037622A /* PitchHistoryCell.swift in Sources */,
 				A05951BF264A27EC002B759A /* AppDIContainer.swift in Sources */,

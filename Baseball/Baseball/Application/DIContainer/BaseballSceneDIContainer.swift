@@ -52,6 +52,13 @@ class BaseballSceneDIContainer: BaseballFlowCoordinatorDependencies {
         return GamePlayViewController.create(with: makeGamePlayViewModel(matchId: matchId))
     }
     
+    //MARK: - GameScoreView
+    private func makeGameScoreViewModel() -> GameScoreViewModel {
+        return GameScoreViewModel()
+    }
+    func makeGameScoreViewController() -> GameScoreViewController {
+        return GameScoreViewController.create(with: makeGameScoreViewModel())
+    }
     //MARK: - Coordinator
     func makeBaseballSceneCoordinator(navigationController: UINavigationController) -> BaseballSceneFlowCoordinator {
         return BaseballSceneFlowCoordinator(navigationController: navigationController, dependencies: self)
