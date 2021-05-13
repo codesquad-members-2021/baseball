@@ -3,12 +3,8 @@ package com.codesquad.baseball.controller;
 import com.codesquad.baseball.dto.etc.ErrorDTO;
 import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
-import com.codesquad.baseball.exceptions.notfound.GameNotFoundException;
-import com.codesquad.baseball.exceptions.notfound.NotFoundException;
-import com.codesquad.baseball.exceptions.notfound.PlayerNotFoundException;
-import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
-import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
-import com.codesquad.baseball.exceptions.oauth.NoJwtTokenException;
+import com.codesquad.baseball.exceptions.notfound.*;
+import com.codesquad.baseball.exceptions.oauth.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +21,7 @@ public class ExceptionController {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({PlayerNotFoundException.class, TeamNotFoundException.class, GameNotFoundException.class})
+    @ExceptionHandler({PlayerNotFoundException.class, TeamNotFoundException.class, GameNotFoundException.class, UserNotFoundException.class})
     public ErrorDTO handlePlayerNotFoundException(NotFoundException exception) {
         return new ErrorDTO(HttpStatus.NOT_FOUND, exception.getMessage());
     }
@@ -47,5 +43,11 @@ public class ExceptionController {
     @ExceptionHandler({NoJwtTokenException.class, InvalidJwtTokenException.class})
     public ErrorDTO handleNoJwtTokenException(RuntimeException exception) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler({InvalidAccessTokenException.class, InvalidRefreshTokenException.class})
+    public ErrorDTO handleInvalidTokenException(InvalidTokenException exception) {
+        return new ErrorDTO(HttpStatus.CONFLICT, exception.getMessage());
     }
 }

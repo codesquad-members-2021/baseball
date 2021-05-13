@@ -2,6 +2,8 @@ package com.codesquad.baseball.domain.user;
 
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
+import com.codesquad.baseball.exceptions.oauth.InvalidAccessTokenException;
+import com.codesquad.baseball.exceptions.oauth.InvalidRefreshTokenException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -46,6 +48,18 @@ public class User {
         givenName = userInfoDTO.getGiven_name();
         picture = userInfoDTO.getPicture();
         locale = userInfoDTO.getLocale();
+    }
+
+    public void verifyAccessToken(String accessToken) {
+        if (!this.accessToken.equals(accessToken)) {
+            throw new InvalidAccessTokenException(InvalidAccessTokenException.INVALID_ACCESS_TOKEN);
+        }
+    }
+
+    public void verifyRefreshToken(String refreshToken) {
+        if (!this.refreshToken.equals(refreshToken)) {
+            throw new InvalidRefreshTokenException(InvalidRefreshTokenException.INVALID_REFRESH_TOKEN);
+        }
     }
 
     public void updateAccessToken(String accessToken) {

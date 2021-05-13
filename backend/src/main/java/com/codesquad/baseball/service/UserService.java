@@ -3,7 +3,9 @@ package com.codesquad.baseball.service;
 import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.domain.user.UserRepository;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
+import com.codesquad.baseball.dto.oauth.RefreshTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
+import com.codesquad.baseball.exceptions.notfound.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,16 +14,16 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final JwtManager jwtManager;
+    private final JwtBuilder jwtBuilder;
 
-    public UserService(UserRepository userRepository, JwtManager jwtManager) {
+    public UserService(UserRepository userRepository, JwtBuilder jwtBuilder) {
         this.userRepository = userRepository;
-        this.jwtManager = jwtManager;
+        this.jwtBuilder = jwtBuilder;
     }
 
     public JwtTokenDTO login(UserInfoDTO userInfoDTO) {
-        Optional<User> optionalUser = findUserByUserId(userInfoDTO.getId());
-        JwtTokenDTO jwtTokenDTO = jwtManager.createToken(userInfoDTO.getId());
+        Optional<User> optionalUser = findOptionalUserByUserId(userInfoDTO.getId());
+        JwtTokenDTO jwtTokenDTO = jwtBuilder.createToken(userInfoDTO.getId());
         processUserData(userInfoDTO, optionalUser, jwtTokenDTO);
         return jwtTokenDTO;
     }
@@ -39,7 +41,11 @@ public class UserService {
         return userRepository.save(new User(userInfoDTO, jwtTokenDTO));
     }
 
-    public Optional<User> findUserByUserId(String userId) {
+    public Optional<User> findOptionalUserByUserId(String userId) {
         return userRepository.findByUserId(userId);
+    }
+
+    public User findUserByUserId(String userId) {
+        return userRepository.findByUserId(userId).orElseThrow(() -> new UserNotFoundException(userId));
     }
 }

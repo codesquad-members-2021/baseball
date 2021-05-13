@@ -1,5 +1,6 @@
 package com.codesquad.baseball.service;
 
+import com.codesquad.baseball.dto.oauth.AccessTokenDTO;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
 import io.jsonwebtoken.*;
@@ -8,14 +9,14 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 @Service
-public class JwtManager {
+public class JwtBuilder {
     private static final String ISSUER = "baseball";
     private static final String USER_ID = "USER_ID";
     private static final long ACCESS_TOKEN_EXPIRATION = 60 * 60 * 1000L;
     private static final long REFERSH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000L;
     private final OAuthConfigManager oAuthConfigManager;
 
-    public JwtManager(OAuthConfigManager oAuthConfigManager) {
+    public JwtBuilder(OAuthConfigManager oAuthConfigManager) {
         this.oAuthConfigManager = oAuthConfigManager;
     }
 
@@ -54,26 +55,5 @@ public class JwtManager {
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + expirationTime))
                 .compact();
-    }
-
-    public String extractUserIdFromJwt(String jwt) {
-        Jws<Claims> claims = verifyJwt(jwt);
-        return (String) claims.getBody().get(USER_ID);
-    }
-
-    private Jws<Claims> verifyJwt(String jwt) {
-        try {
-            return Jwts.parser().setSigningKey(oAuthConfigManager.serverSecret()).parseClaimsJws(jwt);
-        } catch (ExpiredJwtException e) {
-            throw new InvalidJwtTokenException(InvalidJwtTokenException.EXPIRED_JWT_EXCEPTION);
-        } catch (UnsupportedJwtException e) {
-            throw new InvalidJwtTokenException(InvalidJwtTokenException.UNSUPPORTED_JWT_EXCEPTION);
-        } catch (MalformedJwtException e) {
-            throw new InvalidJwtTokenException(InvalidJwtTokenException.MALFORMED_JWT_EXCEPTION);
-        } catch (SignatureException e) {
-            throw new InvalidJwtTokenException(InvalidJwtTokenException.SIGNATURE_EXCEPTION);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidJwtTokenException(InvalidJwtTokenException.ILLEGAL_ARGUMENT_EXCEPTION);
-        }
     }
 }
