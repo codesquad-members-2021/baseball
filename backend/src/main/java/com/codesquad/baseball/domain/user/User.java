@@ -7,7 +7,7 @@ import com.codesquad.baseball.exceptions.oauth.InvalidRefreshTokenException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("USERS")
+@Table("users")
 public class User {
 
     @Id
