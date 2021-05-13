@@ -6,11 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
 
-//@Repository
 public interface TeamRepository extends CrudRepository<Team, Long> {
+
+    @Override
     List<Team> findAll();
 
-    Optional<Team> findByTeamId(Long teamId);
+    @Override
+    Optional<Team> findById(Long aLong);
 
     Optional<Team> findByTeamName(String teamName);
 }

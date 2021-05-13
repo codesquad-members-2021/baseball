@@ -22,22 +22,6 @@ public class Board {
     //@CreatedDate
     //private LocalDateTime createdAt;
 
-
-    @Override
-    public String toString() {
-        return "Board{" +
-                ", inning=" + inning +
-                ", turn='" + turn + '\'' +
-                ", strike=" + strike +
-                ", ball=" + ball +
-                ", out=" + out +
-                ", HomePoint=" + HomePoint +
-                ", AwayPoint=" + AwayPoint +
-                ", pitcher='" + pitcher + '\'' +
-                ", batter='" + batter + '\'' +
-                '}';
-    }
-
     public Long getId() {
         return id;
     }
@@ -112,5 +96,20 @@ public class Board {
 
     public void setBatter(String batter) {
         this.batter = batter;
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                ", inning=" + inning +
+                ", turn='" + turn + '\'' +
+                ", strike=" + strike +
+                ", ball=" + ball +
+                ", out=" + out +
+                ", HomePoint=" + HomePoint +
+                ", AwayPoint=" + AwayPoint +
+                ", pitcher='" + pitcher + '\'' +
+                ", batter='" + batter + '\'' +
+                '}';
     }
 }

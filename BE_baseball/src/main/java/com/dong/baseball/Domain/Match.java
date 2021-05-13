@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Match {
-    @MappedCollection(keyColumn = "match_id")
-    List<Board> gameBoards = new ArrayList<>();
+
     @Id
     private Long id;
     private String home;
     private String away;
+
+    @MappedCollection(keyColumn = "match_id")
+    List<Board> gameBoards = new ArrayList<>();
 
     public void addGameBoards(Board... boards) {
         for (Board board : boards) {
@@ -28,16 +30,8 @@ public class Match {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getHome() {
         return home;
-    }
-
-    public void setHome(String home) {
-        this.home = home;
     }
 
     public String getAway() {
@@ -47,7 +41,6 @@ public class Match {
     public void setAway(String away) {
         this.away = away;
     }
-
 
     @Override
     public String toString() {

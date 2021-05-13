@@ -1,8 +1,6 @@
 package com.dong.baseball.Domain;
 
 public class Player {
-    // 타자 투수 구별은 없음, 왜냐하면 불펜으로 타자가 투수할수도 있기 때문
-    // 나중에 Player를 최대한 풍부하게 만들어놓고 batter, pitcher 클래스를 상속받아 만들면 됨
     private String name;
     private Integer uniformNumber;
     private Integer playedGames;
@@ -11,17 +9,6 @@ public class Player {
     private Integer ball;
     private Integer strike;
     private Double battingAverage;
-
-    /**
-     * `ball`,
-     * `name`,
-     * `at_bat`,
-     * strike`,
-     * `played_games`,
-     * ``uniform_number`,
-     * `batting_average`,
-     * `player_index`
-     */
 
     public Integer getUniformNumber() {
         return uniformNumber;

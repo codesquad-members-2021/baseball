@@ -31,14 +31,14 @@ public class GameController {
     @GetMapping("/{matchId}/offense")
     public ProgressDTO offeseInfo(@PathVariable Long matchId) {
         gameService.matchInformations(matchId);
-        return new ProgressDTO(gameService.matchStream(matchId));
+        return new ProgressDTO(gameService.matchSingleInfo(matchId));
     }
 
     @GetMapping("/{matchId}/defense")
     public ProgressDTO defenseInfo(@PathVariable Long matchId) {
 
         gameService.matchInformations(matchId);
-        return new ProgressDTO(gameService.matchStream(matchId));
+        return new ProgressDTO(gameService.matchSingleInfo(matchId));
     }
 
     @PostMapping("/{matchId}/start")

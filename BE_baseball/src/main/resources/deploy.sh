@@ -1,3 +1,4 @@
+#!/bin/zsh
 # 설정
 LINE='#########################################################'
 SERVADDR='ec2-3-35-226-74.ap-northeast-2.compute.amazonaws.com' #배포할 AWS EC2 서버
