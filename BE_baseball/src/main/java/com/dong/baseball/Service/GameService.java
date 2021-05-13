@@ -43,7 +43,7 @@ public class GameService {
         return matchBoardInfo;
     }
 
-    public Board matchStream(Long matchId) {
+    public Board matchSingleInfo(Long matchId) {
         Match match = leagueRepository.findById(matchId).get();//@Todo get
         List<Board> matchBoards = match.getGameBoards();
         return matchBoards.get(matchBoards.size() - 1);
