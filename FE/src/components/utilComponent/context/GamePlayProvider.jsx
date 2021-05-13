@@ -7,12 +7,24 @@ const gamePlayInitialState = {
         homeOrAway: '',
         userTeamName: '',
         opponentTeamName: '',
+
+        userPlayers: null,
+        opponentPlayers: null,
+
+        userHitterIdx: 0,
+        opponentHitterIdx: 0,
+
+        attackOrDefense: '',
+        roundState: 0,
+
         attacker: '',
+        attackerTeamName: '',
 
         awayScore: 0,
         homeScore: 0,
 
         situation: null,
+
         strikeCount: 0,
         ballCount: 0,
         outCount: 0,

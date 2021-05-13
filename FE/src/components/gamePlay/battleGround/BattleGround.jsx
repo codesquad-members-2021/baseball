@@ -33,13 +33,24 @@ const BattleGround = () => {
 
     // 2) gamePlayState.gameProgress.situation 변경 시
     useEffect(() => {
-        const { gameProgress: { situation, ballCount, strikeCount, outCount } } = gamePlayState;
+        const { 
+            gameProgress: { 
+                situation, ballCount, strikeCount, outCount, 
+                userTeamName,
+                userPlayers, opponentPlayers,
+                userHitterIdx, opponentHitterIdx,
+                attackerTeamName,
+            } 
+        } = gamePlayState;
+
         const { ryanIconStatus } = gamePlayOptionsState;
 
         if (!ryanIconStatus || !situation) return;
 
+        let isOut = false;
+        let isFourBall = false;
+
         if (situation === 'STRIKE') {
-            let isOut = false;
             let nextStrikeCount = strikeCount + 1;
 
             if (nextStrikeCount > 2) {
@@ -60,15 +71,13 @@ const BattleGround = () => {
                     changeType: 'outCount',
                     payload: nextOutCount,
                 });
-            }
-            return;
+            } else return;
         } else if (situation === 'BALL') {
-            let isHits = false;
             let nextBallCount = ballCount + 1;
 
             if (nextBallCount > 3) {
                 nextBallCount = 0;
-                isHits = true;
+                isFourBall = true;
             }
 
             gamePlayDispatch({
@@ -77,21 +86,55 @@ const BattleGround = () => {
                 payload: nextBallCount,
             });
 
-            if (!isHits) return;
-        } else {
-            gamePlayDispatch({
-                type: 'manyChangeGameProgress',
-                changeType: 'ballCount',
-                payload: {
-                    ballCount: 0,
-                    strikeCount: 0
-                },
-            });
+            if (!isFourBall) return;
         }
+
+        const nextOpponentHitterIdx =
+            (opponentHitterIdx + 1 === opponentPlayers.length)
+                ? 1
+                : opponentHitterIdx + 1;
+
+        const nextUserHitterIdx = 
+            (userHitterIdx + 1 === userPlayers.length)
+                ? 1
+                : userHitterIdx + 1
+
+        gamePlayDispatch({
+            type: 'manyChangeGameProgress',
+            payload: {
+                ballCount: 0,
+                strikeCount: 0,
+                userHitterIdx: (userTeamName === attackerTeamName)
+                    ? nextUserHitterIdx
+                    : userHitterIdx,
+                opponentHitterIdx: (userTeamName === attackerTeamName)
+                    ? opponentHitterIdx
+                    : nextOpponentHitterIdx,
+                hitter: (userTeamName === attackerTeamName)
+                    ? userPlayers[nextUserHitterIdx]
+                    : opponentPlayers[nextOpponentHitterIdx]
+            },
+        });
+        if (isOut) return;
+
 
         // 라이언 움직여!!!
         const currRyanIconStatus = ryanIconStatus
-            .map((v) => [v[0] + 1, v[1]])
+            .map((v) => {
+                const nextIdx = (v[0] + 1);
+                const currUuid = v[1];
+                if (nextIdx === 4) {
+                    // 3루에서 홈으로 들어갈때.. (지금은 무조건 +1)
+                    const { gameProgress: { awayScore, homeScore, attacker } } = gamePlayState;
+
+                    gamePlayDispatch({
+                        type: 'changeGameProgress',
+                        changeType: (attacker === 'away') ? 'awayScore' : 'homeScore',
+                        payload: (attacker === 'away') ? awayScore + 1 : homeScore + 1,
+                    });
+                }
+                return [nextIdx, currUuid];
+            })
             .concat([[0, uuid()]])
             .slice(-5);
 
@@ -102,8 +145,42 @@ const BattleGround = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gamePlayState.gameProgress.situation]);
 
+    // 3) 3아웃 시 공수교대
+    useEffect(() => {
+        const {
+            teamsData,
+            gameProgress: { attacker, attackerTeamName, outCount, attackOrDefense, roundState },
+        } = gamePlayState;
 
-    // 3) Pitch 클릭이 되면, gamePlayState.gameProgress.situation 초기화
+        if (outCount < 3) return;
+        const {
+            user: { players: userPlayers, team_name: userTeamName },
+            opponent: { players: opponentPlayers, team_name: opponentTeamName  },
+        } = teamsData;
+
+        gamePlayDispatch({
+            type: 'manyChangeGameProgress',
+            payload: {
+                outCount: 0,
+                attacker: (attacker === 'away') ? 'home' : 'away',
+                attackerTeamName: (attackerTeamName === userTeamName) ? opponentTeamName : userTeamName,
+                attackOrDefense: attackOrDefense === 'attack' ? 'defense' : 'attack',
+                roundState: attackOrDefense === 'attack' ? roundState : roundState + 1,
+                pitcher: (attackerTeamName === userTeamName) ? userPlayers[0] : opponentPlayers[0],
+                hitter: (attackerTeamName === userTeamName) ? opponentPlayers[1] : userPlayers[1],
+            },
+        });
+
+        gamePlayOptionsDispatch({
+            type: 'changeRyanIconStatus',
+            payload: [[0, uuid()]],
+        });
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [gamePlayState.gameProgress.outCount]);
+
+
+    // 4) Pitch 클릭이 되면, gamePlayState.gameProgress.situation 초기화
     useEffect(() => {
         if (!isPitchClick) return;
         gamePlayDispatch({
@@ -118,14 +195,18 @@ const BattleGround = () => {
 
     // [2] event 관련
     const randomSituation = () => {
-        let kind = ['HITS', 'BALL', 'STRIKE'];
+        const arrStrike = [...Array(5)].map((_) => "STRIKE");
+        const arrBall = [...Array(5)].map((_) => "BALL");
+        const arrHits = [...Array(1)].map((_) => "HITS");
+
+        let kind = [...arrStrike, ...arrBall, ...arrHits];
         let randomNumber = Math.floor(Math.random() * kind.length);
         return kind[randomNumber];
     };
 
     const pitchEvent = () => {
         const situation = randomSituation();
-
+        console.log(situation)
         gamePlayDispatch({
             type: 'changeGameProgress',
             changeType: 'situation',

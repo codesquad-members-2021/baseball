@@ -1,26 +1,24 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { GamePlayContext } from '../../../utilComponent/context/GamePlayProvider';
-// import { BattleGroundContext } from '../BattleGround';
 
-const Icon = () => {
-    // const { test } = useContext(GamePlayContext);
+const StadiumPlayers = () => {
     const {
         gamePlayOptionsState: { ryanIconStatus },
     } = useContext(GamePlayContext);
 
     return ryanIconStatus && (
-        <StadiumPlayer>
+        <StyledStadiumPlayers>
             {ryanIconStatus.map((v) => {
                 return <Player key={v[1]} Player={v[0]} />;
             })}
-        </StadiumPlayer>
+        </StyledStadiumPlayers>
     );
 };
 
-export default Icon;
+export default StadiumPlayers;
 
-const StadiumPlayer = styled.div`
+const StyledStadiumPlayers = styled.div`
     width: 100%;
     height: inherit;
 `;
@@ -44,5 +42,6 @@ const Player = styled.div.attrs(({ Player }) => ({
     height: 100px;
     background-image: url('/images/라이언.gif');
     background-size: contain;
-    transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out, transform 0s ease-in-out;
+    transform: ${({Player}) => Player === 0 ? `rotate(0deg)` : Player === 1 ? `rotate(45deg)` : Player === 2 ? `rotate(0deg)` : Player === 3 ? `rotate(-45deg)` :  Player === 4 ? `rotate(-45deg)` : null};
 `;

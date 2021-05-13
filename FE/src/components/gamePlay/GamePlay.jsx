@@ -98,10 +98,18 @@ const GamePlay = ({ location }) => {
             type: 'manyChangeGameProgress',
             payload: {
                 homeOrAway: clickLocation,
-                attacker: (clickLocation === 'away') 
+                attacker: 'away',   // 무조건 첫 공격은 away
+                attackOrDefense: 'attack',
+                roundState: 1,
+                attackerTeamName: (clickLocation === 'away')
                     ? userTeamName
                     : opponentTeamName,
-                userTeamName, opponentTeamName,
+                userTeamName,
+                opponentTeamName,
+                userPlayers,
+                opponentPlayers,
+                userHitterIdx: 1,
+                opponentHitterIdx: 1,
                 pitcher: (clickLocation === 'away') ? opponentPlayers[0] : userPlayers[0],
                 hitter: (clickLocation === 'away') ? userPlayers[1] : opponentPlayers[1],
             },
