@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { theme } from '../Style/Theme';
 import styled from 'styled-components';
 import { useGameState } from '../GameContext';
 
 const GameGeneralInfo = ({ type }) => {
 	const { state } = useGameState();
-	const [away_score, setAwayScore] = useState(
-		state.score ? state.score.awayTeamScore : 0,
-	);
-	const [home_score, setHomeScore] = useState(
-		state.score ? state.score.homeTeamScore : 0,
-	);
+	const [away_score, setAwayScore] = useState(0);
+	const [home_score, setHomeScore] = useState(0);
+
+	useEffect(() => {
+		if (state.score) {
+			setAwayScore(state.score.awayTeamScore);
+			setHomeScore(state.score.homeTeamScore);
+		}
+	}, [state]);
 
 	return (
 		<InfoWrapper>
