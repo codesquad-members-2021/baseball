@@ -2,7 +2,7 @@ package com.dong.baseball.Service;
 
 import com.dong.baseball.DTO.TeamRankDTO;
 import com.dong.baseball.Domain.Team;
-import com.dong.baseball.Exception.TeamNotFound;
+import com.dong.baseball.Exception.TeamNotFoundException;
 import com.dong.baseball.Repository.TeamRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,6 @@ public class TeamService {
 
     public List<TeamRankDTO> teamRanking() {
         List<Team> teamList = teamRepository.findAll();
-        System.out.println("@@@@@@@@" + teamList + "  : " + teamList.size());
         List<TeamRankDTO> teamRankDTOList = new ArrayList<>();
 
         for (Team team : teamList) {
@@ -39,10 +38,10 @@ public class TeamService {
     }
 
     public Team teamInfoById(Long teamId) {
-        return teamRepository.findByTeamId(teamId).orElseThrow(() -> new TeamNotFound());
+        return teamRepository.findByTeamId(teamId).orElseThrow(() -> new TeamNotFoundException());
     }
 
     public Team teamInfoByName(String teamName) {
-        return teamRepository.findByTeamName(teamName).orElseThrow(() -> new TeamNotFound());
+        return teamRepository.findByTeamName(teamName).orElseThrow(() -> new TeamNotFoundException());
     }
 }
