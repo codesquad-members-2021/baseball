@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { GlobalContext } from '../../App';
 
@@ -9,21 +9,25 @@ const PlayInning = (props) => {
     totalOutCount,
     setTotalOutCount,
     inningTop,
-    toggleInningTop,
+    setInningTop,
     isDefense,
     setIsDefense,
   } = useContext(GlobalContext);
 
-  // if (!totalOutCount % 3) {
-  //   // 초, 말 바꿔주기
-  //   toggleInningTop();
-  //   // setIsDefense(); 이것도 토글해야하는데... 모르겠다.
-  //   if (totalOutCount === 6) {
-  //     setCurrInning(currInning + 1);
-  //     setTotalOutCount(0);
-  //   }
-  // }
+  if (totalOutCount === 0) {
+    setInningTop(true);
+  }
 
+  if (totalOutCount >= 3) {
+    if (totalOutCount === 3) {
+      setInningTop(false);
+      // 공격, 수비를 바꿔주는 로직 추가하기
+    }
+    if (totalOutCount === 6) {
+      setCurrInning(currInning + 1);
+      setTotalOutCount(0);
+    }
+  }
   return (
     <PlayInningDiv>
       <Span>

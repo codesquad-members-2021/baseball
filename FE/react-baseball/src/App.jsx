@@ -28,7 +28,7 @@ function App() {
   const [isHome, setIsHome] = useState(false);
   const [totalOutCount, setTotalOutCount] = useState(0);
   const [isDefense, setIsDefense] = useState(false);
-  const [inningTop, toggleInningTop] = useToggle(true);
+  const [inningTop, setInningTop] = useState(true);
 
   const baseballState = {
     teamInfo: {
@@ -59,7 +59,7 @@ function App() {
       isDefense,
       setIsDefense,
       inningTop,
-      toggleInningTop,
+      setInningTop,
     },
   };
 
