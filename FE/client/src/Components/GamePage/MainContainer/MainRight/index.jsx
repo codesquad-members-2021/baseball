@@ -1,6 +1,7 @@
 import React from "react";
 import StatusBoardList from "./StatusBoardList";
 import styled from "styled-components";
+
 const MainRight = () => {
   return (
     <MainRightDiv>
@@ -15,6 +16,10 @@ const MainRightDiv = styled.div`
   padding: 0.5rem 1rem;
   color: white;
   width: 20%;
+  overflow-y:scroll;
+  &::-webkit-scrollbar{
+    display:none;
+  }
 `;
 
 export default MainRight;

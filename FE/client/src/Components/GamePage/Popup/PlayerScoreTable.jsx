@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PlayerScoreTable = () => {
+const PlayerScoreTable = ({ records }) => {
   const scoreTitleArray = ['타자', '타석', '안타', '아웃', '평균'];
 
   return (
