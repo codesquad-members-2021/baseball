@@ -24,6 +24,7 @@ const GamePage = ({ userState }) => {
   const [inGameData, setInGameData] = useState(GAME1);
   const [attackState, setAttackState] = useState("away");
   const [sequenceCount, setSequenceCount] = useState(0);
+  const [roundCount, setRoundCount] = useState(1);
 
   useEffect(() => {
     if (!userState) return;
@@ -60,7 +61,7 @@ const GamePage = ({ userState }) => {
 
   return (
     <GamePageContext.Provider
-      value={{ teamState, inGameData, attackState, sequenceCount }}
+      value={{ teamState, inGameData, attackState, sequenceCount, roundCount }}
     >
       <GamePageBackground>
         {loading && <>loading ...</>}

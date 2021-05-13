@@ -7,9 +7,7 @@ import { GamePageContext } from "Components/GamePage";
 import ReadyImage from "./ReadyImage";
 
 const BaseballField = () => {
-  const {
-    teamState: { home, away },
-  } = useContext(GamePageContext);
+  const { teamState, attackState } = useContext(GamePageContext);
   const canvasRef = useRef();
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,15 +19,15 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage base='first' />
-      <RunnerImage base='second' />
-      <RunnerImage base='third' />
-      <RunnerImage base='fourth' />
-      <ReadyImage base='first' />
-      <ReadyImage base='second' />
-      <ReadyImage base='third' />
-      <ReadyImage base='fourth' />
-      <PitchButton />
+      <RunnerImage base="first" />
+      <RunnerImage base="second" />
+      <RunnerImage base="third" />
+      <RunnerImage base="fourth" />
+      <ReadyImage base="first" />
+      <ReadyImage base="second" />
+      <ReadyImage base="third" />
+      <ReadyImage base="fourth" />
+      {!teamState[attackState].isMyTeam && <PitchButton />}
     </BaseballFieldWrapper>
   );
 };

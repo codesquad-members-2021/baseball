@@ -30,9 +30,17 @@ const HeaderRight = () => {
         name={`${
           attackState === "away"
             ? home[sequenceCount].name
-            : home[sequenceCount].name
+            : away[sequenceCount].name
         }`}
-        description={"1타석 0안타"}
+        description={`${
+          attackState === "away"
+            ? home[sequenceCount].atBat
+            : away[sequenceCount].atBat
+        }타석 ${
+          attackState === "away"
+            ? home[sequenceCount].hit
+            : away[sequenceCount].hit
+        }안타`}
       ></CurrentPlayer>
     </HeaderRightDiv>
   );
