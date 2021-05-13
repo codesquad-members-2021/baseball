@@ -8,15 +8,15 @@ const PlayInning = (props) => {
     setCurrInning,
     totalOutCount,
     setTotalOutCount,
-    isTop,
-    toggleIsTop,
+    inningTop,
+    toggleinningTop,
     isDefense,
     setIsDefense,
   } = useContext(GlobalContext);
 
   if (!totalOutCount % 3) {
     // 초, 말 바꿔주기
-    toggleIsTop();
+    toggleinningTop();
     // setIsDefense(); 이것도 토글해야하는데... 모르겠다.
     if (totalOutCount === 6) {
       setCurrInning(currInning + 1);
@@ -27,7 +27,7 @@ const PlayInning = (props) => {
   return (
     <PlayInningDiv>
       <Span>
-        {currInning}회{isTop ? '초' : '말'} {isDefense ? '수비' : '공격'}
+        {currInning}회{inningTop ? '초' : '말'} {isDefense ? '수비' : '공격'}
       </Span>
     </PlayInningDiv>
   );
