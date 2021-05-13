@@ -74,6 +74,7 @@ public class MatchInfo {
     }
 
     public void resetPlayResults() {
+        strikeCount = 0;
         playResults = new ArrayList<>();
     }
 
