@@ -10,50 +10,77 @@ import Combine
 
 class SelectViewModel {
     
-    private(set) var gameInfo: GameInfo!
+    struct CellInfo {
+        var gameID: String!
+        var away: String!
+        var home: String!
+        var isAwayEnable: Bool!
+        var isHomeEnable: Bool!
+    }
+    
+    private(set) var gameInfo: GameInfo
+    private(set) var cellInfo: CellInfo!
+    
+    @Published var games: [Game]!
+    @Published var error: Error!
+    
     private var networkManager: NetworkManageable
-    private var cancellable = Set<AnyCancellable>()
+    private var cancelBag = Set<AnyCancellable>()
+    
+    var delegate: GameCellDelegate!
     
     init(networkManager: NetworkManageable = NetworkManager()) {
+        self.gameInfo = GameInfo()
         self.networkManager = networkManager
     }
 }
 
 
+// MARK: passing information between ViewController
+
 extension SelectViewModel {
     
-    func setModel(with gameInfo: GameInfo) {
-        self.gameInfo = gameInfo
+    func setUserID(with userID: String) {
+        self.gameInfo.userID = userID
+    }
+
+    func setCellInfo(with game: Game) {
+        self.gameInfo.gameID = game.id
+        
+        let gameID = "GAME \(game.id)"
+        let away = game.away.team
+        let home = game.home.team
+        let isAwayEnable = game.away.status == "unselected"
+        let isHomeEnable = game.home.status == "unselected"
+        
+        self.cellInfo = CellInfo(gameID: gameID, away: away, home: home, isAwayEnable: isAwayEnable, isHomeEnable: isHomeEnable)
     }
     
-    //MARK: GET
-    func request() {
+    func selected(team: String) {
+        self.gameInfo.team = team
+        
+        self.postSelection(with: self.gameInfo)
+        self.delegate.didPressButton(with: self.gameInfo)
+    }
+
+}
+
+
+extension SelectViewModel {
+    
+    func requestGameSelection() {
         networkManager.get(type: DataDTO<[Game]>.self, url: EndPoint.url(path: "")!)
             .receive(on: DispatchQueue.main)
             .sink { error in
-                print(error) ///사용자에게 에러 표시하는 부분 미구현
+                self.error = error as? Error
             } receiveValue: { value in
                 if let games = value.data {
-                    self.fetch(data: games)
+                    self.games = games
                 }
-            }
-            .store(in: &cancellable)
+            }.store(in: &cancelBag)
     }
-    
-    private func fetch(data: [Game]) {
-        NotificationCenter.default.post(name: NotificationName.fetched, object: nil, userInfo: ["games": data])
-    }
-    
-    func didFetchData(completion: @escaping ([Game]) -> Void) {
-        NotificationCenter.default.publisher(for: NotificationName.fetched)
-            .map{ ($0.userInfo as! [String:[Game]]) }
-            .sink { (userInfo) in
-                completion(userInfo["games"] ?? [])
-            }.store(in: &cancellable)
-    }
-    
-    //MARK: POST
-    func postSelection(with gameInfo: GameInfo) {
+
+    private func postSelection(with gameInfo: GameInfo) {
         networkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
             .receive(on: DispatchQueue.main)
             .sink { error in
@@ -61,11 +88,7 @@ extension SelectViewModel {
             } receiveValue: { _ in
                 print("success") ///서버 POST 기능 미구현
             }
-            .store(in: &cancellable)
+            .store(in: &cancelBag)
     }
     
-}
-
-enum NotificationName {
-    static let fetched = Notification.Name("fetched")
 }

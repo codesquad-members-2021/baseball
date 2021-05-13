@@ -17,9 +17,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func okButtonTouched(_ sender: UIButton) {
         let nextVC = ControllerFactory.instantiate(viewController: SelectionViewController.self) as! SelectionViewController
-        let gameInfo = GameInfo(userID: IDTextField.text ?? "", team: "")
+        nextVC.setUserID(with: IDTextField.text ?? "")
         
-        nextVC.viewModel.setModel(with: gameInfo)
         self.navigationController?.pushViewController(nextVC, animated: false)
     }
     
