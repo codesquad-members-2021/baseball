@@ -10,8 +10,7 @@ import UIKit
 protocol BaseballFlowCoordinatorDependencies {
     func makeGameListViewController(action: GameListViewModelAction) -> GameListViewController
     func makeGamePlayViewController(matchId: Int) -> GamePlayViewController
-    func makeGameScoreViewController() -> GameScoreViewController
-}
+    func makeGameScoreViewController(homeTeam: String, awayTeam: String) -> GameScoreViewController}
 
 class BaseballSceneFlowCoordinator {
     private weak var navigationController: UINavigationController?
@@ -24,18 +23,18 @@ class BaseballSceneFlowCoordinator {
     }
     
     func start() {
-        let action = GameListViewModelAction(showGamePlayView: showGamePlayView(matchUp:))
+        let action = GameListViewModelAction(showGamePlayView: showGamePlayView(matchUp:homeTeam:awayTeam:))
         let vc = dependencies.makeGameListViewController(action: action)
         navigationController?.pushViewController(vc, animated: true)
         gameListVC = vc
     }
     
     // let showGamePlayView: ((Int)-> Void)
-    func showGamePlayView(matchUp: Int) {
+    func showGamePlayView(matchUp: Int, homeTeam: String, awayTeam: String) {
         let playVC = dependencies.makeGamePlayViewController(matchId: matchUp)
-        let scoreVC = dependencies.makeGameScoreViewController()
+        let scoreVC = dependencies.makeGameScoreViewController(homeTeam: homeTeam, awayTeam: awayTeam)
         
         let tabBarVC = InGameTabBarController.create(playVC: playVC, scoreVC: scoreVC)
-        self.navigationController?.present(tabBarVC, animated: true)
+        self.navigationController?.pushViewController(tabBarVC, animated: true)
     }
 }

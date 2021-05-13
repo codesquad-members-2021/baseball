@@ -10,7 +10,10 @@ import Combine
 
 struct GameListViewModelAction {
     typealias MatchUpID = Int
-    let showGamePlayView: ((MatchUpID) -> Void)
+    typealias HomeTeamName = String
+    typealias AwayTeamName = String
+    
+    let showGamePlayView: ((MatchUpID, HomeTeamName, AwayTeamName) -> Void)
 }
 
 class GameListViewModel {
@@ -49,6 +52,7 @@ class GameListViewModel {
     }
     
     func didSelectItem(indexPath: IndexPath) {
-        action.showGamePlayView(indexPath.item + 1)
+        let selectedGame = matchUpGames[indexPath.item]
+        action.showGamePlayView(indexPath.item + 1, selectedGame.homeTeam, selectedGame.awayTeam)
     }
 }

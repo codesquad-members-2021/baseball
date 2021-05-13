@@ -9,6 +9,7 @@ import UIKit
 
 class GameScoreViewController: UIViewController {
 
+    @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var homeTeamScore: UIStackView!
     @IBOutlet weak var awayTeamScore: UIStackView!
     @IBOutlet weak var gameScoreTableView: UITableView!

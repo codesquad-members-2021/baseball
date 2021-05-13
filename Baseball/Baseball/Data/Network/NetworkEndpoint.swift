@@ -44,6 +44,22 @@ struct GamePlayEndPoint: Requestable {
     }
 }
 
+struct PlayerRecordEndPoint: Requestable {
+    var baseUrl = "http://3.35.226.74/teams/"
+    var path: String
+    var httpMethod: HTTPMethod
+    
+    init(httpMethod: HTTPMethod, path: String) {
+        self.httpMethod = httpMethod
+        self.path = path
+    }
+    func url() -> URL? {
+        return URL(string: baseUrl + path)
+    }
+    
+    
+}
+
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"

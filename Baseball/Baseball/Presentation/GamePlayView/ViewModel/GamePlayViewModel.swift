@@ -27,7 +27,6 @@ class GamePlayViewModel {
             switch result {
             case .success(let gamePlay):
                 self.gamePlay = gamePlay
-                print(result)
             case .failure(let error):
                 self.errorHandler(error: error)
             }

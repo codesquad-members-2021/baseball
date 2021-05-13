@@ -38,6 +38,10 @@ class GamePlayViewController: UIViewController {
         pitchHistoryTableView.delegate = self
         pitchHistoryTableView.dataSource = self
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setBasePoint()
     }
     
@@ -47,8 +51,8 @@ class GamePlayViewController: UIViewController {
     }
     
     private func setBasePoint() {
-        basePoint = [ CGPoint(x: self.groundView.frame.width / 2, y: self.groundView.frame.height / 2 + 120),
-                      CGPoint(x: self.groundView.frame.width / 2 + 120, y: self.groundView.frame.height / 2),
+        basePoint = [ CGPoint(x: self.groundView.bounds.width / 2, y: self.groundView.bounds.height / 2 + 120),
+                      CGPoint(x: self.groundView.bounds.width / 2 + 120, y: self.groundView.bounds.height / 2),
                       CGPoint(x: self.groundView.frame.width / 2, y: self.groundView.frame.height / 2 - 120),
                       CGPoint(x: self.groundView.frame.width / 2 - 120, y: self.groundView.frame.height / 2)
         ]

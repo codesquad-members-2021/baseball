@@ -53,11 +53,19 @@ class BaseballSceneDIContainer: BaseballFlowCoordinatorDependencies {
     }
     
     //MARK: - GameScoreView
-    private func makeGameScoreViewModel() -> GameScoreViewModel {
-        return GameScoreViewModel()
+    private func makePlayerRecordRepository() -> PlayerRecordRepository {
+        return DefaultPlayerRecordRepository(networkService: dependencies.apiNetwork)
     }
-    func makeGameScoreViewController() -> GameScoreViewController {
-        return GameScoreViewController.create(with: makeGameScoreViewModel())
+    
+    private func makeFetchPlayerRecordsUseCase() -> FetchPlayerRecordsUseCase {
+        return DefaultFetchPlayerRecordsUseCase(playerRecordRepository: makePlayerRecordRepository())
+        
+    }
+    private func makeGameScoreViewModel(homeTeam: String, awayTeam: String) -> GameScoreViewModel {
+        return GameScoreViewModel(homeTeam: homeTeam, awayTeam: awayTeam, fetchPlayerRecordsUseCase: makeFetchPlayerRecordsUseCase())
+    }
+    func makeGameScoreViewController(homeTeam: String, awayTeam: String) -> GameScoreViewController {
+        return GameScoreViewController.create(with: makeGameScoreViewModel(homeTeam: homeTeam, awayTeam: awayTeam))
     }
     //MARK: - Coordinator
     func makeBaseballSceneCoordinator(navigationController: UINavigationController) -> BaseballSceneFlowCoordinator {

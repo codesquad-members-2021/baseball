@@ -7,26 +7,6 @@
 
 import Foundation
 
-/*
- {"matchId":13,
- "away":"awayteam to string",
- "home":"hometeam to string",
- "inning":1,
- "offenseTeam":"offenseTeam to String"
- "firstBase":[],
- "secondBase":[],
- "thirdBase":[],
- "pitcher":"kim",
- "batter":"dong",
- "strike":0,
- "ball":0,
- "out":0,
- "homePoint":0,
- "awayPoint":0}
- */
-
-
-
 struct GamePlayDTO: Decodable {
     private let matchId: Int
     private let away: String
