@@ -1,13 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-const GameListItem = ({ home, away, game_id, idx }) => {
+import { Link } from 'react-router-dom';
+
+const GameListItem = ({ home, away, id, idx }) => {
+  const path = `games/${id}`;
   return (
     <StyledGameItem>
       <div className='title'>GAME {idx + 1}</div>
       <div className='teams'>
-        <div className='teams-name'>{home}</div>
+        <Link to={path}>
+          <div className='teams-name'>{home}</div>
+        </Link>
         <div className='teams-vs'>vs</div>
-        <div className='teams-name'>{away}</div>
+        <Link to={path}>
+          <div className='teams-name'>{away}</div>
+        </Link>
       </div>
     </StyledGameItem>
   );

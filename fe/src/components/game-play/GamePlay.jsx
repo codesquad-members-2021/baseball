@@ -9,12 +9,14 @@ import PopUpRoster from './popup/roster/Roster';
 import PopUp from '../ui/PopUp';
 import useScoreNBase from '../../hooks/useScoreNBase';
 import { fetchPUT } from '../../util/api.js';
+import useFetch from '../../hooks/useFetch';
 
 export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
 const LogContext = createContext();
 
 const memberListReducer = (state, action) => {
+  if (action.type === 'init') return action.value;
   let next = 0;
   const team = action.turn ? 'home' : 'away';
   const newTeam = state[team].map((member, idx, arr) => {
@@ -34,35 +36,48 @@ const memberListReducer = (state, action) => {
 };
 
 const GamePlay = ({ home, away, game_id }) => {
-  const [turn, round, member_list] = [null, null, null];
+  const path = window.location.pathname;
+  const gameID = +path.slice(7);
+  const GAME_PLAY_URL = `http://52.78.184.142${path}`;
+  const { data: gamePlayData } = useFetch(GAME_PLAY_URL, 'get');
   const [inning, setInning] = useState({
     turn: true,
     round: 1,
   });
   const { score, base, safetyDispatch } = useScoreNBase({ score: undefined, base: undefined });
-  const [memberList, memberListDispatch] = useReducer(memberListReducer, {
-    home: data.home.member_list,
-    away: data.away.member_list,
-  }); //member_list fetch해서 받아올아이
+  const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
+  const pitchers = {
+    home: gamePlayData?.home.pitcherId,
+    away: gamePlayData?.away.pitcherId,
+  };
 
-  const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
+  useEffect(() => {
+    const memberListData = {
+      home: gamePlayData?.home.member_list,
+      away: gamePlayData?.away.member_list,
+    };
+    memberListDispatch({ type: 'init', value: memberListData });
+  }, [gamePlayData]);
+
   return (
-    <StyledGamePlay>
-      {/* <PopUp position='top'>
+    { gamePlayData } && (
+      <StyledGamePlay>
+        {/* <PopUp position='top'>
         <PopUpScore />
       </PopUp>
       <PopUp position='bottom'>
         <PopUpRoster memberList={memberList} />
       </PopUp> */}
-      <StyledGamePlayGrid>
-        <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={inning.turn}></Score>
-          <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-          <Board {...{ inning, setInning, memberListDispatch }}></Board>
-          <Log data={data}></Log>
-        </ScoreNBaseContext.Provider>
-      </StyledGamePlayGrid>
-    </StyledGamePlay>
+        <StyledGamePlayGrid>
+          <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
+            <Score teamName={teamName} turn={inning.turn}></Score>
+            <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
+            <Board {...{ inning, setInning, memberListDispatch }}></Board>
+            <Log data={data}></Log>
+          </ScoreNBaseContext.Provider>
+        </StyledGamePlayGrid>
+      </StyledGamePlay>
+    )
   );
 };
 
