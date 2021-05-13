@@ -7,11 +7,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.baseball.domain.match.PlayResult.STRIKE;
+
 public class MatchInfo {
     private Integer halvesCount = 1;
     private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
     private List<PlayResult> playResults = new ArrayList<>();
 
+    int strikeCount = 0;
     int outCount = 0;
 
     public Integer getHalvesCount() {
@@ -19,9 +22,7 @@ public class MatchInfo {
     }
 
     public Integer getStrikeCount() {
-        return (int) playResults.stream()
-                .filter(pitch -> pitch == PlayResult.STRIKE)
-                .count();
+        return strikeCount;
     }
 
     public Integer getBallCount() {
@@ -63,8 +64,12 @@ public class MatchInfo {
 
     public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
-        if (getStrikeCount() != 0 && getStrikeCount() % 3 == 0) {
+        if (playResult == STRIKE) {
+            strikeCount++;
+        }
+        if (strikeCount >= 3) {
             outCount++;
+            strikeCount = 0;
         }
     }
 

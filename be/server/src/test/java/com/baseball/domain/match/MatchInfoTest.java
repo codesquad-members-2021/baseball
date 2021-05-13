@@ -67,7 +67,7 @@ class MatchInfoTest {
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
-                .isEqualTo(3);
+                .isEqualTo(0);
         softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
@@ -88,7 +88,7 @@ class MatchInfoTest {
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
-                .isEqualTo(6);
+                .isEqualTo(0);
         softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
@@ -109,7 +109,7 @@ class MatchInfoTest {
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getStrikeCount())
-                .isEqualTo(9);
+                .isEqualTo(0);
         softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
