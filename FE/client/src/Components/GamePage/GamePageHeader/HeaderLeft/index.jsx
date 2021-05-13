@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import BaseballHeaderScore from "Components/GamePage/GamePageHeader/HeaderLeft/BaseballHeaderScore";
+import BaseballHeaderScore from "./BaseballHeaderScore";
 
 const HeaderLeft = () => {
   return (

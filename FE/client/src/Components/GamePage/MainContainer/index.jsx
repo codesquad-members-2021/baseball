@@ -1,6 +1,6 @@
 import React from "react";
-import MainLeft from "Components/GamePage/MainContainer/MainLeft";
-import MainRight from "Components/GamePage/MainContainer/MainRight";
+import MainLeft from "./MainLeft";
+import MainRight from "./MainRight";
 import styled from "styled-components";
 
 const MainContainer = () => {

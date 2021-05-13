@@ -1,14 +1,18 @@
-import React from 'react';
+import { GamePageContext } from 'Components/GamePage';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
 
+
 const BaseballHeaderScore = () => {
+  const { teamState: { home, away } } = useContext(GamePageContext);
+
   return (
     <TeamDiv>
-      <Team player>Captain</Team>
+      <Team player={home.isMyTeam}>{home.teamName}</Team>
       <Score>1</Score>
       <VsSpan>vs</VsSpan>
       <Score>5</Score>
-      <Team>Marvel</Team>
+      <Team player={away.isMyTeam}>{away.teamName}</Team>
     </TeamDiv>
   );
 };
@@ -16,7 +20,7 @@ const BaseballHeaderScore = () => {
 const TeamDiv = styled.div`
   display:flex;
   justify-content:space-around;
-  font-size: 4rem;
+  font-size: 2.3rem;
   gap:2.5rem;
   font-weight:700;
 `;
@@ -31,7 +35,6 @@ const Team = styled.span`
       text-align: center;
     }
   `}
-
 `;
 const Score = styled.span`
   `;

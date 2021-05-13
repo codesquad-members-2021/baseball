@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { fitToContainer, drawField } from "utils/canvasUtils";
-import RunnerImage from 'Components/GamePage/MainContainer/MainLeft/RunnerImage';
-import PitchButton from "Components/GamePage/MainContainer/MainLeft/PitchButton";
+import RunnerImage from "./RunnerImage";
+import PitchButton from "./PitchButton";
 
 const BaseballField = () => {
-  let canvasRef = useRef();
+  const canvasRef = useRef();
   useEffect(() => {
-    let canvas = canvasRef.current;
-    let ctx = canvas.getContext("2d");
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
     fitToContainer(canvas);
     drawField(ctx, canvas.offsetWidth, canvas.offsetHeight);
   }, []);
@@ -16,14 +16,17 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage />
+      <RunnerImage base='first' />
+      <RunnerImage base='second' />
+      <RunnerImage base='third' />
+      <RunnerImage base='fourth' />
       <PitchButton />
     </BaseballFieldWrapper>
   );
 };
 
 const BaseballFieldWrapper = styled.div`
-  position:relative;
+  position: relative;
   color: white;
   width: 65%;
   height: 100%;

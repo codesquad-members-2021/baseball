@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import Team from "Components/Home/GameList/Team";
+import Team from "./Team";
 
-const Game = ({ gameData }) => {
+const Game = ({ gameData: { id, awayTeamName, homeTeamName, home, away } }) => {
+
   return (
     <GameBox>
-      <GameNumber>GAME {gameData.id}</GameNumber>
+      <GameNumber>GAME {id}</GameNumber>
       <TeamDiv>
-        <Team name={gameData.awayTeamName} />
+        <Team teamName={homeTeamName} gameId={id} teamKind="home" selected={home} />
         <VsSpan>VS</VsSpan>
-        <Team name={gameData.homeTeamName} />
+        <Team teamName={awayTeamName} gameId={id} teamKind="away" selected={away} />
       </TeamDiv>
     </GameBox>
   );

@@ -1,14 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Game from "Components/Home/GameList/Game";
-import { gameDatas } from "utils/mockDatas";
+import Game from "./Game";
+import useAsync from "utils/hooks/useAsync";
+import API from "utils/API";
+import { PageContext } from "Components/Page";
 
 const GameList = () => {
+  const { socket } = useContext(PageContext);
+  const [selectedTeamState, setSelectTeamState] = useState([]);
+  const [allTeamState, setAllTeamState] = useState([]);
+  const [gameState] = useAsync(API.get.games);
+  const { data, loading, error } = gameState;
+
+  useEffect(() => {
+    socket.on('selectedTeam', (baseballGames) => {
+      setSelectTeamState(baseballGames);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!data) return;
+    const dataArray = Array.from(Object.entries(data), ([_, v]) => ({ ...v, home: null, away: null }));
+    const allTeam = dataArray.map(allGame => {
+      const selectedTeam = selectedTeamState.filter(selected => {
+        return (allGame.id === selected.gameId);
+      });
+      return selectedTeam.reduce((acc, cur) => {
+        acc[cur.teamKind] = cur.playerId;
+        return acc;
+      }, allGame);
+    });
+    setAllTeamState(allTeam);
+  }, [data, selectedTeamState]);
+
   return (
     <GameBoxList>
-      {gameDatas.map((gameData) => {
-        return <Game gameData={gameData} />;
+      {loading && <>loading...</>}
+
+      {allTeamState.length && allTeamState.map((gameData, idx) => {
+        return <Game key={`Game-${idx}`} {...{ gameData }} />
       })}
+
+      {error && <>error...</>}
     </GameBoxList>
   );
 };

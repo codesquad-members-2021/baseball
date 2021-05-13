@@ -1,31 +1,88 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import BodyAndHead from 'Images/bodyAndHead.svg';
 import ArmsImage from 'Images/arms.svg';
 import Pants from 'Images/pants.svg';
 import Foot from 'Images/foot.svg';
 
-const RunnerImage = () => {
+const RunnerImage = ({ base }) => {
   return (
-    <RunnerWrapper>
+    <RunnerWrapper base={base}>
       <BodyAndHeadImageTag src={BodyAndHead} alt="" />
       <FrontArmImageTag src={ArmsImage} alt="" />
       <BackArmImageTag src={ArmsImage} alt="" />
       <FrontPantsImageTag src={Pants} alt="" />
       <BackPantsImageTag src={Pants} alt="" />
       <FrontFootImageTag src={Foot} alt="" />
-      <BackImageTag src={Foot} alt="" />
+      <BackFootImageTag src={Foot} alt="" />
     </RunnerWrapper>
   );
 };
 const upDown = keyframes`
-  from {margin-top:-8px;}
-  to {margin-top:0;}
+  from {
+    margin-left:-10px;
+  }
+  to {
+    margin-left:0;
+  }
 `;
 
-const RunnerWrapper = styled.div` 
-  
-  animation: ${upDown} .3s linear infinite alternate;
+const leftRight = keyframes`
+from {
+  margin-top:-10px; 
+}
+to {
+  margin-top:0;
+}
+`;
+const move = (angle) => keyframes`
+  0% {
+    opacity:1;
+    transform: rotate(${angle}deg) translateX(0px);
+  }
+  90%{
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    transform: rotate(${angle}deg) translateX(-330px);
+  }
+`;
+
+const moveLocation = {
+  first: move(135),
+  second: move(45),
+  third: move(315),
+  fourth: move(235)
+};
+
+const runnerLocation = {
+  first: `top: 75%;
+  left: 55%;`,
+  second: `top: 33%;
+  left: 83%;`,
+  third: `top: 2%;
+  left: 36%;`,
+  fourth: `top: 41%;
+  left: 7%;`
+};
+
+const RunnerWrapper = styled.div`
+  min-height: 5rem;
+  min-width: 5rem;
+  width:1%;
+  height:20%;
+  position: absolute;
+  animation: ${({ base }) => base === ('first' || 'third') ? upDown : leftRight} .15s linear infinite alternate,
+  ${({ base }) => moveLocation[base]} 2.5s;
+  top: 50%;
+  left: 55%;
+  transform: rotate(135deg) translateX(0px);
+  ${({ base }) => base && css`
+    ${runnerLocation[base]}
+  `
+  }
+ 
 `;
 
 const frontHand = keyframes`
@@ -39,36 +96,32 @@ const backHand = keyframes`
 `;
 
 const frontPants = keyframes`
-  from {transform:rotate(50deg);}
+  from {transform:rotate(-50deg);}
   to{transform:rotate(0);}
 `;
 
 const backPants = keyframes`
   from {transform:rotate(0);}
-  to{transform:rotate(50deg);}
+  to{transform:rotate(-50deg);}
 `;
 
 const frontFoot = keyframes`
-  from {transform:rotate(77deg);}
-  ${'' /* 40% {transform:rotate(50deg);}
-  50% {transform:rotate(0);}
-  90% {transform:rotate(0);} */}
+  from {transform:rotate(-77deg);}
   to{transform:rotate(0);}
 `;
 
 const backFoot = keyframes`
   from {transform:rotate(0);}
-  ${'' /* 40% {transform:rotate(0);}
-  50% {transform:rotate(67deg);}
-  90% {transform:rotate(50deg);} */}
-  to{transform:rotate(77deg);}
+  to{transform:rotate(-77deg);}
 `;
 
 const BodyAndHeadImageTag = styled.img`
   position: absolute;
-  top:50%;
+  top:25%;
   left:50%;
-  width: 10%;
+  width: 30%;
+  height:30%;
+  min-width:3rem;
   z-index:3;
   transform:translate(-50%,-50%);
 `;
@@ -76,61 +129,69 @@ const BodyAndHeadImageTag = styled.img`
 const FrontArmImageTag = styled.img`
   position:absolute;
   z-index:4;
-  top: 47.7%;
-  left: 46%;
-  width: 12%;
-  animation: ${frontHand} .5s linear infinite alternate;
-  transform-origin:50% 10%;
+  top: 25%;
+  left: 12%;
+  width: 30%;
+  height:30%;
+  min-width:3rem;
+  animation: ${frontHand} .3s linear infinite alternate;
+  transform-origin:62% 10%;
 `;
 
 const BackArmImageTag = styled.img`
   position:absolute;
   z-index:2;
-  top: 47.7%;
-  left: 46%;
-  width: 12%;
-  animation: ${backHand} .5s linear infinite alternate;
+  top: 25%;
+  left: 15%;
+  min-width:3rem;
+  width: 30%;
+  height:30%;
+  animation: ${backHand} .3s linear infinite alternate;
   transform-origin:50% 10%;
 `;
 
 const FrontPantsImageTag = styled.img`
   position:absolute;
   z-index:2;
-  top: 56.3%;
-  left: 45.2%;
-  width: 10%;
-  animation: ${frontPants} .5s linear infinite alternate;
+  top: 35%;
+  left: 16%;
+  min-width:3rem;
+  width: 30%;
+  height:30%;
+  animation: ${frontPants} .3s linear infinite alternate;
   transform-origin:50% 10%;
 `;
 const BackPantsImageTag = styled.img`
  position:absolute;
   z-index:1;
-  top: 56.3%;
-  left: 45.2%;
-  width: 10%;
-  animation: ${backPants} .5s linear infinite alternate;
+  top: 35%;
+  left: 16%;
+  min-width:3rem;
+  width: 30%;
+  height:30%;
+  animation: ${backPants} .3s linear infinite alternate;
   transform-origin:50% 10%;
 `;
 const FrontFootImageTag = styled.img`
  position:absolute;
   z-index:2;
-  top: 67.7%;
-  left: 50.2%;
-  width: 10%;
-  animation: ${frontFoot} .5s linear infinite alternate;
-  transform-origin:-15% -55%;
+  top: 59.7%;
+  left: 16.9%;
+  width: 30%;
+  height:30%;
+  animation: ${frontFoot} .3s linear infinite alternate;
+  transform-origin:82% -36%;
 `;
-const BackImageTag = styled.img`
+const BackFootImageTag = styled.img`
  position:absolute;
   z-index:1;
-  top: 67.7%;
-  left: 50.2%;
-  width: 10%;
-  animation: ${backFoot} .5s linear infinite alternate;
-  transform-origin:-15% -55%;
+  top: 59.7%;
+  left: 16.9%;
+  width: 30%;
+  height:30%;
+  animation: ${backFoot} .3s linear infinite alternate;
+  transform-origin:82% -36%;
 `;
-
-
 
 
 export default RunnerImage;

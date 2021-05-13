@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const CurrentPlayer = (props) => {
+const CurrentPlayer = ({ type, name, description }) => {
   return (
     <>
-      <PlayerType>{props.type}</PlayerType>
+      <PlayerType>{type}</PlayerType>
       <PlayerNameDes>
-        <PlayerName>{props.name}</PlayerName>
-        <PlayerDescription>{props.description}</PlayerDescription>
+        <PlayerName>{name}</PlayerName>
+        <PlayerDescription>{description}</PlayerDescription>
       </PlayerNameDes>
     </>
   );

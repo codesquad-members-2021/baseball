@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderRight from "Components/GamePage/GamePageHeader/HeaderRight";
-import HeaderLeft from "Components/GamePage/GamePageHeader/HeaderLeft";
+import HeaderRight from "./HeaderRight";
+import HeaderLeft from "./HeaderLeft";
 import styled from "styled-components";
 
 const GamePageHeader = () => {
