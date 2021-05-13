@@ -19,6 +19,7 @@ const GpaField = ({ type, gameId }) => {
 	const [inning, setInning] = useState(
 		state.score ? state.gameStatusDTO.inning : 1,
 	);
+	const [move, setMove] = useState(false);
 
 	const logInfo = useLogState();
 	const { logState } = logInfo;
@@ -33,6 +34,27 @@ const GpaField = ({ type, gameId }) => {
 		getPitchResult();
 	};
 
+	useEffect(() => {
+		if (logState.length > 0) {
+			BallType = logState[logState.length - 1].pitchResult.playType;
+			console.log(BallType, logState);
+			if (
+				BallType === 'HOMERUN' ||
+				BallType === 'HITS' ||
+				BallType === 'FOUR_BALL'
+			) {
+				setMove(() => true);
+			}
+			// setMove(
+			// 	BallType === 'HOMERUN' ||
+			// 		BallType === 'HITS' ||
+			// 		BallType === 'FOUR_BALL'
+			// 		? true
+			// 		: false,
+			// );
+		}
+	}, [logState]);
+
 	return (
 		<>
 			{type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
@@ -40,6 +62,7 @@ const GpaField = ({ type, gameId }) => {
 				<GameState>{inning}회초 공격</GameState>
 				<FieldSVG />
 				{/* {console.log('Field:', move)} */}
+				{/* <GhostAnimation move={move} setMove={setMove} /> */}
 				<GhostAnimation />
 			</FieldArea>
 		</>

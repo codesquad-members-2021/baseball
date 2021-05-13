@@ -6,7 +6,9 @@ import { useGameState } from '../../GameContext';
 const GpaBallCount = () => {
 	const { state } = useGameState();
 	const BallCount = (type, count) => {
-		return Array.from({ length: count }).map((v) => <Circle type={type} />);
+		return Array.from({ length: count }).map((v, i) => (
+			<Circle key={i} type={type} />
+		));
 	};
 	const Ball = state.gameStatusDTO
 		? BallCount('B', state.gameStatusDTO.ballCount)
