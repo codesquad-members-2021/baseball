@@ -29,7 +29,7 @@ const Screen = () => {
 
   const handleClickPitch = () => {
     const action = getAction(chooseNumber());
-    dispatchBallCount({ payload: action });
+    dispatchBallCount({ payload: action, attackState: isAttacking });
   };
 
   useEffect(() => {
