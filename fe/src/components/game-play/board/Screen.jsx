@@ -53,20 +53,11 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
     }
   };
 
-  const baseList = Object.entries(base).map(([baseNum, status]) => {
-    if (status)
-      return (
-        <div className='base'>
-          <div className='runner'></div>
-        </div>
-      );
-    else
-      return (
-        <div className='base'>
-          <div className='runner'></div>
-        </div>
-      );
-  });
+  const baseList = Object.entries(base).map(([baseNum, status], idx) => 
+    <div className='base' key={idx}>
+      <div className='runner'></div>
+    </div>
+  );
 
   return (
     <StyledScreen>

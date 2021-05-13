@@ -77,7 +77,6 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
     // 멤버 안타 1, 타석 1 증가
     memberListDispatch({ type: 'safety', turn: inning.turn });
     logListDispatch({ type: 'safety', end: true });
-    safetyDispatch({ turn: inning.turn, power });
   };
 
   useEffect(() => {

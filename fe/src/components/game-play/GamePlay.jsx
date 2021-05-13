@@ -19,18 +19,18 @@ const memberListReducer = (state, action) => {
   let next = 0;
   const team = action.turn ? 'home' : 'away';
   const newTeam = [...state[team]].map((member, idx, arr) => {
-    let { safety, at_bat, out, state } = member;
-    if (member.state) {
+    let { safety, at_bat, out, status } = member;
+    if (member.status) {
       if (action.type === 'out') out++;
       else safety++;
       at_bat++;
       next = idx + 1 === arr.length ? 0 : idx + 1;
-      return { ...member, safety, at_bat, out, state: !state };
+      return { ...member, safety, at_bat, out, status: !status };
     } else {
       return {...member};
     }
   });
-  newTeam[next].state = true;
+  newTeam[next].status = true;
   return { ...state, [team]: newTeam };
 };
 
@@ -47,7 +47,7 @@ const logListReducer = (state, action) => {
       break;
     case '4ball': case 'safety': case 'out':
       target.history = [...target.history, { type: action.type, end : true }];
-      target.state = false;
+      target.status = false;
       newState[newState.length - 1] = target;
       break;
     case 'clear':
@@ -74,6 +74,8 @@ const GamePlay = ({ home, away, game_id }) => {
     away: gamePlayData?.away.pitcherId,
   };
 
+  const teamName = { home, away };
+
   useEffect(() => {
     const memberListData = {
       home: gamePlayData?.home.member_list,
@@ -83,12 +85,13 @@ const GamePlay = ({ home, away, game_id }) => {
   }, [gamePlayData]);
 
   useEffect(() => {
-    memberList[inning.turn ? 'home' : 'away'].forEach((member, index) => {
-      if(member.state) logListDispatch({ value: {...member}, type: 'next', index: index + 1 })
-    })
+    if(memberList && memberList.home) {
+      memberList[inning.turn ? 'home' : 'away'].forEach((member, index) => {
+        if(member.status) logListDispatch({ value: {...member}, type: 'next', index: index + 1 })
+      });
+    }
   }, [memberList]);
 
-  const pitchers = { home: data.home.pitcher, away: data.away.pitcher };
   return (
     <StyledGamePlay>
       <PopUp position='top' emptyText='상세 점수'>
