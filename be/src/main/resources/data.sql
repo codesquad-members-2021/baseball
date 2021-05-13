@@ -12,18 +12,6 @@ INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('BE+FE', true, false, 
 INSERT INTO TEAM(name, is_home, selected, game_id) VALUES('IOS1', false, false, 3);
 
 
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(1,1,1);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(1,2,1);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(1,3,2);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(1,4,0);
-
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(2,0,0);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(3,0,0);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(4,0,0);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(5,0,0);
-INSERT INTO TEAM_SCORE(team_id, round, score) VALUES(6,0,0);
-
-
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Tree',true,1,1);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Pyro',false,2,1);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('MJ',false,3,1);
@@ -91,14 +79,11 @@ INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Hong',fals
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('Ray',false,9,6);
 INSERT INTO PLAYER(name, is_pitcher, uniform_number, team_id) VALUES('V',false,10,6);
 
-UPDATE PLAYER SET plate_appearance = 1000 WHERE PLAYER.id = 1;
-
 
 
 INSERT INTO PLAYER_HISTORY(player_id,round,record) VALUES(1, 1,'S1 B0');
 INSERT INTO PLAYER_HISTORY(player_id,round,record) VALUES(1, 2,'S1 B1');
 INSERT INTO PLAYER_HISTORY(player_id,round,record) VALUES(1, 3,'S1 B2');
-
 
 INSERT INTO PLAYER_HISTORY(player_id,round,record) VALUES(2, 1,'S1 B0');
 INSERT INTO PLAYER_HISTORY(player_id,round,record) VALUES(2, 2,'S1 B1');
