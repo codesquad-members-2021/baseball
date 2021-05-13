@@ -25,27 +25,6 @@ public class ProgressDTO {
     private int homePoint;
     private int awayPoint;
 
-    public ProgressDTO(Long matchId, String away, String home, int inning,
-                       String offenseTeam, List<Player> firstBase, List<Player> secondBase,
-                       List<Player> thirdBase, String pitcher, String batter, int strike,
-                       int ball, int out, int homePoint, int awayPoint) {
-        this.matchId = matchId;
-        this.away = away;
-        this.home = home;
-        this.inning = inning;
-        this.offenseTeam = offenseTeam;
-        this.firstBase = firstBase;
-        this.secondBase = secondBase;
-        this.thirdBase = thirdBase;
-        this.pitcher = pitcher;
-        this.batter = batter;
-        this.strike = strike;
-        this.ball = ball;
-        this.out = out;
-        this.homePoint = homePoint;
-        this.awayPoint = awayPoint;
-    }
-
     public ProgressDTO(Board board) {
         this.matchId = board.getId();
         this.away = "awayteam to string";
@@ -53,9 +32,6 @@ public class ProgressDTO {
         this.inning = board.getInning();
         this.offenseTeam = "offenseTeam to String";
 
-        //this.firstBase = firstBase;
-        //this.secondBase = secondBase;
-        //this.thirdBase = thirdBase;
         this.firstBase = new ArrayList<>();
         this.secondBase = new ArrayList<>();
         this.thirdBase = new ArrayList<>();
