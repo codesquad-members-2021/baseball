@@ -4,7 +4,8 @@ import RxSwift
 class PlayViewController: UIViewController {
     var game: Game?
     private lazy var ballListData = [String]()
-    private lazy var ballCount = BallCount()
+    private lazy var ballCount = BallCount() // Ball + Strike
+    private lazy var outCount = 0
     
     @IBOutlet weak var stadiumView: StadiumView!
     @IBOutlet weak var ballListView: UITableView!
@@ -17,6 +18,7 @@ class PlayViewController: UIViewController {
     @IBOutlet weak var attackAndDefendLabel: UILabel!
     @IBOutlet weak var inningCountLabel: UILabel!
     @IBOutlet weak var inningPointLabel: UILabel!
+    
     @IBAction func pitcherButtonTouched(_ sender: Any) {
         batterCheckMark.isHidden = true
         pitcherCheckMark.isHidden = false
@@ -27,9 +29,7 @@ class PlayViewController: UIViewController {
         pitcherCheckMark.isHidden = true
         attackAndDefendLabel.text = "공격"
     }
-    
-
-    
+ 
     private let viewModel = PlayViewModel()
     private var disposeBag = DisposeBag()
     
@@ -37,13 +37,6 @@ class PlayViewController: UIViewController {
         super.viewDidLoad()
         registerXib()
         configureUI()
-        
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-       
     }
     
     private func registerXib() {
@@ -61,8 +54,10 @@ class PlayViewController: UIViewController {
             self.pitcherBackNumberLabel.text = "#\(data.pitcher.backNumber)"
             self.batterNameLabel.text = "\(data.batter.name)"
             self.ballListData = data.ballCount
-            self.ballListView.reloadData()
             
+            self.ballListView.reloadData()
+            self.ballListView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//            self.ballListView.scrollToRow(at: NSIndexPath(item: self.ballListData.count - 1, section: 0) as IndexPath, at: .bottom, animated: true)
         }
         ballListView.dataSource = self
     }
@@ -70,15 +65,15 @@ class PlayViewController: UIViewController {
 
 extension PlayViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(ballListData.count)
         return ballListData.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: BallListCell.identifier, for: indexPath) as! BallListCell
-        let ball = ballListData[indexPath.row]
-        cell.configure(id: indexPath.row, ball: ball, with: ballCount)
+//        let index = ballListData.count - indexPath.row - 1
+        let index = indexPath.row
+        let ball = ballListData[index]
+        cell.configure(id: index, ball: ball, with: ballCount)
         return cell
     }
 }

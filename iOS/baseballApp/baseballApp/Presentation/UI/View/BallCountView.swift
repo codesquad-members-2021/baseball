@@ -6,6 +6,8 @@ class BallCountView: UIView {
     private lazy var outPoint = CGPoint(x: 20, y: 50)
     private let rectSize = CGSize(width: 20, height: 20)
     
+    
+    
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.setStrokeColor(UIColor.gray.cgColor)

@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="rWc-du-eBq">
-                        <rect key="frame" x="270" y="10" width="38" height="24"/>
+                        <rect key="frame" x="252" y="10" width="38" height="24"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q3Y-xk-cAV">
                                 <rect key="frame" x="0.0" y="0.0" width="12.5" height="24"/>
@@ -41,7 +41,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="H90-VC-Ob2">
-                        <rect key="frame" x="10" y="9.5" width="111" height="25"/>
+                        <rect key="frame" x="10" y="9.5" width="128" height="25"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKw-NX-xJS">
                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -53,23 +53,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGroupedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBound" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A58-bw-KvO">
-                                <rect key="frame" x="37" y="0.0" width="74" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="74" id="rvZ-Y2-7VS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="37" y="0.0" width="91" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="A58-bw-KvO" firstAttribute="width" secondItem="H90-VC-Ob2" secondAttribute="height" multiplier="91:25" id="2q3-jD-am6"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rWc-du-eBq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="30a-Tp-HQH"/>
                     <constraint firstItem="H90-VC-Ob2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="CoS-dE-E1r"/>
-                    <constraint firstAttribute="trailing" secondItem="rWc-du-eBq" secondAttribute="trailing" constant="12" id="Qfm-ND-Wqu"/>
+                    <constraint firstAttribute="trailing" secondItem="rWc-du-eBq" secondAttribute="trailing" constant="30" id="Qfm-ND-Wqu"/>
                     <constraint firstItem="H90-VC-Ob2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lcU-to-O1N"/>
                 </constraints>
             </tableViewCellContentView>

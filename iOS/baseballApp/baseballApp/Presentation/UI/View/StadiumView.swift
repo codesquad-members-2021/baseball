@@ -14,6 +14,7 @@ class StadiumView: UIView {
     private lazy var basePoints = [CGPoint]()
     private lazy var fieldCenter = CGPoint(x: bounds.midX, y: bounds.midY)
     
+//    func configure
     
     override func draw(_ rect: CGRect) {
         drawField(UIGraphicsGetCurrentContext()!)
