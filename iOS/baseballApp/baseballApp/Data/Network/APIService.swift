@@ -11,6 +11,13 @@ class APIService {
         }
         return getAndDecode(url)
     }
+    
+    func requestScore() throws -> Observable<ScoreDTO> {
+        guard let url = URL(string: "https://791e125f-f50f-4801-90d3-3b106e723a88.mock.pstmn.io/baseball/1/score") else {
+            throw APIError.urlNotSupport
+        }
+        return getAndDecode(url)
+    }
 
     private func getAndDecode<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in

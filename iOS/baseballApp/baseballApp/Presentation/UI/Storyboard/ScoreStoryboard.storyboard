@@ -336,12 +336,33 @@
                             <constraint firstItem="Svo-cR-Qhz" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="zFs-hm-ILc"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="baseball_player" selectedImage="lock.doc.fill" catalog="system" id="fjd-0g-Opr"/>
+                    <tabBarItem key="tabBarItem" title="" image="baseball_player" selectedImage="score" id="fjd-0g-Opr"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outletCollection property="awayTeamScores" destination="LNc-Zx-zhU" collectionClass="NSMutableArray" id="Q5b-2r-T5C"/>
-                        <outletCollection property="awayTeamScores" destination="3gY-Dg-2Yc" collectionClass="NSMutableArray" id="1fA-ND-czJ"/>
-                        <outletCollection property="homeTeamScores" destination="rlm-JJ-vvS" collectionClass="NSMutableArray" id="NJN-zL-Fmj"/>
+                        <outletCollection property="homeTeamScores" destination="OXX-5d-fy1" collectionClass="NSMutableArray" id="wlk-r3-W7k"/>
+                        <outletCollection property="homeTeamScores" destination="JiZ-cW-64J" collectionClass="NSMutableArray" id="LDJ-PT-dHg"/>
+                        <outletCollection property="homeTeamScores" destination="fk8-9H-vxD" collectionClass="NSMutableArray" id="oTS-jr-Wdt"/>
+                        <outletCollection property="homeTeamScores" destination="ori-mo-Nv8" collectionClass="NSMutableArray" id="Uwm-bN-xoO"/>
+                        <outletCollection property="homeTeamScores" destination="bVT-sG-WpP" collectionClass="NSMutableArray" id="743-AF-Abv"/>
+                        <outletCollection property="homeTeamScores" destination="3hZ-Eg-H51" collectionClass="NSMutableArray" id="Afn-Iz-4gx"/>
+                        <outletCollection property="homeTeamScores" destination="rlm-JJ-vvS" collectionClass="NSMutableArray" id="jtM-Pg-Sle"/>
+                        <outletCollection property="homeTeamScores" destination="lBG-Fu-B5o" collectionClass="NSMutableArray" id="yOU-sR-5mk"/>
+                        <outletCollection property="homeTeamScores" destination="Npf-lT-Fur" collectionClass="NSMutableArray" id="AKa-iT-kaJ"/>
+                        <outletCollection property="homeTeamScores" destination="ZCx-a2-c1L" collectionClass="NSMutableArray" id="ABy-5M-9Zv"/>
+                        <outletCollection property="homeTeamScores" destination="T0D-B9-0CX" collectionClass="NSMutableArray" id="RZE-J3-qfZ"/>
+                        <outletCollection property="homeTeamScores" destination="ENu-hM-InD" collectionClass="NSMutableArray" id="YEv-2r-pzp"/>
+                        <outletCollection property="awayTeamScores" destination="h85-JT-dra" collectionClass="NSMutableArray" id="wMZ-WN-BQp"/>
+                        <outletCollection property="awayTeamScores" destination="L8i-zr-YHF" collectionClass="NSMutableArray" id="5vW-xr-LjW"/>
+                        <outletCollection property="awayTeamScores" destination="dQU-aM-R4M" collectionClass="NSMutableArray" id="FAr-pA-DeJ"/>
+                        <outletCollection property="awayTeamScores" destination="d3p-aB-IC3" collectionClass="NSMutableArray" id="SOR-lm-Ssv"/>
+                        <outletCollection property="awayTeamScores" destination="3gY-Dg-2Yc" collectionClass="NSMutableArray" id="E5C-kN-Dwz"/>
+                        <outletCollection property="awayTeamScores" destination="LNc-Zx-zhU" collectionClass="NSMutableArray" id="Q1v-Ug-cEf"/>
+                        <outletCollection property="awayTeamScores" destination="Qwf-ue-XCl" collectionClass="NSMutableArray" id="z2a-ht-P13"/>
+                        <outletCollection property="awayTeamScores" destination="Qpk-bS-pgX" collectionClass="NSMutableArray" id="dQk-2R-lvG"/>
+                        <outletCollection property="awayTeamScores" destination="i2P-Ug-X7e" collectionClass="NSMutableArray" id="eYh-Df-GoL"/>
+                        <outletCollection property="awayTeamScores" destination="Qn3-QU-23y" collectionClass="NSMutableArray" id="zKY-Wa-gQb"/>
+                        <outletCollection property="awayTeamScores" destination="Te8-Hn-mJ9" collectionClass="NSMutableArray" id="Xcf-nB-4mU"/>
+                        <outletCollection property="awayTeamScores" destination="hGw-OU-Myj" collectionClass="NSMutableArray" id="pJg-RU-4o4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -351,7 +372,7 @@
     </scenes>
     <resources>
         <image name="baseball_player" width="128" height="128"/>
-        <image name="lock.doc.fill" catalog="system" width="115" height="128"/>
+        <image name="score" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
