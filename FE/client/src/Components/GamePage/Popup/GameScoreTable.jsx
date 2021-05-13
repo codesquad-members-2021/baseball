@@ -19,10 +19,10 @@ const GameScoreTable = ({ teamScores }) => {
         </thead>
         <tbody>
           <tr>
-            {teamScores[0].scores.map(({ score }) => (<td>{score}</td>))}
+            {teamScores[0].scores.map(({ score }, index) => (<td key={`homeScore-${index}`}>{score}</td>))}
           </tr>
           <tr>
-            {teamScores[1].scores.map(({ score }) => (<td>{score}</td>))}
+            {teamScores[1].scores.map(({ score }, index) => (<td key={`awayScore-${index}`}>{score}</td>))}
           </tr>
         </tbody>
       </ScoreTable>

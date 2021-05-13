@@ -5,8 +5,6 @@ import Popup from "./Popup";
 import styled from "styled-components";
 import useAsync from "utils/hooks/useAsync";
 import API from "utils/API";
-import { GAME1 } from "utils/mockDatas";
-import { randomPitch } from "utils/randomPitch";
 import { PageContext } from "Components/Page";
 
 export const GamePageContext = createContext();
@@ -36,9 +34,11 @@ const GamePage = ({ userState }) => {
   const [sequenceCount, setSequenceCount] = useState(0); //몇번째 선수가 뛰고있는지
   const [roundCount, setRoundCount] = useState(1); //몇회인지 카운트
   const [currentBaseData, setCurrentBaseData] = useState([]); //Base에 누구누구 있는지
-  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0, out: 0, action: '' });
+  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0, action: '' });
   const [currentPlayAction, setCurrentPlayAction] = useState(''); ////strike, ball, hit;
   const [playRecordsState, setPlayRecordsState] = useState([]); ////[{id:1,name:홍길동,records:[{strike:0, ball:1}]}]
+  const [currentScore, setCurrentScore] = useState(0); // 현재 게임의 스코어
+  const [outState, setOutState] = useState(0);
 
   const onPitch = () => {
     socket.emit('pitch', { gameId: userState.gameId });
@@ -98,19 +98,44 @@ const GamePage = ({ userState }) => {
 
   useEffect(() => { //
     if (!playRecordsState.length) return;
-    const { strike, ball, out, action } = currentSBData;
-    console.log(12315135, strike)
+    const { strike, ball, action } = currentSBData;
     if (strike === 3) {
       updateSequenceCount();
+      setPlayRecordsState((records) => {
+        const [firstRecord, ...remainRecords] = records;
+        return [{ ...firstRecord, out: true }, ...remainRecords];
+      });
+      setCurrentSBData({ strike: 0, ball: 0, action: '' });
+      setOutState((outState) => outState + 1);
+
     } else if (ball === 4) {
-      //안타 처리
-    } else if (out === 3) {
-      //팀 체인지 
+      updateSequenceCount();
+      setPlayRecordsState((records) => {
+        const [firstRecord, ...remainRecords] = records;
+        return [{ ...firstRecord, fourBall: true }, ...remainRecords];
+      });
+      setCurrentSBData({ strike: 0, ball: 0, action: '' });
+      setCurrentBaseData(base => {  // 볼넷이나 히트일때 base 업데이트
+        const { name, id } = playRecordsState[0];
+        if (base.length === 3) return [{ name, id }, ...base.slice(0, -1)];
+        return [{ name, id }, ...base];
+      })
+      if (currentBaseData.length === 3) setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+
     } else if (action === 'hit') {
       updateSequenceCount();
+      setCurrentBaseData(base => {  // 볼넷이나 히트일때 base 업데이트
+        const { name, id } = playRecordsState[0];
+        if (base.length === 3) return [{ name, id }, ...base.slice(0, -1)];
+        return [{ name, id }, ...base];
+      })
+      if (currentBaseData.length === 3) setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+
+    } else if (outState === 2 && strike === 2 && action === 'strike') {
+      // 팀 체인지 
     }
 
-
+    if (!action) return;
     setPlayRecordsState((records) => {
       const [firstRecord, ...remainRecords] = records;
       return [{ ...firstRecord, records: [currentSBData, ...firstRecord.records] }, ...remainRecords];
@@ -120,21 +145,18 @@ const GamePage = ({ userState }) => {
   useEffect(() => { //초기세팅 record 세팅 (mainRight)
     if (!inGameData) return;
     const { away } = inGameData;
-    setPlayRecordsState([{ id: away[0].id, name: away[0].name, records: [] }])
+    setPlayRecordsState([{ id: away[0].id, name: away[0].name, out: false, records: [] }])
   }, [inGameData]);
 
   useEffect(() => {//선수교체 record 세팅(mainRight)
     if (!inGameData) return;
     const { away } = inGameData;
     setPlayRecordsState((records) => {
-      return [{ id: away[sequenceCount].id, name: away[sequenceCount].name, records: [] }, ...records];
+      return [{ id: away[sequenceCount].id, name: away[sequenceCount].name, out: false, records: [] }, ...records];
     });
   }, [sequenceCount])
 
 
-  useEffect(() => {
-    console.log(123545, playRecordsState)
-  }, [playRecordsState])
   return (
     <GamePageContext.Provider
       value={{
@@ -146,6 +168,8 @@ const GamePage = ({ userState }) => {
         currentSBData,
         currentPlayAction,
         playRecordsState,
+        outState,
+        currentBaseData,
         onPitch,
       }}
     >

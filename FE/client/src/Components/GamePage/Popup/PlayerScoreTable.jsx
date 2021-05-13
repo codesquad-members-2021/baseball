@@ -21,8 +21,8 @@ const PlayerScoreTable = ({ records }) => {
           </tr>
         </thead>
         <tbody>
-          {records.map(({ name, atBat, hit, out }) => {
-            return (<tr>
+          {records.map(({ name, atBat, hit, out }, index) => {
+            return (<tr key={`record-${index}`}>
               <td>{name}</td><td>{atBat}</td><td>{hit}</td><td>{out}</td><td>{getAverage({ hit, out })}</td>
             </tr>)
           })}

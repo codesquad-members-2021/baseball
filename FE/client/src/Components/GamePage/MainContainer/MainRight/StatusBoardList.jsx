@@ -5,18 +5,14 @@ import StatusBoard from "./StatusBoard";
 const StatusBoardList = ({ index }) => {
   const { inGameData, sequenceCount, attackState, playRecordsState } =
     useContext(GamePageContext);
-  {/* playRecordsState[0].records.ball &&
-        playRecordsState[0].records.strike && */}
+
   return (
     <div>
       {playRecordsState.length &&
-
-        playRecordsState.map(({ name, records }, index) => {
-          console.log(records)
-          return (<StatusBoard
+        playRecordsState.map(({ id, name, records, out, fourBall }, index) => {
+          return (<StatusBoard key={`statusBoard-${index}`}
             currentPlayer={index === 0}
-            id={`${sequenceCount + 1}`}
-            {...{ name, records }}
+            {...{ name, records, id, out, fourBall }}
           />)
         })}
     </div>

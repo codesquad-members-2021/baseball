@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 const SBOStatus = () => {
-  const { currentSBData } = useContext(GamePageContext);
+  const { currentSBData, outState } = useContext(GamePageContext);
 
   return (
     <SBOBoard>
@@ -33,7 +33,9 @@ const SBOStatus = () => {
         <SBOspan>O</SBOspan>
         <CircleList>
           {Array.from({ length: 2 }).map((_, index) => (
-            <SBOCircle key={`red-${index}`} color="red" />
+            <SBOCircle key={`red-${index}`}
+              color="red"
+              background={outState >= index + 1} />
           ))}
         </CircleList>
       </CircleListDiv>
