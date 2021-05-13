@@ -63,7 +63,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
       ballCountDispatch({ type: 'clear' });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
-      safetyDispatch({ type: 'clear', turn: inning.turn });
+      safetyDispatch({ type: 'clear', turn: !inning.turn });
       logListDispatch({ type: 'clear' });
     } else {
       logListDispatch({ type: 'out', end: true });

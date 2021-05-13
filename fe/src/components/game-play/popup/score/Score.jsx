@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import ScoreList from './ScoreList';
 
-const Score = (props) => {
+const Score = ({ score, teamName }) => {
   //props로 받아올 아이들 1. team 2. player(home or away)
   const ROUND = new Array(12).fill().map((_, idx) => idx + 1);
 
   return (
     <StyledScore>
       <ScoreList dataType='round' data={ROUND} />
-      <ScoreList team='Captain' dataType='home' data={data.home} isPlayer={true} />
-      <ScoreList team='Marvel' dataType='away' data={data.away} isPlayer={false} />
+      <ScoreList team={teamName.home} dataType='home' data={score.home} isPlayer={true} />
+      <ScoreList team={teamName.away} dataType='away' data={score.away} isPlayer={false} />
     </StyledScore>
   );
 };

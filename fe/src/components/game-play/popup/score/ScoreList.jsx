@@ -4,11 +4,10 @@ import { IoBaseballOutline } from 'react-icons/io5';
 
 const ScoreList = ({ team, dataType, data, isPlayer }) => {
   const isInRound = dataType === 'round';
-
   const scoreList = new Array(12).fill('');
 
   data.forEach((v, idx) => (scoreList[idx] = v));
-  isInRound ? scoreList.push('R') : scoreList.push(data.reduce((acc, cur) => acc + cur));
+  isInRound ? scoreList.push('R') : scoreList.push(data.reduce((acc, cur) => acc + cur, 0));
 
   const scoreDivList = scoreList.map((score, idx, arr) => (
     <div
