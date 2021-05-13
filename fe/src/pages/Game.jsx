@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer } from 'react'
 import useFetch from 'hooks/useFetch'
 import Header from 'components/GamePlay/playHeader/Header'
 import Main from 'components/GamePlay/playScreen/Main'
+import PopUp from 'components/GamePlay/playPopUp/PopUp'
 import qs from 'qs'
 // 쿼리값 읽고 데이터 페치 받은다음에 뿌려준다.
 export const gamePlayContext = React.createContext()
@@ -67,19 +68,19 @@ const Game = () => {
     history: [ballCountState]
   })
 
-  console.log(ballCountState)
+ 
   // useEffect(() => {}, [ballCount]);
 
   // useEffect(() => {}, [out]);
-  const setInitialAttackTurn = (away) => {
-    if(isAttacking === null) setIsAttacking(away.team_info.selected)
-    else return;
+  const setInitialAttackTurn = away => {
+    if (isAttacking === null) setIsAttacking(away.team_info.selected)
+    else return
   }
 
   if (loading) return <div>loading</div>
 
   const [home, away] = response
-  setInitialAttackTurn(away);
+  setInitialAttackTurn(away)
 
   const selectPitcherName = team =>
     team.player.filter(player => player.pitcher === true)[0].name
@@ -90,8 +91,16 @@ const Game = () => {
 
   return (
     <gamePlayContext.Provider
-      value={{ isAttacking, pitcherName, home, away, ballCountState, dispatchBallCount }}
+      value={{
+        isAttacking,
+        pitcherName,
+        home,
+        away,
+        ballCountState,
+        dispatchBallCount
+      }}
     >
+      <PopUp type="down"><div style={{color:"white",background:'red',margin:"1rem", marginTop:"3rem"}}>요호</div></PopUp>
       <Header />
       <Main />
     </gamePlayContext.Provider>

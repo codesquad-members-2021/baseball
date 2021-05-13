@@ -88,7 +88,7 @@ const PitchButton = styled.button`
   color: white;
   background: none;
   transform: translate(-50%, -50%);
-
+  
   &:hover {
     svg {
       animation: ${rotateAnimation} 4s linear infinite;
@@ -97,7 +97,6 @@ const PitchButton = styled.button`
       svg {
         border-radius:50%;
         background-color:#e84545;
-        animation: none;
       }
     }
   }
