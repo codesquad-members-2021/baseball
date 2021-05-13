@@ -1,8 +1,6 @@
 package com.codesquad.baseball.controller;
 
 import com.codesquad.baseball.annotation.Refresh;
-import com.codesquad.baseball.config.AuthInterceptor;
-import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.oauth.AuthorizationInfo;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.ReceiveAccessTokenDTO;
