@@ -1,11 +1,11 @@
 package com.dong.baseball.DTO;
 
-public class ResponseDTO {
+public class BaseballServerResponseDTO {
     private int code;
     private String status;
     private String explanation;
 
-    public ResponseDTO() {
+    public BaseballServerResponseDTO() {
         this.code = 200;
         this.status = "OK";
         this.explanation = "";

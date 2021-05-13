@@ -1,12 +1,11 @@
 package com.dong.baseball.Controller;
 
+import com.dong.baseball.DTO.BaseballServerResponseDTO;
+import com.dong.baseball.DTO.MatchAllProgressDataDTO;
 import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Service.GameService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/games")
@@ -25,36 +24,35 @@ public class GameController {
     }
 
     @GetMapping("/{matchId}")
-    public List<ProgressDTO> matchInfos(@PathVariable Long matchId) {
-        return gameService.matchInformations(matchId);
+    public MatchAllProgressDataDTO matchInfos(@PathVariable Long matchId) {
+        return new MatchAllProgressDataDTO(gameService.findMatch(matchId), gameService.matchInformations(matchId));
     }
 
-    @GetMapping("/offense/{matchId}")
+    @GetMapping("/{matchId}/offense")
     public ProgressDTO offeseInfo(@PathVariable Long matchId) {
-
         gameService.matchInformations(matchId);
         return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @GetMapping("/defense/{matchId}")
+    @GetMapping("/{matchId}/defense")
     public ProgressDTO defenseInfo(@PathVariable Long matchId) {
 
         gameService.matchInformations(matchId);
         return new ProgressDTO(gameService.matchStream(matchId));
     }
 
-    @PostMapping("/start/{matchId}")
-    public ResponseDTO gameStart(@PathVariable Long matchId) {
+    @PostMapping("/{matchId}/start")
+    public BaseballServerResponseDTO gameStart(@PathVariable Long matchId) {
         return gameService.gameStart(matchId);
     }
 
-    @PostMapping("/end/{matchId}")
-    public ResponseDTO gameEnd(@PathVariable Long matchId) {
+    @PostMapping("/{matchId}/end")
+    public BaseballServerResponseDTO gameEnd(@PathVariable Long matchId) {
         return gameService.gameEnd(matchId);
     }
 
-    @PostMapping("/throws/{matchId}")
-    public ResponseDTO gameProgress(@PathVariable Long matchId) {
+    @PostMapping("/{matchId}/throws")
+    public BaseballServerResponseDTO gameProgress(@PathVariable Long matchId) {
         return gameService.gameProgress(matchId);
     }
 }

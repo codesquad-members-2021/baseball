@@ -6,7 +6,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import java.util.ArrayList;
 import java.util.List;
 
-//    Tigers, Bears, Twins, Dinos, Lions, Eagles, Giants
 public class Team {
     @MappedCollection(idColumn = "team_id", keyColumn = "player_index")
     List<Player> members = new ArrayList<>();

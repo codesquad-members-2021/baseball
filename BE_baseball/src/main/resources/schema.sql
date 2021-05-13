@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS `baseball`.`player`
     `player_id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `team_id` BIGINT REFERENCES `team` (team_id),
     `player_index` INT,
-    -- `dddong` INT,
     `name` VARCHAR(64) NOT NULL,
     `uniform_number` INT NOT NULL,
     `played_games` INT NOT NULL,

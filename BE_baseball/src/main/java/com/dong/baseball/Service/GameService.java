@@ -1,11 +1,12 @@
 package com.dong.baseball.Service;
 
+import com.dong.baseball.DTO.BaseballServerResponseDTO;
 import com.dong.baseball.DTO.MatchDTO;
 import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.ResponseDTO;
 import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
+import com.dong.baseball.Exception.MatchNotFoundException;
 import com.dong.baseball.Repository.LeagueRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ import java.util.List;
 @Service
 public class GameService {
 
-    //private final BoardRepository boardRepository;
     private final LeagueRepository leagueRepository;
 
     public GameService(LeagueRepository leagueRepository) {
@@ -50,19 +50,23 @@ public class GameService {
     }
 
 
-    public ResponseDTO gameStart(Long matchId) {
+    public BaseballServerResponseDTO gameStart(Long matchId) {
         System.out.println("start!");
-        return new ResponseDTO();
+        return new BaseballServerResponseDTO();
     }
 
-    public ResponseDTO gameEnd(Long matchId) {
+    public BaseballServerResponseDTO gameEnd(Long matchId) {
         System.out.println("end");
-        return new ResponseDTO();
+        return new BaseballServerResponseDTO();
     }
 
-    public ResponseDTO gameProgress(Long matchId) {
+    public BaseballServerResponseDTO gameProgress(Long matchId) {
         System.out.println("progress");
-        return new ResponseDTO();
+        return new BaseballServerResponseDTO();
+    }
+
+    public MatchDTO findMatch(Long matchId) {
+        return new MatchDTO(leagueRepository.findById(matchId).orElseThrow(() -> new MatchNotFoundException()));
     }
 }
 
