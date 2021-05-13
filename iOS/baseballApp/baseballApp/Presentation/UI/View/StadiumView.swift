@@ -53,6 +53,8 @@ class StadiumView: UIView {
         context.drawPath(using: mode)
     }
     
-    
+    func drawPlayer() {
+        let layer = CALayer()
+    }
 }
 

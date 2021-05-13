@@ -27,7 +27,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="baseball_player" width="50" height="50"/>
+        <image name="baseball_player" width="25" height="25"/>
         <image name="lock.doc.fill" catalog="system" width="115" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -11,6 +11,13 @@ class APIService {
         }
         return getAndDecode(url)
     }
+    
+    func requestPlay(gameID: Int, inningID: Int) throws -> Observable<PlayDTO> {
+        guard  let url = Endpoint.getGames(path: "baseball/\(gameID)/inning/\(inningID)") else {
+            throw APIError.urlNotSupport
+        }
+        return getAndDecode(url)
+    }
 
     private func getAndDecode<T: Codable>(_ url: URL) -> Observable<T> {
         return Observable.create { observer in

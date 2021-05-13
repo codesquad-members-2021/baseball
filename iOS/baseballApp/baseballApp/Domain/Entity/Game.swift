@@ -8,7 +8,7 @@ struct Game: Codable {
     let awayID: Int
     let away: String
     let awayScore: Int
-    let inning: Int
+    let inningID: Int
     
     enum CodingKeys: String, CodingKey {
         case id = "game_id"
@@ -18,6 +18,6 @@ struct Game: Codable {
         case awayID = "away_team_id"
         case away = "away_team"
         case awayScore = "away_team_score"
-        case inning = "now_inning_id"
+        case inningID = "now_inning_id"
     }
 }
