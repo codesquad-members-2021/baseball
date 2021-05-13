@@ -28,6 +28,7 @@ public class GameStatusDTO {
                 .inning(game.currentInningNumber())
                 .isTop(game.isTop())
                 .strikeCount(game.getCurrentStrikeCount())
+                .ballCount(game.getCurrentBallCount())
                 .outCount(game.getCurrentOutCount())
                 .currentHitter(game.currentHitter())
                 .nextHitter(game.nextHitter())
