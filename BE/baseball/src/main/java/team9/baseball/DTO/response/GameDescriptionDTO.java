@@ -3,6 +3,7 @@ package team9.baseball.DTO.response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import team9.baseball.domain.enums.GameStatus;
 
 @Getter
 @Setter
@@ -13,4 +14,5 @@ public class GameDescriptionDTO {
     private String homeTeam;
     private String awayUserEmail;
     private String homeUserEmail;
+    private GameStatus status;
 }

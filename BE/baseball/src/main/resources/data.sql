@@ -12,6 +12,6 @@ INSERT INTO player (team_id, name, uniform_number) VALUES (2, '크롱', 3);
 INSERT INTO player (team_id, name, uniform_number) VALUES (2, '세라', 4);
 INSERT INTO player (team_id, name, uniform_number) VALUES (2, '헤드', 5);
 
-INSERT INTO `user` (email) VALUES ('isaac@naver.com');
-INSERT INTO `user` (email) VALUES ('soo@naver.com');
-INSERT INTO `user` (email) VALUES ('song@naver.com');
+INSERT INTO `user` (email, oauth_resource_server) VALUES ('isaac@naver.com', 'GITHUB');
+INSERT INTO `user` (email, oauth_resource_server) VALUES ('soo@naver.com', 'GITHUB');
+INSERT INTO `user` (email, oauth_resource_server) VALUES ('song@naver.com', 'GITHUB');
