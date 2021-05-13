@@ -104,19 +104,6 @@
                                     <action selector="didTappedRetryButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5BE-hd-Su6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvU-Cz-rdU">
-                                <rect key="frame" x="184" y="145" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="RSq-MZ-rfg" kind="presentation" id="Pg0-Zl-gLN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQW-Bt-NfZ">
-                                <rect key="frame" x="323" y="145" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -144,11 +131,11 @@
             <objects>
                 <viewController storyboardIdentifier="GamePlayViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kzF-gc-ebD" customClass="GamePlayViewController" customModule="Baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bse-3r-WIJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cQ-GY-0hY" customClass="GroundView" customModule="Baseball" customModuleProvider="target">
-                                <rect key="frame" x="20" y="63" width="374" height="292"/>
+                                <rect key="frame" x="20" y="107" width="374" height="351"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2회초" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwe-Iq-N7F">
                                         <rect key="frame" x="319" y="8" width="47" height="24"/>
@@ -163,7 +150,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d4-cV-j2r">
-                                        <rect key="frame" x="138" y="134.5" width="98" height="23"/>
+                                        <rect key="frame" x="138" y="164" width="98" height="23"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
@@ -237,7 +224,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juP-Vh-kHk">
-                                <rect key="frame" x="20" y="363" width="374" height="146"/>
+                                <rect key="frame" x="20" y="466" width="374" height="146"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="POC-01-LJn">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="73"/>
@@ -334,7 +321,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eJM-6t-Cta">
-                                <rect key="frame" x="20" y="509" width="374" height="250"/>
+                                <rect key="frame" x="20" y="612" width="374" height="250"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PitchHistoryCell" id="Sgv-Ty-nBG" customClass="PitchHistoryCell" customModule="Baseball" customModuleProvider="target">
@@ -345,7 +332,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcQ-FI-LkX" customClass="PaddingLabel" customModule="Baseball" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="11" width="20.5" height="22"/>
+                                                    <rect key="frame" x="8" y="14" width="6.5" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -368,7 +355,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4x-ed-cTS">
-                                                    <rect key="frame" x="38.5" y="7.5" width="104" height="29"/>
+                                                    <rect key="frame" x="24.5" y="7.5" width="104" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -431,13 +418,13 @@
         <!--Item 2-->
         <scene sceneID="6g5-9S-iFA">
             <objects>
-                <viewController id="lM2-LM-tZg" customClass="GameScoreViewController" customModule="Baseball" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameScoreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lM2-LM-tZg" customClass="GameScoreViewController" customModule="Baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MpJ-O4-P9G">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MyC-QQ-n5M">
-                                <rect key="frame" x="20" y="159" width="374" height="70"/>
+                                <rect key="frame" x="20" y="203" width="374" height="70"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eLj-PK-srv">
                                         <rect key="frame" x="93.5" y="25" width="280.5" height="23"/>
@@ -703,7 +690,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tqs-rw-ZEA">
-                                <rect key="frame" x="20" y="302" width="374" height="457"/>
+                                <rect key="frame" x="20" y="346" width="374" height="516"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GameScoreTableViewCell" rowHeight="89" id="pq7-ZU-ScY" customClass="GameScoreTableViewCell" customModule="Baseball" customModuleProvider="target">
@@ -774,7 +761,7 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hlx-ZX-tvu">
-                                <rect key="frame" x="20" y="247" width="374" height="32"/>
+                                <rect key="frame" x="20" y="291" width="374" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="374" id="iiq-tR-d2i"/>
                                 </constraints>
@@ -811,19 +798,15 @@
             </objects>
             <point key="canvasLocation" x="1253.6231884057972" y="317.41071428571428"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--In Game Tab Bar Controller-->
         <scene sceneID="hKo-bW-Jqy">
             <objects>
-                <tabBarController id="RSq-MZ-rfg" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="InGameTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RSq-MZ-rfg" customClass="InGameTabBarController" customModule="Baseball" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SIm-Zz-fhG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="lM2-LM-tZg" kind="relationship" relationship="viewControllers" id="fNe-Lx-6j5"/>
-                        <segue destination="kzF-gc-ebD" kind="relationship" relationship="viewControllers" id="pBf-SL-iqd"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tua-Ex-wrb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -832,7 +815,7 @@
     </scenes>
     <designables>
         <designable name="bcQ-FI-LkX">
-            <size key="intrinsicContentSize" width="20.5" height="22"/>
+            <size key="intrinsicContentSize" width="6.5" height="16"/>
         </designable>
     </designables>
     <resources>
