@@ -7,7 +7,7 @@ import com.dong.baseball.DTO.ProgressDTO;
 import com.dong.baseball.Domain.Board;
 import com.dong.baseball.Domain.Match;
 import com.dong.baseball.Exception.MatchNotFoundException;
-import com.dong.baseball.Repository.LeagueRepository;
+import com.dong.baseball.Repository.MatchRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private final LeagueRepository leagueRepository;
+    private final MatchRepository leagueRepository;
 
-    public GameService(LeagueRepository leagueRepository) {
+    public GameService(MatchRepository leagueRepository) {
         this.leagueRepository = leagueRepository;
     }
 
@@ -32,7 +32,7 @@ public class GameService {
     }
 
     public List<ProgressDTO> matchInformations(Long matchId) {
-        Match match = leagueRepository.findById(matchId).get();//@Todo get
+        Match match = leagueRepository.findById(matchId).orElseThrow(() -> new MatchNotFoundException());
         List<Board> matchBoards = match.getGameBoards();
         List<ProgressDTO> matchBoardInfo = new ArrayList<>();
 
