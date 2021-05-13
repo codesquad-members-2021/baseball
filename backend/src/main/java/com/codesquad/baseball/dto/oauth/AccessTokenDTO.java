@@ -10,6 +10,14 @@ public class AccessTokenDTO {
         this.accessToken = builder.accessToken;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
     public static class Builder {
 
         private String userId;
@@ -28,13 +36,5 @@ public class AccessTokenDTO {
         public AccessTokenDTO build() {
             return new AccessTokenDTO(this);
         }
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
     }
 }

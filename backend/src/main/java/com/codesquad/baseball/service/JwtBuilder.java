@@ -1,9 +1,9 @@
 package com.codesquad.baseball.service;
 
-import com.codesquad.baseball.dto.oauth.AccessTokenDTO;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
-import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

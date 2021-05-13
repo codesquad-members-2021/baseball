@@ -10,6 +10,14 @@ public class RefreshTokenDTO {
         this.refreshToken = builder.refreshToken;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
     public static class Builder {
 
         private String userId;
@@ -28,13 +36,5 @@ public class RefreshTokenDTO {
         public RefreshTokenDTO build() {
             return new RefreshTokenDTO(this);
         }
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
     }
 }

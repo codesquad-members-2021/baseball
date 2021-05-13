@@ -22,6 +22,26 @@ public class JwtTokenDTO {
         this.refreshTokenExpirationDate = builder.refreshTokenExpirationDate;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public Date getAccessTokenExpirationDate() {
+        return accessTokenExpirationDate;
+    }
+
+    public Date getRefreshTokenExpirationDate() {
+        return refreshTokenExpirationDate;
+    }
+
     public static class Builder {
 
         private String userId;
@@ -58,25 +78,5 @@ public class JwtTokenDTO {
         public JwtTokenDTO build() {
             return new JwtTokenDTO(this);
         }
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public Date getAccessTokenExpirationDate() {
-        return accessTokenExpirationDate;
-    }
-
-    public Date getRefreshTokenExpirationDate() {
-        return refreshTokenExpirationDate;
     }
 }

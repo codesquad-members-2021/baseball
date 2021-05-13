@@ -3,7 +3,6 @@ package com.codesquad.baseball.service;
 import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.domain.user.UserRepository;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
-import com.codesquad.baseball.dto.oauth.RefreshTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
 import com.codesquad.baseball.exceptions.notfound.UserNotFoundException;
 import org.springframework.stereotype.Service;

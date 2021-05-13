@@ -2,11 +2,7 @@ package com.codesquad.baseball.config;
 
 import com.codesquad.baseball.annotation.Refresh;
 import com.codesquad.baseball.dto.oauth.RefreshTokenDTO;
-import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
-import com.codesquad.baseball.exceptions.oauth.NoJwtTokenException;
-import com.codesquad.baseball.service.JwtBuilder;
 import com.codesquad.baseball.service.JwtVerifier;
-import com.codesquad.baseball.service.UserService;
 import com.codesquad.baseball.utils.TokenUtil;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;

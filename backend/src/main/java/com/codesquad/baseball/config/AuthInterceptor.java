@@ -2,8 +2,6 @@ package com.codesquad.baseball.config;
 
 import com.codesquad.baseball.annotation.Auth;
 import com.codesquad.baseball.dto.oauth.AccessTokenDTO;
-import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
-import com.codesquad.baseball.exceptions.oauth.NoJwtTokenException;
 import com.codesquad.baseball.service.JwtVerifier;
 import com.codesquad.baseball.utils.TokenUtil;
 import org.springframework.web.method.HandlerMethod;
@@ -15,10 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AuthInterceptor implements HandlerInterceptor {
 
+    public static final String USER_ID_KEY = "USER_ID";
     private static final int BEARER_TOKEN_LENGTH = 2;
     private static final int TOKEN = 1;
-    public static final String USER_ID_KEY = "USER_ID";
-
     private final JwtVerifier jwtVerifier;
 
     public AuthInterceptor(JwtVerifier jwtVerifier) {

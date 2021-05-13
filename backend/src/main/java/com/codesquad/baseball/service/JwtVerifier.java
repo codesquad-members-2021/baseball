@@ -3,7 +3,6 @@ package com.codesquad.baseball.service;
 import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.oauth.AccessTokenDTO;
 import com.codesquad.baseball.dto.oauth.RefreshTokenDTO;
-import com.codesquad.baseball.exceptions.notfound.UserNotFoundException;
 import com.codesquad.baseball.exceptions.oauth.InvalidJwtTokenException;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Service;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 public class JwtVerifier {
     private static final String ISSUER = "baseball";
     private static final String USER_ID = "USER_ID";
-    private static final long ACCESS_TOKEN_EXPIRATION = 60 * 60 * 1000L;
-    private static final long REFERSH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000L;
 
     private final OAuthConfigManager oAuthConfigManager;
     private final UserService userService;
