@@ -23,11 +23,7 @@ public class RefreshInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Refresh refreshAnnotation = ((HandlerMethod) handler).getMethodAnnotation(Refresh.class);
-        if (refreshAnnotation != null) {
-            onRefreshAnnotation(request);
-            return true;
-        }
+        processRefresh(request, handler);
         return true;
     }
 
@@ -39,6 +35,15 @@ public class RefreshInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+    }
+
+    private void processRefresh(HttpServletRequest request, Object handler) {
+        if (handler instanceof HandlerMethod) {
+            Refresh refreshAnnotation = ((HandlerMethod) handler).getMethodAnnotation(Refresh.class);
+            if (refreshAnnotation != null) {
+                onRefreshAnnotation(request);
+            }
+        }
     }
 
     private void onRefreshAnnotation(HttpServletRequest request) {

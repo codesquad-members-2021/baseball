@@ -42,7 +42,10 @@ public class UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             user.update(userInfoDTO);
+            user.updateAccessToken(jwtTokenDTO.getAccessToken());
+            user.updateRefreshToken(jwtTokenDTO.getRefreshToken());
             userRepository.save(user);
+            return;
         }
         createUser(userInfoDTO, jwtTokenDTO);
     }
