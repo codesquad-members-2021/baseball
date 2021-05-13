@@ -48,6 +48,10 @@ class BallCounter {
 
         let updateInfo: [String: Any] = ["ballType": BallCount.strike, "count": self.strike]
         NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
+        
+        if self.strike == 3 {
+            self.strike = 0
+        }
     }
     
     private func updateBall(_ count: Int) {
@@ -55,6 +59,10 @@ class BallCounter {
         
         let updateInfo: [String: Any] = ["ballType": BallCount.ball, "count": self.ball]
         NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
+        
+        if self.ball == 4 {
+            self.ball = 0
+        }
     }
     
     private func updateOut(_ count: Int) {
@@ -62,6 +70,10 @@ class BallCounter {
         
         let updateInfo: [String: Any] = ["ballType": BallCount.out, "count": self.out]
         NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
+        
+        if self.out == 3 {
+            self.out = 0
+        }
     }
     
 }

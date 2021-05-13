@@ -164,9 +164,7 @@ extension GamePlayViewController {
             guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
             }
-            
-            let index = indexPath.row
-            cell.updateLabels(count: index, result: pitch.result, log: pitch.log)
+            cell.updateLabels(count: pitch.count, result: pitch.result, log: pitch.log)
             
             return cell
         }
