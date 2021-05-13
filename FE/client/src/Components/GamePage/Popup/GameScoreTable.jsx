@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 const GameScoreTable = ({ teamScores }) => {
   const roundArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const [homeTotal, awayTotal] = teamScores.map(({ scores }) => {
+    return scores.reduce((acc, { score }) => acc + score, 0);
+  });
 
   return (
     <>
@@ -16,18 +19,10 @@ const GameScoreTable = ({ teamScores }) => {
         </thead>
         <tbody>
           <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
+            {teamScores[0].scores.map(({ score }) => (<td>{score}</td>))}
           </tr>
           <tr>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
-            <td>3</td>
+            {teamScores[1].scores.map(({ score }) => (<td>{score}</td>))}
           </tr>
         </tbody>
       </ScoreTable>
@@ -39,10 +34,10 @@ const GameScoreTable = ({ teamScores }) => {
         </thead>
         <tbody>
           <tr>
-            <td>2</td>
+            <td>{homeTotal}</td>
           </tr>
           <tr>
-            <td>3</td>
+            <td>{awayTotal}</td>
           </tr>
         </tbody>
       </TotalScoreTable>

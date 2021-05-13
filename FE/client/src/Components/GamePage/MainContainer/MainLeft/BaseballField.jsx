@@ -9,6 +9,7 @@ import ReadyImage from "./ReadyImage";
 const BaseballField = () => {
   const { teamState, attackState } = useContext(GamePageContext);
   const canvasRef = useRef();
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -19,15 +20,14 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage base="first" />
-      <RunnerImage base="second" />
-      <RunnerImage base="third" />
-      <RunnerImage base="fourth" />
-      <ReadyImage base="first" />
-      <ReadyImage base="second" />
-      <ReadyImage base="third" />
-      <ReadyImage base="fourth" />
-      {!teamState[attackState].isMyTeam && <PitchButton />}
+      <RunnerImage base='first' />
+      <RunnerImage base='second' />
+      <RunnerImage base='third' />
+      <RunnerImage base='fourth' />
+      <ReadyImage base='first' />
+      <ReadyImage base='second' />
+      <ReadyImage base='third' />
+      <PitchButton />
     </BaseballFieldWrapper>
   );
 };

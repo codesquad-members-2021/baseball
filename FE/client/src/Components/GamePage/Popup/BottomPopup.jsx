@@ -4,33 +4,30 @@ import API from "utils/API";
 import useAsync from "utils/hooks/useAsync";
 import { GamePageContext } from "Components/GamePage";
 import PlayerScoreTable from "./PlayerScoreTable";
+import { GAME1 } from "utils/mockDatas";
 
 const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
   const { teamState: { home, away } } = useContext(GamePageContext);
-  const [homeTeamRecodes, fetchHomeTeamRecodes] = useAsync(API.get.records, [], true);
-  const [awayTeamRecodes, fetchAwayTeamRecodes] = useAsync(API.get.records, [], true);
-
+  // const [gameRecodes, fetchGameRecodes] = useAsync(API.get.records, [], true);
+  const gameRecodes = { loading: null, error: null, data: GAME1 };
 
   useEffect(() => {
     if (bottom) return;
-    fetchHomeTeamRecodes(home.teamId);
-    fetchAwayTeamRecodes(away.teamId);
   }, [bottom]);
 
   return (
     <BottomPopupWrapper {...{ distance, bottom }}>
 
-      {awayTeamRecodes.loading && <>loading...</>}
+      {gameRecodes.loading && <>loading...</>}
 
-      {awayTeamRecodes.data && <>
+      {gameRecodes.data && <>
         <TeamNamesWrapper player={home.isMyTeam}>{home.teamName}</TeamNamesWrapper>
         <TeamNamesWrapper player={away.isMyTeam}>{away.teamName}</TeamNamesWrapper>
-        <PlayerScoreTable records={homeTeamRecodes} />
-        <PlayerScoreTable records={awayTeamRecodes} />
+        <PlayerScoreTable records={gameRecodes.data.home} />
+        <PlayerScoreTable records={gameRecodes.data.away} />
       </>}
 
-
-      {awayTeamRecodes.error && <>error...</>}
+      {gameRecodes.error && <>error...</>}
     </BottomPopupWrapper>
   );
 };

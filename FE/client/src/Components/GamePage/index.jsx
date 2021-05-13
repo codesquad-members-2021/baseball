@@ -106,7 +106,6 @@ const GamePage = ({ userState }) => {
         sequenceCount,
         roundCount,
         onPitch,
-        currentPlayData,
       }}
     >
       <GamePageBackground>
