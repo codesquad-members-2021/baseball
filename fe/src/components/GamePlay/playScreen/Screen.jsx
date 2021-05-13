@@ -1,13 +1,21 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { IoIosBaseball } from 'react-icons/io';
 
-import { gamePlayContext } from 'pages/Game';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 import BallCount from 'components/GamePlay/playScreen/BallCount';
 
 const Screen = () => {
-  const { dispatchBallCount } = useContext(gamePlayContext);
+  const { dispatchBallCount, round, isAttacking } = useContext(gamePlayContext);
+  const initialAttackState = isAttacking ? ['초', '공격'] : ['초', '수비'];
+  const [AttackState, setAttackState] = useState(initialAttackState);
+  const currentRound = Math.floor(round / 2 + 1);
 
+  const changeAttackState = ([first, attack]) => {
+    const _first = first === '초' ? '말' : '초';
+    const _attack = attack === '공격' ? '수비' : '공격';
+    return [_first, _attack];
+  };
   const chooseNumber = () => Math.floor(Math.random() * 4);
 
   const getAction = (number) => {
@@ -24,10 +32,17 @@ const Screen = () => {
     dispatchBallCount({ payload: action });
   };
 
+  useEffect(() => {
+    if (!round) return;
+    setAttackState((stateArr) => changeAttackState(stateArr));
+  }, [round]);
+
   return (
     <StyledScreen>
       <ScreenField src="field.svg" alt="field" />
-      <ScreenRound>2회 초 수비</ScreenRound>
+      <ScreenRound>
+        {currentRound}회 {AttackState[0]} {AttackState[1]}
+      </ScreenRound>
       <PitchButton onClick={handleClickPitch}>
         <IoIosBaseball />
       </PitchButton>

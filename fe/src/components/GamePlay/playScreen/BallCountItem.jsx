@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
-import { gamePlayContext } from 'pages/Game';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
 const BallCountItem = ({ type }) => {
   const { ballCountState } = useContext(gamePlayContext);

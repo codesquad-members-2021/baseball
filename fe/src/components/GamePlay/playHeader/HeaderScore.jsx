@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { gamePlayContext } from 'pages/Game';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 import styled from 'styled-components';
 import Span from 'components/common/Span';
 import VsSpan from 'components/common/VsSpan';
@@ -7,8 +7,8 @@ import FlexCenter from 'styles/FlexCenter';
 
 const HeaderScore = () => {
   const { home, away } = useContext(gamePlayContext);
-const homeTeam = home.team_info
-const awayTeam = away.team_info
+  const homeTeam = home.team_info;
+  const awayTeam = away.team_info;
   // 함수 GAME에서 넘겨줘야함
 
   const [scores, setScores] = useState({ home: 0, away: 0 });
