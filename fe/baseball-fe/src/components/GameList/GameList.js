@@ -68,7 +68,7 @@ const StyledGameList = styled.ul`
   & > * {
     font-size: 1.4rem;
   }
-  width: calc(30rem + ${props => String(props.scrollWidth) + 'px'});
+  width: calc(500px + ${props => String(props.scrollWidth) + 'px'});
   height: 20rem;
   margin-left: ${props => String(props.scrollWidth) + 'px'};
   padding: 0;
