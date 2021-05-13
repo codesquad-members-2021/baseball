@@ -17,7 +17,6 @@ const Player = ({ memberList, turn, pitchers }) => {
     return result;
   };
   const player = getPlayer();
-  console.log(player);
   return (
     <StyledPlayer>
       <div className='player'>
