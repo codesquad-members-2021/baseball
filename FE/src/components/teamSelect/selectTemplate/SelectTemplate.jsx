@@ -9,11 +9,10 @@ const SelectTemplate = () => {
     const [teamName, setTeamName] = useState([]);
     const [test,setTest] = useState([]);
     const [desc, setDesc] = useState("참가할 게임을 선택하세요.");
-    const { response, loading, error } = useFetch('/api/intro');
+    const { response, loading, error } = useFetch('http://52.78.180.217/api/intro');
 
     useEffect(() => {
         if (loading) return;
-        console.log(error, response);
         setTeamName(response.teams.map(v => v.name));
         let boolean = ["true","true","true","true","true","false"].sort(() => {
             return Math.random() - Math.random();
