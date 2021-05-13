@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { cssFlexAlignCenter } from "../../../utilComponent/CommonStyledCSS";
 import Icon from "./Icon";
 
 const BaseballStadium = () => (
@@ -86,9 +85,9 @@ export default BaseballStadium;
 // --- Styled Components ---
 const StyledBaseballStadium = styled.div`
     position:absolute;
-    left: 18%;
+    z-index:-1;
+    /* left: 18%;
     top:2%;
-    /* ${cssFlexAlignCenter};
     margin: auto 0;
     height: inherit; */
 `;

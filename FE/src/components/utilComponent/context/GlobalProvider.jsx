@@ -1,18 +1,41 @@
-import { createContext, useState, useMemo } from 'react'
+import { createContext, useReducer, useMemo } from 'react';
+
+const globalInitialState = {
+    clickLocation: "",
+    loginModalVisible: false,
+};
+
+const globalReducer = (state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case 'clickLocationChange':
+            return {
+                ...state,
+                clickLocation: payload,
+            };
+        case 'loginModalVisibleControl':
+            return {
+                ...state,
+                loginModalVisible: !state.loginModalVisible,
+            };
+        default:    throw new Error();
+    }
+};
 
 export const GlobalContext = createContext({
-    clickLocation: null,
-    setClickLocation: () => {}
+    globalState: null,
+    globalDispatch: () => {},
 });
 
-const GlobalProvider = ({children}) => {
-    const [clickLocation, setClickLocation] = useState();
-    const value = useMemo(() => ({clickLocation, setClickLocation}), [clickLocation, setClickLocation]);
-    return(
+const GlobalProvider = ({ children }) => {
+    const [globalState, globalDispatch] = useReducer(globalReducer, globalInitialState);
+    const value = useMemo(() => ({ globalState, globalDispatch }), [globalState, globalDispatch]);
+    return (
         <GlobalContext.Provider value={value}>
             {children}
         </GlobalContext.Provider>
-    )
-}
+    );
+};
 
 export default GlobalProvider;

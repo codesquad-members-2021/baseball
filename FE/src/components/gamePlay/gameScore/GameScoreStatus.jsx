@@ -1,31 +1,15 @@
 import styled from 'styled-components';
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { PostsContext } from "../GamePlay";
 
 const ScoreStatus = ({ data = true}) => {
-    const { team } = useContext(PostsContext);
-    const options = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"user" : team.home, "opponent" : team.away})
-    }
-    const fetchData = async (url) => {
-        const res = await fetch(url, options);
-        const result = await res.json();
-        console.log(result)
-        return result;
-    };
-    useEffect(() => {
-        console.log("fetch요청 갔다!")
-        fetchData("/api/games/type-away");
-    }, [])
-
+    const { playerList } = useContext(PostsContext);
     return (
-        data && (
+        data && playerList && (
             <StyledScoreStatus>
                 <Status>
                     <StatusItem type="team">
-                        <span>{team.away}</span>
+                        <span>{playerList.opponent.team_name}</span>
                         <span className="score">1</span>
                     </StatusItem>
                 </Status>
@@ -33,7 +17,7 @@ const ScoreStatus = ({ data = true}) => {
                 <Status>
                     <StatusItem type="team">
                         <span className="score">2</span>
-                        <span>{team.home}</span>
+                        <span>{playerList.user.team_name}</span>
                     </StatusItem>
                     <IsPlayer>Player</IsPlayer>
                 </Status>
