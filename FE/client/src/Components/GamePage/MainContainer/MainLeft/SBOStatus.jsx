@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 const SBOStatus = () => {
   const { currentSBData } = useContext(GamePageContext);
+
   return (
     <SBOBoard>
       <CircleListDiv>
         <SBOspan>S</SBOspan>
         <CircleList>
-          {Array.from({ length: 2 }).map((_, index) => (
+          {currentSBData && Array.from({ length: 2 }).map((_, index) => (
             <SBOCircle
               color="yellow"
               background={currentSBData && currentSBData.strike === index + 1}
@@ -20,7 +21,7 @@ const SBOStatus = () => {
       <CircleListDiv>
         <SBOspan>B</SBOspan>
         <CircleList>
-          {Array.from({ length: 3 }).map((_, index) => (
+          {currentSBData && Array.from({ length: 3 }).map((_, index) => (
             <SBOCircle
               color="green"
               background={currentSBData && currentSBData.ball === index + 1}

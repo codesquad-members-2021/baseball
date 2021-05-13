@@ -12,6 +12,7 @@ import { PageContext } from "Components/Page";
 export const GamePageContext = createContext();
 
 const GamePage = ({ userState }) => {
+  const { socket } = useContext(PageContext);
   const [teamInfoState, fetchTeamInfoState] = useAsync(
     API.get.scores,
     [],
@@ -35,12 +36,11 @@ const GamePage = ({ userState }) => {
   const [sequenceCount, setSequenceCount] = useState(0); //몇번째 선수가 뛰고있는지
   const [roundCount, setRoundCount] = useState(1); //몇회인지 카운트
   const [currentBaseData, setCurrentBaseData] = useState([]); //Base에 누구누구 있는지
-  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0 });
-
-  const { socket } = useContext(PageContext);
+  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0, out: 0 });
+  const [currentPlayAction, setCurrentPlayAction] = useState(''); ////strike, ball, hit;
 
   const onPitch = () => {
-    socket.emit("pitchClicked", "퓟취");
+    socket.emit('pitch', { gameId: userState.gameId });
   };
 
   useEffect(() => {
@@ -91,6 +91,7 @@ const GamePage = ({ userState }) => {
         sequenceCount,
         roundCount,
         currentSBData,
+        currentPlayAction,
         onPitch,
       }}
     >

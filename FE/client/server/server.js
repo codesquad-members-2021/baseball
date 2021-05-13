@@ -35,9 +35,14 @@ io.on("connection", (socket) => {
     if (isMatchGame) startGame({ gameId });
   });
 
-  socket.on("pitchClicked", (msg) => {
-    console.log(msg);
-    io.to("room1").emit("pitchResult", randomPitch());
+  socket.on('pitch', ({ gameId }) => {
+
+    const matchCombinedData = getMatchData({ gameId });
+    const playAction = randomPitch();
+
+    matchCombinedData.forEach((user) => {
+      user.socket.emit('pitchResult', { playAction });
+    });
   });
 
   socket.on("disconnect", () => {
@@ -57,19 +62,7 @@ http.listen(port, () => {
 });
 
 function startGame({ gameId }) {
-  const matchTeams = baseball.games.filter((game) => game.gameId === gameId);
-  const matchUsers = baseball.users.filter((user) =>
-    matchTeams.find((matchTeam) => {
-      return user.playerId === matchTeam.playerId;
-    })
-  );
-
-  const matchCombinedData = matchUsers.map((user) => ({
-    ...matchTeams.find((game) => {
-      return user.playerId === game.playerId;
-    }),
-    ...user,
-  }));
+  const matchCombinedData = getMatchData({ gameId });
 
   matchCombinedData.forEach((user) => {
     user.socket.emit("matchingGame", {
@@ -78,6 +71,22 @@ function startGame({ gameId }) {
       teamKind: user.teamKind,
     });
   });
+}
+
+const getMatchData = ({ gameId }) => {
+  const matchTeams = baseball.games.filter((game) => game.gameId === gameId);
+  const matchUsers = baseball.users.filter((user) =>
+    matchTeams.find((matchTeam) => {
+      return user.playerId === matchTeam.playerId;
+    })
+  );
+
+  return matchUsers.map((user) => ({
+    ...matchTeams.find((game) => {
+      return user.playerId === game.playerId;
+    }),
+    ...user,
+  }));
 }
 
 const randomPitch = () => {

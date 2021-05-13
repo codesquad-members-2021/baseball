@@ -4,15 +4,14 @@ import API from "utils/API";
 import useAsync from "utils/hooks/useAsync";
 import { GamePageContext } from "Components/GamePage";
 import PlayerScoreTable from "./PlayerScoreTable";
-import { GAME1 } from "utils/mockDatas";
 
 const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
-  const { teamState: { home, away } } = useContext(GamePageContext);
-  // const [gameRecodes, fetchGameRecodes] = useAsync(API.get.records, [], true);
-  const gameRecodes = { loading: null, error: null, data: GAME1 };
+  const { teamState: { gameId, home, away } } = useContext(GamePageContext);
+  const [gameRecodes, fetchGameRecodes] = useAsync(API.get.records, [], true);
 
   useEffect(() => {
     if (bottom) return;
+    fetchGameRecodes(gameId);
   }, [bottom]);
 
   return (

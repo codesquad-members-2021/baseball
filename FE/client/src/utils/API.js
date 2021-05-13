@@ -6,7 +6,7 @@ const API = {
     teams: () => customFetch(`${END_POINT}/teams`),
     games: () => customFetch(`${END_POINT}/games`),
     scores: (gameId) => customFetch(`${END_POINT}/games/${gameId}/scores`),
-    records: (teamId) => customFetch(`${END_POINT}/teams/${teamId}/records`),
+    records: (gameId) => customFetch(`${END_POINT}/games/${gameId}/members`),
     inGameDatas: (gameId) =>
       customFetch(`${END_POINT}/games/${gameId}/members`),
   },
