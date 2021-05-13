@@ -18,7 +18,7 @@ class GameCell: UICollectionViewCell {
     }
     
     func configureCell(game: Game) {
-        gameIdLabel.text = "Game \(game.id)"
+        gameIdLabel.text = GameViewModel.formatGameID(id: game.id)
         homeTeamLabel.text = game.home
         awayTeamLabel.text = game.away
     }

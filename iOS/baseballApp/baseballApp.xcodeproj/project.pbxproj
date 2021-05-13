@@ -31,9 +31,17 @@
 		76619ABC2643A355004D31C6 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619ABB2643A355004D31C6 /* GameViewModel.swift */; };
 		76619AC22643AE83004D31C6 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619AC12643AE83004D31C6 /* GameCell.swift */; };
 		76619B062644EE37004D31C6 /* StadiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76619B052644EE37004D31C6 /* StadiumView.swift */; };
+		76855AC7264BE17600068E77 /* BallCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76855AC6264BE17600068E77 /* BallCountView.swift */; };
 		7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */; };
+		76A7E3A6264CB9010028B08A /* PlayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A7E3A5264CB9010028B08A /* PlayInfo.swift */; };
+		76A7E3A8264CBD510028B08A /* PlayDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A7E3A7264CBD510028B08A /* PlayDTO.swift */; };
+		76A7E3AA264CC4B60028B08A /* PlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A7E3A9264CC4B60028B08A /* PlayViewModel.swift */; };
+		76A7E3AC264CD2F20028B08A /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A7E3AB264CD2F20028B08A /* Constant.swift */; };
+		76A7E3EA264CF9B50028B08A /* BallCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A7E3E9264CF9B50028B08A /* BallCount.swift */; };
 		76AA2694264A73F500600D45 /* ScoreStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76AA2693264A73F500600D45 /* ScoreStoryboard.storyboard */; };
 		76AF2BC4264B7D9900DC7782 /* GameViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */; };
+		76AF2BC7264BA5F600DC7782 /* BallListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76AF2BC5264BA5F600DC7782 /* BallListCell.swift */; };
+		76AF2BC8264BA5F600DC7782 /* BallListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76AF2BC6264BA5F600DC7782 /* BallListCell.xib */; };
 		F36C7CA9C029C0FB3B9C3E12 /* Pods_baseballApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D440DD687E5153149898B6E /* Pods_baseballApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,9 +97,17 @@
 		76619ABB2643A355004D31C6 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		76619AC12643AE83004D31C6 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		76619B052644EE37004D31C6 /* StadiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadiumView.swift; sourceTree = "<group>"; };
+		76855AC6264BE17600068E77 /* BallCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCountView.swift; sourceTree = "<group>"; };
 		7691F9A426491ADB00C56E11 /* PlayStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PlayStoryboard.storyboard; sourceTree = "<group>"; };
+		76A7E3A5264CB9010028B08A /* PlayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayInfo.swift; sourceTree = "<group>"; };
+		76A7E3A7264CBD510028B08A /* PlayDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDTO.swift; sourceTree = "<group>"; };
+		76A7E3A9264CC4B60028B08A /* PlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewModel.swift; sourceTree = "<group>"; };
+		76A7E3AB264CD2F20028B08A /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		76A7E3E9264CF9B50028B08A /* BallCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCount.swift; sourceTree = "<group>"; };
 		76AA2693264A73F500600D45 /* ScoreStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScoreStoryboard.storyboard; sourceTree = "<group>"; };
 		76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelType.swift; sourceTree = "<group>"; };
+		76AF2BC5264BA5F600DC7782 /* BallListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallListCell.swift; sourceTree = "<group>"; };
+		76AF2BC6264BA5F600DC7782 /* BallListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BallListCell.xib; sourceTree = "<group>"; };
 		9D440DD687E5153149898B6E /* Pods_baseballApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDE39EEDB49C05D5593DD150 /* Pods-baseballAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballAppTests.debug.xcconfig"; path = "Target Support Files/Pods-baseballAppTests/Pods-baseballAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F2922330279C4AAA4D13C84B /* Pods-baseballApp-baseballAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballApp-baseballAppUITests.release.xcconfig"; path = "Target Support Files/Pods-baseballApp-baseballAppUITests/Pods-baseballApp-baseballAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +174,7 @@
 				7650A1B02640E3A9006C1E5F /* Assets.xcassets */,
 				7650A1B22640E3A9006C1E5F /* LaunchScreen.storyboard */,
 				7650A1B52640E3A9006C1E5F /* Info.plist */,
+				76A7E3AB264CD2F20028B08A /* Constant.swift */,
 			);
 			path = baseballApp;
 			sourceTree = "<group>";
@@ -204,6 +221,7 @@
 			children = (
 				76619ABB2643A355004D31C6 /* GameViewModel.swift */,
 				76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */,
+				76A7E3A9264CC4B60028B08A /* PlayViewModel.swift */,
 				71310C7B264CC42F005FCF5A /* ScoreViewModel.swift */,
 			);
 			path = ViewModel;
@@ -224,7 +242,13 @@
 			children = (
 				76619AC12643AE83004D31C6 /* GameCell.swift */,
 				76619B052644EE37004D31C6 /* StadiumView.swift */,
+
+				76AF2BC5264BA5F600DC7782 /* BallListCell.swift */,
+				76AF2BC6264BA5F600DC7782 /* BallListCell.xib */,
+				76855AC6264BE17600068E77 /* BallCountView.swift */,
+
 				71310C7D264CE262005FCF5A /* ScoreCell.swift */,
+
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +276,8 @@
 				7650A1E6264138A0006C1E5F /* Player.swift */,
 				7650A1E82641418B006C1E5F /* Record.swift */,
 				76619AA626437476004D31C6 /* Game.swift */,
+				76A7E3A5264CB9010028B08A /* PlayInfo.swift */,
+				76A7E3E9264CF9B50028B08A /* BallCount.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -287,7 +313,11 @@
 			isa = PBXGroup;
 			children = (
 				76619AB326439866004D31C6 /* GameDTO.swift */,
+
+				76A7E3A7264CBD510028B08A /* PlayDTO.swift */,
+
 				71310C79264CBC27005FCF5A /* ScoreDTO.swift */,
+
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -427,6 +457,7 @@
 				7691F9A526491ADB00C56E11 /* PlayStoryboard.storyboard in Resources */,
 				7650A1B42640E3A9006C1E5F /* LaunchScreen.storyboard in Resources */,
 				7650A1B12640E3A9006C1E5F /* Assets.xcassets in Resources */,
+				76AF2BC8264BA5F600DC7782 /* BallListCell.xib in Resources */,
 				7650A1AF2640E3A8006C1E5F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -557,21 +588,33 @@
 			files = (
 				7650A1E326411A6B006C1E5F /* PlayViewController.swift in Sources */,
 				76619AAA264376D4004D31C6 /* Endpoint.swift in Sources */,
+				76AF2BC7264BA5F600DC7782 /* BallListCell.swift in Sources */,
 				7650A1A82640E3A8006C1E5F /* AppDelegate.swift in Sources */,
 				76AF2BC4264B7D9900DC7782 /* GameViewModelType.swift in Sources */,
 				76619AC22643AE83004D31C6 /* GameCell.swift in Sources */,
+				76A7E3EA264CF9B50028B08A /* BallCount.swift in Sources */,
 				7650A1AA2640E3A8006C1E5F /* SceneDelegate.swift in Sources */,
 				7650A1E126411A51006C1E5F /* HomeViewController.swift in Sources */,
 				76619ABC2643A355004D31C6 /* GameViewModel.swift in Sources */,
 				76619AB426439866004D31C6 /* GameDTO.swift in Sources */,
 				7650A1E92641418B006C1E5F /* Record.swift in Sources */,
 				76619AB2264385BB004D31C6 /* APIService.swift in Sources */,
+				76A7E3AA264CC4B60028B08A /* PlayViewModel.swift in Sources */,
+				76A7E3A8264CBD510028B08A /* PlayDTO.swift in Sources */,
+				76A7E3AC264CD2F20028B08A /* Constant.swift in Sources */,
 				7650A1E7264138A0006C1E5F /* Player.swift in Sources */,
+
+				76A7E3A6264CB9010028B08A /* PlayInfo.swift in Sources */,
+				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
+				76619AA726437476004D31C6 /* Game.swift in Sources */,
+				76855AC7264BE17600068E77 /* BallCountView.swift in Sources */,
+
 				71310C7A264CBC27005FCF5A /* ScoreDTO.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 				76619AA726437476004D31C6 /* Game.swift in Sources */,
 				71310C7C264CC42F005FCF5A /* ScoreViewModel.swift in Sources */,
 				71310C7E264CE262005FCF5A /* ScoreCell.swift in Sources */,
+
 				76619B062644EE37004D31C6 /* StadiumView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

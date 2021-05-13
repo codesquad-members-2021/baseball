@@ -27,12 +27,13 @@ class HomeViewController: UIViewController {
     }
     
     private func setupCollectionViewDelegate() {
-        mainCollectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
+        mainCollectionView.rx.modelSelected(Game.self)
+            .subscribe(onNext: { [weak self] game in
                 let tabBarController = self?.storyboard?.instantiateViewController(identifier: "TabBarController")
+                let playViewController = tabBarController?.children.first as! PlayViewController
+                playViewController.game = game
                 self?.present(tabBarController!, animated: true, completion: nil)
             }, onError: { error in
-                
                 print(error.localizedDescription)
             })
             .disposed(by: disposeBag)
