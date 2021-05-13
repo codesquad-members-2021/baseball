@@ -65,7 +65,7 @@ class GameRepositoryTest {
     @DisplayName("생성된 게임의 초기상태의 occupied는 false여야 합니다")
     void testOccupation() {
         Game game = createGame(GAME_TITLE);
-        assertThat(game.isAvailable()).isTrue();
+        assertThat(game.isJoinable()).isTrue();
     }
 
     @Test

@@ -32,7 +32,7 @@ create table game
     current_strike_count int         not null,
     current_out_count    int         not null,
     current_ball_count   int         not null,
-    is_occupied          bool        not null,
+    game_occupier        varchar(30) references users (user_id),
     first_base           int references player (id),
     second_base          int references player (id),
     third_base           int references player (id)

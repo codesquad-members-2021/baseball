@@ -7,6 +7,7 @@ import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
 import com.codesquad.baseball.domain.game.pitch.PitchResult;
 import com.codesquad.baseball.domain.team.TeamType;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
+import com.codesquad.baseball.exceptions.game.NotYourGameException;
 import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class Game {
 
     public static final int NO_PLAYER = -1;
+    public static final String NO_USER = "NO_ONE";
     private static final int MAXIMUM_STRIKE_COUNT = 3;
     private static final int MAXIMUM_OUT_COUNT = 3;
     private static final int MAXIMUM_BALL_COUNT = 4;
@@ -33,7 +35,7 @@ public class Game {
     private int currentStrikeCount;
     private int currentOutCount;
     private int currentBallCount;
-    private boolean isOccupied;
+    private String gameOccupier;
     private Set<TeamParticipatingInGame> teams = new HashSet<>();
     private int firstBase;
     private int secondBase;
@@ -53,7 +55,7 @@ public class Game {
         this.currentStrikeCount = builder.currentStrikeCount;
         this.currentOutCount = builder.currentOutCount;
         this.currentBallCount = builder.currentBallCount;
-        this.isOccupied = builder.isOccupied;
+        this.gameOccupier = builder.gameOccupier;
         this.teams.add(builder.homeTeam);
         this.teams.add(builder.awayTeam);
         this.firstBase = builder.firstBase;
@@ -64,7 +66,7 @@ public class Game {
     public static Game createGame(String gameTitle, TeamParticipatingInGame homeTeam, TeamParticipatingInGame awayTeam) {
         Game game = new Builder()
                 .gameTitle(gameTitle)
-                .isOccupied(false)
+                .gameOccupier(NO_USER)
                 .currentStrikeCount(0)
                 .currentBallCount(0)
                 .currentOutCount(0)
@@ -79,8 +81,8 @@ public class Game {
         return game;
     }
 
-    public void joinGame() {
-        isOccupied = true;
+    public void joinGame(String userId) {
+        gameOccupier = userId;
     }
 
     public List<History> showHistoriesOfCurrentInning() {
@@ -424,8 +426,8 @@ public class Game {
         this.isTop = true;
     }
 
-    public boolean isAvailable() {
-        return !isOccupied;
+    public boolean isJoinable() {
+        return gameOccupier.equals(NO_USER);
     }
 
     public boolean isSameTitle(String title) {
@@ -433,12 +435,15 @@ public class Game {
     }
 
     public boolean isOccupied() {
-        return isOccupied;
+        return !isJoinable();
     }
 
-    public void verifyGameIsPlayable() {
-        if (!isOccupied) {
+    public void verifyGameIsPlayable(String userId) {
+        if (!isOccupied()) {
             throw new GameIsNotStartedException();
+        }
+        if (!gameOccupier.equals(userId)) {
+            throw new NotYourGameException();
         }
     }
 
@@ -512,20 +517,6 @@ public class Game {
         return innings;
     }
 
-    @Override
-    public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", gameTitle='" + gameTitle + '\'' +
-                ", isTop=" + isTop +
-                ", currentStrikeCount=" + currentStrikeCount +
-                ", currentOutCount=" + currentOutCount +
-                ", currentBallCount=" + currentBallCount +
-                ", isOccupied=" + isOccupied +
-                ", teams=" + teams +
-                '}';
-    }
-
     public static class Builder {
         private Integer id;
         private String gameTitle;
@@ -533,7 +524,7 @@ public class Game {
         private int currentStrikeCount;
         private int currentOutCount;
         private int currentBallCount;
-        private boolean isOccupied;
+        private String gameOccupier;
         private TeamParticipatingInGame homeTeam;
         private TeamParticipatingInGame awayTeam;
         private int firstBase;
@@ -570,8 +561,8 @@ public class Game {
             return this;
         }
 
-        public Builder isOccupied(boolean value) {
-            isOccupied = value;
+        public Builder gameOccupier(String value) {
+            gameOccupier = value;
             return this;
         }
 

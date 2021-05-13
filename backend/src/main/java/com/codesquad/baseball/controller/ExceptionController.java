@@ -3,6 +3,7 @@ package com.codesquad.baseball.controller;
 import com.codesquad.baseball.dto.etc.ErrorDTO;
 import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
+import com.codesquad.baseball.exceptions.game.NotYourGameException;
 import com.codesquad.baseball.exceptions.notfound.*;
 import com.codesquad.baseball.exceptions.oauth.*;
 import org.springframework.http.HttpStatus;
@@ -50,4 +51,11 @@ public class ExceptionController {
     public ErrorDTO handleInvalidTokenException(InvalidTokenException exception) {
         return new ErrorDTO(HttpStatus.CONFLICT, exception.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(NotYourGameException.class)
+    public ErrorDTO handleNotYourGameException(NotYourGameException exception) {
+        return new ErrorDTO(HttpStatus.FORBIDDEN, exception.getMessage());
+    }
+
 }

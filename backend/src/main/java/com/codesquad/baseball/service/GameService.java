@@ -51,12 +51,12 @@ public class GameService {
     }
 
     @Transactional
-    public void joinIn(int gameId) {
+    public void joinIn(int gameId, String userId) {
         Game game = findGame(gameId);
         if (game.isOccupied()) {
             throw new GameAlreadyOccupiedException(gameId);
         }
-        game.joinGame();
+        game.joinGame(userId);
         gameRepository.save(game);
     }
 
@@ -83,9 +83,9 @@ public class GameService {
     }
 
     @Transactional
-    public PitchDTO doPitch(int gameId) {
+    public PitchDTO doPitch(int gameId, String userId) {
         Game game = findGame(gameId);
-        game.verifyGameIsPlayable();
+        game.verifyGameIsPlayable(userId);
         PitchResult pitchResult = game.pitch(PitchRandomTable.rollDice());
         gameRepository.save(game);
         return createPitchDTO(game, pitchResult);
