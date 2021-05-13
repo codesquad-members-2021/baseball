@@ -4,6 +4,7 @@ import { fitToContainer, drawField } from "utils/canvasUtils";
 import RunnerImage from "./RunnerImage";
 import PitchButton from "./PitchButton";
 import { GamePageContext } from "Components/GamePage";
+import ReadyImage from "./ReadyImage";
 
 const BaseballField = () => {
   const {
@@ -20,10 +21,14 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage base="first" />
-      <RunnerImage base="second" />
-      <RunnerImage base="third" />
-      <RunnerImage base="fourth" />
+      <RunnerImage base='first' />
+      <RunnerImage base='second' />
+      <RunnerImage base='third' />
+      <RunnerImage base='fourth' />
+      <ReadyImage base='first' />
+      <ReadyImage base='second' />
+      <ReadyImage base='third' />
+      <ReadyImage base='fourth' />
       <PitchButton />
     </BaseballFieldWrapper>
   );
