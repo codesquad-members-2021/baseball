@@ -15,8 +15,6 @@ public class ProgressDTO {
     private List<Player> firstBase;
     private List<Player> secondBase;
     private List<Player> thirdBase;
-    //private Player pitcher;
-    //private Player batter;
     private String pitcher;
     private String batter;
     private int strike;
