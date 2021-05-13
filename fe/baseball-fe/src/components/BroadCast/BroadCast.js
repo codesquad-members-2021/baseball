@@ -44,7 +44,7 @@ function BroadCast({ className }) {
 export default BroadCast;
 
 const StyledBroadCast = styled.div`
-  box-shadow: 0 0 0 1px black inset;
+  /* box-shadow: 0 0 0 1px black inset; */
   background-color: black;
   margin-right: ${props => '-' + String(props.scrollWidth) + 'px'};
   overflow-y: ${props => props.mouseOver ? 'scroll' : 'hidden'};

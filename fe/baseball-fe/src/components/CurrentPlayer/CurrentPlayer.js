@@ -36,7 +36,7 @@ function CurrentPlayer({ className }) {
 export default CurrentPlayer;
 
 const StyledCurrentPlayer = styled.div`
-  box-shadow: 0 0 0 1px black inset;
+  /* box-shadow: 0 0 0 1px black inset; */
   padding: 1rem;
 
   .pitcher {

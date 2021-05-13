@@ -44,7 +44,7 @@ function BallCount() {
 export default BallCount;
 
 const StyledBallCount = styled.div`
-  box-shadow: 0 0 0 1px red inset;
+  /* box-shadow: 0 0 0 1px red inset; */
   align-self: flex-start;
 `;
 

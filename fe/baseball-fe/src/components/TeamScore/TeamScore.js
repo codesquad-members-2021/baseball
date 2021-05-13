@@ -31,7 +31,7 @@ function TeamScore({ className }) {
 export default TeamScore;
 
 const StyledTeamScore = styled.div`
-  box-shadow: 0 0 0 1px black inset;
+  /* box-shadow: 0 0 0 1px black inset; */
   display: flex;
   flex-direction: column;
   align-items: center;

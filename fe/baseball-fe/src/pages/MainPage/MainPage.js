@@ -23,7 +23,7 @@ export default MainPage;
 const StyledMainPage = styled.div`
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 0 1px blue inset;
+  /* box-shadow: 0 0 0 1px blue inset; */
   background-color: black;
   display: flex;
   justify-content: center;

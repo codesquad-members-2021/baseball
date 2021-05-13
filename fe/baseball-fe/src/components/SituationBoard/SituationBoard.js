@@ -34,7 +34,7 @@ function SituationBoard({ className }) {
 export default SituationBoard;
 
 const StyledSituationBoard = styled.div`
-  box-shadow: 0 0 0 1px black inset;
+  /* box-shadow: 0 0 0 1px black inset; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,7 +46,7 @@ const StyledSituationBoard = styled.div`
   overflow: hidden;
   
   .inning {
-    box-shadow: 0 0 0 1px red inset;
+    /* box-shadow: 0 0 0 1px red inset; */
     position: absolute;
     align-self: flex-end;
     width: 100px;

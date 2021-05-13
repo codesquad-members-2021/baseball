@@ -125,7 +125,7 @@ const StyledGamePage = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 0 1px green inset;
+  /* box-shadow: 0 0 0 1px green inset; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
