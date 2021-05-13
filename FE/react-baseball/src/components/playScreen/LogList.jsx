@@ -21,17 +21,14 @@ const LogList = () => {
     setLogArr((logArr) => [...logArr, ballCnt]);
     if (ballCnt.HitInfo === 'O') {
       // console.log('현재 타자!', currHitter.id, currHitter);
-      console.log('토탈!', totalOutCount);
+      setBatOrder((batOrder) => batOrder + 1);
+      setCurrHitter({ ...currHitter, out: currHitter.out + 1 });
+      setCurrHitter(myTeam[batOrder]);
       setTotalOutCount((totalOutCount) => totalOutCount + 1);
-      console.log('이제 하나씩 올렷다', totalOutCount);
     }
     if (ballCnt.HitInfo === 'H') {
-      //한박자 느린 Hitter 변경
-      //아웃과 안타시 타자 변경
-      console.log('🔥현재나의타자정보번호', currHitter, 'BBBb', batOrder);
-      setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
       setBatOrder((batOrder) => batOrder + 1);
-      console.log('batOrder 바뀌지않앗겟지', batOrder);
+      setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
       //myTeam으로 가져올지 homeTeam으로 가져올지 모그렛음
       setCurrHitter(myTeam[batOrder]);
       console.log('⭐️현재나의타자정보번호', currHitter, 'BBB', batOrder);
@@ -69,7 +66,7 @@ const LogList = () => {
   return (
     <LogListDiv>
       <LogBox>
-        <LogHitter>7번타자 류현진</LogHitter>
+        <LogHitter>7번타자 {currHitter?.name}</LogHitter>
         <LogCards />
       </LogBox>
     </LogListDiv>
