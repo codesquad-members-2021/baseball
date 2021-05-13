@@ -8,8 +8,8 @@ const PlayInning = (props) => {
     setCurrInning,
     totalOutCount,
     setTotalOutCount,
-    isTop,
-    toggleIsTop,
+    inningTop,
+    toggleinningTop,
     isDefense,
     setIsDefense,
   } = useContext(GlobalContext);
@@ -27,7 +27,7 @@ const PlayInning = (props) => {
   return (
     <PlayInningDiv>
       <Span>
-        {currInning}회{isTop ? '초' : '말'} {isDefense ? '수비' : '공격'}
+        {currInning}회{inningTop ? '초' : '말'} {isDefense ? '수비' : '공격'}
       </Span>
     </PlayInningDiv>
   );

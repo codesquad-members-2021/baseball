@@ -3,26 +3,29 @@ import styled from 'styled-components';
 import { GlobalContext } from '../../App';
 
 const CurrentPlayer = () => {
-  const { isHome, myTeam, counterTeam } = useContext(GlobalContext);
-  const myPitcher = myTeam.filter((player) => player.pitcher === true)[0];
-  const counterPitcher = counterTeam.filter(
+  const {
+    homeTeam,
+    awayTeam,
+    inningTop,
+    currPitcher,
+    setCurrPitcher,
+  } = useContext(GlobalContext);
+
+  const homeTeamPitcher = homeTeam.players.filter(
     (player) => player.pitcher === true
   )[0];
+  const awayTeamPitcher = awayTeam.players.filter(
+    (player) => player.pitcher === true
+  )[0];
+
+  setCurrPitcher(inningTop ? homeTeamPitcher : awayTeamPitcher);
 
   return (
     <CurrentPlayerDiv>
       <PlayerTag>PITCHER</PlayerTag>
       <Player>
-        {isHome ? (
-          <PlayerName>{myPitcher?.name}</PlayerName>
-        ) : (
-          <PlayerName>{counterPitcher?.name}</PlayerName>
-        )}
-        {isHome ? (
-          <PitcherNum>#{myPitcher?.backNumber}</PitcherNum>
-        ) : (
-          <PitcherNum>#{counterPitcher?.backNumber}</PitcherNum>
-        )}
+        <PlayerName>{currPitcher?.name}</PlayerName>
+        <PitcherNum>#{currPitcher?.backNumber}</PitcherNum>
       </Player>
       <PlayerTag>HITTER</PlayerTag>
       <Player>
