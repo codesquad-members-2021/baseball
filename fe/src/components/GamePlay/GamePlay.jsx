@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import Header from 'components/GamePlay/playHeader/Header';
 import Main from 'components/GamePlay/playScreen/Main';
-import qs from 'qs';
-// 쿼리값 읽고 데이터 페치 받은다음에 뿌려준다.
+
 export const gamePlayContext = React.createContext();
 
 const GamePlay = ({ response }) => {
@@ -27,11 +26,9 @@ const GamePlay = ({ response }) => {
     O: 0,
     isHit: false,
   };
-
-  // const [homePrevPlayer, setHomePrevPlayer] = useState({});
-  // const [awayPrevPlayer, setAwayPrevPlayer] = useState([{}]);
-
+  // { count: 0, 가 없어지고 homeCount : 0 , ballCount: 0 } 으로 저장하고 리셋안함 ( )
   const getDeepCopy = (original) => JSON.parse(JSON.stringify(original));
+
   const ballCountReducer = (state, action) => {
     const deepCopied = getDeepCopy(state);
     deepCopied.count += 1;
@@ -54,7 +51,7 @@ const GamePlay = ({ response }) => {
         deepCopied.type = '안타';
         return deepCopied;
       case 'resetRoundBallCount':
-        return { ...initialBallCount, count: state.count };
+        return { ...initialBallCount, count: 0 };
       case 'runToBase':
         return { ...initialBallCount, O: state.O, count: state.count };
       case 'threeStrike':
@@ -76,6 +73,32 @@ const GamePlay = ({ response }) => {
     history: [ballCountState],
   });
 
+  const saveDataReducer = (state, action) => {
+    switch (action.payload) {
+      case 'saveHomeCount':
+        return { ...state, homeCount: state.homeCount + ballCountState.count };
+      case 'saveAwayCount':
+        return { ...state, awayCount: state.awayCount + ballCountState.count };
+      case 'saveHomeScore':
+        return { ...state, homeScore: state.homeScore + 1 };
+      case 'saveAwayScore':
+        return { ...state, awayScore: state.awayScore + 1 };
+      default:
+    }
+  };
+
+  const [saveDataState, dispatchSaveData] = useReducer(saveDataReducer, {
+    homeCount: 0,
+    homeScore: 0,
+    awayCount: 0,
+    awayScore: 0,
+  });
+
+  console.log(saveDataState);
+
+  // const [homePrevPlayer, setHomePrevPlayer] = useState({});
+  // const [awayPrevPlayer, setAwayPrevPlayer] = useState([{}]);
+
   // useEffect(() => {}, [ballCount]);
   useEffect(() => {
     setIsAttacking(away.team_info.selected);
@@ -89,8 +112,11 @@ const GamePlay = ({ response }) => {
 
   useEffect(() => {
     if (ballCountState.O === 3) {
-      dispatchBallCount({ payload: 'resetRoundBallCount' });
+      const saveDataAction = isAttacking ? 'saveAwayCount' : 'saveHomeCount';
+      dispatchSaveData({ payload: saveDataAction });
       setRound((round) => round + 1);
+      setIsAttacking((state) => !state);
+      dispatchBallCount({ payload: 'resetRoundBallCount' });
     }
   }, [ballCountState.O]);
 
@@ -108,6 +134,7 @@ const GamePlay = ({ response }) => {
         away,
         ballCountState,
         dispatchBallCount,
+        saveDataState,
       }}
     >
       <Header />
