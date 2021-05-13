@@ -1,43 +1,42 @@
-import { useContext } from 'react'
-import styled, { keyframes } from 'styled-components'
-import { IoIosBaseball } from 'react-icons/io'
+import { useContext } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { IoIosBaseball } from 'react-icons/io';
 
-import { gamePlayContext } from 'pages/Game'
-import BallCount from 'components/GamePlay/playScreen/BallCount'
-import Span from 'components/common/Span'
+import { gamePlayContext } from 'pages/Game';
+import BallCount from 'components/GamePlay/playScreen/BallCount';
 
 const Screen = () => {
-  const { dispatchBallCount } = useContext(gamePlayContext)
-  
+  const { dispatchBallCount } = useContext(gamePlayContext);
+
   const chooseNumber = () => Math.floor(Math.random() * 4);
 
-  const getAction = (number) =>{
+  const getAction = (number) => {
     return {
       0: 'strike',
       1: 'ball',
       2: 'out',
-      3: 'hit'
-    }[number]
-  }
+      3: 'hit',
+    }[number];
+  };
 
   const handleClickPitch = () => {
-    const action = getAction(chooseNumber())
-    dispatchBallCount({payload : action})
-  }
-  
+    const action = getAction(chooseNumber());
+    dispatchBallCount({ payload: action });
+  };
+
   return (
     <StyledScreen>
-      <ScreenField src='field.svg' alt='field' />
+      <ScreenField src="field.svg" alt="field" />
       <ScreenRound>2회 초 수비</ScreenRound>
       <PitchButton onClick={handleClickPitch}>
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
     </StyledScreen>
-  )
-}
+  );
+};
 
-export default Screen
+export default Screen;
 
 const StyledScreen = styled.section`
   display: flex;
@@ -50,13 +49,13 @@ const StyledScreen = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-`
+`;
 
 const ScreenField = styled.img`
   height: fit-content;
   width: 27%;
   transform: rotate(45deg);
-`
+`;
 const ScreenRound = styled.span`
   font-size: ${({ theme }) => `${theme.fontSizes.BASE}rem`};
   font-weight: ${({ theme }) => `${theme.weights.BASE}`};
@@ -64,7 +63,7 @@ const ScreenRound = styled.span`
   position: absolute;
   right: 2%;
   top: 4%;
-`
+`;
 const rotateAnimation = keyframes`
 0%{
   transform: rotate(0deg) scale(1);
@@ -75,7 +74,7 @@ const rotateAnimation = keyframes`
 100%{
   transform: rotate(360deg) scale(1);
 }
-`
+`;
 
 const PitchButton = styled.button`
   height: 5rem;
@@ -93,4 +92,4 @@ const PitchButton = styled.button`
       animation: ${rotateAnimation} 4s linear infinite;
     }
   }
-`
+`;
