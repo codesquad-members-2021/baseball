@@ -3,8 +3,9 @@ import RxSwift
 
 class ScoreViewController: UIViewController {
         
+    @IBOutlet weak var teamSegment: UISegmentedControl!
+    @IBOutlet weak var scoreTableView: UITableView!
     @IBOutlet var homeTeamScores: [UILabel]!
-    
     @IBOutlet var awayTeamScores: [UILabel]!
     
     private let disposeBag = DisposeBag()
@@ -13,6 +14,7 @@ class ScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        setupSegmentControll()
     }
     
     func bindViewModel() {
@@ -28,6 +30,11 @@ class ScoreViewController: UIViewController {
                 print(error)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.getHomePlayerInfo()
+            .bind(to: scoreTableView.rx.items(cellIdentifier: ScoreCell.identifier, cellType: ScoreCell.self)) { _, player, cell in
+                cell.configure(player)
+            }.disposed(by: disposeBag)
     }
 }
 
@@ -61,4 +68,31 @@ private extension ScoreViewController {
         }
         team[team.endIndex-1].text = "\(total)"
     }
+    
+    private func setupSegmentControll() {
+        teamSegment.addTarget(self, action: #selector(segmentChanged(seg:)), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc private func segmentChanged(seg: UISegmentedControl) {
+        switch seg.selectedSegmentIndex {
+        case 0:
+            scoreTableView.delegate = nil
+            scoreTableView.dataSource = nil
+            viewModel.getHomePlayerInfo()
+                .bind(to: scoreTableView.rx.items(cellIdentifier: ScoreCell.identifier, cellType: ScoreCell.self)) { _, player, cell in
+                    cell.configure(player)
+                }.disposed(by: disposeBag)
+        case 1:
+            scoreTableView.delegate = nil
+            scoreTableView.dataSource = nil
+            viewModel.getAwayPlayerInfo()
+                .bind(to: scoreTableView.rx.items(cellIdentifier: ScoreCell.identifier, cellType: ScoreCell.self)) { _, player, cell in
+                    cell.configure(player)
+                }.disposed(by: disposeBag)
+        default:
+            break
+        }
+        
+    }
 }
+
