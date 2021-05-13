@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		40C979E22293C1822FEDDADB /* Pods_baseballAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7262255BB32895E5026ABCCD /* Pods_baseballAppTests.framework */; };
 		6E01E4A77960D78600C8D1CB /* Pods_baseballApp_baseballAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F05876547F6EEBDBEA0AE39 /* Pods_baseballApp_baseballAppUITests.framework */; };
+		71310C7A264CBC27005FCF5A /* ScoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71310C79264CBC27005FCF5A /* ScoreDTO.swift */; };
+		71310C7C264CC42F005FCF5A /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71310C7B264CC42F005FCF5A /* ScoreViewModel.swift */; };
+		71310C7E264CE262005FCF5A /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71310C7D264CE262005FCF5A /* ScoreCell.swift */; };
 		7650A1A82640E3A8006C1E5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1A72640E3A8006C1E5F /* AppDelegate.swift */; };
 		7650A1AA2640E3A8006C1E5F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7650A1A92640E3A8006C1E5F /* SceneDelegate.swift */; };
 		7650A1AF2640E3A8006C1E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7650A1AD2640E3A8006C1E5F /* Main.storyboard */; };
@@ -57,6 +60,9 @@
 		06F1AB5151E04DC80D88CA31 /* Pods-baseballApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballApp.debug.xcconfig"; path = "Target Support Files/Pods-baseballApp/Pods-baseballApp.debug.xcconfig"; sourceTree = "<group>"; };
 		1F05876547F6EEBDBEA0AE39 /* Pods_baseballApp_baseballAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballApp_baseballAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37835D1E64DAE23B1D174CF2 /* Pods-baseballAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-baseballAppTests.release.xcconfig"; path = "Target Support Files/Pods-baseballAppTests/Pods-baseballAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		71310C79264CBC27005FCF5A /* ScoreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDTO.swift; sourceTree = "<group>"; };
+		71310C7B264CC42F005FCF5A /* ScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewModel.swift; sourceTree = "<group>"; };
+		71310C7D264CE262005FCF5A /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
 		7262255BB32895E5026ABCCD /* Pods_baseballAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_baseballAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7650A1A42640E3A8006C1E5F /* baseballApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = baseballApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7650A1A72640E3A8006C1E5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 			children = (
 				76619ABB2643A355004D31C6 /* GameViewModel.swift */,
 				76AF2BC3264B7D9900DC7782 /* GameViewModelType.swift */,
+				71310C7B264CC42F005FCF5A /* ScoreViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 			children = (
 				76619AC12643AE83004D31C6 /* GameCell.swift */,
 				76619B052644EE37004D31C6 /* StadiumView.swift */,
+				71310C7D264CE262005FCF5A /* ScoreCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -279,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				76619AB326439866004D31C6 /* GameDTO.swift */,
+				71310C79264CBC27005FCF5A /* ScoreDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -558,8 +567,11 @@
 				7650A1E92641418B006C1E5F /* Record.swift in Sources */,
 				76619AB2264385BB004D31C6 /* APIService.swift in Sources */,
 				7650A1E7264138A0006C1E5F /* Player.swift in Sources */,
+				71310C7A264CBC27005FCF5A /* ScoreDTO.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 				76619AA726437476004D31C6 /* Game.swift in Sources */,
+				71310C7C264CC42F005FCF5A /* ScoreViewModel.swift in Sources */,
+				71310C7E264CE262005FCF5A /* ScoreCell.swift in Sources */,
 				76619B062644EE37004D31C6 /* StadiumView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
