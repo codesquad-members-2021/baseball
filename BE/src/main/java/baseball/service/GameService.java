@@ -1,18 +1,19 @@
 package baseball.service;
 
-import baseball.domain.Game;
-import baseball.domain.Score;
-import baseball.domain.Team;
+import baseball.domain.*;
 import baseball.exception.GameNotFoundException;
+import baseball.exception.RecordDTONotFoundException;
 import baseball.exception.TeamNotFoundException;
 import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.GameDTO;
-import baseball.service.dto.GameScoreDTO;
+import baseball.service.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -74,5 +75,39 @@ public class GameService {
         Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
 
         return new GameScoreDTO(gameId, homeTeam, awayTeam);
+    }
+
+    public GameMemberDTO getGameMemberDTO(Long gameId) {
+        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
+        Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
+        Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
+
+        Set<Member> homeMembers = homeTeam.getMembers();
+        Set<Member> awayMembers = awayTeam.getMembers();
+
+        Set<RecordDTO> homeRecordDTOs = new HashSet<>();
+        for (Member member : homeMembers) {
+            if (member.hasRecord()) {
+                Record record = member.getRecord();
+                homeRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
+            }
+            if (!member.hasRecord()) {
+                Record record = new Record(0, 0, 0);
+                homeRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
+            }
+        }
+
+        Set<RecordDTO> awayRecordDTOs = new HashSet<>();
+        for (Member member : awayMembers) {
+            if (member.hasRecord()) {
+                Record record = member.getRecord();
+                awayRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
+            }
+            if (!member.hasRecord()) {
+                Record record = new Record(0, 0, 0);
+                awayRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
+            }
+        }
+        return new GameMemberDTO(gameId, homeRecordDTOs, awayRecordDTOs);
     }
 }

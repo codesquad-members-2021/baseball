@@ -15,6 +15,9 @@ public class Record {
     }
 
     private double calculateAverage(int atBat, int hit) {
+        if (hit == 0) {
+            return 0;
+        }
         return atBat / (double) hit;
     }
 
@@ -32,5 +35,15 @@ public class Record {
 
     public double getAverage() {
         return average;
+    }
+
+    @Override
+    public String toString() {
+        return "Record{" +
+                "atBat=" + atBat +
+                ", hit=" + hit +
+                ", out=" + out +
+                ", average=" + average +
+                '}';
     }
 }
