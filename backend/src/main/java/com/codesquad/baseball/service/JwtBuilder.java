@@ -12,7 +12,8 @@ import java.util.Date;
 public class JwtBuilder {
     private static final String ISSUER = "baseball";
     private static final String USER_ID = "USER_ID";
-    private static final long ACCESS_TOKEN_EXPIRATION = 60 * 60 * 1000L;
+    //private static final long ACCESS_TOKEN_EXPIRATION = 60 * 60 * 1000L;
+    private static final long ACCESS_TOKEN_EXPIRATION = 60 * 1000L;
     private static final long REFERSH_TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000L;
     private final OAuthConfigManager oAuthConfigManager;
 

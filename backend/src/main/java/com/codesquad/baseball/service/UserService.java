@@ -6,6 +6,7 @@ import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
 import com.codesquad.baseball.exceptions.notfound.UserNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -25,6 +26,16 @@ public class UserService {
         JwtTokenDTO jwtTokenDTO = jwtBuilder.createToken(userInfoDTO.getId());
         processUserData(userInfoDTO, optionalUser, jwtTokenDTO);
         return jwtTokenDTO;
+    }
+
+    @Transactional
+    public JwtTokenDTO refreshToken(String userId) {
+        User user = findUserByUserId(userId);
+        JwtTokenDTO newTokenDTO = jwtBuilder.createToken(userId);
+        user.updateAccessToken(newTokenDTO.getAccessToken());
+        user.updateRefreshToken(newTokenDTO.getRefreshToken());
+        userRepository.save(user);
+        return newTokenDTO;
     }
 
     private void processUserData(UserInfoDTO userInfoDTO, Optional<User> optionalUser, JwtTokenDTO jwtTokenDTO) {

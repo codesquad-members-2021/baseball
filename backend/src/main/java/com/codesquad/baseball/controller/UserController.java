@@ -2,12 +2,14 @@ package com.codesquad.baseball.controller;
 
 import com.codesquad.baseball.annotation.Refresh;
 import com.codesquad.baseball.config.AuthInterceptor;
+import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.oauth.AuthorizationInfo;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.ReceiveAccessTokenDTO;
 import com.codesquad.baseball.dto.oauth.UserInfoDTO;
 import com.codesquad.baseball.service.GoogleApiRequester;
 import com.codesquad.baseball.service.GoogleUrlService;
+import com.codesquad.baseball.service.JwtBuilder;
 import com.codesquad.baseball.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +27,13 @@ public class UserController {
     private final GoogleApiRequester googleApiRequester;
     private final UserService userService;
     private final GoogleUrlService googleUrlService;
+    private final JwtBuilder jwtBuilder;
 
-    public UserController(GoogleApiRequester googleApiRequester, UserService userService, GoogleUrlService googleUrlService) {
+    public UserController(GoogleApiRequester googleApiRequester, UserService userService, GoogleUrlService googleUrlService, JwtBuilder jwtBuilder) {
         this.googleApiRequester = googleApiRequester;
         this.userService = userService;
         this.googleUrlService = googleUrlService;
+        this.jwtBuilder = jwtBuilder;
     }
 
     @GetMapping("/login")
@@ -48,7 +52,6 @@ public class UserController {
     @PostMapping("/refreshToken")
     public JwtTokenDTO refreshToken(HttpServletRequest request) {
         String userId = (String) request.getAttribute(AuthInterceptor.USER_ID_KEY);
-        System.out.println(userId);
-        return null;
+        return userService.refreshToken(userId);
     }
 }
