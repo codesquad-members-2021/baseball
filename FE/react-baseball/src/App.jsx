@@ -27,7 +27,6 @@ function App() {
   const [currTeamLog, setCurrTeamLog] = useState([]);
   const [isHome, setIsHome] = useState(false);
   const [totalOutCount, setTotalOutCount] = useState(0);
-  const [isDefense, setIsDefense] = useState(false);
   const [inningTop, setInningTop] = useState(true);
 
   const baseballState = {
@@ -56,8 +55,6 @@ function App() {
       setIsHome,
       totalOutCount,
       setTotalOutCount,
-      isDefense,
-      setIsDefense,
       inningTop,
       setInningTop,
     },

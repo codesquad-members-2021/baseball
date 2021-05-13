@@ -4,14 +4,13 @@ import { GlobalContext } from '../../App';
 
 const PlayInning = (props) => {
   const {
+    isHome,
     currInning,
     setCurrInning,
     totalOutCount,
     setTotalOutCount,
     inningTop,
     setInningTop,
-    isDefense,
-    setIsDefense,
   } = useContext(GlobalContext);
 
   if (totalOutCount === 0) {
@@ -31,7 +30,11 @@ const PlayInning = (props) => {
   return (
     <PlayInningDiv>
       <Span>
-        {currInning}회{inningTop ? '초' : '말'} {isDefense ? '수비' : '공격'}
+        {inningTop && isHome ? `${currInning}회초 수비` : ``}
+        {!inningTop && isHome ? `${currInning}회말 공격` : ``}
+
+        {inningTop && !isHome ? `${currInning}회초 공격` : ``}
+        {!inningTop && !isHome ? `${currInning}회말 수비` : ``}
       </Span>
     </PlayInningDiv>
   );

@@ -17,14 +17,14 @@ const PlayScreen = (props) => {
     setCounterTeamName,
     setCurrHitter,
   } = useContext(GlobalContext);
-  useEffect(() => setCurrHitter(homeTeam.players[0]), []);
+
+  useEffect(() => setCurrHitter(awayTeam.players[0]), []);
+
   if (isHome) {
     setMyTeam(homeTeam.players);
     setMyTeamName(homeTeam.teamName);
     setCounterTeam(awayTeam.players);
     setCounterTeamName(awayTeam.teamName);
-    // setCurrHitter(homeTeam.players[0]);
-    // setIsDefense(isHome);
   } else {
     setMyTeam(awayTeam.players);
     setMyTeamName(awayTeam.teamName);
