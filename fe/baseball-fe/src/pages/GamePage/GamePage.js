@@ -19,23 +19,15 @@ const _initialState = {
   mode: null,
   home: null,
   away: null,
-  // latestAction: {
-  //   result: null,
-  //   time: null,
-  // },
   pitcher: null,
   batter: null,
-  nthBatter: null,
+  nth_batter: null,
   runners: [],
-  ballCount: {
+  ball_count: {
     strike: null,
     ball: null,
     out: null
   },
-  // halfInning: {
-  //   currentInning: null,
-  //   frame: null
-  // },
 }
 
 /*

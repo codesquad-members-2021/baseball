@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-function usePolling({ URL, options = {}, delay = 1000, completeFn = () => false }) {
-  const [timeoutId, setTimeoutId] = useState();
+function usePolling({ URL, options = {}, delay = 1500, completeFn = () => false }) {
+  const [intervalId, setIntervalId] = useState();
   const [response, setResponse] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [polling, setPolling] = useState(false);
 
   const stopPolling = () => {
-    if (timeoutId) clearTimeout(timeoutId);
-    setTimeoutId(null);
+    if (intervalId) clearInterval(intervalId);
+    setIntervalId(null);
     setIsLoading(false);
     setPolling(false);
   }
@@ -38,18 +38,32 @@ function usePolling({ URL, options = {}, delay = 1000, completeFn = () => false 
       }
     }
 
-    const repeatFn = () => {
+    if (intervalId)
+      return;
+
+    const newIntervalId = setInterval(() => {
       fetchData();
-
-      const newTimeoutId = setTimeout(() => {
-        repeatFn();
-      }, delay);
-
-      setTimeoutId(newTimeoutId);
       console.log('polling');
-    }
+    }, delay)
 
-    repeatFn();
+    setIntervalId(newIntervalId);
+
+    // const repeatFn = (setintervalId) => {
+      
+
+    //   const newTimeoutId = (() => {
+    //     repeatFn(setTimeoutId);
+    //   }, delay);
+
+    //   setTimeoutId(newTimeoutId);
+    //   console.log('polling');
+    // }
+
+    // repeatFn(setTimeoutId);
+
+    return () => {
+      if (newIntervalId) clearInterval(newIntervalId);
+    }
   }, [polling]);
 
   return { response, error, isLoading, setPolling };

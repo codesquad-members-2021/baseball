@@ -123,8 +123,8 @@ function gameReducer(state, { type, payload }) {
       console.log('next-batter');
       return {
         ...state,
-        batter: state.home.mode === 'fielding' ? state.home.batters[state.nthBatter] : state.away.batters[state.nthBatter],
-        nthBatter: state.nthBatter + 1, // TODO: cycular
+        batter: state.home.mode === 'fielding' ? state.home.batters[state.nth_batter] : state.away.batters[state.nth_batter],
+        nth_batter: state.nth_batter + 1, // TODO: cycular
       }
     }
 
