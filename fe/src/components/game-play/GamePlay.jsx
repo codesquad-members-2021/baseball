@@ -25,6 +25,7 @@ const memberListReducer = (state, action) => {
       else safety++;
       at_bat++;
       next = idx + 1 === arr.length ? 0 : idx + 1;
+
       return { ...member, safety, at_bat, out, status: !status };
     } else {
       return { ...member };
@@ -36,8 +37,8 @@ const memberListReducer = (state, action) => {
 
 const logListReducer = (state, action) => {
   let newState = [...state];
+  console.log(newState);
   const target = newState.length > 0 && { ...newState[newState.length - 1] };
-  // eslint-disable-next-line default-case
   switch (action.type) {
     case 'next':
       newState.push({ ...action.value, index: action.index, history: [] });
@@ -75,7 +76,6 @@ const GamePlay = ({ home, away, game_id }) => {
     score: { home: [0], away: [] },
     base: undefined,
   });
-  console.log('score', score);
   const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
   const teamName = {
     home: 'json',
@@ -113,7 +113,7 @@ const GamePlay = ({ home, away, game_id }) => {
       </PopUp>
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={inning.turn}></Score>
+          <Score teamName={teamName} turn={inning.turn} gameID={gameID}></Score>
           <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
           <Board {...{ inning, setInning, memberListDispatch, logListDispatch }}></Board>
           <Log logList={logList}></Log>
