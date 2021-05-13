@@ -20,14 +20,12 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @CrossOrigin
     @GetMapping
     public GamesDTO showGames() {
         return gameService.showGames();
     }
 
     @Auth
-    @CrossOrigin
     @PatchMapping("/{gameId}")
     public void joinIn(@PathVariable("gameId") int gameId, HttpServletRequest request) {
         String userId = ControllerUtil.extractUserIdFromRequest(request);
@@ -35,14 +33,12 @@ public class GameController {
     }
 
     @Auth
-    @CrossOrigin
     @GetMapping("/{gameId}")
     public GameDetailDTO showGameDetail(@PathVariable("gameId") int gameId) {
         return gameService.gameDetail(gameId);
     }
 
     @Auth
-    @CrossOrigin
     @PostMapping("/{gameId}/pitch")
     public PitchDTO pitch(@PathVariable("gameId") int gameId, HttpServletRequest request) {
         String userId = ControllerUtil.extractUserIdFromRequest(request);
