@@ -11,6 +11,7 @@ import com.codesquad.baseball.service.GoogleApiRequester;
 import com.codesquad.baseball.service.GoogleUrlService;
 import com.codesquad.baseball.service.JwtBuilder;
 import com.codesquad.baseball.service.UserService;
+import com.codesquad.baseball.utils.ControllerUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,7 @@ public class UserController {
     @Refresh
     @PostMapping("/refreshToken")
     public JwtTokenDTO refreshToken(HttpServletRequest request) {
-        String userId = (String) request.getAttribute(AuthInterceptor.USER_ID_KEY);
+        String userId = ControllerUtil.extractUserIdFromRequest(request);
         return userService.refreshToken(userId);
     }
 }
