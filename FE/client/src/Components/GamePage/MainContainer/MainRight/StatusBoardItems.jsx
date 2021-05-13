@@ -4,14 +4,21 @@ import styled from "styled-components";
 
 const StatusBoardItems = (props) => {
   const { inGameData, currentSBData } = useContext(GamePageContext);
-
+  console.log(
+    "어레이프롬",
+    currentSBData &&
+      Array.from({
+        length: currentSBData.strike + currentSBData.ball,
+      })
+  );
+  console.log("여기서찍는SB", currentSBData);
   return (
     <>
-      {currentSBData.length &&
+      {currentSBData &&
         Array.from({ length: currentSBData.strike + currentSBData.ball }).map(
-          (currentData) => (
+          (_, index) => (
             <StatusBoardItem>
-              <NumberCircle>1</NumberCircle>스트라이크
+              <NumberCircle>{index + 1}</NumberCircle>스트라이크
               <StrikeBallStatus>{`S${currentSBData.strike} B${currentSBData.ball}`}</StrikeBallStatus>
             </StatusBoardItem>
           )

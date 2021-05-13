@@ -10,8 +10,8 @@ const StatusBoardList = () => {
     <div>
       <StatusBoard
         currentPlayer
-        name={`${inGameData[attackState][sequenceCount].name}`}
-        id={`${inGameData[attackState][sequenceCount].id}`}
+        name={`${inGameData && inGameData[attackState][sequenceCount].name}`}
+        id={`${sequenceCount + 1}`}
       />
     </div>
   );

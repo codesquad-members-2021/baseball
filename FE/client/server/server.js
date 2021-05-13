@@ -11,6 +11,8 @@ const baseball = {
   users: [],
 };
 
+const pitchState = [];
+
 io.on("connection", (socket) => {
   const connectPlayerId = socket.id;
   socket.on("init", () => {
@@ -31,6 +33,11 @@ io.on("connection", (socket) => {
     io.to("room1").emit("selectedTeam", baseball.games);
 
     if (isMatchGame) startGame({ gameId });
+  });
+
+  socket.on("pitchClicked", (msg) => {
+    console.log(msg);
+    io.to("room1").emit("pitchResult", randomPitch());
   });
 
   socket.on("disconnect", () => {
@@ -72,3 +79,8 @@ function startGame({ gameId }) {
     });
   });
 }
+
+const randomPitch = () => {
+  const arr = ["strike", "ball", "hit"];
+  return arr[Math.floor(Math.random() * arr.length)];
+};

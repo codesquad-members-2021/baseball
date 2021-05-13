@@ -12,7 +12,7 @@ const SBOStatus = () => {
           {Array.from({ length: 2 }).map((_, index) => (
             <SBOCircle
               color="yellow"
-              background={currentSBData.strike === index + 1}
+              background={currentSBData && currentSBData.strike === index + 1}
             />
           ))}
         </CircleList>
@@ -23,7 +23,7 @@ const SBOStatus = () => {
           {Array.from({ length: 3 }).map((_, index) => (
             <SBOCircle
               color="green"
-              background={currentSBData.ball === index + 1}
+              background={currentSBData && currentSBData.ball === index + 1}
             />
           ))}
         </CircleList>
