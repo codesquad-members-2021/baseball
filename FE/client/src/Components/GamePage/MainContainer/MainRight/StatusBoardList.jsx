@@ -2,17 +2,23 @@ import { GamePageContext } from "Components/GamePage";
 import React, { useContext } from "react";
 import StatusBoard from "./StatusBoard";
 
-const StatusBoardList = () => {
-  const { inGameData, sequenceCount, attackState } =
+const StatusBoardList = ({ index }) => {
+  const { inGameData, sequenceCount, attackState, playRecordsState } =
     useContext(GamePageContext);
-
+  {/* playRecordsState[0].records.ball &&
+        playRecordsState[0].records.strike && */}
   return (
     <div>
-      <StatusBoard
-        currentPlayer
-        name={`${inGameData && inGameData[attackState][sequenceCount].name}`}
-        id={`${sequenceCount + 1}`}
-      />
+      {playRecordsState.length &&
+
+        playRecordsState.map(({ name, records }, index) => {
+          console.log(records)
+          return (<StatusBoard
+            currentPlayer={index === 0}
+            id={`${sequenceCount + 1}`}
+            {...{ name, records }}
+          />)
+        })}
     </div>
   );
 };

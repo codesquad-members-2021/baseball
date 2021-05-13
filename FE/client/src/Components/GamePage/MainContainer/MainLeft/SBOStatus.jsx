@@ -11,9 +11,9 @@ const SBOStatus = () => {
         <SBOspan>S</SBOspan>
         <CircleList>
           {currentSBData && Array.from({ length: 2 }).map((_, index) => (
-            <SBOCircle
+            <SBOCircle key={`yellow-${index}`}
               color="yellow"
-              background={currentSBData && currentSBData.strike === index + 1}
+              background={currentSBData.strike >= index + 1}
             />
           ))}
         </CircleList>
@@ -22,9 +22,9 @@ const SBOStatus = () => {
         <SBOspan>B</SBOspan>
         <CircleList>
           {currentSBData && Array.from({ length: 3 }).map((_, index) => (
-            <SBOCircle
+            <SBOCircle key={`green-${index}`}
               color="green"
-              background={currentSBData && currentSBData.ball === index + 1}
+              background={currentSBData.ball >= index + 1}
             />
           ))}
         </CircleList>
@@ -32,8 +32,8 @@ const SBOStatus = () => {
       <CircleListDiv>
         <SBOspan>O</SBOspan>
         <CircleList>
-          {Array.from({ length: 2 }).map((_) => (
-            <SBOCircle color="red" />
+          {Array.from({ length: 2 }).map((_, index) => (
+            <SBOCircle key={`red-${index}`} color="red" />
           ))}
         </CircleList>
       </CircleListDiv>

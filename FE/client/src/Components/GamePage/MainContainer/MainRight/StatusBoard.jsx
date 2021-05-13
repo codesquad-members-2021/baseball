@@ -2,13 +2,16 @@ import React from "react";
 import StatusBoardItems from "./StatusBoardItems";
 import styled from "styled-components";
 
-const StatusBoard = (props) => {
+const StatusBoard = ({ name, currentPlayer, id, records }) => {
   return (
     <StatusBoardDiv>
-      <StatusTitle currentPlayer={props.currentPlayer}>
-        {props.id}번 타자 {props.name}
+      <StatusTitle currentPlayer={currentPlayer}>
+        {id}번 타자 {name}
       </StatusTitle>
-      <StatusBoardItems />
+
+      {records.map((record, index) => {
+        return (<StatusBoardItems {...{ record, index, recordLength: records.length }} />)
+      })}
     </StatusBoardDiv>
   );
 };

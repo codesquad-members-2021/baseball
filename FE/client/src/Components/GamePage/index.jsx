@@ -36,12 +36,20 @@ const GamePage = ({ userState }) => {
   const [sequenceCount, setSequenceCount] = useState(0); //몇번째 선수가 뛰고있는지
   const [roundCount, setRoundCount] = useState(1); //몇회인지 카운트
   const [currentBaseData, setCurrentBaseData] = useState([]); //Base에 누구누구 있는지
-  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0, out: 0 });
+  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0, out: 0, action: '' });
   const [currentPlayAction, setCurrentPlayAction] = useState(''); ////strike, ball, hit;
+  const [playRecordsState, setPlayRecordsState] = useState([]); ////[{id:1,name:홍길동,records:[{strike:0, ball:1}]}]
 
   const onPitch = () => {
     socket.emit('pitch', { gameId: userState.gameId });
   };
+
+  const updateSequenceCount = () => {
+    return setSequenceCount((sequenceCount) => {
+      if (sequenceCount === 8) return 0;
+      return sequenceCount + 1;
+    });
+  }
 
   useEffect(() => {
     if (!userState) return;
@@ -77,11 +85,56 @@ const GamePage = ({ userState }) => {
   }, [data]);
 
   useEffect(() => {
-    socket.on("pitchResult", (pitchResult) => {
-      setCurrentSBData(pitchResult);
+    socket.on("pitchResult", ({ playAction }) => {
+      const playActionObject = {
+        'strike': (currentData) => ({ ...currentData, strike: currentData.strike + 1, action: playAction }),
+        'ball': (currentData) => ({ ...currentData, ball: currentData.ball + 1, action: playAction }),
+        'hit': (currentData) => ({ ...currentData, strike: 0, ball: 0, action: playAction })
+      }
+      setCurrentPlayAction(playAction);
+      setCurrentSBData((currentData) => playActionObject[playAction](currentData));
     });
   }, []);
 
+  useEffect(() => { //
+    if (!playRecordsState.length) return;
+    const { strike, ball, out, action } = currentSBData;
+    console.log(12315135, strike)
+    if (strike === 3) {
+      updateSequenceCount();
+    } else if (ball === 4) {
+      //안타 처리
+    } else if (out === 3) {
+      //팀 체인지 
+    } else if (action === 'hit') {
+      updateSequenceCount();
+    }
+
+
+    setPlayRecordsState((records) => {
+      const [firstRecord, ...remainRecords] = records;
+      return [{ ...firstRecord, records: [currentSBData, ...firstRecord.records] }, ...remainRecords];
+    });
+  }, [currentSBData]);
+
+  useEffect(() => { //초기세팅 record 세팅 (mainRight)
+    if (!inGameData) return;
+    const { away } = inGameData;
+    setPlayRecordsState([{ id: away[0].id, name: away[0].name, records: [] }])
+  }, [inGameData]);
+
+  useEffect(() => {//선수교체 record 세팅(mainRight)
+    if (!inGameData) return;
+    const { away } = inGameData;
+    setPlayRecordsState((records) => {
+      return [{ id: away[sequenceCount].id, name: away[sequenceCount].name, records: [] }, ...records];
+    });
+  }, [sequenceCount])
+
+
+  useEffect(() => {
+    console.log(123545, playRecordsState)
+  }, [playRecordsState])
   return (
     <GamePageContext.Provider
       value={{
@@ -92,6 +145,7 @@ const GamePage = ({ userState }) => {
         roundCount,
         currentSBData,
         currentPlayAction,
+        playRecordsState,
         onPitch,
       }}
     >
