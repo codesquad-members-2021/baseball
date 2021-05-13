@@ -1,12 +1,11 @@
 package com.dong.baseball.Controller;
 
+import com.dong.baseball.DTO.BaseballServerResponseDTO;
+import com.dong.baseball.DTO.MatchAllProgressDataDTO;
 import com.dong.baseball.DTO.MatchUpListsDTO;
 import com.dong.baseball.DTO.ProgressDTO;
-import com.dong.baseball.DTO.BaseballServerResponseDTO;
 import com.dong.baseball.Service.GameService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/games")
@@ -25,8 +24,8 @@ public class GameController {
     }
 
     @GetMapping("/{matchId}")
-    public List<ProgressDTO> matchInfos(@PathVariable Long matchId) {
-        return gameService.matchInformations(matchId);
+    public MatchAllProgressDataDTO matchInfos(@PathVariable Long matchId) {
+        return new MatchAllProgressDataDTO(gameService.findMatch(matchId), gameService.matchInformations(matchId));
     }
 
     @GetMapping("/{matchId}/offense")
