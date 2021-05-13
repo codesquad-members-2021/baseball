@@ -1,12 +1,17 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { GameContext } from 'util/context.js';
+import { GameContext, GlobalContext } from 'util/context';
+import useFetch from 'util/hook/useFetch';
+import API from 'util/API';
 
-//Gameid/score 로 요청하면 score가 올 예정
 function ScorePopup() {
     const { gameState } = useContext(GameContext);
+    const { globalState } = useContext(GlobalContext);
+    const { response , error, isLoading } = useFetch(API.score({
+        gameId: globalState.gameId,
+        userId: globalState.userId
+    }));
     const totalRound = Array(12).fill(0).map((el, i) => el + (i + 1));
-    console.log("GameState", gameState)
 
     return (
         <StyledScorePopup>
@@ -28,12 +33,12 @@ function ScorePopup() {
                     </div>
                 </div>
                 <div className="inning-scores">
-                    <div>{[1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0].map(score => <div>{score}</div>)}</div>
-                    <div>{[1, 2, 3, 1, 2, 1, 3, 0, 0, 0, 1, 2].map(score => <div>{score}</div>)}</div>
+                    <div>{response && response.away_score_list.map(score => <div>{score}</div>)}</div>
+                    <div>{response && response.home_score_list.map(score => <div>{score}</div>)}</div>
                 </div>
                 <div className="total-score">
-                    <div>{gameState.away.score}</div>
-                    <div>{gameState.home.score}</div>
+                    <div>{response && response.away_total}</div>
+                    <div>{response && response.home_total}</div>
                 </div>
            </div>
         </StyledScorePopup>

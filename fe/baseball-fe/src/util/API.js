@@ -9,12 +9,12 @@ const API = {
   pitch: ({ gameId, userId }) => BASE + `/games/${gameId}/pitch/user/${userId}`,
   pitchResult: ({ gameId, userId }) => BASE + `/games/${gameId}/pitchResult/user/${userId}`,
   batterRecord: ({ gameId, userId}) => BASE + `/games/${gameId}/batterRecord/user/${userId}`,
-  halfInning: ({ gameId, userId }) => BASE + `/games/${gameId}/halfInning/user/${userId}`
+  halfInning: ({ gameId, userId }) => BASE + `/games/${gameId}/halfInning/user/${userId}`,
   // login: ({ userId }) => BASE + `/users/${userId}`,
   // teamSelect: ({ gameId, teamId }) => BASE + `/games/${gameId}/teams/${teamId}`,
   // games: () => BASE + '/games',
   // start: ({ id }) => BASE + `/games/${id}/start`,
-  // score: ({ id }) => BASE + `/games/${id}/score`,
+  score: ({ gameId, userId }) => BASE + `/games/${gameId}/score/user/${userId}`,
   // pitch: ({ id }) => BASE + `/games/${id}/pitch`,
   // halfInning: ({ id }) => BASE + `/games/${id}/halfInning`
 }
