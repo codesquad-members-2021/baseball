@@ -40,4 +40,8 @@ public class Member {
     public boolean hasRecord() {
         return record != null;
     }
+
+    public void deleteRecord() {
+        record = null;
+    }
 }

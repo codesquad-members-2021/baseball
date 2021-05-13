@@ -46,4 +46,8 @@ public class Team {
         }
         throw new NullPointerException();
     }
+
+    public void deleteScore() {
+        scores.clear();
+    }
 }

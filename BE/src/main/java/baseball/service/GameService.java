@@ -2,18 +2,19 @@ package baseball.service;
 
 import baseball.domain.*;
 import baseball.exception.GameNotFoundException;
-import baseball.exception.RecordDTONotFoundException;
 import baseball.exception.TeamNotFoundException;
 import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.*;
+import baseball.service.dto.GameDTO;
+import baseball.service.dto.GameMemberDTO;
+import baseball.service.dto.GameScoreDTO;
+import baseball.service.dto.RecordDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -85,7 +86,7 @@ public class GameService {
         Set<Member> homeMembers = homeTeam.getMembers();
         Set<Member> awayMembers = awayTeam.getMembers();
 
-        Set<RecordDTO> homeRecordDTOs = new HashSet<>();
+        List<RecordDTO> homeRecordDTOs = new ArrayList<>();
         for (Member member : homeMembers) {
             if (member.hasRecord()) {
                 Record record = member.getRecord();
@@ -97,7 +98,7 @@ public class GameService {
             }
         }
 
-        Set<RecordDTO> awayRecordDTOs = new HashSet<>();
+        List<RecordDTO> awayRecordDTOs = new ArrayList<>();
         for (Member member : awayMembers) {
             if (member.hasRecord()) {
                 Record record = member.getRecord();
@@ -109,5 +110,19 @@ public class GameService {
             }
         }
         return new GameMemberDTO(gameId, homeRecordDTOs, awayRecordDTOs);
+    }
+
+    public void deleteGame() {
+        gameRepository.deleteAll();
+
+        Iterable<Team> teams = teamRepository.findAll();
+        for (Team team : teams) {
+            team.deleteScore();
+            Set<Member> members = team.getMembers();
+            for (Member member : members) {
+                member.deleteRecord();
+            }
+        }
+        teamRepository.saveAll(teams);
     }
 }

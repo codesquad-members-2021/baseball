@@ -1,14 +1,14 @@
 package baseball.service.dto;
 
-import java.util.Set;
+import java.util.List;
 
 public class GameMemberDTO {
 
     private Long gameId;
-    private Set<RecordDTO> home;
-    private Set<RecordDTO> away;
+    private List<RecordDTO> home;
+    private List<RecordDTO> away;
 
-    public GameMemberDTO(Long gameId, Set<RecordDTO> home, Set<RecordDTO> away) {
+    public GameMemberDTO(Long gameId, List<RecordDTO> home, List<RecordDTO> away) {
         this.gameId = gameId;
         this.home = home;
         this.away = away;
@@ -18,11 +18,11 @@ public class GameMemberDTO {
         return gameId;
     }
 
-    public Set<RecordDTO> getHome() {
+    public List<RecordDTO> getHome() {
         return home;
     }
 
-    public Set<RecordDTO> getAway() {
+    public List<RecordDTO> getAway() {
         return away;
     }
 }

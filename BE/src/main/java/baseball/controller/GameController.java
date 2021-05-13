@@ -38,4 +38,9 @@ public class GameController {
     public GameMemberDTO showMembers(@PathVariable Long gameId) {
         return gameService.getGameMemberDTO(gameId);
     }
+
+    @DeleteMapping
+    public void deleteGame() {
+        gameService.deleteGame();
+    }
 }
