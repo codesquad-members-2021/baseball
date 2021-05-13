@@ -1,43 +1,57 @@
-import { useContext } from 'react'
-import styled, { keyframes } from 'styled-components'
-import { IoIosBaseball } from 'react-icons/io'
+import { useContext, useState, useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { IoIosBaseball } from 'react-icons/io';
 
-import { gamePlayContext } from 'pages/Game'
-import BallCount from 'components/GamePlay/playScreen/BallCount'
-import Span from 'components/common/Span'
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
+import BallCount from 'components/GamePlay/playScreen/BallCount';
 
 const Screen = () => {
-  const { dispatchBallCount } = useContext(gamePlayContext)
-  
+  const { dispatchBallCount, round, isAttacking } = useContext(gamePlayContext);
+  const initialAttackState = isAttacking ? ['초', '공격'] : ['초', '수비'];
+  const [AttackState, setAttackState] = useState(initialAttackState);
+  const currentRound = Math.floor(round / 2 + 1);
+
+  const changeAttackState = ([first, attack]) => {
+    const _first = first === '초' ? '말' : '초';
+    const _attack = attack === '공격' ? '수비' : '공격';
+    return [_first, _attack];
+  };
   const chooseNumber = () => Math.floor(Math.random() * 4);
 
-  const getAction = (number) =>{
+  const getAction = (number) => {
     return {
       0: 'strike',
       1: 'ball',
       2: 'out',
-      3: 'hit'
-    }[number]
-  }
+      3: 'hit',
+    }[number];
+  };
 
   const handleClickPitch = () => {
-    const action = getAction(chooseNumber())
-    dispatchBallCount({payload : action})
-  }
-  
+    const action = getAction(chooseNumber());
+    dispatchBallCount({ payload: action });
+  };
+
+  useEffect(() => {
+    if (!round) return;
+    setAttackState((stateArr) => changeAttackState(stateArr));
+  }, [round]);
+
   return (
     <StyledScreen>
-      <ScreenField src='field.svg' alt='field' />
-      <ScreenRound>2회 초 수비</ScreenRound>
+      <ScreenField src="field.svg" alt="field" />
+      <ScreenRound>
+        {currentRound}회 {AttackState[0]} {AttackState[1]}
+      </ScreenRound>
       <PitchButton onClick={handleClickPitch}>
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
     </StyledScreen>
-  )
-}
+  );
+};
 
-export default Screen
+export default Screen;
 
 const StyledScreen = styled.section`
   display: flex;
@@ -50,13 +64,13 @@ const StyledScreen = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-`
+`;
 
 const ScreenField = styled.img`
   height: fit-content;
   width: 27%;
   transform: rotate(45deg);
-`
+`;
 const ScreenRound = styled.span`
   font-size: ${({ theme }) => `${theme.fontSizes.BASE}rem`};
   font-weight: ${({ theme }) => `${theme.weights.BASE}`};
@@ -64,7 +78,7 @@ const ScreenRound = styled.span`
   position: absolute;
   right: 2%;
   top: 4%;
-`
+`;
 const rotateAnimation = keyframes`
 0%{
   transform: rotate(0deg) scale(1);
@@ -75,7 +89,7 @@ const rotateAnimation = keyframes`
 100%{
   transform: rotate(360deg) scale(1);
 }
-`
+`;
 
 const PitchButton = styled.button`
   height: 5rem;
@@ -93,4 +107,4 @@ const PitchButton = styled.button`
       animation: ${rotateAnimation} 4s linear infinite;
     }
   }
-`
+`;

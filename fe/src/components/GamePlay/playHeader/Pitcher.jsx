@@ -1,18 +1,17 @@
-import { useContext, useState, useEffect } from 'react'
-import { gamePlayContext } from 'pages/Game'
+import { useContext, useState, useEffect } from 'react';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
-const Pitcher = ({ pitcher }) => {
-  const { ballCountState, pitcherName, isAttacking } = useContext(
-    gamePlayContext
-  )
-  const [homeCount, setHomeCount] = useState(0)
-  const [awayCount, setAwayCount] = useState(0)
-  let type = isAttacking ? 'away' : 'home'
+const Pitcher = () => {
+  const { ballCountState, pitcherName, isAttacking } =
+    useContext(gamePlayContext);
+  const [homeCount, setHomeCount] = useState(0);
+  const [awayCount, setAwayCount] = useState(0);
 
   useEffect(() => {
-    if (isAttacking) return setAwayCount(count => count + ballCountState.count)
-    setHomeCount(count => count + ballCountState.count)
-  }, [isAttacking])
+    if (isAttacking)
+      return setAwayCount((count) => count + ballCountState.count);
+    setHomeCount((count) => count + ballCountState.count);
+  }, [isAttacking]);
 
   return (
     <>
@@ -23,7 +22,7 @@ const Pitcher = ({ pitcher }) => {
         <span># {ballCountState.count + homeCount}</span>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Pitcher
+export default Pitcher;
