@@ -1,15 +1,17 @@
 package baseball.service;
 
 import baseball.domain.Member;
-import baseball.domain.Record;
+import baseball.domain.Team;
 import baseball.exception.RecordDTONotFoundException;
 import baseball.exception.TeamNotFoundException;
-import baseball.service.dto.*;
-import baseball.domain.Team;
 import baseball.repository.TeamRepository;
+import baseball.service.dto.*;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
