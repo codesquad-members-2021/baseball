@@ -24,8 +24,8 @@ import java.util.Map;
 @Service
 public class GithubOauthService implements OauthService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String clientId = "6c8240ec73fc69e81d92";       //배포시에는 환경변수로 설정
-    private final String clientSecret = "84f7e4fd4b00260fa6ce8a5f66ac04a96c1d8df9";   //배포시에는 환경변수로 설정
+    private final String clientId = System.getenv("GITHUB_OAUTH_CLIENT_ID");
+    private final String clientSecret = System.getenv("GITHUB_OAUTH_CLIENT_PASSWORD");
 
     //https://github.com/login/oauth/authorize?client_id=6c8240ec73fc69e81d92&scope=user:email
     @Override
