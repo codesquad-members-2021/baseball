@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { fitToContainer, drawField } from "utils/canvasUtils";
 import RunnerImage from "./RunnerImage";
 import PitchButton from "./PitchButton";
+import { GamePageContext } from "Components/GamePage";
 
 const BaseballField = () => {
+  const {
+    teamState: { home, away },
+  } = useContext(GamePageContext);
   const canvasRef = useRef();
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,10 +20,10 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage base='first' />
-      <RunnerImage base='second' />
-      <RunnerImage base='third' />
-      <RunnerImage base='fourth' />
+      <RunnerImage base="first" />
+      <RunnerImage base="second" />
+      <RunnerImage base="third" />
+      <RunnerImage base="fourth" />
       <PitchButton />
     </BaseballFieldWrapper>
   );

@@ -1,4 +1,4 @@
-const randomPitch = () => {
+export const randomPitch = () => {
   //
   const arr = ["strike", "ball", "anta"];
   return arr[Math.floor(Math.random() * arr.length)];
