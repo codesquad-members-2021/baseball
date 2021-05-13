@@ -18,7 +18,7 @@ const Screen = () => {
   const initialAttackState = isAttacking ? ['초', '공격'] : ['초', '수비'];
   const [AttackState, setAttackState] = useState(initialAttackState);
   const currentRound = Math.floor(round / 2 + 1);
-
+  const [isClicked, setIsClicked] = useState(false);
   const changeAttackState = ([first, attack]) => {
     const _first = first === '초' ? '말' : '초';
     const _attack = attack === '공격' ? '수비' : '공격';
@@ -37,15 +37,18 @@ const Screen = () => {
 
   const handleClickPitch = () => {
     const ballCountAction = getAction(chooseNumber());
+    dispatchBallCount({ payload: ballCountAction, attackState: isAttacking });
+    setIsClicked((state) => !state);
+  };
+
+  useEffect(() => {
     const currentPlayeAction = {
       payload: 'updatePlayerHistory',
       ballCount: ballCountState,
     };
-
-    dispatchBallCount({ payload: ballCountAction, attackState: isAttacking });
     if (isAttacking) dispatchAwayCurrentPlayerState(currentPlayeAction);
     if (!isAttacking) dispatchHomeCurrentPlayerState(currentPlayeAction);
-  };
+  }, [isClicked]);
 
   useEffect(() => {
     if (!round) return;

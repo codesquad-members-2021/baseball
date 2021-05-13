@@ -1,17 +1,28 @@
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import BoardItem from 'components/GamePlay/playScreen/BoardItem';
 
-const Board = () => {
+const Board = ({
+  playerName,
+  turn,
+  uniformNumber,
+  history,
+  hits,
+  previousAction,
+}) => {
   return (
     <BoardWrap>
       <div>
         <h3>
-          {7}번 타자 {'류현진'}
+          {uniformNumber}번 타자 {playerName}
         </h3>
       </div>
-      {'안타'}
+      {previousAction}
       <BoardLists>
-        <BoardItem />
+        {history.length !== 0 &&
+          history.map((stat, i) => (
+            <BoardItem key={uuidv4()} {...{ ...stat }} idx={i} />
+          ))}
       </BoardLists>
     </BoardWrap>
   );

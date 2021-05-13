@@ -1,13 +1,30 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-const BoardItem = () => {
+import PutComponent from './PutComponent';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
+
+const BoardItem = ({ B, S, idx, type }) => {
+  const { isAttacking, round, home, away } = useContext(gamePlayContext);
+
+  // 팀스코어 testData 수정해야함
+  const teamScore = 0;
+  const teamName = isAttacking
+    ? home.team_info.team_name
+    : away.team_info.team_name;
+
+  const hit = type === '안타';
+  const postPlayerData = { teamName, round, hit, teamScore };
+
+  if (type === '안타' || type === '아웃')
+    return <PutComponent data={postPlayerData} />;
+
   return (
     <Lists>
-      {/* 상태관리 해야함 */}
-      <Number>{1}</Number>
-      <span>{'스트라이크'}</span>
+      <Number>{idx + 1}</Number>
+      <span>{type}</span>
       <span>
-        S{1} B{0}
+        S{S} B{B}
       </span>
     </Lists>
   );
