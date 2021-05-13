@@ -36,23 +36,13 @@ class BallCounter {
         self.ball = 0
         self.out = 0
         
-        notiStrikeChange()
-        notiBallChange()
-        notiOutChange()
+        notiBallChange(ballType: BallCount.strike, count: self.strike)
+        notiBallChange(ballType: BallCount.ball, count: self.ball)
+        notiBallChange(ballType: BallCount.out, count: self.out)
     }
     
-    private func notiStrikeChange() {
-        let updateInfo: [String: Any] = ["ballType": BallCount.strike, "count": self.strike]
-        NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
-    }
-
-    private func notiBallChange() {
-        let updateInfo: [String: Any] = ["ballType": BallCount.ball, "count": self.ball]
-        NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
-    }
-    
-    private func notiOutChange() {
-        let updateInfo: [String: Any] = ["ballType": BallCount.out, "count": self.out]
+    private func notiBallChange(ballType: BallCount, count: Int) {
+        let updateInfo: [String: Any] = ["ballType": ballType, "count": count]
         NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
     }
     
@@ -65,31 +55,22 @@ class BallCounter {
     private func updateStrike(_ count: Int) {
         self.strike += count
 
-        notiStrikeChange()
-        
-        if self.strike == 3 {
-            self.strike = 0
-        }
+        notiBallChange(ballType: BallCount.strike, count: self.strike)
+        if self.strike == 3 { self.strike = 0 }
     }
     
     private func updateBall(_ count: Int) {
         self.ball += count
-        
-        notiBallChange()
-        
-        if self.ball == 4 {
-            self.ball = 0
-        }
+
+        notiBallChange(ballType: BallCount.ball, count: self.ball)
+        if self.ball == 4 { self.ball = 0 }
     }
     
     private func updateOut(_ count: Int) {
         self.out += count
         
-        notiOutChange()
-        
-        if self.out == 3 {
-            self.out = 0
-        }
+        notiBallChange(ballType: BallCount.out, count: self.out)
+        if self.out == 3 { self.out = 0 }
     }
     
 }

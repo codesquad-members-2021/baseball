@@ -122,8 +122,8 @@ extension GameManager: GameUpdatable {
     }
     
     func changeBatter(to newBatter: Player) {
+        if self.batter.name != newBatter.name { self.ballCounter.reset() }
         self.batter = newBatter
-        self.ballCounter.reset()
     }
     
     func updateBallCount(with ballChanged: BallChanged) {

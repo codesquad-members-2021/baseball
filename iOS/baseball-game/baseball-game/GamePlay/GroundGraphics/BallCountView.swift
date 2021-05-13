@@ -142,7 +142,7 @@ class BallCountView: UIView {
     private func fill(with property: DrawingProperty, upto count: Int) {
         guard let targetLayers = countCircleLayers[property.row] else { return }
 
-        if count > property.maxColumn {
+        if count > property.maxColumn || count == 0 {
             targetLayers.forEach { layer in
                 layer.backgroundColor = Color.clear
             }
