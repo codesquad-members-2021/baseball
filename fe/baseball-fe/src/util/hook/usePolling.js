@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react';
 
-function usePolling({ URL, options = {}, delay, completeFn = () => false }) {
+function usePolling({ URL, options = {}, delay = 1000, completeFn = () => false }) {
   const [timeoutId, setTimeoutId] = useState();
   const [response, setResponse] = useState();
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [polling, setPolling] = useState(false);
 
+  const stopPolling = () => {
+    if (timeoutId) clearTimeout(timeoutId);
+    setTimeoutId(null);
+    setIsLoading(false);
+    setPolling(false);
+  }
+
   useEffect(() => {
-    if (!polling) {
-      if (timeoutId) clearTimeout(timeoutId);
-      setTimeoutId(null);
-      setIsLoading(false);
+    if (polling === false) {
+      stopPolling();
       return;
     }
     
@@ -23,11 +28,8 @@ function usePolling({ URL, options = {}, delay, completeFn = () => false }) {
         const json = await res.json();
         setResponse(json);
         
-        if (completeFn(json) && timeoutId) {
-          clearTimeout(timeoutId);
-          setTimeoutId(null);
-          setIsLoading(false);
-        }
+        if (completeFn(json))
+          stopPolling();
       } catch (err) {
         console.error(err);
         setError(err);
@@ -44,6 +46,7 @@ function usePolling({ URL, options = {}, delay, completeFn = () => false }) {
       }, delay);
 
       setTimeoutId(newTimeoutId);
+      console.log('polling');
     }
 
     repeatFn();

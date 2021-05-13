@@ -7,30 +7,19 @@ import API from 'util/API.js';
 function LoginPage() {
   const { globalDispatch } = useContext(GlobalContext);
   const [id, setId] = useState('');
-  const [loginFalse, setLoginFalse] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoginFalse(false);
-    }, 100);
-  }, [loginFalse]);
 
   const handleChange = (evt) => {
     setId(evt.target.value);
   }
 
-  const handleClick = async () => {
-    const res = await fetch(API.login({ userId: id }), { method: 'POST' });
+  const handleClick = () => {
+    // TODO: authentication logic
 
-    if (res.ok) {
-      globalDispatch({ type: GlobalAction.LOGIN, payload: { userId: id }});
-    } else {
-      setLoginFalse(true);
-    }
+    globalDispatch({ type: GlobalAction.LOGIN, payload: { userId: id }});
   }
 
   return (
-    <StyledLoginPage className={loginFalse ? 'login-false' : ''}>
+    <StyledLoginPage>
       <label>
         ID 
         <input type='text' value={id} onChange={handleChange}/>
@@ -53,6 +42,10 @@ const StyledLoginPage = styled.div`
 
   &.login-false {
     background-color: #555555;
+  }
+  
+  &:disabled {
+    opacity: 0.7;
   }
 
   input, button {

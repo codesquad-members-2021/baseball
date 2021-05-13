@@ -1,24 +1,19 @@
-import { useContext } from "react";
-import { GlobalContext } from "util/context.js";
-import { GlobalAction } from "util/action.js";
+// import { useContext } from "react";
+// import { GlobalContext } from "util/context.js";
+// import { GlobalAction } from "util/action.js";
+import { useState } from 'react';
 import Message from "./Message.js";
 import GameList from "components/GameList/GameList.js";
 import styled from "styled-components";
 
-const testPayload = {
-  gameId: 123,
-  playTeam: "abc",
-  home: true,
-};
-
 function MainPage() {
-  const { globalDispatch } = useContext(GlobalContext);
+  const [message, setMessage] = useState('참가할 팀을 선택하세요!');
 
   return (
     <StyledMainPage>
       <div>BASEBALL GAME ONLINE</div>
-      <Message />
-      <GameList />
+      <Message message={message}/>
+      <GameList setMessage={setMessage}/>
     </StyledMainPage>
   );
 }

@@ -2,15 +2,25 @@ import { useContext } from 'react';
 import styled from "styled-components";
 import { GlobalContext } from "util/context.js";
 import { GlobalAction } from 'util/action.js';
+import API from 'util/API.js';
 
-function GameListItem({ match, idx, isLoading }) {
-  const { globalDispatch } = useContext(GlobalContext);
+function GameListItem({ match, idx, isLoading, setMessage }) {
+  const { globalState, globalDispatch } = useContext(GlobalContext);
 
-  const handleClickTeam = ({ playTeam, home }) => {
-    globalDispatch({
+  const handleClickTeam = async ({ team, home }) => {
+    const res = await fetch(API.selectTeam({ gameId: match.game_id, teamId: team.id, userId: globalState.userId }), { method: 'POST' });
+    const json = await res.json();
+
+    if (json.status === 'SELECT_OK') {
+      globalDispatch({
         type: GlobalAction.SELECT_TEAM,
-        payload: { gameId: match.id, playTeam, home }
-    });
+        payload: { gameId: match.game_id, playTeam: team.name, home }
+      });
+
+      // TODO wait polling  
+    } else if (json.status === 'SELECT_FAIL') {
+      setMessage(json.message);
+    }
   }
 
   return (
@@ -20,14 +30,14 @@ function GameListItem({ match, idx, isLoading }) {
         <GameNumber>Game {idx + 1}</GameNumber>
         <MatchInformation>
             <TeamAway onClick={() => handleClickTeam({
-              playTeam: match.away.name,
+              team: match.away,
               home: false
             })}>
               {match.away.name}
             </TeamAway>
             <div className="versus">vs.</div>
             <TeamHome onClick={() => handleClickTeam({
-              playTeam: match.home.name,
+              team: match.home,
               home: true
             })}>
               {match.home.name}

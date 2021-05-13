@@ -56,6 +56,20 @@ app.get('/games', (req, res) => {
   res.json(json);
 });
 
+app.post('/games/:gameId/teams/:teamId', (req, res) => {
+  const successJson = {
+    status: "SELECT_OK",
+    message: "팀이 선택되었습니다."
+  };
+
+  const failJson = {
+    statud: "SELECT_FAIL",
+    message: "이미 선택된 팀입니다. 다른 팀을 골라 주세요."
+  }
+
+  res.json(req.params.teamId === 1 ? successJson : failJson);
+});
+
 app.get('/games/:id/start', (req, res) => {
   const json = {   
     "game_info" : {

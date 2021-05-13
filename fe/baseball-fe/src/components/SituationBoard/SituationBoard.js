@@ -20,9 +20,9 @@ function SituationBoard({ className }) {
     <StyledSituationBoard className={className}>
       <BallCount/>
         <div className='inning'>
-          {gameState.halfInning.currentInning}회
-          {gameState.halfInning.frame === "top" ? " 초" : " 말"}
-          {gameState.mode === "fielding" ? " 수비" : " 공격"}
+          {gameState.game_info.current_inning}회
+          {gameState.game_info.frame === "TOP" ? " 초" : " 말"}
+          {gameState.mode === "FIELDING" ? " 수비" : " 공격"}
         </div>
       <Field/>
       {gameState.batter && <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}

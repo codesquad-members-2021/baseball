@@ -6,19 +6,19 @@ function BallCount() {
   const { gameState } = useContext(GameContext);
 
   const renderStrike = () => {
-    return [...Array(gameState.ballCount.strike).keys()].map((_, idx) =>
+    return [...Array(gameState.ball_count.strike).keys()].map((_, idx) =>
       <Count key={idx} className='strike'/>
     );
   }
 
   const renderBall = () => {
-    return [...Array(gameState.ballCount.ball).keys()].map((_, idx) =>
+    return [...Array(gameState.ball_count.ball).keys()].map((_, idx) =>
       <Count key={idx} className='ball'/>
     );
   }
 
   const renderOut = () => {
-    return [...Array(gameState.ballCount.out).keys()].map((_, idx) =>
+    return [...Array(gameState.ball_count.out).keys()].map((_, idx) =>
       <Count key={idx} className='out'/>
     );
   }

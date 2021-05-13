@@ -1,5 +1,5 @@
-import { useEffect, useReducer, useContext } from 'react';
 import styled from 'styled-components';
+import { useEffect, useReducer, useContext } from 'react';
 import usePolling from 'util/hook/usePolling.js';
 import gameReducer from 'util/reducer/gameReducer.js';
 import { GameContext, GlobalContext } from 'util/context.js';
@@ -32,10 +32,10 @@ const _initialState = {
     ball: null,
     out: null
   },
-  halfInning: {
-    currentInning: null,
-    frame: null
-  },
+  // halfInning: {
+  //   currentInning: null,
+  //   frame: null
+  // },
 }
 
 /*
@@ -70,35 +70,16 @@ const _initialState = {
 
 function GamePage() {
   const { globalState } = useContext(GlobalContext);
-  const [gameState, gameDispatch] = useReducer(gameReducer, _initialState);
-  const { response, error, setPolling } = usePolling({
-    URL: API.start({ id: globalState.gameId }),
-    delay: 1000,
-  });
+  const [gameState, gameDispatch] = useReducer(gameReducer, globalState.initialGameState);
+  // const { response, error, isLoading, setPolling } = usePolling({
+  //   URL: API.start({ gameId: globalState.gameId, userId: globalState.userId }),
+  //   delay: 1000,
+  //   completeFn: res => res.status === 'START_OK'
+  // });
 
-  useEffect(() => {
-    setPolling(true);
-  }, []);
-
-  useEffect(() => {
-    if (!response) return;
-
-    const mode = getCurrMode(response);
-
-    if (!gameState.mode)
-      gameDispatch({
-        type: GameAction.START,
-        payload: {
-          ...response,
-          mode
-        }
-      });
-    // TODO: else ..
-
-    if (mode === 'fielding')
-      setPolling(false);
-
-  }, [response]);
+  // useEffect(() => {
+  //   setPolling(true);
+  // }, []);
 
   useEffect(() => {
     for (let i = 0; i < gameState.runners.length; i++) {
@@ -107,32 +88,24 @@ function GamePage() {
 
       gameDispatch({
         type: GameAction.SCORE,
-        payload: { isHomeFielding: globalState.home && gameState.mode === 'fielding' } });
+        payload: { isHomeFielding: globalState.home && gameState.mode === 'FIELDING' } });
       break;
     }
   }, [gameState.runners]);
 
-  useEffect(() => {
-    // TODO: POST result
-  }, [gameState]);
-
-  const getCurrMode = (data) =>  {
-    return globalState.home ? data.home.mode : data.away.mode;
-  }
-
   return (
     <StyledGamePage>
-      <GameContext.Provider value={{ gameState, gameDispatch }}>
-        {gameState.mode &&
-        <>
-          <TeamScore className='team-score'/>
-          <CurrentPlayer className='current-player'/>
-          <SituationBoard className='situation-board'/>
-          <BroadCast className='broadcast'/>
-          <Popup direction="top"><ScorePopup/></Popup>
-          <Popup direction="bottom"><PlayerListPopup/></Popup>
-        </>}
-      </GameContext.Provider>
+        <GameContext.Provider value={{ gameState, gameDispatch }}>
+          {gameState.mode &&
+          <>
+            <TeamScore className='team-score'/>
+            <CurrentPlayer className='current-player'/>
+            <SituationBoard className='situation-board'/>
+            <BroadCast className='broadcast'/>
+            <Popup direction="top"><ScorePopup/></Popup>
+            <Popup direction="bottom"><PlayerListPopup/></Popup>
+          </>}
+        </GameContext.Provider>
     </StyledGamePage>
   )
 }

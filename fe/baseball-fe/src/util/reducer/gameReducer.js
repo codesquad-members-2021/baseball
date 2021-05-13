@@ -11,33 +11,33 @@ function _dstRunnerMode({ currMode, hitBase }) {
 
 function gameReducer(state, { type, payload }) {
   switch (type) {
-    case GameAction.START: {
-      return {
-        ...state,
-        mode: payload.mode,
-        home: payload.home,
-        away: payload.away,
-        pitcher: payload.home.pitcher,
-        nthBatter: 1,
-        batter: { ...payload.away.batters[0], mode: null },
-        ballCount: {
-          strike: 0,
-          ball: 0,
-          out: 0,
-        },
-        halfInning: {
-          currentInning: payload.game_info.current_inning,
-          frame: payload.game_info.frame
-        },
-      }
-    }
+    // case GameAction.START: {
+    //   return {
+    //     ...state,
+    //     mode: payload.mode,
+    //     home: payload.home,
+    //     away: payload.away,
+    //     pitcher: payload.home.pitcher,
+    //     nthBatter: 1,
+    //     batter: { ...payload.away.batters[0], mode: null },
+    //     ballCount: {
+    //       strike: 0,
+    //       ball: 0,
+    //       out: 0,
+    //     },
+    //     halfInning: {
+    //       currentInning: payload.game_info.current_inning,
+    //       frame: payload.game_info.frame
+    //     },
+    //   }
+    // }
 
     case GameAction.STRIKE: {
-      const newState = { ...state, ballCount: { ...state.ballCount }};
+      const newState = { ...state, ball_count: { ...state.ball_count }};
 
-      if (++newState.ballCount.strike === 3) {
-        newState.ballCount.out += 1;
-        newState.ballCount.strike = 0;
+      if (++newState.ball_count.strike === 3) {
+        newState.ball_count.out += 1;
+        newState.ball_count.strike = 0;
       }
 
       newState.latestAction = {
@@ -48,13 +48,13 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.BALL: {
-      const newState = { ...state, ballCount: { ...state.ballCount }};
+      const newState = { ...state, ball_count: { ...state.ball_count }};
 
-      if (++newState.ballCount.ball === 4) {
-        if (newState.ballCount.strike < 2) {
-          newState.ballCount.strike++;
+      if (++newState.ball_count.ball === 4) {
+        if (newState.ball_count.strike < 2) {
+          newState.ball_count.strike++;
         }
-        newState.ballCount.ball = 0;
+        newState.ball_count.ball = 0;
       }
 
       newState.latestAction = {
@@ -66,9 +66,9 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.OUT: {
-      const newState = { ...state, ballCount: { ...state.ballCount }};
+      const newState = { ...state, ball_count: { ...state.ball_count }};
 
-      newState.ballCount.out += 1;
+      newState.ball_count.out += 1;
       newState.latestAction = {
         result: "out",
         time: new Date().value()

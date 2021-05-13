@@ -1,6 +1,8 @@
 export const GlobalAction = {
   SELECT_TEAM: 'select-team',
-  LOGIN: 'login'
+  LOGIN: 'login',
+  // LOADING_START: 'loading-start',
+  LOADING_END: 'loading-end',
 };
 
 export const GameAction = {

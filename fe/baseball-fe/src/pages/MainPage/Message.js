@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function Message() {
+function Message({ message }) {
   return (
     <StyledMessage>
-      <div>참가할 게임을 선택하세요!</div>
+      <div>{message}</div>
     </StyledMessage>
   );
 }
