@@ -1,12 +1,18 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import StatusBoard from "./StatusBoard";
 
 const StatusBoardList = () => {
+  const { inGameData, sequenceCount, attackState } =
+    useContext(GamePageContext);
+
   return (
     <div>
-      <StatusBoard currentPlayer name="류현진" />
-      <StatusBoard name="김제니" />
-      <StatusBoard name="김비모" />
+      <StatusBoard
+        currentPlayer
+        name={`${inGameData[attackState][sequenceCount].name}`}
+        id={`${inGameData[attackState][sequenceCount].id}`}
+      />
     </div>
   );
 };

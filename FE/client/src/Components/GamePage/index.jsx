@@ -6,6 +6,7 @@ import styled from "styled-components";
 import useAsync from "utils/hooks/useAsync";
 import API from "utils/API";
 import { GAME1 } from "utils/mockDatas";
+import { randomPitch } from "utils/randomPitch";
 
 export const GamePageContext = createContext();
 
@@ -22,9 +23,42 @@ const GamePage = ({ userState }) => {
     away: { isMyTeam: false, teamId: 0, teamName: "" },
   });
   const [inGameData, setInGameData] = useState(GAME1);
+  const [thisData, fetchThisData] = useAsync(API.get.inGameDatas, [], true);
+  const { data: thisis } = thisData;
   const [attackState, setAttackState] = useState("away");
   const [sequenceCount, setSequenceCount] = useState(0);
   const [roundCount, setRoundCount] = useState(1);
+  const [currentPlayData, setCurrentPlayerData] = useState([]);
+  const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0 });
+
+  const onPitch = () => {
+    const pitchResult = randomPitch();
+    switch (pitchResult) {
+      case "hit":
+        setCurrentPlayerData([
+          ...currentPlayData,
+          {
+            name: inGameData[attackState][sequenceCount].name,
+            id: inGameData[attackState][sequenceCount].id,
+          },
+        ]);
+        break;
+      case "ball":
+        setCurrentSBData({
+          strike: currentSBData.strike,
+          ball: currentSBData.ball + 1,
+        });
+        break;
+      case "strike":
+        setCurrentSBData({
+          strike: currentSBData.strike + 1,
+          ball: currentSBData.ball,
+        });
+        break;
+      default:
+        return;
+    }
+  };
 
   useEffect(() => {
     if (!userState) return;
@@ -35,7 +69,10 @@ const GamePage = ({ userState }) => {
       [teamKind]: { ...teamState[teamKind], isMyTeam: true },
     });
     fetchTeamInfoState(gameId);
+    fetchThisData(gameId);
   }, [userState]);
+
+  console.log("이것이다~!", thisis);
 
   useEffect(() => {
     if (!data) return;
@@ -56,12 +93,21 @@ const GamePage = ({ userState }) => {
       },
     });
   }, [data]);
+
   console.log(teamState);
   console.log("인게임", inGameData);
 
   return (
     <GamePageContext.Provider
-      value={{ teamState, inGameData, attackState, sequenceCount, roundCount }}
+      value={{
+        teamState,
+        inGameData,
+        attackState,
+        sequenceCount,
+        roundCount,
+        onPitch,
+        currentPlayData,
+      }}
     >
       <GamePageBackground>
         {loading && <>loading ...</>}

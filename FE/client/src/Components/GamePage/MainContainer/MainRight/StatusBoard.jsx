@@ -6,7 +6,7 @@ const StatusBoard = (props) => {
   return (
     <StatusBoardDiv>
       <StatusTitle currentPlayer={props.currentPlayer}>
-        7번 타자 {props.name}
+        {props.id}번 타자 {props.name}
       </StatusTitle>
       <StatusBoardItems />
     </StatusBoardDiv>

@@ -1,10 +1,12 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 const PitchButton = () => {
+  const { onPitch } = useContext(GamePageContext);
   return (
     <>
-      <PitchBtn>PITCH</PitchBtn>
+      <PitchBtn onClick={onPitch}>PITCH</PitchBtn>
     </>
   );
 };

@@ -1,25 +1,21 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 const StatusBoardItems = (props) => {
+  const { inGameData, currentSBData } = useContext(GamePageContext);
+
   return (
     <>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>볼
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
+      {currentSBData.length &&
+        Array.from({ length: currentSBData.strike + currentSBData.ball }).map(
+          (currentData) => (
+            <StatusBoardItem>
+              <NumberCircle>1</NumberCircle>스트라이크
+              <StrikeBallStatus>{`S${currentSBData.strike} B${currentSBData.ball}`}</StrikeBallStatus>
+            </StatusBoardItem>
+          )
+        )}
     </>
   );
 };
