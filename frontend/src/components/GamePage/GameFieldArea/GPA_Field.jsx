@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
@@ -10,25 +10,49 @@ import {
   useLogState,
   useLogDispatch,
 } from '../../GameContext';
-import GhostAnimation from './GPA_Animation';
+// import GhostAnimation from './GPA_Animation';
 
-const GpaField = ({ type, gameId }) => {
+const GPA_Field = ({ type, gameId }) => {
   const { state } = useGameState();
   const dispatch = useDispatch();
   const logDispatch = useLogDispatch();
   const [inning, setInning] = useState(
     state.score ? state.gameStatusDTO.inning : 1
   );
+  const currentInning = state.score ? state.gameStatusDTO.inning : 1;
+  const [isTop, setIsTop] = useState(type === 'Attack' ? '공격' : '수비');
+  const [currentType, setCurrentType] = useState(type);
+  const [isInit, setIsInit] = useState('초');
 
-  if (state.pitchResult) console.log(state.pitchResult.playType);
+  useEffect(() => {
+    state.score && setIsTop(state.gameStatusDTO.top ? '공격' : '수비');
+  }, [state]);
+
+  useEffect(() => {
+    state.score && isInit === '초' ? setIsInit('말') : setIsInit('초');
+    state.score && currentType === 'Attack'
+      ? setCurrentType('Defense')
+      : setCurrentType('Attack');
+  }, [isTop]);
+
+  const getPitchResult = async () => {
+    const response = await API.post.pitch(gameId);
+    dispatch({ type: 'pitch', payload: response });
+    logDispatch({ type: 'log', payload: response });
+  };
+
+  let interval;
+
+  useEffect(() => {
+    if (currentType === 'Defense') {
+      interval = setInterval(() => {
+        getPitchResult();
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, []);
 
   const handleClick = () => {
-    const getPitchResult = async () => {
-      const response = await API.post.pitch(gameId);
-      dispatch({ type: 'pitch', payload: response });
-      logDispatch({ type: 'log', payload: response });
-    };
-
     getPitchResult();
   };
 
@@ -37,11 +61,13 @@ const GpaField = ({ type, gameId }) => {
 
   return (
     <>
-      {type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
+      {currentType === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
       <FieldArea>
-        <GameState>{inning}회초 공격</GameState>
+        <GameState>
+          {currentInning}회{isInit} {isTop}
+        </GameState>
         <FieldSVG />
-        <GhostAnimation move={move} />
+        {/* <GhostAnimation move={move} /> */}
       </FieldArea>
     </>
   );
@@ -49,7 +75,7 @@ const GpaField = ({ type, gameId }) => {
 
 const PITCH = styled.button`
   position: absolute;
-  top: 23rem;
+  top: 26rem;
   left: 3rem;
   cursor: pointer;
   z-index: 9999;
@@ -71,7 +97,7 @@ const FieldSVG = styled(Field)`
 
 const GameState = styled(Span)`
   position: absolute;
-  top: 17rem;
+  top: 50rem;
   right: 23rem;
   font-size: ${theme.fontSize.X_large};
   font-weight: ${theme.fontWeight.light};

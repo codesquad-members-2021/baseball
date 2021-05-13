@@ -11,16 +11,16 @@ const GameGeneralInfo = ({ type }) => {
     <InfoWrapper>
       <Title>BASEBALL GAME ONLINE</Title>
       <FlexBox>
-        <TeamName>{state.awayTeam.teamName}</TeamName>
         <TeamBlock>
-          <TeamName>{away_score}</TeamName>
-          {type === 'Defense' && <MyTeam>Player</MyTeam>}
+          <TeamName>{state.awayTeam.teamName}</TeamName>
+          {type === 'Attack' && <MyTeam>Player</MyTeam>}
         </TeamBlock>
+        <TeamName>{away_score}</TeamName>
         <VS>VS</VS>
         <TeamName>{home_score}</TeamName>
         <TeamBlock>
           <TeamName>{state.homeTeam.teamName}</TeamName>
-          {type === 'Attack' && <MyTeam>Player</MyTeam>}
+          {type === 'Defense' && <MyTeam>Player</MyTeam>}
         </TeamBlock>
       </FlexBox>
     </InfoWrapper>

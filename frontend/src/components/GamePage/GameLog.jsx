@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../Style/Theme';
 import Scroll from '../Style/Scroll';
-import { useGameState } from '../GameContext';
+import { useLogState } from '../GameContext';
 
 const GameLog = () => {
   const { logState } = useLogState();
@@ -12,19 +12,21 @@ const GameLog = () => {
   logState.map((log, i) => {
     processedLog[i] = {
       hitter: `${log.gameStatusDTO.currentHitter + 1}번 타자 ${
-        log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
+        log.awayTeam.players[log.gameStatusDTO.currentHitter].name
       }`,
       fragment: (
-        <LogWrapper>
-          <Number>{i}</Number>
-          <Log>{log.pitchResult.playType}</Log>
-          <AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
-        </LogWrapper>
+        <div>
+          <LogWrapper>
+            <Number>{i + 1}</Number>
+            <Log>{log.pitchResult.playType}</Log>
+            <AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
+          </LogWrapper>
+        </div>
       ),
     };
   });
 
-  const gropuByHitter = processedLog.reduce((acc, obj) => {
+  const LogGroupedByHitter = processedLog.reduce((acc, obj) => {
     if (!acc[obj.hitter]) {
       acc[obj.hitter] = [];
     }
@@ -34,15 +36,17 @@ const GameLog = () => {
 
   return (
     <GameLogScroll>
-      {Object.entries(gropuByHitter).map(([key, value]) => {
+      {Object.entries(LogGroupedByHitter).map(([key, value]) => {
         const logList = value.map(log => log);
         return (
-          <>
-            <PlayerWrapper>
-              <Player>{key}</Player>
-            </PlayerWrapper>
-            {logList}
-          </>
+          <PlayersWrapper>
+            <div>
+              <PlayerWrapper>
+                <Player>{key}</Player>
+              </PlayerWrapper>
+              <LogByPlayer>{logList}</LogByPlayer>
+            </div>
+          </PlayersWrapper>
         );
       })}
     </GameLogScroll>
@@ -50,9 +54,20 @@ const GameLog = () => {
 };
 const GameLogScroll = styled(Scroll)``;
 
+const PlayersWrapper = styled.div`
+  display: flex;
+  /* flex-direction: column-reverse; */
+`;
+
 const PlayerWrapper = styled.div`
   padding-left: 20px;
 `;
+
+const LogByPlayer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
 const LogWrapper = styled.div`
   margin: 1rem;
   width: fit-content;

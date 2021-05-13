@@ -9,7 +9,7 @@ const GamePlayers = () => {
   } = useGameState();
 
   const TeamPlayersInfo = () => {
-    console.log(awayTeam.players);
+    // console.log(awayTeam.players);
     return gameStatusDTO ? (
       <>
         <Team>
