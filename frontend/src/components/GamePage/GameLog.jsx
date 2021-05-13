@@ -8,10 +8,6 @@ const GameLog = () => {
 	const { state } = useGameState();
 	const [logData, setLogData] = useState([]);
 
-	if (state.pitchResult) {
-		console.log(state.gameStatusDTO);
-	}
-
 	const SingleLog = () => {};
 
 	useEffect(() => {

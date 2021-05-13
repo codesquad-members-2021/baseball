@@ -1,25 +1,35 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
 import { useGameState } from '../GameContext';
 const GameDetailScore = () => {
 	const { state } = useGameState();
+
 	const totalInning = Array.from({ length: 14 }, (v, i) => i);
 	totalInning[0] = null;
 	totalInning[totalInning.length - 1] = 'R';
 
 	const ScoreTop = totalInning.map((v) => <Block>{v}</Block>);
-	const teamHome = totalInning
-		.slice()
-		.map((v, i) => (i === 0 ? <Block>{state.awayTeam.teamName}</Block> : null));
-	const teamAway = totalInning
-		.slice()
-		.map((v, i) => (i === 0 ? <Block>{state.homeTeam.teamName}</Block> : null));
+	const teamHome = Array.from({ length: 14 }, (v, i) =>
+		i === 0 ? <Block>{state.homeTeam.teamName}</Block> : null,
+	);
+	const teamAway = Array.from({ length: 14 }, (v, i) =>
+		i === 0 ? <Block>{state.awayTeam.teamName}</Block> : null,
+	);
+	if (state.score) {
+		const scoreState = state.score.innings;
+		scoreState.map((el, idx) => {
+			teamHome[idx + 1] = <Block>{el.homeTeamScore}</Block>;
+			teamAway[idx + 1] = <Block>{el.awayTeamScore}</Block>;
+		});
+	}
+
 	return (
 		<ScoreDivWrapper>
 			<ScoreWrapper>
 				<ScoreBlock>{ScoreTop}</ScoreBlock>
-				<TeamScoreBlock>{teamHome}</TeamScoreBlock>
 				<TeamScoreBlock>{teamAway}</TeamScoreBlock>
+				<TeamScoreBlock>{teamHome}</TeamScoreBlock>
 			</ScoreWrapper>
 		</ScoreDivWrapper>
 	);

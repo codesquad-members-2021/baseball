@@ -1,35 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
-import { ReactComponent as Ghost } from './ghost.svg';
 import API from '../../Hook/API';
 import { useGameState, useDispatch } from '../../GameContext';
-
-const run = keyframes`
-from {
-	transform: translateX(0rem) translateY(0rem);
-}
-to {
-	transform: translateX(15rem) translateY(-12.5rem);
-}`;
+import GhostAnimation from './GPA_Animation';
 
 const GpaField = ({ type, gameId }) => {
 	const { state } = useGameState();
-	const [move, setMove] = useState(false);
 	const dispatch = useDispatch();
-
 	const [inning, setInning] = useState(
 		state.score ? state.gameStatusDTO.inning : 1,
 	);
+
+	if (state.pitchResult) console.log(state.pitchResult.playType);
+
 	const handleClick = () => {
-		const pitchResult = async () => {
+		const getPitchResult = async () => {
 			const response = await API.post.pitch(gameId);
 			dispatch({ type: 'pitch', payload: response });
 		};
-		pitchResult();
-		setMove(true);
+
+		getPitchResult();
 	};
+
+	const move =
+		state.pitchResult && state.pitchResult.playType === 'HITS' ? true : false;
 
 	return (
 		<>
@@ -37,24 +33,11 @@ const GpaField = ({ type, gameId }) => {
 			<FieldArea>
 				<GameState>{inning}회초 공격</GameState>
 				<FieldSVG />
-				<GhostSVG move={move} />
+				<GhostAnimation move={move} />
 			</FieldArea>
 		</>
 	);
 };
-
-const GhostSVG = styled(Ghost)`
-	position: absolute;
-	width: 3rem;
-	top: 52.5rem;
-	left: 23rem;
-	animation: run 2s forwards;
-	${(props) =>
-		props.move &&
-		css`
-			animation-name: ${run};
-		`};
-`; //트랜지션
 
 const PITCH = styled.button`
 	position: absolute;
