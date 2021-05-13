@@ -25,7 +25,7 @@ const GamePlay = ({ location }) => {
     const team = queryString.parse(location.search);
     const { gamePlayState, gamePlayDispatch } = useContext(GamePlayContext);
 
-    const { clickLocation } = useContext(GlobalContext);
+    const { globalState } = useContext(GlobalContext);
     const [playerList, setPlayerList] = useState("");
     console.log(playerList)
 
@@ -59,7 +59,7 @@ const GamePlay = ({ location }) => {
     const options = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"user" : clickLocation === "away" ? team.away : team.home, "opponent" : clickLocation === "away" ? team.home : team.away})
+        body: JSON.stringify({"user" : globalState.clickLocation === "away" ? team.away : team.home, "opponent" : globalState.clickLocation === "away" ? team.home : team.away})
         // 클릭이 좌측 away인지 우측 home 인지 판별하기.
     }
     const fetchData = async (url) => {
@@ -69,10 +69,10 @@ const GamePlay = ({ location }) => {
     };
 
     useEffect(() => {
-        if (!clickLocation) return;
-        clickLocation === "away" ? fetchData("/api/games/type-away") : fetchData("/api/games/type-home");
+        if (!globalState.clickLocation) return;
+        globalState.clickLocation === "away" ? fetchData("/api/games/type-away") : fetchData("/api/games/type-home");
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [clickLocation])
+    }, [globalState.clickLocation])
 
     const childComponents = [
         <GameScore />,
