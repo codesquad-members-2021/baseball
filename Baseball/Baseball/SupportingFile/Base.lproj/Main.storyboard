@@ -333,7 +333,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcQ-FI-LkX" customClass="PaddingLabel" customModule="Baseball" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="14" width="6.5" height="16"/>
+                                                    <rect key="frame" x="8" y="11" width="20.5" height="22"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -356,7 +356,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스트라이크" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4x-ed-cTS">
-                                                    <rect key="frame" x="24.5" y="7.5" width="104" height="29"/>
+                                                    <rect key="frame" x="38.5" y="7.5" width="104" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -806,8 +806,8 @@
                                             <outlet property="atBatLabel" destination="AdZ-u4-BVU" id="0jE-aj-akJ"/>
                                             <outlet property="averageLabel" destination="ILD-O4-VkM" id="kU0-KP-3YE"/>
                                             <outlet property="hitLabel" destination="PXy-Dd-gs6" id="vDX-xf-rLD"/>
-                                            <outlet property="outLabel" destination="Iaa-Rs-dEV" id="1Ba-lO-pmN"/>
                                             <outlet property="playerNameLabel" destination="30M-mx-bNr" id="NTg-LU-6CA"/>
+                                            <outlet property="strikeLabel" destination="Iaa-Rs-dEV" id="2Gd-Co-fwu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -919,7 +919,7 @@
     </scenes>
     <designables>
         <designable name="bcQ-FI-LkX">
-            <size key="intrinsicContentSize" width="6.5" height="16"/>
+            <size key="intrinsicContentSize" width="20.5" height="22"/>
         </designable>
     </designables>
     <resources>
