@@ -36,7 +36,7 @@ class SelectViewModel {
 }
 
 
-// MARK: passing information between ViewConroller
+// MARK: passing information between ViewController
 
 extension SelectViewModel {
     
