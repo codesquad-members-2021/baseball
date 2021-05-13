@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FetchGameListUseCase {
-    func execute(completion: @escaping(Result<[MatchUp],Error>) -> Void)
+    func execute(completion: @escaping(Result<[MatchUp],NetworkError>) -> Void)
 }
 
 class DefaultFetchGameListUseCase: FetchGameListUseCase {
@@ -18,7 +18,7 @@ class DefaultFetchGameListUseCase: FetchGameListUseCase {
         self.gameListRepository = gameListRepository
     }
     
-    func execute(completion: @escaping (Result<[MatchUp],Error>) -> Void) {
+    func execute(completion: @escaping (Result<[MatchUp],NetworkError>) -> Void) {
         gameListRepository.fetchGameList { result in
             completion(result)
         }

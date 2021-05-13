@@ -16,13 +16,27 @@ protocol Requestable {
 }
 
 struct GameListEndpoint: Requestable {
-    // http://ec2-3-35-10-144.ap-northeast-2.compute.amazonaws.com/games
-    var baseUrl = "http://ec2-3-35-10-144.ap-northeast-2.compute.amazonaws.com/"
+    var baseUrl = "http://3.35.226.74/"
     var path = "games"
     var httpMethod: HTTPMethod
     
     init(httpMethod: HTTPMethod) {
         self.httpMethod = httpMethod
+    }
+    
+    func url() -> URL? {
+        return URL(string: baseUrl + path)
+    }
+}
+
+struct GamePlayEndPoint: Requestable {
+    var baseUrl = "http://3.35.226.74/games/offense/"
+    var path: String
+    var httpMethod: HTTPMethod
+    
+    init(httpMethod: HTTPMethod, path: String) {
+        self.httpMethod = httpMethod
+        self.path = path
     }
     
     func url() -> URL? {
