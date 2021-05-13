@@ -12,14 +12,17 @@ import {
 import GhostAnimation from './GPA_Animation';
 
 const GpaField = ({ type, gameId }) => {
+	let BallType;
 	const { state } = useGameState();
 	const dispatch = useDispatch();
 	const logDispatch = useLogDispatch();
 	const [inning, setInning] = useState(
 		state.score ? state.gameStatusDTO.inning : 1,
 	);
+	const [move, setMove] = useState(false);
 
-	if (state.pitchResult) console.log(state.pitchResult.playType);
+	const logInfo = useLogState();
+	const { logState } = logInfo;
 
 	const handleClick = () => {
 		const getPitchResult = async () => {
@@ -31,8 +34,26 @@ const GpaField = ({ type, gameId }) => {
 		getPitchResult();
 	};
 
-	const move =
-		state.pitchResult && state.pitchResult.playType === 'HITS' ? true : false;
+	useEffect(() => {
+		if (logState.length > 0) {
+			BallType = logState[logState.length - 1].pitchResult.playType;
+			console.log(BallType, logState);
+			if (
+				BallType === 'HOMERUN' ||
+				BallType === 'HITS' ||
+				BallType === 'FOUR_BALL'
+			) {
+				setMove(() => true);
+			}
+			// setMove(
+			// 	BallType === 'HOMERUN' ||
+			// 		BallType === 'HITS' ||
+			// 		BallType === 'FOUR_BALL'
+			// 		? true
+			// 		: false,
+			// );
+		}
+	}, [logState]);
 
 	return (
 		<>
@@ -40,7 +61,8 @@ const GpaField = ({ type, gameId }) => {
 			<FieldArea>
 				<GameState>{inning}회초 공격</GameState>
 				<FieldSVG />
-				<GhostAnimation move={move} />
+				{/* {console.log('Field:', move)} */}
+				<GhostAnimation move={move} setMove={setMove} />
 			</FieldArea>
 		</>
 	);

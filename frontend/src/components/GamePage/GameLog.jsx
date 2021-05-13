@@ -8,18 +8,19 @@ import { useLogState } from '../GameContext';
 const GameLog = () => {
 	const { logState } = useLogState();
 	const SingleLog = () => {
-		return logState.map((log, i) => (
-			// console.log(log.pitchResult.playType, log.gameStatusDTO.strikeCount);
+		return null;
+		// return logState.map((log, i) => (
+		// 	// console.log(log.pitchResult.playType, log.gameStatusDTO.strikeCount);
 
-			<Foo key={i}>
-				<span>{i}</span>
-				<span>{`${log.gameStatusDTO.currentHitter + 1}번 타자 ${
-					log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
-				}`}</span>
-				<span>{log.pitchResult.playType}</span>
-				<span>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</span>
-			</Foo>
-		));
+		// 	<Foo key={i}>
+		// 		<span>{i}</span>
+		// 		<span>{`${log.gameStatusDTO.currentHitter + 1}번 타자 ${
+		// 			log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
+		// 		}`}</span>
+		// 		<span>{log.pitchResult.playType}</span>
+		// 		<span>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</span>
+		// 	</Foo>
+		// ));
 	};
 
 	return (
