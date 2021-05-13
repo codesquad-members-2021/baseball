@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import useFetch from '../../hooks/useFetch';
 import GameListItem from './GameListItem';
 
-const GameList = (props) => {
+const DATA_LIST_URL = 'http://52.78.184.142/games';
+
+const GameList = () => {
+  const { data: gameListData } = useFetch(DATA_LIST_URL, 'get');
   const TITLE = 'BASEBALL GAME ONLINE';
   const DESCRIPTION = '참가할 게임을 선택하세요!';
-  const gameList = game_list.map(({ home, away, game_id }, idx) => (
-    <GameListItem key={idx} {...{ home, away, game_id, idx }} />
+  const gameList = gameListData?.game_list.map(({ home, away, id }, idx) => (
+    <GameListItem key={idx} {...{ home, away, id, idx }} />
   ));
 
   return (
