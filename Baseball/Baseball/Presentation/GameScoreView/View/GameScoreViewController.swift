@@ -13,6 +13,20 @@ class GameScoreViewController: UIViewController {
     @IBOutlet weak var awayTeamScore: UIStackView!
     @IBOutlet weak var gameScoreTableView: UITableView!
     
+    private var viewModel: GameScoreViewModel!
+    
+    static let storyboardName = "Main"
+    static let storyboardID = "GameScoreViewController"
+    
+    static func create(with viewModel: GameScoreViewModel) -> GameScoreViewController {
+        let storyboard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+        guard let vc = storyboard.instantiateViewController(identifier: storyboardID) as? GameScoreViewController else {
+            return GameScoreViewController()
+        }
+        vc.viewModel = viewModel
+        return vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureStackView()
