@@ -1,6 +1,6 @@
 # 출처: https://www.notion.so/cc778488e5524e1999a1bcf0c19f0006
 
-KEY_PATH=/Users/g/baseball-0506.pem
+KEY_PATH=/Users/g/baseball-0511.pem
 AWS_PATH=ubuntu@13.124.124.151
 JAR_FILE=baseball.jar
 

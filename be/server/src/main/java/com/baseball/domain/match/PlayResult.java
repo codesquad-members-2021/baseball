@@ -2,7 +2,6 @@ package com.baseball.domain.match;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 public enum PlayResult {
@@ -16,9 +15,11 @@ public enum PlayResult {
     }
 
     public static PlayResult of(String name) {
-        name = name.toUpperCase();
-        return Optional.ofNullable(valueOf(name))
-                .orElseGet(PlayResult::getRandomPitch);
+        try {
+            return valueOf(name.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return getRandomPitch();
+        }
     }
 
     public Boolean toBoolean() {

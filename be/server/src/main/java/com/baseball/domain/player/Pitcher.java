@@ -42,5 +42,4 @@ public class Pitcher extends Player {
         return (float) getOutCount() / 3;
 
     }
-
 }

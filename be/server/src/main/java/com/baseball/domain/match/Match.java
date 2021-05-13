@@ -23,10 +23,6 @@ public class Match {
         return matchInfo;
     }
 
-    public TeamType getSelectedTeam() {
-        return selectedTeam;
-    }
-
     public void selectTeam(String teamName) {
         if (selectedTeam != NONE) {
             throw new MatchOccupiedException();
@@ -36,10 +32,6 @@ public class Match {
     }
 
     public Boolean getUserOffense() {
-        /**
-         * NOTE: 만약 유저가 AWAY 팀을 선택했다면, 초반부가 공격이다.
-         * 반대로 유저가 HOME 팀을 선택헀다면, 후반부가 공격이다.
-         */
         if (selectedTeam == AWAY) {
             return matchInfo.getUserTop();
         }
@@ -47,8 +39,21 @@ public class Match {
     }
 
     public void play(String pitch) {
+        Boolean isThirdBaseTrue = matchInfo.isThirdBaseTrue();
         PlayResult playResult = PlayResult.of(pitch);
-        matchInfo.update(playResult);
         teams.play(playResult);
+        matchInfo.pushPlayResult(playResult);
+        if (playResult == PlayResult.HIT) {
+            teams.proceedToNextBase(isThirdBaseTrue);
+            matchInfo.proceedToNextBase();
+        }
+        if (matchInfo.getBallCount() >= 4) {
+            teams.proceedToNextBase(isThirdBaseTrue);
+            matchInfo.proceedToNextBase();
+        }
+        if (matchInfo.getOutCount() >= 3) {
+            teams.switchRole();
+            matchInfo.proceedToNextHalve();
+        }
     }
 }

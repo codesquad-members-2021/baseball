@@ -10,12 +10,31 @@ import static com.baseball.domain.team.TeamType.HOME;
 public class Teams {
     private final Team awayTeam;
     private final Team homeTeam;
-    private TeamType offenseTeam = AWAY;
+    private TeamType offenseTeamType = AWAY;
 
     public Teams(Team awayTeam, Team homeTeam) {
         this.awayTeam = awayTeam;
         this.homeTeam = homeTeam;
+        awayTeam.pushScore();
         awayTeam.getBatter().increasePlateAppearances();
+    }
+
+    public void switchRole() {
+        offenseTeamType = offenseTeamType == AWAY ? HOME : AWAY;
+        offenseTeam().pushScore();
+        defenseTeam().changePitcher();
+    }
+
+    public void proceedToNextBase(Boolean isThirdBaseTrue) {
+        offenseTeam().changeBatter();
+        if (isThirdBaseTrue) {
+            offenseTeam().increaseScore();
+        }
+    }
+
+    public void play(PlayResult playResult) {
+        offenseTeam().playOffense(playResult);
+        defenseTeam().playDefense(playResult);
     }
 
     public Team getAwayTeam() {
@@ -26,43 +45,19 @@ public class Teams {
         return homeTeam;
     }
 
-    public void switchRole() {
-        offenseTeam = offenseTeam == AWAY ? HOME : AWAY;
-        if (offenseTeam == AWAY) {
-            awayTeam.pushScore();
-        }
-        if (offenseTeam == HOME) {
-            homeTeam.pushScore();
-        }
-    }
-
-    public void increaseScore() {
-        if (offenseTeam == AWAY) {
-            awayTeam.increaseScore();
-        }
-        if (offenseTeam == HOME) {
-            homeTeam.increaseScore();
-        }
-    }
-
-    public void play(PlayResult playResult) {
-        Pitcher pitcher = getPitcher();
-        Batter batter = getBatter();
-        pitcher.play(playResult);
-        batter.play(playResult);
-    }
-
     public Pitcher getPitcher() {
-        if (offenseTeam == AWAY) {
-            return homeTeam.getPitcher();
-        }
-        return awayTeam.getPitcher();
+        return defenseTeam().getPitcher();
     }
 
     public Batter getBatter() {
-        if (offenseTeam == AWAY) {
-            return awayTeam.getBatter();
-        }
-        return homeTeam.getBatter();
+        return offenseTeam().getBatter();
+    }
+
+    private Team offenseTeam() {
+        return offenseTeamType == AWAY ? awayTeam : homeTeam;
+    }
+
+    private Team defenseTeam() {
+        return offenseTeamType == AWAY ? homeTeam : awayTeam;
     }
 }

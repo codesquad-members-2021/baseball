@@ -1,5 +1,6 @@
 package com.baseball.domain.team;
 
+import com.baseball.domain.match.PlayResult;
 import com.baseball.domain.player.Batter;
 import com.baseball.domain.player.Pitcher;
 import com.baseball.domain.player.Players;
@@ -30,6 +31,16 @@ public class Team {
         return scores.stream()
                 .reduce(Integer::sum)
                 .orElse(0);
+    }
+
+    public void playOffense(PlayResult playResult) {
+        Batter batter = players.getBatter();
+        batter.play(playResult);
+    }
+
+    public void playDefense(PlayResult playResult) {
+        Pitcher pitcher = players.getPitcher();
+        pitcher.play(playResult);
     }
 
     public List<Integer> getScores() {

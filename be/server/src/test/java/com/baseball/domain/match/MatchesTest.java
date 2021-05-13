@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class MatchesTest {
-
     private Matches matches;
 
     @BeforeEach
@@ -23,6 +22,4 @@ class MatchesTest {
                 .isThrownBy(() -> matches.getMatch("BAD_ID"))
                 .withMessage("존재하지 않는 Match Id 입니다; BAD_ID");
     }
-
-
 }

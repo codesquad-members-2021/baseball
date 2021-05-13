@@ -12,24 +12,26 @@ public class MatchInfo {
     private LinkedList<Boolean> bases = new LinkedList<>(Arrays.asList(false, false, false));
     private List<PlayResult> playResults = new ArrayList<>();
 
+    int outCount = 0;
+
     public Integer getHalvesCount() {
         return halvesCount;
     }
 
-    public Integer getStrike() {
+    public Integer getStrikeCount() {
         return (int) playResults.stream()
                 .filter(pitch -> pitch == PlayResult.STRIKE)
                 .count();
     }
 
-    public Integer getBall() {
+    public Integer getBallCount() {
         return (int) playResults.stream()
                 .filter(pitch -> pitch == PlayResult.BALL)
                 .count();
     }
 
     public Integer getOutCount() {
-        return getStrike() / 3;
+        return outCount;
     }
 
     public List<Boolean> getBases() {
@@ -55,17 +57,31 @@ public class MatchInfo {
         return halvesCount % 2 == 1;
     }
 
-    public void update(PlayResult playResult) {
-        // TODO: playResult 에 따른 상태변화를 TDD 로 구현
+    public Boolean isThirdBaseTrue() {
+        return bases.get(2);
+    }
+
+    public void pushPlayResult(PlayResult playResult) {
         playResults.add(playResult);
-
-        if (playResult == PlayResult.HIT) {
-            bases.removeLast();
-            bases.addFirst(Boolean.TRUE);
+        if (getStrikeCount() != 0 && getStrikeCount() % 3 == 0) {
+            outCount++;
         }
+    }
 
-        if (playResult == PlayResult.STRIKE && getOutCount() == 3) {
-            halvesCount++;
-        }
+    public void resetPlayResults() {
+        playResults = new ArrayList<>();
+    }
+
+    public void proceedToNextBase() {
+        bases.removeLast();
+        bases.addFirst(Boolean.TRUE);
+        resetPlayResults();
+    }
+
+    public void proceedToNextHalve() {
+        halvesCount++;
+        bases = new LinkedList<>(Arrays.asList(false, false, false));
+        resetPlayResults();
+        outCount = 0;
     }
 }

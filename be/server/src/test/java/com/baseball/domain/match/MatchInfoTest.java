@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static com.baseball.domain.match.PlayResult.*;
+import static com.baseball.domain.match.PlayResult.BALL;
+import static com.baseball.domain.match.PlayResult.STRIKE;
 
 class MatchInfoTest {
     private SoftAssertions softly;
@@ -25,9 +26,9 @@ class MatchInfoTest {
     void scenario_initial() {
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -41,12 +42,12 @@ class MatchInfoTest {
     @Test
     @DisplayName("피쳐가 strike를 던졌을 경우에 대한 테스트")
     void scenario_strike() {
-        matchInfo.update(STRIKE);
+        matchInfo.pushPlayResult(STRIKE);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -61,13 +62,13 @@ class MatchInfoTest {
     @DisplayName("피쳐가 strike를 3번 던졌을 경우에 대한 테스트")
     void scenario_strike_3() {
         for (int i = 0; i < 3; i++) {
-            matchInfo.update(STRIKE);
+            matchInfo.pushPlayResult(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(3);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(1);
@@ -79,16 +80,37 @@ class MatchInfoTest {
     }
 
     @Test
+    @DisplayName("피쳐가 strike를 6번 던졌을 경우에 대한 테스트")
+    void scenario_strike_6() {
+        for (int i = 0; i < 6; i++) {
+            matchInfo.pushPlayResult(STRIKE);
+        }
+        softly.assertThat(matchInfo.getHalvesCount())
+                .isEqualTo(1);
+        softly.assertThat(matchInfo.getStrikeCount())
+                .isEqualTo(6);
+        softly.assertThat(matchInfo.getBallCount())
+                .isEqualTo(0);
+        softly.assertThat(matchInfo.getOutCount())
+                .isEqualTo(2);
+        softly.assertThat(matchInfo.getBases())
+                .isEqualTo(Arrays.asList(false, false, false));
+        softly.assertThat(matchInfo.getPitcherInfo())
+                .isEqualTo(Arrays.asList(true, true, true, true, true, true));
+        softly.assertAll();
+    }
+
+    @Test
     @DisplayName("피쳐가 strike를 9번 던졌을 경우에 대한 테스트")
     void scenario_strike_9() {
         for (int i = 0; i < 9; i++) {
-            matchInfo.update(STRIKE);
+            matchInfo.pushPlayResult(STRIKE);
         }
         softly.assertThat(matchInfo.getHalvesCount())
-                .isEqualTo(2);
-        softly.assertThat(matchInfo.getStrike())
+                .isEqualTo(1);
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(9);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(3);
@@ -102,12 +124,12 @@ class MatchInfoTest {
     @Test
     @DisplayName("피쳐가 ball을 던졌을 경우에 대한 테스트")
     void scenario_ball() {
-        matchInfo.update(BALL);
+        matchInfo.pushPlayResult(BALL);
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(1);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
@@ -118,86 +140,55 @@ class MatchInfoTest {
         softly.assertAll();
     }
 
-    @Test
-    @DisplayName("베가 hit을 던졌을 경우에 대한 테스트")
-    void scenario_hit() {
-        matchInfo.update(HIT);
-        softly.assertThat(matchInfo.getHalvesCount())
-                .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getOutCount())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getBases())
-                .isEqualTo(Arrays.asList(true, false, false));
-        softly.assertThat(matchInfo.getPitcherInfo())
-                .isEqualTo(new ArrayList<>());
-        softly.assertAll();
-    }
 
     @Test
-    @DisplayName("베터가 hit을 연속으로 2번 냈을 경우에 대한 테스트")
-    void scenario_hit_2() {
-        for (int i = 0; i < 2; i++) {
-            matchInfo.update(HIT);
-        }
-        softly.assertThat(matchInfo.getHalvesCount())
-                .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getOutCount())
-                .isEqualTo(0);
-        softly.assertThat(matchInfo.getBases())
-                .isEqualTo(Arrays.asList(true, true, false));
-        softly.assertThat(matchInfo.getPitcherInfo())
-                .isEqualTo(new ArrayList<>());
-        softly.assertAll();
-    }
-
-    @Test
-    @DisplayName("베터가 hit을 연속으로 3번 냈을 경우에 대한 테스트")
-    void scenario_hit_3() {
+    @DisplayName("타자가 바뀌면, ball, strike, playerResults 는 초기화 되어야하지만, out 은 초기화 되면 안된다.")
+    void proceedToNextBase_reset() {
         for (int i = 0; i < 3; i++) {
-            matchInfo.update(HIT);
+            matchInfo.pushPlayResult(STRIKE);
         }
+        matchInfo.proceedToNextBase();
         softly.assertThat(matchInfo.getHalvesCount())
                 .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
+        softly.assertThat(matchInfo.getStrikeCount())
                 .isEqualTo(0);
-        softly.assertThat(matchInfo.getBall())
+        softly.assertThat(matchInfo.getBallCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
-                .isEqualTo(0);
+                .isEqualTo(1);
         softly.assertThat(matchInfo.getBases())
-                .isEqualTo(Arrays.asList(true, true, true));
+                .isEqualTo(Arrays.asList(true, false, false));
         softly.assertThat(matchInfo.getPitcherInfo())
                 .isEqualTo(new ArrayList<>());
         softly.assertAll();
     }
 
     @Test
-    @DisplayName("베터가 strike, ball hit를 차례로 냈을 경우에 대한 테스트")
-    void scenario_variety() {
-        matchInfo.update(STRIKE);
-        matchInfo.update(BALL);
-        matchInfo.update(HIT);
-
+    @DisplayName("공수가 바뀌면, MatchInfo 가 halvesCount 를 제외하고 초기화 되야 한다.")
+    void proceedToNextHalve_reset() {
+        matchInfo.proceedToNextHalve();
         softly.assertThat(matchInfo.getHalvesCount())
-                .isEqualTo(1);
-        softly.assertThat(matchInfo.getStrike())
-                .isEqualTo(1);
-        softly.assertThat(matchInfo.getBall())
-                .isEqualTo(1);
+                .isEqualTo(2);
+        softly.assertThat(matchInfo.getStrikeCount())
+                .isEqualTo(0);
+        softly.assertThat(matchInfo.getBallCount())
+                .isEqualTo(0);
         softly.assertThat(matchInfo.getOutCount())
                 .isEqualTo(0);
         softly.assertThat(matchInfo.getBases())
-                .isEqualTo(Arrays.asList(true, false, false));
+                .isEqualTo(Arrays.asList(false, false, false));
         softly.assertThat(matchInfo.getPitcherInfo())
-                .isEqualTo(Arrays.asList(true, false));
+                .isEqualTo(new ArrayList<>());
+        softly.assertAll();
+    }
+
+    @Test
+    @DisplayName("공수가 2번 바뀌면, 이닝이 증가해야 한다.")
+    void proceedToNextHalve_increaseInning() {
+        for (int i = 0; i < 2; i++) {
+            matchInfo.proceedToNextHalve();
+        }
+        softly.assertThat(matchInfo.getInningCount()).isEqualTo(2);
         softly.assertAll();
     }
 }
