@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
 import styled, { css, keyframes } from 'styled-components';
-import { ReactComponent as Ghost } from './ghost.svg';
+import { ReactComponent as Ghost } from './Ghost.svg';
 function GhostAnimation({ move, setMove }) {
 	console.log(move);
 	const [ghostList, setGhostList] = useState([1]);

@@ -1,27 +1,30 @@
+//gameLog
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../Style/Theme';
 import Scroll from '../Style/Scroll';
-import { useGameState } from '../GameContext';
+import { useLogState } from '../GameContext';
 
 const GameLog = () => {
-	const { state } = useGameState();
-	const [logData, setLogData] = useState([]);
+	const { logState } = useLogState();
+	const SingleLog = () => {
+		return logState.map((log, i) => (
+			// console.log(log.pitchResult.playType, log.gameStatusDTO.strikeCount);
 
-	const SingleLog = () => {};
-
-	useEffect(() => {
-		if (state.pitchResult) {
-			console.log(
-				state.gameStatusDTO.currentHitter,
-				state.pitchResult.playType,
-				`S${state.gameStatusDTO.strikeCount} B${state.gameStatusDTO.ballCount}`,
-			);
-		}
-	}, [logData]);
+			<Foo key={i}>
+				<span>{i}</span>
+				<span>{`${log.gameStatusDTO.currentHitter + 1}번 타자 ${
+					log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
+				}`}</span>
+				<span>{log.pitchResult.playType}</span>
+				<span>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</span>
+			</Foo>
+		));
+	};
 
 	return (
 		<GameLogScroll>
+			<SingleLog />
 			<PlayerWrapper>
 				<Player now={true}>7번 타자 류진</Player>
 				<LogWrapper>
@@ -83,6 +86,10 @@ const Log = styled(Span)`
 `;
 const AccLog = styled(Span)`
 	color: ${theme.colors.grey};
+`;
+
+const Foo = styled(Span)`
+	color: ${theme.colors.white};
 `;
 
 export default GameLog;

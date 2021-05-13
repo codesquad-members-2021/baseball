@@ -3,12 +3,18 @@ import styled, { css, keyframes } from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
 import API from '../../Hook/API';
-import { useGameState, useDispatch } from '../../GameContext';
+import {
+	useGameState,
+	useDispatch,
+	useLogState,
+	useLogDispatch,
+} from '../../GameContext';
 import GhostAnimation from './GPA_Animation';
 
 const GpaField = ({ type, gameId }) => {
 	const { state } = useGameState();
 	const dispatch = useDispatch();
+	const logDispatch = useLogDispatch();
 	const [inning, setInning] = useState(
 		state.score ? state.gameStatusDTO.inning : 1,
 	);
@@ -19,6 +25,7 @@ const GpaField = ({ type, gameId }) => {
 		const getPitchResult = async () => {
 			const response = await API.post.pitch(gameId);
 			dispatch({ type: 'pitch', payload: response });
+			logDispatch({ type: 'log', payload: response });
 		};
 
 		getPitchResult();
