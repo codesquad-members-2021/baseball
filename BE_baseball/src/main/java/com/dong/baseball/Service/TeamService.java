@@ -38,7 +38,7 @@ public class TeamService {
     }
 
     public Team teamInfoById(Long teamId) {
-        return teamRepository.findByTeamId(teamId).orElseThrow(() -> new TeamNotFoundException());
+        return teamRepository.findById(teamId).orElseThrow(() -> new TeamNotFoundException());
     }
 
     public Team teamInfoByName(String teamName) {
