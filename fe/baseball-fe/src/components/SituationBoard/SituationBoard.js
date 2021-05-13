@@ -1,18 +1,19 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { GameContext } from 'util/context.js';
-import { GameAction } from 'util/action.js';
 
 import BallCount from './BallCount.js';
 import Field from './Field/Field.js';
 import Baseball from 'util/baseball.js';
 
 function SituationBoard({ className }) {
-  const { gameState, gameDispatch } = useContext(GameContext);
-  // const [showPitchBtn, setShowPitchBtn] = useState(GameContext.mode === 'fielding');
+  const { gameState, gameDispatch, setRecords } = useContext(GameContext);
 
   const handleClickPitch = () => {
     const result = Baseball.pitch();
+    setRecords(records => [...records,
+      Baseball.generateRecord({ action: result, gameState })
+    ]);
     gameDispatch({ type: result });
   }
 
@@ -25,7 +26,7 @@ function SituationBoard({ className }) {
           {gameState.mode === "FIELDING" ? " 수비" : " 공격"}
         </div>
       <Field/>
-      {gameState.batter && <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}
+      {gameState.mode === 'FIELDING' && gameState.batter && <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}
     </StyledSituationBoard>
   );
 }

@@ -17,13 +17,6 @@ function Field() {
     setRunEndCnt(0);
   }, [runEndCnt]);
 
-  // useEffect(() => {
-  //   let isScore = false;
-
-  //   gameState
-    
-  // }, [gameState.runners]);
-
   const handleRunEnd = () => {
     setRunEndCnt(runEndCnt + 1);
   }

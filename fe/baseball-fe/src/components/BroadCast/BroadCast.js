@@ -1,21 +1,42 @@
 import styled from 'styled-components';
-import { useState, useEffect, useContext } from 'react';
-import { GameContext } from 'util/context.js';
+import { useRef, useState, useEffect } from 'react';
+
+import BatterRecordList from './BatterRecordList.js';
 
 function BroadCast({ className }) {
-  const { gameState } = useContext(GameContext);
-  const [ actionList, setActionList ] = useState(gameState.latestAction);
+  const [scrollWidth, setScrollWidth] = useState();
+  const [mouseOver, setMouseOver] = useState(false);
+  const ref = useRef();
 
   useEffect(() => {
-    setActionList(actionList);
-  }, [actionList]);
+    if (mouseOver === false || scrollWidth)
+      return;
+
+    setScrollWidth(ref.current.offsetWidth - ref.current.clientWidth);
+  }, [mouseOver]);
+
+  const handleMouseOver = () => {
+    setMouseOver(true);
+  }
+
+  const handleMouseEnter = () => {
+    setMouseOver(true);
+  }
+
+  const handleMouseLeave = () => {
+    setMouseOver(false);
+  }
 
   return (
-    <StyledBroadCast className={className}>
-      <div className="curr-hitter">
-        {gameState.currHitter}
-      </div>
-      <div className="hitter-record">{}</div>
+    <StyledBroadCast
+      className={className} 
+      ref={ref}
+      mouseOver={mouseOver}
+      scrollWidth={mouseOver ? scrollWidth : 0}
+      onMouseOver={handleMouseOver}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
+      <BatterRecordList/>
     </StyledBroadCast>
   )
 }
@@ -24,12 +45,7 @@ export default BroadCast;
 
 const StyledBroadCast = styled.div`
   box-shadow: 0 0 0 1px black inset;
-
-  .curr-hitter {
-    border: 2px solid green;
-  }
-
-  .hitter-record {
-    border: 2px solid blue;
-  }
+  background-color: black;
+  margin-right: ${props => '-' + String(props.scrollWidth) + 'px'};
+  overflow-y: ${props => props.mouseOver ? 'scroll' : 'hidden'};
 `;

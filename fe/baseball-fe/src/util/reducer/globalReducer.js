@@ -18,7 +18,7 @@ function globalReducer(state, { type, payload }) {
           pitcher: null,
           batter: null,
           pitcher: payload.initialGameState.home.pitcher,
-          nth_batter: 1,
+          nth_batter: 0,
           batter: { ...payload.initialGameState.away.batters[0], mode: null },
           runners: [],
           ball_count: {
@@ -26,6 +26,8 @@ function globalReducer(state, { type, payload }) {
             ball: 0,
             out: 0
           },
+          additionalRecord: null,
+          needToPost: false,
         }
       };
     }

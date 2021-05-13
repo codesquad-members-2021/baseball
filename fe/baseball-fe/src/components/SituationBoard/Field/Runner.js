@@ -1,13 +1,10 @@
-import { useState, useEffect, useContext, useReducer } from 'react';
+import { useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { GlobalContext, GameContext } from 'util/context.js';
-import runnerReducer from 'util/reducer/runnerReducer.js';
-import { GameAction, RunnerAction } from 'util/action.js';
+import { GameContext } from 'util/context.js';
+import { GameAction } from 'util/action.js';
 
 function Runner({ runnerIdx, onRunEnd }) {
-  const { globalState } = useContext(GlobalContext);
   const { gameState, gameDispatch } = useContext(GameContext);
-
 
   const handleAnimationEnd = () => {
     gameDispatch({ type: GameAction.RUN_END, payload: { runnerIdx }});

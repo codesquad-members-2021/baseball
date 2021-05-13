@@ -14,11 +14,6 @@ function LoadingPage() {
 
   useEffect(() => {
     setPolling(true);
-
-    // FOR TEST
-    // setTimeout(() => {
-    //   setPolling(false);
-    // }, 3000);
   }, []);
 
   useEffect(() => {
@@ -34,13 +29,6 @@ function LoadingPage() {
         initialGameState: { ...response.body, mode }
       }
     });
-    // gameDispatch({
-    //   type: GameAction.START,
-    //   payload: {
-    //     ...response.body,
-    //     mode
-    //   }
-    // });
   }, [isLoading]);
 
   const getCurrMode = (data) =>  {

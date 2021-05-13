@@ -48,19 +48,6 @@ function usePolling({ URL, options = {}, delay = 1500, completeFn = () => false 
 
     setIntervalId(newIntervalId);
 
-    // const repeatFn = (setintervalId) => {
-      
-
-    //   const newTimeoutId = (() => {
-    //     repeatFn(setTimeoutId);
-    //   }, delay);
-
-    //   setTimeoutId(newTimeoutId);
-    //   console.log('polling');
-    // }
-
-    // repeatFn(setTimeoutId);
-
     return () => {
       if (newIntervalId) clearInterval(newIntervalId);
     }

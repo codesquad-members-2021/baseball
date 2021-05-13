@@ -10,7 +10,6 @@ import GamePage from './pages/GamePage/GamePage.js';
 
 const _initialState = {
   userId: null,
-  // isLoading: false,
   gameId: null,
   playTeam: null,
   home: null,

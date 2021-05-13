@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { useEffect, useReducer, useContext } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 import usePolling from 'util/hook/usePolling.js';
 import gameReducer from 'util/reducer/gameReducer.js';
+import recordReducer from 'util/reducer/recordReducer.js';
 import { GameContext, GlobalContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 import API from 'util/API.js';
@@ -63,10 +64,9 @@ const _initialState = {
 function GamePage() {
   const { globalState } = useContext(GlobalContext);
   const [gameState, gameDispatch] = useReducer(gameReducer, globalState.initialGameState);
+  const [records, setRecords] = useState([]);
   // const { response, error, isLoading, setPolling } = usePolling({
   //   URL: API.start({ gameId: globalState.gameId, userId: globalState.userId }),
-  //   delay: 1000,
-  //   completeFn: res => res.status === 'START_OK'
   // });
 
   // useEffect(() => {
@@ -84,10 +84,27 @@ function GamePage() {
       break;
     }
   }, [gameState.runners]);
+  
+  useEffect(() => {
+    if (!gameState.additionalRecord)
+      return;
+
+    setRecords(records => [...records, { ...gameState.additionalRecord }]);
+    gameDispatch({ type: GameAction.ADDITIONAL_RECORD_END });
+  }, [gameState.additionalRecord]);
+
+  useEffect(() => {
+    if (!gameState.needToPost)
+      return;
+
+    console.log('pitch post!');
+    // gameDispatch({ type: GameAction.NEED_TO_POST_END });
+    
+  }, [gameState.needToPost]);
 
   return (
     <StyledGamePage>
-        <GameContext.Provider value={{ gameState, gameDispatch }}>
+        <GameContext.Provider value={{ gameState, gameDispatch, records, setRecords }}>
           {gameState.mode &&
           <>
             <TeamScore className='team-score'/>
