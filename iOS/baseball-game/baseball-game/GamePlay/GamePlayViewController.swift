@@ -44,14 +44,13 @@ class GamePlayViewController: UIViewController {
         gamePlayViewModel.requestGame()
         configureDataSource()
         bind()
+        addNotifications()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         ballCountView.configure()
         groundView.configure()
-        
         ballCountView.reset()
     }
     
@@ -115,6 +114,44 @@ extension GamePlayViewController {
         }
     }
     
+    private func addNotifications() {
+        NotificationCenter.default
+            .publisher(for: BallCounter.notiName)
+            .sink { data in
+                if let ballType = data.userInfo?["ballType"] as? BallCount,
+                   let count = data.userInfo?["count"] as? Int {
+                    DispatchQueue.main.async {
+                        switch ballType {
+                        case .strike:
+                            self.ballCountView.fillStrike(upto: count)
+                        case .ball:
+                            self.ballCountView.fillBall(upto: count)
+                        case .out:
+                            self.ballCountView.fillOut(upto: count)
+                        }
+                    }
+                }
+            }.store(in: &cancelBag)
+        
+        NotificationCenter.default
+            .publisher(for: BaseManager.notiName)
+            .sink { data in
+                if let movementType = data.userInfo?["movement"] as? BaseMovement {
+                    DispatchQueue.main.async {
+                        switch movementType {
+                        case .homeToFirst:
+                            self.groundView.homeTofirstBase()
+                        case .firstToSecond:
+                            self.groundView.firstBaseToSecondBase()
+                        case .secondToThird:
+                            self.groundView.secondBaseToThirdBase()
+                        case .thirdToHome:
+                            self.groundView.thirdBaseToHome()
+                        }
+                    }
+                }
+            }.store(in: &cancelBag)
+    }
 }
 
 

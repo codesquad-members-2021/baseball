@@ -8,7 +8,6 @@
 import Foundation
 
 struct GameDTO: Decodable {
-    
     var teams: Teams?
     var inning: Inning?
     var score: Score?
@@ -17,16 +16,4 @@ struct GameDTO: Decodable {
     var newPitch: Pitch?
     var ballChanged: BallChanged?
     var baseChanged: BaseChanged?
-
-    enum CodingKeys: String, CodingKey {
-        case teams
-        case inning
-        case score
-        case batter
-        case pitcher
-        case newPitch = "new-pitch"
-        case ballChanged = "ball-changed"
-        case baseChanged = "base-changed"
-    }
-    
 }

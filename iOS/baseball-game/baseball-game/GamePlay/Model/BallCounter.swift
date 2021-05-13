@@ -41,16 +41,33 @@ class BallCounter {
         updateOut(newInfo.out)
     }
     
+    static let notiName = Notification.Name.init("ballCountChanged")
+    
     private func updateStrike(_ count: Int) {
         self.strike += count
+
+        let updateInfo: [String: Any] = ["ballType": BallCount.strike, "count": self.strike]
+        NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
     }
     
     private func updateBall(_ count: Int) {
         self.ball += count
+        
+        let updateInfo: [String: Any] = ["ballType": BallCount.ball, "count": self.ball]
+        NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
     }
     
     private func updateOut(_ count: Int) {
-        self.out += count 
+        self.out += count
+        
+        let updateInfo: [String: Any] = ["ballType": BallCount.out, "count": self.out]
+        NotificationCenter.default.post(name: BallCounter.notiName, object: nil, userInfo: updateInfo)
     }
     
+}
+
+enum BallCount {
+    case strike
+    case ball
+    case out
 }

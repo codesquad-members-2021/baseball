@@ -62,22 +62,43 @@ class BaseManager {
         
     }
     
+    static let notiName = Notification.Name.init("baseChanged")
+    
     private func thirdToHome() {
         self.third = false
+        
+        let updateInfo: [String: Any] = ["movement": BaseMovement.thirdToHome]
+        NotificationCenter.default.post(name: BaseManager.notiName, object: nil, userInfo: updateInfo)
     }
     
     private func secondToThird() {
         self.second = false
         self.third = true
+        
+        let updateInfo: [String: Any] = ["movement": BaseMovement.secondToThird]
+        NotificationCenter.default.post(name: BaseManager.notiName, object: nil, userInfo: updateInfo)
     }
     
     private func firstToSecond() {
         self.first = false
         self.second = true
+        
+        let updateInfo: [String: Any] = ["movement": BaseMovement.firstToSecond]
+        NotificationCenter.default.post(name: BaseManager.notiName, object: nil, userInfo: updateInfo)
     }
     
     private func homeToFirst() {
         self.first = true
+        
+        let updateInfo: [String: Any] = ["movement": BaseMovement.homeToFirst]
+        NotificationCenter.default.post(name: BaseManager.notiName, object: nil, userInfo: updateInfo)
     }
     
+}
+
+enum BaseMovement {
+    case homeToFirst
+    case firstToSecond
+    case secondToThird
+    case thirdToHome
 }
