@@ -3,7 +3,7 @@ import Score from '../components/playScreen/Score';
 import LogList from '../components/playScreen/LogList';
 import Stadium from '../components/playScreen/Stadium';
 import CurrentPlayer from '../components/playScreen/CurrentPlayer';
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { GlobalContext } from '../App';
 
 const PlayScreen = (props) => {
@@ -15,13 +15,15 @@ const PlayScreen = (props) => {
     setMyTeamName,
     setCounterTeam,
     setCounterTeamName,
+    setCurrHitter,
   } = useContext(GlobalContext);
-
+  useEffect(() => setCurrHitter(homeTeam.players[0]), []);
   if (isHome) {
     setMyTeam(homeTeam.players);
     setMyTeamName(homeTeam.teamName);
     setCounterTeam(awayTeam.players);
     setCounterTeamName(awayTeam.teamName);
+    // setCurrHitter(homeTeam.players[0]);
     // setIsDefense(isHome);
   } else {
     setMyTeam(awayTeam.players);

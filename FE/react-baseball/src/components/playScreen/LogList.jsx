@@ -1,26 +1,48 @@
 import styled from 'styled-components';
 import { useState, useEffect, useContext } from 'react';
-import { boardHistory, BoardHistoryContext } from '../provider/Context';
 import { GlobalContext } from '../../App';
+import { BoardHistoryContext } from '../provider/Context';
+
 const LogList = () => {
   const { ballCnt } = useContext(BoardHistoryContext);
+  const {
+    homeTeam,
+    myTeam,
+    currHitter,
+    setCurrHitter,
+    totalOutCount,
+    setTotalOutCount,
+  } = useContext(GlobalContext);
   const [logArr, setLogArr] = useState([]);
-  const { totalOutCount, setTotalOutCount } = useContext(GlobalContext);
+  const [batOrder, setBatOrder] = useState(1);
+  console.log('⭐️', myTeam);
 
   useEffect(() => {
     setLogArr((logArr) => [...logArr, ballCnt]);
+    if (ballCnt.HitInfo === 'O') {
+      // console.log('현재 타자!', currHitter.id, currHitter);
+      console.log('토탈!', totalOutCount);
+      setTotalOutCount((totalOutCount) => totalOutCount + 1);
+      console.log('이제 하나씩 올렷다', totalOutCount);
+    }
+    if (ballCnt.HitInfo === 'H') {
+      //한박자 느린 Hitter 변경
+      //아웃과 안타시 타자 변경
+      console.log('🔥현재나의타자정보번호', currHitter, 'BBBb', batOrder);
+      setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
+      setBatOrder((batOrder) => batOrder + 1);
+      console.log('batOrder 바뀌지않앗겟지', batOrder);
+      //myTeam으로 가져올지 homeTeam으로 가져올지 모그렛음
+      setCurrHitter(myTeam[batOrder]);
+      console.log('⭐️현재나의타자정보번호', currHitter, 'BBB', batOrder);
+    }
   }, [ballCnt]);
 
   const LogCards = () => {
+    console.log('============================', logArr);
     return logArr.map((ele, i) => {
-      // if (ele.O !== 0) {
-      //   var prevTotalCnt = totalOutCount;
-      //   setTotalOutCount((totalOutCount) => totalOutCount + 1);
-      //   return <LogLine key={i}>아웃입니다</LogLine>;
-      // }
+      // console.log('logarr 하ㅏ나식', ele);
       if (ele.HitInfo !== ' ' && (ele.HitInfo === 'S' || ele.HitInfo === 'B')) {
-        // if (ele.H === 1) return <LogLine key={i}>안타입니다</LogLine>;
-        // if (ele.O === 1) return <LogLine key={i}>아웃입니다</LogLine>;
         return (
           <LogLine key={i}>
             <LogIdx>{i}</LogIdx>
@@ -33,22 +55,16 @@ const LogList = () => {
       }
 
       if (ele.HitInfo === 'O') {
+        // setTotalOutCount((prevCnt) => prevCnt + 1);
+        // console.log('토탈아웃', totalOutCount);
         return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
       }
       if (ele.HitInfo === 'H') {
+        // console.log(myTeam);
         return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
       }
-      // if (ele.H === 1) {
-      //   return <LogLine>안타입니다</LogLine>;
-      // }
-      // if (ele.O === 1) {
-      //   return <LogLine>아웃입니다</LogLine>;
-      // } else return null;
     });
   };
-  // const setLogLine = () => {};
-  // Pitch 누르면 -> dispatch 내용을 리스트에 넣기  -> useEffect로 내용바뀔때마가 map렌더링
-  // 데이터 바로 받아서 리스트에 넣기
 
   return (
     <LogListDiv>

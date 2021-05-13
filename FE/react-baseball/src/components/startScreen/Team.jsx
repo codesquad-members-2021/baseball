@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { GlobalContext, PlayableContext } from '../../App';
 import axios from 'axios';
 
