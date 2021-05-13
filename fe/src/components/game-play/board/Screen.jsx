@@ -32,6 +32,9 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
     } else if (randomNum <= 80) {
       //볼
       if (ballCount.ball === 3) {
+        if (base[3]) {
+          //4번 API {"game_id": 7,"home": 1,"away": 2, "round": 3} 모든정보 컨텍스트로
+        }
         setIsTransition(true);
         setRunFirstBase(true);
         setCurrentPower(1);
@@ -39,6 +42,9 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
       handleBall();
     } else {
       //안타
+      if (base[3]) {
+        //4번 API {"game_id": 7,"home": 1,"away": 2, "round": 3} 모든정보 컨텍스트로
+      }
       setIsTransition(true);
       setRunFirstBase(true);
       handleSafety();

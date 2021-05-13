@@ -42,7 +42,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   const handleStrike = () => {
     if (ballCount.strike === 2) {
       handleOut();
-      //필요한 것들
+      //3번 API fetch { "game_id": 6, "at_bat": false } //game_id는 컨텍스트 사용
     } else {
       ballCountDispatch({ type: 'strike' });
       logListDispatch({ type: 'strike', ...ballCount, strike: ballCount.strike + 1 });
@@ -53,6 +53,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
       ballCountDispatch({ type: 'safety' });
       logListDispatch({ type: '4ball', end: true });
       memberListDispatch({ type: 'safety', turn: inning.turn });
+      //3번 API fetch  { "game_id": 6, "at_bat": true }
     } else {
       ballCountDispatch({ type: 'ball' });
       logListDispatch({ type: 'ball', ...ballCount, ball: ballCount.ball + 1 });
@@ -60,6 +61,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   };
   const handleOut = () => {
     if (ballCount.out === 2) {
+      //7번 API { "game_id": 6, "team_id":1, "round":3, "at_bat": 3 } ??타자를 번호를 보내는거네???
       ballCountDispatch({ type: 'clear' });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
@@ -73,6 +75,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
     memberListDispatch({ type: 'out', turn: inning.turn });
   };
   const handleSafety = () => {
+    //3번 API fetch { "game_id": 6, "at_bat": true }
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
     memberListDispatch({ type: 'safety', turn: inning.turn });
