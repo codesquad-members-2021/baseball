@@ -1,9 +1,9 @@
 package com.dong.baseball.Exception;
 
 public class MatchNotFoundException extends NotFoundException {
-    private static final String ERROR_MESSAGE = "Match";
+    private static final String MATCH_NOT_FOUND_MESSAGE = "Cannot Found Match";;
 
     public MatchNotFoundException() {
-        super(ERROR_MESSAGE);
+        super(MATCH_NOT_FOUND_MESSAGE);
     }
 }

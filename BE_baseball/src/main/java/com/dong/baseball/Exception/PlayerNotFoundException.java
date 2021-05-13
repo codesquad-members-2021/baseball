@@ -1,10 +1,10 @@
 package com.dong.baseball.Exception;
 
 public class PlayerNotFoundException extends NotFoundException {
-    private static final String ERROR_MESSAGE = "Cannot Found Player";
+    private static final String PLAYER_NOT_FOUND_MESSAGE = "Cannot Found Player";
 
     public PlayerNotFoundException() {
-        super(ERROR_MESSAGE);
+        super(PLAYER_NOT_FOUND_MESSAGE);
     }
 
 }
