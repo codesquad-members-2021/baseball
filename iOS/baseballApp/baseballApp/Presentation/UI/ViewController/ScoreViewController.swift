@@ -3,6 +3,10 @@ import RxSwift
 
 class ScoreViewController: UIViewController {
         
+    @IBOutlet weak var awayTeamName: UILabel!
+    @IBOutlet weak var awayTotalScore: UILabel!
+    @IBOutlet weak var homeTotalScore: UILabel!
+    @IBOutlet weak var homeTeamName: UILabel!
     @IBOutlet weak var teamSegment: UISegmentedControl!
     @IBOutlet weak var scoreTableView: UITableView!
     @IBOutlet var homeTeamScores: [UILabel]!
@@ -41,13 +45,17 @@ class ScoreViewController: UIViewController {
 private extension ScoreViewController {
     
     private func setupHomeScore(_ scoreInfo:TeamScore) {
+        homeTeamName.text = scoreInfo.teamName
         setupScore(homeTeamScores, scoreInfo.teamScore)
-        setupTotalScore(homeTeamScores, scoreInfo.teamScore)
+        let total = setupTotalScore(homeTeamScores, scoreInfo.teamScore)
+        homeTotalScore.text = "\(total)"
     }
     
     private func setupAwayScore(_ scoreInfo:TeamScore) {
+        awayTeamName.text = scoreInfo.teamName
         setupScore(awayTeamScores, scoreInfo.teamScore)
-        setupTotalScore(awayTeamScores, scoreInfo.teamScore)
+        let total = setupTotalScore(awayTeamScores, scoreInfo.teamScore)
+        awayTotalScore.text = "\(total)"
     }
     
     private func setupScore(_ team:[UILabel], _ score:[Int]) {
@@ -61,12 +69,13 @@ private extension ScoreViewController {
         inning.text = "\(score)"
     }
     
-    private func setupTotalScore(_ team: [UILabel], _ scores:[Int]){
+    private func setupTotalScore(_ team: [UILabel], _ scores:[Int]) -> Int {
         var total = 0
         for score in scores {
             total += score
         }
         team[team.endIndex-1].text = "\(total)"
+        return total
     }
     
     private func setupSegmentControll() {

@@ -16,23 +16,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-nb-EGy">
-                                <rect key="frame" x="0.0" y="44" width="414" height="88"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-nb-EGy">
+                                <rect key="frame" x="1.5" y="44" width="411.5" height="88"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV5-Mt-EDU">
-                                        <rect key="frame" x="0.0" y="32" width="186" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV5-Mt-EDU">
+                                        <rect key="frame" x="0.0" y="32" width="130.5" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XU9-5p-I9U">
-                                        <rect key="frame" x="186" y="32" width="56" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XU9-5p-I9U">
+                                        <rect key="frame" x="141.5" y="32" width="18" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 Marvel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nC3-IO-OKN">
-                                        <rect key="frame" x="242" y="32" width="172" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eA-Tf-Z4O">
+                                        <rect key="frame" x="170.5" y="32" width="47" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSb-gZ-gHX">
+                                        <rect key="frame" x="228.5" y="32" width="23.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Marvel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nC3-IO-OKN">
+                                        <rect key="frame" x="263" y="32" width="148.5" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -426,18 +438,18 @@
                             <constraint firstItem="Svo-cR-Qhz" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.486607" id="6aU-u9-dWq"/>
                             <constraint firstItem="Svo-cR-Qhz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="6hg-qD-nPf"/>
                             <constraint firstItem="XUf-HC-7pv" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="139" id="852-NI-Sy8"/>
+                            <constraint firstItem="jlt-nb-EGy" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.993961" id="8jH-P3-AiC"/>
                             <constraint firstItem="eW3-Gi-SeV" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="171" id="8uq-iJ-K21"/>
                             <constraint firstItem="JDn-jx-ef4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="74" id="BkH-Ym-XPY"/>
                             <constraint firstItem="dgF-1K-hoa" firstAttribute="top" secondItem="EW5-vN-w6W" secondAttribute="bottom" constant="14" id="El9-zB-1oN"/>
                             <constraint firstItem="dgF-1K-hoa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="IyA-cL-uKi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="tOm-6F-gKn" secondAttribute="trailing" constant="20" id="LC0-Lh-7CE"/>
-                            <constraint firstItem="jlt-nb-EGy" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="LOP-7b-9jc"/>
                             <constraint firstItem="tOm-6F-gKn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="140" id="MUT-0v-0pX"/>
-                            <constraint firstItem="jlt-nb-EGy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Mwb-Z8-a6k"/>
                             <constraint firstItem="EW5-vN-w6W" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="74" id="RiI-RM-Mev"/>
                             <constraint firstItem="XUf-HC-7pv" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.0267857" id="T86-tF-pzo"/>
                             <constraint firstItem="4zR-DY-nC9" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="TsV-op-lQr"/>
                             <constraint firstItem="JDn-jx-ef4" firstAttribute="top" secondItem="jlt-nb-EGy" secondAttribute="bottom" constant="8" symbolic="YES" id="WUo-ci-Aih"/>
+                            <constraint firstItem="jlt-nb-EGy" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="a7n-3w-tAb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Svo-cR-Qhz" secondAttribute="bottom" constant="29" id="apn-Bu-7vq"/>
                             <constraint firstItem="EW5-vN-w6W" firstAttribute="leading" secondItem="eW3-Gi-SeV" secondAttribute="trailing" constant="8" id="bhZ-hf-QIy"/>
                             <constraint firstItem="jlt-nb-EGy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="haK-yj-jcN"/>
@@ -453,6 +465,10 @@
                     <tabBarItem key="tabBarItem" title="" image="score" selectedImage="score" id="fjd-0g-Opr"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="awayTeamName" destination="nC3-IO-OKN" id="qKy-Ml-A4N"/>
+                        <outlet property="awayTotalScore" destination="oSb-gZ-gHX" id="1AQ-AH-Fsj"/>
+                        <outlet property="homeTeamName" destination="yV5-Mt-EDU" id="Jgu-xO-pkA"/>
+                        <outlet property="homeTotalScore" destination="XU9-5p-I9U" id="Z9Q-W9-QuZ"/>
                         <outlet property="scoreTableView" destination="Svo-cR-Qhz" id="Hfv-2k-h3X"/>
                         <outlet property="teamSegment" destination="dgF-1K-hoa" id="cad-vz-V88"/>
                         <outletCollection property="homeTeamScores" destination="OXX-5d-fy1" collectionClass="NSMutableArray" id="wlk-r3-W7k"/>
