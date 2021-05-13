@@ -3,15 +3,12 @@ import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
 const Pitcher = () => {
   const {
-    ballCountState: { count },
+    ballCountState: { homeCount, awayCount },
     pitcherName,
     isAttacking,
-    saveDataState,
   } = useContext(gamePlayContext);
 
-  const pitchCount = isAttacking
-    ? count + saveDataState.awayCount
-    : count + saveDataState.homeCount;
+  const pitchCount = isAttacking ? awayCount : homeCount;
 
   return (
     <>
