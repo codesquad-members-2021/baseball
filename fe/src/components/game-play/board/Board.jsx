@@ -32,7 +32,7 @@ const ballCountReducer = (state, action) => {
   return newState;
 };
 
-const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
+const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id }) => {
   const [ballCount, ballCountDispatch] = useReducer(ballCountReducer, {
     strike: 0,
     ball: 0,
@@ -52,7 +52,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
     if (ballCount.ball === 3) {
       ballCountDispatch({ type: 'safety' });
       logListDispatch({ type: '4ball', end: true });
-      memberListDispatch({ type: 'safety', turn: inning.turn });
+      memberListDispatch({ type: 'safety', turn: inning.turn, game_id });
     } else {
       ballCountDispatch({ type: 'ball' });
       logListDispatch({ type: 'ball', ...ballCount, ball: ballCount.ball + 1 });
@@ -60,6 +60,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   };
   const handleOut = () => {
     if (ballCount.out === 2) {
+      // 여기에 공수교대
       ballCountDispatch({ type: 'clear' });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
@@ -70,12 +71,12 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
       ballCountDispatch({ type: 'out' });
     }
     // 멤버 아웃 1, 타석 1 증가
-    memberListDispatch({ type: 'out', turn: inning.turn });
+    memberListDispatch({ type: 'out', turn: inning.turn, game_id });
   };
   const handleSafety = () => {
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
-    memberListDispatch({ type: 'safety', turn: inning.turn });
+    memberListDispatch({ type: 'safety', turn: inning.turn, game_id });
     logListDispatch({ type: 'safety', end: true });
   };
 
@@ -86,7 +87,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   return (
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
-      <Screen {...{ handleStrike, handleBall, handleSafety }} turn={inning.turn}></Screen>
+      <Screen {...{ handleStrike, handleBall, handleSafety, ballCount }} turn={inning.turn}></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>
     </StyledBoard>
   );

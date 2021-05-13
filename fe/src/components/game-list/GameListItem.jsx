@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom';
 
 const GameListItem = ({ home, away, id, idx }) => {
   const path = `games/${id}`;
+  const onClick = e => {
+    localStorage.setItem('select', e.target.textContent);
+  }
   return (
     <StyledGameItem>
       <div className='title'>GAME {idx + 1}</div>
       <div className='teams'>
-        <Link to={path}>
+        <Link to={path} onClick={onClick}>
           <div className='teams-name'>{home}</div>
         </Link>
         <div className='teams-vs'>vs</div>
-        <Link to={path}>
+        <Link to={path} onClick={onClick}>
           <div className='teams-name'>{away}</div>
         </Link>
       </div>

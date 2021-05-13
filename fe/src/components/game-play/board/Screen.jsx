@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useScoreNBase from '../../../hooks/useScoreNBase';
 import { ScoreNBaseContext } from '../GamePlay';
 
-const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
+const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => {
   const { base, safetyDispatch } = useContext(ScoreNBaseContext);
   const [isTransition, setIsTransition] = useState(false);
   const [runFirstBase, setRunFirstBase] = useState(false);
@@ -26,11 +26,16 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
 
   const handlePitchClick = () => {
     const randomNum = Math.ceil(Math.random() * 100);
-    if (randomNum <= 30) {
+    if (randomNum <= 0) {
       //스트라이크
       handleStrike();
-    } else if (randomNum <= 90) {
+    } else if (randomNum <= 0) {
       //볼
+      if(ballCount.ball === 3) {
+        setIsTransition(true);
+        setRunFirstBase(true);
+        setCurrentPower(1);
+      }
       handleBall();
     } else {
       //안타
