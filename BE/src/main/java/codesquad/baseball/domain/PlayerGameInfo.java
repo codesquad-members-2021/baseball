@@ -23,6 +23,14 @@ public class PlayerGameInfo {
     private int out;
     private Long average;
 
+    public void reset() {
+        pitchCount =0;
+        plateAppearance = 0;
+        hits = 0;
+        out = 0;
+        average = 0L;
+    }
+
     @JsonIgnore
     public void addPitchCount(int pitches) {
         pitchCount += pitches;
