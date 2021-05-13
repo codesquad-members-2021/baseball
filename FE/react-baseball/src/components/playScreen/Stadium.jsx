@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { useEffect, useContext } from 'react';
 import { BoardHistoryContext } from '../provider/Context';
 import PlayInning from './PlayInning';
+import { GlobalContext } from '../../App';
 
 const Stadium = () => {
   const { ballCnt, dispatch } = useContext(BoardHistoryContext);
+  const { logArr, setLogArr } = useContext(GlobalContext);
   const PlayBoardTemp = ({ type }) => {
     if (type === 'S') {
       const arr = new Array(ballCnt.S).fill(' 🟡');
@@ -19,6 +21,8 @@ const Stadium = () => {
   };
 
   useEffect(() => {
+    setLogArr((logArr) => [...logArr, ballCnt]);
+    // 여기때문에 다 엉킨듯 합니다....
     if (ballCnt.S === 3) {
       setTimeout(() => dispatch({ type: 'hitO', payload: 'O' }), 1000);
     }

@@ -13,6 +13,7 @@ import theme from './theme';
 import useToggle from './components/hooks/useToggle';
 
 function App() {
+  const [logArr, setLogArr] = useState([]);
   const [ballCnt, dispatch] = useReducer(ballReducer, boardHistory);
   const [playable, setPlayable] = useState(true);
   const [myTeam, setMyTeam] = useState([]);
@@ -32,6 +33,8 @@ function App() {
 
   const baseballState = {
     teamInfo: {
+      logArr,
+      setLogArr,
       myTeam,
       setMyTeam,
       myTeamName,
