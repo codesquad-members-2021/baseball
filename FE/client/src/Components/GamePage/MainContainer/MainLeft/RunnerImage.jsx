@@ -1,14 +1,13 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import BodyAndHead from 'Images/bodyAndHead.svg';
 import ArmsImage from 'Images/arms.svg';
 import Pants from 'Images/pants.svg';
 import Foot from 'Images/foot.svg';
 
-const RunnerImage = () => {
-
+const RunnerImage = ({ base }) => {
   return (
-    <RunnerWrapper>
+    <RunnerWrapper base={base}>
       <BodyAndHeadImageTag src={BodyAndHead} alt="" />
       <FrontArmImageTag src={ArmsImage} alt="" />
       <BackArmImageTag src={ArmsImage} alt="" />
@@ -21,14 +20,52 @@ const RunnerImage = () => {
 };
 const upDown = keyframes`
   from {
-    margin-left:-8px;
-    margin-top:-8px;
+    margin-left:-10px;
   }
   to {
     margin-left:0;
-    margin-top:0;
   }
 `;
+
+const leftRight = keyframes`
+from {
+  margin-top:-10px; 
+}
+to {
+  margin-top:0;
+}
+`;
+const move = (angle) => keyframes`
+  0% {
+    opacity:1;
+    transform: rotate(${angle}deg) translateX(0px);
+  }
+  90%{
+    opacity:1;
+  }
+  100% {
+    opacity:0;
+    transform: rotate(${angle}deg) translateX(-330px);
+  }
+`;
+
+const moveLocation = {
+  first: move(135),
+  second: move(45),
+  third: move(315),
+  fourth: move(235)
+};
+
+const runnerLocation = {
+  first: `top: 75%;
+  left: 55%;`,
+  second: `top: 33%;
+  left: 83%;`,
+  third: `top: 2%;
+  left: 36%;`,
+  fourth: `top: 41%;
+  left: 7%;`
+};
 
 const RunnerWrapper = styled.div`
   min-height: 5rem;
@@ -36,10 +73,16 @@ const RunnerWrapper = styled.div`
   width:1%;
   height:20%;
   position: absolute;
-  top: 77%;
+  animation: ${({ base }) => base === ('first' || 'third') ? upDown : leftRight} .15s linear infinite alternate,
+  ${({ base }) => moveLocation[base]} 2.5s;
+  top: 50%;
   left: 55%;
-  transform: rotate(135deg) translateX(-330px);
-  animation: ${upDown} .15s linear infinite alternate;
+  transform: rotate(135deg) translateX(0px);
+  ${({ base }) => base && css`
+    ${runnerLocation[base]}
+  `
+  }
+ 
 `;
 
 const frontHand = keyframes`

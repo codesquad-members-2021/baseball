@@ -35,7 +35,7 @@ const GamePage = ({ userState }) => {
   }, [data]);
 
   return (
-    <GamePageContext.Provider value={{ teamState, setTeamState }}>
+    <GamePageContext.Provider value={{ teamState }}>
       <GamePageBackground>
         {loading && <>loading ...</>}
 

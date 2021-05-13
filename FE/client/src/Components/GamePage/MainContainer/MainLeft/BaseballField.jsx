@@ -16,7 +16,10 @@ const BaseballField = () => {
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
-      <RunnerImage />
+      <RunnerImage base='first' />
+      <RunnerImage base='second' />
+      <RunnerImage base='third' />
+      <RunnerImage base='fourth' />
       <PitchButton />
     </BaseballFieldWrapper>
   );
