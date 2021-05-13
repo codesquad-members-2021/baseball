@@ -7,10 +7,10 @@ import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
 import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
 import com.team22.baseball.dto.response.GameList.GameDto;
-import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
-import com.team22.baseball.dto.response.TeamSelect.TeamTypeDto;
+import com.team22.baseball.dto.response.PlayerScoreList.PlayerDto;
+import com.team22.baseball.dto.response.PlayerScoreList.PlayerScoreDto;
+import com.team22.baseball.dto.response.PlayerScoreList.TeamDto;
+import com.team22.baseball.dto.response.TeamSelect.*;
 import com.team22.baseball.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,5 +130,44 @@ public class GameService {
 
     public Game findGameById(Long gameId) throws Exception {
         return gameRepository.findGameById(gameId).orElseThrow(Exception::new);
+    }
+
+    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName) throws Exception {
+        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber,teamName).orElseThrow(Exception::new);
+    }
+
+    public List<PlayerScoreDto> getPlayerScoreOfGame(Game findGame){
+
+        List<PlayerScoreDto> responseDto = new ArrayList<>();
+
+        for (Team team : findGame.getTeams()) {
+
+            List<PlayerDto> playerDtos = new ArrayList<>();
+            TeamDto teamDto = TeamDto.of(team.getName(), team.isHome(), team.isSelected());
+
+            for (Player player : team.getPlayers()) {
+                playerDtos.add(PlayerDto.of(player.getUniformNumber(), player.getName(), player.getPlateAppearance(), player.getHits(), player.getOuts()));
+            }
+            responseDto.add(PlayerScoreDto.of(teamDto, playerDtos));
+        }
+
+        return responseDto;
+
+    }
+
+    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfoDto req) throws Exception {
+        int[] scores = calculatePlayerScore(req);
+
+        updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);
+        insertTeamScore(req.getTeamName(), req.getRound(), req.getTeamScore());
+
+        Player prevPlayer = findPlayerByName(req.getPlayerName());
+
+        int prevUniformNumber = prevPlayer.getUniformNumber();
+        String teamName = req.getTeamName();
+
+        int nextUniformNumber = ++prevUniformNumber > 10 ? 1 : prevUniformNumber;
+
+        return findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName);
     }
 }
