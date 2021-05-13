@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { ReactComponent as Arrow } from 'rsc/arrow.svg'
+import useFetch from 'util/hook/useFetch.js';
+import { GlobalContext } from 'util/context.js';
 
 function Popup({ direction, children }) {
+    const { globalState } = useContext(GlobalContext);
     const [ active, setActive ] = useState(false);
+    const { response, error, isLoading } = useFetch(`http://52.78.193.180:8080/games/${globalState.gameId}/score`)
+    // console.log("fetch해오기", response);//지금 안됌.
 
     useEffect(() => {
         document.body.addEventListener('click', closePopup);

@@ -10,12 +10,12 @@ function ScorePopup() {
 
     return (
         <StyledScorePopup>
-           <div class="innings">
+           <div className="innings">
                 {totalRound.map(num => <div>{num}</div>)}
                 <div>R</div>
            </div>
-           <div class="score-container">
-                <div class="team-names">
+           <div className="score-container">
+                <div className="team-names">
                     <div>
                         <span>{gameState.away.mode === "batting" && "⚾️"}</span>
                         <span className="team-name">{gameState.away.name}</span>
@@ -27,11 +27,11 @@ function ScorePopup() {
                         <div className="curr-player">{gameState.mode === gameState.home.mode && "Player"}</div>
                     </div>
                 </div>
-                <div class="inning-scores">
+                <div className="inning-scores">
                     <div>{[1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0].map(score => <div>{score}</div>)}</div>
                     <div>{[1, 2, 3, 1, 2, 1, 3, 0, 0, 0, 1, 2].map(score => <div>{score}</div>)}</div>
                 </div>
-                <div class="total-score">
+                <div className="total-score">
                     <div>{gameState.away.score}</div>
                     <div>{gameState.home.score}</div>
                 </div>
