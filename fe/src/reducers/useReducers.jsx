@@ -48,4 +48,14 @@ const ballCountReducer = (state, action) => {
   }
 };
 
-export { ballCountReducer };
+const playerReducer = (state, action) => {
+  switch (action.payload) {
+    case 'takeTurn':
+
+    case 'getNextTurn':
+
+    default:
+  }
+};
+
+export { ballCountReducer, playerReducer };

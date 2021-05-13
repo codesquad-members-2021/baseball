@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
 const Pitcher = () => {

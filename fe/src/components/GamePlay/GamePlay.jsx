@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import Header from 'components/GamePlay/playHeader/Header';
 import Main from 'components/GamePlay/playScreen/Main';
-import { initialBallCount } from 'variables/initialData';
-import { ballCountReducer } from 'reducers/useReducers';
+import { initialBallCount, CurrentPlayer } from 'variables/initialData';
+import { ballCountReducer, playerReducer } from 'reducers/useReducers';
 
 export const gamePlayContext = React.createContext();
 
@@ -19,6 +19,28 @@ const GamePlay = ({ response }) => {
   const pitcherName = isAttacking
     ? selectPitcherName(home)
     : selectPitcherName(away);
+
+  const [homeCurrentPlayerState, dispatchHomeCurrentPlayerState] = useReducer(
+    playerReducer,
+    new CurrentPlayer(
+      homePlayer[0].name,
+      homePlayer[0].uniform_number,
+      0,
+      0,
+      []
+    )
+  );
+
+  const [awayCurrentPlayerState, dispatcAwayCurrentPlayerState] = useReducer(
+    playerReducer,
+    new CurrentPlayer(
+      awayPlayer[0].name,
+      awayPlayer[0].uniform_number,
+      0,
+      0,
+      []
+    )
+  );
 
   const [ballCountState, dispatchBallCount] = useReducer(
     ballCountReducer,
@@ -54,6 +76,8 @@ const GamePlay = ({ response }) => {
   return (
     <gamePlayContext.Provider
       value={{
+        homeCurrentPlayerState,
+        awayCurrentPlayerState,
         round,
         isAttacking,
         pitcherName,

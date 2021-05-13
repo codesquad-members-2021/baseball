@@ -1,9 +1,15 @@
-const Hitter = ({ hitter }) => {
+import { useContext } from 'react';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
+
+const Hitter = ({ type }) => {
+  const { isAttacking, homeCurrentPlayerState, awayCurrentPlayerState } =
+    useContext(gamePlayContext);
+
   return (
     <>
-      <span>류현진</span>
+      <span>{homeCurrentPlayerState.playerName}</span>
       <span>
-        {hitter.turn ?? 0}타석 {hitter.hit ?? 0}안타
+        {homeCurrentPlayerState.turn}타석 {homeCurrentPlayerState.hit}안타
       </span>
     </>
   );

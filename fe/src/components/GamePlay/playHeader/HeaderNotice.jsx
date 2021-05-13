@@ -8,11 +8,7 @@ const HeaderNotice = ({ type }) => {
     <NoticeWrap>
       <Position>{type === 'pitcher' ? '투수' : '타자'}</Position>
       <Notice>
-        {type === 'pitcher' ? (
-          <Pitcher pitcher={type} />
-        ) : (
-          <Hitter hitter={type} />
-        )}
+        {type === 'pitcher' ? <Pitcher type={type} /> : <Hitter type={type} />}
       </Notice>
     </NoticeWrap>
   );

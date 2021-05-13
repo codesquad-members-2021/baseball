@@ -9,11 +9,11 @@ const initialBallCount = {
 };
 
 class CurrentPlayer {
-  constructor({ playerName, num, turn, hit, ballCountStateArr }) {
-    this.playerName = playerName;
-    this.uniform_number = num;
+  constructor(name, uniform_number, turn, hits, ballCountStateArr) {
+    this.playerName = name;
+    this.uniform_number = uniform_number;
     this.turn = turn;
-    this.hit = hit;
+    this.hits = hits;
     this.history = ballCountStateArr;
   }
 }
