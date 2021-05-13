@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { ReactComponent as Ghost } from './Ghost.svg';
+import { useLogState, useLogDispatch } from '../../GameContext';
 function GhostAnimation({ move, setMove }) {
 	console.log(move);
 	const [ghostList, setGhostList] = useState([1]);
