@@ -25,18 +25,18 @@ const GamePage = ({ userState }) => {
   const [inGameData, setInGameData] = useState(GAME1);
   const [thisData, fetchThisData] = useAsync(API.get.inGameDatas, [], true);
   const { data: thisis } = thisData;
-  const [attackState, setAttackState] = useState("away");
-  const [sequenceCount, setSequenceCount] = useState(0);
-  const [roundCount, setRoundCount] = useState(1);
-  const [currentPlayData, setCurrentPlayerData] = useState([]);
+  const [attackState, setAttackState] = useState("away"); //attack하는 애가 awayteam인지 homeTeam인지
+  const [sequenceCount, setSequenceCount] = useState(0); //몇번째 선수가 뛰고있는지
+  const [roundCount, setRoundCount] = useState(1); //몇회인지 카운트
+  const [currentBaseData, setCurrentBaseData] = useState([]); //Base에 누구누구 있는지
   const [currentSBData, setCurrentSBData] = useState({ strike: 0, ball: 0 });
 
   const onPitch = () => {
     const pitchResult = randomPitch();
     switch (pitchResult) {
       case "hit":
-        setCurrentPlayerData([
-          ...currentPlayData,
+        setCurrentBaseData([
+          ...currentBaseData,
           {
             name: inGameData[attackState][sequenceCount].name,
             id: inGameData[attackState][sequenceCount].id,
