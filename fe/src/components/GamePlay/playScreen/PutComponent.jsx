@@ -1,23 +1,33 @@
-import useFetch from 'hooks/useFetch';
+import useFetch from 'hooks/useFetch'
 
-const PutComponent = ({ data }) => {
+const PutComponent = ({
+  data,
+  dispatchHomeCurrentPlayerState,
+  dispatchAwayCurrentPlayerState,
+  isAttacking
+}) => {
   const option = {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data),
-  };
+    body: JSON.stringify(data)
+  }
 
-  const { response } = useFetch(
+  const { response, loading, error } = useFetch(
     'http://baseball.san.r-e.kr/api/update_player',
     option
-  );
-  //   dispatchEvent(resposndata);
-  return <></>;
-};
+  )
 
-export default PutComponent;
+  if(response) {
+    const action = { payload: 'changeTurn', data: response }
+    if (isAttacking) dispatchAwayCurrentPlayerState(action)
+    if (!isAttacking) dispatchHomeCurrentPlayerState(action)
+  return <></>;
+  }
+}
+
+export default PutComponent
 
 // Content-Type: application/json
 // Transfer-Encoding: chunked

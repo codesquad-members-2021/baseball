@@ -13,6 +13,7 @@ const GamePlay = ({ response }) => {
   const [round, setRound] = useState(0)
   const [homePlayer, setHomePlayer] = useState(home.player)
   const [awayPlayer, setAwayPlayer] = useState(away.player)
+  const [log, setLog] = useState([])
 
   const selectPitcherName = team =>
     team.player.filter(player => player.pitcher === true)[0].name
@@ -60,6 +61,10 @@ const GamePlay = ({ response }) => {
 
   useEffect(() => {
     if (ballCountState.O === 3) {
+      const currentPlayer = isAttacking
+        ? awayCurrentPlayerState
+        : homeCurrentPlayerState
+      setLog(log => [...log, currentPlayer])
       setRound(round => round + 1)
       setIsAttacking(state => !state)
       dispatchBallCount({
@@ -87,7 +92,8 @@ const GamePlay = ({ response }) => {
         home,
         away,
         ballCountState,
-        dispatchBallCount
+        dispatchBallCount,
+        log,
       }}
     >
       <Round />
