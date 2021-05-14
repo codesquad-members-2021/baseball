@@ -23,6 +23,8 @@ const ballCountReducer = (state, action) => {
     case 'hit':
       deepCopied.isHit = true;
       deepCopied.type = '안타';
+      deepCopied.B = 0;
+      deepCopied.S = 0;
       return deepCopied;
     case 'resetRoundBallCount':
       return {
@@ -49,9 +51,11 @@ const ballCountReducer = (state, action) => {
 };
 
 const playerReducer = (state, action) => {
+  const deepCopied = getDeepCopy(state);
   switch (action.payload) {
-    case 'takeTurn':
-
+    case 'updatePlayerHistory':
+      deepCopied.history = [...deepCopied.history, action.ballCount];
+      return deepCopied;
     case 'getNextTurn':
 
     default:

@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
-import { gamePlayContext } from 'components/GamePlay/GamePlay';
 import styled from 'styled-components';
+
+import FlexCenter from 'styles/FlexCenter';
 import Span from 'components/common/Span';
 import VsSpan from 'components/common/VsSpan';
-import FlexCenter from 'styles/FlexCenter';
+
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
 const HeaderScore = () => {
   const { home, away } = useContext(gamePlayContext);

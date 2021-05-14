@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+
 import Span from 'components/common/Span';
 import Pitcher from 'components/GamePlay/playHeader/Pitcher';
 import Hitter from 'components/GamePlay/playHeader/Hitter';
 
 const HeaderNotice = ({ type }) => {
+  const pitcher = type === 'pitcher';
+
   return (
     <NoticeWrap>
-      <Position>{type === 'pitcher' ? '투수' : '타자'}</Position>
-      <Notice>
-        {type === 'pitcher' ? <Pitcher type={type} /> : <Hitter type={type} />}
-      </Notice>
+      <Position>{pitcher ? '투수' : '타자'}</Position>
+      <Notice>{pitcher ? <Pitcher /> : <Hitter />}</Notice>
     </NoticeWrap>
   );
 };
@@ -17,7 +18,7 @@ const HeaderNotice = ({ type }) => {
 export default HeaderNotice;
 
 const NoticeWrap = styled.div`
-  padding-right: 2rem;
+  min-width: 9rem;
   display: flex;
   flex-direction: column;
 `;

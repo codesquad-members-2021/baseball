@@ -1,5 +1,6 @@
-import Title from 'components/common/Title';
 import styled from 'styled-components';
+
+import Title from 'components/common/Title';
 import FlexCenter from 'styles/FlexCenter';
 import HeaderScore from 'components/GamePlay/playHeader/HeaderScore';
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+
 import HeaderLeft from 'components/GamePlay/playHeader/HeaderLeft';
 import HeaderRight from 'components/GamePlay/playHeader/HeaderRight';
+
 const Header = () => {
   return (
     <GamePlayHeader>
