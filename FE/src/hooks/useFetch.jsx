@@ -2,11 +2,18 @@ import { useState, useEffect } from 'react';
 
 const useFetch = (
     url,
-    { callback = null, isExecuteFunc = false, options = {}, addProps = [], } = {
+    {
+        callback = null,
+        isExecuteFunc = false,
+        options = {},
+        addProps = [],
+        returnType = '',
+    } = {
         callback: null,
         isExecuteFunc: false,
         options: {},
         addProps: [],
+        returnType: '',
     },
 ) => {
     const [response, setResponse] = useState();
@@ -15,17 +22,19 @@ const useFetch = (
 
     const fetchData = async () => {
         try {
+            if (!url) setError(`Error: URL IS NULL`);
+            console.log(url)
             const res = await fetch(url, options);
-            if (!res.ok) {
-                setError(`Error: code ${res.status}`);
-                return;
-            }
+            if (!res.ok) return setError(`Error: code ${res.status}`);
 
-            const result = await res.json();
-            if (!result) {
-                setError(`Error: NO JSON DATA`);
-                return;
-            }
+            let result = null;
+            if (returnType)
+                result = res[returnType]
+            else
+                result = await res.json();
+
+            if (!result) return setError(`Error: NO DATA`);
+            console.log(result);
             setResponse(result);
         } catch (e) {
             setError(e);
@@ -35,7 +44,7 @@ const useFetch = (
     };
 
     useEffect(() => {
-        if (!addProps) return;
+        if (!addProps || !url) return;
         if (addProps.length > 0) {
             const flag = addProps.some((v) => !v);
             if (flag) {

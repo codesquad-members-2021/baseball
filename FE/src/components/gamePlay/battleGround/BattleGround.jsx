@@ -7,11 +7,23 @@ import SBO from './partial/SBO';
 import { useState, useContext, useEffect } from 'react';
 import { uuid } from 'uuidv4';
 import { GamePlayContext } from '../../utilComponent/context/GamePlayProvider';
+import useFetch from '../../../hooks/useFetch';
+import { createFetchOptions } from '../../../common/util';
+import { API } from '../../../common/reference';
 
 // export const BattleGroundContext = createContext();
 
 const BattleGround = () => {
     const [isPitchClick, setIsPitchClick] = useState(false);
+
+    const [hitOrOut, setHitOrOut] = useState('');
+    const [currHitterID, setCurrHitterID] = useState();
+    const [url, setUrl] = useState();
+    const [urlLoading, setUrlLoading] = useState(true);
+
+    const [isThreeOut, setIsThreeOut] = useState(false);
+    const [gameID, setGameID] = useState();
+
     const {
         gamePlayState,
         gamePlayDispatch,
@@ -22,14 +34,23 @@ const BattleGround = () => {
     // [1] useEffect
     // 1) 초기 렌더링
     useEffect(
-        () =>
+        () => {
             gamePlayOptionsDispatch({
                 type: 'changeRyanIconStatus',
                 payload: [[0, uuid()]],
-            }),
+            });
+            setGameID()
+        },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
     );
+
+    useEffect(() => {
+        if (!gamePlayState) return;
+        const { teamsData } = gamePlayState;
+        if (!teamsData) return;
+        setGameID(teamsData.game_id);
+    }, [gamePlayState]);
 
     // 2) gamePlayState.gameProgress.situation 변경 시
     useEffect(() => {
@@ -39,6 +60,7 @@ const BattleGround = () => {
                 userTeamName,
                 userPlayers, opponentPlayers,
                 userHitterIdx, opponentHitterIdx,
+                hitter,
                 attackerTeamName,
             } 
         } = gamePlayState;
@@ -115,8 +137,14 @@ const BattleGround = () => {
                     : opponentPlayers[nextOpponentHitterIdx]
             },
         });
-        if (isOut) return;
 
+        if (isOut)
+            setHitOrOut('OUT')
+        else
+            setHitOrOut('HITS');
+        setCurrHitterID(hitter.id);
+
+        if (isOut) return;
 
         // 라이언 움직여!!!
         const currRyanIconStatus = ryanIconStatus
@@ -153,6 +181,8 @@ const BattleGround = () => {
         } = gamePlayState;
 
         if (outCount < 3) return;
+        setIsThreeOut(true);
+
         const {
             user: { players: userPlayers, team_name: userTeamName },
             opponent: { players: opponentPlayers, team_name: opponentTeamName  },
@@ -179,6 +209,23 @@ const BattleGround = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gamePlayState.gameProgress.outCount]);
 
+    // 3-2) 3아웃 시, 점수 전송
+    /*
+    const { loading, response } = useFetch((API + `/api/games/${gameID}/points`),
+        {
+            options: createFetchOptions('POST', {
+                "team_name" : "롯데 자이언츠",
+                "round" : 3,
+                "point" : 5
+            }),
+            addProps: [isThreeOut],
+            returnType: 'status',
+            isExecuteFunc: true,
+            callback: () => setIsThreeOut(false)
+        },
+    );
+    */
+
 
     // 4) Pitch 클릭이 되면, gamePlayState.gameProgress.situation 초기화
     useEffect(() => {
@@ -191,6 +238,31 @@ const BattleGround = () => {
         setIsPitchClick(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPitchClick]);
+
+    // 5) BattleGround 'hitOrOut' state에 따라 HITS OUT에 따라서 PUT 요청
+    useEffect(() => {
+        if (!currHitterID) return;
+        setUrl(`/api/players/${currHitterID}/record`);
+        setUrlLoading(false);
+    }, [currHitterID]);
+
+    /* const { response } =  */
+    useFetch((API + url),
+        {
+            options: createFetchOptions('PUT', { record : hitOrOut }),
+            addProps: [!urlLoading],
+            returnType: 'status',
+            callback: () => setUrlLoading(true),
+            isExecuteFunc: true,
+        },
+    );
+    /*
+    // useFetch (PUT) 체크용, 일단은 잘돌아감.. 
+    useEffect(() => {
+        if (urlLoading) return;
+        console.log(response)
+    }, [urlLoading])
+    */
 
 
     // [2] event 관련
