@@ -5,11 +5,7 @@ import baseball.exception.GameNotFoundException;
 import baseball.exception.TeamNotFoundException;
 import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.GameDTO;
-import baseball.service.dto.GameTeamDTO;
-import baseball.service.dto.GameScoreDTO;
-import baseball.service.dto.ScoreRequest;
-import baseball.service.dto.RecordDTO;
+import baseball.service.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
