@@ -30,12 +30,4 @@ public class InningRequestDto {
         return score;
     }
 
-    @Override
-    public String toString() {
-        return "InningRequestDto{" +
-                "teamName='" + teamName + '\'' +
-                ", number=" + number +
-                ", score=" + score +
-                '}';
-    }
 }

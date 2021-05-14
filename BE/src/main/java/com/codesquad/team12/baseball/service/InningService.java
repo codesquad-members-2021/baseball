@@ -35,7 +35,6 @@ public class InningService {
     }
 
     public void updateInning(Long gameId, InningRequestDto inningRequestDto) {
-        System.out.println(inningRequestDto);
         inningRepository.updateInning(gameId, inningRequestDto.getTeamName(), inningRequestDto.getNumber(), inningRequestDto.getScore());
     }
 

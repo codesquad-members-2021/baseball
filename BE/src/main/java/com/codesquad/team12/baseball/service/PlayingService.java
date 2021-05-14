@@ -46,7 +46,8 @@ public class PlayingService {
     }
 
     public void updatePlaying(Long gameId, PlayingRequestDto playingRequestDto) {
-        playingRepository.updatePlaying(gameId, playingRequestDto.getTeamName(), playingRequestDto.getPlayerNumber(), playingRequestDto.getPa(), playingRequestDto.getHit(), playingRequestDto.getOut());
+        Double average = (double) playingRequestDto.getHit() / playingRequestDto.getPa();
+        playingRepository.updatePlaying(gameId, playingRequestDto.getTeamName(), playingRequestDto.getPlayerNumber(), playingRequestDto.getPa(), playingRequestDto.getHit(), playingRequestDto.getOut(), average);
     }
 
     private Playing findByTeam(Long gameId, String teamName, Integer playerNumber) {

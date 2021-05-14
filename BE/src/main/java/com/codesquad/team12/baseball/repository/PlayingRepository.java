@@ -15,6 +15,6 @@ public interface PlayingRepository extends CrudRepository<Playing, Long> {
     Playing findByTeam(Long gameId, String teamName, Integer playerNumber);
 
     @Modifying
-    @Query("UPDATE playing SET pa=:pa, hit=:hit, `out`=:out WHERE game_id=:gameId AND team_name=:teamName AND player_number=:playerNumber")
-    void updatePlaying(Long gameId, String teamName, Integer playerNumber, Integer pa, Integer hit, Integer out);
+    @Query("UPDATE playing SET pa=:pa, hit=:hit, `out`=:out, `average`=:average WHERE game_id=:gameId AND team_name=:teamName AND player_number=:playerNumber")
+    void updatePlaying(Long gameId, String teamName, Integer playerNumber, Integer pa, Integer hit, Integer out, Double average);
 }
