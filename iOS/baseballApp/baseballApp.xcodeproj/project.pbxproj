@@ -242,13 +242,10 @@
 			children = (
 				76619AC12643AE83004D31C6 /* GameCell.swift */,
 				76619B052644EE37004D31C6 /* StadiumView.swift */,
-
 				76AF2BC5264BA5F600DC7782 /* BallListCell.swift */,
 				76AF2BC6264BA5F600DC7782 /* BallListCell.xib */,
 				76855AC6264BE17600068E77 /* BallCountView.swift */,
-
 				71310C7D264CE262005FCF5A /* ScoreCell.swift */,
-
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,11 +310,8 @@
 			isa = PBXGroup;
 			children = (
 				76619AB326439866004D31C6 /* GameDTO.swift */,
-
 				76A7E3A7264CBD510028B08A /* PlayDTO.swift */,
-
 				71310C79264CBC27005FCF5A /* ScoreDTO.swift */,
-
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -603,18 +597,15 @@
 				76A7E3A8264CBD510028B08A /* PlayDTO.swift in Sources */,
 				76A7E3AC264CD2F20028B08A /* Constant.swift in Sources */,
 				7650A1E7264138A0006C1E5F /* Player.swift in Sources */,
-
 				76A7E3A6264CB9010028B08A /* PlayInfo.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 				76619AA726437476004D31C6 /* Game.swift in Sources */,
 				76855AC7264BE17600068E77 /* BallCountView.swift in Sources */,
-
 				71310C7A264CBC27005FCF5A /* ScoreDTO.swift in Sources */,
 				7650A1E526411A78006C1E5F /* ScoreViewController.swift in Sources */,
 				76619AA726437476004D31C6 /* Game.swift in Sources */,
 				71310C7C264CC42F005FCF5A /* ScoreViewModel.swift in Sources */,
 				71310C7E264CE262005FCF5A /* ScoreCell.swift in Sources */,
-
 				76619B062644EE37004D31C6 /* StadiumView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

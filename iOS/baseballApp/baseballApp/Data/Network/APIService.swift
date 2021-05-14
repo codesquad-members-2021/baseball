@@ -6,7 +6,8 @@ class APIService {
     static let shared: APIService = APIService()
     
     func requestGames() throws -> Observable<GameDTO> {
-        guard  let url = Endpoint.getGames(path: "baseball") else {
+//        guard  let url = Endpoint.getGames(path: "baseball") else {
+        guard let url = URL(string:"http://52.79.138.172:8080/baseball") else {
             throw APIError.urlNotSupport
         }
         return getAndDecode(url)
@@ -18,8 +19,15 @@ class APIService {
         return getAndDecode(url)
     }
     
+//    func requestPitch() throws -> Observable<PlayDTO> {
+//        guard  let url = Endpoint.getGames(path: "baseball/pitch") else { throw APIError.urlNotSupport }
+//        return getAndDecode(url)
+//    }
+
+    
     func requestScore() throws -> Observable<ScoreDTO> {
-        guard let url = URL(string: "https://791e125f-f50f-4801-90d3-3b106e723a88.mock.pstmn.io/baseball/1/score") else {
+        guard let url = URL(string: "https://f0eb7133-38c6-4f20-96a2-4a438fe100c8.mock.pstmn.io/baseball/1/score/3"
+) else {
             throw APIError.urlNotSupport
         }
         return getAndDecode(url)
@@ -31,6 +39,7 @@ class APIService {
         return Observable.create { observer in
             AF.request(url, method: .get)
                 .responseDecodable(of: T.self) { response in
+                    dump(response)
                     switch response.result {
                     case .failure(let error):
                         observer.onError(error)

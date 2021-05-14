@@ -29,15 +29,14 @@ class BallListCell: UITableViewCell {
     
     func configure(id: Int, ball: String, with ballCount: BallCount) {
         ballIDLabel.text = "\(id)"
-        ballTypeLabel.text = ball == "S" ? "Strike" : "Ball"
-        let (strike, ball) = ballCount.addBall(ball)
-        strikeCountLabel.text = "\(ball)"
-        ballCountLabel.text = "\(strike)"
+        ballTypeLabel.text = ball == "S" ? "스트라이크" : "볼"
+        strikeCountLabel.text = "\(ballCount.strikeCount)"
+        ballCountLabel.text = "\(ballCount.ballCount)"
     }
     
     func configureUI() {
-        ballIDLabel.layer.cornerRadius = ballIDLabel.bounds.width / 2
-        
+        ballIDLabel.layer.cornerRadius = 10
+
     }
     
     

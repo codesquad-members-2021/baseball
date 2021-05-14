@@ -28,6 +28,16 @@ class PlayViewModel {
             }.disposed(by: disposeBag)
     }
     
+//    func getPitchInfo(gameID: Int, inningID: Int, _ completion: @escaping (PlayDTO)->Void) {
+//        try? APIService.shared.requestPitch()
+//            .subscribe { playData in
+//                    self.savePlay(from: playData)
+//                completion(playData)
+//            } onError: { error in
+//                print(error.localizedDescription)
+//            }.disposed(by: disposeBag)
+//    }
+    
 //    private func transformDTO(to play: PlayDTO, completion: @escaping (PlayDTO)->Void
 //    ){
 //        play.forEach { data in
