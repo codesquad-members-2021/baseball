@@ -80,16 +80,13 @@ public class GameService {
 
     private Team findFirstOffenseTeam(Match match) {
         if (match.isHome()) {
-            return findTeam(match.getExpeditionTeamId());
+            return findTeam(match.getCounterTeamId());
         }
-        return findTeam(match.getHomeTeamId());
+        return findTeam(match.getMyTeamId());
     }
 
     private Team findFirstDefenseTeam(Match match) {
-        if (match.isHome()) {
-            return findTeam(match.getHomeTeamId());
-        }
-        return findTeam(match.getExpeditionTeamId());
+        return findTeam(match.getHomeTeamId());
     }
 
     public PlayerListPopUpDTO[] getPlayerInfo(Long matchId) {
