@@ -185,6 +185,12 @@ const GamePage = ({ userState }) => {
     });
   }, [currentSBData]);
 
+
+  useEffect(() => {
+    console.log(123)
+    console.log(attackState)
+  }, [attackState]);
+
   useEffect(() => {
     //초기세팅 record 세팅 (mainRight)
     if (!inGameData) return;

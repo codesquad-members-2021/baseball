@@ -7,13 +7,9 @@ import { GamePageContext } from "Components/GamePage";
 import ReadyImage from "./ReadyImage";
 
 const BaseballField = () => {
-  const { teamState, attackState, currentBaseData } =
-    useContext(GamePageContext);
+  const { teamState, attackState, currentBaseData } = useContext(GamePageContext);
   const canvasRef = useRef();
   const baseCount = useRef(0); //이전 base의 length가 뭐였는지 저장하기위함
-  const key = useRef(0);
-
-  // const getKey = () => ++key.current;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -23,36 +19,27 @@ const BaseballField = () => {
   }, []);
 
   useEffect(() => {
-    ++key.current;
     baseCount.current += 1;
   }, [currentBaseData]);
 
   const numberEng = {
-    0: "first",
-    1: "second",
-    2: "third",
+    0: 'first',
+    1: 'second',
+    2: 'third'
   };
 
   return (
     <BaseballFieldWrapper>
       <canvas ref={canvasRef} />
 
-      {currentBaseData.map((_, index) => {
-        return (
-          <>
-            <RunnerImage base={numberEng[index]} key={index} />
-            <ReadyImage base={numberEng[index]} key={index} />
-          </>
-        );
+      {currentBaseData.map((base, index) => {
+        return (<q key={base.name + base.id + index}>
+          <RunnerImage base={numberEng[index]} />
+          <ReadyImage base={numberEng[index]} />
+        </q>)
       })}
-      {baseCount.current > 4 && <RunnerImage base="fourth" />}
-      {/* <RunnerImage base='first' />
-      <RunnerImage base='second' />
-      <RunnerImage base='third' />
-      <RunnerImage base='fourth' />
-      <ReadyImage base='first' />
-      <ReadyImage base='second' />
-      <ReadyImage base='third' /> */}
+      {baseCount.current > 4 && <RunnerImage base='fourth' key={baseCount.current} />}
+
       {!teamState[attackState].isMyTeam && <PitchButton />}
     </BaseballFieldWrapper>
   );
