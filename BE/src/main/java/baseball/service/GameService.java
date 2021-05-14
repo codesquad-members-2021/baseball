@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,14 +85,14 @@ public class GameService {
     public void deleteGame() {
         gameRepository.deleteAll();
 
-        Iterable<Team> teams = teamRepository.findAll();
-        for (Team team : teams) {
-            team.deleteScores();
-            Set<Member> members = team.getMembers();
-            for (Member member : members) {
-                member.deleteRecord();
-            }
-        }
+        List<Team> teams = teamRepository.findAll().stream()
+                .map(team -> {
+                    team.deleteScores();
+                    team.getMembers().stream()
+                            .forEach(Member::deleteRecord);
+                    return team;
+                }).collect(Collectors.toList());
+
         teamRepository.saveAll(teams);
     }
 
