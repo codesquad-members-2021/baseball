@@ -13,7 +13,7 @@ const History = () => {
   // const {playerName, uniformNumber,turn,hits,hisory} = playerStates
   return (
     <HistoryWrap>
-      {/* 아래 보드는 currentPlayer */}
+     
       <Board {...{ ...playerStates }} />
 
       {/* {homePrevPlayer.map((player) => (
