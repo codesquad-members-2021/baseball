@@ -25,12 +25,7 @@ public class ApiUserController {
     public ApiResult loginUsingGithub(String code) {
         String accessToken = oauthService.getAccessToken(code);
         String email = oauthService.getEmail(accessToken);
-
+        
         return ApiResult.succeed(userService.signIn(email, ResourceServer.GITHUB));
-    }
-
-    @GetMapping("/logined")
-    public ApiResult isLoginValid() {
-        return ApiResult.succeed("OK");
     }
 }

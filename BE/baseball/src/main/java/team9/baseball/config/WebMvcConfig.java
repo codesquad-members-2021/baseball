@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login/**")
+                .excludePathPatterns("/user/**/")
                 .excludePathPatterns("/game/list");
     }
 }
