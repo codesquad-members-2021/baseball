@@ -12,7 +12,7 @@ function Field() {
   const [runEndCnt, setRunEndCnt] = useState(0);
 
   useEffect(() => {
-    console.log(runEndCnt, gameState.runners.length);
+    // console.log(runEndCnt, gameState.runners.length);
     if (runEndCnt < gameState.runners.length) return;
   
     gameDispatch({ type: GameAction.NEXT_BATTER });

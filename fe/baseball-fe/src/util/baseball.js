@@ -1,6 +1,6 @@
 const Baseball = {
   pitch: () => {
-    const rand =  Math.floor(Math.random() * 4);
+    const rand =  Math.floor(Math.random() * 6);
     
     if (rand === 0) return 'STRIKE';
     if (rand === 1) return 'BALL';
@@ -11,7 +11,7 @@ const Baseball = {
     const rand = Math.random();
     return 1;
 
-    console.log('hit random:', rand);
+    // console.log('hit random:', rand);
     if (rand >= 0.97) return 3;
     if (rand >= 0.90) return 2;
     return 1;
@@ -26,6 +26,7 @@ const Baseball = {
   }),
   organizeResult: (gameState, home) => {
     const batter = gameState.pitch_result === 'OUT' ? gameState.prevBatter : gameState.batter;
+    const runners = gameState.runners.filter(v => v.mode !== null);
   
     return {
       home_id: gameState.home.id,
@@ -39,7 +40,7 @@ const Baseball = {
         is_out: batter.is_out
       },
       ball_count: { ...gameState.ball_count },
-      runners: [...gameState.runners],
+      runners: [...runners.map(runner => ({ ...runner }))],
       score: {
         home_score: gameState.home.score,
         away_score: gameState.away.score

@@ -17,21 +17,6 @@ import ScorePopup from 'pages/GamePage/ScorePopup';
 import PlayerListPopup from 'pages/GamePage/PlayerListPopup.js';
 import Popup from 'components/Popup/Popup.js';
 
-const _initialState = {
-  mode: null,
-  home: null,
-  away: null,
-  pitcher: null,
-  batter: null,
-  nth_batter: null,
-  runners: [],
-  ball_count: {
-    strike: null,
-    ball: null,
-    out: null
-  },
-}
-
 /*
   {
     "home_id": 1,
@@ -67,7 +52,7 @@ function GamePage() {
   const [gameState, gameDispatch] = useReducer(gameReducer, globalState.initialGameState);
   const [records, setRecords] = useState([]);
   const { response: responsePitch, setPolling: setPitchPolling } = usePolling({
-    URL: API.pitch({ gameId: globalState.gameId, userId: globalState.userId }),
+    URL: API.pitchResult({ gameId: globalState.gameId, userId: globalState.userId }),
   });
   const { response: responseRecord, setPolling: setRecordPolling } = usePolling({
     URL: API.batterRecord({ gameId: globalState.gameId, userId: globalState.userId }),
@@ -84,7 +69,7 @@ function GamePage() {
   }, [gameState.mode]);
 
   useEffect(() => {
-    if (!responsePitch)
+    if (!responsePitch || responsePitch.home_id === null)
       return;
 
     gameDispatch({ type: GameAction.UPDATE, payload: { ...responsePitch, home: globalState.home }});
@@ -129,10 +114,9 @@ function GamePage() {
   }, [gameState.additionalRecord]);
 
   useEffect(() => {
-    if (!gameState.needToPost)
+    if (!gameState.needToPost || gameState.mode === 'BATTING')
       return;
 
-    console.log('post!');
     if (gameState.halfInningEnd) {
       fetch(API.halfInning({ gameId: globalState.gameId, userId: globalState.userId }),
         {
@@ -143,17 +127,8 @@ function GamePage() {
           body: JSON.stringify(Baseball.organizeResult(gameState, globalState.home))
         }
       );
-      fetch(API.batterRecord({ gameId: globalState.gameId, userId: globalState.userId }),
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify([])
-        }
-      );
     } else {
-      fetch(API.pitchResult({ gameId: globalState.gameId, userId: globalState.userId }),
+      fetch(API.pitch({ gameId: globalState.gameId, userId: globalState.userId }),
         {
           method: 'POST',
           headers: {
