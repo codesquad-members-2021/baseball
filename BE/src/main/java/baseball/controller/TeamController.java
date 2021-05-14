@@ -22,8 +22,8 @@ public class TeamController {
     }
 
     @GetMapping
-    public List<TeamDTO> showTeams() {
-        return teamService.convertToTeamDTOList();
+    public TeamsDTO showTeams() {
+        return teamService.convertToTeamsDTO();
     }
 
     @PostMapping("/{teamId}/{memberId}/record")

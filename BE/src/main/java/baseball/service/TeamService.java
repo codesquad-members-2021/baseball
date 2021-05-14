@@ -7,11 +7,10 @@ import baseball.repository.TeamRepository;
 import baseball.service.dto.RecordRequest;
 import baseball.service.dto.TeamDTO;
 import baseball.service.dto.TeamRequest;
+import baseball.service.dto.TeamsDTO;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,16 +29,12 @@ public class TeamService {
         teamRepository.saveAll(teams);
     }
 
-    public List<TeamDTO> convertToTeamDTOList() {
-        Iterable<Team> teams = teamRepository.findAll();
-        List<TeamDTO> teamDTOs = new ArrayList<>();
+    public TeamsDTO convertToTeamsDTO() {
+        List<TeamDTO> teamDTOs = teamRepository.findAll().stream()
+                .map(team -> new TeamDTO(team, team.getMembers()))
+                .collect(Collectors.toList());
 
-        for (Team team : teams) {
-            Set<Member> members = team.getMembers();
-            TeamDTO teamDTO = new TeamDTO(team, members);
-            teamDTOs.add(teamDTO);
-        }
-        return teamDTOs;
+        return new TeamsDTO(teamDTOs);
     }
 
     public void insertRecord(Long teamId, Long memberId, RecordRequest recordRequest) {
