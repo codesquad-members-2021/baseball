@@ -21,7 +21,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/users/**");
 
         registry.addInterceptor(new RefreshInterceptor(jwtVerifier))
-                .excludePathPatterns("/**")
                 .addPathPatterns("/users/**");
     }
 }
