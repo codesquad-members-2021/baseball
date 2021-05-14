@@ -40,7 +40,7 @@ const Message = styled.div`
 `;
 
 const ListWrapper = styled(Scroll)`
-	width: 370px;
+	width: 600px;
 	margin: 0 auto;
 	max-height: 295px;
 `;

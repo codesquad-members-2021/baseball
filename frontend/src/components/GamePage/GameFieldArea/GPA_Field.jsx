@@ -56,6 +56,7 @@ const GpaField = ({ type, gameId }) => {
 
 	return (
 		<>
+			{console.log(currentType)}
 			{currentType === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
 			<FieldArea>
 				<GameState>
@@ -70,8 +71,8 @@ const GpaField = ({ type, gameId }) => {
 
 const PITCH = styled.button`
 	position: absolute;
-	top: 26rem;
-	left: 3rem;
+	top: 32rem;
+	left: 35rem;
 	cursor: pointer;
 	z-index: 9999;
 	background-color: ${theme.colors.transparent};
@@ -86,14 +87,14 @@ const FieldArea = styled.div`
 
 const FieldSVG = styled(Field)`
 	position: absolute;
-	top: 23rem;
-	left: 3rem;
+	top: -90px;
+	left: 250px;
 `;
 
 const GameState = styled(Span)`
 	position: absolute;
-	top: 17rem;
-	right: 23rem;
+	top: -6rem;
+	right: 3rem;
 	font-size: ${theme.fontSize.X_large};
 	font-weight: ${theme.fontWeight.light};
 	color: ${theme.colors.white};

@@ -17,8 +17,9 @@ const GameGrid = ({ type, id }) => {
 const GridBox = styled.div`
 	display: grid;
 	grid-template-columns: 5fr 1fr;
-	grid-template-rows: 1fr 4fr;
+	grid-template-rows: 190px 550px;
 	box-sizing: border-box;
+	overflow: hidden;
 `;
 
 export default GameGrid;

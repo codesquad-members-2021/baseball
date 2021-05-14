@@ -36,28 +36,36 @@ const GameLog = () => {
 	}, {});
 
 	return (
-		<GameLogScroll>
-			{Object.entries(LogGroupedByHitter).map(([key, value]) => {
-				const logList = value.map((log) => log);
-				return (
-					<PlayersWrapper>
-						<div>
-							<PlayerWrapper>
-								<Player>{key}</Player>
-							</PlayerWrapper>
-							<LogByPlayer>{logList}</LogByPlayer>
-						</div>
-					</PlayersWrapper>
-				);
-			})}
-		</GameLogScroll>
+		<ScrollDiv>
+			<GameLogScroll className="LogScroll">
+				{Object.entries(LogGroupedByHitter).map(([key, value]) => {
+					const logList = value.map((log) => log);
+					return (
+						<PlayersWrapper>
+							<div>
+								<PlayerWrapper>
+									<Player>{key}</Player>
+								</PlayerWrapper>
+								<LogByPlayer>{logList}</LogByPlayer>
+							</div>
+						</PlayersWrapper>
+					);
+				})}
+			</GameLogScroll>
+		</ScrollDiv>
 	);
 };
-const GameLogScroll = styled(Scroll)``;
+const ScrollDiv = styled(Scroll)``;
+const GameLogScroll = styled.div`
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: flex-end;
+	align-items: flex-start;
+	padding: 20px;
+`;
 
 const PlayersWrapper = styled.div`
 	display: flex;
-	/* flex-direction: column-reverse; */
 `;
 
 const PlayerWrapper = styled.div`
@@ -70,14 +78,13 @@ const LogByPlayer = styled.div`
 `;
 
 const LogWrapper = styled.div`
-	margin: 1rem;
+	margin: 10px;
 	width: fit-content;
-	padding-top: 10px;
 	display: grid;
 	grid-template-columns: 20px 130px 100px;
 `;
 const Player = styled.div`
-	margin: 15px 0;
+	margin-top: 10px 0;
 	font-size: ${theme.fontSize.medium};
 	font-weight: ${theme.fontWeight.medium};
 	color: ${(props) =>

@@ -11,7 +11,7 @@ const MatchingInfo = ({ setMessage, data }) => {
 		const getResponse = async () => {
 			if (!currentID) return;
 			const response = await fetch(
-				`http://13.124.70.38:8080/games/${currentID}`,
+				`http://ec2-3-35-119-77.ap-northeast-2.compute.amazonaws.com/games/${currentID}`,
 				{
 					method: 'PATCH',
 					headers: {

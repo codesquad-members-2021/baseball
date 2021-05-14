@@ -17,7 +17,6 @@ const GamePlayAreaWrapper = styled.div`
 	border-right: 5px solid ${theme.colors.white};
 `;
 const AlignCenterWrapper = styled.div`
-	position: relative;
 	top: -50%;
 	left: 23%;
 `;

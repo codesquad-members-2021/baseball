@@ -48,9 +48,6 @@ function GhostAnimation() {
 
 	return (
 		<Ground>
-			{/* <div>
-				<GhostSVG className="ghost-svg" />
-			</div> */}
 			{base.map((v, i) => (
 				<div key={i}>
 					<GhostSVG
@@ -69,10 +66,10 @@ export default GhostAnimation;
 
 const Ground = styled.div`
 	position: relative;
-	top: 31.5rem;
-	left: -14rem;
-	width: 22rem;
-	height: 21rem;
+	top: -0.5rem;
+	left: -1rem;
+	width: 20rem;
+	height: 28rem;
 	margin: auto;
 	transform: rotate(-45deg);
 	& > div:nth-child(1) {
@@ -84,8 +81,8 @@ const Ground = styled.div`
 			position: absolute;
 			width: 4.5rem;
 			height: 4.5rem;
-			top: 0rem;
-			left: -0.6rem;
+			top: 3.9rem;
+			left: -1.6rem;
 			background-color: #fff;
 		}
 	}
