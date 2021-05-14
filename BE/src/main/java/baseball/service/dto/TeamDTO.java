@@ -13,10 +13,10 @@ public class TeamDTO {
     private String name;
     private List<MemberDTO> members;
 
-    public TeamDTO(Team team, Set<Member> members) {
+    public TeamDTO(Team team) {
         this.id = team.getId();
         this.name = team.getName();
-        this.members = convertToMemberDTOs(members);
+        this.members = convertToMemberDTOs(team.getMembers());
     }
 
     public Long getId() {

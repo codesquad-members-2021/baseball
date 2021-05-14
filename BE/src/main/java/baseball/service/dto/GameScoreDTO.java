@@ -19,8 +19,8 @@ public class GameScoreDTO {
     private List<TeamScoreDTO> convertToTeamScoreDTOList(Team homeTeam, Team awayTeam) {
         List<TeamScoreDTO> teamScoreDTOS = new ArrayList<>();
 
-        TeamScoreDTO homeTeamScoreDTO = new TeamScoreDTO(homeTeam.getId(), homeTeam.getName(), homeTeam.getScores());
-        TeamScoreDTO awayTeamScoreDTO = new TeamScoreDTO(awayTeam.getId(), awayTeam.getName(), awayTeam.getScores());
+        TeamScoreDTO homeTeamScoreDTO = new TeamScoreDTO(homeTeam);
+        TeamScoreDTO awayTeamScoreDTO = new TeamScoreDTO(awayTeam);
         teamScoreDTOS.add(homeTeamScoreDTO);
         teamScoreDTOS.add(awayTeamScoreDTO);
 

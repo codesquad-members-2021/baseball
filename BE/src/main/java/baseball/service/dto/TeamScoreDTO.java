@@ -1,6 +1,7 @@
 package baseball.service.dto;
 
 import baseball.domain.Score;
+import baseball.domain.Team;
 
 import java.util.Set;
 
@@ -10,10 +11,10 @@ public class TeamScoreDTO {
     private String teamName;
     private Set<Score> scores;
 
-    public TeamScoreDTO(Long teamId, String teamName, Set<Score> scores) {
-        this.teamId = teamId;
-        this.teamName = teamName;
-        this.scores = scores;
+    public TeamScoreDTO(Team team) {
+        this.teamId = team.getId();
+        this.teamName = team.getName();
+        this.scores = team.getScores();
     }
 
     public Long getTeamId() {
