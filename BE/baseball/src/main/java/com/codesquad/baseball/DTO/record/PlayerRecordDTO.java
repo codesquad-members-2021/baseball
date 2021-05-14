@@ -2,11 +2,14 @@ package com.codesquad.baseball.DTO.record;
 
 import com.codesquad.baseball.domain.Player;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class PlayerRecordDTO {
 
-    private static final DecimalFormat AVERAGE_FORMAT = new DecimalFormat("0.000");
+    private static final int AVERAGE_DECIMAL_PLACES = 3;
+
     private Long id;
 
     private String name;
@@ -17,7 +20,7 @@ public class PlayerRecordDTO {
 
     private int out;
 
-    private String average;
+    private BigDecimal average;
 
     private int battingOrder;
 
@@ -26,11 +29,10 @@ public class PlayerRecordDTO {
     private boolean isPitcher;
 
     public static PlayerRecordDTO of(Player player) {
-        String average = "0";
-        if (player.getPlateAppearance() > 0) {
-            average = AVERAGE_FORMAT.format(player.getHit() / (float) player.getPlateAppearance());
-            System.out.println(average);
-        }
+        BigDecimal average = (player.getPlateAppearance() > 0) ?
+                BigDecimal.valueOf(player.getHit() / (double) player.getPlateAppearance()) : BigDecimal.ZERO;
+        average = average.setScale(AVERAGE_DECIMAL_PLACES, RoundingMode.CEILING);
+
         return new PlayerRecordDTO(
                 player.getId(),
                 player.getName(),
@@ -44,7 +46,7 @@ public class PlayerRecordDTO {
         );
     }
 
-    private PlayerRecordDTO(Long id, String name, int plateAppearance, int hit, int out, String average,
+    private PlayerRecordDTO(Long id, String name, int plateAppearance, int hit, int out, BigDecimal average,
                             int battingOrder, int backNumber, boolean isPitcher) {
         this.id = id;
         this.name = name;
@@ -77,7 +79,7 @@ public class PlayerRecordDTO {
         return out;
     }
 
-    public String getAverage() {
+    public BigDecimal getAverage() {
         return average;
     }
 
