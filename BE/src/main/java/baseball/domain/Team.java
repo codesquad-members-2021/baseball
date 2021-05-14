@@ -17,7 +17,9 @@ public class Team {
 
     public Team(String name, Set<Member> members) {
         this.name = name;
-        this.members = members;
+        if (!isMembersEmpty(members)) {
+            this.members = members;
+        }
     }
 
     public Long getId() {
@@ -49,5 +51,12 @@ public class Team {
 
     public void deleteScores() {
         scores.clear();
+    }
+
+    private boolean isMembersEmpty(Set<Member> members) {
+        if (!members.isEmpty()) {
+            throw new MemberNotFoundException();
+        }
+        return false;
     }
 }
