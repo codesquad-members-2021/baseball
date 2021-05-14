@@ -27,7 +27,7 @@ class SelectViewModel {
     private var networkManager: NetworkManageable
     private var cancelBag = Set<AnyCancellable>()
     
-    var delegate: GameCellDelegate!
+    var delegate: SelectViewModelDelegate!
     
     init(networkManager: NetworkManageable = NetworkManager()) {
         self.gameInfo = GameInfo()

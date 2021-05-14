@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-protocol GameCellDelegate {
+protocol SelectViewModelDelegate {
     func didPressButton(with gameInfo: GameInfo)
 }
 
@@ -103,7 +103,7 @@ extension SelectionViewController: Instantiatable, IdentifierReusable {
 }
 
 
-extension SelectionViewController: GameCellDelegate {
+extension SelectionViewController: SelectViewModelDelegate {
     
     func setUserID(with userID: String) {
         self.viewModel.setUserID(with: userID)
