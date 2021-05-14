@@ -170,4 +170,16 @@ public class GameService {
 
         return findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName);
     }
+
+    public void resetGameData(Long gameId) {
+        gameRepository.resetGame(gameId);
+        gameRepository.resetTeam(gameId);
+
+        List<Team> teams = gameRepository.findTeamById(gameId);
+
+        for(Team team : teams){
+            gameRepository.resetTeamScore(team.getId());
+            gameRepository.resetPlayer(gameId);
+        }
+    }
 }

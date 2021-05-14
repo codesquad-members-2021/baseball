@@ -86,10 +86,21 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     Optional<Game> findGameById(@Param("id") Long id);
 
 
-
     @Query("SELECT P.name, P.uniform_number, P.plate_appearance, P.hits FROM PLAYER AS P INNER JOIN TEAM T on P.team_id = T.id\n" +
             "WHERE uniform_number = :nextUniformNumber AND T.name = :teamName;")
     Optional<NextPlayerInfoDto> findNextPlayerByNumberAndTeamName(@Param("nextUniformNumber") int nextUniformNumber, @Param("teamName") String teamName);
+
+    @Query("UPDATE GAME SET GAME.round = 0, GAME.in_progress= false WHERE GAME.id = :gameId;")
+    void resetGame(@Param("gameId") Long gameId);
+
+    @Query("UPDATE TEAM SET TEAM.selected = false WHERE TEAM.game_id = :gameid;")
+    void resetTeam(@Param("gameId") Long gameId);
+
+    @Query("DELETE FROM TEAM_SCORE WHERE TEAM_SCORE.team_id = :teamId;")
+    void resetTeamScore(@Param("gameId") Long gameId);
+
+    @Query("UPDATE PLAYER SET PLAYER.hits = 0, PLAYER.outs=0, PLAYER.plate_appearance = 0 WHERE PLAYER.team_id = :teamId;")
+    void resetPlayer(@Param("teamId") Long teamId);
 
 }
 

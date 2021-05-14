@@ -66,4 +66,10 @@ public class ApiGameController {
         return gameService.getPlayerScoreOfGame(findGame);
     }
 
+    @GetMapping("/reset/{gameId}")
+    @ResponseStatus(HttpStatus.OK)
+    private void resetData(@PathVariable Long gameId) {
+       gameService.resetGameData(gameId);
+    }
+
 }
