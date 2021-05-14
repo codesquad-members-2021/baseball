@@ -24,14 +24,14 @@ class TeamRepositoryTest {
 
     private static final Logger logger = LoggerFactory.getLogger(TeamRepositoryTest.class);
     private static final String[] testTeamNames = {
-            "댕댕 타이거즈",
-            "냥냥 라이온즈",
-            "짹짹 이글스",
+            "TEST-TEAM-A",
+            "TEST-TEAM-B",
+            "TEST-TEAM-C",
     };
     private static final String[] playerNames = {
-            "댕현진",
-            "댕신수",
-            "댕찬호",
+            "TEST-PLAYER-A",
+            "TEST-PLAYER-B",
+            "TEST-PLAYER-C",
     };
 
     @Autowired
