@@ -7,7 +7,8 @@ import { GamePageContext } from "Components/GamePage";
 import ReadyImage from "./ReadyImage";
 
 const BaseballField = () => {
-  const { teamState, attackState, currentBaseData } = useContext(GamePageContext);
+  const { teamState, attackState, currentBaseData } =
+    useContext(GamePageContext);
   const canvasRef = useRef();
   const baseCount = useRef(0); //이전 base의 length가 뭐였는지 저장하기위함
   const key = useRef(0);
@@ -27,9 +28,9 @@ const BaseballField = () => {
   }, [currentBaseData]);
 
   const numberEng = {
-    0: 'first',
-    1: 'second',
-    2: 'third'
+    0: "first",
+    1: "second",
+    2: "third",
   };
 
   return (
@@ -37,12 +38,14 @@ const BaseballField = () => {
       <canvas ref={canvasRef} />
 
       {currentBaseData.map((_, index) => {
-        return (<>
-          <RunnerImage base={numberEng[index]} key={index} />
-          <ReadyImage base={numberEng[index]} key={index} />
-        </>)
+        return (
+          <>
+            <RunnerImage base={numberEng[index]} key={index} />
+            <ReadyImage base={numberEng[index]} key={index} />
+          </>
+        );
       })}
-      {baseCount.current > 4 && <RunnerImage base='fourth' />}
+      {baseCount.current > 4 && <RunnerImage base="fourth" />}
       {/* <RunnerImage base='first' />
       <RunnerImage base='second' />
       <RunnerImage base='third' />
@@ -50,7 +53,7 @@ const BaseballField = () => {
       <ReadyImage base='first' />
       <ReadyImage base='second' />
       <ReadyImage base='third' /> */}
-      <PitchButton />
+      {!teamState[attackState].isMyTeam && <PitchButton />}
     </BaseballFieldWrapper>
   );
 };
@@ -61,7 +64,5 @@ const BaseballFieldWrapper = styled.div`
   width: 65%;
   height: 100%;
 `;
-
-
 
 export default BaseballField;

@@ -6,7 +6,9 @@ import { GamePageContext } from "Components/GamePage";
 import PlayerScoreTable from "./PlayerScoreTable";
 
 const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
-  const { teamState: { gameId, home, away } } = useContext(GamePageContext);
+  const {
+    teamState: { gameId, home, away },
+  } = useContext(GamePageContext);
   const [gameRecodes, fetchGameRecodes] = useAsync(API.get.records, [], true);
 
   useEffect(() => {
@@ -16,15 +18,20 @@ const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
 
   return (
     <BottomPopupWrapper {...{ distance, bottom }}>
-
       {gameRecodes.loading && <>loading...</>}
 
-      {gameRecodes.data && <>
-        <TeamNamesWrapper player={home.isMyTeam}>{home.teamName}</TeamNamesWrapper>
-        <TeamNamesWrapper player={away.isMyTeam}>{away.teamName}</TeamNamesWrapper>
-        <PlayerScoreTable records={gameRecodes.data.home} />
-        <PlayerScoreTable records={gameRecodes.data.away} />
-      </>}
+      {gameRecodes.data && (
+        <>
+          <TeamNamesWrapper player={home.isMyTeam}>
+            {home.teamName}
+          </TeamNamesWrapper>
+          <TeamNamesWrapper player={away.isMyTeam}>
+            {away.teamName}
+          </TeamNamesWrapper>
+          <PlayerScoreTable records={gameRecodes.data.home} />
+          <PlayerScoreTable records={gameRecodes.data.away} />
+        </>
+      )}
 
       {gameRecodes.error && <>error...</>}
     </BottomPopupWrapper>
