@@ -28,12 +28,10 @@ class BallListCell: UITableViewCell {
     }
     
     func configure(id: Int, ball: String, with ballCount: BallCount) {
-        transform = CGAffineTransform(scaleX: 1, y: -1)
         ballIDLabel.text = "\(id)"
-        ballTypeLabel.text = ball == "S" ? "Strike" : "Ball"
-        let (strike, ball) = ballCount.addBall(ball)
-        strikeCountLabel.text = "\(strike)"
-        ballCountLabel.text = "\(ball)"
+        ballTypeLabel.text = ball == "S" ? "스트라이크" : "볼"
+        strikeCountLabel.text = "\(ballCount.strikeCount)"
+        ballCountLabel.text = "\(ballCount.ballCount)"
     }
     
 //    func configureUI() {

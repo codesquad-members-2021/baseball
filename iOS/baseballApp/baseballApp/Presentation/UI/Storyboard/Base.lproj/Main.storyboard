@@ -131,9 +131,9 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="BZw-FP-NNP"/>
                                         <include reference="Bsq-xu-5fX"/>
                                         <exclude reference="q8Y-bB-Qog"/>
+                                        <exclude reference="BZw-FP-NNP"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -164,7 +164,6 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <exclude reference="yvP-bG-74J"/>
                                 <include reference="APK-CB-v05"/>
                                 <include reference="F8D-TC-4XR"/>
                                 <include reference="Gcj-Ij-cu2"/>
@@ -172,6 +171,7 @@
                                 <exclude reference="jfJ-KO-MlE"/>
                                 <exclude reference="mtG-sm-4g2"/>
                                 <include reference="xsU-Nc-sOO"/>
+                                <exclude reference="yvP-bG-74J"/>
                             </mask>
                         </variation>
                     </view>
@@ -220,7 +220,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GvN-9w-bGO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2045" y="58"/>
+            <point key="canvasLocation" x="2070" y="175"/>
         </scene>
     </scenes>
     <resources>

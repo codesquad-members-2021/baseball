@@ -4,10 +4,16 @@ import RxSwift
 class PlayViewController: UIViewController {
     var game: Game?
     private lazy var ballListData = [String]()
-    private lazy var ballCount = BallCount() // Ball + Strike
+    private var ballCount: BallCount?
+    private lazy var ballCountStorage = [BallCount]()
     private lazy var outCount = 0
+    private lazy var baseStatus = [Int]()
+    
+    private lazy var preBaseStatus = [Int]()
+//    prePlayerPosition -> StadiumView
     
     @IBOutlet weak var stadiumView: StadiumView!
+    @IBOutlet weak var ballCountView: BallCountView!
     @IBOutlet weak var ballListView: UITableView!
     @IBOutlet weak var pitcherNameLabel: UILabel!
     @IBOutlet weak var pitcherBackNumberLabel: UILabel!
@@ -29,35 +35,58 @@ class PlayViewController: UIViewController {
         pitcherCheckMark.isHidden = true
         attackAndDefendLabel.text = "공격"
     }
- 
+    @IBAction func playButtonTouched(_ sender: Any) {
+        preBaseStatus = baseStatus // backup
+        dump(preBaseStatus)
+        ballCountView.initializePosition()
+        stadiumView.initializeBase()
+        configureUI(gameID: 2, inningID: 22)
+        stadiumView.acivateAnimation()
+        stadiumView.setNeedsDisplay()
+    }
+    
     private let viewModel = PlayViewModel()
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerXib()
-        configureUI()
+        configureUI(gameID: 1, inningID: 11)
+        stadiumView.setNeedsDisplay()
     }
     
     private func registerXib() {
         ballListView.register(UINib(nibName: BallListCell.identifier, bundle: nil), forCellReuseIdentifier: BallListCell.identifier)
     }
+//
+//    stadiumView.fetch(prePlayerPosition)
     
-    func configureUI() {
+    func configureUI(gameID: Int, inningID: Int) {
         batterCheckMark.isHidden = false
         pitcherCheckMark.isHidden = true
         attackAndDefendLabel.text = "공격"
-        viewModel.getPlayInfo(gameID: game!.id, inningID: game!.inningID) { data in
+        viewModel.getPlayInfo(gameID: gameID, inningID: inningID) { data in
             self.inningCountLabel.text = "\(data.inning)"
             self.inningPointLabel.text = "초"
             self.pitcherNameLabel.text = "\(data.pitcher.name)"
             self.pitcherBackNumberLabel.text = "#\(data.pitcher.backNumber)"
             self.batterNameLabel.text = "\(data.batter.name)"
             self.ballListData = data.ballCount
+            self.outCount = data.outCount
+            self.ballCount = BallCount(data.ballCount)
+            data.ballCount.forEach { data in
+                self.ballCountStorage.append(BallCount([data]))
+            }
+            self.baseStatus = data.baseStatus
             
+            self.ballCountView.configure(
+                strikeCount: self.ballCount?.strikeCount ?? 0,
+                ballCount: self.ballCount?.ballCount ?? 0,
+                outCount: self.outCount)
+            self.stadiumView.configure(self.baseStatus)
+            self.stadiumView.setNeedsDisplay()
+            self.ballCountView.setNeedsDisplay()
             self.ballListView.reloadData()
-            self.ballListView.transform = CGAffineTransform(scaleX: 1, y: -1)
-//            self.ballListView.scrollToRow(at: NSIndexPath(item: self.ballListData.count - 1, section: 0) as IndexPath, at: .bottom, animated: true)
         }
         ballListView.dataSource = self
     }
@@ -70,10 +99,10 @@ extension PlayViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: BallListCell.identifier, for: indexPath) as! BallListCell
-//        let index = ballListData.count - indexPath.row - 1
-        let index = indexPath.row
+        let index = ballListData.count - indexPath.row - 1
+//        let index = indexPath.row
         let ball = ballListData[index]
-        cell.configure(id: index, ball: ball, with: ballCount)
+        cell.configure(id: index + 1, ball: ball, with: ballCountStorage.popLast()!)
         return cell
     }
 }

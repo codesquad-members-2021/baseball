@@ -105,6 +105,9 @@
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="playButtonTouched:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="t0m-o0-Ufg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
@@ -284,6 +287,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="attackAndDefendLabel" destination="sQw-Vu-Pmb" id="l8V-VD-XmM"/>
+                        <outlet property="ballCountView" destination="S7j-Bz-F2K" id="Hlo-TV-Csa"/>
                         <outlet property="ballListView" destination="fJ2-ax-ezy" id="Iap-M5-Crd"/>
                         <outlet property="batterCheckMark" destination="bsy-bY-TNZ" id="2i8-3T-Wq3"/>
                         <outlet property="batterInfoLabel" destination="9pV-Vo-UwH" id="BbH-Mw-CUl"/>

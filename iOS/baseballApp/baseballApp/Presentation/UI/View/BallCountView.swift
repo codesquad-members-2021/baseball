@@ -5,18 +5,35 @@ class BallCountView: UIView {
     private lazy var ballPoint = CGPoint(x: 20, y: 26)
     private lazy var outPoint = CGPoint(x: 20, y: 50)
     private let rectSize = CGSize(width: 20, height: 20)
+    private var strikeCount: Int = 0
+    private var ballCount: Int = 0
+    private var outCount: Int = 0
     
+    func configure(strikeCount: Int, ballCount: Int, outCount: Int) {
+        self.strikeCount = strikeCount
+        self.ballCount = ballCount
+        self.outCount = outCount
+    }
+    
+    func initializePosition() {
+        strikePoint = CGPoint(x: 20, y: 2)
+        ballPoint = CGPoint(x: 20, y: 26)
+        outPoint = CGPoint(x: 20, y: 50)
+    }
     
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.setStrokeColor(UIColor.gray.cgColor)
-        drawStrike(context)
-        drawStrike(context)
-        drawBall(context)
-        drawBall(context)
-        drawBall(context)
-        drawOut(context)
+        for _ in 0..<strikeCount {
+            drawStrike(context)
+        }
+        for _ in 0..<ballCount {
+            drawBall(context)
+        }
+        for _ in 0..<outCount {
+            drawOut(context)
+        }
     }
 
     func drawStrike(_ context: CGContext) {

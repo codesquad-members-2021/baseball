@@ -1,17 +1,23 @@
 import Foundation
 
 class BallCount {
-    private var strike: Int
-    private var ball: Int
+    var strikeCount: Int
+    var ballCount: Int
     
-    init() {
-        self.strike = 0
-        self.ball = 0
+    init(_ balls: [String]) {
+        self.strikeCount = 0
+        self.ballCount = 0
+        balls.forEach { ball in
+            update(with: ball)
+        }
     }
     
-    func addBall(_ ballType: String) -> (Int, Int) {
-        strike += ballType == "S" ? 1 : 0
-        ball += ballType == "B" ? 1: 0
-        return (strike, ball)
+    convenience init() {
+        self.init([])
+    }
+    
+    func update(with ballType: String) {
+        strikeCount += ballType == "S" ? 1 : 0
+        ballCount += ballType == "B" ? 1: 0
      }
 }
