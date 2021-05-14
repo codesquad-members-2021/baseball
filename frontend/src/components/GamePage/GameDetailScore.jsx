@@ -11,18 +11,18 @@ const GameDetailScore = () => {
 	totalInning[0] = null;
 	totalInning[totalInning.length - 1] = 'R';
 
-	const ScoreTop = totalInning.map((v) => <Block>{v}</Block>);
+	const ScoreTop = totalInning.map((v, i) => <Block key={'a' + i}>{v}</Block>);
 	const teamHome = Array.from({ length: 14 }, (v, i) =>
-		i === 0 ? <Block>{state.homeTeam.teamName}</Block> : null,
+		i === 0 ? <Block key={'b' + i}>{state.homeTeam.teamName}</Block> : null,
 	);
 	const teamAway = Array.from({ length: 14 }, (v, i) =>
-		i === 0 ? <Block>{state.awayTeam.teamName}</Block> : null,
+		i === 0 ? <Block key={'c' + i}>{state.awayTeam.teamName}</Block> : null,
 	);
 	if (state.score) {
 		const scoreState = state.score.innings;
 		scoreState.map((el, idx) => {
-			teamHome[idx + 1] = <Block>{el.homeTeamScore}</Block>;
-			teamAway[idx + 1] = <Block>{el.awayTeamScore}</Block>;
+			teamHome[idx + 1] = <Block key={'d' + idx}>{el.homeTeamScore}</Block>;
+			teamAway[idx + 1] = <Block key={'e' + idx}>{el.awayTeamScore}</Block>;
 		});
 	}
 

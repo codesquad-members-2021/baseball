@@ -12,56 +12,57 @@ import {
 import GhostAnimation from './GPA_Animation';
 
 const GpaField = ({ type, gameId }) => {
+	let BallType;
 	const { state } = useGameState();
 	const dispatch = useDispatch();
 	const logDispatch = useLogDispatch();
 	const [inning, setInning] = useState(
 		state.score ? state.gameStatusDTO.inning : 1,
 	);
-	const currentInning = state.score ? state.gameStatusDTO.inning : 1;
-	const [isTop, setIsTop] = useState(type === 'Attack' ? '공격' : '수비');
-	const [currentType, setCurrentType] = useState(type);
-	const [isInit, setIsInit] = useState('초');
-	useEffect(() => {
-		state.score && setIsTop(state.gameStatusDTO.top ? '공격' : '수비');
-	}, [state]);
+	const [move, setMove] = useState(false);
 
-	useEffect(() => {
-		state.score && isInit === '초' ? setIsInit('말') : setIsInit('초');
-		state.score && currentType === 'Attack'
-			? setCurrentType('Defense')
-			: setCurrentType('Attack');
-	}, [isTop]);
-
-	const getPitchResult = async () => {
-		const response = await API.post.pitch(gameId);
-		dispatch({ type: 'pitch', payload: response });
-		logDispatch({ type: 'log', payload: response });
-	};
-
-	let interval;
-
-	useEffect(() => {
-		if (currentType === 'Defense') {
-			interval = setInterval(() => {
-				getPitchResult();
-			}, 3000);
-		}
-		return () => clearInterval(interval);
-	}, []);
+	const logInfo = useLogState();
+	const { logState } = logInfo;
 
 	const handleClick = () => {
+		const getPitchResult = async () => {
+			const response = await API.post.pitch(gameId);
+			dispatch({ type: 'pitch', payload: response });
+			logDispatch({ type: 'log', payload: response });
+		};
+
 		getPitchResult();
 	};
 
+	useEffect(() => {
+		if (logState.length > 0) {
+			BallType = logState[logState.length - 1].pitchResult.playType;
+			console.log(BallType, logState);
+			if (
+				BallType === 'HOMERUN' ||
+				BallType === 'HITS' ||
+				BallType === 'FOUR_BALL'
+			) {
+				setMove(() => true);
+			}
+			// setMove(
+			// 	BallType === 'HOMERUN' ||
+			// 		BallType === 'HITS' ||
+			// 		BallType === 'FOUR_BALL'
+			// 		? true
+			// 		: false,
+			// );
+		}
+	}, [logState]);
+
 	return (
 		<>
-			{currentType === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
+			{type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
 			<FieldArea>
-				<GameState>
-					{currentInning}회{isInit} {isTop}
-				</GameState>
+				<GameState>{inning}회초 공격</GameState>
 				<FieldSVG />
+				{/* {console.log('Field:', move)} */}
+				{/* <GhostAnimation move={move} setMove={setMove} /> */}
 				<GhostAnimation />
 			</FieldArea>
 		</>
@@ -70,7 +71,7 @@ const GpaField = ({ type, gameId }) => {
 
 const PITCH = styled.button`
 	position: absolute;
-	top: 26rem;
+	top: 23rem;
 	left: 3rem;
 	cursor: pointer;
 	z-index: 9999;
