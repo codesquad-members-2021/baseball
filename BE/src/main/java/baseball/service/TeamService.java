@@ -29,7 +29,7 @@ public class TeamService {
         teamRepository.saveAll(teams);
     }
 
-    public TeamsDTO convertToTeamsDTO() {
+    public TeamsDTO getTeamsDTO() {
         List<TeamDTO> teamDTOs = teamRepository.findAll().stream()
                 .map(team -> new TeamDTO(team, team.getMembers()))
                 .collect(Collectors.toList());
