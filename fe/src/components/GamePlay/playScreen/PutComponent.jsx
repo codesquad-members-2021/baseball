@@ -4,7 +4,6 @@ const PutComponent = ({ data }) => {
   const option = {
     method: 'PUT',
     headers: {
-      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -14,7 +13,6 @@ const PutComponent = ({ data }) => {
     'http://baseball.san.r-e.kr/api/update_player',
     option
   );
-  console.log(response);
   //   dispatchEvent(resposndata);
   return <></>;
 };
