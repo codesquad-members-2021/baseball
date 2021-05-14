@@ -1,0 +1,156 @@
+{
+    "away" : {
+      "team_name" : "Twins",
+      "players" : [
+            {
+                "player_id" : "11",
+                "player_name" : "비비",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "22",
+                "player_name" : "네이스",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "33",
+                "player_name" : "봉프",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "44",
+                "player_name" : "디코",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "55",
+                "player_name" : "새리",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "2",
+                "player_name" : "프레디",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "77",
+                "player_name" : "로치",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "88",
+                "player_name" : "노을",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "99",
+                "player_name" : "쿠퍼",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            }
+        ]
+    },
+    "home" : {
+      "team_name" : "Hanhwa",
+      "players" : [
+            {
+                "player_id" : "21",
+                "player_name" : "김대현",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "0.5"
+            },
+            {
+                "player_id" : "32",
+                "player_name" : "오지환",
+                "at_bat" : "1",
+                "hit" : "1",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "42",
+                "player_name" : "차우찬",
+                "at_bat" : "1",
+                "hit" : "2",
+                "out" : "0",
+                "average": "1.5"
+            },
+            {
+                "player_id" : "52",
+                "player_name" : "김현수",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "62",
+                "player_name" : "김용의",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "72",
+                "player_name" : "채은성",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "1",
+                "player_name" : "정찬헌",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "92",
+                "player_name" : "유강남",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            },
+            {
+                "player_id" : "12",
+                "player_name" : "구본혁",
+                "at_bat" : "1",
+                "hit" : "0",
+                "out" : "0",
+                "average": "1"
+            }
+        ]
+    }
+}
