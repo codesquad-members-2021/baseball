@@ -23,13 +23,16 @@ const GamePage = ({ userState }) => {
     away: { isMyTeam: false, teamId: 0, teamName: "" },
   });
 
-  // const [inGameData, setInGameData] = useState(GAME1);
+
   const [inGameState, fetchInGameData] = useAsync(
     API.get.inGameDatas,
     [],
     true
   );
   const { data: inGameData } = inGameState;
+  const [memberFirstRecords, fetchMemberRecords] = useAsync(API.get.inGameDatas);
+  const [memberRecords, setMemberRecords] = useState();
+
   const [attackState, setAttackState] = useState("away"); //attack하는 애가 awayteam인지 homeTeam인지
   const [sequenceCount, setSequenceCount] = useState(0); //몇번째 선수가 뛰고있는지
   const [roundCount, setRoundCount] = useState(1); //몇회인지 카운트
@@ -40,10 +43,11 @@ const GamePage = ({ userState }) => {
     action: "",
   });
   const [currentPlayAction, setCurrentPlayAction] = useState(""); ////strike, ball, hit;
-  const [playRecordsState, setPlayRecordsState] = useState([]); ////[{id:1,name:홍길동,records:[{strike:0, ball:1}]}]
+  const [playRecordsState, setPlayRecordsState] = useState([]); ////[{id:1,name:홍길동,records:[{strike:0, ball:1}]}]  
   const [currentScore, setCurrentScore] = useState(0); // 현재 게임의 스코어
   const [outState, setOutState] = useState(0);
   const [teamScore, setTeamScore] = useState({ home: 0, away: 0 });
+
 
   const onPitch = () => {
     socket.emit("pitch", { gameId: userState.gameId });
@@ -87,6 +91,7 @@ const GamePage = ({ userState }) => {
         isAttack: true,
       },
     });
+    fetchMemberRecords(data.gameId);
   }, [data]);
 
   useEffect(() => {
@@ -114,6 +119,7 @@ const GamePage = ({ userState }) => {
         playActionObject[playAction](currentData)
       );
     });
+
   }, []);
 
   useEffect(() => {
@@ -225,6 +231,36 @@ const GamePage = ({ userState }) => {
   useEffect(() => {
     //선수교체 record 세팅(mainRight)
     if (!inGameData) return;
+    const isAway = attackState === 'away';
+    const teamId = isAway ? data.teamScores[1].teamId : data.teamScores[0].teamId;
+    const teamKind = isAway ? 'away' : 'home';
+
+    const isOut = playRecordsState[0].records[0].strike === 3; //아웃되었을때
+    const isHit = playRecordsState[0].records[0].action === 'hit'; //히트일때
+
+    const currentMember = memberRecords[teamKind].find(({ id }) => {
+      return id === playRecordsState[0].id;
+    });
+
+    if (!currentMember) return;
+    currentMember.out = isOut ? currentMember.out + 1 : currentMember.out;
+    currentMember.hit = isHit ? currentMember.hit + 1 : currentMember.hit;
+
+    setMemberRecords((memberRecords) => {
+      const changeMemberIndex = memberRecords[teamKind].find(({ id }) => {
+        return id === playRecordsState[0].id;
+      });
+      memberRecords[teamKind].splice(changeMemberIndex, 1);
+      return { ...memberRecords, [teamKind]: [...memberRecords[teamKind], currentMember] }
+    })
+
+    const postData = {
+      "hit": currentMember.hit,
+      "out": currentMember.out
+    }
+
+    socket.emit('plusMemberScore', { teamId, memberId: playRecordsState[0].id, postData });
+
     if (!sequenceCount) return;
     const { away, home } = inGameData;
     if (attackState === "away")
@@ -252,6 +288,11 @@ const GamePage = ({ userState }) => {
         ];
       });
   }, [sequenceCount]);
+
+  useEffect(() => {
+    if (!memberFirstRecords.data) return;
+    setMemberRecords(memberFirstRecords.data);
+  }, [memberFirstRecords])
 
   return (
     <GamePageContext.Provider

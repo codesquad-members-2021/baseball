@@ -50,6 +50,11 @@ io.on("connection", (socket) => {
     API.post.score({ teamId, postData });
   });
 
+
+  socket.on('plusMemberScore', ({ teamId, memberId, postData }) => {
+    API.post.memberScore({ teamId, memberId, postData });
+  })
+
   socket.on("disconnect", () => {
     baseball.games = baseball.games.filter(
       ({ playerId }) => playerId !== connectPlayerId
@@ -108,6 +113,16 @@ const API = {
   post: {
     score: ({ teamId, postData }) => {
       return fetch(`${END_POINT}/games/${teamId}/score`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(postData),
+      })
+
+    },
+    memberScore: ({ teamId, memberId, postData }) => {
+      return fetch(`${END_POINT}/teams/${teamId}/${memberId}/record`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
