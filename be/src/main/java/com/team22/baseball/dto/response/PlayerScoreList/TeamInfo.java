@@ -1,6 +1,6 @@
 package com.team22.baseball.dto.response.PlayerScoreList;
 
-public class TeamDto {
+public class TeamInfo {
 
     private String teamName;
 
@@ -8,7 +8,7 @@ public class TeamDto {
 
     private boolean isSelected;
 
-    public TeamDto(String teamName, boolean isHome, boolean isSelected) {
+    public TeamInfo(String teamName, boolean isHome, boolean isSelected) {
         this.teamName = teamName;
         this.isHome = isHome;
         this.isSelected = isSelected;
@@ -38,7 +38,7 @@ public class TeamDto {
         isSelected = selected;
     }
 
-    public static TeamDto of(String teamName, boolean isHome, boolean isSelected) {
-        return new TeamDto(teamName, isHome, isSelected);
+    public static TeamInfo of(String teamName, boolean isHome, boolean isSelected) {
+        return new TeamInfo(teamName, isHome, isSelected);
     }
 }

@@ -4,7 +4,7 @@ import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
-import com.team22.baseball.dto.response.GameList.GameDto;
+import com.team22.baseball.dto.response.GameList.GameList;
 import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
@@ -45,7 +45,7 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id\n" +
             "WHERE TEAM.is_home = false) as away_group\n" +
             "ON home_group.id = away_group.id;")
-    List<GameDto> findAllGame();
+    List<GameList> findAllGame();
 
     @Query("SELECT TEAM.name FROM TEAM WHERE TEAM.game_id = (SELECT TEAM.game_id FROM TEAM WHERE TEAM.name = :title);")
     List<TeamTypeDto> findTeamListByTeamTitle(@Param("title") String title);
@@ -86,11 +86,11 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     @Query("UPDATE GAME SET GAME.round = 0, GAME.in_progress= false WHERE GAME.id = :gameId;")
     void resetGame(@Param("gameId") Long gameId);
 
-    @Query("UPDATE TEAM SET TEAM.selected = false WHERE TEAM.game_id = :gameid;")
+    @Query("UPDATE TEAM SET TEAM.selected = false WHERE TEAM.game_id = :gameId;")
     void resetTeam(@Param("gameId") Long gameId);
 
     @Query("DELETE FROM TEAM_SCORE WHERE TEAM_SCORE.team_id = :teamId;")
-    void resetTeamScore(@Param("gameId") Long gameId);
+    void resetTeamScore(@Param("teamId") Long teamId);
 
     @Query("UPDATE PLAYER SET PLAYER.hits = 0, PLAYER.outs=0, PLAYER.plate_appearance = 0 WHERE PLAYER.team_id = :teamId;")
     void resetPlayer(@Param("teamId") Long teamId);

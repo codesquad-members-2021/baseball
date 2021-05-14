@@ -2,7 +2,7 @@ package com.team22.baseball.dto.response.PlayerScoreList;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class PlayerDto {
+public class PlayerInfo {
 
     @JsonProperty("uniform_number")
     private int uniformNumber;
@@ -19,7 +19,7 @@ public class PlayerDto {
     @JsonProperty("outs")
     private int outs;
 
-    public PlayerDto(int uniformNumber, String playerName, int plateAppearance, int hits, int outs) {
+    public PlayerInfo(int uniformNumber, String playerName, int plateAppearance, int hits, int outs) {
         this.uniformNumber = uniformNumber;
         this.playerName = playerName;
         this.plateAppearance = plateAppearance;
@@ -67,7 +67,7 @@ public class PlayerDto {
         this.outs = outs;
     }
 
-    public static PlayerDto of(int uniformNumber, String playerName, int plateAppearance, int hits, int outs) {
-        return new PlayerDto(uniformNumber, playerName, plateAppearance, hits, outs);
+    public static PlayerInfo of(int uniformNumber, String playerName, int plateAppearance, int hits, int outs) {
+        return new PlayerInfo(uniformNumber, playerName, plateAppearance, hits, outs);
     }
 }

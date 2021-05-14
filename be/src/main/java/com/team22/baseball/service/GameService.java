@@ -4,12 +4,12 @@ import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
-import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
-import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
-import com.team22.baseball.dto.response.GameList.GameDto;
-import com.team22.baseball.dto.response.PlayerScoreList.PlayerDto;
-import com.team22.baseball.dto.response.PlayerScoreList.PlayerScoreDto;
-import com.team22.baseball.dto.response.PlayerScoreList.TeamDto;
+import com.team22.baseball.dto.request.UpdatePlayerInfo;
+import com.team22.baseball.dto.response.DetailScore.DetailScore;
+import com.team22.baseball.dto.response.GameList.GameList;
+import com.team22.baseball.dto.response.PlayerScoreList.PlayerInfo;
+import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
+import com.team22.baseball.dto.response.PlayerScoreList.TeamInfo;
 import com.team22.baseball.dto.response.TeamSelect.*;
 import com.team22.baseball.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public List<GameDto> findAllGame() {
+    public List<GameList> findAllGame() {
         return gameRepository.findAllGame();
     }
 
@@ -78,7 +78,7 @@ public class GameService {
         return gameRepository.findPlayerByName(name).orElseThrow(Exception::new);
     }
 
-    public int[] calculatePlayerScore(UpdatePlayerInfoDto req) throws Exception {
+    public int[] calculatePlayerScore(UpdatePlayerInfo req) throws Exception {
 
         Player findPlayer = findPlayerByName(req.getPlayerName());
 
@@ -106,17 +106,17 @@ public class GameService {
         return gameRepository.findTeamScoreByName(name);
     }
 
-    public List<detailScoreDto> getDetailScoreOfEachTeam(Long gameID) {
+    public List<DetailScore> getDetailScoreOfEachTeam(Long gameID) {
 
         List<Team> teams = findTeamById(gameID);
 
-        List<detailScoreDto> detailScoreDtos = new ArrayList<>();
+        List<DetailScore> detailScores = new ArrayList<>();
 
         for (Team team : teams) {
-            detailScoreDtos.add(new detailScoreDto(team.getName(), findTeamScoreByName(team.getName())));
+            detailScores.add(new DetailScore(team.getName(), findTeamScoreByName(team.getName())));
         }
 
-        return detailScoreDtos;
+        return detailScores;
     }
 
     public void updateGameStatusByTitle(String teamTitle) {
@@ -136,26 +136,26 @@ public class GameService {
         return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber,teamName).orElseThrow(Exception::new);
     }
 
-    public List<PlayerScoreDto> getPlayerScoreOfGame(Game findGame){
+    public List<ScoreList> getPlayerScoreOfGame(Game findGame){
 
-        List<PlayerScoreDto> responseDto = new ArrayList<>();
+        List<ScoreList> responseDto = new ArrayList<>();
 
         for (Team team : findGame.getTeams()) {
 
-            List<PlayerDto> playerDtos = new ArrayList<>();
-            TeamDto teamDto = TeamDto.of(team.getName(), team.isHome(), team.isSelected());
+            List<PlayerInfo> playerInfos = new ArrayList<>();
+            TeamInfo teamInfo = TeamInfo.of(team.getName(), team.isHome(), team.isSelected());
 
             for (Player player : team.getPlayers()) {
-                playerDtos.add(PlayerDto.of(player.getUniformNumber(), player.getName(), player.getPlateAppearance(), player.getHits(), player.getOuts()));
+                playerInfos.add(PlayerInfo.of(player.getUniformNumber(), player.getName(), player.getPlateAppearance(), player.getHits(), player.getOuts()));
             }
-            responseDto.add(PlayerScoreDto.of(teamDto, playerDtos));
+            responseDto.add(ScoreList.of(teamInfo, playerInfos));
         }
 
         return responseDto;
 
     }
 
-    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfoDto req) throws Exception {
+    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo req) throws Exception {
         int[] scores = calculatePlayerScore(req);
 
         updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);
@@ -172,14 +172,13 @@ public class GameService {
     }
 
     public void resetGameData(Long gameId) {
-        gameRepository.resetGame(gameId);
-        gameRepository.resetTeam(gameId);
-
         List<Team> teams = gameRepository.findTeamById(gameId);
 
         for(Team team : teams){
             gameRepository.resetTeamScore(team.getId());
-            gameRepository.resetPlayer(gameId);
+            gameRepository.resetPlayer(team.getId());
         }
+        gameRepository.resetTeam(gameId);
+        gameRepository.resetGame(gameId);
     }
 }

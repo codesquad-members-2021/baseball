@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class detailScoreDto {
+public class DetailScore {
 
     private String name;
 
     private List<TeamScore> scores = new ArrayList<>();
 
-    public detailScoreDto(String name, List<TeamScore> scores) {
+    public DetailScore(String name, List<TeamScore> scores) {
         this.name = name;
         this.scores = scores;
     }

@@ -1,10 +1,10 @@
 package com.team22.baseball.controller;
 
 import com.team22.baseball.domain.Game;
-import com.team22.baseball.dto.request.UpdatePlayerInfoDto;
-import com.team22.baseball.dto.response.DetailScore.detailScoreDto;
-import com.team22.baseball.dto.response.GameList.GameDto;
-import com.team22.baseball.dto.response.PlayerScoreList.PlayerScoreDto;
+import com.team22.baseball.dto.request.UpdatePlayerInfo;
+import com.team22.baseball.dto.response.DetailScore.DetailScore;
+import com.team22.baseball.dto.response.GameList.GameList;
+import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
 import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -32,7 +33,7 @@ public class ApiGameController {
     }
 
     @GetMapping("game_list")
-    private List<GameDto> gameList() {
+    private List<GameList> gameList() {
         logger.debug("gameService.findAllGame() : {}", gameService.findAllGame());
         return gameService.findAllGame();
     }
@@ -47,29 +48,28 @@ public class ApiGameController {
     }
 
     @PutMapping("/update_player")
-    @ResponseStatus(HttpStatus.OK)
-    private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfoDto req) throws Exception {
+    @ResponseStatus(HttpStatus.CREATED)
+    private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfo req) throws Exception {
         return gameService.updatePlayerInfo(req);
     }
 
     @GetMapping("/detailScore/{gameID}")
     @ResponseStatus(HttpStatus.OK)
-    private List<detailScoreDto> detailScore(@PathVariable Long gameID) {
+    private List<DetailScore> detailScore(@PathVariable Long gameID) {
         return gameService.getDetailScoreOfEachTeam(gameID);
     }
 
     @GetMapping("/playerList/{gameId}")
     @ResponseStatus(HttpStatus.OK)
-    private List<PlayerScoreDto> playerScoreList(@PathVariable Long gameId) throws Exception {
+    private List<ScoreList> playerScoreList(@PathVariable Long gameId) throws Exception {
         Game findGame = gameService.findGameById(gameId);
-
         return gameService.getPlayerScoreOfGame(findGame);
     }
 
-    @GetMapping("/reset/{gameId}")
-    @ResponseStatus(HttpStatus.OK)
-    private void resetData(@PathVariable Long gameId) {
-       gameService.resetGameData(gameId);
+    @PutMapping("/reset")
+    @ResponseStatus(HttpStatus.RESET_CONTENT)
+    private void resetData(@RequestBody Map<String, Long> request) {
+       gameService.resetGameData(request.get("teamId"));
     }
 
 }
