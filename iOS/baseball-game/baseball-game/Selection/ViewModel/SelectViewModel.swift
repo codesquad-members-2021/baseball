@@ -10,7 +10,7 @@ import Combine
 
 class SelectViewModel {
     
-    struct CellInfo {
+    struct GameSelectInfo {
         var gameID: String!
         var away: String!
         var home: String!
@@ -19,7 +19,7 @@ class SelectViewModel {
     }
     
     private(set) var gameInfo: GameInfo
-    private(set) var cellInfo: CellInfo!
+    private(set) var gameSelectInfo: GameSelectInfo!
     
     @Published var games: [Game]!
     @Published var error: Error!
@@ -53,7 +53,7 @@ extension SelectViewModel {
         let isAwayEnable = game.away.status == "unselected"
         let isHomeEnable = game.home.status == "unselected"
         
-        self.cellInfo = CellInfo(gameID: gameID, away: away, home: home, isAwayEnable: isAwayEnable, isHomeEnable: isHomeEnable)
+        self.gameSelectInfo = GameSelectInfo(gameID: gameID, away: away, home: home, isAwayEnable: isAwayEnable, isHomeEnable: isHomeEnable)
     }
     
     func selected(team: String) {

@@ -27,7 +27,7 @@ class GameCell: UITableViewCell, IdentifierReusable {
 extension GameCell {
 
     func updateUI(with viewModel: SelectViewModel) {
-        guard let model = viewModel.cellInfo else { return }
+        guard let model = viewModel.gameSelectInfo else { return }
         
         self.gameIdLabel.text = model.gameID
         self.awayTeamButton.setTitle(model.away, for: .normal)
