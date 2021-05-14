@@ -4,81 +4,85 @@ import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
 import API from '../../Hook/API';
 import {
-	useGameState,
-	useDispatch,
-	useLogState,
-	useLogDispatch,
+  useGameState,
+  useDispatch,
+  useLogState,
+  useLogDispatch,
 } from '../../GameContext';
-import GhostAnimation from './GPA_Animation';
+// import GhostAnimation from './GPA_Animation';
 
-const GpaField = ({ type, gameId }) => {
-	let BallType;
-	const { state } = useGameState();
-	const dispatch = useDispatch();
-	const logDispatch = useLogDispatch();
-	const [inning, setInning] = useState(
-		state.score ? state.gameStatusDTO.inning : 1,
-	);
-	const [move, setMove] = useState(false);
+const GPA_Field = ({ type, gameId }) => {
+  const { state } = useGameState();
+  const dispatch = useDispatch();
+  const logDispatch = useLogDispatch();
+  const [inning, setInning] = useState(
+    state.score ? state.gameStatusDTO.inning : 1
+  );
+  const currentInning = state.score ? state.gameStatusDTO.inning : 1;
+  const [isTop, setIsTop] = useState(type === 'Attack' ? '공격' : '수비');
+  const [currentType, setCurrentType] = useState(type);
+  const [isInit, setIsInit] = useState('초');
 
-	const logInfo = useLogState();
-	const { logState } = logInfo;
+  useEffect(() => {
+    state.score && setIsTop(state.gameStatusDTO.top ? '공격' : '수비');
+  }, [state]);
 
-	const handleClick = () => {
-		const getPitchResult = async () => {
-			const response = await API.post.pitch(gameId);
-			dispatch({ type: 'pitch', payload: response });
-			logDispatch({ type: 'log', payload: response });
-		};
+  useEffect(() => {
+    state.score && isInit === '초' ? setIsInit('말') : setIsInit('초');
+    state.score && currentType === 'Attack'
+      ? setCurrentType('Defense')
+      : setCurrentType('Attack');
+  }, [isTop]);
 
-		getPitchResult();
-	};
+  const getPitchResult = async () => {
+    const response = await API.post.pitch(gameId);
+    dispatch({ type: 'pitch', payload: response });
+    logDispatch({ type: 'log', payload: response });
+  };
 
-	useEffect(() => {
-		if (logState.length > 0) {
-			BallType = logState[logState.length - 1].pitchResult.playType;
-			console.log(BallType, logState);
-			if (
-				BallType === 'HOMERUN' ||
-				BallType === 'HITS' ||
-				BallType === 'FOUR_BALL'
-			) {
-				setMove(() => true);
-			}
-			// setMove(
-			// 	BallType === 'HOMERUN' ||
-			// 		BallType === 'HITS' ||
-			// 		BallType === 'FOUR_BALL'
-			// 		? true
-			// 		: false,
-			// );
-		}
-	}, [logState]);
+  let interval;
 
-	return (
-		<>
-			{type === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
-			<FieldArea>
-				<GameState>{inning}회초 공격</GameState>
-				<FieldSVG />
-				{/* {console.log('Field:', move)} */}
-				<GhostAnimation move={move} setMove={setMove} />
-			</FieldArea>
-		</>
-	);
+  useEffect(() => {
+    if (currentType === 'Defense') {
+      interval = setInterval(() => {
+        getPitchResult();
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleClick = () => {
+    getPitchResult();
+  };
+
+  const move =
+    state.pitchResult && state.pitchResult.playType === 'HITS' ? true : false;
+
+  return (
+    <>
+      {currentType === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
+      <FieldArea>
+        <GameState>
+          {currentInning}회{isInit} {isTop}
+        </GameState>
+        <FieldSVG />
+        {/* <GhostAnimation move={move} /> */}
+      </FieldArea>
+    </>
+  );
 };
 
 const PITCH = styled.button`
-	position: absolute;
-	top: 23rem;
-	left: 3rem;
-	cursor: pointer;
-	z-index: 9999;
-	background-color: ${theme.colors.transparent};
-	font-size: ${theme.fontSize.XX_large};
-	font-weight: ${theme.fontWeight.Bold};
-	color: ${theme.colors.white};
-	border: 5px solid ${theme.colors.white};
+  position: absolute;
+  top: 26rem;
+  left: 3rem;
+  cursor: pointer;
+  z-index: 9999;
+  background-color: ${theme.colors.transparent};
+  font-size: ${theme.fontSize.XX_large};
+  font-weight: ${theme.fontWeight.Bold};
+  color: ${theme.colors.white};
+  border: 5px solid ${theme.colors.white};
 `;
 const FieldArea = styled.div`
 	position: relative;

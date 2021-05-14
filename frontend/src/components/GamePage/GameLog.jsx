@@ -6,67 +6,75 @@ import Scroll from '../Style/Scroll';
 import { useLogState } from '../GameContext';
 
 const GameLog = () => {
-	const { logState } = useLogState();
-	const SingleLog = () => {
-		return null;
-		// return logState.map((log, i) => (
-		// 	// console.log(log.pitchResult.playType, log.gameStatusDTO.strikeCount);
+  const { logState } = useLogState();
 
-		// 	<Foo key={i}>
-		// 		<span>{i}</span>
-		// 		<span>{`${log.gameStatusDTO.currentHitter + 1}번 타자 ${
-		// 			log.awayTeam.players[log.gameStatusDTO.currentHitter + 1].name
-		// 		}`}</span>
-		// 		<span>{log.pitchResult.playType}</span>
-		// 		<span>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</span>
-		// 	</Foo>
-		// ));
-	};
+  let processedLog = [];
 
-	return (
-		<GameLogScroll>
-			<SingleLog />
-			<PlayerWrapper>
-				<Player now={true}>7번 타자 류진</Player>
-				<LogWrapper>
-					<Number>&#9316;</Number>
-					<Log>스트라이크</Log>
-					<AccLog>S2 B3</AccLog>
-				</LogWrapper>
-				<LogWrapper>
-					<Number>&#9315;</Number>
-					<Log>볼</Log>
-					<AccLog>S1 B3</AccLog>
-				</LogWrapper>
-				<LogWrapper>
-					<Number>&#9314;</Number>
-					<Log>볼</Log>
-					<AccLog>S1 B2</AccLog>
-				</LogWrapper>
-				<LogWrapper>
-					<Number>&#9313;</Number>
-					<Log>볼</Log>
-					<AccLog>S1 B1</AccLog>
-				</LogWrapper>
-				<LogWrapper>
-					<Number>&#9312;</Number>
-					<Log> 스트라이크</Log>
-					<AccLog>S1 B0</AccLog>
-				</LogWrapper>
-			</PlayerWrapper>
-		</GameLogScroll>
-	);
+  logState.map((log, i) => {
+    processedLog[i] = {
+      hitter: `${log.gameStatusDTO.currentHitter + 1}번 타자 ${
+        log.awayTeam.players[log.gameStatusDTO.currentHitter].name
+      }`,
+      fragment: (
+        <div>
+          <LogWrapper>
+            <Number>{i + 1}</Number>
+            <Log>{log.pitchResult.playType}</Log>
+            <AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
+          </LogWrapper>
+        </div>
+      ),
+    };
+  });
+
+  const LogGroupedByHitter = processedLog.reduce((acc, obj) => {
+    if (!acc[obj.hitter]) {
+      acc[obj.hitter] = [];
+    }
+    acc[obj.hitter].push(obj.fragment);
+    return acc;
+  }, {});
+
+  return (
+    <GameLogScroll>
+      {Object.entries(LogGroupedByHitter).map(([key, value]) => {
+        const logList = value.map(log => log);
+        return (
+          <PlayersWrapper>
+            <div>
+              <PlayerWrapper>
+                <Player>{key}</Player>
+              </PlayerWrapper>
+              <LogByPlayer>{logList}</LogByPlayer>
+            </div>
+          </PlayersWrapper>
+        );
+      })}
+    </GameLogScroll>
+  );
 };
 const GameLogScroll = styled(Scroll)``;
+
+const PlayersWrapper = styled.div`
+  display: flex;
+  /* flex-direction: column-reverse; */
+`;
 
 const PlayerWrapper = styled.div`
 	padding-left: 20px;
 `;
+
+const LogByPlayer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+`;
+
 const LogWrapper = styled.div`
-	width: fit-content;
-	padding-top: 10px;
-	display: grid;
-	grid-template-columns: 20px 130px 100px;
+  margin: 1rem;
+  width: fit-content;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 20px 130px 100px;
 `;
 const Player = styled.div`
 	margin: 15px 0;
@@ -80,17 +88,17 @@ const Result = styled(Span)`
 	color: ${theme.colors.blue_log};
 `;
 const Number = styled(Span)`
-	color: ${theme.colors.white};
+  color: ${theme.colors.white};
+  background-color: #0073b1;
+  border-radius: 10px;
+  text-align: center;
 `;
 const Log = styled(Span)`
 	color: ${theme.colors.white};
 `;
 const AccLog = styled(Span)`
-	color: ${theme.colors.grey};
-`;
-
-const Foo = styled(Span)`
-	color: ${theme.colors.white};
+  text-align: left;
+  color: ${theme.colors.grey};
 `;
 
 export default GameLog;
