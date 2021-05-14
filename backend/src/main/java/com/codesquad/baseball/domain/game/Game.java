@@ -105,6 +105,18 @@ public class Game {
         }).collect(Collectors.toList());
     }
 
+    public TeamType winner() {
+        int homeTeamScore = homeTeamScore();
+        int awayTeamScore = awayTeamScore();
+        if (homeTeamScore > awayTeamScore) {
+            return TeamType.HOME;
+        } else if (homeTeamScore < awayTeamScore) {
+            return TeamType.AWAY;
+        } else {
+            return TeamType.NONE;
+        }
+    }
+
     public PitchResult pitch(PlayType playType) {
         PitchResult pitchResult = new PitchResult(playType);
         switch (playType) {

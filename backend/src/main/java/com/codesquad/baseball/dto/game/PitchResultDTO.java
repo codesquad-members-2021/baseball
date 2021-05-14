@@ -1,8 +1,10 @@
 package com.codesquad.baseball.dto.game;
 
 import com.codesquad.baseball.domain.game.Game;
+import com.codesquad.baseball.domain.game.GameState;
 import com.codesquad.baseball.domain.game.PlayType;
 import com.codesquad.baseball.domain.game.pitch.PitchResult;
+import com.codesquad.baseball.domain.team.TeamType;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ public class PitchResultDTO {
     private int thirdBase;
     private List<Integer> backHome;
     private int pointsEarned;
+    private GameState gameState;
+    private TeamType winningTeam;
 
     public PitchResultDTO(Builder builder) {
         this.pitcherId = builder.pitcherId;
@@ -25,6 +29,8 @@ public class PitchResultDTO {
         this.thirdBase = builder.thirdBase;
         this.backHome = builder.backHome;
         this.pointsEarned = builder.pointsEarned;
+        this.gameState = builder.gameState;
+        this.winningTeam = builder.winningTeam;
     }
 
     public static PitchResultDTO from(PitchResult pitchResult, Game game) {
@@ -37,6 +43,8 @@ public class PitchResultDTO {
                 .thirdBase(game.thirdBaseRunner())
                 .backHome(pitchResult.getBackHomeRunners())
                 .pointsEarned(pitchResult.numberOfRunners())
+                .gameState(pitchResult.getGameState())
+                .winningTeam(game.winner())
                 .build();
     }
 
@@ -72,6 +80,14 @@ public class PitchResultDTO {
         return pointsEarned;
     }
 
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public TeamType getWinningTeam() {
+        return winningTeam;
+    }
+
     public static class Builder {
         private int pitcherId;
         private int hitterId;
@@ -81,6 +97,8 @@ public class PitchResultDTO {
         private int thirdBase;
         private List<Integer> backHome;
         private int pointsEarned;
+        private GameState gameState;
+        private TeamType winningTeam;
 
         public Builder pitcherId(int value) {
             pitcherId = value;
@@ -119,6 +137,16 @@ public class PitchResultDTO {
 
         public Builder pointsEarned(int value) {
             pointsEarned = value;
+            return this;
+        }
+
+        public Builder gameState(GameState value) {
+            gameState = value;
+            return this;
+        }
+
+        public Builder winningTeam(TeamType value) {
+            winningTeam = value;
             return this;
         }
 
