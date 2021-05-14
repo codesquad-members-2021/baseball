@@ -95,16 +95,16 @@ DROP TABLE IF EXISTS `baseball`.`playing`;
 
 CREATE TABLE IF NOT EXISTS `baseball`.`playing`
 (
-    `id`            INT         NOT NULL AUTO_INCREMENT,
-    `team_name`     VARCHAR(45) NOT NULL,
-    `player_number` INT         NOT NULL,
-    `player_name`   VARCHAR(45) NOT NULL,
-    `position`      VARCHAR(45) NOT NULL,
-    `pa`            INT         NULL,
-    `hit`           INT         NULL,
-    `out`           INT         NULL,
-    `average`       DOUBLE      NULL,
-    `game_id`       INT         NOT NULL,
+    `id`            INT           NOT NULL AUTO_INCREMENT,
+    `team_name`     VARCHAR(45)   NOT NULL,
+    `player_number` INT           NOT NULL,
+    `player_name`   VARCHAR(45)   NOT NULL,
+    `position`      VARCHAR(45)   NOT NULL,
+    `pa`            INT           NULL,
+    `hit`           INT           NULL,
+    `out`           INT           NULL,
+    `average`       DECIMAL(6, 3) NULL,
+    `game_id`       INT           NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `fk_playing_game1_idx` (`game_id` ASC) VISIBLE,
     CONSTRAINT `fk_playing_game1`

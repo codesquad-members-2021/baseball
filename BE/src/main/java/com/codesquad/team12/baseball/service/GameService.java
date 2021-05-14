@@ -1,9 +1,7 @@
 package com.codesquad.team12.baseball.service;
 
-import com.codesquad.team12.baseball.dto.GameDto;
-import com.codesquad.team12.baseball.dto.InningDto;
+import com.codesquad.team12.baseball.dto.response.GameDto;
 import com.codesquad.team12.baseball.model.Game;
-import com.codesquad.team12.baseball.model.Inning;
 import com.codesquad.team12.baseball.repository.GameRepository;
 import org.springframework.stereotype.Service;
 

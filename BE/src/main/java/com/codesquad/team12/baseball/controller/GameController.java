@@ -1,6 +1,8 @@
 package com.codesquad.team12.baseball.controller;
 
-import com.codesquad.team12.baseball.dto.*;
+import com.codesquad.team12.baseball.dto.request.InningRequestDto;
+import com.codesquad.team12.baseball.dto.request.PlayingRequestDto;
+import com.codesquad.team12.baseball.dto.response.*;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.service.GameService;
 import com.codesquad.team12.baseball.service.InningService;
@@ -61,12 +63,13 @@ public class GameController {
         return new PlayingsDto(homePlayings, awayPlayings);
     }
 
-    @PutMapping
-    public void putGame(@PathVariable Long gameId) {
-//        TODO: To get parameter from request body using DTO
+    @PutMapping("/innings")
+    public void putGame(@PathVariable Long gameId, @RequestBody InningRequestDto inningRequestDto) {
+        inningService.updateInning(gameId, inningRequestDto);
     }
 
-    @PutMapping("/{teamId}")
-    public void putPlaying(@PathVariable Long gameId, @PathVariable Long teamId) {
+    @PutMapping("/squads")
+    public void putPlaying(@PathVariable Long gameId, @RequestBody PlayingRequestDto playingRequestDto) {
+        playingService.updatePlaying(gameId, playingRequestDto);
     }
 }

@@ -1,6 +1,6 @@
 package com.codesquad.team12.baseball.model;
 
-import com.codesquad.team12.baseball.dto.PlayerDto;
+import com.codesquad.team12.baseball.dto.response.PlayerDto;
 
 public class Player {
     private Integer number;

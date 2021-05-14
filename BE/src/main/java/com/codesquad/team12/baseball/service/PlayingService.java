@@ -1,6 +1,7 @@
 package com.codesquad.team12.baseball.service;
 
-import com.codesquad.team12.baseball.dto.PlayingDto;
+import com.codesquad.team12.baseball.dto.response.PlayingDto;
+import com.codesquad.team12.baseball.dto.request.PlayingRequestDto;
 import com.codesquad.team12.baseball.model.Player;
 import com.codesquad.team12.baseball.model.Playing;
 import com.codesquad.team12.baseball.model.Team;
@@ -42,6 +43,11 @@ public class PlayingService {
                 .sorted(Comparator.comparing(Playing::getPlayerNumber))
                 .map(Playing::createPlayingDto)
                 .collect(Collectors.toList());
+    }
+
+    public void updatePlaying(Long gameId, PlayingRequestDto playingRequestDto) {
+        Double average = (double) playingRequestDto.getHit() / playingRequestDto.getPa();
+        playingRepository.updatePlaying(gameId, playingRequestDto.getTeamName(), playingRequestDto.getPlayerNumber(), playingRequestDto.getPa(), playingRequestDto.getHit(), playingRequestDto.getOut(), average);
     }
 
     private Playing findByTeam(Long gameId, String teamName, Integer playerNumber) {
