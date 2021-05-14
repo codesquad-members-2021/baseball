@@ -19,6 +19,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ApiGameController {
 
     private final Logger logger = LoggerFactory.getLogger(ApiGameController.class);
