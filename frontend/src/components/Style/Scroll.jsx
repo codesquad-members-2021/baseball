@@ -21,6 +21,7 @@ const Scroll = styled.div`
 		background-color: ${theme.colors.grey_transparent};
 		border-radius: 5px;
 	}
+
 `;
 //scroll 위치 조정하기, 가로 x scroll방지
 export default Scroll;

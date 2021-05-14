@@ -6,9 +6,9 @@ import Scroll from '../Style/Scroll';
 import { useLogState } from '../GameContext';
 
 const GameLog = () => {
-	const { logState } = useLogState();
+  const { logState } = useLogState();
 
-	let processedLog = [];
+  let processedLog = [];
 
 	logState.map((log, i) => {
 		processedLog[i] = {
@@ -24,13 +24,14 @@ const GameLog = () => {
 		};
 	});
 
-	const LogGroupedByHitter = processedLog.reduce((acc, obj) => {
-		if (!acc[obj.hitter]) {
-			acc[obj.hitter] = [];
-		}
-		acc[obj.hitter].push(obj.fragment);
-		return acc;
-	}, {});
+
+  const LogGroupedByHitter = processedLog.reduce((acc, obj) => {
+    if (!acc[obj.hitter]) {
+      acc[obj.hitter] = [];
+    }
+    acc[obj.hitter].push(obj.fragment);
+    return acc;
+  }, {});
 
 	return (
 		<ScrollDiv>
@@ -76,16 +77,18 @@ const PlayersWrapper = styled.div`
 	display: flex;
 `;
 
+
 const PlayerWrapper = styled.div`
-	padding-left: 20px;
+  padding-left: 20px;
 `;
 
 const LogByPlayer = styled.div`
-	display: flex;
-	flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
 `;
 
 const LogWrapper = styled.div`
+
 	margin: 10px;
 	width: fit-content;
 	display: grid;
@@ -99,21 +102,21 @@ const Player = styled.div`
 		props.now ? theme.colors.red_log : theme.colors.skyblue_log};
 `;
 const Result = styled(Span)`
-	width: 150px;
-	color: ${theme.colors.blue_log};
+  width: 150px;
+  color: ${theme.colors.blue_log};
 `;
 const Number = styled(Span)`
-	color: ${theme.colors.white};
-	background-color: #0073b1;
-	border-radius: 10px;
-	text-align: center;
+  color: ${theme.colors.white};
+  background-color: #0073b1;
+  border-radius: 10px;
+  text-align: center;
 `;
 const Log = styled(Span)`
-	color: ${theme.colors.white};
+  color: ${theme.colors.white};
 `;
 const AccLog = styled(Span)`
-	text-align: left;
-	color: ${theme.colors.grey};
+  text-align: left;
+  color: ${theme.colors.grey};
 `;
 
 export default GameLog;

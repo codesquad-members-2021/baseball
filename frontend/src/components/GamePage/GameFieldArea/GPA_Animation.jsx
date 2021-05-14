@@ -4,47 +4,47 @@ import { ReactComponent as Ghost } from './Ghost.svg';
 import { useLogState, useLogDispatch } from '../../GameContext';
 
 const playerruntype = [
-	'translateX(20.5rem)',
-	'translateY(-19.5rem)',
-	'translateX(-20.5rem)',
-	'translateY(19.5rem)',
+  'translateX(20.5rem)',
+  'translateY(-19.5rem)',
+  'translateX(-20.5rem)',
+  'translateY(19.5rem)',
 ];
 
 function GhostAnimation() {
-	const [istransition, setIsTransition] = useState(false);
-	const [base, setBase] = useState([1]);
-	const [moveCount, setMoveCount] = useState(0);
-	const logInfo = useLogState();
-	const { logState } = logInfo;
-	let BallType;
+  const [istransition, setIsTransition] = useState(false);
+  const [base, setBase] = useState([1]);
+  const [moveCount, setMoveCount] = useState(0);
+  const logInfo = useLogState();
+  const { logState } = logInfo;
+  let BallType;
 
-	useEffect(() => {
-		if (logState.length > 0) {
-			BallType = logState[logState.length - 1].pitchResult.playType;
-			if (
-				BallType === 'HOMERUN' ||
-				BallType === 'HITS' ||
-				BallType === 'FOUR_BALL'
-			) {
-				setMoveCount(base.length);
-				setIsTransition(() => true);
-			}
-		}
-	}, [logState]);
+  useEffect(() => {
+    if (logState.length > 0) {
+      BallType = logState[logState.length - 1].pitchResult.playType;
+      if (
+        BallType === 'HOMERUN' ||
+        BallType === 'HITS' ||
+        BallType === 'FOUR_BALL'
+      ) {
+        setMoveCount(base.length);
+        setIsTransition(() => true);
+      }
+    }
+  }, [logState]);
 
-	const handleTransitionEnd = () => {
-		if (moveCount > 1) {
-			setMoveCount(moveCount - 1);
-		} else {
-			setMoveCount(moveCount - 1);
-			setBase((base) => [...base, 1]);
-			setIsTransition(() => false);
-		}
-	};
+  const handleTransitionEnd = () => {
+    if (moveCount > 1) {
+      setMoveCount(moveCount - 1);
+    } else {
+      setMoveCount(moveCount - 1);
+      setBase(base => [...base, 1]);
+      setIsTransition(() => false);
+    }
+  };
 
-	useEffect(() => {
-		if (base.length === 5) setBase([...base.slice(-4)]);
-	}, [base]);
+  useEffect(() => {
+    if (base.length === 5) setBase([...base.slice(-4)]);
+  }, [base]);
 
 	return (
 		<Ground>
@@ -61,6 +61,7 @@ function GhostAnimation() {
 			))}
 		</Ground>
 	);
+
 }
 export default GhostAnimation;
 
@@ -104,9 +105,9 @@ const Ground = styled.div`
 `;
 
 const GhostSVG = styled(Ghost)`
-	width: 3rem;
-	visibility: ${(props) => props.visible};
-	transition: ${(props) => (props.istransition ? 'all 0.5s' : '')};
-	transform: ${(props) =>
-		(props.istransition && props.playerruntype) || 'translate(0px, 0px)'};
+  width: 3rem;
+  visibility: ${props => props.visible};
+  transition: ${props => (props.istransition ? 'all 0.5s' : '')};
+  transform: ${props =>
+    (props.istransition && props.playerruntype) || 'translate(0px, 0px)'};
 `;
