@@ -116,7 +116,6 @@ const GamePage = ({ userState }) => {
   }, []);
 
   useEffect(() => {
-    //
     if (!playRecordsState.length) return;
     const { strike, ball, action } = currentSBData;
     if (strike === 3) {
@@ -140,8 +139,9 @@ const GamePage = ({ userState }) => {
         if (base.length === 3) return [{ name, id }, ...base.slice(0, -1)];
         return [{ name, id }, ...base];
       });
-      if (currentBaseData.length === 3)
+      if (currentBaseData.length === 3) {
         setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+      }
     } else if (action === "hit") {
       updateSequenceCount();
       setCurrentBaseData((base) => {
@@ -150,8 +150,10 @@ const GamePage = ({ userState }) => {
         if (base.length === 3) return [{ name, id }, ...base.slice(0, -1)];
         return [{ name, id }, ...base];
       });
-      if (currentBaseData.length === 3)
+      if (currentBaseData.length === 3) {
+        socket.emit('plusScore', ({ teamId: 1, postData: { "inningNumber": 1, "score": 3 } }));
         setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+      }
     } else if (outState === 2 && strike === 2 && action === "strike") {
       // 팀 체인지
       setCurrentSBData({ strike: 0, ball: 0, action: "" });
@@ -165,14 +167,6 @@ const GamePage = ({ userState }) => {
       setOutState(0);
       setSequenceCount(0);
       setCurrentBaseData([]);
-      /*
-      제가 생각했을 땐 setPlayRecordsState를 위의 if (strike===3) 일 때 비모가 하신것처럼
-      제일 위의 records 쌓인 {strike:2 ball:2}에다가 out을 추가하고 나서, 그 결과를 출력시킨 다음
-      나머지들을 초기화시켜야 하지 않을까 했습니당
-      attackState가 변경되면 그 해당하는 attackSTate에 맞춰서 초기화를 시키고싶은데
-      어떻게 해야할지 모르겠어요 !!!!!!!!!!!!!!
-      일단 attackState가 변경되면, 변경된 수비쪽 팀에다가 pitch버튼을 넘겼는데 그건 잘 작동합니다..
-      */
     }
 
     if (!action) return;
@@ -184,12 +178,6 @@ const GamePage = ({ userState }) => {
       ];
     });
   }, [currentSBData]);
-
-
-  useEffect(() => {
-    console.log(123)
-    console.log(attackState)
-  }, [attackState]);
 
   useEffect(() => {
     //초기세팅 record 세팅 (mainRight)
@@ -221,16 +209,6 @@ const GamePage = ({ userState }) => {
           records: [],
         },
       ]);
-    // if (attackState === "away")
-    //   setPlayRecordsState([
-    //     { id: away[0].id, name: away[0].name, out: false, records: [] },
-    //   ]);
-
-    // else {
-    //   setPlayRecordsState([
-    //     { id: home[0].id, name: home[0].name, out: false, records: [] },
-    //   ]);
-    // }
   }, [attackState]);
 
   useEffect(() => {

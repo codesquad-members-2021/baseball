@@ -5,6 +5,24 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http, {
   cors: { origin: "*" },
 });
+const fetch = require("node-fetch");
+
+const END_POINT =
+  "http://ec2-13-125-90-225.ap-northeast-2.compute.amazonaws.com";
+
+const API = {
+  post: {
+    score: ({ teamId, postData }) => {
+      return fetch(`${END_POINT}/games/${teamId}/score`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(postData),
+      })
+    }
+  },
+};
 
 const baseball = {
   games: [],
@@ -45,6 +63,9 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on('plusScore', ({ teamId, postData }) => {
+    API.post.score({ teamId, postData });
+  })
   socket.on("disconnect", () => {
     baseball.games = baseball.games.filter(
       ({ playerId }) => playerId !== connectPlayerId

@@ -10,7 +10,17 @@ const API = {
     inGameDatas: (gameId) =>
       customFetch(`${END_POINT}/games/${gameId}/members`),
   },
-  post: {},
+  post: {
+    score: ({ teamId, postData }) => {
+      return fetch(`${END_POINT}/games/${teamId}/score`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(postData),
+      })
+    }
+  },
 };
 
 const customFetch = async (...param) => {
