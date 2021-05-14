@@ -5,6 +5,7 @@ const gamePlayInitialState = {
     teamsData: null,
     gameProgress: {
         homeOrAway: '',
+
         userTeamName: '',
         opponentTeamName: '',
 

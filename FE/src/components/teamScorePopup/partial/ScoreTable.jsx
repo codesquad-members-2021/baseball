@@ -2,11 +2,6 @@ import styled, { css } from 'styled-components';
 
 const BaseballIcon = () => (<StyledBaseballIcon>⚾️</StyledBaseballIcon>);
 const ScoreTable = () => {
-    // score가 배열로 넘어올지... 뭘로 넘어올지..
-    // team별 배열로 넘어오면
-    // const round = [1,2,3,4,5,6,7,8,9,10,11,12];
-    // let {home,away} = teamInformatin
-
     return (
         <StyledScoreTable>
 

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -17,9 +17,14 @@ import GameScore from './gameScore/GameScore';
 import MatchScreen from './matchScreen/MatchScreen';
 import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
+import useFetch from '../../hooks/useFetch';
+import { createFetchOptions } from '../../common/util';
 
 const GamePlay = ({ location }) => {
     const team = queryString.parse(location.search);
+
+    const [ url, setUrl ] = useState(null); 
+    const [ urlLoading, setUrlLoading ] = useState(true);
 
     const { globalState } = useContext(GlobalContext);
     const {
@@ -29,62 +34,36 @@ const GamePlay = ({ location }) => {
         gamePlayOptionsDispatch,
     } = useContext(GamePlayContext);
 
-    /*
-    // gameplay 첫 스타트는 공격으로 시작.
-    // 팀 선택 클릭 시 랜덤으로 돌려도 될듯.
-    const [sequence, setSequence] = useState('attack');
-    const [onOff, setOnOff] = useState(false); // pitch 버튼 attack일때 off     // 제외 (sequence로 제어 가능할듯)
-    const [strike, setStrike] = useState([]);
-    const [ball, setBall] = useState([]);
-    const [awayScore, setAwayScore] = useState(0);
-    const [homeScore, setHomeScore] = useState(0);
-    const [pitcher, setPitcher] = useState('');
-    const [hitter, setHitter] = useState('');
-
-    const randomSituation = () => {
-        let kind = ['HIT', 'OUT', 'BALL', 'STRIKE'];
-        let randomNumber = Math.floor(Math.random() * kind.length) + 1;
-        return kind[randomNumber];
-    };
-    const gamePlay = () => {
-        if (sequence === 'attack') {
-            setPitcher(gamePlayState.playerList.opponent.players[0]); // 투수
-            setHitter(gamePlayState.playerList.user.players[1]); // 타자
-        } else if (sequence === 'defense') {
-            setOnOff(true);
-            setPitcher(gamePlayState.playerList.user.players[0]); // 투수
-            setHitter(gamePlayState.playerList.opponent.players[1]); // 타자
-        }
-    };
-    */
-
-    // useFetch로 --------------- 수정 예정 START
-    const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            user: globalState.clickLocation === 'away' ? team.away : team.home,
-            opponent:
-                globalState.clickLocation === 'away' ? team.home : team.away,
-        }),
-        // 클릭이 좌측 away인지 우측 home 인지 판별하기.
-    };
-    const fetchData = async (url) => {
-        const res = await fetch(url, options);
-        console.log(res);
-        const result = await res.json();
-        gamePlayDispatch({ type: 'setTeamsData', payload: result });
-    };
-
+    // [1] TeamData 요청 (POST)
     useEffect(() => {
         if (!globalState.clickLocation) return;
         globalState.clickLocation === 'away'
-            ? fetchData(API + '/api/games/type-away')
-            : fetchData(API + '/api/games/type-home');
+            ? setUrl(API + '/api/games/type-away')
+            : setUrl(API + '/api/games/type-home');
         // eslint-disable-next-line react-hooks/exhaustive-deps
+        setUrlLoading(false);
     }, [globalState.clickLocation]);
-    // useFetch로 --------------- 수정 예정  END
 
+    const bodyData = {
+        user: globalState.clickLocation === 'away' ? team.away : team.home,
+        opponent:
+            globalState.clickLocation === 'away' ? team.home : team.away,
+    };
+
+    const { response, error, loading } = useFetch(url, {
+        options: createFetchOptions('POST', bodyData),
+        addProps: [!urlLoading],
+        isExecuteFunc: true,
+        callback: () => setUrlLoading(true),
+    });
+
+    useEffect(() => {
+        if (loading || error) return;
+        gamePlayDispatch({ type: 'setTeamsData', payload: response });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loading]);
+
+    // [2] 게임 시작 전 모든 GamePlayProvider 업뎃
     useEffect(() => {
         if (!teamsData || !globalState) return;
         const { user, opponent } = teamsData;
@@ -119,7 +98,7 @@ const GamePlay = ({ location }) => {
 
     const childComponents = [
         <GameScore />,
-        <MatchScreen />, //
+        <MatchScreen />,
         <BattleGround />, // 어택인지 디펜스인지에 따라 피치버튼 on & off
         <SituationScreen />,
     ];
