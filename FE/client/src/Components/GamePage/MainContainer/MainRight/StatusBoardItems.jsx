@@ -1,28 +1,31 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-const StatusBoardItems = (props) => {
+const StatusBoardItems = ({ record, index, recordLength }) => {
+  const { inGameData, currentSBData, currentPlayAction } = useContext(GamePageContext);
+
+  // console.log("여기서찍는SB", currentSBData);
+  // console.log(1, currentPlayAction)
+  const { action, strike, ball } = record;
+
   return (
-    <>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>볼
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-      <StatusBoardItem>
-        <NumberCircle>1</NumberCircle>스트라이크
-        <StrikeBallStatus>S2 B2</StrikeBallStatus>
-      </StatusBoardItem>
-    </>
+    <StatusBoardItem>
+
+      {action === 'strike' && <><NumberCircle>{(recordLength - index)}</NumberCircle>스트라이크</>}
+      {action === 'ball' && <><NumberCircle>{(recordLength - index)}</NumberCircle>볼</>}
+      {action === 'hit' && <><FinishItem>안타 !</FinishItem></>}
+
+      <StrikeBallStatus>{action !== 'hit' && `S${strike} B${ball}`}</StrikeBallStatus>
+    </StatusBoardItem>
   );
 };
+
+const FinishItem = styled.div`
+  margin:auto;
+  color: #47abc4;
+  font-weight:700;
+`;
 
 const StatusBoardItem = styled.div`
   display: flex;
