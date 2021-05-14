@@ -20,4 +20,9 @@ class BallCount {
         strikeCount += ballType == "S" ? 1 : 0
         ballCount += ballType == "B" ? 1: 0
      }
+    
+    func update(with ballCount: BallCount) {
+        self.strikeCount += ballCount.strikeCount
+        self.ballCount += ballCount.ballCount
+    }
 }

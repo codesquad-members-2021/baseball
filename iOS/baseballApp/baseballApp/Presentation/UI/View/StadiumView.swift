@@ -1,7 +1,7 @@
 import UIKit
 
 class StadiumView: UIView {
-    private lazy var flag = false
+    lazy var flag = false
     private lazy var height = self.bounds.height
     private lazy var width = self.bounds.width
     private lazy var baseInterval = Float(width)/3.3
@@ -33,6 +33,7 @@ class StadiumView: UIView {
         drawBaseStatus(context)
         if flag {
             fetchPlayer(preBaseStatus)
+            flag = false
         }
     }
        
@@ -40,13 +41,14 @@ class StadiumView: UIView {
         context.setStrokeColor(UIColor.gray.cgColor)
         context.setLineWidth(4.0)
         drawRotatedRect(context, center: fieldCenter, length: baseInterval, mode: .stroke)
-        context.setFillColor(UIColor.white.cgColor)
         context.setLineWidth(1.0)
         drawBase(context)
     }
     
     private func drawBase(_ context: CGContext) {
+        context.setFillColor(UIColor.yellow.cgColor)
         drawHomeBase(context, center: homeBase)
+        context.setFillColor(UIColor.white.cgColor)
         drawRotatedRect(context, center: firstBase, length: baseSize, mode: .fillStroke)
         drawRotatedRect(context, center: secondBase, length: baseSize, mode: .fillStroke)
         drawRotatedRect(context, center: thirdBase, length: baseSize, mode: .fillStroke)
@@ -129,11 +131,12 @@ extension StadiumView {
 
 extension StadiumView {
     
-    func acivateAnimation() {
-        flag = true
-    }
-    
+//    func acivateAnimation() {
+//        flag = true
+//    }
+//    
     func PreBaseStatus(_ playersStatus: [Int]) {
+        flag = true
         self.preBaseStatus = playersStatus
     }
     
@@ -146,8 +149,8 @@ extension StadiumView {
 
     private func drawPlayer(from position: Int) {
         let playerLayer = CALayer()
-        layer.backgroundColor = UIColor.red.cgColor
-        playerLayer.frame = CGRect(origin: basePoints[position], size: CGSize(width: 10, height: 10))
+        playerLayer.contents = UIImage(named: "baseball_player")?.cgImage
+        playerLayer.frame = CGRect(origin: basePoints[position], size: CGSize(width: 25, height: 25))
         self.layer.addSublayer(playerLayer)
         
         let animation = CABasicAnimation(keyPath: "position")

@@ -41,7 +41,8 @@ class PlayViewController: UIViewController {
         ballCountView.initializePosition()
         stadiumView.initializeBase()
         configureUI(gameID: 2, inningID: 22)
-        stadiumView.acivateAnimation()
+//        stadiumView.flag = true
+        stadiumView.PreBaseStatus(preBaseStatus)
         stadiumView.setNeedsDisplay()
     }
     
@@ -72,11 +73,17 @@ class PlayViewController: UIViewController {
             self.pitcherBackNumberLabel.text = "#\(data.pitcher.backNumber)"
             self.batterNameLabel.text = "\(data.batter.name)"
             self.ballListData = data.ballCount
+            self.ballListData.forEach { data in
+                let ballCount = BallCount([data])
+                if !self.ballCountStorage.isEmpty{ ballCount.update(with: self.ballCountStorage[self.ballCountStorage.endIndex-1])}
+                dump(ballCount)
+                self.ballCountStorage.append(ballCount)
+                dump(self.ballCountStorage)
+                
+            }
             self.outCount = data.outCount
             self.ballCount = BallCount(data.ballCount)
-            data.ballCount.forEach { data in
-                self.ballCountStorage.append(BallCount([data]))
-            }
+            
             self.baseStatus = data.baseStatus
             
             self.ballCountView.configure(
@@ -99,9 +106,11 @@ extension PlayViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
         let cell = tableView.dequeueReusableCell(withIdentifier: BallListCell.identifier, for: indexPath) as! BallListCell
+        dump(ballListData)
         let index = ballListData.count - indexPath.row - 1
-//        let index = indexPath.row
         let ball = ballListData[index]
+//        ballCountStorage.update(with: ballListData[indexPath.row])
+        dump(ballCountStorage)
         cell.configure(id: index + 1, ball: ball, with: ballCountStorage.popLast()!)
         return cell
     }

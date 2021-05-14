@@ -16,14 +16,14 @@ class BallListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        configureUI()
+        configureUI()
         // Initialization code
     }
 
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-//        configureUI()
+        configureUI()
         // Configure the view for the selected state
     }
     
@@ -34,10 +34,10 @@ class BallListCell: UITableViewCell {
         ballCountLabel.text = "\(ballCount.ballCount)"
     }
     
-//    func configureUI() {
-//        ballIDLabel.layer.cornerRadius = ballIDLabel.layer.bounds.width / 2
-//
-//    }
+    func configureUI() {
+        ballIDLabel.layer.cornerRadius = 10
+
+    }
     
     
 }
