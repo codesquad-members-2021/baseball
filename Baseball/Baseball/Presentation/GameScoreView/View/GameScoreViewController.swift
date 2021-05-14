@@ -13,6 +13,7 @@ class GameScoreViewController: UIViewController, Alertable {
     @IBOutlet weak var scoreView: UIView!
     @IBOutlet weak var homeTeamScore: UIStackView!
     @IBOutlet weak var awayTeamScore: UIStackView!
+    @IBOutlet weak var recordsSegmented: UISegmentedControl!
     @IBOutlet weak var gameScoreTableView: UITableView!
     
     private var viewModel: GameScoreViewModel!
@@ -34,17 +35,20 @@ class GameScoreViewController: UIViewController, Alertable {
         super.viewDidLoad()
         bind(to: viewModel)
         configureStackView()
+        configureSegmentedControl()
         self.gameScoreTableView.delegate = self
         self.gameScoreTableView.dataSource = self
+        gameScoreTableView.register(UINib(nibName: "RecordsTableViewHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "recordsHeader")
+    
     }
     
     private func bind(to viewModel: GameScoreViewModel) {
-        bindMatchUpGames(to: viewModel)
+        bindRecordsTableView(to: viewModel)
         bindErrorMessage(to: viewModel)
     }
     
-    private func bindMatchUpGames(to viewModel: GameScoreViewModel) {
-        viewModel.$homeTeamPlayersRecords.receive(on: DispatchQueue.main)
+    private func bindRecordsTableView(to viewModel: GameScoreViewModel ) {
+        viewModel.$selectedPlayerTeam.receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.gameScoreTableView.reloadData()
             }
@@ -64,6 +68,14 @@ class GameScoreViewController: UIViewController, Alertable {
         showAlert(title: "Error", message: error)
     }
     
+    private func configureSegmentedControl() {
+        recordsSegmented.addTarget(self, action: #selector(segconChange(segcon:)), for: UIControl.Event.valueChanged)
+    }
+    
+    @objc func segconChange(segcon: UISegmentedControl) {
+        viewModel.setSelectedTeam(index: segcon.selectedSegmentIndex)
+    }
+    
     func configureStackView() {
         homeTeamScore.layer.addBorder([.top], color: .black, thickness: 0.75)
         awayTeamScore.layer.addBorder([.bottom], color: .black, thickness: 0.75)
@@ -72,17 +84,17 @@ class GameScoreViewController: UIViewController, Alertable {
 
 extension GameScoreViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.homeTeamPlayersRecords.count
+        return viewModel.selectedPlayerTeam.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = gameScoreTableView.dequeueReusableCell(withIdentifier: "GameScoreTableViewCell") as? GameScoreTableViewCell else { return UITableViewCell() }
-        cell.configure(playerRecord: viewModel.homeTeamPlayersRecords[indexPath.row])
+        cell.configure(playerRecord: viewModel.selectedPlayerTeam[indexPath.row])
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "a"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "recordsHeader") ?? UIView()
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -41,6 +41,7 @@
 		FF576691264D03E300F46A43 /* PlayerRecordDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576690264D03E300F46A43 /* PlayerRecordDTO+Mapping.swift */; };
 		FF576693264D04A200F46A43 /* PlayerRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576692264D04A200F46A43 /* PlayerRecordRepository.swift */; };
 		FF576695264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576694264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift */; };
+		FF57669B264E06D100F46A43 /* RecordsTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */; };
 		FFDD3A90264138800037622A /* MatchUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A8F264138800037622A /* MatchUp.swift */; };
 		FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A91264138F40037622A /* GameListViewModel.swift */; };
 		FFDD3A9C2643C25F0037622A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */; };
@@ -85,6 +86,7 @@
 		FF576690264D03E300F46A43 /* PlayerRecordDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerRecordDTO+Mapping.swift"; sourceTree = "<group>"; };
 		FF576692264D04A200F46A43 /* PlayerRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRecordRepository.swift; sourceTree = "<group>"; };
 		FF576694264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPlayerRecordsUseCase.swift; sourceTree = "<group>"; };
+		FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordsTableViewHeader.xib; sourceTree = "<group>"; };
 		FFDD3A8F264138800037622A /* MatchUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUp.swift; sourceTree = "<group>"; };
 		FFDD3A91264138F40037622A /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
 		FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			children = (
 				A05951C8264A69F1002B759A /* GameScoreViewController.swift */,
 				A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */,
+				FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A025C3362640E8E800C9B8C7 /* LaunchScreen.storyboard in Resources */,
+				FF57669B264E06D100F46A43 /* RecordsTableViewHeader.xib in Resources */,
 				A025C3332640E8E800C9B8C7 /* Assets.xcassets in Resources */,
 				A025C3312640E8E700C9B8C7 /* Main.storyboard in Resources */,
 			);

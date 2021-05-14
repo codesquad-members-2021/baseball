@@ -9,10 +9,11 @@ import Foundation
 import Combine
 
 class GameScoreViewModel {
-    @Published private (set) var homeTeamPlayersRecords: [PlayerRecord]!
-    @Published private (set) var awayTeamPlayersRecords: [PlayerRecord]!
     @Published private (set) var error: String
+    @Published private (set) var selectedPlayerTeam: [PlayerRecord]!
     
+    private var homeTeamPlayersRecords: [PlayerRecord]!
+    private var awayTeamPlayersRecords: [PlayerRecord]!
     private var fetchPlayerRecordsUseCase: FetchPlayerRecordsUseCase
     private var homeTeam: String
     private var awayTeam: String
@@ -32,6 +33,7 @@ class GameScoreViewModel {
             switch result {
             case .success(let records):
                 self.homeTeamPlayersRecords = records
+                self.selectedPlayerTeam = records
             case .failure(let error):
                 print(error.localizedDescription)
                 self.errorHandler(error)
@@ -46,6 +48,14 @@ class GameScoreViewModel {
             }
         }
         
+    }
+    
+    func setSelectedTeam(index: Int) {
+        if index == 0 {
+            selectedPlayerTeam = homeTeamPlayersRecords
+        } else {
+            selectedPlayerTeam = awayTeamPlayersRecords
+        }
     }
     
     func errorHandler(_ error: NetworkError) {

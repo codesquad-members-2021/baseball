@@ -16,6 +16,6 @@ struct PlayerRecord {
     let ball: Int
     let strike: Int
     var battingAverage: Double {
-        return round((Double(hit) / Double(atBat)) * 100)
+        return (Double(hit) / Double(atBat))
     }
 }
