@@ -1,4 +1,5 @@
 {
+  "proxy": "http://baseball.san.r-e.kr",
   "name": "fe",
   "version": "0.1.0",
   "private": true,
