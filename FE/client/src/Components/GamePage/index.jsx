@@ -164,6 +164,7 @@ const GamePage = ({ userState }) => {
       );
       setOutState(0);
       setSequenceCount(0);
+      setCurrentBaseData([]);
       /*
       제가 생각했을 땐 setPlayRecordsState를 위의 if (strike===3) 일 때 비모가 하신것처럼
       제일 위의 records 쌓인 {strike:2 ball:2}에다가 out을 추가하고 나서, 그 결과를 출력시킨 다음
@@ -194,22 +195,67 @@ const GamePage = ({ userState }) => {
   }, [inGameData]);
 
   useEffect(() => {
-    //선수교체 record 세팅(mainRight)
     if (!inGameData) return;
-    const { away } = inGameData;
-    setPlayRecordsState((records) => {
-      return [
+    const { away, home } = inGameData;
+    if (attackState === "away")
+      setPlayRecordsState([
         {
           id: away[sequenceCount].id,
           name: away[sequenceCount].name,
           out: false,
           records: [],
         },
-        ...records,
-      ];
-    });
+      ]);
+    else
+      setPlayRecordsState([
+        {
+          id: home[sequenceCount].id,
+          name: home[sequenceCount].name,
+          out: false,
+          records: [],
+        },
+      ]);
+    // if (attackState === "away")
+    //   setPlayRecordsState([
+    //     { id: away[0].id, name: away[0].name, out: false, records: [] },
+    //   ]);
+
+    // else {
+    //   setPlayRecordsState([
+    //     { id: home[0].id, name: home[0].name, out: false, records: [] },
+    //   ]);
+    // }
+  }, [attackState]);
+
+  useEffect(() => {
+    //선수교체 record 세팅(mainRight)
+    if (!inGameData) return;
+    const { away, home } = inGameData;
+    if (attackState === "away")
+      setPlayRecordsState((records) => {
+        return [
+          {
+            id: away[sequenceCount].id,
+            name: away[sequenceCount].name,
+            out: false,
+            records: [],
+          },
+          ...records,
+        ];
+      });
+    else
+      setPlayRecordsState((records) => {
+        return [
+          {
+            id: home[sequenceCount].id,
+            name: home[sequenceCount].name,
+            out: false,
+            records: [],
+          },
+          ...records,
+        ];
+      });
   }, [sequenceCount]);
-  console.log(attackState);
 
   return (
     <GamePageContext.Provider
