@@ -1,8 +1,10 @@
 package baseball.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 
-public class Game {
+public class Game implements Persistable<Long> {
 
     @Id
     private Long id;
@@ -10,13 +12,23 @@ public class Game {
     private Long homeTeamId;
     private Long awayTeamId;
 
-    public Game(Long homeTeamId, Long awayTeamId) {
+    @Transient
+    private boolean isNew = false;
+
+    public Game(Long id, Long homeTeamId, Long awayTeamId) {
+        this.id = id;
         this.homeTeamId = homeTeamId;
         this.awayTeamId = awayTeamId;
+        isNew = true;
     }
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
     }
 
     public Long getHomeTeamId() {

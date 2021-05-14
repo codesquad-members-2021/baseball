@@ -2,14 +2,14 @@ package baseball.service;
 
 import baseball.domain.Member;
 import baseball.domain.Team;
-import baseball.exception.RecordDTONotFoundException;
 import baseball.exception.TeamNotFoundException;
 import baseball.repository.TeamRepository;
-import baseball.service.dto.*;
+import baseball.service.dto.RecordRequest;
+import baseball.service.dto.TeamDTO;
+import baseball.service.dto.TeamRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,20 +47,5 @@ public class TeamService {
         Member member = team.getMemberById(memberId);
         member.setRecord(recordRequest.toRecord());
         teamRepository.save(team);
-    }
-
-    public TeamRecordsDTO getRecordsOfTeam(Long teamId) {
-        Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
-        Set<Member> members = team.getMembers();
-
-        Set<RecordDTO> recordDTOS = new HashSet<>();
-        for (Member member : members) {
-            if (member.hasRecord()) {
-                RecordDTO recordDTO = teamRepository.findRecordByMemberId(member.getId())
-                        .orElseThrow(RecordDTONotFoundException::new);
-                recordDTOS.add(recordDTO);
-            }
-        }
-        return new TeamRecordsDTO(teamId, recordDTOS);
     }
 }

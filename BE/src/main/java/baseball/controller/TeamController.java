@@ -30,9 +30,4 @@ public class TeamController {
     public void addRecord(@PathVariable Long teamId, @PathVariable Long memberId, @RequestBody RecordRequest recordRequest) {
         teamService.insertRecord(teamId, memberId, recordRequest);
     }
-
-    @GetMapping("/{teamId}/records")
-    public TeamRecordsDTO showRecords(@PathVariable Long teamId) {
-        return teamService.getRecordsOfTeam(teamId);
-    }
 }

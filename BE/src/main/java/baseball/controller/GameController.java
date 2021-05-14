@@ -2,6 +2,7 @@ package baseball.controller;
 
 import baseball.service.GameService;
 import baseball.service.dto.GameDTO;
+import baseball.service.dto.GameTeamDTO;
 import baseball.service.dto.GameScoreDTO;
 import baseball.service.dto.ScoreRequest;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,15 @@ public class GameController {
     @GetMapping("/{gameId}/scores")
     public GameScoreDTO showScore(@PathVariable Long gameId) {
         return gameService.getGameScoreDTO(gameId);
+    }
+
+    @GetMapping("/{gameId}/records")
+    public GameTeamDTO showRecordsByGame(@PathVariable Long gameId) {
+        return gameService.getGameTeamDTO(gameId);
+    }
+
+    @DeleteMapping
+    public void deleteGame() {
+        gameService.deleteGame();
     }
 }

@@ -15,6 +15,25 @@ public class Record {
     }
 
     private double calculateAverage(int atBat, int hit) {
+        if (hit == 0) {
+            return 0;
+        }
         return atBat / (double) hit;
+    }
+
+    public int getAtBat() {
+        return atBat;
+    }
+
+    public int getHit() {
+        return hit;
+    }
+
+    public int getOut() {
+        return out;
+    }
+
+    public double getAverage() {
+        return average;
     }
 }
