@@ -22,6 +22,10 @@ const BaseballField = () => {
     baseCount.current += 1;
   }, [currentBaseData]);
 
+  useEffect(() => {
+    baseCount.current = 0;
+  }, [attackState]);
+
   const numberEng = {
     0: 'first',
     1: 'second',
@@ -38,7 +42,7 @@ const BaseballField = () => {
           <ReadyImage base={numberEng[index]} />
         </q>)
       })}
-      {baseCount.current > 4 && <RunnerImage base='fourth' key={baseCount.current} />}
+      {baseCount.current > 3 && <RunnerImage base='fourth' key={baseCount.current} />}
 
       {!teamState[attackState].isMyTeam && <PitchButton />}
     </BaseballFieldWrapper>

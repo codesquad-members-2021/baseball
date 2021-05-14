@@ -43,6 +43,7 @@ const GamePage = ({ userState }) => {
   const [playRecordsState, setPlayRecordsState] = useState([]); ////[{id:1,name:홍길동,records:[{strike:0, ball:1}]}]
   const [currentScore, setCurrentScore] = useState(0); // 현재 게임의 스코어
   const [outState, setOutState] = useState(0);
+  const [teamScore, setTeamScore] = useState({ home: 0, away: 0 });
 
   const onPitch = () => {
     socket.emit("pitch", { gameId: userState.gameId });
@@ -118,6 +119,7 @@ const GamePage = ({ userState }) => {
   useEffect(() => {
     if (!playRecordsState.length) return;
     const { strike, ball, action } = currentSBData;
+    const teamId = attackState === 'away' ? data.teamScores[1].teamId : data.teamScores[0].teamId;
     if (strike === 3) {
       updateSequenceCount();
       setPlayRecordsState((records) => {
@@ -141,6 +143,9 @@ const GamePage = ({ userState }) => {
       });
       if (currentBaseData.length === 3) {
         setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+        attackState === 'away'
+          ? setTeamScore((teamScore) => ({ ...teamScore, away: teamScore.away + 1 }))
+          : setTeamScore((teamScore) => ({ ...teamScore, home: teamScore.home + 1 }))
       }
     } else if (action === "hit") {
       updateSequenceCount();
@@ -151,11 +156,16 @@ const GamePage = ({ userState }) => {
         return [{ name, id }, ...base];
       });
       if (currentBaseData.length === 3) {
-        socket.emit('plusScore', ({ teamId: 1, postData: { "inningNumber": 1, "score": 3 } }));
         setCurrentScore((currentScore) => currentScore + 1); //점수 업데이트
+        attackState === 'away'
+          ? setTeamScore((teamScore) => ({ ...teamScore, away: teamScore.away + 1 }))
+          : setTeamScore((teamScore) => ({ ...teamScore, home: teamScore.home + 1 }))
       }
-    } else if (outState === 2 && strike === 2 && action === "strike") {
+    }
+    if (outState === 2 && strike === 3 && action === "strike") {
       // 팀 체인지
+      socket.emit('plusScore', ({ teamId: teamId, postData: { "inningNumber": roundCount, "score": currentScore } }));
+      if (attackState === 'home') setRoundCount((round) => round + 1);
       setCurrentSBData({ strike: 0, ball: 0, action: "" });
       setPlayRecordsState((records) => {
         const [firstRecord, ...remainRecords] = records;
@@ -164,8 +174,9 @@ const GamePage = ({ userState }) => {
       setAttackState((attackState) =>
         attackState === "away" ? "home" : "away"
       );
-      setOutState(0);
+      setCurrentScore(0);
       setSequenceCount(0);
+      setOutState(0);
       setCurrentBaseData([]);
     }
 
@@ -214,6 +225,7 @@ const GamePage = ({ userState }) => {
   useEffect(() => {
     //선수교체 record 세팅(mainRight)
     if (!inGameData) return;
+    if (!sequenceCount) return;
     const { away, home } = inGameData;
     if (attackState === "away")
       setPlayRecordsState((records) => {
@@ -254,6 +266,7 @@ const GamePage = ({ userState }) => {
         playRecordsState,
         outState,
         currentBaseData,
+        teamScore,
         onPitch,
       }}
     >

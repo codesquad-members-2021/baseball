@@ -7,28 +7,11 @@ const io = require("socket.io")(http, {
 });
 const fetch = require("node-fetch");
 
-const END_POINT =
-  "http://ec2-13-125-90-225.ap-northeast-2.compute.amazonaws.com";
-
-const API = {
-  post: {
-    score: ({ teamId, postData }) => {
-      return fetch(`${END_POINT}/games/${teamId}/score`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(postData),
-      })
-    }
-  },
-};
 
 const baseball = {
   games: [],
   users: [],
 };
-
 const pitchState = [];
 
 io.on("connection", (socket) => {
@@ -65,7 +48,8 @@ io.on("connection", (socket) => {
 
   socket.on('plusScore', ({ teamId, postData }) => {
     API.post.score({ teamId, postData });
-  })
+  });
+
   socket.on("disconnect", () => {
     baseball.games = baseball.games.filter(
       ({ playerId }) => playerId !== connectPlayerId
@@ -73,6 +57,7 @@ io.on("connection", (socket) => {
     baseball.users = baseball.users.filter(
       ({ playerId }) => playerId !== connectPlayerId
     );
+
     // socket.leave('room1'); //disconnect하면 자동으로 leave가 됨
     console.log("disconnected");
   });
@@ -111,6 +96,34 @@ const getMatchData = ({ gameId }) => {
 }
 
 const randomPitch = () => {
-  const arr = ["strike", "ball", "hit"];
+  const arr = ["strike", "strike", "strike", "ball", "hit"];
   return arr[Math.floor(Math.random() * arr.length)];
 };
+
+
+const END_POINT =
+  "http://ec2-13-125-90-225.ap-northeast-2.compute.amazonaws.com";
+
+const API = {
+  post: {
+    score: ({ teamId, postData }) => {
+      return fetch(`${END_POINT}/games/${teamId}/score`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(postData),
+      })
+    }
+  },
+  delete: {
+    score: () => fetch(`${END_POINT}/games`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+  }
+};
+
+API.delete.score();

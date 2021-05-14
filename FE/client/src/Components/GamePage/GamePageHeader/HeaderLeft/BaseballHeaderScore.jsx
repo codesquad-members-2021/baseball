@@ -5,14 +5,15 @@ import styled, { css } from "styled-components";
 const BaseballHeaderScore = () => {
   const {
     teamState: { home, away },
+    teamScore
   } = useContext(GamePageContext);
 
   return (
     <TeamDiv>
       <Team player={home.isMyTeam}>{home.teamName}</Team>
-      <Score>0</Score>
+      <Score>{teamScore.home}</Score>
       <VsSpan>vs</VsSpan>
-      <Score>0</Score>
+      <Score>{teamScore.away}</Score>
       <Team player={away.isMyTeam}>{away.teamName}</Team>
     </TeamDiv>
   );

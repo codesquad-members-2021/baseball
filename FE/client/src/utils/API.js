@@ -6,9 +6,9 @@ const API = {
     teams: () => customFetch(`${END_POINT}/teams`),
     games: () => customFetch(`${END_POINT}/games`),
     scores: (gameId) => customFetch(`${END_POINT}/games/${gameId}/scores`),
-    records: (gameId) => customFetch(`${END_POINT}/games/${gameId}/members`),
+    records: (gameId) => customFetch(`${END_POINT}/games/${gameId}/records`),
     inGameDatas: (gameId) =>
-      customFetch(`${END_POINT}/games/${gameId}/members`),
+      customFetch(`${END_POINT}/games/${gameId}/records`),
   },
   post: {
     score: ({ teamId, postData }) => {
