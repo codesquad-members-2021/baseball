@@ -1,10 +1,7 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { gamePlayContext } from 'components/GamePlay/GamePlay';
 const BoardItemHistory = ({ B, S, idx, type, playerName }) => {
-  const { isAttacking, round, home, away } = useContext(gamePlayContext);
-
+  if (type == '안타' || type === '아웃') return null;
   return (
     <Lists>
       <Number>{idx + 1}</Number>

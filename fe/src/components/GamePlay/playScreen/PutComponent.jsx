@@ -1,33 +1,51 @@
-import useFetch from 'hooks/useFetch'
+import useFetch from 'hooks/useFetch';
+import { useEffect, useState, useContext } from 'react';
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
 const PutComponent = ({
   data,
   dispatchHomeCurrentPlayerState,
   dispatchAwayCurrentPlayerState,
-  isAttacking
+  isAttacking,
+  type,
 }) => {
+  const { setLog, homeCurrentPlayerState, awayCurrentPlayerState } =
+    useContext(gamePlayContext);
+
   const option = {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
-  }
+    body: JSON.stringify(data),
+  };
 
   const { response, loading, error } = useFetch(
     'http://baseball.san.r-e.kr/api/update_player',
     option
-  )
+  );
 
-  if(response) {
-    const action = { payload: 'changeTurn', data: response }
-    if (isAttacking) dispatchAwayCurrentPlayerState(action)
-    if (!isAttacking) dispatchHomeCurrentPlayerState(action)
+  useEffect(() => {
+    if (response) {
+      if (isAttacking)
+        setLog((log) => [
+          { ...awayCurrentPlayerState, previousAction: type },
+          ...log,
+        ]);
+      if (!isAttacking)
+        setLog((log) => [
+          { ...homeCurrentPlayerState, previousAction: type },
+          ...log,
+        ]);
+      const action = { payload: 'changeTurn', data: response };
+      if (isAttacking) dispatchAwayCurrentPlayerState(action);
+      if (!isAttacking) dispatchHomeCurrentPlayerState(action);
+    }
+  });
   return <></>;
-  }
-}
+};
 
-export default PutComponent
+export default PutComponent;
 
 // Content-Type: application/json
 // Transfer-Encoding: chunked

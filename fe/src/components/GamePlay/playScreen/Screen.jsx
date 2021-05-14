@@ -2,6 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { IoIosBaseball } from 'react-icons/io';
 
+import { v4 as uuidv4 } from 'uuid';
+import Noel from './Noel';
 import { gamePlayContext } from 'components/GamePlay/GamePlay';
 import BallCount from 'components/GamePlay/playScreen/BallCount';
 
@@ -24,6 +26,7 @@ const Screen = () => {
     const _attack = attack === '공격' ? '수비' : '공격';
     return [_first, _attack];
   };
+  const [base, setBase] = useState([false, false, false, false]);
   const chooseNumber = () => Math.floor(Math.random() * 4);
 
   const getAction = (number) => {
@@ -34,13 +37,28 @@ const Screen = () => {
       3: 'hit',
     }[number];
   };
+  const num = base.filter((v) => v).length;
+
+  const runForward = (number) => {
+    if (number === 0) {
+      setBase((base) => [true, false, false, false]);
+    }
+    if (number === 1) {
+      setBase((base) => [true, true, false, false]);
+    }
+    if (number === 2) {
+      setBase((base) => [true, true, true, false]);
+    }
+    if (number === 3) {
+      setBase((base) => [true, true, true, true]);
+    }
+  };
 
   const handleClickPitch = () => {
-
     const ballCountAction = getAction(chooseNumber());
+    if (ballCountAction === 'hit') runForward(num);
     dispatchBallCount({ payload: ballCountAction, attackState: isAttacking });
     setIsClicked((state) => !state);
-
   };
 
   useEffect(() => {
@@ -67,6 +85,7 @@ const Screen = () => {
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
+      {base.map((n, i) => (n ? <Noel idx={i} /> : null))}
     </StyledScreen>
   );
 };
@@ -113,7 +132,7 @@ const rotateAnimation = keyframes`
 
 const PitchButton = styled.button`
   height: 5rem;
-  width:fit-content;
+  width: fit-content;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -122,15 +141,15 @@ const PitchButton = styled.button`
   color: white;
   background: none;
   transform: translate(-50%, -50%);
-  
+
   &:hover {
     svg {
       animation: ${rotateAnimation} 4s linear infinite;
     }
     &:active {
       svg {
-        border-radius:50%;
-        background-color:#e84545;
+        border-radius: 50%;
+        background-color: #e84545;
       }
     }
   }
