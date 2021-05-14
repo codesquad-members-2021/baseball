@@ -38,3 +38,6 @@ out/
 
 ### properties 제외 ###
 /src/main/resources/application.properties
+
+### server_secret 제외 ###
+/src/main/resources/server.secret.json
