@@ -3,8 +3,16 @@ import styled, { keyframes } from 'styled-components';
 import { GameContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 
+import runnerRunSvg from 'rsc/runner_run.svg';
+import runnerStandSvg from 'rsc/runner_stand.svg';
+
 function Runner({ runnerIdx, onRunEnd }) {
   const { gameState, gameDispatch } = useContext(GameContext);
+
+  const isRun = (mode) => {
+    if (mode === 'run-to-first' || 'run-to-second' || 'run-to-third' || 'run-to-home') return true;
+    return false;
+  };
 
   const handleAnimationEnd = () => {
     gameDispatch({ type: GameAction.RUN_END, payload: { runnerIdx }});
@@ -15,6 +23,9 @@ function Runner({ runnerIdx, onRunEnd }) {
     <StyledRunner
       className={gameState.runners[runnerIdx].mode}
       onAnimationEnd={handleAnimationEnd}>
+      {isRun(gameState.runners[runnerIdx].mode) ?
+        <img src={runnerRunSvg} alt='runner run'/> :
+        <img src={runnerStandSvg} alg='runner stand'/>}
     </StyledRunner>
   );
 }

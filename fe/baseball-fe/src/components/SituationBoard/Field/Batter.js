@@ -6,6 +6,7 @@ import { BatterMode } from 'util/mode.js';
 
 import Baseball from 'util/baseball.js';
 import runnerBatSvg from 'rsc/runner_bat.svg';
+import runnerHitSvg from 'rsc/runner_hit.svg';
 
 function Batter() {
   const { gameState, gameDispatch } = useContext(GameContext);
@@ -14,14 +15,18 @@ function Batter() {
     if (gameState.batter.mode !== BatterMode.HIT)
       return;
 
-    // setTimeout(() => {
+    setTimeout(() => {
       gameDispatch({ type: GameAction.RUN_START, payload: { hitBase: Baseball.generateHitBase() } });
-    // }, 300);
+    }, 300);
   }, [gameState.batter.mode]);
 
   return (
-    <StyledBatter className={gameState.batter?.mode}>
-      <img src={runnerBatSvg} alt='batter'/>
+    <StyledBatter
+      // className={gameState.batter?.mode}
+    >
+      {gameState.batter?.mode === BatterMode.HIT ? 
+        <img src={runnerBatSvg} alt='batter bat'/> :
+        <img src={runnerHitSvg} alg='batter hit'/>}
     </StyledBatter>
   );
 }
@@ -36,7 +41,7 @@ const StyledBatter = styled.div`
   top: 100%;
   transform: rotate(-135deg);
 
-  &.hit {
+  /* &.hit {
     background-color: yellowgreen;
-  }
+  } */
 `;
