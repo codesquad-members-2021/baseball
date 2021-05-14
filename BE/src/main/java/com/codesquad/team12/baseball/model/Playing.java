@@ -1,6 +1,6 @@
 package com.codesquad.team12.baseball.model;
 
-import com.codesquad.team12.baseball.dto.PlayingDto;
+import com.codesquad.team12.baseball.dto.response.PlayingDto;
 import org.springframework.data.annotation.Id;
 
 public class Playing {

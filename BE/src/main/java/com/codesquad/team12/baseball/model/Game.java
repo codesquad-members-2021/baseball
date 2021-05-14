@@ -1,6 +1,9 @@
 package com.codesquad.team12.baseball.model;
 
-import com.codesquad.team12.baseball.dto.*;
+import com.codesquad.team12.baseball.dto.response.GameDto;
+import com.codesquad.team12.baseball.dto.response.ScoreDto;
+import com.codesquad.team12.baseball.dto.response.ScoreTeamDto;
+import com.codesquad.team12.baseball.dto.response.TeamDto;
 import org.springframework.data.annotation.Id;
 
 public class Game {

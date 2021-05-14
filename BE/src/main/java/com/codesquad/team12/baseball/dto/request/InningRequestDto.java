@@ -1,4 +1,4 @@
-package com.codesquad.team12.baseball.dto;
+package com.codesquad.team12.baseball.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

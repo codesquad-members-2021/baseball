@@ -1,7 +1,7 @@
 package com.codesquad.team12.baseball.service;
 
-import com.codesquad.team12.baseball.dto.PlayingDto;
-import com.codesquad.team12.baseball.dto.PlayingRequestDto;
+import com.codesquad.team12.baseball.dto.response.PlayingDto;
+import com.codesquad.team12.baseball.dto.request.PlayingRequestDto;
 import com.codesquad.team12.baseball.model.Player;
 import com.codesquad.team12.baseball.model.Playing;
 import com.codesquad.team12.baseball.model.Team;

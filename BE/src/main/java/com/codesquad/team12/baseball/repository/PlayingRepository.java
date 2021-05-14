@@ -3,7 +3,6 @@ package com.codesquad.team12.baseball.repository;
 import com.codesquad.team12.baseball.model.Playing;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

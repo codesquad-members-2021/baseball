@@ -1,13 +1,12 @@
 package com.codesquad.team12.baseball.service;
 
-import com.codesquad.team12.baseball.dto.InningDto;
-import com.codesquad.team12.baseball.dto.InningRequestDto;
+import com.codesquad.team12.baseball.dto.response.InningDto;
+import com.codesquad.team12.baseball.dto.request.InningRequestDto;
 import com.codesquad.team12.baseball.model.*;
 import com.codesquad.team12.baseball.repository.InningRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service

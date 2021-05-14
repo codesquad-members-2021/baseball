@@ -1,6 +1,8 @@
 package com.codesquad.team12.baseball.controller;
 
-import com.codesquad.team12.baseball.dto.*;
+import com.codesquad.team12.baseball.dto.request.InningRequestDto;
+import com.codesquad.team12.baseball.dto.request.PlayingRequestDto;
+import com.codesquad.team12.baseball.dto.response.*;
 import com.codesquad.team12.baseball.model.Game;
 import com.codesquad.team12.baseball.service.GameService;
 import com.codesquad.team12.baseball.service.InningService;

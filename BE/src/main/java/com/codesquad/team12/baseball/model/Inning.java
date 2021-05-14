@@ -1,6 +1,6 @@
 package com.codesquad.team12.baseball.model;
 
-import com.codesquad.team12.baseball.dto.InningDto;
+import com.codesquad.team12.baseball.dto.response.InningDto;
 import org.springframework.data.annotation.Id;
 
 public class Inning {

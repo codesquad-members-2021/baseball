@@ -1,8 +1,8 @@
 package com.codesquad.team12.baseball.model;
 
-import com.codesquad.team12.baseball.dto.PlayerDto;
-import com.codesquad.team12.baseball.dto.TeamDto;
-import com.codesquad.team12.baseball.dto.TeamPlayerDto;
+import com.codesquad.team12.baseball.dto.response.PlayerDto;
+import com.codesquad.team12.baseball.dto.response.TeamDto;
+import com.codesquad.team12.baseball.dto.response.TeamPlayerDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 
