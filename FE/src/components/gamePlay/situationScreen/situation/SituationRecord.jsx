@@ -1,7 +1,7 @@
 // 이 파일은 [5 | 스트라이크 | S2 | B3] 요론 아이템을 뜻함
 import styled from 'styled-components';
 
-const SituationRecord = () => {
+const SituationRecord = ({ status }) => {
     return (
         <StyledSituationRecord>
             {[...Array(5)].map((_, i) => (

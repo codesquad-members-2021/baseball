@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const ListTable = () => {
+const ListTable = ({team}) => {
+    const playerList = team.players;
+    const allHit = playerList.reduce((acc,cur) => acc+cur.hits, 0);
+    const allBat = playerList.reduce((acc,cur) => acc+cur.at_bat,0);
+    const allOut = playerList.reduce((acc,cur) => acc+cur.out,0);
+    console.log(playerList)
     return (
         <StyledListTable>
             <thead>
@@ -14,13 +19,16 @@ const ListTable = () => {
             </thead>
 
             <tbody>
-                {[...Array(9)].map((_, i) => (
+                {playerList.map((_, i) => (
                     <tr key={i}>
-                        <td>김광진</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>1.000</td>
+                        <td>{_.name}</td>
+                        {/* 타석 */}
+                        <td>{_.at_bat}</td> 
+                        {/* 안타 */}
+                        <td>{_.hits}</td>
+                        {/* 아웃 */}
+                        <td>{_.out}</td>
+                        <Average>{_.average.toFixed(2)}</Average>
                     </tr>
                 ))}
             </tbody>
@@ -28,9 +36,9 @@ const ListTable = () => {
             <tfoot>
                 <tr>
                     <th>Totals</th>
-                    <th>9</th>
-                    <th>4</th>
-                    <th>5</th>
+                    <th>{allBat}</th>
+                    <th>{allHit}</th>
+                    <th>{allOut}</th>
                     <th></th>
                 </tr>
             </tfoot>
@@ -61,4 +69,8 @@ const StyledListTable = styled.table`
     tfoot tr th {
         border-bottom: none;
     }
+`;
+
+const Average = styled.td`
+
 `;

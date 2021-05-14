@@ -1,12 +1,11 @@
 // 이 파일은 [7번타자 류현진] 이름과 [안타! 아웃!] 상태를 뜻함
 import styled from "styled-components";
 
-const SituationStatus = ({ type, player, status }) => {
+const SituationStatus = ({ type, player }) => {
     const { name, id } = player;
     return player && (
         <StyledSituationStatus>
             <Name type={type}>{id}번 타자 {name}</Name>
-            {status && <Status>{status}!</Status>}
         </StyledSituationStatus>
     );
 };
