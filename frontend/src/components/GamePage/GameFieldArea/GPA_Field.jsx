@@ -9,9 +9,9 @@ import {
 	useLogState,
 	useLogDispatch,
 } from '../../GameContext';
-// import GhostAnimation from './GPA_Animation';
+import GhostAnimation from './GPA_Animation';
 
-const GPA_Field = ({ type, gameId }) => {
+const GpaField = ({ type, gameId }) => {
 	const { state } = useGameState();
 	const dispatch = useDispatch();
 	const logDispatch = useLogDispatch();

@@ -29,13 +29,6 @@ const historyReducer = (logState, action) => {
 	}
 };
 
-const historyReducer = (logState, action) => {
-  switch (action.type) {
-    case 'log':
-      return [...logState, action.payload];
-  }
-};
-
 function GameProvider({ children, gameData }) {
 	const [state, dispatch] = useReducer(gameReducer, gameData);
 	const [logState, logDispatch] = useReducer(historyReducer, []);
@@ -43,7 +36,6 @@ function GameProvider({ children, gameData }) {
 	useEffect(() => {
 		dispatch({ type: 'init', data: gameData });
 	}, [gameData]);
-
 
 	return (
 		<GameStateContext.Provider value={{ state }}>
@@ -59,18 +51,18 @@ function GameProvider({ children, gameData }) {
 }
 
 function useLogState() {
-  const context = useContext(GameLogContext);
-  if (!context) {
-    throw new Error('Cannot find GameProvider');
-  }
-  return context;
+	const context = useContext(GameLogContext);
+	if (!context) {
+		throw new Error('Cannot find GameProvider');
+	}
+	return context;
 }
 function useLogDispatch() {
-  const context = useContext(LogDispatchContext);
-  if (!context) {
-    throw new Error('Cannot find GameProvider');
-  }
-  return context;
+	const context = useContext(LogDispatchContext);
+	if (!context) {
+		throw new Error('Cannot find GameProvider');
+	}
+	return context;
 }
 function useGameState() {
 	const context = useContext(GameStateContext);
@@ -94,5 +86,4 @@ export {
 	useDispatch,
 	useLogState,
 	useLogDispatch,
-
 };
