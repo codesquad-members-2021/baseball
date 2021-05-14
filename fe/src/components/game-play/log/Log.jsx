@@ -1,40 +1,43 @@
 import styled from 'styled-components';
 
-const Log = (props) => {
-  const team = props.data.home;
-  const { member_list } = team;
-  const log_list = member_list.map((member, i) => (
-    <div className={'log ' + (member.state === true ? 'active' : '')} key={i}>
-      <div className="title">{i + 1}번 타자 {member.name}</div>
-      <div className="contents">
-        <div className="content">
-          <div>1</div>
-          <div>볼</div>
-          <div>S0 B1</div>
-        </div>
-        <div className="content">
-          <div>2</div>
-          <div>스트라이크</div>
-          <div>S1 B1</div>
-        </div>
-        <div className="content">
-          <div>3</div>
-          <div>스트라이크</div>
-          <div>S2 B1</div>
-        </div>
-        <div className="content result">
-          <div></div>
-          <div>안타!</div>
-          <div></div>
-        </div>
+const TYPE = {
+  strike: '스트라이크',
+  ball: '볼',
+  safety: '안타',
+  '4ball': '볼넷',
+  out: '아웃',
+};
+
+const Log = ({ logList }) => {
+  const logs = logList.map((member, i) => (
+    <div className={'log ' + (i + 1 === logList.length ? 'active' : '')} key={i}>
+      <div className='title'>
+        {member.index}번 타자 {member.name}
+      </div>
+      <div className='contents'>
+        {member.history.map((v, i) =>
+          v.end ? (
+            <div className='content result' key={i}>
+              <div></div>
+              <div>{TYPE[v.type]}!</div>
+              <div></div>
+            </div>
+          ) : (
+            <div className='content' key={i}>
+              <div>{i + 1}</div>
+              <div>{TYPE[v.type]}</div>
+              <div>
+                S{v.strike} B{v.ball}
+              </div>
+            </div>
+          )
+        )}
       </div>
     </div>
   ));
   return (
     <StyledLog>
-      <div className="logs">
-        {log_list}
-      </div>
+      <div className='logs'>{logs}</div>
     </StyledLog>
   );
 };
@@ -95,7 +98,6 @@ const StyledLog = styled.div`
       color: #ff4545;
     }
   }
-  
 `;
 
 export default Log;

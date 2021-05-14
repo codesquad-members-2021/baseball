@@ -1,9 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import useScoreNBase from '../../../hooks/useScoreNBase';
 import { ScoreNBaseContext } from '../GamePlay';
 
-const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
+const Screen = ({
+  handleStrike,
+  handleBall,
+  handleSafety,
+  ballCount,
+  turn,
+  teamName,
+  selectTeam,
+}) => {
   const { base, safetyDispatch } = useContext(ScoreNBaseContext);
   const [isTransition, setIsTransition] = useState(false);
   const [runFirstBase, setRunFirstBase] = useState(false);
@@ -26,17 +34,22 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
 
   const handlePitchClick = () => {
     const randomNum = Math.ceil(Math.random() * 100);
-    if (randomNum <= 30) {
+    if (randomNum <= 55) {
       //스트라이크
       handleStrike();
-    } else if (randomNum <= 90) {
+    } else if (randomNum <= 80) {
       //볼
+      if (ballCount.ball === 3) {
+        setCurrentPower(1);
+        setIsTransition(true);
+        setRunFirstBase(true);
+      }
       handleBall();
     } else {
       //안타
-      handleSafety();
-      setRunFirstBase(true);
       setIsTransition(true);
+      setRunFirstBase(true);
+      handleSafety();
       if (randomNum <= 100) {
         //1루타
         setCurrentPower(1);
@@ -53,20 +66,46 @@ const Screen = ({ handleStrike, handleBall, handleSafety, turn }) => {
     }
   };
 
-  const baseList = Object.entries(base).map(([baseNum, status]) => {
-    if (status)
-      return (
-        <div className='base'>
-          <div className='runner'></div>
-        </div>
-      );
-    else
-      return (
-        <div className='base'>
-          <div className='runner'></div>
-        </div>
-      );
-  });
+  const baseList = Object.entries(base).map(([baseNum, status], idx) => (
+    <div className='base' key={idx}>
+      <div className='runner'></div>
+    </div>
+  ));
+
+  const isPitch = (turn && teamName.home != selectTeam) || (!turn && teamName.away != selectTeam);
+
+  const savedCallback = useRef();
+
+  // function callback() {
+  //   handlePitchClick();
+  // }
+
+  // useEffect(() => {
+  //   savedCallback.current = callback;
+  // });
+
+  // useEffect(() => {
+  //   function tick() {
+  //     savedCallback.current();
+  //   }
+  //   if (!isPitch) {
+  //     let id = setInterval(tick, 1000);
+  //     return () => clearInterval(id);
+  //   } else {
+  //     return null;
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   let interval = setInterval(() => handlePitchClick(), 1000);
+  //   clearInterval(interval);
+  //   if(!isPitch) {
+  //     interval = setInterval(() => handlePitchClick(), 1000);
+  //   } else {
+  //     clearInterval(interval);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [turn])
 
   return (
     <StyledScreen>

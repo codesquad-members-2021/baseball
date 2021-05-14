@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { ScoreNBaseContext } from '../GamePlay';
 
-const Score = ({ teamName, turn }) => {
+const Score = ({ teamName, selectTeam }) => {
   const { score } = useContext(ScoreNBaseContext);
   const TITLE = 'BASEBALL GAME ONLINE';
   const TURN = 'Player';
@@ -16,7 +16,7 @@ const Score = ({ teamName, turn }) => {
         <div className='home'>
           <div className='teams-name'>
             {teamName.home}
-            {turn && <div className='turn'>{TURN}</div>}
+            {teamName.home == selectTeam && <div className='turn'>{TURN}</div>}
           </div>
 
           <div className='teams-score'>{homeScore}</div>
@@ -26,7 +26,7 @@ const Score = ({ teamName, turn }) => {
           <div className='teams-score'>{awayScore}</div>
           <div className='teams-name'>
             {teamName.away}
-            {!turn && <div className='turn'>{TURN}</div>}
+            {teamName.away == selectTeam && <div className='turn'>{TURN}</div>}
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@ const Score = ({ teamName, turn }) => {
 
 const StyledScore = styled.div`
   .title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -52,15 +52,15 @@ const StyledScore = styled.div`
     .home,
     .away {
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 5rem;
+      font-size: 3rem;
     }
     .teams-vs {
       font-size: 4rem;
       color: #777;
     }
     .teams-name {
+      font-size: 3rem;
       position: relative;
     }
     .turn {
@@ -72,13 +72,15 @@ const StyledScore = styled.div`
     }
   }
   .home {
+    justify-content: flex-end;
     .teams-score {
-      margin-left: 3rem;
+      margin: 0 3rem;
     }
   }
   .away {
+    justify-content: flex-start;
     .teams-score {
-      margin-right: 3rem;
+      margin: 0 3rem;
     }
   }
 `;

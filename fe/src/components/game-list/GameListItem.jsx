@@ -4,15 +4,19 @@ import { Link } from 'react-router-dom';
 
 const GameListItem = ({ home, away, id, idx }) => {
   const path = `games/${id}`;
+  const onClick = (e) => {
+    localStorage.setItem('select', e.target.textContent);
+    localStorage.setItem('teams', JSON.stringify({ home, away }));
+  };
   return (
     <StyledGameItem>
       <div className='title'>GAME {idx + 1}</div>
       <div className='teams'>
-        <Link to={path}>
+        <Link to={path} onClick={onClick}>
           <div className='teams-name'>{home}</div>
         </Link>
         <div className='teams-vs'>vs</div>
-        <Link to={path}>
+        <Link to={path} onClick={onClick}>
           <div className='teams-name'>{away}</div>
         </Link>
       </div>
@@ -51,6 +55,13 @@ const StyledGameItem = styled.div`
       font-size: 2.5rem;
       font-weight: 600;
       color: #777;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    a:visited {
+      color: #000;
     }
   }
 `;
