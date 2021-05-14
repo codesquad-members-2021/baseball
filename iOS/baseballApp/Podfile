@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'baseballApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for baseballApp
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'Alamofire'
+pod 'RxDataSources'
+target 'baseballAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'baseballAppUITests' do
+    # Pods for testing
+  end
+
+end
