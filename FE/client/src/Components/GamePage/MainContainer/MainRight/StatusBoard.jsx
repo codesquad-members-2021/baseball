@@ -2,16 +2,26 @@ import React from "react";
 import StatusBoardItems from "./StatusBoardItems";
 import styled from "styled-components";
 
-const StatusBoard = (props) => {
+const StatusBoard = ({ name, currentPlayer, id, records, out, fourBall }) => {
   return (
     <StatusBoardDiv>
-      <StatusTitle currentPlayer={props.currentPlayer}>
-        7번 타자 {props.name}
+      <StatusTitle currentPlayer={currentPlayer}>
+        {id}번 타자 {name}
       </StatusTitle>
-      <StatusBoardItems />
+      {out && <FinishItem>아웃</FinishItem>}
+      {fourBall && <FinishItem>볼넷 진루~!</FinishItem>}
+      {records.map((record, index) => {
+        return (<StatusBoardItems key={`statusItems-${index}`} {...{ record, index, recordLength: records.length }} />)
+      })}
     </StatusBoardDiv>
   );
 };
+
+const FinishItem = styled.div`
+  margin:auto;
+  color: #47abc4;
+  font-weight:700;
+`;
 
 const StatusBoardDiv = styled.div`
   display: flex;

@@ -6,31 +6,34 @@ import { GamePageContext } from "Components/GamePage";
 import PlayerScoreTable from "./PlayerScoreTable";
 
 const BottomPopup = ({ isHidePopupState: { bottom }, distance }) => {
-  const { teamState: { home, away } } = useContext(GamePageContext);
-  const [homeTeamRecodes, fetchHomeTeamRecodes] = useAsync(API.get.records, [], true);
-  const [awayTeamRecodes, fetchAwayTeamRecodes] = useAsync(API.get.records, [], true);
-
+  const {
+    teamState: { gameId, home, away },
+  } = useContext(GamePageContext);
+  const [gameRecodes, fetchGameRecodes] = useAsync(API.get.records, [], true);
 
   useEffect(() => {
     if (bottom) return;
-    fetchHomeTeamRecodes(home.teamId);
-    fetchAwayTeamRecodes(away.teamId);
+    fetchGameRecodes(gameId);
   }, [bottom]);
 
   return (
     <BottomPopupWrapper {...{ distance, bottom }}>
+      {gameRecodes.loading && <>loading...</>}
 
-      {awayTeamRecodes.loading && <>loading...</>}
+      {gameRecodes.data && (
+        <>
+          <TeamNamesWrapper player={home.isMyTeam}>
+            {home.teamName}
+          </TeamNamesWrapper>
+          <TeamNamesWrapper player={away.isMyTeam}>
+            {away.teamName}
+          </TeamNamesWrapper>
+          <PlayerScoreTable records={gameRecodes.data.home} />
+          <PlayerScoreTable records={gameRecodes.data.away} />
+        </>
+      )}
 
-      {awayTeamRecodes.data && <>
-        <TeamNamesWrapper player={home.isMyTeam}>{home.teamName}</TeamNamesWrapper>
-        <TeamNamesWrapper player={away.isMyTeam}>{away.teamName}</TeamNamesWrapper>
-        <PlayerScoreTable records={homeTeamRecodes} />
-        <PlayerScoreTable records={awayTeamRecodes} />
-      </>}
-
-
-      {awayTeamRecodes.error && <>error...</>}
+      {gameRecodes.error && <>error...</>}
     </BottomPopupWrapper>
   );
 };
