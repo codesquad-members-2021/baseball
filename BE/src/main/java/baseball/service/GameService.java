@@ -12,7 +12,6 @@ import baseball.service.dto.RecordDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -51,12 +50,14 @@ public class GameService {
     private void saveGames() {
         List<Game> games = new ArrayList<>();
 
+        long id = 1;
         for (long i = 1; i <= NUMBER_OF_TEAM; i += 2) {
             Team homeTeam = teamRepository.findById(i).orElseThrow(TeamNotFoundException::new);
             Team awayTeam = teamRepository.findById(i + 1).orElseThrow(TeamNotFoundException::new);
 
-            Game game = new Game(homeTeam.getId(), awayTeam.getId());
+            Game game = new Game(id, homeTeam.getId(), awayTeam.getId());
             games.add(game);
+            id++;
         }
         gameRepository.saveAll(games);
     }
