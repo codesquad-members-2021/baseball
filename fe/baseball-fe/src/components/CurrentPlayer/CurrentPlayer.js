@@ -6,12 +6,6 @@ import useFetch from 'util/hook/useFetch.js';
 
 function CurrentPlayer({ className }) {
   const { gameState } = useContext(GameContext);
-  // const [batter, setBatter] = useState({...gameState.batter});
-
-  // useEffect(() => {
-  //   if (gameState.batter === null) 
-
-  // }, [gameState.batter]);
 
   return (
     <StyledCurrentPlayer className={className}>
@@ -38,6 +32,8 @@ export default CurrentPlayer;
 const StyledCurrentPlayer = styled.div`
   /* box-shadow: 0 0 0 1px black inset; */
   padding: 1rem;
+  background-color: black;
+  color: white;
 
   .pitcher {
     margin-bottom: 1rem;

@@ -17,7 +17,7 @@ function Batter() {
 
     setTimeout(() => {
       gameDispatch({ type: GameAction.RUN_START, payload: { hitBase: Baseball.generateHitBase() } });
-    }, 300);
+    }, 500);
   }, [gameState.batter.mode]);
 
   return (
@@ -25,8 +25,8 @@ function Batter() {
       // className={gameState.batter?.mode}
     >
       {gameState.batter?.mode === BatterMode.HIT ? 
-        <img src={runnerBatSvg} alt='batter bat'/> :
-        <img src={runnerHitSvg} alg='batter hit'/>}
+        <img src={runnerHitSvg} alg='batter hit'/> :
+        <img src={runnerBatSvg} alt='batter bat'/>}
     </StyledBatter>
   );
 }

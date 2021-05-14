@@ -5,6 +5,7 @@ import { GameContext } from 'util/context.js';
 import BallCount from './BallCount.js';
 import Field from './Field/Field.js';
 import Baseball from 'util/baseball.js';
+import { BatterMode } from 'util/mode.js';
 
 function SituationBoard({ className }) {
   const { gameState, gameDispatch, setRecords } = useContext(GameContext);
@@ -26,7 +27,10 @@ function SituationBoard({ className }) {
           {gameState.mode === "FIELDING" ? " 수비" : " 공격"}
         </div>
       <Field/>
-      {gameState.mode === 'FIELDING' && gameState.batter && <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}
+      {gameState.mode === 'FIELDING' &&
+      gameState.batter.mode !== BatterMode.RUN &&
+      gameState.batter.mode !== BatterMode.HIT &&
+      <button className='pitch-btn' onClick={handleClickPitch}>PITCH</button>}
     </StyledSituationBoard>
   );
 }
@@ -57,6 +61,9 @@ const StyledSituationBoard = styled.div`
     width: 12rem;
     height: 4rem;
     position: absolute;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.2rem;
 
     top: calc(50% - 1rem);
     left: calc(50% - 6rem);

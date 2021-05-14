@@ -10,7 +10,6 @@ function BatterRecordList() {
   const createOrganizedRecords = () => {
     const newRecords = [];
 
-    console.log(records);
     for (let i = records.length - 1; i >= 0; i--) {
       const currRecord = records[i];
       const currBatter = {

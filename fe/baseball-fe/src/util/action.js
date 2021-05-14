@@ -21,6 +21,7 @@ export const GameAction = {
   NEXT_BATTER: 'next-batter',
   ADDITIONAL_RECORD_END: 'additional-record-end',
   NEED_TO_POST_END: 'need-to-post-end',
+  UPDATE: 'update'
 };
 
 export const RecordAction = {

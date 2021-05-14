@@ -16,6 +16,7 @@ function globalReducer(state, { type, payload }) {
         initialGameState: {
           ...payload.initialGameState,
           pitcher: null,
+          pitch_result: null,
           batter: null,
           pitcher: payload.initialGameState.home.pitcher,
           nth_batter: 0,

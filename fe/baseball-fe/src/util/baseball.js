@@ -1,12 +1,11 @@
 const Baseball = {
   pitch: () => {
-    const rand =  Math.floor(Math.random() * 3);
+    const rand =  Math.floor(Math.random() * 4);
     
-    // if (rand === 0) return 'STRIKE';
-    // if (rand === 1) return 'BALL';
-    // if (rand === 2) return 'OUT';
-
-    return 'BALL';
+    if (rand === 0) return 'STRIKE';
+    if (rand === 1) return 'BALL';
+    if (rand === 2) return 'OUT';
+    return 'HIT';
   },
   generateHitBase: () => {
     const rand = Math.random();
@@ -24,7 +23,29 @@ const Baseball = {
     batter_name: gameState.batter.name,
     strike: gameState.ball_count.strike + (action === 'STRIKE' ? 1 : 0),
     ball: gameState.ball_count.ball + (action === 'BALL' ? 1 : 0)
-  })
+  }),
+  organizeResult: (gameState, home) => {
+    const batter = gameState.pitch_result === 'OUT' ? gameState.prevBatter : gameState.batter;
+  
+    return {
+      home_id: gameState.home.id,
+      away_id: gameState.away.id,
+      batting_team_id: home === true ? gameState.away.id : gameState.home.id,
+      pitch_result: gameState.pitch_result,
+      batter: {
+        player_id: batter.id,
+        player_name: batter.name,
+        player_uniform_number: batter.player_uniform_number,
+        is_out: batter.is_out
+      },
+      ball_count: { ...gameState.ball_count },
+      runners: [...gameState.runners],
+      score: {
+        home_score: gameState.home.score,
+        away_score: gameState.away.score
+      }
+    }
+  }
 }
 
 export default Baseball;

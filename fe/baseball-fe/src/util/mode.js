@@ -25,4 +25,5 @@ export const RunnerModeSequence = [
 
 export const BatterMode = {
   HIT: 'hit',
+  RUN: 'run'
 }

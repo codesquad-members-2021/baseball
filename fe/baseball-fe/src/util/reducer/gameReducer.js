@@ -13,7 +13,7 @@ function _nextRunnerMode({ currMode }) {
 function gameReducer(state, { type, payload }) {
   switch (type) {
     case GameAction.STRIKE: {
-      const newState = { ...state, ball_count: { ...state.ball_count, strike: state.ball_count.strike + 1 }};
+      const newState = { ...state, pitch_result: GameAction.STRIKE, ball_count: { ...state.ball_count, strike: state.ball_count.strike + 1 }};
 
       if (newState.ball_count.strike === 3) {
         newState.additionalRecord = Baseball.generateRecord({ action: RecordAction.OUT, gameState: newState });
@@ -25,7 +25,7 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.BALL: {
-      const newState = { ...state, ball_count: { ...state.ball_count, ball: state.ball_count.ball + 1 }};
+      const newState = { ...state, pitch_result: GameAction.BALL, ball_count: { ...state.ball_count, ball: state.ball_count.ball + 1 }};
 
       if (newState.ball_count.ball === 4) {
         newState.ball_count.strike = Math.min(2, newState.ball_count.strike + 1);
@@ -38,7 +38,15 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.OUT: {
-      const newState = { ...state, ball_count: { ...state.ball_count, out: state.ball_count.out + 1 }};
+      const newState = {
+        ...state,
+        pitch_result: state.pitch_result ?? GameAction.OUT,
+        ball_count: {
+          ...state.ball_count,
+          out: state.ball_count.out + 1
+        },
+        batter: { ...state.batter, is_out: true }
+      };
 
       if (newState.ball_count.out === 3) {
         return gameReducer({ ...newState }, { type: GameAction.HALF_INNING_END });
@@ -70,6 +78,7 @@ function gameReducer(state, { type, payload }) {
 
       return {
         ...state,
+        batter: { ...state.batter, mode: BatterMode.RUN },
         runners: newRunners
       };
     }
@@ -92,6 +101,7 @@ function gameReducer(state, { type, payload }) {
       console.log('next-batter');
       return {
         ...state,
+        prevBatter: { ...state.batter, is_out: state.batter?.is_out ?? false },
         batter: state.home.mode === 'FIELDING' ?
           state.home.batters[state.nth_batter % state.home.batters.length] :
           state.away.batters[state.nth_batter % state.away.batters.length],
@@ -109,7 +119,13 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.HALF_INNING_END: {
-
+      return gameReducer({
+        ...state,
+        halfInningEnd: true,
+        ball_count: { strike: 0, ball: 0, out: 0},
+        nth_batter: 0,
+        runners: [],
+      }, { type: GameAction.NEXT_BATTER });
     }
 
     case GameAction.ADDITIONAL_RECORD_END: {
@@ -117,13 +133,35 @@ function gameReducer(state, { type, payload }) {
     }
 
     case GameAction.NEED_TO_POST_END: {
-      return { ...state, needToPost: false };
+      return { ...state, halfInningEnd: false, needToPost: false, pitch_result: null };
+    }
+
+    case GameAction.UPDATE: {
+      if (state.mode === 'FIELDING')
+        throw new Error('FIELDING team cannot GameAction.UPDATE');
+      
+      const receivedState = { ...payload };
+      const newState = { ...state };
+      newState.mode = _getMode({
+        home: receivedState.home,
+        homeId: receivedState.home_id,
+        battingTeamId: receivedState.batting_team_id
+      });
+      newState.batter = receivedState
+
+      return { ...state, ...payload };
     }
   }
 }
 
-export default gameReducer;
-
-function organizeResult(state) {
-  
+function _getMode({ homeId, battingTeamId, home }) {
+  if (home === true) {
+    if (homeId === battingTeamId) return 'BATTING';
+    return 'FIELDING';
+  } else {
+    if (homeId !== battingTeamId) return 'BATTING';
+    return 'FIELDING';
+  }
 }
+
+export default gameReducer;

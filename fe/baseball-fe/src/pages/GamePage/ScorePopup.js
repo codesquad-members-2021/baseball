@@ -17,12 +17,12 @@ function ScorePopup() {
            <div className="score-container">
                 <div className="team-names">
                     <div>
-                        <span>{gameState.away.mode === "batting" && "⚾️"}</span>
+                        <span>{gameState.away.mode === "BATTING" && "⚾️"}</span>
                         <span className="team-name">{gameState.away.name}</span>
                         <div className="curr-player">{gameState.mode === gameState.away.mode && "Player"}</div>
                     </div>
                     <div>
-                        <span>{gameState.home.mode === "batting" && "⚾️"}</span>
+                        <span>{gameState.home.mode === "BATTING" && "⚾️"}</span>
                         <span className="team-name">{gameState.home.name}</span>
                         <div className="curr-player">{gameState.mode === gameState.home.mode && "Player"}</div>
                     </div>

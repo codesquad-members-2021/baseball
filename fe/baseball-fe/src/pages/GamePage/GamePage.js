@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { useState, useEffect, useReducer, useContext } from 'react';
 import usePolling from 'util/hook/usePolling.js';
 import gameReducer from 'util/reducer/gameReducer.js';
-import recordReducer from 'util/reducer/recordReducer.js';
+// import recordReducer from 'util/reducer/recordReducer.js';
 import { GameContext, GlobalContext } from 'util/context.js';
 import { GameAction } from 'util/action.js';
 import API from 'util/API.js';
 
 import { RunnerMode } from 'util/mode.js';
+import Baseball from 'util/baseball.js';
 import TeamScore from 'components/TeamScore/TeamScore.js';
 import SituationBoard from 'components/SituationBoard/SituationBoard.js';
 import CurrentPlayer from 'components/CurrentPlayer/CurrentPlayer.js';
@@ -65,13 +66,36 @@ function GamePage() {
   const { globalState } = useContext(GlobalContext);
   const [gameState, gameDispatch] = useReducer(gameReducer, globalState.initialGameState);
   const [records, setRecords] = useState([]);
-  // const { response, error, isLoading, setPolling } = usePolling({
-  //   URL: API.start({ gameId: globalState.gameId, userId: globalState.userId }),
-  // });
+  const { response: responsePitch, setPolling: setPitchPolling } = usePolling({
+    URL: API.pitch({ gameId: globalState.gameId, userId: globalState.userId }),
+  });
+  const { response: responseRecord, setPolling: setRecordPolling } = usePolling({
+    URL: API.batterRecord({ gameId: globalState.gameId, userId: globalState.userId }),
+  })
 
-  // useEffect(() => {
-  //   setPolling(true);
-  // }, []);
+  useEffect(() => {
+    if (gameState.mode === 'FIELDING') {
+      setPitchPolling(false);
+      setRecordPolling(false);
+    } else if (gameState.mode === 'BATTING') {
+      setPitchPolling(true);
+      setRecordPolling(true);
+    }
+  }, [gameState.mode]);
+
+  useEffect(() => {
+    if (!responsePitch)
+      return;
+
+    gameDispatch({ type: GameAction.UPDATE, payload: { ...responsePitch, home: globalState.home }});
+  }, [responsePitch]);
+
+  useEffect(() => {
+    if (!responseRecord)
+      return;
+
+    setRecords(responseRecord);
+  }, [responseRecord]);
 
   useEffect(() => {
     for (let i = 0; i < gameState.runners.length; i++) {
@@ -89,7 +113,18 @@ function GamePage() {
     if (!gameState.additionalRecord)
       return;
 
-    setRecords(records => [...records, { ...gameState.additionalRecord }]);
+    const newRecords = [...records, { ...gameState.additionalRecord }];
+    setRecords(newRecords);
+
+    fetch(API.batterRecord({ gameId: globalState.gameId, userId: globalState.userId }),
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newRecords)
+      }
+    );
     gameDispatch({ type: GameAction.ADDITIONAL_RECORD_END });
   }, [gameState.additionalRecord]);
 
@@ -97,9 +132,39 @@ function GamePage() {
     if (!gameState.needToPost)
       return;
 
-    console.log('pitch post!');
-    // gameDispatch({ type: GameAction.NEED_TO_POST_END });
-    
+    console.log('post!');
+    if (gameState.halfInningEnd) {
+      fetch(API.halfInning({ gameId: globalState.gameId, userId: globalState.userId }),
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Baseball.organizeResult(gameState, globalState.home))
+        }
+      );
+      fetch(API.batterRecord({ gameId: globalState.gameId, userId: globalState.userId }),
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify([])
+        }
+      );
+    } else {
+      fetch(API.pitchResult({ gameId: globalState.gameId, userId: globalState.userId }),
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(Baseball.organizeResult(gameState, globalState.home))
+        }
+      );
+    }
+
+    gameDispatch({ type: GameAction.NEED_TO_POST_END });
   }, [gameState.needToPost]);
 
   return (

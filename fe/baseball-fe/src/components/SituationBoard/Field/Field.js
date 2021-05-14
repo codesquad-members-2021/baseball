@@ -5,20 +5,22 @@ import { GameAction } from 'util/action.js';
 
 import Runner from './Runner.js';
 import Batter from './Batter.js';
+import { BatterMode } from 'util/mode.js';
 
 function Field() {
   const { gameState, gameDispatch } = useContext(GameContext);
   const [runEndCnt, setRunEndCnt] = useState(0);
 
   useEffect(() => {
-    if (runEndCnt !== gameState.runners.length) return;
+    console.log(runEndCnt, gameState.runners.length);
+    if (runEndCnt < gameState.runners.length) return;
   
     gameDispatch({ type: GameAction.NEXT_BATTER });
     setRunEndCnt(0);
   }, [runEndCnt]);
 
   const handleRunEnd = () => {
-    setRunEndCnt(runEndCnt + 1);
+    setRunEndCnt(v => v + 1);
   }
 
   const renderRunners = () => {
@@ -34,7 +36,7 @@ function Field() {
         <Base className='first'/>
         <Base className='second'/>
         <Base className='third'/>
-        {gameState.batter && <Batter/>}
+        {gameState.batter.mode !== BatterMode.RUN && <Batter/>}
         {gameState.runners.length && renderRunners()}
       </InField>
     </StyledField>
