@@ -2,13 +2,13 @@ package baseball.service.dto;
 
 import java.util.List;
 
-public class GameMemberDTO {
+public class GameTeamDTO {
 
     private Long gameId;
     private List<RecordDTO> home;
     private List<RecordDTO> away;
 
-    public GameMemberDTO(Long gameId, List<RecordDTO> home, List<RecordDTO> away) {
+    public GameTeamDTO(Long gameId, List<RecordDTO> home, List<RecordDTO> away) {
         this.gameId = gameId;
         this.home = home;
         this.away = away;

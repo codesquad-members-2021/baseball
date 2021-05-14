@@ -6,7 +6,7 @@ import baseball.exception.TeamNotFoundException;
 import baseball.repository.GameRepository;
 import baseball.repository.TeamRepository;
 import baseball.service.dto.GameDTO;
-import baseball.service.dto.GameMemberDTO;
+import baseball.service.dto.GameTeamDTO;
 import baseball.service.dto.GameScoreDTO;
 import baseball.service.dto.RecordDTO;
 import org.springframework.stereotype.Service;
@@ -79,7 +79,7 @@ public class GameService {
         return new GameScoreDTO(gameId, homeTeam, awayTeam);
     }
 
-    public GameMemberDTO getGameMemberDTO(Long gameId) {
+    public GameTeamDTO getGameTeamDTO(Long gameId) {
         Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
         Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
         Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
@@ -110,7 +110,7 @@ public class GameService {
                 awayRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
             }
         }
-        return new GameMemberDTO(gameId, homeRecordDTOs, awayRecordDTOs);
+        return new GameTeamDTO(gameId, homeRecordDTOs, awayRecordDTOs);
     }
 
     public void deleteGame() {
