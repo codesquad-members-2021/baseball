@@ -38,8 +38,6 @@ class GameScoreViewController: UIViewController, Alertable {
         configureSegmentedControl()
         self.gameScoreTableView.delegate = self
         self.gameScoreTableView.dataSource = self
-        gameScoreTableView.register(UINib(nibName: "RecordsTableViewHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "recordsHeader")
-    
     }
     
     private func bind(to viewModel: GameScoreViewModel) {
@@ -92,11 +90,11 @@ extension GameScoreViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(playerRecord: viewModel.selectedPlayerTeam[indexPath.row])
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "recordsHeader") ?? UIView()
+        let view = RecordsTableViewHeader.nib().instantiate(withOwner: nil, options: nil)[0] as! RecordsTableViewHeader
+        return view
     }
-    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }

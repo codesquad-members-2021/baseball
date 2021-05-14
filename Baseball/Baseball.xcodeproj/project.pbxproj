@@ -42,6 +42,7 @@
 		FF576693264D04A200F46A43 /* PlayerRecordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576692264D04A200F46A43 /* PlayerRecordRepository.swift */; };
 		FF576695264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF576694264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift */; };
 		FF57669B264E06D100F46A43 /* RecordsTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */; };
+		FF57669D264E5B2200F46A43 /* RecordsTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF57669C264E5B2200F46A43 /* RecordsTableViewHeader.swift */; };
 		FFDD3A90264138800037622A /* MatchUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A8F264138800037622A /* MatchUp.swift */; };
 		FFDD3A92264138F40037622A /* GameListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A91264138F40037622A /* GameListViewModel.swift */; };
 		FFDD3A9C2643C25F0037622A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */; };
@@ -87,6 +88,7 @@
 		FF576692264D04A200F46A43 /* PlayerRecordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRecordRepository.swift; sourceTree = "<group>"; };
 		FF576694264D06AC00F46A43 /* FetchPlayerRecordsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPlayerRecordsUseCase.swift; sourceTree = "<group>"; };
 		FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordsTableViewHeader.xib; sourceTree = "<group>"; };
+		FF57669C264E5B2200F46A43 /* RecordsTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewHeader.swift; sourceTree = "<group>"; };
 		FFDD3A8F264138800037622A /* MatchUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchUp.swift; sourceTree = "<group>"; };
 		FFDD3A91264138F40037622A /* GameListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListViewModel.swift; sourceTree = "<group>"; };
 		FFDD3A9B2643C25F0037622A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				A05951C8264A69F1002B759A /* GameScoreViewController.swift */,
 				A05951CD264A7921002B759A /* GameScoreTableViewCell.swift */,
+				FF57669C264E5B2200F46A43 /* RecordsTableViewHeader.swift */,
 				FF57669A264E06D100F46A43 /* RecordsTableViewHeader.xib */,
 			);
 			path = View;
@@ -453,6 +456,7 @@
 				A09F9F2C26490CD700A78969 /* FetchGameListUseCase.swift in Sources */,
 				A025C32A2640E8E700C9B8C7 /* AppDelegate.swift in Sources */,
 				FF576693264D04A200F46A43 /* PlayerRecordRepository.swift in Sources */,
+				FF57669D264E5B2200F46A43 /* RecordsTableViewHeader.swift in Sources */,
 				A05951C3264A2AB5002B759A /* AppFlowCoordinator.swift in Sources */,
 				A025C32C2640E8E700C9B8C7 /* SceneDelegate.swift in Sources */,
 				FFDD3A9C2643C25F0037622A /* PaddingLabel.swift in Sources */,
