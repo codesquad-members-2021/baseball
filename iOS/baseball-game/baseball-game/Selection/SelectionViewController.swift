@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-protocol GameCellDelegate {
+protocol SelectViewModelDelegate: AnyObject {
     func didPressButton(with gameInfo: GameInfo)
 }
 
@@ -21,7 +21,7 @@ class SelectionViewController: UIViewController {
     
     private let gradientLayer: CAGradientLayer = CAGradientLayer()
     
-    var viewModel = SelectViewModel()
+    private var viewModel = SelectViewModel()
     private var dataSource: UITableViewDiffableDataSource<Section, Game>!
     private var cancelBag = Set<AnyCancellable>()
     
@@ -50,7 +50,9 @@ extension SelectionViewController {
     }
     
     private func configureDataSource() {
-        self.dataSource = UITableViewDiffableDataSource.init(tableView: self.gameListTableView) { (tableView, indexPath, game) -> UITableViewCell in
+        self.dataSource = UITableViewDiffableDataSource.init(tableView: self.gameListTableView) { [weak self] (tableView, indexPath, game) -> UITableViewCell in
+            
+            guard let self = self else { return UITableViewCell() }
             
             let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as! GameCell
 
@@ -103,7 +105,7 @@ extension SelectionViewController: Instantiatable, IdentifierReusable {
 }
 
 
-extension SelectionViewController: GameCellDelegate {
+extension SelectionViewController: SelectViewModelDelegate {
     
     func setUserID(with userID: String) {
         self.viewModel.setUserID(with: userID)
