@@ -10,19 +10,20 @@ const GameLog = () => {
 
   let processedLog = [];
 
-  logState.map((log, i) => {
-    processedLog[i] = {
-      hitter: `${log.gameStatusDTO.currentHitter + 1}번 타자 ${
-        log.awayTeam.players[log.gameStatusDTO.currentHitter].name
-      }`,
-      fragment: (
-        <>
-          <Log>{log.pitchResult.playType}</Log>
-          <AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
-        </>
-      ),
-    };
-  });
+	logState.map((log, i) => {
+		processedLog[i] = {
+			hitter: `${log.gameStatusDTO.currentHitter + 1}번 타자 ${
+				log.awayTeam.players[log.gameStatusDTO.currentHitter].name
+			}`,
+			fragment: (
+				<>
+					<Log>{log.pitchResult.playType}</Log>
+					<AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
+				</>
+			),
+		};
+	});
+
 
   const LogGroupedByHitter = processedLog.reduce((acc, obj) => {
     if (!acc[obj.hitter]) {
@@ -32,41 +33,50 @@ const GameLog = () => {
     return acc;
   }, {});
 
-  return (
-    <GameLogScroll>
-      {Object.entries(LogGroupedByHitter).map(([key, value]) => {
-        const logList = value.map((log, i) => {
-          return (
-            <div>
-              <LogWrapper>
-                <Number>{i + 1}</Number>
-                {log}
-              </LogWrapper>
-            </div>
-          );
-        });
-        return (
-          <PlayersWrapper>
-            <div>
-              <PlayerWrapper>
-                <Player>{key}</Player>
-              </PlayerWrapper>
-              <LogByPlayer>{logList}</LogByPlayer>
-            </div>
-          </PlayersWrapper>
-        );
-      })}
-    </GameLogScroll>
-  );
+	return (
+		<ScrollDiv>
+			<GameLogScroll>
+				{Object.entries(LogGroupedByHitter).map(([key, value]) => {
+					const logList = value.map((log, i) => {
+						return (
+							<div>
+								<LogWrapper>
+									<Number>{i + 1}</Number>
+									{log}
+								</LogWrapper>
+							</div>
+						);
+					});
+					return (
+						<PlayersWrapper>
+							<div>
+								<PlayerWrapper>
+									<Player>{key}</Player>
+								</PlayerWrapper>
+								<LogByPlayer>{logList}</LogByPlayer>
+							</div>
+						</PlayersWrapper>
+					);
+				})}
+			</GameLogScroll>
+		</ScrollDiv>
+	);
 };
-const GameLogScroll = styled(Scroll)`
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  align-items: flex-start;
+
+const ScrollDiv = styled(Scroll)`
+	display: flex;
+	justify-content: flex-end;
+`;
+const GameLogScroll = styled.div`
+	display: flex;
+	flex-direction: column-reverse;
+	padding: 20px;
 `;
 
-const PlayersWrapper = styled.div``;
+const PlayersWrapper = styled.div`
+	display: flex;
+`;
+
 
 const PlayerWrapper = styled.div`
   padding-left: 20px;
@@ -78,18 +88,18 @@ const LogByPlayer = styled.div`
 `;
 
 const LogWrapper = styled.div`
-  margin: 1rem;
-  width: fit-content;
-  padding-top: 10px;
-  display: grid;
-  grid-template-columns: 20px 130px 100px;
+
+	margin: 10px;
+	width: fit-content;
+	display: grid;
+	grid-template-columns: 20px 130px 100px;
 `;
 const Player = styled.div`
-  margin: 15px 0;
-  font-size: ${theme.fontSize.medium};
-  font-weight: ${theme.fontWeight.medium};
-  color: ${props =>
-    props.now ? theme.colors.red_log : theme.colors.skyblue_log};
+	margin-top: 10px 0;
+	font-size: ${theme.fontSize.medium};
+	font-weight: ${theme.fontWeight.medium};
+	color: ${(props) =>
+		props.now ? theme.colors.red_log : theme.colors.skyblue_log};
 `;
 const Result = styled(Span)`
   width: 150px;

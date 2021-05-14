@@ -39,9 +39,10 @@ const GpaField = ({ type, gameId }) => {
     logDispatch({ type: 'log', payload: response });
   };
 
-  let interval;
-
-  console.log(state);
+	let interval;
+	const handleClick = () => {
+		getPitchResult();
+	};
 
   useEffect(() => {
     if (currentType === 'Defense') {
@@ -51,10 +52,6 @@ const GpaField = ({ type, gameId }) => {
     }
     return () => clearInterval(interval);
   }, []);
-
-  const handleClick = () => {
-    getPitchResult();
-  };
 
   return (
     <>
@@ -71,34 +68,33 @@ const GpaField = ({ type, gameId }) => {
 };
 
 const PITCH = styled.button`
-  position: absolute;
-  top: 10rem;
-  left: 3rem;
-  cursor: pointer;
-  z-index: 9999;
-  background-color: ${theme.colors.transparent};
-  font-size: ${theme.fontSize.XX_large};
-  font-weight: ${theme.fontWeight.Bold};
-  color: ${theme.colors.white};
-  border: 5px solid ${theme.colors.white};
+	position: absolute;
+	top: 373px;
+	left: 603px;
+	cursor: pointer;
+	z-index: 9999;
+	background-color: ${theme.colors.transparent};
+	font-size: ${theme.fontSize.XX_large};
+	font-weight: ${theme.fontWeight.Bold};
+	color: ${theme.colors.white};
+	border: 5px solid ${theme.colors.white};
 `;
 const FieldArea = styled.div`
-  position: relative;
-  top: 10rem;
+	position: absoulte;
 `;
 
 const FieldSVG = styled(Field)`
-  position: absolute;
-  top: 23rem;
-  left: 3rem;
+	position: absolute;
+	top: 100px;
+	left: 300px;
 `;
 
 const GameState = styled(Span)`
-  position: absolute;
-  top: 17rem;
-  right: 23rem;
-  font-size: ${theme.fontSize.X_large};
-  font-weight: ${theme.fontWeight.light};
-  color: ${theme.colors.white};
+	position: absolute;
+	top: 100px;
+	right: 3rem;
+	font-size: ${theme.fontSize.X_large};
+	font-weight: ${theme.fontWeight.light};
+	color: ${theme.colors.white};
 `;
 export default GpaField;

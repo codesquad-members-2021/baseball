@@ -46,61 +46,62 @@ function GhostAnimation() {
     if (base.length === 5) setBase([...base.slice(-4)]);
   }, [base]);
 
-  return (
-    <Ground>
-      {base.map((v, i) => (
-        <div key={i}>
-          <GhostSVG
-            visible={v < 1 && 'hidden'}
-            playerruntype={playerruntype[i]}
-            className="ghost-svg"
-            onTransitionEnd={handleTransitionEnd}
-            istransition={istransition}
-          />
-        </div>
-      ))}
-    </Ground>
-  );
+	return (
+		<Ground>
+			{base.map((v, i) => (
+				<div key={i}>
+					<GhostSVG
+						visible={v < 1 && 'hidden'}
+						playerruntype={playerruntype[i]}
+						className="ghost-svg"
+						onTransitionEnd={handleTransitionEnd}
+						istransition={istransition}
+					/>
+				</div>
+			))}
+		</Ground>
+	);
+
 }
 export default GhostAnimation;
 
 const Ground = styled.div`
-  position: relative;
-  top: 31.5rem;
-  left: -14rem;
-  width: 22rem;
-  height: 21rem;
-  margin: auto;
-  transform: rotate(-45deg);
-  & > div:nth-child(1) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    &:after {
-      content: '';
-      position: absolute;
-      width: 4.5rem;
-      height: 4.5rem;
-      top: 0rem;
-      left: -0.6rem;
-      background-color: #fff;
-    }
-  }
-  & > div:nth-child(2) {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-  & > div:nth-child(3) {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  & > div:nth-child(4) {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+	position: absolute;
+	top: 177px;
+	left: 500px;
+	width: 20rem;
+	height: 28rem;
+	margin: auto;
+	transform: rotate(-45deg);
+	& > div:nth-child(1) {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		&:after {
+			content: '';
+			position: absolute;
+			width: 4.5rem;
+			height: 4.5rem;
+			top: 3.9rem;
+			left: -1.6rem;
+			background-color: #fff;
+		}
+	}
+	& > div:nth-child(2) {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+	& > div:nth-child(3) {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	& > div:nth-child(4) {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 `;
 
 const GhostSVG = styled(Ghost)`

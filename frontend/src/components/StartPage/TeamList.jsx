@@ -19,7 +19,7 @@ const TeamList = ({ setMessage }) => {
 };
 
 const SingleList = styled.div`
-	width: 337px;
+	width: 500px;
 	height: 85px;
 	margin: 10px;
 	background: ${theme.colors.grey_list};

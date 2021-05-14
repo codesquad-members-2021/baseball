@@ -1,4 +1,4 @@
-const url = 'http://13.124.70.38:8080';
+const url = 'http://ec2-3-35-119-77.ap-northeast-2.compute.amazonaws.com';
 const API = {
 	get: {
 		teamList: async () => {
