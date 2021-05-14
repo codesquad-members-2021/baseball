@@ -55,7 +55,7 @@ public class ApiGameController {
     @PostMapping("/status/pitch-result")
     public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO, HttpServletRequest request) {
         long userId = (long) request.getAttribute("userId");
-        gameService.applyPitchResult(1l, pitchResultDTO.getPitchResult());
+        gameService.applyPitchResult(userId, pitchResultDTO.getPitchResult());
         return ApiResult.succeed("OK");
     }
 
