@@ -6,6 +6,7 @@ const GameListItem = ({ home, away, id, idx }) => {
   const path = `games/${id}`;
   const onClick = e => {
     localStorage.setItem('select', e.target.textContent);
+    localStorage.setItem('teams', JSON.stringify({ home, away }));
   }
   return (
     <StyledGameItem>

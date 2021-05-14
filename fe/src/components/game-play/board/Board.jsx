@@ -32,7 +32,7 @@ const ballCountReducer = (state, action) => {
   return newState;
 };
 
-const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id }) => {
+const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id, teamName, selectTeam }) => {
   const [ballCount, ballCountDispatch] = useReducer(ballCountReducer, {
     strike: 0,
     ball: 0,
@@ -88,7 +88,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch, game_id
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
       <Screen
-        {...{ handleStrike, handleBall, handleSafety, ballCount }}
+        {...{ handleStrike, handleBall, handleSafety, ballCount, teamName, selectTeam }}
         turn={inning.turn}
       ></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>

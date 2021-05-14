@@ -1,25 +1,24 @@
 import styled from 'styled-components';
 import RosterPlayer from './RosterPlayer';
 
-const TeamRoster = ({ memberList, player = false }) => {
+const TeamRoster = ({ memberList, teamName, selectTeam }) => {
   const player_name = 'abc';
-  const team_name = '베리베리 스트로베리';
   const HEADS = ['타자', '타석', '안타', '아웃', '평균'];
   const TOTALTEXT = 'Totals';
   const heads = HEADS.map((head, idx) => <div key={idx}>{head}</div>);
   let [totalAtBat, totalSafety, totalOut] = [0, 0, 0];
   
   const members = memberList.map((member, idx) => {
-    const { at_bat, safety, out } = member;
-    totalAtBat += at_bat;
-    totalSafety += safety;
-    totalOut += out;
+    const { atBat, plate_appearance, outCount } = member;
+    totalAtBat += atBat;
+    totalSafety += plate_appearance;
+    totalOut += outCount;
     return <RosterPlayer {...member} player_name={player_name} key={idx} />
   });
 
   return (
     <StyledTeamRoster>
-      <div className='title'>{team_name} {player && <div className='player'>Player</div>}</div>
+      <div className='title'>{teamName} {teamName === selectTeam && <div className='player'>Player</div>}</div>
       <ul className='roster'>
         <li className='roster--head'>
           {heads}

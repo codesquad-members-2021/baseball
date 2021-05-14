@@ -31,7 +31,7 @@ const Player = ({ memberList, turn, pitchers }) => {
         <div className='player-detail'>
           <div className='name'>{player?.batter.name}</div>
           <div className='detail'>
-            {player?.batter.at_bat || 0}타석 {player?.batter.safety || 0}안타
+            {player?.batter.atBat || 0}타석 {player?.batter.plate_appearance || 0}안타
           </div>
         </div>
       </div>

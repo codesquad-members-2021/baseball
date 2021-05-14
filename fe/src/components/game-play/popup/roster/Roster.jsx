@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import TeamRoster from './TeamRoster';
-const Roster = ({ memberList }) => {
-  // team_name 필요
+const Roster = ({ memberList, teamName, selectTeam }) => {
   return (
     <StyledRoster>
-      <TeamRoster memberList={memberList.home}/>
-      <TeamRoster memberList={memberList.away} player={true}/>
+      <TeamRoster memberList={memberList.home} teamName={teamName.home} selectTeam={selectTeam}/>
+      <TeamRoster memberList={memberList.away} teamName={teamName.away} selectTeam={selectTeam}/>
     </StyledRoster>
   );
 }

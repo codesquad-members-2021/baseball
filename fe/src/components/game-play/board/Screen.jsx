@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import useScoreNBase from '../../../hooks/useScoreNBase';
 import { ScoreNBaseContext } from '../GamePlay';
 
-const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => {
+const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn, teamName, selectTeam }) => {
   const { base, safetyDispatch } = useContext(ScoreNBaseContext);
   const [isTransition, setIsTransition] = useState(false);
   const [runFirstBase, setRunFirstBase] = useState(false);
@@ -26,19 +26,21 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
 
   const handlePitchClick = () => {
     const randomNum = Math.ceil(Math.random() * 100);
-    if (randomNum <= 0) {
+    if (randomNum <= 55) {
       //스트라이크
       handleStrike();
-    } else if (randomNum <= 0) {
+    } else if (randomNum <= 90) {
       //볼
       if (ballCount.ball === 3) {
+        setCurrentPower(1);
         setIsTransition(true);
         setRunFirstBase(true);
-        setCurrentPower(1);
       }
       handleBall();
     } else {
       //안타
+      setIsTransition(true);
+      setRunFirstBase(true);
       handleSafety();
       if (randomNum <= 100) {
         //1루타
@@ -62,9 +64,45 @@ const Screen = ({ handleStrike, handleBall, handleSafety, ballCount, turn }) => 
     </div>
   ));
 
+  const isPitch = (turn && teamName.home != selectTeam) || (!turn && teamName.away != selectTeam);
+
+  const savedCallback = useRef();
+
+  function callback() {
+    handlePitchClick();
+  }
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if(!isPitch) {
+      let id = setInterval(tick, 1000);
+      return () => clearInterval(id);
+    } else {
+      return null;
+    }
+  }, []);
+
+
+  // useEffect(() => {
+  //   let interval = setInterval(() => handlePitchClick(), 1000);
+  //   clearInterval(interval);
+  //   if(!isPitch) {
+  //     interval = setInterval(() => handlePitchClick(), 1000);
+  //   } else {
+  //     clearInterval(interval);
+  //   }
+  //   return () => clearInterval(interval);
+  // }, [turn])
+
   return (
     <StyledScreen>
-      <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>
+      {isPitch && <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>}
       <StyledGround
         playerRunType={playerRunType}
         currentPower={currentPower}

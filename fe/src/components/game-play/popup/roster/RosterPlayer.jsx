@@ -1,15 +1,17 @@
 import React from 'react';
+// const { atBat, plate_appearance, outCountCount } = member;
 
-const RosterPlayer = ({ name, at_bat, safety, out, player_name }) => {
-  const getAverage = (at_bat, safety) => (safety / at_bat) ? (safety / at_bat).toFixed(3) : 0;
+const RosterPlayer = ({ name, atBat, plate_appearance, outCount, player_name }) => {
+  
+  const getAverage = (atBat, plate_appearance) => (plate_appearance / atBat) ? (plate_appearance / atBat).toFixed(3) : 0;
   const class_name = 'roster--member' + (name === player_name ? ' active' : '');
   return (
     <li className={class_name}>
       <div>{name}</div>
-      <div>{at_bat}</div>
-      <div>{safety}</div>
-      <div>{out}</div>
-      <div>{getAverage(at_bat, safety)}</div>
+      <div>{atBat}</div>
+      <div>{plate_appearance}</div>
+      <div>{outCount}</div>
+      <div>{getAverage(atBat, plate_appearance)}</div>
     </li>
   );
 };
