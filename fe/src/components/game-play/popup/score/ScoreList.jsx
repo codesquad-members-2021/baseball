@@ -39,8 +39,8 @@ const StyledScoreList = styled.div`
     margin-right: 2rem;
     .team {
       position: relative;
-      width: 5rem;
-      font-size: 1.5rem;
+      width: 8rem;
+      font-size: 1.1rem;
       font-weight: 700;
       .baseball {
         position: absolute;

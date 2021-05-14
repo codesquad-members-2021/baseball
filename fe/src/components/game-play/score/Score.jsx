@@ -36,7 +36,7 @@ const Score = ({ teamName, selectTeam }) => {
 
 const StyledScore = styled.div`
   .title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -54,13 +54,14 @@ const StyledScore = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 5rem;
+      font-size: 3rem;
     }
     .teams-vs {
       font-size: 4rem;
       color: #777;
     }
     .teams-name {
+      font-size: 3rem;
       position: relative;
     }
     .turn {

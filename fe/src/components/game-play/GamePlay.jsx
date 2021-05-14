@@ -12,6 +12,7 @@ import { fetchPUT } from '../../util/api.js';
 import useFetch from '../../hooks/useFetch';
 
 export const ScoreNBaseContext = createContext();
+export const GameIdContext = createContext();
 const MemberListContext = createContext();
 
 const DATA_PLAYER_URL = 'http://52.78.184.142';
@@ -27,18 +28,6 @@ const memberListReducer = (state, action) => {
       else plate_appearance++;
       atBat++;
       next = idx + 1 === arr.length ? 0 : idx + 1;
-
-      // put: /players/{player_id}
-
-      /*
-      const { data: result } = useFetch(DATA_PLAYER_URL + '/players/' + member.id, 'put', {
-        local
-      });
-      */
-      // {
-      //   "game_id": 6,
-      //   "atBat": true // true: 안타, false: 아웃
-      // }
       return { ...member, plate_appearance, atBat, outCount, status: !status };
     } else {
       return { ...member };
@@ -92,6 +81,10 @@ const GamePlay = ({ home, away, game_id }) => {
   });
   console.log(gamePlayData);
   const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
+  const teamId = {
+    home: gamePlayData?.home?.teamId,
+    away: gamePlayData?.away?.teamId,
+  };
   const teamName = {
     home: gamePlayData?.home?.name,
     away: gamePlayData?.away?.name,
@@ -106,6 +99,7 @@ const GamePlay = ({ home, away, game_id }) => {
       home: gamePlayData?.home?.member_list,
       away: gamePlayData?.away?.member_list,
     };
+    setInning({ turn: gamePlayData?.turn || true, round: gamePlayData?.round || 1 });
     memberListDispatch({ type: 'init', value: memberListData });
   }, [gamePlayData]);
 
@@ -119,53 +113,42 @@ const GamePlay = ({ home, away, game_id }) => {
     }
   }, [memberList]);
 
-  useEffect(() => {
-    // post:/games/{game_id}
-    // console.log(inning, memberList);
-    // const { data: result } = useFetch(DATA_PLAYER_URL + '/games/' + game_id, 'put', {
-    //   game_id,
-    //   "team_id": 1, 종료된 팀 아이디
-    //   "round" : 3, 종료된 라운드
-    //   "player_id": 3, 마지막 아웃 된 타자
-    // });
-    // {
-    //   "game_id": 6,
-    //   "atBat": true // true: 안타, false: 아웃
-    // }
-  }, [inning]);
-
   return (
-    <StyledGamePlay>
-      <PopUp position='top' emptyText='상세 점수'>
-        <PopUpScore score={score} teamName={teamName} selectTeam={selectTeam} />
-      </PopUp>
-      <PopUp position='bottom' emptyText='선수 명단'>
-        <PopUpRoster memberList={memberList} teamName={teamName} selectTeam={selectTeam} />
-      </PopUp>
-      <StyledGamePlayGrid>
-        <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score
-            teamName={teamName}
-            turn={inning.turn}
-            gameID={gameID}
-            selectTeam={selectTeam}
-          ></Score>
-          <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-          <Board
-            {...{
-              inning,
-              setInning,
-              memberListDispatch,
-              logListDispatch,
-              game_id: gameID,
-              teamName,
-              selectTeam,
-            }}
-          ></Board>
-          <Log logList={logList}></Log>
-        </ScoreNBaseContext.Provider>
-      </StyledGamePlayGrid>
-    </StyledGamePlay>
+    <GameIdContext.Provider value={{ gameID }}>
+      <StyledGamePlay>
+        <PopUp position='top' emptyText='상세 점수'>
+          <PopUpScore score={score} teamName={teamName} selectTeam={selectTeam} />
+        </PopUp>
+        <PopUp position='bottom' emptyText='선수 명단'>
+          <PopUpRoster memberList={memberList} teamName={teamName} selectTeam={selectTeam} />
+        </PopUp>
+        <StyledGamePlayGrid>
+          <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
+            <Score
+              teamName={teamName}
+              turn={inning.turn}
+              gameID={gameID}
+              selectTeam={selectTeam}
+            ></Score>
+            <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
+            <Board
+              {...{
+                inning,
+                setInning,
+                memberListDispatch,
+                logListDispatch,
+                game_id: gameID,
+                teamName,
+                teamId,
+                selectTeam,
+                memberList,
+              }}
+            ></Board>
+            <Log logList={logList}></Log>
+          </ScoreNBaseContext.Provider>
+        </StyledGamePlayGrid>
+      </StyledGamePlay>
+    </GameIdContext.Provider>
   );
 };
 

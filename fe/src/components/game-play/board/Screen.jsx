@@ -40,9 +40,6 @@ const Screen = ({
     } else if (randomNum <= 80) {
       //볼
       if (ballCount.ball === 3) {
-        if (base[3]) {
-          //4번 API {"game_id": 7,"home": 1,"away": 2, "round": 3} 모든정보 컨텍스트로
-        }
         setCurrentPower(1);
         setIsTransition(true);
         setRunFirstBase(true);
@@ -50,7 +47,6 @@ const Screen = ({
       handleBall();
     } else {
       //안타
-      //4번 API {"game_id": 7,"home": 1,"away": 2, "round": 3} 모든정보 컨텍스트로
       setIsTransition(true);
       setRunFirstBase(true);
       handleSafety();
@@ -80,25 +76,25 @@ const Screen = ({
 
   const savedCallback = useRef();
 
-  function callback() {
-    handlePitchClick();
-  }
+  // function callback() {
+  //   handlePitchClick();
+  // }
 
-  useEffect(() => {
-    savedCallback.current = callback;
-  });
+  // useEffect(() => {
+  //   savedCallback.current = callback;
+  // });
 
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (!isPitch) {
-      let id = setInterval(tick, 1000);
-      return () => clearInterval(id);
-    } else {
-      return null;
-    }
-  }, []);
+  // useEffect(() => {
+  //   function tick() {
+  //     savedCallback.current();
+  //   }
+  //   if (!isPitch) {
+  //     let id = setInterval(tick, 1000);
+  //     return () => clearInterval(id);
+  //   } else {
+  //     return null;
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   let interval = setInterval(() => handlePitchClick(), 1000);
@@ -113,7 +109,7 @@ const Screen = ({
 
   return (
     <StyledScreen>
-      {isPitch && <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>}
+      <StyledPitch onClick={handlePitchClick}>PITCH</StyledPitch>
       <StyledGround
         playerRunType={playerRunType}
         currentPower={currentPower}
