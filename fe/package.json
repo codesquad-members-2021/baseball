@@ -3,6 +3,7 @@
   "name": "fe",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://baseball.san.r-e.kr",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
