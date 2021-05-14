@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-protocol SelectViewModelDelegate {
+protocol SelectViewModelDelegate: AnyObject {
     func didPressButton(with gameInfo: GameInfo)
 }
 
@@ -50,7 +50,9 @@ extension SelectionViewController {
     }
     
     private func configureDataSource() {
-        self.dataSource = UITableViewDiffableDataSource.init(tableView: self.gameListTableView) { (tableView, indexPath, game) -> UITableViewCell in
+        self.dataSource = UITableViewDiffableDataSource.init(tableView: self.gameListTableView) { [weak self] (tableView, indexPath, game) -> UITableViewCell in
+            
+            guard let self = self else { return UITableViewCell() }
             
             let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as! GameCell
 
