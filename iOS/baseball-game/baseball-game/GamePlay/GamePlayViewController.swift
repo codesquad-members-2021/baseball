@@ -129,8 +129,8 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BallCounter.notiName)
             .sink { data in
-                if let ballType = data.userInfo?["ballType"] as? BallCount,
-                   let count = data.userInfo?["count"] as? Int {
+                if let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
+                   let count = data.userInfo?[BallCounter.UserInfo.count] as? Int {
                     DispatchQueue.main.async {
                         switch ballType {
                         case .strike:
@@ -147,7 +147,7 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BaseManager.notiName)
             .sink { data in
-                if let movementType = data.userInfo?["movement"] as? BaseMovement {
+                if let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement {
                     self.totalDelay += self.delayAmount
                     DispatchQueue.main.asyncAfter(deadline: .now() + self.totalDelay) {
                         switch movementType {
@@ -174,9 +174,10 @@ extension GamePlayViewController {
     
     private func configureDataSource() {
         self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) {
-            (tableView, indexPath, pitch) -> UITableViewCell in
+            [weak self] (tableView, indexPath, pitch) -> UITableViewCell in
             
-            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
+            guard let self = self,
+                  let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
             }
             cell.updateLabels(count: pitch.count, result: pitch.result, log: pitch.log)

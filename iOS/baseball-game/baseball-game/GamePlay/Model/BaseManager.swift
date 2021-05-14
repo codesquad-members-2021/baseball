@@ -49,6 +49,10 @@ class BaseManager {
     
     static let notiName = Notification.Name.init("baseChanged")
     
+    enum UserInfo {
+        static let movement = "movement"
+    }
+    
     private func notiBaseChanged(movement: BaseMovement) {
         let updateInfo: [String: Any] = ["movement": movement]
         NotificationCenter.default.post(name: BaseManager.notiName, object: nil, userInfo: updateInfo)

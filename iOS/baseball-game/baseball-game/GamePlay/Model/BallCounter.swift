@@ -31,6 +31,11 @@ class BallCounter {
     
     static let notiName = Notification.Name.init("ballCountChanged")
     
+    enum UserInfo {
+        static let ballType = "ballType"
+        static let count = "count"
+    }
+    
     func reset() {
         self.strike = 0
         self.ball = 0

@@ -80,7 +80,6 @@ class GamePlayViewModel {
                         self.gameManager.updateBase(with: newBaseInfo)
                     }
                 }
-                
                 self.gameUpdator = self.gameManager
             }
 

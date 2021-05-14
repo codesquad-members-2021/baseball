@@ -8,19 +8,11 @@
 import Foundation
 
 protocol GameInformable {
-    
     func teamInfo() -> [String: String]
-    
     func scoreInfo() -> [String: Int]
-    
     func inningInfo() -> String
-
     func pitcherInfo() -> Player
-    
     func batterInfo() -> Player
-    
     func pitchInfo() -> [Pitch]
-    
     func isUserDefense() -> Bool?
-    
 }
