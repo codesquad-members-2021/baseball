@@ -18,7 +18,7 @@ const GamePlayersList = () => {
           totalPlateAppearances += player.plateAppearances;
           totalHitCount += player.hitCount;
           totalAvg += player.outCount;
-          console.log(totalPlateAppearances, totalHitCount, totalAvg);
+
           return (
             <tr>
               <td>{player.name}</td>

@@ -4,8 +4,7 @@ const Scroll = styled.div`
   padding-right: 10px;
   overflow: hidden;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column-reverse;
+
   &:hover {
     overflow-y: scroll;
   }
