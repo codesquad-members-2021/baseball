@@ -5,15 +5,18 @@ import useFetch from 'util/hook/useFetch';
 import API from 'util/API';
 
 function ScorePopup() {
-    const { gameState } = useContext(GameContext);
     const { globalState } = useContext(GlobalContext);
+    const { gameState } = useContext(GameContext);
     const { response , error, isLoading } = useFetch(API.score({
         gameId: globalState.gameId,
         userId: globalState.userId
     }));
     const totalRound = Array(12).fill(0).map((el, i) => el + (i + 1));
+    if (response) console.log("response:", response);
 
     return (
+        <>
+        {response &&
         <StyledScorePopup>
            <div className="innings">
                 {totalRound.map(num => <div>{num}</div>)}
@@ -41,7 +44,8 @@ function ScorePopup() {
                     <div>{response && response.home_total}</div>
                 </div>
            </div>
-        </StyledScorePopup>
+        </StyledScorePopup>}
+        </>
     )
 }
 
@@ -102,6 +106,7 @@ const StyledScorePopup = styled.div`
         }
 
         .inning-scores {
+            text-align: left;
             width: 33rem;
             margin-left: 0.7rem;
             & > div {

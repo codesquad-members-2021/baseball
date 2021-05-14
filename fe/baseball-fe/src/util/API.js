@@ -15,6 +15,7 @@ const API = {
   // games: () => BASE + '/games',
   // start: ({ id }) => BASE + `/games/${id}/start`,
   score: ({ gameId, userId }) => BASE + `/games/${gameId}/score/user/${userId}`,
+  players: ({ gameId, userId }) => BASE + `/games/${gameId}/pa/user/${userId}`
   // pitch: ({ id }) => BASE + `/games/${id}/pitch`,
   // halfInning: ({ id }) => BASE + `/games/${id}/halfInning`
 }

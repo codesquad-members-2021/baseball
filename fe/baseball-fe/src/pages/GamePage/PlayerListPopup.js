@@ -1,16 +1,32 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { GameContext } from 'util/context.js';
+import { GameContext, GlobalContext } from 'util/context.js';
+import useFetch from 'util/hook/useFetch';
+import API from 'util/API';
+
 import tempData from './players.json';//임시로 json 데이터 받아옴. 삭제될 예정.
 
 function PlayerListPopup() {
+    const { globalState } = useContext(GlobalContext);
     const { gameState } = useContext(GameContext);
-    console.log("gameState", gameState);
     const categories = ["타자", "타석", "안타", "아웃", "평균"];
-    const awayPlayers = [...tempData.away.players];
-    const homePlayers = [...tempData.home.players];
+    const { response, error, isLoading } = useFetch(API.players({
+        gameId: globalState.gameId,
+        userId: globalState.userId
+    }))
+    let awayPlayers;
+    let homePlayers;
+
+    if (response) {
+        awayPlayers = [...response.away.players];
+        homePlayers = [...response.home.players];
+    }
+    useEffect(() => {
+        console.log("response:", response)
+    }, [response])
 
     const isCurrentPlayer = (playerId) => {
+        // const result = isCurrentBatter(playerId);
         const result = isCurrentBatter(playerId) || isCurrentPitcher(playerId);
         return result ? 'current-player' : '';
     }
@@ -24,10 +40,12 @@ function PlayerListPopup() {
     }
 
     return (
+        <>
+        {response &&
         <StyledPlayerListPopup>
             <div className="away-players">
                 <div className="away-team-title">
-                    {tempData.away.team_name}
+                    {response.away.team_name}
                     <span className="current-playteam"></span>
                 </div>
                 <div className="categories">
@@ -54,7 +72,7 @@ function PlayerListPopup() {
             </div>
             <div className="home-players">
                 <div className="home-team-title">
-                    {tempData.home.team_name}
+                    {response.home.team_name}
                     <span className="current-playteam">&nbsp;Player</span>
                 </div>
                 <div className="categories">
@@ -79,7 +97,8 @@ function PlayerListPopup() {
                     </li>
                 </ul>
             </div>
-        </StyledPlayerListPopup>
+        </StyledPlayerListPopup>}
+        </>
     )
 }
 

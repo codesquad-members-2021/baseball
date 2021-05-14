@@ -36,3 +36,4 @@ const StyledMainPage = styled.div`
     font-size: 2.5rem;
   }
 `;
+

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { ReactComponent as Arrow } from 'rsc/arrow.svg'
+import { ReactComponent as Arrow } from 'rsc/arrow.svg';
 import useFetch from 'util/hook/useFetch.js';
 import { GlobalContext } from 'util/context.js';
 
