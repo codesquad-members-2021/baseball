@@ -30,7 +30,7 @@ public class GameService {
         if (gameRepository.count() == EMPTY) {
             saveGames();
         }
-        Iterable<Game> games = gameRepository.findAll();
+        List<Game> games = gameRepository.findAll();
 
         return new GameDTO(games);
     }
