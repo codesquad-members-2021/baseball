@@ -23,8 +23,17 @@ public interface GameRepository extends CrudRepository<Game, Long> {
 
     List<Game> findAll();
 
+    @Query("SELECT * FROM GAME WHERE GAME.id = :id;")
+    Optional<Game> findGameById(@Param("id") Long id);
+
     @Query("SELECT TEAM.id as id, TEAM.name as name, TEAM.is_home as is_home, TEAM.selected as selected, TEAM.game_id as game_id FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id AND TEAM.name = :title;")
     Optional<Team> findTeamByTitle(@Param("title") String title);
+
+    @Query("SELECT * FROM PLAYER AS P WHERE P.name = :name;")
+    Optional<Player> findPlayerByName(@Param("name") String name);
+
+    @Query("SELECT * FROM TEAM WHERE TEAM.game_id = (SELECT GAME.id FROM GAME WHERE GAME.id = :id);")
+    List<Team> findTeamById(@Param("id") Long id);
 
     @Query("SELECT home_group.id AS game_id, home_group.in_progress as in_progress ,home_group.home as home, away_group.away as away\n" +
             "FROM\n" +
@@ -38,20 +47,24 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "ON home_group.id = away_group.id;")
     List<GameDto> findAllGame();
 
-    @Query("SELECT TEAM.name \n" +
-            "FROM TEAM \n" +
-            "WHERE TEAM.game_id = (SELECT TEAM.game_id FROM TEAM WHERE TEAM.name = :title);")
+    @Query("SELECT TEAM.name FROM TEAM WHERE TEAM.game_id = (SELECT TEAM.game_id FROM TEAM WHERE TEAM.name = :title);")
     List<TeamTypeDto> findTeamListByTeamTitle(@Param("title") String title);
 
-    @Query("SELECT T.name, T.selected, T.is_home\n" +
-            "FROM TEAM T\n" +
-            "WHERE T.name = :title;")
+    @Query("SELECT T.name, T.selected, T.is_home FROM TEAM T WHERE T.name = :title;")
     Optional<TeamInfoDto> findTeamInfoByTitle(@Param("title") String title);
+
+    @Query("SELECT * FROM TEAM_SCORE WHERE TEAM_SCORE.team_id = (SELECT TEAM.id FROM TEAM WHERE TEAM.name = :name);")
+    List<TeamScore> findTeamScoreByName(@Param("name") String name);
 
     @Query("SELECT P.name, P.uniform_number, P.is_pitcher\n" +
             "FROM PLAYER AS P INNER JOIN TEAM T on P.team_id = T.id\n" +
             "WHERE T.name = :title;")
     List<PlayerInfoDto> findPlayerListByTeamTitle(@Param("title") String title);
+
+    @Query("SELECT P.name, P.uniform_number, P.plate_appearance, P.hits\n"+
+            "FROM PLAYER AS P INNER JOIN TEAM T on P.team_id = T.id\n" +
+            "WHERE uniform_number = :nextUniformNumber AND T.name = :teamName;")
+    Optional<NextPlayerInfoDto> findNextPlayerByNumberAndTeamName(@Param("nextUniformNumber") int nextUniformNumber, @Param("teamName") String teamName);
 
     @Modifying
     @Query("UPDATE TEAM SET TEAM.selected=:selected WHERE TEAM.name = :teamTitle;")
@@ -66,29 +79,9 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "VALUES((SELECT TEAM.id FROM TEAM WHERE TEAM.name = :teamName), :round,:score)")
     void insertTeamScore(@Param("teamName") String teamName, @Param("round") int round, @Param("score") int score);
 
-    @Query("SELECT * FROM PLAYER AS P WHERE P.name = :name;")
-    Optional<Player> findPlayerByName(@Param("name") String name);
-
-    @Query("SELECT * FROM TEAM\n" +
-            "WHERE TEAM.game_id = (SELECT GAME.id FROM GAME WHERE GAME.id = :id);")
-    List<Team> findTeamById(@Param("id") Long id);
-
-    @Query("SELECT *\n" +
-            "FROM TEAM_SCORE\n" +
-            "WHERE TEAM_SCORE.team_id = (SELECT TEAM.id FROM TEAM WHERE TEAM.name = :name);")
-    List<TeamScore> findTeamScoreByName(@Param("name") String name);
-
     @Modifying
     @Query("UPDATE GAME SET GAME.in_progress = :inProgress WHERE GAME.id = ( SELECT TEAM.id FROM TEAM WHERE TEAM.name = :teamTitle );")
     void updateGameStatusByTitle(@Param("teamTitle") String teamTitle, @Param("inProgress") boolean inProgress);
-
-    @Query("SELECT * FROM GAME WHERE GAME.id = :id;")
-    Optional<Game> findGameById(@Param("id") Long id);
-
-
-    @Query("SELECT P.name, P.uniform_number, P.plate_appearance, P.hits FROM PLAYER AS P INNER JOIN TEAM T on P.team_id = T.id\n" +
-            "WHERE uniform_number = :nextUniformNumber AND T.name = :teamName;")
-    Optional<NextPlayerInfoDto> findNextPlayerByNumberAndTeamName(@Param("nextUniformNumber") int nextUniformNumber, @Param("teamName") String teamName);
 
     @Query("UPDATE GAME SET GAME.round = 0, GAME.in_progress= false WHERE GAME.id = :gameId;")
     void resetGame(@Param("gameId") Long gameId);
@@ -103,4 +96,3 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     void resetPlayer(@Param("teamId") Long teamId);
 
 }
-
