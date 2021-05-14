@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useFetch from '../../hooks/useFetch';
 import GameListItem from './GameListItem';
+import { Link } from 'react-router-dom';
 
 const DATA_LIST_URL = 'http://52.78.184.142/games';
 
 const GameList = () => {
+  const game_id = localStorage.getItem('game_id');
+  if(game_id) {
+    window.location.href = 'games/' + game_id;
+  }
   const { data: gameListData } = useFetch(DATA_LIST_URL, 'get');
   const TITLE = 'BASEBALL GAME ONLINE';
   const DESCRIPTION = '참가할 게임을 선택하세요!';
   const gameList = gameListData?.game_list.map(({ home, away, id }, idx) => (
     <GameListItem key={idx} {...{ home, away, id, idx }} />
   ));
-
-  return (
+    
+  return game_id ? null : (
     <StyledGameList>
       <StyledTitle>{TITLE}</StyledTitle>
       <StyledDescription>{DESCRIPTION}</StyledDescription>
@@ -70,38 +75,5 @@ const StyledList = styled.div`
     background-color: transparent;
   }
 `;
-
-const game_list = [
-  {
-    home: '베리베리 스트로베리',
-    away: '엄마는 외계인',
-    game_id: 0,
-  },
-  {
-    home: 'twins',
-    away: 'tigers',
-    game_id: 1,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-];
 
 export default GameList;

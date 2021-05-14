@@ -9,7 +9,6 @@ const Score = ({ score, teamName, gameID }) => {
   const ROUND = new Array(12).fill().map((_, idx) => idx + 1);
 
   // const { data: score } = useFetch(SCORE_URL, 'get');
-  console.log(score);
   return (
     score &&
     score.home && (

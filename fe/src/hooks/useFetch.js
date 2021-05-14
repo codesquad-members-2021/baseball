@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useFetch = (url, method, value) => {
+const useFetch = (url, method, value = '') => {
   const [data, setData] = useState(null);
 
   const fetchData = async (url, method, value) => {
@@ -9,11 +9,28 @@ const useFetch = (url, method, value) => {
         const res = await fetch(url);
         const data = await res.json();
         setData(data);
+      } else if (method === 'post') {
+        console.log('post', value);
+        const res = await fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(value),
+        });
+        const data = await res.json();
+        console.log(res, data);
       } else if (method === 'put') {
+        console.log('put', value);
         const res = await fetch(url, {
           method: 'put',
-          headers: '',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(value),
         });
+        const data = await res.json();
+        console.log(res, data);
       }
     } catch (err) {
       console.log(err);

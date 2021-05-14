@@ -17,13 +17,13 @@ const Log = ({ logList }) => {
         { member.history.map((v, i) => 
           v.end 
           ?
-          <div className="content result">
+          <div className="content result" key={i}>
             <div></div>
             <div>{TYPE[v.type]}!</div>
             <div></div>
           </div>
           :
-          <div className="content">
+          <div className="content" key={i}>
             <div>{i + 1}</div>
             <div>{TYPE[v.type]}</div>
             <div>S{v.strike} B{v.ball}</div>

@@ -14,19 +14,32 @@ import useFetch from '../../hooks/useFetch';
 export const ScoreNBaseContext = createContext();
 const MemberListContext = createContext();
 
+const DATA_PLAYER_URL = 'http://52.78.184.142';
+
 const memberListReducer = (state, action) => {
   if (action.type === 'init') return action.value;
   let next = 0;
   const team = action.turn ? 'home' : 'away';
   const newTeam = [...state[team]].map((member, idx, arr) => {
-    let { safety, at_bat, out, status } = member;
+    let { plate_appearance, atBat, outCount, status } = member;
     if (member.status) {
-      if (action.type === 'out') out++;
-      else safety++;
-      at_bat++;
+      if (action.type === 'out') outCount++;
+      else plate_appearance++;
+      atBat++;
       next = idx + 1 === arr.length ? 0 : idx + 1;
 
-      return { ...member, safety, at_bat, out, status: !status };
+      // put: /players/{player_id}
+
+      /*
+      const { data: result } = useFetch(DATA_PLAYER_URL + '/players/' + member.id, 'put', {
+        local
+      });
+      */
+      // {
+      //   "game_id": 6,
+      //   "atBat": true // true: 안타, false: 아웃
+      // }
+      return { ...member, plate_appearance, atBat, outCount, status: !status };
     } else {
       return { ...member };
     }
@@ -64,7 +77,9 @@ const logListReducer = (state, action) => {
 const GamePlay = ({ home, away, game_id }) => {
   const path = window.location.pathname;
   const gameID = +path.slice(7);
-  const GAME_PLAY_URL = `http://52.78.184.142${path}`;
+  const selectTeam = localStorage.getItem('select');
+  localStorage.setItem('game_id', gameID);
+  const GAME_PLAY_URL = DATA_PLAYER_URL + path;
   const { data: gamePlayData } = useFetch(GAME_PLAY_URL, 'get');
   const [inning, setInning] = useState({
     turn: true,
@@ -97,25 +112,56 @@ const GamePlay = ({ home, away, game_id }) => {
   useEffect(() => {
     if (memberList && memberList.home) {
       memberList[inning.turn ? 'home' : 'away'].forEach((member, index) => {
-        if (member.status)
+        if (member.status) {
           logListDispatch({ value: { ...member }, type: 'next', index: index + 1 });
+        }
       });
     }
   }, [memberList]);
 
+  useEffect(() => {
+    // post:/games/{game_id}
+    // console.log(inning, memberList);
+    // const { data: result } = useFetch(DATA_PLAYER_URL + '/games/' + game_id, 'put', {
+    //   game_id,
+    //   "team_id": 1, 종료된 팀 아이디
+    //   "round" : 3, 종료된 라운드
+    //   "player_id": 3, 마지막 아웃 된 타자
+    // });
+    // {
+    //   "game_id": 6,
+    //   "atBat": true // true: 안타, false: 아웃
+    // }
+  }, [inning]);
+
   return (
     <StyledGamePlay>
       <PopUp position='top' emptyText='상세 점수'>
-        <PopUpScore score={score} teamName={teamName} />
+        <PopUpScore score={score} teamName={teamName} selectTeam={selectTeam} />
       </PopUp>
       <PopUp position='bottom' emptyText='선수 명단'>
-        <PopUpRoster memberList={memberList} />
+        <PopUpRoster memberList={memberList} teamName={teamName} selectTeam={selectTeam} />
       </PopUp>
       <StyledGamePlayGrid>
         <ScoreNBaseContext.Provider value={{ score, base, safetyDispatch }}>
-          <Score teamName={teamName} turn={inning.turn} gameID={gameID}></Score>
+          <Score
+            teamName={teamName}
+            turn={inning.turn}
+            gameID={gameID}
+            selectTeam={selectTeam}
+          ></Score>
           <Player memberList={memberList} turn={inning.turn} pitchers={pitchers}></Player>
-          <Board {...{ inning, setInning, memberListDispatch, logListDispatch }}></Board>
+          <Board
+            {...{
+              inning,
+              setInning,
+              memberListDispatch,
+              logListDispatch,
+              game_id: gameID,
+              teamName,
+              selectTeam,
+            }}
+          ></Board>
           <Log logList={logList}></Log>
         </ScoreNBaseContext.Provider>
       </StyledGamePlayGrid>

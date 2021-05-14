@@ -32,7 +32,15 @@ const ballCountReducer = (state, action) => {
   return newState;
 };
 
-const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
+const Board = ({
+  memberListDispatch,
+  inning,
+  setInning,
+  logListDispatch,
+  game_id,
+  teamName,
+  selectTeam,
+}) => {
   const [ballCount, ballCountDispatch] = useReducer(ballCountReducer, {
     strike: 0,
     ball: 0,
@@ -52,7 +60,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
     if (ballCount.ball === 3) {
       ballCountDispatch({ type: 'safety' });
       logListDispatch({ type: '4ball', end: true });
-      memberListDispatch({ type: 'safety', turn: inning.turn });
+      memberListDispatch({ type: 'safety', turn: inning.turn, game_id });
       //3번 API fetch  { "game_id": 6, "at_bat": true }
     } else {
       ballCountDispatch({ type: 'ball' });
@@ -62,6 +70,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
   const handleOut = () => {
     if (ballCount.out === 2) {
       //7번 API { "game_id": 6, "team_id":1, "round":3, "at_bat": 3 } ??타자를 번호를 보내는거네???
+      // 여기에 공수교대
       ballCountDispatch({ type: 'clear' });
       if (inning.turn) setInning({ ...inning, turn: !inning.turn });
       else setInning({ ...inning, round: inning.round + 1, turn: !inning.turn });
@@ -72,13 +81,13 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
       ballCountDispatch({ type: 'out' });
     }
     // 멤버 아웃 1, 타석 1 증가
-    memberListDispatch({ type: 'out', turn: inning.turn });
+    memberListDispatch({ type: 'out', turn: inning.turn, game_id });
   };
   const handleSafety = () => {
     //3번 API fetch { "game_id": 6, "at_bat": true }
     ballCountDispatch({ type: 'safety' });
     // 멤버 안타 1, 타석 1 증가
-    memberListDispatch({ type: 'safety', turn: inning.turn });
+    memberListDispatch({ type: 'safety', turn: inning.turn, game_id });
     logListDispatch({ type: 'safety', end: true });
   };
 
@@ -90,7 +99,7 @@ const Board = ({ memberListDispatch, inning, setInning, logListDispatch }) => {
     <StyledBoard>
       <BallCount ballCount={ballCount}></BallCount>
       <Screen
-        {...{ handleStrike, handleBall, handleSafety, ballCount }}
+        {...{ handleStrike, handleBall, handleSafety, ballCount, teamName, selectTeam }}
         turn={inning.turn}
       ></Screen>
       <Inning inning={inning} isHome={isHome}></Inning>
