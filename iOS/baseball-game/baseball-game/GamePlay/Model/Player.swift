@@ -8,7 +8,6 @@
 import Foundation
 
 struct Player: Decodable {
-    var position: String
     var name: String
     var info: String
 }

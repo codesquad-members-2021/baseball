@@ -43,7 +43,7 @@ extension SelectViewModel {
     func setUserID(with userID: String) {
         self.gameInfo.userID = userID
     }
-    
+
     func setCellInfo(with game: Game) {
         self.gameInfo.gameID = game.id
         
@@ -69,15 +69,17 @@ extension SelectViewModel {
 extension SelectViewModel {
     
     func requestGameSelection() {
-        networkManager.get(type: [Game].self, url: EndPoint.url(path: "")!)
+        networkManager.get(type: DataDTO<[Game]>.self, url: EndPoint.url(path: "")!)
             .receive(on: DispatchQueue.main)
             .sink { error in
                 self.error = error as? Error
-            } receiveValue: { games in
-                self.games = games
+            } receiveValue: { value in
+                if let games = value.data {
+                    self.games = games
+                }
             }.store(in: &cancelBag)
     }
-    
+
     private func postSelection(with gameInfo: GameInfo) {
         networkManager.post(url: EndPoint.url(path: "")!, data: gameInfo)
             .receive(on: DispatchQueue.main)

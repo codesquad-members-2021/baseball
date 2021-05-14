@@ -14,15 +14,17 @@ enum NetworkError: Error {
 }
 
 enum EndPoint {
-    static let scheme = "https"
-    static let host = "28620c3c-a2bb-4264-bf32-8546221c8a8d.mock.pstmn.io"
+    static let scheme = "http"
+    static let host = "ec2-3-35-235-30.ap-northeast-2.compute.amazonaws.com"
+    static let port = 8080
     static let path = "/baseball/games"
-    
+
     static func url(path: String) -> URL? {
         var components = URLComponents()
         
         components.scheme = EndPoint.scheme
         components.host = EndPoint.host
+        components.port = EndPoint.port
         components.path = "\(EndPoint.path)\(path)"
         
         return components.url
