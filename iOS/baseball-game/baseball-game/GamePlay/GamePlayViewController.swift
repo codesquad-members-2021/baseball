@@ -93,6 +93,14 @@ extension GamePlayViewController {
                 guard let error = error else { return }
                 print(error) ///사용자에게 에러 표시하는 부분 미구현
             }.store(in: &cancelBag)
+        
+        gamePlayViewModel.$alertMessage
+            .receive(on: DispatchQueue.main)
+            .sink { message in
+                guard let message = message else { return }
+                let alert = AlertFactory.create(with: message)
+                self.present(alert, animated: true, completion: nil)
+            }.store(in: &cancelBag)
     }
     
     private func updateViews(with gameManager: GameInformable) {

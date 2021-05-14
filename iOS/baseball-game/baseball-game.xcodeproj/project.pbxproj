@@ -25,6 +25,7 @@
 		E4AA6887263FDDA500139BD6 /* GamePlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA6886263FDDA500139BD6 /* GamePlayViewController.swift */; };
 		E4AA688C263FDDA800139BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4AA688B263FDDA800139BD6 /* Assets.xcassets */; };
 		E4AA688F263FDDA800139BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4AA688D263FDDA800139BD6 /* LaunchScreen.storyboard */; };
+		E4DB1CE3264E204E00894DCB /* AlertFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB1CE2264E204E00894DCB /* AlertFactory.swift */; };
 		E4FE76D82641242400151B35 /* SelectPitcherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */; };
 		E4FE76DA26412ACD00151B35 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76D926412ACD00151B35 /* GameManager.swift */; };
 		E4FE76DF26438ABC00151B35 /* PitchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */; };
@@ -69,6 +70,7 @@
 		E4AA688B263FDDA800139BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4AA688E263FDDA800139BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E4AA6890263FDDA900139BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4DB1CE2264E204E00894DCB /* AlertFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertFactory.swift; sourceTree = "<group>"; };
 		E4FE76D72641242400151B35 /* SelectPitcherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPitcherViewController.swift; sourceTree = "<group>"; };
 		E4FE76D926412ACD00151B35 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchListTableViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				E4FE76F92644108900151B35 /* PitcherInfoView.swift */,
 				E4FE76FB2644136600151B35 /* BatterInfoView.swift */,
 				E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */,
+				E4DB1CE2264E204E00894DCB /* AlertFactory.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				E47234E226492255009508A8 /* BallCountView.swift in Sources */,
 				AE5C79B2264127300075EBC3 /* Game.swift in Sources */,
 				E4AA6887263FDDA500139BD6 /* GamePlayViewController.swift in Sources */,
+				E4DB1CE3264E204E00894DCB /* AlertFactory.swift in Sources */,
 				AE7A1542263FE4DE005EBAB9 /* SelectionViewController.swift in Sources */,
 				E4FE76FC2644136600151B35 /* BatterInfoView.swift in Sources */,
 				E4FE770E2645170300151B35 /* BaseManager.swift in Sources */,

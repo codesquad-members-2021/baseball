@@ -14,6 +14,7 @@ class GamePlayViewModel {
     @Published var gameUpdator: GameInformable!
     @Published var pitchList: [Pitch]!
     @Published var error: Error!
+    @Published var alertMessage: String!
     
     private let userTeamSide: TeamSide
     private var networkManager: NetworkManageable
@@ -50,9 +51,12 @@ class GamePlayViewModel {
             if let data = value.data {
                 if let newInning = data.inning {
                     self.gameManager.resetForNewInning(with: newInning)
+                    self.alertMessage = AlertFactory.createMessage(alertType: .newInning)
                 } else {
                     if let newScore = data.score {
                         self.gameManager.updateScore(with: newScore)
+                        self.alertMessage = AlertFactory.createMessage(alertType: .newScore,
+                                                                       info: AlertFactory.scoreToMessage(with: newScore))
                     }
                     
                     if let newPitch = data.newPitch {
