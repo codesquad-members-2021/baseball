@@ -41,8 +41,8 @@ public class GameService {
 
         long id = 1;
         for (long i = 1; i <= NUMBER_OF_TEAM; i += 2) {
-            Team homeTeam = teamRepository.findById(i).orElseThrow(TeamNotFoundException::new);
-            Team awayTeam = teamRepository.findById(i + 1).orElseThrow(TeamNotFoundException::new);
+            Team homeTeam = findTeamById(i);
+            Team awayTeam = findTeamById(i + 1);
 
             Game game = new Game(id, homeTeam.getId(), awayTeam.getId());
             games.add(game);
@@ -52,8 +52,8 @@ public class GameService {
     }
 
     public void saveScore(Long gameId, Long teamId, ScoreRequest scoreRequest) {
-        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
-        Team team = teamRepository.findById(teamId).orElseThrow(TeamNotFoundException::new);
+        Game game = findGameById(gameId);
+        Team team = findTeamById(teamId);
 
         if (!game.isTeamInGame(team)) {
             throw new TeamNotFoundException();
@@ -65,18 +65,17 @@ public class GameService {
     }
 
     public GameScoreDTO getGameScoreDTO(Long gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
-
-        Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
-        Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
+        Game game = findGameById(gameId);
+        Team homeTeam = findTeamById(game.getHomeTeamId());
+        Team awayTeam = findTeamById(game.getAwayTeamId());
 
         return new GameScoreDTO(game, homeTeam, awayTeam);
     }
 
     public GameTeamDTO getGameTeamDTO(Long gameId) {
-        Game game = gameRepository.findById(gameId).orElseThrow(GameNotFoundException::new);
-        Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
-        Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
+        Game game = findGameById(gameId);
+        Team homeTeam = findTeamById(game.getHomeTeamId());
+        Team awayTeam = findTeamById(game.getAwayTeamId());
 
         List<RecordDTO> homeRecordDTOs = getRecordDTOList(homeTeam);
         List<RecordDTO> awayRecordDTOs = getRecordDTOList(awayTeam);
@@ -96,6 +95,14 @@ public class GameService {
             }
         }
         teamRepository.saveAll(teams);
+    }
+
+    private Game findGameById(Long id) {
+        return gameRepository.findById(id).orElseThrow(GameNotFoundException::new);
+    }
+
+    private Team findTeamById(Long id) {
+        return teamRepository.findById(id).orElseThrow(TeamNotFoundException::new);
     }
 
     private List<RecordDTO> getRecordDTOList(Team team) {
