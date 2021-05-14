@@ -15,6 +15,9 @@ const GamePlayArea = ({ type, id }) => {
 };
 const GamePlayAreaWrapper = styled.div`
 	border-right: 5px solid ${theme.colors.white};
+	position: relative;
+	top: 0px;
+	left: 0px;
 `;
 const AlignCenterWrapper = styled.div`
 	top: -50%;

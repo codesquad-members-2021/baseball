@@ -40,6 +40,9 @@ const GpaField = ({ type, gameId }) => {
 	};
 
 	let interval;
+	const handleClick = () => {
+		getPitchResult();
+	};
 
 	useEffect(() => {
 		if (currentType === 'Defense') {
@@ -50,13 +53,8 @@ const GpaField = ({ type, gameId }) => {
 		return () => clearInterval(interval);
 	}, []);
 
-	const handleClick = () => {
-		getPitchResult();
-	};
-
 	return (
 		<>
-			{console.log(currentType)}
 			{currentType === 'Attack' && <PITCH onClick={handleClick}>PITCH</PITCH>}
 			<FieldArea>
 				<GameState>
@@ -71,8 +69,8 @@ const GpaField = ({ type, gameId }) => {
 
 const PITCH = styled.button`
 	position: absolute;
-	top: 32rem;
-	left: 35rem;
+	top: 373px;
+	left: 603px;
 	cursor: pointer;
 	z-index: 9999;
 	background-color: ${theme.colors.transparent};
@@ -82,18 +80,18 @@ const PITCH = styled.button`
 	border: 5px solid ${theme.colors.white};
 `;
 const FieldArea = styled.div`
-	position: relative;
+	position: absoulte;
 `;
 
 const FieldSVG = styled(Field)`
 	position: absolute;
-	top: -90px;
-	left: 250px;
+	top: 100px;
+	left: 300px;
 `;
 
 const GameState = styled(Span)`
 	position: absolute;
-	top: -6rem;
+	top: 100px;
 	right: 3rem;
 	font-size: ${theme.fontSize.X_large};
 	font-weight: ${theme.fontWeight.light};

@@ -16,13 +16,10 @@ const GameLog = () => {
 				log.awayTeam.players[log.gameStatusDTO.currentHitter].name
 			}`,
 			fragment: (
-				<div>
-					<LogWrapper>
-						<Number>{i + 1}</Number>
-						<Log>{log.pitchResult.playType}</Log>
-						<AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
-					</LogWrapper>
-				</div>
+				<>
+					<Log>{log.pitchResult.playType}</Log>
+					<AccLog>{`S${log.gameStatusDTO.strikeCount} B${log.gameStatusDTO.ballCount}`}</AccLog>
+				</>
 			),
 		};
 	});
@@ -37,9 +34,18 @@ const GameLog = () => {
 
 	return (
 		<ScrollDiv>
-			<GameLogScroll className="LogScroll">
+			<GameLogScroll>
 				{Object.entries(LogGroupedByHitter).map(([key, value]) => {
-					const logList = value.map((log) => log);
+					const logList = value.map((log, i) => {
+						return (
+							<div>
+								<LogWrapper>
+									<Number>{i + 1}</Number>
+									{log}
+								</LogWrapper>
+							</div>
+						);
+					});
 					return (
 						<PlayersWrapper>
 							<div>
@@ -55,12 +61,14 @@ const GameLog = () => {
 		</ScrollDiv>
 	);
 };
-const ScrollDiv = styled(Scroll)``;
+
+const ScrollDiv = styled(Scroll)`
+	display: flex;
+	justify-content: flex-end;
+`;
 const GameLogScroll = styled.div`
 	display: flex;
 	flex-direction: column-reverse;
-	justify-content: flex-end;
-	align-items: flex-start;
 	padding: 20px;
 `;
 

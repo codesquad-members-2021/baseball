@@ -65,9 +65,9 @@ function GhostAnimation() {
 export default GhostAnimation;
 
 const Ground = styled.div`
-	position: relative;
-	top: -0.5rem;
-	left: -1rem;
+	position: absolute;
+	top: 177px;
+	left: 500px;
 	width: 20rem;
 	height: 28rem;
 	margin: auto;
