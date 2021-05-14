@@ -21,7 +21,7 @@ const Board = ({
       <BoardLists>
         {history.length !== 0 &&
           history.map((stat, i) => (
-            <BoardItem key={uuidv4()} {...{ ...stat }} idx={i} />
+            <BoardItem key={uuidv4()} {...{ ...stat, playerName }} idx={i} />
           ))}
       </BoardLists>
     </BoardWrap>
