@@ -6,83 +6,163 @@ import { BoardHistoryContext } from '../provider/Context';
 const LogList = () => {
   const { ballCnt } = useContext(BoardHistoryContext);
   const {
-    homeTeam,
+    logArr,
+    setLogArr,
     myTeam,
     currHitter,
     setCurrHitter,
-    totalOutCount,
+    currTeamLog,
+    setCurrTeamLog,
     setTotalOutCount,
   } = useContext(GlobalContext);
-  const [logArr, setLogArr] = useState([]);
+  //Stadium에서 설정하면 한템포 빠를까 해 useContext로 올려버림
+  // const [logArr, setLogArr] = useState([]);
   const [batOrder, setBatOrder] = useState(1);
-  console.log('⭐️', myTeam);
 
   useEffect(() => {
-    setLogArr((logArr) => [...logArr, ballCnt]);
+    // setLogArr((logArr) => [...logArr, ballCnt]);
     if (ballCnt.HitInfo === 'O') {
       // console.log('현재 타자!', currHitter.id, currHitter);
-      console.log('토탈!', totalOutCount);
-      setTotalOutCount((totalOutCount) => totalOutCount + 1);
-      console.log('이제 하나씩 올렷다', totalOutCount);
-    }
-    if (ballCnt.HitInfo === 'H') {
-      //한박자 느린 Hitter 변경
-      //아웃과 안타시 타자 변경
-      console.log('🔥현재나의타자정보번호', currHitter, 'BBBb', batOrder);
-      setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
+      console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', ballCnt.HitInfo);
       setBatOrder((batOrder) => batOrder + 1);
-      console.log('batOrder 바뀌지않앗겟지', batOrder);
+      setCurrHitter({ ...currHitter, out: currHitter.out + 1 });
+      setCurrHitter(myTeam[batOrder]);
+      setCurrTeamLog([...currTeamLog, logArr]);
+      setLogArr([]);
+      // setTimeout(() => setLogArr([]), 3000);
+
+      setTotalOutCount((totalOutCount) => totalOutCount + 1);
+    }
+    //이 데이터가 오지 않아 잡지를 못함 이경우를 잡지를 못함...제발....
+    if (ballCnt.HitInfo === 'H') {
+      console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', ballCnt.HitInfo);
+
+      setBatOrder((batOrder) => batOrder + 1);
+      setCurrHitter({ ...currHitter, hit: currHitter.hit + 1 });
       //myTeam으로 가져올지 homeTeam으로 가져올지 모그렛음
       setCurrHitter(myTeam[batOrder]);
-      console.log('⭐️현재나의타자정보번호', currHitter, 'BBB', batOrder);
+      setCurrTeamLog([...currTeamLog, logArr]);
+      setLogArr([]);
+      //3초 있다 지우면 H안타나 O한것도 지울 수 있을거라 생각
+      // setTimeout(() => setLogArr([]), 3000);
     }
   }, [ballCnt]);
 
-  const LogCards = () => {
-    console.log('============================', logArr);
-    return logArr.map((ele, i) => {
-      // console.log('logarr 하ㅏ나식', ele);
-      if (ele.HitInfo !== ' ' && (ele.HitInfo === 'S' || ele.HitInfo === 'B')) {
+  const LogBoxes = () => {
+    if (currTeamLog) {
+      return currTeamLog.map((logBox, idx) => {
+        var sCnt = 0;
+        var bCnt = 0;
         return (
-          <LogLine key={i}>
-            <LogIdx>{i}</LogIdx>
-            <LogName>{ele.HitInfo === 'S' ? '스트라이크' : '볼'}</LogName>
-            <LogBoard>
-              S{ele.S} B{ele.B}
-            </LogBoard>
-          </LogLine>
+          <LogBoxDiv key={idx}>
+            <LogHitter>
+              {myTeam[idx].battingOrder}번타자 {myTeam[idx].name}
+            </LogHitter>
+            <>
+              {logBox?.map((ele, i) => {
+                if (
+                  ele.HitInfo !== ' ' &&
+                  (ele.HitInfo === 'S' || ele.HitInfo === 'B')
+                ) {
+                  return (
+                    <LogLine key={i}>
+                      <LogIdx>{i}</LogIdx>
+                      <LogName>
+                        {ele.HitInfo === 'S' ? '스트라이크' : '볼'}
+                      </LogName>
+                      <LogBoard>
+                        S{ele.S} B{ele.B}
+                      </LogBoard>
+                    </LogLine>
+                  );
+                }
+                // 데이터가 정확하게 오면 위처럼 map돌릴 필요가 없고 이렇게 돌리면 됨
+                // if (ele.HitInfo === 'O') {
+                //   return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
+                // }
+                // if (ele.HitInfo === 'H') {
+                //   return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
+                // }
+              })}
+            </>
+            <>
+              {logBox?.map((ele, i) => {
+                if (ele.HitInfo === 'S') {
+                  sCnt += 1;
+                  if (sCnt === 3) {
+                    return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
+                  }
+                } else if (ele.HitInfo === 'B') {
+                  bCnt += 1;
+                  if (bCnt === 4) {
+                    return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
+                  }
+                } else return <></>;
+              })}
+            </>
+          </LogBoxDiv>
         );
-      }
+      });
+    } else return <></>;
+  };
+  const LogBox = () => {
+    if (logArr) {
+      console.log('box를 뿌릴때 currTeamLog', currTeamLog);
+      console.log('box- logArr', logArr);
 
-      if (ele.HitInfo === 'O') {
-        // setTotalOutCount((prevCnt) => prevCnt + 1);
-        // console.log('토탈아웃', totalOutCount);
-        return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
-      }
-      if (ele.HitInfo === 'H') {
-        // console.log(myTeam);
-        return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
-      }
-    });
+      return (
+        <LogBoxDiv>
+          <LogHitter>
+            {currHitter?.battingOrder}번타자 {currHitter?.name}
+          </LogHitter>
+          <>
+            {logArr.map((ele, i) => {
+              if (
+                ele.HitInfo !== ' ' &&
+                (ele.HitInfo === 'S' || ele.HitInfo === 'B')
+              ) {
+                return (
+                  <LogLine key={i}>
+                    <LogIdx>{i}</LogIdx>
+                    <LogName>
+                      {ele.HitInfo === 'S' ? '스트라이크' : '볼'}
+                    </LogName>
+                    <LogBoard>
+                      S{ele.S} B{ele.B}
+                    </LogBoard>
+                  </LogLine>
+                );
+              }
+              if (ele.HitInfo === 'O') {
+                return <LogLineMsg key={i}>⚾️ 아웃 ⚾️</LogLineMsg>;
+              }
+              if (ele.HitInfo === 'H') {
+                return <LogLineMsg key={i}>🥎 안타 🥎</LogLineMsg>;
+              }
+            })}
+          </>
+        </LogBoxDiv>
+      );
+    } else return <></>;
   };
 
   return (
-    <LogListDiv>
-      <LogBox>
-        <LogHitter>7번타자 류현진</LogHitter>
-        <LogCards />
-      </LogBox>
-    </LogListDiv>
+    <LogListWrap>
+      <LogListDiv>
+        <LogBox />
+        <LogBoxes />
+      </LogListDiv>
+    </LogListWrap>
   );
 };
-
-const LogListDiv = styled.div`
+const LogBoxDiv = styled.div``;
+const LogListWrap = styled.div`
   padding: 20px 20px;
   border: solid 4px white;
   border-top: none;
   border-right: none;
 `;
-const LogBox = styled.div`
+const LogListDiv = styled.div`
   display: flex;
   flex-direction: column;
   height: 550px;
@@ -91,6 +171,8 @@ const LogBox = styled.div`
 `;
 const LogHitter = styled.div`
   margin: 10px 0;
+  font-size: ${({ theme }) => theme.fontSizes.XS};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.green};
 `;
 const LogIdx = styled.div`
