@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { fitToContainer, drawField } from "utils/canvasUtils";
 import RunnerImage from "./RunnerImage";

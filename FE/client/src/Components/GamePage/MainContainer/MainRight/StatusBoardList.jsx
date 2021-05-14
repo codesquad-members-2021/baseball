@@ -2,9 +2,8 @@ import { GamePageContext } from "Components/GamePage";
 import React, { useContext } from "react";
 import StatusBoard from "./StatusBoard";
 
-const StatusBoardList = ({ index }) => {
-  const { inGameData, sequenceCount, attackState, playRecordsState } =
-    useContext(GamePageContext);
+const StatusBoardList = () => {
+  const { playRecordsState } = useContext(GamePageContext);
 
   return (
     <div>

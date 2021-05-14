@@ -1,7 +1,6 @@
 import { GamePageContext } from "Components/GamePage";
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { randomPitch } from 'utils/randomPitch';
 
 const PitchButton = () => {
   const { onPitch } = useContext(GamePageContext);

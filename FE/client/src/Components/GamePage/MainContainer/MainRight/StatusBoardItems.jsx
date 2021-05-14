@@ -1,12 +1,8 @@
-import { GamePageContext } from "Components/GamePage";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StatusBoardItems = ({ record, index, recordLength }) => {
-  const { inGameData, currentSBData, currentPlayAction } = useContext(GamePageContext);
 
-  // console.log("여기서찍는SB", currentSBData);
-  // console.log(1, currentPlayAction)
   const { action, strike, ball } = record;
 
   return (

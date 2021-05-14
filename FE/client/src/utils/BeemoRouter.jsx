@@ -71,4 +71,3 @@ export default function BeemoRouter() {
     Router, Route, Link, Switch, push
   }
 }
-

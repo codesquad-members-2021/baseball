@@ -6,9 +6,8 @@ const AttackDefendStatus = () => {
   const { roundCount, attackState, teamState } = useContext(GamePageContext);
 
   return (
-    <ADstatusDiv>{`${roundCount}회차 ${
-      teamState[attackState].isMyTeam ? "공격" : "수비"
-    }`}</ADstatusDiv>
+    <ADstatusDiv>{`${roundCount}회차 ${teamState[attackState].isMyTeam ? "공격" : "수비"
+      }`}</ADstatusDiv>
   );
 };
 
