@@ -21,7 +21,7 @@ class SelectionViewController: UIViewController {
     
     private let gradientLayer: CAGradientLayer = CAGradientLayer()
     
-    var viewModel = SelectViewModel()
+    private var viewModel = SelectViewModel()
     private var dataSource: UITableViewDiffableDataSource<Section, Game>!
     private var cancelBag = Set<AnyCancellable>()
     
