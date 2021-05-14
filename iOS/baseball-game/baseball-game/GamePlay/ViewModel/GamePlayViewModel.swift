@@ -49,6 +49,14 @@ class GamePlayViewModel {
             self.error = error as? Error
         } receiveValue: { value in
             if let data = value.data {
+                if let newBatter = data.batter {
+                    self.gameManager.changeBatter(to: newBatter)
+                }
+
+                if let newPitcher = data.pitcher {
+                    self.gameManager.changePitcher(to: newPitcher)
+                }
+                
                 if let newInning = data.inning {
                     self.gameManager.resetForNewInning(with: newInning)
                     self.alertMessage = AlertFactory.createMessage(alertType: .newInning)
@@ -71,14 +79,6 @@ class GamePlayViewModel {
                     if let newBaseInfo = data.baseChanged {
                         self.gameManager.updateBase(with: newBaseInfo)
                     }
-                }
-
-                if let newBatter = data.batter {
-                    self.gameManager.changeBatter(to: newBatter)
-                }
-
-                if let newPitcher = data.pitcher {
-                    self.gameManager.changePitcher(to: newPitcher)
                 }
                 
                 self.gameUpdator = self.gameManager
