@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -81,32 +82,9 @@ public class GameService {
         Team homeTeam = teamRepository.findById(game.getHomeTeamId()).orElseThrow(TeamNotFoundException::new);
         Team awayTeam = teamRepository.findById(game.getAwayTeamId()).orElseThrow(TeamNotFoundException::new);
 
-        Set<Member> homeMembers = homeTeam.getMembers();
-        Set<Member> awayMembers = awayTeam.getMembers();
+        List<RecordDTO> homeRecordDTOs = getRecordDTOList(homeTeam);
+        List<RecordDTO> awayRecordDTOs = getRecordDTOList(awayTeam);
 
-        List<RecordDTO> homeRecordDTOs = new ArrayList<>();
-        for (Member member : homeMembers) {
-            if (member.hasRecord()) {
-                Record record = member.getRecord();
-                homeRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
-            }
-            if (!member.hasRecord()) {
-                Record record = new Record(0, 0, 0);
-                homeRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
-            }
-        }
-
-        List<RecordDTO> awayRecordDTOs = new ArrayList<>();
-        for (Member member : awayMembers) {
-            if (member.hasRecord()) {
-                Record record = member.getRecord();
-                awayRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
-            }
-            if (!member.hasRecord()) {
-                Record record = new Record(0, 0, 0);
-                awayRecordDTOs.add(RecordDTO.toRecordDTO(member, record));
-            }
-        }
         return new GameTeamDTO(gameId, homeRecordDTOs, awayRecordDTOs);
     }
 
@@ -122,5 +100,15 @@ public class GameService {
             }
         }
         teamRepository.saveAll(teams);
+    }
+
+    private List<RecordDTO> getRecordDTOList(Team team) {
+        return team.getMembers().stream()
+                .filter(Member::hasRecord)
+                .map(member -> {
+                    Record record = member.getRecord();
+                    return RecordDTO.toRecordDTO(member, record);
+                })
+                .collect(Collectors.toList());
     }
 }
