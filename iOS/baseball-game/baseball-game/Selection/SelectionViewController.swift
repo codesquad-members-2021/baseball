@@ -125,7 +125,7 @@ extension SelectionViewController: SelectViewModelDelegate {
         let nextVC = ControllerFactory.instantiate(viewController: GamePlayViewController.self) as! GamePlayViewController
         nextVC.getInfo(with: gameInfo)
         
-        self.navigationController?.pushViewController(nextVC, animated: false)
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
 }
