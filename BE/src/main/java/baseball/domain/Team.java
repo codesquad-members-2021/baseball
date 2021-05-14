@@ -41,12 +41,10 @@ public class Team {
     }
 
     public Member getMemberById(Long id) {
-        for (Member member : members) {
-            if (member.getId() == id) {
-                return member;
-            }
-        }
-        throw new MemberNotFoundException();
+        return members.stream()
+                .filter(m -> m.getId() == id)
+                .findFirst()
+                .orElseThrow(MemberNotFoundException::new);
     }
 
     public void deleteScores() {

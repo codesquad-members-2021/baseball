@@ -1,5 +1,6 @@
 package baseball.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
@@ -13,6 +14,7 @@ public class Game implements Persistable<Long> {
     private Long awayTeamId;
 
     @Transient
+    @JsonIgnore
     private boolean isNew = false;
 
     public Game(Long id, Long homeTeamId, Long awayTeamId) {
@@ -26,11 +28,6 @@ public class Game implements Persistable<Long> {
         return id;
     }
 
-    @Override
-    public boolean isNew() {
-        return isNew;
-    }
-
     public Long getHomeTeamId() {
         return homeTeamId;
     }
@@ -41,5 +38,11 @@ public class Game implements Persistable<Long> {
 
     public boolean isTeamInGame(Team team) {
         return team.getId() == homeTeamId || team.getId() == awayTeamId;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isNew() {
+        return isNew;
     }
 }

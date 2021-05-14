@@ -19,7 +19,7 @@ public class GameController {
 
     @GetMapping
     public GameDTO showGames() {
-        return gameService.getGameDTOList();
+        return gameService.getGameDTO();
     }
 
     @PostMapping("/{gameId}/{teamId}/score")

@@ -20,6 +20,7 @@ import java.util.Set;
 public class GameService {
 
     private static final int NUMBER_OF_TEAM = 10;
+    private static final int EMPTY = 0;
 
     private final GameRepository gameRepository;
     private final TeamRepository teamRepository;
@@ -29,8 +30,8 @@ public class GameService {
         this.teamRepository = teamRepository;
     }
 
-    public GameDTO getGameDTOList() {
-        if (gameRepository.count() != 5) {
+    public GameDTO getGameDTO() {
+        if (gameRepository.count() == EMPTY) {
             saveGames();
         }
         Iterable<Game> games = gameRepository.findAll();
