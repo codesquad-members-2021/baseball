@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PutComponent from './PutComponent';
 import { gamePlayContext } from 'components/GamePlay/GamePlay';
 
-const BoardItem = ({ B, S, idx, type }) => {
+const BoardItem = ({ B, S, idx, type, playerName }) => {
   const { isAttacking, round, home, away } = useContext(gamePlayContext);
 
   // 팀스코어 testData 수정해야함
@@ -14,8 +14,8 @@ const BoardItem = ({ B, S, idx, type }) => {
     : away.team_info.team_name;
 
   const hit = type === '안타';
-  const postPlayerData = { teamName, round, hit, teamScore };
-
+  const postPlayerData = { round, teamName, teamScore, playerName, hit };
+  console.log(type);
   if (type === '안타' || type === '아웃')
     return <PutComponent data={postPlayerData} />;
 
