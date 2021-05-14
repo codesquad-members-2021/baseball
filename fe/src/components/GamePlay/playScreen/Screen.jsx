@@ -28,6 +28,7 @@ const Screen = () => {
   };
 
   const handleClickPitch = () => {
+
     const action = getAction(chooseNumber());
     dispatchBallCount({ payload: action, attackState: isAttacking });
   };
@@ -93,6 +94,7 @@ const rotateAnimation = keyframes`
 
 const PitchButton = styled.button`
   height: 5rem;
+  width:fit-content;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -101,10 +103,16 @@ const PitchButton = styled.button`
   color: white;
   background: none;
   transform: translate(-50%, -50%);
-
+  
   &:hover {
     svg {
       animation: ${rotateAnimation} 4s linear infinite;
+    }
+    &:active {
+      svg {
+        border-radius:50%;
+        background-color:#e84545;
+      }
     }
   }
 `;
