@@ -19,7 +19,7 @@ public class InningService {
 
     public void initInning(Long gameId, String teamName) {
         for (int i = 1; i <= 12; i++) {
-            Inning inning = new Inning(teamName, i, 0, gameId);
+            Inning inning = new Inning(teamName, i, null, gameId);
             if (findByTeam(gameId,teamName,i) == null) {
                 inningRepository.save(inning);
             }
