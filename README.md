@@ -35,8 +35,8 @@
 ------
 ### ✨ Frontend 기획서:
 #### Sequence 다이어그램
-![image](![image](https://user-images.githubusercontent.com/74038014/118239097-4f36f400-b4d4-11eb-96ea-1662330621fe.png)
-)
+![image](https://user-images.githubusercontent.com/74038014/118239097-4f36f400-b4d4-11eb-96ea-1662330621fe.png)
+
 #### Component 설계
 ![image](https://user-images.githubusercontent.com/65105537/117406418-ff8e8080-af47-11eb-9c45-b8d47f0b3af8.png)
 
