@@ -1,38 +1,67 @@
 import styled from 'styled-components';
-import { useContext } from "react"
-import { PostsContext } from "../GamePlay";
+import { useState, useEffect, useContext } from "react"
+import { GamePlayContext } from "../../utilComponent/context/GamePlayProvider";
+import { isAllNullObjectValues } from "../../../common/util";
 
-const ScoreStatus = ({ data = true}) => {
-    const { playerList } = useContext(PostsContext);
-    return (
-        data && playerList && (
-            <StyledScoreStatus>
-                <Status>
-                    <StatusItem type="team">
-                        <span>{playerList.opponent.team_name}</span>
-                        <span className="score">1</span>
-                    </StatusItem>
-                </Status>
-                <Versus>VS</Versus>
-                <Status>
-                    <StatusItem type="team">
-                        <span className="score">2</span>
-                        <span>{playerList.user.team_name}</span>
-                    </StatusItem>
-                    <IsPlayer>Player</IsPlayer>
-                </Status>
-            </StyledScoreStatus>
-        )
+const GameScoreStatus = () => {
+    const { gamePlayState: { gameProgress } } = useContext(GamePlayContext);
+
+    const [names, setNames] = useState({ awayTeam: null, homeTeam: null });
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (!gameProgress) return;
+        const { homeOrAway, userTeamName, opponentTeamName } = gameProgress;
+        if (!homeOrAway || !userTeamName || !opponentTeamName) return;
+        setNames({
+            ...names,
+            awayTeam: homeOrAway === 'away' ? userTeamName : opponentTeamName,
+            homeTeam: homeOrAway === 'away' ? opponentTeamName : userTeamName,
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [gameProgress]);
+
+    useEffect(() => setIsLoading(isAllNullObjectValues(names)), [names]);
+
+    return gameProgress && !isLoading && (
+        <StyledGameScoreStatus>
+            <Status>
+                {/* away */}
+                <StatusItem type="team">
+                    <div>
+                        <p>{names.awayTeam}</p>
+                        {gameProgress.homeOrAway === 'away' && <IsPlayer>Player</IsPlayer>}
+                    </div>
+                </StatusItem>
+            </Status>
+
+            <Versus>
+                <span className="score">{gameProgress.awayScore}</span>
+                <span>VS</span>
+                <span className="score">{gameProgress.homeScore}</span>
+            </Versus>
+
+            <Status>
+                {/* home */}
+                <StatusItem type="team">
+                    <div>
+                        <p>{names.homeTeam}</p>
+                        {gameProgress.homeOrAway === 'home' && <IsPlayer>Player</IsPlayer>}
+                    </div>
+                </StatusItem>
+            </Status>
+        </StyledGameScoreStatus>
     );
 };
 
-export default ScoreStatus;
+export default GameScoreStatus;
 
 // --- Styled Components ---
-const StyledScoreStatus = styled.div`
+const StyledGameScoreStatus = styled.div`
     display: flex;
     justify-content: space-evenly;
-    margin: 24px 32px;
+    margin: 36px 24px 12px;
+    width: 100%;
 `;
 
 const Status = styled.div`
@@ -44,33 +73,30 @@ const Versus = styled.div`
     font-size: ${({ theme }) => theme.fontSize.XXXL};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
     color: ${({ theme }) => theme.colors.gray5};
-    margin: auto 0;
-`;
 
-const StatusItem = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-content: space-between;
+    span {
+        margin: 0 20px;
+    }
 
-    font-size: ${({ theme }) => theme.fontSize.XL};
-    font-weight: ${({ theme }) => theme.fontWeight.bold2};
-
-    color: ${({ theme }) => theme.colors.white};
     .score {
         font-size: ${({ theme }) => theme.fontSize.XXXXL};
         color: ${({ theme }) => theme.colors.gray4};
     }
 `;
 
+const StatusItem = styled.div`
+    font-size: ${({ theme }) => theme.fontSize.XL};
+    font-weight: ${({ theme }) => theme.fontWeight.bold2};
+
+    color: ${({ theme }) => theme.colors.white};
+`;
+
 const IsPlayer = styled.p`
     font-size: ${({ theme }) => theme.fontSize.L};
     font-weight: ${({ theme }) => theme.fontWeight.bold};
     color: ${({ theme }) => theme.colors.red};
-    text-align:right;
-    padding-right:55px;
 
-    ${StatusItem} + & {
+    p + & {
         margin-top: 16px;
     }
 `;

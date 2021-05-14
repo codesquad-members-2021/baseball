@@ -25,7 +25,8 @@ const globalReducer = (state, action) => {
                 ...state,
                 userLogin: payload,
             }
-        default: throw new Error();
+        default:
+            throw new Error('[Error] dispatch - global');
     }
 };
 
