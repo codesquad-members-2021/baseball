@@ -1,6 +1,9 @@
 # ⚾︎ baseball-team05
 <br>
 
+# 데모 영상
+[BaseballApp](https://github.com/pbg0205/baseball/wiki/%5BiOS%5D-데모-영상)
+
 # 😄 팀원 소개
 
 - [BE] [Cooper🧑‍💻](https://github.com/pbg0205)
