@@ -38,7 +38,7 @@ class DefaultNetworkService: NetworkService {
         
         return Just(data).decode(type: T.self, decoder: decoder)
             .mapError{ error in
-                .network(description: error.localizedDescription)
+                .network(description: "Decode Error")
             }
             .eraseToAnyPublisher()
         

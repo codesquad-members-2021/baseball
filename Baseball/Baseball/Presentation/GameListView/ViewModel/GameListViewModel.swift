@@ -8,17 +8,26 @@
 import Foundation
 import Combine
 
+struct GameListViewModelAction {
+    typealias MatchUpID = Int
+    typealias HomeTeamName = String
+    typealias AwayTeamName = String
+    
+    let showGamePlayView: ((MatchUpID, HomeTeamName, AwayTeamName) -> Void)
+}
+
 class GameListViewModel {
     @Published private (set) var matchUpGames: [MatchUp]
     @Published private (set) var error: String
     
     private var fetchGameListUseCase: FetchGameListUseCase
+    private var action: GameListViewModelAction
     
-    init(fetchGameListUseCase: FetchGameListUseCase) {
+    init(fetchGameListUseCase: FetchGameListUseCase, action: GameListViewModelAction) {
         self.matchUpGames = []
         self.error = ""
         self.fetchGameListUseCase = fetchGameListUseCase
-        
+        self.action = action
         fetchGameList()
     }
     
@@ -33,7 +42,17 @@ class GameListViewModel {
         }
     }
     
-    private func errorHandler(error: Error) {
-        self.error = error.localizedDescription
+    private func errorHandler(error: NetworkError) {
+        switch error {
+        case .network(description: let des):
+            self.error = des
+        case .parsing(description: let des):
+            self.error = des
+        }
+    }
+    
+    func didSelectItem(indexPath: IndexPath) {
+        let selectedGame = matchUpGames[indexPath.item]
+        action.showGamePlayView(indexPath.item + 1, selectedGame.homeTeam, selectedGame.awayTeam)
     }
 }

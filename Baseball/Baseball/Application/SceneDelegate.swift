@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController()
-        navigationController.setNavigationBarHidden(true, animated: true)
+        navigationController.navigationBar.barTintColor = .clear
+//        navigationController.setNavigationBarHidden(true, animated: true)
         window?.rootViewController = navigationController
         appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController, appDIContainer: appDIContainer)
         appFlowCoordinator?.start()

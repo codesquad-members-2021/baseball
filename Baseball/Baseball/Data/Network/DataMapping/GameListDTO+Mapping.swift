@@ -8,22 +8,22 @@
 import Foundation
 
 struct GameListDTO: Decodable {
-    private let games: [MatchUpDTO]
+    private let matchUpList: [MatchUpDTO]
     
     func toDomain() -> [MatchUp] {
-        let matchUps = self.games.map { matchUpDTO in
+        let matchUps = self.matchUpList.map { matchUpDTO in
             matchUpDTO.toDomain()
         }
         return matchUps
     }
     
     struct MatchUpDTO: Decodable {
-        private let gameId: Int
+        private let matchId: Int
         private let home: String
         private let away: String
     
         func toDomain() -> MatchUp {
-            return .init(matchNumber: gameId, homeTeam: home, awayTeam: away)
+            return .init(matchNumber: matchId, homeTeam: home, awayTeam: away)
         }
     }
 }
