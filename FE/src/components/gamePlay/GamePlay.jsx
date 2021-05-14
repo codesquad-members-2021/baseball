@@ -183,6 +183,7 @@ const GamePlayItem = styled.li`
     ${({ idx }) =>
         (idx === 3 || idx === 4) &&
         css`
+            max-height: 600px;
             min-height: 600px;
         `};
 

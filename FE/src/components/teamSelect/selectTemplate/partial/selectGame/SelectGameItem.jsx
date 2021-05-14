@@ -57,7 +57,7 @@ const StyledSelectGameItem = styled.li`
     padding: 12px;
     background-color: ${({ theme }) => theme.colors.gray4};
     cursor: pointer;
-
+    opacity:0.6;
     & + & {
         margin-top: 20px;
     }

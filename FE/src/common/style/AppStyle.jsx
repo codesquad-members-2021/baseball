@@ -8,7 +8,7 @@ const AppStyle = createGlobalStyle`
 
     #root {
         height: inherit;
-        background-image: url('/images/background.jpg');
+        background-image: url('/images/background2.jpg');
         background-repeat: no-repeat;
         background-size: cover;
     }
