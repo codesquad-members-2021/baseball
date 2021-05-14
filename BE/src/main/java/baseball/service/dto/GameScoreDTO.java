@@ -3,35 +3,27 @@ package baseball.service.dto;
 import baseball.domain.Game;
 import baseball.domain.Team;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameScoreDTO {
 
     private Long gameId;
-    private List<TeamScoreDTO> teamScores;
+    private TeamScoreDTO home;
+    private TeamScoreDTO away;
 
     public GameScoreDTO(Game game, Team homeTeam, Team awayTeam) {
         this.gameId = game.getId();
-        this.teamScores = convertToTeamScoreDTOList(homeTeam, awayTeam);
-    }
-
-    private List<TeamScoreDTO> convertToTeamScoreDTOList(Team homeTeam, Team awayTeam) {
-        List<TeamScoreDTO> teamScoreDTOS = new ArrayList<>();
-
-        TeamScoreDTO homeTeamScoreDTO = new TeamScoreDTO(homeTeam);
-        TeamScoreDTO awayTeamScoreDTO = new TeamScoreDTO(awayTeam);
-        teamScoreDTOS.add(homeTeamScoreDTO);
-        teamScoreDTOS.add(awayTeamScoreDTO);
-
-        return teamScoreDTOS;
+        this.home = new TeamScoreDTO(homeTeam);
+        this.away = new TeamScoreDTO(awayTeam);
     }
 
     public Long getGameId() {
         return gameId;
     }
 
-    public List<TeamScoreDTO> getTeamScores() {
-        return teamScores;
+    public TeamScoreDTO getHome() {
+        return home;
+    }
+
+    public TeamScoreDTO getAway() {
+        return away;
     }
 }
