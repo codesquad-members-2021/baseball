@@ -52,7 +52,6 @@ const StyledScore = styled.div`
     .home,
     .away {
       display: flex;
-      justify-content: center;
       align-items: center;
       font-size: 3rem;
     }
@@ -73,13 +72,15 @@ const StyledScore = styled.div`
     }
   }
   .home {
+    justify-content: flex-end;
     .teams-score {
-      margin-left: 3rem;
+      margin: 0 3rem;
     }
   }
   .away {
+    justify-content: flex-start;
     .teams-score {
-      margin-right: 3rem;
+      margin: 0 3rem;
     }
   }
 `;

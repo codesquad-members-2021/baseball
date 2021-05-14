@@ -58,8 +58,8 @@ const Board = ({
 
   const currentRoundScore = {
     game_id: gameID,
-    home: score.home[inning.round - 1],
-    away: score.away[inning.round - 1] + 1 || null,
+    home: score.home[inning.round - 1] + inning.turn,
+    away: !inning.turn ? score.away[inning.round - 1] + 1 : null,
     round: inning.round,
   };
 

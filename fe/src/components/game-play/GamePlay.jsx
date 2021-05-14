@@ -79,7 +79,6 @@ const GamePlay = ({ home, away, game_id }) => {
     score: { home: [0], away: [] },
     base: undefined,
   });
-  console.log(gamePlayData);
   const [memberList, memberListDispatch] = useReducer(memberListReducer, null);
   const teamId = {
     home: gamePlayData?.home?.teamId,

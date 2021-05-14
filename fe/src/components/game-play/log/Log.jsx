@@ -1,42 +1,43 @@
 import styled from 'styled-components';
 
 const TYPE = {
-  'strike': '스트라이크',
-  'ball': '볼',
-  'safety': '안타',
+  strike: '스트라이크',
+  ball: '볼',
+  safety: '안타',
   '4ball': '볼넷',
-  'out': '아웃',
-}
+  out: '아웃',
+};
 
 const Log = ({ logList }) => {
   const logs = logList.map((member, i) => (
-    member.history.length > 0 &&
-    <div className={'log ' + (member.state === true ? 'active' : '')} key={i}>
-      <div className="title">{member.index}번 타자 {member.name}</div>
-      <div className="contents">
-        { member.history.map((v, i) => 
-          v.end 
-          ?
-          <div className="content result" key={i}>
-            <div></div>
-            <div>{TYPE[v.type]}!</div>
-            <div></div>
-          </div>
-          :
-          <div className="content" key={i}>
-            <div>{i + 1}</div>
-            <div>{TYPE[v.type]}</div>
-            <div>S{v.strike} B{v.ball}</div>
-          </div>
+    <div className={'log ' + (i + 1 === logList.length ? 'active' : '')} key={i}>
+      <div className='title'>
+        {member.index}번 타자 {member.name}
+      </div>
+      <div className='contents'>
+        {member.history.map((v, i) =>
+          v.end ? (
+            <div className='content result' key={i}>
+              <div></div>
+              <div>{TYPE[v.type]}!</div>
+              <div></div>
+            </div>
+          ) : (
+            <div className='content' key={i}>
+              <div>{i + 1}</div>
+              <div>{TYPE[v.type]}</div>
+              <div>
+                S{v.strike} B{v.ball}
+              </div>
+            </div>
+          )
         )}
       </div>
     </div>
   ));
   return (
     <StyledLog>
-      <div className="logs">
-        {logs}
-      </div>
+      <div className='logs'>{logs}</div>
     </StyledLog>
   );
 };
@@ -97,7 +98,6 @@ const StyledLog = styled.div`
       color: #ff4545;
     }
   }
-  
 `;
 
 export default Log;
