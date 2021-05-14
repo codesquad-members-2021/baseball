@@ -36,11 +36,9 @@ const Screen = () => {
   };
 
   const handleClickPitch = () => {
-
     const ballCountAction = getAction(chooseNumber());
     dispatchBallCount({ payload: ballCountAction, attackState: isAttacking });
     setIsClicked((state) => !state);
-
   };
 
   useEffect(() => {
@@ -67,6 +65,7 @@ const Screen = () => {
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
+      <img className="noel" src="noel.png" alt="" />
     </StyledScreen>
   );
 };
@@ -84,6 +83,13 @@ const StyledScreen = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+
+  .noel {
+    position: absolute;
+    z-index: 9999;
+    width: 80px;
+    bottom: 20%;
+  }
 `;
 
 const ScreenField = styled.img`
@@ -113,7 +119,7 @@ const rotateAnimation = keyframes`
 
 const PitchButton = styled.button`
   height: 5rem;
-  width:fit-content;
+  width: fit-content;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -122,15 +128,15 @@ const PitchButton = styled.button`
   color: white;
   background: none;
   transform: translate(-50%, -50%);
-  
+
   &:hover {
     svg {
       animation: ${rotateAnimation} 4s linear infinite;
     }
     &:active {
       svg {
-        border-radius:50%;
-        background-color:#e84545;
+        border-radius: 50%;
+        background-color: #e84545;
       }
     }
   }

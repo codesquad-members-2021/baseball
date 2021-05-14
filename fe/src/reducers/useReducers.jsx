@@ -57,9 +57,12 @@ const playerReducer = (state, action) => {
       deepCopied.history = [...deepCopied.history, action.ballCount];
       return deepCopied;
     case 'changeTurn':
-      const data = action.data;
-      return data;
-
+      deepCopied.playerName = action.data.name;
+      deepCopied.uniformNumber = action.data.uniformNumber;
+      deepCopied.hits = action.data.hits;
+      deepCopied.turn = action.data.plateAppearance;
+      deepCopied.history = [];
+      return deepCopied;
     default:
   }
 };
