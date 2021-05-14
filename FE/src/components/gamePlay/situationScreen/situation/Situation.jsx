@@ -2,12 +2,13 @@ import styled from "styled-components";
 import SituationRecord from "./SituationRecord";
 import SituationStatus from "./SituationStatus";
 
-const Situation = (/*{data} */) => {
+const Situation = ({number, name, situation}) => {
     return (
         <StyledSituation>
-            {/* <SituationStatus type="now" player={{id: 2, name: '이용대'}} /> */}
-            <SituationStatus player={{id: 1, name: '류현진'}} status={'안타'} />
-            <SituationRecord />
+            {<div>
+                {number && <SituationStatus  player={{id: number, name: name}}/>}
+                {situation && <SituationRecord status={situation} />}
+            </div>}
         </StyledSituation>
     );
 };

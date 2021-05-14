@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Icon from "./Icon";
+import StadiumPlayers from "./StadiumPlayers";
 
 const BaseballStadium = () => (
     <StyledBaseballStadium>
-        <Icon />
+        <StadiumPlayers />
         <svg
             width="527"
             height="535"

@@ -8,3 +8,5 @@ export const divideArray = (arrData, refNum = 2) => {
 
     return result;
 };
+
+export const isAllNullObjectValues = (obj) => Object.values(obj).every((v) => !v);

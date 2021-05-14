@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import ListTable from './partial/ListTable';
 import PopupFrame from '../utilComponent/popupFrame/PopupFrame';
+import { useContext,useEffect,useState } from "react";
+import { GamePlayContext } from "../../components/utilComponent/context/GamePlayProvider";
+import { API } from "../../common/reference";
 
 const PlayerListPopup = ({ visible }) => {
+    const { 
+        gamePlayState: { teamsData },
+        gamePlayDispatch 
+    } = useContext(GamePlayContext);
+    const [team,setTeam] = useState("");
 
     const popupOptions = {
         zIndex: 10,
@@ -10,12 +18,20 @@ const PlayerListPopup = ({ visible }) => {
         visible,
     };
 
+    useEffect(async () => {
+        if(!teamsData) return;
+        const teamData = await fetch(API+`/api/games/${teamsData.game_id}/players`).then(res => res.json());
+        setTeam(teamData);
+    },[visible])    
+
     return (
         <PopupFrame options={popupOptions}>
-            <StyledPlayerListPopup>
-                <ListTable />
-                <ListTable />
-            </StyledPlayerListPopup>
+            {team && (
+                <StyledPlayerListPopup>
+                    <ListTable team={team.opponent}/>
+                    <ListTable team={team.user}/>
+                </StyledPlayerListPopup>
+            )}
         </PopupFrame>
     );
 };

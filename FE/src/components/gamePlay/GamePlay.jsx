@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
-import { useState, useEffect, useContext, createContext } from "react";
-import { withRouter } from "react-router-dom";
-import queryString from "query-string";
+import { useEffect, useContext } from 'react';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
-import { GamePlayContext } from "../utilComponent/context/GamePlayProvider";
+import { API } from "../../common/reference";
+
+import { GamePlayContext } from '../utilComponent/context/GamePlayProvider';
 import { GlobalContext } from '../utilComponent/context/GlobalProvider';
 import { cssScrollbar, cssTranslate } from '../utilComponent/CommonStyledCSS';
 
@@ -16,67 +18,108 @@ import MatchScreen from './matchScreen/MatchScreen';
 import BattleGround from './battleGround/BattleGround';
 import SituationScreen from './situationScreen/SituationScreen';
 
-export const PostsContext = createContext();
-
 const GamePlay = ({ location }) => {
-    const [scorePopupVisible, setScorePopupVisible] = useState(false);
-    const [listPopupVisible, setListPopupVisible] = useState(false);
-
     const team = queryString.parse(location.search);
-    const { gamePlayState, gamePlayDispatch } = useContext(GamePlayContext);
 
     const { globalState } = useContext(GlobalContext);
-    const [playerList, setPlayerList] = useState("");
-    console.log(playerList)
+    const {
+        gamePlayState: { teamsData },
+        gamePlayDispatch,
+        gamePlayOptionsState,
+        gamePlayOptionsDispatch,
+    } = useContext(GamePlayContext);
 
+    /*
     // gameplay 첫 스타트는 공격으로 시작.
     // 팀 선택 클릭 시 랜덤으로 돌려도 될듯.
-    const [sequence,setSequence] = useState("attack");
-    const [onOff,setOnOff] = useState(false); // pitch 버튼 attack일때 off
-    const [strike,setStrike] = useState([]);
-    const [ball,setBall] = useState([]);
-    const [awayScore,setAwayScore] = useState(0);
-    const [homeScore,setHomeScore] = useState(0);
-    const [pitcher,setPitcher] = useState("");
-    const [hitter,setHitter] = useState("");
-    
-    const randomSituation = () => {
-        let kind = ["HIT","OUT","BALL","STRIKE"];
-        let randomNumber = Math.floor(Math.random()*kind.length)+1;
-        return kind[randomNumber];
-    }
-    const gamePlay = () => {
-        if(sequence === "attack") {
-            setPitcher(playerList.opponent.players[0]); // 투수
-            setHitter(playerList.user.players[1]);      // 타자
-        } else if(sequence === "defense"){
-            setOnOff(true);
-            setPitcher(playerList.user.players[0]);     // 투수
-            setHitter(playerList.opponent.players[1]);  // 타자
-        }
-    }
+    const [sequence, setSequence] = useState('attack');
+    const [onOff, setOnOff] = useState(false); // pitch 버튼 attack일때 off     // 제외 (sequence로 제어 가능할듯)
+    const [strike, setStrike] = useState([]);
+    const [ball, setBall] = useState([]);
+    const [awayScore, setAwayScore] = useState(0);
+    const [homeScore, setHomeScore] = useState(0);
+    const [pitcher, setPitcher] = useState('');
+    const [hitter, setHitter] = useState('');
 
+    const randomSituation = () => {
+        let kind = ['HIT', 'OUT', 'BALL', 'STRIKE'];
+        let randomNumber = Math.floor(Math.random() * kind.length) + 1;
+        return kind[randomNumber];
+    };
+    const gamePlay = () => {
+        if (sequence === 'attack') {
+            setPitcher(gamePlayState.playerList.opponent.players[0]); // 투수
+            setHitter(gamePlayState.playerList.user.players[1]); // 타자
+        } else if (sequence === 'defense') {
+            setOnOff(true);
+            setPitcher(gamePlayState.playerList.user.players[0]); // 투수
+            setHitter(gamePlayState.playerList.opponent.players[1]); // 타자
+        }
+    };
+    */
+
+    // useFetch로 --------------- 수정 예정 START
     const options = {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"user" : globalState.clickLocation === "away" ? team.away : team.home, "opponent" : globalState.clickLocation === "away" ? team.home : team.away})
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            user: globalState.clickLocation === 'away' ? team.away : team.home,
+            opponent:
+                globalState.clickLocation === 'away' ? team.home : team.away,
+        }),
         // 클릭이 좌측 away인지 우측 home 인지 판별하기.
-    }
+    };
     const fetchData = async (url) => {
         const res = await fetch(url, options);
+        console.log(res);
         const result = await res.json();
-        setPlayerList(result);
+        gamePlayDispatch({ type: 'setTeamsData', payload: result });
     };
 
     useEffect(() => {
         if (!globalState.clickLocation) return;
-        globalState.clickLocation === "away" ? fetchData("/api/games/type-away") : fetchData("/api/games/type-home");
+        globalState.clickLocation === 'away'
+            ? fetchData(API + '/api/games/type-away')
+            : fetchData(API + '/api/games/type-home');
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [globalState.clickLocation])
+    }, [globalState.clickLocation]);
+    // useFetch로 --------------- 수정 예정  END
+
+    useEffect(() => {
+        if (!teamsData || !globalState) return;
+        const { user, opponent } = teamsData;
+        const { clickLocation } = globalState;
+        if (!user || !opponent || !clickLocation) return;
+
+        const { players: userPlayers, team_name: userTeamName } = user;
+        const { players: opponentPlayers, team_name: opponentTeamName } = opponent;
+
+        gamePlayDispatch({
+            type: 'manyChangeGameProgress',
+            payload: {
+                homeOrAway: clickLocation,
+                attacker: 'away',   // 무조건 첫 공격은 away
+                attackOrDefense: 'attack',
+                roundState: 1,
+                attackerTeamName: (clickLocation === 'away')
+                    ? userTeamName
+                    : opponentTeamName,
+                userTeamName,
+                opponentTeamName,
+                userPlayers,
+                opponentPlayers,
+                userHitterIdx: 1,
+                opponentHitterIdx: 1,
+                pitcher: (clickLocation === 'away') ? opponentPlayers[0] : userPlayers[0],
+                hitter: (clickLocation === 'away') ? userPlayers[1] : opponentPlayers[1],
+            },
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [teamsData]);
 
     const childComponents = [
         <GameScore />,
-        <MatchScreen />,  //
+        <MatchScreen />, //
         <BattleGround />, // 어택인지 디펜스인지에 따라 피치버튼 on & off
         <SituationScreen />,
     ];
@@ -86,36 +129,46 @@ const GamePlay = ({ location }) => {
         </GamePlayItem>
     ));
 
-    const handleMouseEnter = ({target}) => {
-        if (!target || target.tagName !== "SECTION") return;
+    const handleMouseEnter = ({ target }) => {
+        if (!target || target.tagName !== 'SECTION') return;
         const targetID = Number(target.dataset.id);
-        if (targetID === 1) 
-            gamePlayDispatch({type: "teamScoreVisibleControl"});
-        else
-            gamePlayDispatch({type: "playerListVisibleControl"});
+        if (targetID === 1)
+            gamePlayOptionsDispatch({ type: 'teamScoreVisibleToggle' });
+        else gamePlayOptionsDispatch({ type: 'playerListVisibleToggle' });
     };
 
     const handleMainFrameClick = ({ target }) => {
         if (!target) return;
         const targetDataSetName = target.dataset.name;
-        if (targetDataSetName !== "gameplay") return;
-        const { teamScorePopupVisible, playListPopupVisible } = gamePlayState;
-        teamScorePopupVisible && gamePlayDispatch({type: "teamScoreVisibleControl"});
-        playListPopupVisible && gamePlayDispatch({type: "playerListVisibleControl"});
+        if (targetDataSetName !== 'gameplay') return;
+        const { teamScorePopupVisible, playListPopupVisible } = gamePlayOptionsState;
+        teamScorePopupVisible &&
+            gamePlayOptionsDispatch({ type: 'teamScoreVisibleToggle' });
+        playListPopupVisible &&
+            gamePlayOptionsDispatch({ type: 'playerListVisibleToggle' });
     };
 
     return (
-        <PostsContext.Provider value={{playerList}}>
-            <MainFrame onClick={handleMainFrameClick} data-name="gameplay">
-                <StyledGamePlay>
-                    <GamePlayPopupSection data-id={1} onMouseEnter={handleMouseEnter} isTop />
-                    <GamePlayPopupSection data-id={2} onMouseEnter={handleMouseEnter} />
-                    <TeamScorePopup visible={gamePlayState.teamScorePopupVisible} />
-                    <PlayerListPopup visible={gamePlayState.playListPopupVisible} />
-                    <GamePlayItems>{gamePlayItems}</GamePlayItems>
-                </StyledGamePlay>
-            </MainFrame>
-        </PostsContext.Provider>
+        <MainFrame onClick={handleMainFrameClick} data-name="gameplay">
+            <StyledGamePlay>
+                <GamePlayPopupSection
+                    data-id={1}
+                    onMouseEnter={handleMouseEnter}
+                    isTop
+                />
+                <GamePlayPopupSection
+                    data-id={2}
+                    onMouseEnter={handleMouseEnter}
+                />
+                <TeamScorePopup
+                    visible={gamePlayOptionsState.teamScorePopupVisible}
+                />
+                <PlayerListPopup
+                    visible={gamePlayOptionsState.playListPopupVisible}
+                />
+                <GamePlayItems>{gamePlayItems}</GamePlayItems>
+            </StyledGamePlay>
+        </MainFrame>
     );
 };
 
@@ -138,14 +191,23 @@ const GamePlayItems = styled.ul`
 const GamePlayItem = styled.li`
     padding: 16px;
 
-    ${({ idx }) => (idx % 2 === 0) && 
-        css`border-left: 3px solid ${({ theme }) => theme.colors.white};`};
-    ${({ idx }) => (idx === 1 || idx === 2) 
-        && css`border-bottom: 3px solid ${({ theme }) => theme.colors.white};`};
-    ${({ idx }) => (idx === 3 || idx === 4) 
-        && css`max-height: 600px;`};
+    ${({ idx }) =>
+        idx % 2 === 0 &&
+        css`
+            border-left: 3px solid ${({ theme }) => theme.colors.white};
+        `};
+    ${({ idx }) =>
+        (idx === 1 || idx === 2) &&
+        css`
+            border-bottom: 3px solid ${({ theme }) => theme.colors.white};
+        `};
+    ${({ idx }) =>
+        (idx === 3 || idx === 4) &&
+        css`
+            min-height: 600px;
+        `};
 
-    ${({ idx }) => (idx === 4) && cssScrollbar};
+    ${({ idx }) => idx === 4 && cssScrollbar};
 `;
 
 const GamePlayPopupSection = styled.section`
