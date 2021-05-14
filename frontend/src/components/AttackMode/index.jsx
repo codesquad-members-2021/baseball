@@ -4,7 +4,7 @@ const AttackMode = ({ match }) => {
 	const id = match.params;
 	return (
 		<>
-			<GamePage data={match.params} type="Attack" />
+			<GamePage data={id} type="Attack" />
 		</>
 	);
 };

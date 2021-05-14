@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
 import { ReactComponent as Field } from './Field.svg';
-import { ReactComponent as Ghost } from './ghost.svg';
 import API from '../../Hook/API';
 import {
   useGameState,
@@ -86,21 +85,21 @@ const PITCH = styled.button`
   border: 5px solid ${theme.colors.white};
 `;
 const FieldArea = styled.div`
-  position: relative;
+	position: relative;
 `;
 
 const FieldSVG = styled(Field)`
-  position: absolute;
-  top: 23rem;
-  left: 3rem;
+	position: absolute;
+	top: 23rem;
+	left: 3rem;
 `;
 
 const GameState = styled(Span)`
-  position: absolute;
-  top: 50rem;
-  right: 23rem;
-  font-size: ${theme.fontSize.X_large};
-  font-weight: ${theme.fontWeight.light};
-  color: ${theme.colors.white};
+	position: absolute;
+	top: 17rem;
+	right: 23rem;
+	font-size: ${theme.fontSize.X_large};
+	font-weight: ${theme.fontWeight.light};
+	color: ${theme.colors.white};
 `;
-export default GPA_Field;
+export default GpaField;

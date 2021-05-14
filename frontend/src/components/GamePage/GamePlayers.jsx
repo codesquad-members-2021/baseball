@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { theme } from '../Style/Theme';
 import { useGameState } from '../GameContext';
@@ -42,11 +41,11 @@ const GamePlayers = () => {
     );
   };
 
-  return (
-    <PlayerWrapper>
-      <TeamPlayersInfo />
-    </PlayerWrapper>
-  );
+	return (
+		<PlayerWrapper>
+			<TeamPlayersInfo />
+		</PlayerWrapper>
+	);
 };
 const PlayerWrapper = styled.div`
   height: 12rem;
@@ -54,23 +53,23 @@ const PlayerWrapper = styled.div`
   box-sizing: border-box;
 `;
 const Team = styled.div`
-  margin: 20px;
-  box-sizing: border-box;
+	margin: 20px;
+	box-sizing: border-box;
 `;
 const Role = styled.span`
-  font-size: ${theme.fontSize.large};
-  font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.white};
+	font-size: ${theme.fontSize.large};
+	font-weight: ${theme.fontWeight.bold};
+	color: ${theme.colors.white};
 `;
 const Name = styled.span`
-  margin-left: 10px;
-  font-size: ${theme.fontSize.medium};
-  font-weight: ${theme.fontWeight.bold};
-  color: ${theme.colors.skyblue_log};
+	margin-left: 10px;
+	font-size: ${theme.fontSize.medium};
+	font-weight: ${theme.fontWeight.bold};
+	color: ${theme.colors.skyblue_log};
 `;
 const State = styled.div`
-  font-size: ${theme.fontSize.medium};
-  font-weight: ${theme.fontWeight.normal};
-  color: ${theme.colors.blue_log};
+	font-size: ${theme.fontSize.medium};
+	font-weight: ${theme.fontWeight.normal};
+	color: ${theme.colors.blue_log};
 `;
 export default GamePlayers;

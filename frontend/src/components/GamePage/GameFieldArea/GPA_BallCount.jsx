@@ -1,23 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../../Style/Theme';
-const GPA_BallCount = () => {
+import { useGameState } from '../../GameContext';
+
+const GpaBallCount = () => {
+	const { state } = useGameState();
+	const BallCount = (type, count) => {
+		return Array.from({ length: count }).map((v) => <Circle type={type} />);
+	};
+	const Ball = state.gameStatusDTO
+		? BallCount('B', state.gameStatusDTO.ballCount)
+		: null;
+	const Strike = state.gameStatusDTO
+		? BallCount('S', state.gameStatusDTO.strikeCount)
+		: null;
+	const Out = state.gameStatusDTO
+		? BallCount('O', state.gameStatusDTO.outCount)
+		: null;
+
 	return (
-		<GPA_BallCount_Wrapper>
+		<GpaBallCountWrapper>
 			<FlexWrapper>
-				<BallType>S</BallType> <Circle type="S" />
+				<BallType>S</BallType>
+				{Strike}
 			</FlexWrapper>
 
 			<FlexWrapper>
-				<BallType>B</BallType> <Circle type="B" />
+				<BallType>B</BallType>
+				{Ball}
 			</FlexWrapper>
+
 			<FlexWrapper>
-				<BallType>O</BallType> <Circle type="O" />
+				<BallType>O</BallType>
+				{Out}
 			</FlexWrapper>
-		</GPA_BallCount_Wrapper>
+		</GpaBallCountWrapper>
 	);
 };
-const GPA_BallCount_Wrapper = styled.div`
+const GpaBallCountWrapper = styled.div`
 	position: inherit;
 	margin: 30px;
 `;
@@ -31,7 +51,6 @@ const Circle = styled.div`
 	height: 20px;
 	border-radius: 50%;
 	background-color: ${(props) => switchColor(props.type)};
-
 	margin-left: 15px;
 `;
 const FlexWrapper = styled.div`
@@ -43,4 +62,4 @@ const BallType = styled(Span)`
 	font-weight: ${theme.fontWeight.light};
 	color: ${theme.colors.white};
 `;
-export default GPA_BallCount;
+export default GpaBallCount;

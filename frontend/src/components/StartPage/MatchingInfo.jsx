@@ -10,8 +10,6 @@ const MatchingInfo = ({ setMessage, data }) => {
 	useEffect(() => {
 		const getResponse = async () => {
 			if (!currentID) return;
-			// const foo = await API.patch.initGame(currentID);
-			// console.log(foo);
 			const response = await fetch(
 				`http://13.124.70.38:8080/games/${currentID}`,
 				{
@@ -29,7 +27,6 @@ const MatchingInfo = ({ setMessage, data }) => {
 				history.push(`/attack/${currentID}`);
 			} else if (status === 409) {
 				setMessage(`이미 게임이 시작되었습니다. \n다른 팀을 선택해주세요`);
-				//occupied=true인경우(409error)
 			}
 		};
 		getResponse();
@@ -74,7 +71,6 @@ const TeamName = styled.span`
 	&:hover {
 		color: ${theme.colors.red};
 	}
-
 	&.occupied {
 		pointer-events: none;
 		color: ${theme.colors.grey_deep};

@@ -1,3 +1,4 @@
+//gameLog
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { theme, Span } from '../Style/Theme';
@@ -60,7 +61,7 @@ const PlayersWrapper = styled.div`
 `;
 
 const PlayerWrapper = styled.div`
-  padding-left: 20px;
+	padding-left: 20px;
 `;
 
 const LogByPlayer = styled.div`
@@ -76,15 +77,15 @@ const LogWrapper = styled.div`
   grid-template-columns: 20px 130px 100px;
 `;
 const Player = styled.div`
-  margin: 15px 0;
-  font-size: ${theme.fontSize.medium};
-  font-weight: ${theme.fontWeight.medium};
-  color: ${props =>
-    props.now ? theme.colors.red_log : theme.colors.skyblue_log};
+	margin: 15px 0;
+	font-size: ${theme.fontSize.medium};
+	font-weight: ${theme.fontWeight.medium};
+	color: ${(props) =>
+		props.now ? theme.colors.red_log : theme.colors.skyblue_log};
 `;
 const Result = styled(Span)`
-  width: 150px;
-  color: ${theme.colors.blue_log};
+	width: 150px;
+	color: ${theme.colors.blue_log};
 `;
 const Number = styled(Span)`
   color: ${theme.colors.white};
@@ -93,7 +94,7 @@ const Number = styled(Span)`
   text-align: center;
 `;
 const Log = styled(Span)`
-  color: ${theme.colors.white};
+	color: ${theme.colors.white};
 `;
 const AccLog = styled(Span)`
   text-align: left;
