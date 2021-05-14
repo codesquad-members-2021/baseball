@@ -30,7 +30,7 @@
 #### <a href="https://github.com/cchoongh/baseball/wiki/%5BBE%5D-API---ver.210506" target="_blank">API 설계</a>
 
 #### ERD 설계
-![image](https://user-images.githubusercontent.com/65105537/117402195-e9c98d00-af40-11eb-8f11-2b5b4a613d4a.png)
+![image](https://user-images.githubusercontent.com/73228803/118230563-d67e6a80-b4c8-11eb-9965-54e9b4a7cb1d.png)
 
 ------
 ### ✨ Frontend 기획서:
