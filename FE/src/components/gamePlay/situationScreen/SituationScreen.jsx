@@ -26,7 +26,7 @@ const SituationScreen = () => {
     useEffect(() => {
         if(!hitter) return;
         // if(screenList.length===1) return;
-        screenList ? setScreenList([...screenList, [String(hitter.name),hitterNumber()]]) : setScreenList([[String(hitter.name),hitterNumber()]]);
+        screenList ? setScreenList([[String(hitter.name),hitterNumber()],...screenList]) : setScreenList([[String(hitter.name),hitterNumber()]]);
     },[hitter]);
    
 
@@ -40,6 +40,4 @@ const SituationScreen = () => {
 export default SituationScreen;
 
 // --- Styled Components ---
-const StyledSituationScreen = styled.div`
-
-`;
+const StyledSituationScreen = styled.div``;

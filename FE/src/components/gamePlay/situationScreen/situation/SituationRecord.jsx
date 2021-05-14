@@ -4,13 +4,13 @@ import styled from 'styled-components';
 const SituationRecord = ({ status }) => {
     return (
         <StyledSituationRecord>
-            {[...Array(5)].map((_, i) => (
+            {/* {[...Array(5)].map((_, i) => (
                 <Record key={i}>
                     <Num>{i+1}</Num>
                     <span>{i % 2 === 0 ? '스트라이크' : '아웃'}</span>
                     <span>S1 B{i+1}</span>
                 </Record>
-            ))}
+            ))} */}
         </StyledSituationRecord>
     );
 };

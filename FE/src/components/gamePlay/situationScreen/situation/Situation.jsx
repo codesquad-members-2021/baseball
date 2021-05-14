@@ -7,7 +7,6 @@ const Situation = ({number, name, situation}) => {
         <StyledSituation>
             {<div>
                 {number && <SituationStatus  player={{id: number, name: name}}/>}
-                {situation && <SituationRecord status={situation} />}
             </div>}
         </StyledSituation>
     );
