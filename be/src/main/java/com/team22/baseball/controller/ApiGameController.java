@@ -69,7 +69,7 @@ public class ApiGameController {
     @PutMapping("/reset")
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     private void resetData(@RequestBody Map<String, Long> request) {
-       gameService.resetGameData(request.get("teamId"));
+       gameService.resetGameData(request.get("gameId"));
     }
 
 }

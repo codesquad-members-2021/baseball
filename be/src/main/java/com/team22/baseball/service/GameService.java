@@ -21,6 +21,8 @@ import java.util.List;
 @Service
 public class GameService {
 
+    private final int ONE = 1;
+
     private final GameRepository gameRepository;
 
     @Autowired
@@ -66,8 +68,8 @@ public class GameService {
         return teamListDtos;
     }
 
-    public void updatePlayerInfo(String name, int plate_appearance, int hits, int outs) {
-        gameRepository.updatePlayerInfo(name, plate_appearance, hits, outs);
+    public void updatePlayerInfo(String name, int plateAppearance, int hits, int outs) {
+        gameRepository.updatePlayerInfo(name, plateAppearance, hits, outs);
     }
 
     public void insertTeamScore(String teamName, int round, int score) {
@@ -82,15 +84,15 @@ public class GameService {
 
         Player findPlayer = findPlayerByName(req.getPlayerName());
 
-        int plateAppearance = findPlayer.getPlateAppearance() + 1; //m 타석은 무조건 1이 맞을까 ?
+        int plateAppearance = findPlayer.getPlateAppearance() + ONE;
         int hits;
         int outs;
 
         if (req.isHit()) {
-            hits = findPlayer.getHits() + 1;
+            hits = findPlayer.getHits() + ONE;
             outs = findPlayer.getOuts();
         } else {
-            outs = findPlayer.getOuts() + 1;
+            outs = findPlayer.getOuts() + ONE;
             hits = findPlayer.getHits();
         }
 
@@ -121,7 +123,7 @@ public class GameService {
 
     public void updateGameStatusByTitle(String teamTitle) {
 
-        boolean gameStatus = true; //TODO. 나중에 검증 로직 만들기
+        boolean gameStatus = true;
 
         gameRepository.updateGameStatusByTitle(teamTitle, gameStatus);
         gameRepository.updateSelectedTeamByTitle(teamTitle, gameStatus);
@@ -133,10 +135,10 @@ public class GameService {
     }
 
     public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName) throws Exception {
-        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber,teamName).orElseThrow(Exception::new);
+        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName).orElseThrow(Exception::new);
     }
 
-    public List<ScoreList> getPlayerScoreOfGame(Game findGame){
+    public List<ScoreList> getPlayerScoreOfGame(Game findGame) {
 
         List<ScoreList> responseDto = new ArrayList<>();
 
@@ -156,9 +158,16 @@ public class GameService {
     }
 
     public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo req) throws Exception {
+
         int[] scores = calculatePlayerScore(req);
 
-        updatePlayerInfo(req.getPlayerName(), scores[0], scores[1], scores[2]);
+        final int PLATE_APPEARANCE = 0;
+        final int HITS = 1;
+        final int OUTS = 2;
+
+        final int MAX_PLAYER = 10;
+
+        updatePlayerInfo(req.getPlayerName(), scores[PLATE_APPEARANCE], scores[HITS], scores[OUTS]);
         insertTeamScore(req.getTeamName(), req.getRound(), req.getTeamScore());
 
         Player prevPlayer = findPlayerByName(req.getPlayerName());
@@ -166,7 +175,7 @@ public class GameService {
         int prevUniformNumber = prevPlayer.getUniformNumber();
         String teamName = req.getTeamName();
 
-        int nextUniformNumber = ++prevUniformNumber > 10 ? 1 : prevUniformNumber;
+        int nextUniformNumber = ++prevUniformNumber > MAX_PLAYER ? ONE : prevUniformNumber;
 
         return findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName);
     }
@@ -174,7 +183,7 @@ public class GameService {
     public void resetGameData(Long gameId) {
         List<Team> teams = gameRepository.findTeamById(gameId);
 
-        for(Team team : teams){
+        for (Team team : teams) {
             gameRepository.resetTeamScore(team.getId());
             gameRepository.resetPlayer(team.getId());
         }
