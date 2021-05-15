@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "TEMP"; //배포시 SECRET_KEY는 환경변수로 설정할 예정 (개인키 노출 X)
+    private static final String SECRET_KEY = System.getenv("JWT_SECRET_KEY");
 
     public static String createToken(String subject, String audience, Map<String, Object> privateClaims, int expiredMinute) {
 
@@ -31,7 +31,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuer("isaac.baseball.api")
                 .setAudience(audience)
-                .setHeaderParam("typ", "JWT")
+                .setHeaderParam("type", "JWT")
                 .signWith(signatureAlgorithm, signingKey);
 
         for (Map.Entry<String, Object> claim : privateClaims.entrySet()) {
