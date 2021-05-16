@@ -1,5 +1,6 @@
 package com.team22.baseball.controller;
 
+import com.team22.baseball.dto.request.GameId;
 import com.team22.baseball.dto.request.SelectTeam;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.ApiResult;
@@ -16,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/")
@@ -64,10 +64,10 @@ public class ApiGameController {
         return gameService.getPlayerScoreOfGame(gameId);
     }
 
-    @PutMapping("/reset")
-    @ResponseStatus(HttpStatus.RESET_CONTENT)
-    private void resetData(@RequestBody Map<String, Long> request) {
-        gameService.resetGameData(request.get("gameId"));
+    @PostMapping("/reset")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void resetData(@RequestBody GameId gameId) {
+        gameService.resetGameData(gameId.getGameId());
     }
 
 }
