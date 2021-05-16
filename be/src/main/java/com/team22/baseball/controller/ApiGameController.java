@@ -35,8 +35,10 @@ public class ApiGameController {
 
     @GetMapping("games")
     private Response<List<GameInfo>> gameList() {
-        logger.debug("gameService.findAllGame() : {}", gameService.findAllGame());
-        return new Response(gameService.findAllGame());
+        List<GameInfo> gameInfos = gameService.findAllGame();
+        logger.debug("gameService.findAllGame() : {}", gameInfos);
+
+        return new Response(gameInfos);
     }
 
     @GetMapping("select-team/{title}")
@@ -70,7 +72,7 @@ public class ApiGameController {
     @PutMapping("/reset")
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     private void resetData(@RequestBody Map<String, Long> request) {
-       gameService.resetGameData(request.get("gameId"));
+        gameService.resetGameData(request.get("gameId"));
     }
 
 }
