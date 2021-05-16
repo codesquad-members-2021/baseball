@@ -22,8 +22,8 @@ public class ExceptionController {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({PlayerNotFoundException.class, TeamNotFoundException.class, GameNotFoundException.class, UserNotFoundException.class})
-    public ErrorDTO handlePlayerNotFoundException(NotFoundException exception) {
+    @ExceptionHandler(NotFoundException.class)
+    public ErrorDTO handleNotFoundException(NotFoundException exception) {
         return new ErrorDTO(HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
