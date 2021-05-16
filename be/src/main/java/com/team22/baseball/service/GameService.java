@@ -138,9 +138,10 @@ public class GameService {
         return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName).orElseThrow(NotFoundException::new);
     }
 
-    public List<ScoreList> getPlayerScoreOfGame(Game findGame) {
+    public List<ScoreList> getPlayerScoreOfGame(Long gameId) {
 
         List<ScoreList> responseDto = new ArrayList<>();
+        Game findGame = gameRepository.findGameById(gameId).orElseThrow(NotFoundException::new);
 
         for (Team team : findGame.getTeams()) {
 

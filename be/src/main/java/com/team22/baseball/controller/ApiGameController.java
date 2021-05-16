@@ -1,6 +1,5 @@
 package com.team22.baseball.controller;
 
-import com.team22.baseball.domain.Game;
 import com.team22.baseball.dto.request.SelectTeam;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.ApiResult;
@@ -51,7 +50,7 @@ public class ApiGameController {
 
     @PutMapping("player")
     @ResponseStatus(HttpStatus.CREATED)
-    private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfo updatePlayerInfo){
+    private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfo updatePlayerInfo) {
         return gameService.updatePlayerInfo(updatePlayerInfo);
     }
 
@@ -61,9 +60,8 @@ public class ApiGameController {
     }
 
     @GetMapping("/player-list/{gameId}")
-    private List<ScoreList> playerScoreList(@PathVariable Long gameId) throws Exception {
-        Game findGame = gameService.findGameById(gameId);
-        return gameService.getPlayerScoreOfGame(findGame);
+    private List<ScoreList> playerScoreList(@PathVariable Long gameId) {
+        return gameService.getPlayerScoreOfGame(gameId);
     }
 
     @PutMapping("/reset")
