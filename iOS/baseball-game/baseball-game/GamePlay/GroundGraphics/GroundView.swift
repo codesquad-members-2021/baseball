@@ -108,6 +108,17 @@ class GroundView: UIView {
     private var baseLayers: [Int: CALayer] = [:]
     private var playerLayer: [PlayerLayer] = []
     
+    enum Player: Int {
+        case home = 0
+        case first = 1
+        case second = 2
+        case third = 3
+        
+        var index: Int {
+            return rawValue
+        }
+    }
+    
     enum Duration {
         static let total = 1.0
         static let player = 1.0
@@ -213,7 +224,8 @@ extension GroundView {
     func homeTofirstBase() {
         guard let homeBaseProperty = homeBaseProperty, let firstBaseProperty = firstBaseProperty else { return }
         
-        playerLayer[0].opacity = 0
+        let targetIndex = Player.home.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(Duration.total)
@@ -228,7 +240,8 @@ extension GroundView {
     func firstBaseToSecondBase() {
         guard let firstBaseProperty = firstBaseProperty, let secondBaseProperty = secondBaseProperty else { return }
         
-        playerLayer[1].opacity = 0
+        let targetIndex = Player.first.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(Duration.total)
@@ -244,7 +257,8 @@ extension GroundView {
     func secondBaseToThirdBase() {
         guard let secondBaseProperty = secondBaseProperty, let thirdBaseProperty = thirdBaseProperty else { return }
         
-        playerLayer[2].opacity = 0
+        let targetIndex = Player.second.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(Duration.total)
@@ -259,7 +273,8 @@ extension GroundView {
     func thirdBaseToHome() {
         guard let thirdBaseProperty = thirdBaseProperty, let homeBaseProperty = homeBaseProperty else { return }
         
-        playerLayer[3].opacity = 0
+        let targetIndex = Player.third.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
         CATransaction.setAnimationDuration(Duration.total)
@@ -274,9 +289,8 @@ extension GroundView {
         
         let targetIndex = toBaseInfo.id - 1
         
-        guard playerLayer.count >= targetIndex else { return }
-        
-        let player = playerLayer[targetIndex]
+        guard let player = playerLayer[safe: targetIndex] else { return }
+  
         player.opacity = 100
         
         let offsetY = player.frame.height / 2
