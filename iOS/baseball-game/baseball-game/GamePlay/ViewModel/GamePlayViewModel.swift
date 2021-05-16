@@ -12,7 +12,7 @@ class GamePlayViewModel {
     
     private var gameManager: GameUpdatable!
     @Published var gameUpdator: GameInformable!
-    @Published var pitchList: [Pitch]!
+    @Published var pitches: [Pitch]!
     @Published var error: Error!
     @Published var alertMessage: String!
     
@@ -43,7 +43,7 @@ class GamePlayViewModel {
                                        batter: batter,
                                        pitcher: pitcher)
         self.gameUpdator = self.gameManager
-        self.pitchList = self.gameUpdator.pitchInfo()
+        self.pitches = self.gameUpdator.pitchInfo()
     }
     
     func requestPitch() {
@@ -93,7 +93,7 @@ class GamePlayViewModel {
     private func updatePitches(with newPitch: Pitch?) {
         guard let newPitch = newPitch else { return }
         self.gameManager.updatePitchList(with: newPitch)
-        self.pitchList = self.gameManager.pitchInfo()
+        self.pitches = self.gameManager.pitchInfo()
     }
     
     private func updateBallCount(with newBallInfo: BallChanged?) {

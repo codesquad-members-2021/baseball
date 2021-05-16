@@ -16,7 +16,6 @@ enum NetworkError: Error {
 enum EndPoint {
     static let scheme = "http"
     static let host = "13.125.35.62"
-    //static let port = 8080
     static let path = "/baseball/games"
 
     static func url(path: String) -> URL? {
@@ -24,7 +23,6 @@ enum EndPoint {
         
         components.scheme = EndPoint.scheme
         components.host = EndPoint.host
-        //components.port = EndPoint.port
         components.path = "\(EndPoint.path)\(path)"
         
         return components.url

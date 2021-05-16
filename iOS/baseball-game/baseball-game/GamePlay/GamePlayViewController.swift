@@ -76,7 +76,7 @@ extension GamePlayViewController {
             }
             .store(in: &cancelBag)
         
-        gamePlayViewModel.$pitchList
+        gamePlayViewModel.$pitches
             .receive(on: DispatchQueue.main)
             .sink { [weak self] pitches in
                 guard let pitches = pitches else { return }

@@ -13,7 +13,7 @@ class GameManager {
     private var teams: Teams
     private var inning: Inning
     private var score: Score
-    private var pitchList: [Pitch]
+    private var pitches: [Pitch]
     private var ballCounter: BallCounter
     private var baseManager: BaseManager
     private var batter: Player
@@ -24,7 +24,7 @@ class GameManager {
         self.teams = teams
         self.inning = inning
         self.score = score
-        self.pitchList = pitchList
+        self.pitches = pitchList
         self.ballCounter = ballCounter
         self.baseManager = baseManager
         self.batter = batter
@@ -84,7 +84,7 @@ extension GameManager: GameInformable {
     }
     
     func pitchInfo() -> [Pitch] {
-        return pitchList
+        return pitches
     }
 
     private func isHomeDefense() -> Bool {
@@ -135,7 +135,7 @@ extension GameManager: GameUpdatable {
     }
     
     func updatePitchList(with newPitch: Pitch) {
-        self.pitchList.insert(newPitch, at: 0)
+        self.pitches.insert(newPitch, at: 0)
     }
     
 }
