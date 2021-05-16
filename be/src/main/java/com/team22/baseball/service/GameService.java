@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class GameService {
 
-    private final int ONE = 1;
+    private static final int ONE = 1;
 
     private final GameRepository gameRepository;
 

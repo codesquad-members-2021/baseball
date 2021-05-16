@@ -19,8 +19,10 @@ import java.util.Optional;
 
 public interface GameRepository extends CrudRepository<Game, Long> {
 
+    @Override
     Optional<Game> findById(Long id);
 
+    @Override
     List<Game> findAll();
 
     @Query("SELECT * FROM GAME WHERE GAME.id = :id;")
