@@ -1,11 +1,12 @@
 package com.team22.baseball.controller;
 
 import com.team22.baseball.domain.Game;
+import com.team22.baseball.dto.request.SelectTeam;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.DetailScore.DetailScore;
 import com.team22.baseball.dto.response.GameList.GameInfo;
-import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
 import com.team22.baseball.dto.response.GameList.Response;
+import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
 import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/")
@@ -41,13 +41,13 @@ public class ApiGameController {
         return new Response(gameInfos);
     }
 
-    @GetMapping("select-team/{title}")
+    @PutMapping("select-team")
     @ResponseStatus(HttpStatus.OK)
-    private List<TeamListDto> selectGame(@PathVariable String title) throws Exception {
-        title = Objects.toString(title, "");
-        gameService.updateGameStatusByTitle(title);
+    private List<TeamListDto> selectGame(@RequestBody SelectTeam selectTeam) throws Exception {
+        final String teamTitle = selectTeam.getTitle();
+        gameService.updateGameStatusByTitle(teamTitle);
 
-        return gameService.getInfoSelectedTeam(title);
+        return gameService.getInfoSelectedTeam(teamTitle);
     }
 
     @PutMapping("/update-player")
