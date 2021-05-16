@@ -3,7 +3,7 @@ package com.team22.baseball.dto.response.GameList;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GameList {
+public class GameInfo {
 
     @JsonProperty("game_id")
     private Long gameId;
@@ -17,7 +17,7 @@ public class GameList {
     @JsonProperty("away")
     private String away;
 
-    public GameList(Long gameId, boolean inProgress, String home, String away) {
+    public GameInfo(Long gameId, boolean inProgress, String home, String away) {
         this.gameId = gameId;
         this.inProgress = inProgress;
         this.home = home;

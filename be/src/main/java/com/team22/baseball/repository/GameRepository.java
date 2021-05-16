@@ -4,7 +4,7 @@ import com.team22.baseball.domain.Game;
 import com.team22.baseball.domain.Player;
 import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
-import com.team22.baseball.dto.response.GameList.GameList;
+import com.team22.baseball.dto.response.GameList.GameInfo;
 import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.PlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamInfoDto;
@@ -45,7 +45,7 @@ public interface GameRepository extends CrudRepository<Game, Long> {
             "FROM GAME INNER JOIN TEAM ON GAME.id = TEAM.game_id\n" +
             "WHERE TEAM.is_home = false) as away_group\n" +
             "ON home_group.id = away_group.id;")
-    List<GameList> findAllGame();
+    List<GameInfo> findAllGame();
 
     @Query("SELECT TEAM.name FROM TEAM WHERE TEAM.game_id = (SELECT TEAM.game_id FROM TEAM WHERE TEAM.name = :title);")
     List<TeamTypeDto> findTeamListByTeamTitle(@Param("title") String title);

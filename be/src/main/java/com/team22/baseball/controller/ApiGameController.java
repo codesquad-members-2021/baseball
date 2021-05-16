@@ -3,8 +3,9 @@ package com.team22.baseball.controller;
 import com.team22.baseball.domain.Game;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.DetailScore.DetailScore;
-import com.team22.baseball.dto.response.GameList.GameList;
+import com.team22.baseball.dto.response.GameList.GameInfo;
 import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
+import com.team22.baseball.dto.response.GameList.Response;
 import com.team22.baseball.dto.response.TeamSelect.NextPlayerInfoDto;
 import com.team22.baseball.dto.response.TeamSelect.TeamListDto;
 import com.team22.baseball.service.GameService;
@@ -33,9 +34,9 @@ public class ApiGameController {
     }
 
     @GetMapping("games")
-    private List<GameList> gameList() {
+    private Response<List<GameInfo>> gameList() {
         logger.debug("gameService.findAllGame() : {}", gameService.findAllGame());
-        return gameService.findAllGame();
+        return new Response(gameService.findAllGame());
     }
 
     @GetMapping("select-team/{title}")

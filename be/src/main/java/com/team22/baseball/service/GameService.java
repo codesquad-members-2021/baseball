@@ -6,7 +6,7 @@ import com.team22.baseball.domain.Team;
 import com.team22.baseball.domain.TeamScore;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.DetailScore.DetailScore;
-import com.team22.baseball.dto.response.GameList.GameList;
+import com.team22.baseball.dto.response.GameList.GameInfo;
 import com.team22.baseball.dto.response.PlayerScoreList.PlayerInfo;
 import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
 import com.team22.baseball.dto.response.PlayerScoreList.TeamInfo;
@@ -30,7 +30,7 @@ public class GameService {
         this.gameRepository = gameRepository;
     }
 
-    public List<GameList> findAllGame() {
+    public List<GameInfo> findAllGame() {
         return gameRepository.findAllGame();
     }
 
