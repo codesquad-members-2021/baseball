@@ -8,19 +8,16 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthInterceptor implements HandlerInterceptor {
 
     public static final String USER_ID_KEY = "USER_ID";
-    private static final int BEARER_TOKEN_LENGTH = 2;
-    private static final int TOKEN = 1;
-    private final JwtVerifier jwtVerifier;
 
-    public AuthInterceptor(JwtVerifier jwtVerifier) {
-        this.jwtVerifier = jwtVerifier;
-    }
+    @Resource
+    private JwtVerifier jwtVerifier;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

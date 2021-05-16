@@ -1,6 +1,7 @@
 package com.codesquad.baseball.config;
 
 import com.codesquad.baseball.service.JwtVerifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -8,19 +9,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private final JwtVerifier jwtVerifier;
-
-    public WebMvcConfig(JwtVerifier jwtVerifier) {
-        this.jwtVerifier = jwtVerifier;
-    }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthInterceptor(jwtVerifier))
+        registry.addInterceptor(authInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/users/**");
 
-        registry.addInterceptor(new RefreshInterceptor(jwtVerifier))
+        registry.addInterceptor(refreshInterceptor())
                 .addPathPatterns("/users/**");
+    }
+
+    @Bean
+    public AuthInterceptor authInterceptor() {
+        return new AuthInterceptor();
+    }
+
+    @Bean
+    public RefreshInterceptor refreshInterceptor() {
+        return new RefreshInterceptor();
     }
 }

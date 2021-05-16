@@ -8,6 +8,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,11 +16,8 @@ public class RefreshInterceptor implements HandlerInterceptor {
 
     public static final String USER_ID_KEY = "USER_ID";
 
-    private final JwtVerifier jwtVerifier;
-
-    public RefreshInterceptor(JwtVerifier jwtVerifier) {
-        this.jwtVerifier = jwtVerifier;
-    }
+    @Resource
+    private JwtVerifier jwtVerifier;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
