@@ -1,18 +1,16 @@
 package baseball.service.dto;
 
-import baseball.domain.Game;
-
 import java.util.List;
 
 public class Games {
 
-    private List<Game> games;
+    private List<GameDTO> games;
 
-    public Games(List<Game> games) {
+    public Games(List<GameDTO> games) {
         this.games = games;
     }
 
-    public List<Game> getGames() {
+    public List<GameDTO> getGames() {
         return games;
     }
 }

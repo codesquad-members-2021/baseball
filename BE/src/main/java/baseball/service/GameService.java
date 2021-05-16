@@ -30,9 +30,11 @@ public class GameService {
         if (gameRepository.count() == EMPTY) {
             saveGames();
         }
-        List<Game> games = gameRepository.findAll();
+        List<GameDTO> gameDTOs = gameRepository.findAll().stream()
+                .map(GameDTO::toGameDTO)
+                .collect(Collectors.toList());
 
-        return new Games(games);
+        return new Games(gameDTOs);
     }
 
     private void saveGames() {

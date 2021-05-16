@@ -14,7 +14,6 @@ public class Game implements Persistable<Long> {
     private Long awayTeamId;
 
     @Transient
-    @JsonIgnore
     private boolean isNew = false;
 
     public Game(Long id, Long homeTeamId, Long awayTeamId) {
@@ -41,7 +40,6 @@ public class Game implements Persistable<Long> {
     }
 
     @Override
-    @JsonIgnore
     public boolean isNew() {
         return isNew;
     }
