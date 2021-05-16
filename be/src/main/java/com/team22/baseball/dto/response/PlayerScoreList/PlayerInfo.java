@@ -1,22 +1,15 @@
 package com.team22.baseball.dto.response.PlayerScoreList;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class PlayerInfo {
 
-    @JsonProperty("uniform_number")
     private int uniformNumber;
 
-    @JsonProperty("player_name")
     private String playerName;
 
-    @JsonProperty("plate_appearance")
     private int plateAppearance;
 
-    @JsonProperty("hits")
     private int hits;
 
-    @JsonProperty("outs")
     private int outs;
 
     public PlayerInfo(int uniformNumber, String playerName, int plateAppearance, int hits, int outs) {

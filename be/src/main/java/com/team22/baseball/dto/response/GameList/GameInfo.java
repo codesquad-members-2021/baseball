@@ -1,14 +1,10 @@
 package com.team22.baseball.dto.response.GameList;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class GameInfo {
 
-    @JsonProperty("game_id")
     private Long gameId;
 
-    @JsonProperty("in_Progress")
     private boolean inProgress;
 
     private String home;
