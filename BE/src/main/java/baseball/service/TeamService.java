@@ -31,7 +31,7 @@ public class TeamService {
 
     public TeamsDTO getTeamsDTO() {
         List<TeamDTO> teamDTOs = teamRepository.findAll().stream()
-                .map(team -> new TeamDTO(team))
+                .map(TeamDTO::new)
                 .collect(Collectors.toList());
 
         return new TeamsDTO(teamDTOs);
