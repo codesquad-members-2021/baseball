@@ -11,10 +11,8 @@ public class GameInfo {
     @JsonProperty("in_Progress")
     private boolean inProgress;
 
-    @JsonProperty("home")
     private String home;
 
-    @JsonProperty("away")
     private String away;
 
     public GameInfo(Long gameId, boolean inProgress, String home, String away) {
