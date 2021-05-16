@@ -39,7 +39,7 @@ public class ExceptionController {
 
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ErrorDTO handleInternalServerError(HttpRequestMethodNotSupportedException exception) {
+    public ErrorDTO handleMethodNotAllowed(HttpRequestMethodNotSupportedException exception) {
         return new ErrorDTO(HttpStatus.METHOD_NOT_ALLOWED, exception.getMessage());
     }
 
