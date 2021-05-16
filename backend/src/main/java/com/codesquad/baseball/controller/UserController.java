@@ -1,6 +1,5 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.annotation.Refresh;
 import com.codesquad.baseball.dto.oauth.AuthorizationInfo;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.ReceiveAccessTokenDTO;
@@ -42,7 +41,7 @@ public class UserController {
     @GetMapping("/callback")
     public JwtTokenDTO oauthCallBack(AuthorizationInfo authorizationInfo) {
         ReceiveAccessTokenDTO receiveAccessTokenDTO = googleApiRequester.requestAccessToken(authorizationInfo.getCode());
-        UserInfoDTO userInfoDTO = googleApiRequester.requestUserInfo(receiveAccessTokenDTO.getAccess_token());
+        UserInfoDTO userInfoDTO = googleApiRequester.requestUserInfo(receiveAccessTokenDTO.getAccessToken());
         return userService.login(userInfoDTO);
     }
 

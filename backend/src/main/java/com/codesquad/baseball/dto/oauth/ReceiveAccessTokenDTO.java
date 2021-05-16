@@ -1,44 +1,48 @@
 package com.codesquad.baseball.dto.oauth;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ReceiveAccessTokenDTO {
 
-    private String access_token;
-    private int expires_in;
+    private String accessToken;
+    private int expiresIn;
     private String scope;
-    private String token_type;
-    private String id_token;
+    private String tokenType;
+    private String idToken;
 
     public ReceiveAccessTokenDTO() {
     }
 
-    public String getAccess_token() {
-        return access_token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public int getExpires_in() {
-        return expires_in;
+    public int getExpiresIn() {
+        return expiresIn;
     }
 
     public String getScope() {
         return scope;
     }
 
-    public String getToken_type() {
-        return token_type;
+    public String getTokenType() {
+        return tokenType;
     }
 
-    public String getId_token() {
-        return id_token;
+    public String getIdToken() {
+        return idToken;
     }
 
     @Override
     public String toString() {
         return "ReceiveAccessTokenDTO{" +
-                "access_token='" + access_token + '\'' +
-                ", expires_in=" + expires_in +
+                "access_token='" + accessToken + '\'' +
+                ", expires_in=" + expiresIn +
                 ", scope='" + scope + '\'' +
-                ", token_type='" + token_type + '\'' +
-                ", id_token='" + id_token + '\'' +
+                ", token_type='" + tokenType + '\'' +
+                ", id_token='" + idToken + '\'' +
                 '}';
     }
 }

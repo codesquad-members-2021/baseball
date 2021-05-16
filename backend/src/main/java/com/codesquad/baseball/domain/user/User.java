@@ -29,10 +29,10 @@ public class User {
     public User(UserInfoDTO userInfoDTO, JwtTokenDTO jwtTokenDTO) {
         userId = userInfoDTO.getId();
         email = userInfoDTO.getEmail();
-        verifiedEmail = userInfoDTO.getVerified_email();
+        verifiedEmail = userInfoDTO.getVerifiedEmail();
         name = userInfoDTO.getName();
-        familyName = userInfoDTO.getFamily_name();
-        givenName = userInfoDTO.getGiven_name();
+        familyName = userInfoDTO.getFamilyName();
+        givenName = userInfoDTO.getGivenName();
         picture = userInfoDTO.getPicture();
         locale = userInfoDTO.getLocale();
         this.accessToken = jwtTokenDTO.getAccessToken();
@@ -42,10 +42,10 @@ public class User {
     public void update(UserInfoDTO userInfoDTO) {
         userId = userInfoDTO.getId();
         email = userInfoDTO.getEmail();
-        verifiedEmail = userInfoDTO.getVerified_email();
+        verifiedEmail = userInfoDTO.getVerifiedEmail();
         name = userInfoDTO.getName();
-        familyName = userInfoDTO.getFamily_name();
-        givenName = userInfoDTO.getGiven_name();
+        familyName = userInfoDTO.getFamilyName();
+        givenName = userInfoDTO.getGivenName();
         picture = userInfoDTO.getPicture();
         locale = userInfoDTO.getLocale();
     }

@@ -1,12 +1,16 @@
 package com.codesquad.baseball.dto.oauth;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserInfoDTO {
     private String id;
     private String email;
-    private String verified_email;
+    private String verifiedEmail;
     private String name;
-    private String family_name;
-    private String given_name;
+    private String familyName;
+    private String givenName;
     private String picture;
     private String locale;
 
@@ -21,20 +25,20 @@ public class UserInfoDTO {
         return email;
     }
 
-    public String getVerified_email() {
-        return verified_email;
+    public String getVerifiedEmail() {
+        return verifiedEmail;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getFamily_name() {
-        return family_name;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public String getGiven_name() {
-        return given_name;
+    public String getGivenName() {
+        return givenName;
     }
 
     public String getPicture() {
@@ -50,10 +54,10 @@ public class UserInfoDTO {
         return "UserInfoDTO{" +
                 "id='" + id + '\'' +
                 ", email='" + email + '\'' +
-                ", verified_email='" + verified_email + '\'' +
+                ", verified_email='" + verifiedEmail + '\'' +
                 ", name='" + name + '\'' +
-                ", family_name='" + family_name + '\'' +
-                ", given_name='" + given_name + '\'' +
+                ", family_name='" + familyName + '\'' +
+                ", given_name='" + givenName + '\'' +
                 ", picture='" + picture + '\'' +
                 ", locale='" + locale + '\'' +
                 '}';
