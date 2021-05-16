@@ -143,7 +143,7 @@ public class GameService {
             TeamInfo teamInfo = TeamInfo.of(team.getName(), team.isHome(), team.isSelected());
 
             for (Player player : team.getPlayers()) {
-                playerInfos.add(PlayerInfo.of(player.getUniformNumber(), player.getName(), player.getPlateAppearance(), player.getHits(), player.getOuts()));
+                playerInfos.add(new PlayerInfo(player));
             }
             responseDto.add(ScoreList.of(teamInfo, playerInfos));
         }

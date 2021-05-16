@@ -1,5 +1,7 @@
 package com.team22.baseball.dto.response.PlayerScoreList;
 
+import com.team22.baseball.domain.Player;
+
 public class PlayerInfo {
 
     private int uniformNumber;
@@ -19,6 +21,15 @@ public class PlayerInfo {
         this.hits = hits;
         this.outs = outs;
     }
+
+    public PlayerInfo(Player player){
+        this.uniformNumber = player.getUniformNumber();
+        this.playerName = player.getName();
+        this.plateAppearance = player.getPlateAppearance();
+        this.hits = player.getHits();
+        this.outs = player.getOuts();
+    }
+
 
     public int getUniformNumber() {
         return uniformNumber;
