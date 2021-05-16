@@ -17,8 +17,13 @@ public class Team {
 
     public Team(String name, Set<Member> members) {
         this.name = name;
-        if (!isMembersEmpty(members)) {
-            this.members = members;
+        validateMembers(members);
+        this.members = members;
+    }
+
+    private void validateMembers(Set<Member> members) {
+        if (!members.isEmpty()) {
+            throw new MemberNotFoundException();
         }
     }
 
@@ -51,12 +56,5 @@ public class Team {
 
     public void deleteScores() {
         scores.clear();
-    }
-
-    private boolean isMembersEmpty(Set<Member> members) {
-        if (!members.isEmpty()) {
-            throw new MemberNotFoundException();
-        }
-        return false;
     }
 }
