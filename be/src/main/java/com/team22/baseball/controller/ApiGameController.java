@@ -1,6 +1,5 @@
 package com.team22.baseball.controller;
 
-import com.team22.baseball.dto.request.GameId;
 import com.team22.baseball.dto.request.SelectTeam;
 import com.team22.baseball.dto.request.UpdatePlayerInfo;
 import com.team22.baseball.dto.response.ApiResult;
@@ -64,10 +63,10 @@ public class ApiGameController {
         return gameService.getPlayerScoreOfGame(gameId);
     }
 
-    @PostMapping("/reset")
+    @PostMapping("/reset/games/{gameId}/reset")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void resetData(@RequestBody GameId gameId) {
-        gameService.resetGameData(gameId.getGameId());
+    private void resetData(@PathVariable Long gameId) {
+        gameService.resetGameData(gameId);
     }
 
 }
