@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useContext, useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { IoIosBaseball } from 'react-icons/io';
@@ -64,26 +65,50 @@ const Screen = () => {
         {currentRound}회 {AttackState[0]} {AttackState[1]}
       </ScreenRound>
       <PitchButton onClick={handleClickPitch}>
+=======
+import styled, { keyframes } from 'styled-components'
+import BallCount from 'components/GamePlay/playScreen/BallCount'
+import { IoIosBaseball } from 'react-icons/io'
+import Span from 'components/common/Span'
+const Screen = () => {
+  return (
+    <StyledScreen>
+      <ScreenField src='field.svg' alt='field' />
+      <ScreenRound>2회 초 수비</ScreenRound>
+      <PitchButton>
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
         <IoIosBaseball />
       </PitchButton>
       <BallCount />
     </StyledScreen>
+<<<<<<< HEAD
   );
 };
 
 export default Screen;
+=======
+  )
+}
+
+export default Screen
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
 
 const StyledScreen = styled.section`
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   align-items: center;
   width: 80%;
+=======
+  width: 70%;
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
   height: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url('https://upload.wikimedia.org/wikipedia/commons/8/80/Munhak_baseball_stadium_2012.png');
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+<<<<<<< HEAD
 `;
 
 const ScreenField = styled.img`
@@ -91,6 +116,14 @@ const ScreenField = styled.img`
   width: 27%;
   transform: rotate(45deg);
 `;
+=======
+`
+
+const ScreenField = styled.img`
+  width: 34%;
+  transform: rotate(45deg);
+`
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
 const ScreenRound = styled.span`
   font-size: ${({ theme }) => `${theme.fontSizes.BASE}rem`};
   font-weight: ${({ theme }) => `${theme.weights.BASE}`};
@@ -98,6 +131,7 @@ const ScreenRound = styled.span`
   position: absolute;
   right: 2%;
   top: 4%;
+<<<<<<< HEAD
 `;
 const rotateAnimation = keyframes`
 0%{
@@ -114,6 +148,23 @@ const rotateAnimation = keyframes`
 const PitchButton = styled.button`
   height: 5rem;
   width:fit-content;
+=======
+`
+const rotateAnimation = keyframes`
+100%{
+  transform: rotate(360deg);
+}
+`
+
+const scaleAnimation = keyframes`
+100%{
+  transform: scale(1.2)
+}
+`
+
+const PitchButton = styled.button`
+  height: 5rem;
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
   position: absolute;
   left: 50%;
   top: 50%;
@@ -122,6 +173,7 @@ const PitchButton = styled.button`
   color: white;
   background: none;
   transform: translate(-50%, -50%);
+<<<<<<< HEAD
   
   &:hover {
     svg {
@@ -135,3 +187,13 @@ const PitchButton = styled.button`
     }
   }
 `;
+=======
+
+  &:hover {
+    svg {
+      animation: ${rotateAnimation} 5s linear infinite,
+        ${scaleAnimation} 2.5s ease-in infinite ;
+    }
+  }
+`
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import History from 'components/GamePlay/playScreen/History';
 import Screen from 'components/GamePlay/playScreen/Screen';
 
