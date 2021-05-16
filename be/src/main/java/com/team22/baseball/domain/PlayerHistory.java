@@ -40,22 +40,7 @@ public class PlayerHistory {
         return record;
     }
 
-    PlayerHistory withId(Long playerId, int round, String record) {
+    public static PlayerHistory of(Long playerId, int round, String record) {
         return new PlayerHistory(null, playerId, round, record);
-    }
-
-    public PlayerHistory of(Long playerId, int round, String record) {
-        return new PlayerHistory(null, playerId, round, record);
-    }
-
-
-    @Override
-    public String toString() {
-        return "PlayerHistory{" +
-                "id=" + id +
-                ", playerId=" + playerId +
-                ", round=" + round +
-                ", record='" + record + '\'' +
-                '}';
     }
 }
