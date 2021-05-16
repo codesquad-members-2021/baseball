@@ -210,16 +210,20 @@ public class Game {
                 changeHitterOfAttackingTeam();
                 resetStrikeAndBall();
                 increaseOutCount();
-                if (isThreeOut()) {
-                    boolean isEndOfTheGame = proceedToNextStage();
-                    if (isEndOfTheGame) {
-                        pitchResult.changeGameStateToGameOver();
-                    }
-                }
+                judgeEndOfGame(pitchResult);
                 break;
         }
         pitchResult.getBackHomeRunners().forEach(i -> currentInning().addScore(attackingTeam()));
         return pitchResult;
+    }
+
+    private void judgeEndOfGame(PitchResult pitchResult) {
+        if (isThreeOut()) {
+            boolean isEndOfTheGame = proceedToNextStage();
+            if (isEndOfTheGame) {
+                pitchResult.changeGameStateToGameOver();
+            }
+        }
     }
 
     private void changeHitterOfAttackingTeam() {
