@@ -32,13 +32,13 @@ public class ApiGameController {
         this.gameService = gameService;
     }
 
-    @GetMapping("game_list")
+    @GetMapping("games")
     private List<GameList> gameList() {
         logger.debug("gameService.findAllGame() : {}", gameService.findAllGame());
         return gameService.findAllGame();
     }
 
-    @GetMapping("select_team/{title}")
+    @GetMapping("select-team/{title}")
     @ResponseStatus(HttpStatus.OK)
     private List<TeamListDto> selectGame(@PathVariable String title) throws Exception {
         title = Objects.toString(title, "");
@@ -47,19 +47,19 @@ public class ApiGameController {
         return gameService.getInfoSelectedTeam(title);
     }
 
-    @PutMapping("/update_player")
+    @PutMapping("/update-player")
     @ResponseStatus(HttpStatus.CREATED)
     private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfo req) throws Exception {
         return gameService.updatePlayerInfo(req);
     }
 
-    @GetMapping("/detailScore/{gameID}")
+    @GetMapping("/detail-score/{gameID}")
     @ResponseStatus(HttpStatus.OK)
     private List<DetailScore> detailScore(@PathVariable Long gameID) {
         return gameService.getDetailScoreOfEachTeam(gameID);
     }
 
-    @GetMapping("/playerList/{gameId}")
+    @GetMapping("/player-list/{gameId}")
     @ResponseStatus(HttpStatus.OK)
     private List<ScoreList> playerScoreList(@PathVariable Long gameId) throws Exception {
         Game findGame = gameService.findGameById(gameId);
