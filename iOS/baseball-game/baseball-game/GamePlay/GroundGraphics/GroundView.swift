@@ -108,10 +108,28 @@ class GroundView: UIView {
     private var baseLayers: [Int: CALayer] = [:]
     private var playerLayer: [PlayerLayer] = []
     
-    private let totalTime = 1.5
-    private let fastDelay = 0.0
-    private let lateDelay = 0.5
+    enum Player: Int {
+        case home = 0
+        case first = 1
+        case second = 2
+        case third = 3
+        
+        var index: Int {
+            return rawValue
+        }
+    }
     
+    enum Duration {
+        static let total = 1.0
+        static let player = 1.0
+        static let base = 0.3
+    }
+    
+    enum Delay {
+        static let fast = 0.0
+        static let late = 0.7
+    }
+
     func configure() {
         self.backgroundColor = UIColor(cgColor: Color.groundGreen)
         configureBaseProperties()
@@ -206,13 +224,14 @@ extension GroundView {
     func homeTofirstBase() {
         guard let homeBaseProperty = homeBaseProperty, let firstBaseProperty = firstBaseProperty else { return }
         
-        playerLayer[0].opacity = 0
+        let targetIndex = Player.home.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
-        CATransaction.setAnimationDuration(totalTime)
+        CATransaction.setAnimationDuration(Duration.total)
         
-        animatePlayer(with: homeBaseProperty, firstBaseProperty, duration: 1, delay: fastDelay)
-        animateBase(id: 1, toSelected: true, duration: 1, delay: lateDelay)
+        animatePlayer(with: homeBaseProperty, firstBaseProperty, duration: Duration.player, delay: Delay.fast)
+        animateBase(id: 1, toSelected: true, duration: Duration.base, delay: Delay.late)
         
         CATransaction.commit()
         
@@ -221,14 +240,15 @@ extension GroundView {
     func firstBaseToSecondBase() {
         guard let firstBaseProperty = firstBaseProperty, let secondBaseProperty = secondBaseProperty else { return }
         
-        playerLayer[1].opacity = 0
+        let targetIndex = Player.first.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
-        CATransaction.setAnimationDuration(totalTime)
+        CATransaction.setAnimationDuration(Duration.total)
         
-        animatePlayer(with: firstBaseProperty, secondBaseProperty, duration: 1, delay: fastDelay)
-        animateBase(id: 1, toSelected: false, duration: 1, delay: fastDelay)
-        animateBase(id: 2, toSelected: true, duration: 1, delay: lateDelay)
+        animatePlayer(with: firstBaseProperty, secondBaseProperty, duration: Duration.player, delay: Delay.fast)
+        animateBase(id: 1, toSelected: false, duration: Duration.base, delay: Delay.late)
+        animateBase(id: 2, toSelected: true, duration: Duration.base, delay: Delay.late)
         
         CATransaction.commit()
         
@@ -237,14 +257,15 @@ extension GroundView {
     func secondBaseToThirdBase() {
         guard let secondBaseProperty = secondBaseProperty, let thirdBaseProperty = thirdBaseProperty else { return }
         
-        playerLayer[2].opacity = 0
+        let targetIndex = Player.second.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
-        CATransaction.setAnimationDuration(totalTime)
+        CATransaction.setAnimationDuration(Duration.total)
         
-        animatePlayer(with: secondBaseProperty, thirdBaseProperty, duration: 1, delay: fastDelay)
-        animateBase(id: 2, toSelected: false, duration: 1, delay: fastDelay)
-        animateBase(id: 3, toSelected: true, duration: 1, delay: lateDelay)
+        animatePlayer(with: secondBaseProperty, thirdBaseProperty, duration: Duration.player, delay: Delay.fast)
+        animateBase(id: 2, toSelected: false, duration: Duration.base, delay: Delay.late)
+        animateBase(id: 3, toSelected: true, duration: Duration.base, delay: Delay.late)
         
         CATransaction.commit()
     }
@@ -252,13 +273,14 @@ extension GroundView {
     func thirdBaseToHome() {
         guard let thirdBaseProperty = thirdBaseProperty, let homeBaseProperty = homeBaseProperty else { return }
         
-        playerLayer[3].opacity = 0
+        let targetIndex = Player.third.index
+        playerLayer[safe: targetIndex]?.opacity = 0
         
         CATransaction.begin()
-        CATransaction.setAnimationDuration(totalTime)
+        CATransaction.setAnimationDuration(Duration.total)
         
-        animatePlayer(with: thirdBaseProperty, homeBaseProperty, duration: 1, delay: fastDelay)
-        animateBase(id: 3, toSelected: false, duration: 1, delay: fastDelay)
+        animatePlayer(with: thirdBaseProperty, homeBaseProperty, duration: Duration.player, delay: Delay.fast)
+        animateBase(id: 3, toSelected: false, duration: Duration.base, delay: Delay.late)
         
         CATransaction.commit()
     }
@@ -267,15 +289,19 @@ extension GroundView {
         
         let targetIndex = toBaseInfo.id - 1
         
-        guard playerLayer.count >= targetIndex else { return }
-        
-        let player = playerLayer[targetIndex]
+        guard let player = playerLayer[safe: targetIndex] else { return }
+  
         player.opacity = 100
         
         let offsetY = player.frame.height / 2
         let fromPosition = fromBaseInfo.centerMovedBy(x: 0, y: offsetY)
         let toPosition = toBaseInfo.centerMovedBy(x: 0, y: offsetY)
 
+        CATransaction.setCompletionBlock {
+            player.position = toPosition
+            if targetIndex == 3 { player.opacity = 0 }
+        }
+        
         let positionAnimation = CASpringAnimation(keyPath: #keyPath(PlayerLayer.position))
         positionAnimation.damping = 10
         positionAnimation.mass = 0.7
@@ -295,23 +321,22 @@ extension GroundView {
         let opacityAnimation2 = CABasicAnimation(keyPath: #keyPath(PlayerLayer.opacity))
         opacityAnimation2.fromValue = 100
         opacityAnimation2.byValue = 0
-        opacityAnimation2.timeOffset = delay + (duration * 0.9)
+        opacityAnimation2.timeOffset = delay + (duration * 0.8)
         opacityAnimation2.duration = duration * 0.1
         player.add(opacityAnimation2, forKey: #keyPath(PlayerLayer.opacity))
 
-        CATransaction.setCompletionBlock {
-            player.position = toPosition
-            if targetIndex == 3 { player.opacity = 0 }
-        }
-        
     }
     
     private func animateBase(id: Int, toSelected: Bool, duration: Double, delay: Double) {
         
-        guard let firstBase = baseLayers[id] else { return }
+        guard let toBase = baseLayers[id] else { return }
     
         let fromColor = toSelected ? Color.base : Color.baseSelected
         let toColor = toSelected ? Color.baseSelected : Color.base
+
+        CATransaction.setCompletionBlock {
+            toBase.backgroundColor = toColor
+        }
         
         let backgroundAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.backgroundColor))
         backgroundAnimation.fromValue = fromColor
@@ -319,11 +344,7 @@ extension GroundView {
         backgroundAnimation.timeOffset = delay
         backgroundAnimation.duration = duration
         
-        firstBase.add(backgroundAnimation, forKey: #keyPath(CALayer.backgroundColor))
-        
-        CATransaction.setCompletionBlock {
-            firstBase.backgroundColor = toColor
-        }
+        toBase.add(backgroundAnimation, forKey: #keyPath(CALayer.backgroundColor))
 
     }
     

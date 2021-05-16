@@ -54,7 +54,7 @@ extension SelectionViewController {
             
             guard let self = self else { return UITableViewCell() }
             
-            let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as! GameCell
+            let cell = self.gameListTableView.dequeueReusableCell(withIdentifier: GameCell.reuseIdentifier) as? GameCell ?? GameCell()
 
             self.viewModel.setCellInfo(with: game)
             self.viewModel.delegate = self
@@ -122,7 +122,7 @@ extension SelectionViewController: SelectViewModelDelegate {
     }
     
     func didPressButton(with gameInfo: GameInfo) {
-        let nextVC = ControllerFactory.instantiate(viewController: GamePlayViewController.self) as! GamePlayViewController
+        let nextVC = ControllerFactory.instantiate(viewController: GamePlayViewController.self) as? GamePlayViewController ?? GamePlayViewController()
         nextVC.getInfo(with: gameInfo)
         
         self.navigationController?.pushViewController(nextVC, animated: true)

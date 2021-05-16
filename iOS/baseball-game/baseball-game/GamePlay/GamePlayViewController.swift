@@ -24,10 +24,7 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var batterInfoView: PitcherInfoView!
     @IBOutlet weak var ballCountView: BallCountView!
     @IBOutlet weak var groundView: GroundView!
-    
-    private let delayAmount = 0.2
-    private var totalDelay = -0.2
-    
+
     enum ViewID {
         static let storyboard = "GamePlay"
         static let segue = "selectPitcher"
@@ -79,7 +76,7 @@ extension GamePlayViewController {
             }
             .store(in: &cancelBag)
         
-        gamePlayViewModel.$pitchList
+        gamePlayViewModel.$pitches
             .receive(on: DispatchQueue.main)
             .sink { [weak self] pitches in
                 guard let pitches = pitches else { return }
@@ -129,17 +126,16 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BallCounter.notiName)
             .sink { data in
-                if let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
-                   let count = data.userInfo?[BallCounter.UserInfo.count] as? Int {
-                    DispatchQueue.main.async {
-                        switch ballType {
-                        case .strike:
-                            self.ballCountView.fillStrike(upto: count)
-                        case .ball:
-                            self.ballCountView.fillBall(upto: count)
-                        case .out:
-                            self.ballCountView.fillOut(upto: count)
-                        }
+                guard let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
+                      let count = data.userInfo?[BallCounter.UserInfo.count] as? Int else { return }
+                DispatchQueue.main.async {
+                    switch ballType {
+                    case .strike:
+                        self.ballCountView.fillStrike(upto: count)
+                    case .ball:
+                        self.ballCountView.fillBall(upto: count)
+                    case .out:
+                        self.ballCountView.fillOut(upto: count)
                     }
                 }
             }.store(in: &cancelBag)
@@ -147,22 +143,19 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BaseManager.notiName)
             .sink { data in
-                if let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement {
-                    self.totalDelay += self.delayAmount
-                    DispatchQueue.main.asyncAfter(deadline: .now() + self.totalDelay) {
-                        switch movementType {
-                        case .homeToFirst:
-                            self.groundView.homeTofirstBase()
-                        case .firstToSecond:
-                            self.groundView.firstBaseToSecondBase()
-                        case .secondToThird:
-                            self.groundView.secondBaseToThirdBase()
-                        case .thirdToHome:
-                            self.groundView.thirdBaseToHome()
-                        case .reset:
-                            self.groundView.reset()
-                        }
-                        self.totalDelay -= self.delayAmount
+                guard let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement else { return }
+                DispatchQueue.main.sync {
+                    switch movementType {
+                    case .homeToFirst:
+                        self.groundView.homeTofirstBase()
+                    case .firstToSecond:
+                        self.groundView.firstBaseToSecondBase()
+                    case .secondToThird:
+                        self.groundView.secondBaseToThirdBase()
+                    case .thirdToHome:
+                        self.groundView.thirdBaseToHome()
+                    case .reset:
+                        self.groundView.reset()
                     }
                 }
             }.store(in: &cancelBag)
