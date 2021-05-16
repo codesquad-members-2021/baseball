@@ -11,8 +11,8 @@ import com.team22.baseball.dto.response.PlayerScoreList.PlayerInfo;
 import com.team22.baseball.dto.response.PlayerScoreList.ScoreList;
 import com.team22.baseball.dto.response.PlayerScoreList.TeamInfo;
 import com.team22.baseball.dto.response.TeamSelect.*;
+import com.team22.baseball.exception.NotFoundException;
 import com.team22.baseball.repository.GameRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
-    @Autowired
     public GameService(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
@@ -76,27 +75,28 @@ public class GameService {
         gameRepository.insertTeamScore(teamName, round, score);
     }
 
-    public Player findPlayerByName(String name) throws Exception {
-        return gameRepository.findPlayerByName(name).orElseThrow(Exception::new);
+    public Player findPlayerByName(String name){
+        return gameRepository.findPlayerByName(name).orElseThrow(NotFoundException::new);
     }
 
-    public int[] calculatePlayerScore(UpdatePlayerInfo req) throws Exception {
+    public List<Integer> calculatePlayerScore(UpdatePlayerInfo updatePlayerInfo){
 
-        Player findPlayer = findPlayerByName(req.getPlayerName());
+        Player findPlayer = findPlayerByName(updatePlayerInfo.getPlayerName());
+        List<Integer> scores = new ArrayList<>();
 
-        int plateAppearance = findPlayer.getPlateAppearance() + ONE;
-        int hits;
-        int outs;
+        int hits = findPlayer.getHits();
+        int outs = findPlayer.getOuts() + ONE;
 
-        if (req.isHit()) {
+        if (updatePlayerInfo.isHit()) {
             hits = findPlayer.getHits() + ONE;
-            outs = findPlayer.getOuts();
-        } else {
-            outs = findPlayer.getOuts() + ONE;
-            hits = findPlayer.getHits();
+            outs = outs - ONE;
         }
 
-        return new int[]{plateAppearance, hits, outs};
+        scores.add(findPlayer.getPlateAppearance() + ONE);
+        scores.add(hits);
+        scores.add(outs);
+
+        return scores;
 
     }
 
@@ -134,8 +134,8 @@ public class GameService {
         return gameRepository.findGameById(gameId).orElseThrow(Exception::new);
     }
 
-    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName) throws Exception {
-        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName).orElseThrow(Exception::new);
+    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName){
+        return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName).orElseThrow(NotFoundException::new);
     }
 
     public List<ScoreList> getPlayerScoreOfGame(Game findGame) {
@@ -157,9 +157,9 @@ public class GameService {
 
     }
 
-    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo req) throws Exception {
+    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo updatePlayerInfo){
 
-        int[] scores = calculatePlayerScore(req);
+        List<Integer> scores = calculatePlayerScore(updatePlayerInfo);
 
         final int PLATE_APPEARANCE = 0;
         final int HITS = 1;
@@ -167,13 +167,13 @@ public class GameService {
 
         final int MAX_PLAYER = 10;
 
-        updatePlayerInfo(req.getPlayerName(), scores[PLATE_APPEARANCE], scores[HITS], scores[OUTS]);
-        insertTeamScore(req.getTeamName(), req.getRound(), req.getTeamScore());
+        updatePlayerInfo(updatePlayerInfo.getPlayerName(), scores.get(PLATE_APPEARANCE), scores.get(HITS), scores.get(OUTS));
+        insertTeamScore(updatePlayerInfo.getTeamName(), updatePlayerInfo.getRound(), updatePlayerInfo.getTeamScore());
 
-        Player prevPlayer = findPlayerByName(req.getPlayerName());
+        Player prevPlayer = findPlayerByName(updatePlayerInfo.getPlayerName());
 
         int prevUniformNumber = prevPlayer.getUniformNumber();
-        String teamName = req.getTeamName();
+        String teamName = updatePlayerInfo.getTeamName();
 
         int nextUniformNumber = ++prevUniformNumber > MAX_PLAYER ? ONE : prevUniformNumber;
 
