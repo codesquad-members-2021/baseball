@@ -18,6 +18,9 @@ public class Game {
 
     private final boolean inProgress;
 
+    @MappedCollection(idColumn = "game_id", keyColumn = "id")
+    private List<Team> teams = new ArrayList<>();
+
     @PersistenceConstructor
     private Game(Long id, int round, boolean inProgress) {
         this.id = id;
@@ -25,15 +28,16 @@ public class Game {
         this.inProgress = inProgress;
     }
 
-    @MappedCollection(idColumn = "game_id", keyColumn = "id")
-    private List<Team> teams = new ArrayList<>();
-
     public List<Team> getTeams() {
         return teams;
     }
 
     public void addTeam(Team team) {
         teams.add(team);
+    }
+
+    public static Game of(int round, boolean inProgress) {
+        return new Game(null, round, inProgress);
     }
 
     public Long getId() {
@@ -48,8 +52,5 @@ public class Game {
         return inProgress;
     }
 
-    public static Game of(int round, boolean inProgress) {
-        return new Game(null, round, inProgress);
-    }
 
 }
