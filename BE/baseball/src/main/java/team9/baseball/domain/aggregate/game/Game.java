@@ -267,12 +267,13 @@ public class Game {
         sendBatterOnPlate(attackTeam.getId(), nextBatterUniformNumber);
     }
 
+    private boolean isScoreDifferent() {
+        return getTotalScore(Halves.TOP) != getTotalScore(Halves.BOTTOM);
+    }
+
     private boolean isExited() {
-        if (currentInning == 9 && currentHalves == Halves.BOTTOM &&
-                getTotalScore(Halves.TOP) != getTotalScore(Halves.BOTTOM)) {
-            return true;
-        }
-        if (currentInning == 12 && currentHalves == Halves.BOTTOM) {
+        if ((currentInning == 9 && currentHalves == Halves.BOTTOM && isScoreDifferent())
+                || (currentInning == 12 && currentHalves == Halves.BOTTOM)) {
             return true;
         }
 
