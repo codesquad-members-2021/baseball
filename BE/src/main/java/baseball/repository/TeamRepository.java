@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface TeamRepository extends CrudRepository<Team, Long> {
 
+    @Override
     List<Team> findAll();
 }
