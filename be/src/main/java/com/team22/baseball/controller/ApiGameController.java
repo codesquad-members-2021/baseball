@@ -41,8 +41,7 @@ public class ApiGameController {
         return new Response(gameInfos);
     }
 
-    @PutMapping("select-team")
-    @ResponseStatus(HttpStatus.OK)
+    @PutMapping("team")
     private List<TeamListDto> selectGame(@RequestBody SelectTeam selectTeam) throws Exception {
         final String teamTitle = selectTeam.getTitle();
         gameService.updateGameStatusByTitle(teamTitle);
@@ -50,20 +49,18 @@ public class ApiGameController {
         return gameService.getInfoSelectedTeam(teamTitle);
     }
 
-    @PutMapping("/update-player")
+    @PutMapping("player")
     @ResponseStatus(HttpStatus.CREATED)
     private NextPlayerInfoDto updatePlayerInfo(@RequestBody UpdatePlayerInfo req) throws Exception {
         return gameService.updatePlayerInfo(req);
     }
 
     @GetMapping("/detail-score/{gameID}")
-    @ResponseStatus(HttpStatus.OK)
     private List<DetailScore> detailScore(@PathVariable Long gameID) {
         return gameService.getDetailScoreOfEachTeam(gameID);
     }
 
     @GetMapping("/player-list/{gameId}")
-    @ResponseStatus(HttpStatus.OK)
     private List<ScoreList> playerScoreList(@PathVariable Long gameId) throws Exception {
         Game findGame = gameService.findGameById(gameId);
         return gameService.getPlayerScoreOfGame(findGame);
