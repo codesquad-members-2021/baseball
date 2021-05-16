@@ -30,7 +30,6 @@ create table record
     at_bat    int,
     hit      int,
     `out`    int,
-    average  double,
     member int references member (id)
 );
 
