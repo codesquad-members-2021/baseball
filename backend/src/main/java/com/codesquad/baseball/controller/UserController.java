@@ -34,6 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
+    @ResponseStatus(HttpStatus.NOT_MODIFIED)
     public void login(HttpServletResponse response) throws IOException {
         response.sendRedirect(googleUrlService.loginPageUrl());
     }
