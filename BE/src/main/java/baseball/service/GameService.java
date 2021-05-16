@@ -26,13 +26,13 @@ public class GameService {
         this.teamRepository = teamRepository;
     }
 
-    public GameDTO getGameDTO() {
+    public Games getGameDTO() {
         if (gameRepository.count() == EMPTY) {
             saveGames();
         }
         List<Game> games = gameRepository.findAll();
 
-        return new GameDTO(games);
+        return new Games(games);
     }
 
     private void saveGames() {

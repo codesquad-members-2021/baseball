@@ -4,11 +4,11 @@ import baseball.domain.Game;
 
 import java.util.List;
 
-public class GameDTO {
+public class Games {
 
     private List<Game> games;
 
-    public GameDTO(List<Game> games) {
+    public Games(List<Game> games) {
         this.games = games;
     }
 

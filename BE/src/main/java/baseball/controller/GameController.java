@@ -1,7 +1,7 @@
 package baseball.controller;
 
 import baseball.service.GameService;
-import baseball.service.dto.GameDTO;
+import baseball.service.dto.Games;
 import baseball.service.dto.GameTeamDTO;
 import baseball.service.dto.GameScoreDTO;
 import baseball.service.dto.ScoreRequest;
@@ -18,7 +18,7 @@ public class GameController {
     }
 
     @GetMapping
-    public GameDTO showGames() {
+    public Games showGames() {
         return gameService.getGameDTO();
     }
 
