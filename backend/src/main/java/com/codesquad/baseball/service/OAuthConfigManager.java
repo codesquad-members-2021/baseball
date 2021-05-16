@@ -27,7 +27,6 @@ public class OAuthConfigManager {
             InputStream inputStream = OAuthConfigManager.class.getResourceAsStream("/server.secret.json");
             ObjectMapper objectMapper = new ObjectMapper();
             serverSecretDTO = objectMapper.readValue(inputStream, ServerSecretDTO.class);
-
         } catch (IOException e) {
             logger.error(LOADING_OAUTH_CONFIG_FAILED_ERROR_MESSAGE);
             e.printStackTrace();

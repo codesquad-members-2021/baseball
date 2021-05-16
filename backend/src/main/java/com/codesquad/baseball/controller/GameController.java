@@ -1,14 +1,12 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.annotation.Auth;
+import com.codesquad.baseball.config.annotation.CertifiedUser;
+import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.game.GameDetailDTO;
 import com.codesquad.baseball.dto.game.GamesDTO;
 import com.codesquad.baseball.dto.game.PitchDTO;
 import com.codesquad.baseball.service.GameService;
-import com.codesquad.baseball.utils.ControllerUtil;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/games")
@@ -26,9 +24,8 @@ public class GameController {
     }
 
     @PatchMapping("/{gameId}")
-    public void joinIn(@PathVariable("gameId") int gameId, HttpServletRequest request) {
-        String userId = ControllerUtil.extractUserIdFromRequest(request);
-        gameService.joinIn(gameId, userId);
+    public void joinIn(@PathVariable("gameId") int gameId, @CertifiedUser User certifiedUser) {
+        gameService.joinIn(gameId, certifiedUser);
     }
 
     @GetMapping("/{gameId}")
@@ -37,8 +34,7 @@ public class GameController {
     }
 
     @PostMapping("/{gameId}/pitch")
-    public PitchDTO pitch(@PathVariable("gameId") int gameId, HttpServletRequest request) {
-        String userId = ControllerUtil.extractUserIdFromRequest(request);
-        return gameService.doPitch(gameId, userId);
+    public PitchDTO pitch(@PathVariable("gameId") int gameId, @CertifiedUser User certifiedUser) {
+        return gameService.doPitch(gameId, certifiedUser);
     }
 }

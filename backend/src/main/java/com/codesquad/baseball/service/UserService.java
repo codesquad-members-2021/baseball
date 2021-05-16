@@ -29,12 +29,11 @@ public class UserService {
     }
 
     @Transactional
-    public JwtTokenDTO refreshToken(String userId) {
-        User user = findUserByUserId(userId);
-        JwtTokenDTO newTokenDTO = jwtBuilder.createToken(userId);
-        user.updateAccessToken(newTokenDTO.getAccessToken());
-        user.updateRefreshToken(newTokenDTO.getRefreshToken());
-        userRepository.save(user);
+    public JwtTokenDTO refreshToken(User certifiedUser) {
+        JwtTokenDTO newTokenDTO = jwtBuilder.createToken(certifiedUser.getUserId());
+        certifiedUser.updateAccessToken(newTokenDTO.getAccessToken());
+        certifiedUser.updateRefreshToken(newTokenDTO.getRefreshToken());
+        userRepository.save(certifiedUser);
         return newTokenDTO;
     }
 

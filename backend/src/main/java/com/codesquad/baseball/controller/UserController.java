@@ -1,5 +1,7 @@
 package com.codesquad.baseball.controller;
 
+import com.codesquad.baseball.config.annotation.CertifiedUser;
+import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.oauth.AuthorizationInfo;
 import com.codesquad.baseball.dto.oauth.JwtTokenDTO;
 import com.codesquad.baseball.dto.oauth.ReceiveAccessTokenDTO;
@@ -8,11 +10,9 @@ import com.codesquad.baseball.service.GoogleApiRequester;
 import com.codesquad.baseball.service.GoogleUrlService;
 import com.codesquad.baseball.service.JwtBuilder;
 import com.codesquad.baseball.service.UserService;
-import com.codesquad.baseball.utils.ControllerUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -46,8 +46,7 @@ public class UserController {
     }
 
     @PostMapping("/refreshToken")
-    public JwtTokenDTO refreshToken(HttpServletRequest request) {
-        String userId = ControllerUtil.extractUserIdFromRequest(request);
-        return userService.refreshToken(userId);
+    public JwtTokenDTO refreshToken(@CertifiedUser User certifiedUser) {
+        return userService.refreshToken(certifiedUser);
     }
 }

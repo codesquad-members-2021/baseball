@@ -1,7 +1,9 @@
-package com.codesquad.baseball.config;
+package com.codesquad.baseball.config.interceptor;
 
-import com.codesquad.baseball.dto.oauth.RefreshTokenDTO;
+import com.codesquad.baseball.domain.user.User;
+import com.codesquad.baseball.dto.oauth.AccessTokenDTO;
 import com.codesquad.baseball.service.JwtVerifier;
+import com.codesquad.baseball.service.UserService;
 import com.codesquad.baseball.utils.TokenUtil;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -11,17 +13,21 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class RefreshInterceptor implements HandlerInterceptor {
+import static com.codesquad.baseball.utils.ArgumentResolverKeyConstant.CERTIFIED_USER;
+import static com.codesquad.baseball.utils.ArgumentResolverKeyConstant.USER_ID_KEY;
 
-    public static final String USER_ID_KEY = "USER_ID";
+public class AuthInterceptor implements HandlerInterceptor {
 
     @Resource
     private JwtVerifier jwtVerifier;
 
+    @Resource
+    private UserService userService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
-            onRefreshAnnotation(request);
+            onAuthAnnotation(request);
         }
         return true;
     }
@@ -36,18 +42,19 @@ public class RefreshInterceptor implements HandlerInterceptor {
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 
-    private void onRefreshAnnotation(HttpServletRequest request) {
-        RefreshTokenDTO refreshTokenDTO = verifyRefreshToken(request);
-        jwtVerifier.verifyRefreshToken(refreshTokenDTO);
-        request.setAttribute(USER_ID_KEY, refreshTokenDTO.getUserId());
+    private void onAuthAnnotation(HttpServletRequest request) {
+        AccessTokenDTO accessTokenDTO = extractAccessTokenDtoFromRequest(request);
+        jwtVerifier.verifyAccessToken(accessTokenDTO);
+        User certifiedUser = userService.findUserByUserId(accessTokenDTO.getUserId());
+        request.setAttribute(CERTIFIED_USER, certifiedUser);
     }
 
-    private RefreshTokenDTO verifyRefreshToken(HttpServletRequest request) {
+    private AccessTokenDTO extractAccessTokenDtoFromRequest(HttpServletRequest request) {
         String jwtToken = TokenUtil.extractTokenFromHeader(request);
         String userId = jwtVerifier.extractUserIdFromJwt(jwtToken);
-        return new RefreshTokenDTO.Builder()
+        return new AccessTokenDTO.Builder()
                 .userId(userId)
-                .refreshToken(jwtToken)
+                .accessToken(jwtToken)
                 .build();
     }
 }

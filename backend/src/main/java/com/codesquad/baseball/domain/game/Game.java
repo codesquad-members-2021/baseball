@@ -6,6 +6,7 @@ import com.codesquad.baseball.domain.game.participant.PlayerParticipatingInGame;
 import com.codesquad.baseball.domain.game.participant.TeamParticipatingInGame;
 import com.codesquad.baseball.domain.game.pitch.PitchResult;
 import com.codesquad.baseball.domain.team.TeamType;
+import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.game.NotYourGameException;
 import com.codesquad.baseball.exceptions.notfound.TeamNotFoundException;
@@ -81,8 +82,8 @@ public class Game {
         return game;
     }
 
-    public void joinGame(String userId) {
-        gameOccupier = userId;
+    public void joinGame(User user) {
+        gameOccupier = user.getUserId();
     }
 
     public List<History> showHistoriesOfCurrentInning() {
@@ -454,11 +455,11 @@ public class Game {
         return !isJoinable();
     }
 
-    public void verifyGameIsPlayable(String userId) {
+    public void verifyGameIsPlayable(User user) {
         if (!isOccupied()) {
             throw new GameIsNotStartedException();
         }
-        if (!gameOccupier.equals(userId)) {
+        if (!user.isSameUser(gameOccupier)) {
             throw new NotYourGameException();
         }
     }

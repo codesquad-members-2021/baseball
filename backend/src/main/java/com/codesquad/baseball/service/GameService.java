@@ -10,6 +10,7 @@ import com.codesquad.baseball.domain.team.Player;
 import com.codesquad.baseball.domain.team.PlayerRepository;
 import com.codesquad.baseball.domain.team.Team;
 import com.codesquad.baseball.domain.team.TeamType;
+import com.codesquad.baseball.domain.user.User;
 import com.codesquad.baseball.dto.game.*;
 import com.codesquad.baseball.dto.player.PlayerDTO;
 import com.codesquad.baseball.dto.team.TeamDetailDTO;
@@ -51,12 +52,12 @@ public class GameService {
     }
 
     @Transactional
-    public void joinIn(int gameId, String userId) {
+    public void joinIn(int gameId, User certifiedUser) {
         Game game = findGame(gameId);
         if (game.isOccupied()) {
             throw new GameAlreadyOccupiedException(gameId);
         }
-        game.joinGame(userId);
+        game.joinGame(certifiedUser);
         gameRepository.save(game);
     }
 
@@ -83,9 +84,9 @@ public class GameService {
     }
 
     @Transactional
-    public PitchDTO doPitch(int gameId, String userId) {
+    public PitchDTO doPitch(int gameId, User user) {
         Game game = findGame(gameId);
-        game.verifyGameIsPlayable(userId);
+        game.verifyGameIsPlayable(user);
         PitchResult pitchResult = game.pitch(PitchRandomTable.rollDice());
         gameRepository.save(game);
         return createPitchDTO(game, pitchResult);

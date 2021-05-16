@@ -62,6 +62,10 @@ public class User {
         }
     }
 
+    public boolean isSameUser(String userId) {
+        return this.userId.equals(userId);
+    }
+
     public void updateAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
