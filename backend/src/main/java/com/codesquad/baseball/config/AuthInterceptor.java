@@ -22,7 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
-            processAuth(request, handler);
+            onAuthAnnotation(request);
         }
         return true;
     }
@@ -41,13 +41,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         AccessTokenDTO accessTokenDTO = extractAccessTokenDtoFromRequest(request);
         jwtVerifier.verifyAccessToken(accessTokenDTO);
         request.setAttribute(USER_ID_KEY, accessTokenDTO.getUserId());
-    }
-
-    private void processAuth(HttpServletRequest request, Object handler) {
-        Auth authAnnotation = ((HandlerMethod) handler).getMethodAnnotation(Auth.class);
-        if (authAnnotation != null) {
-            onAuthAnnotation(request);
-        }
     }
 
     private AccessTokenDTO extractAccessTokenDtoFromRequest(HttpServletRequest request) {

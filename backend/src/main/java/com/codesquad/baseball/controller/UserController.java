@@ -10,10 +10,8 @@ import com.codesquad.baseball.service.GoogleUrlService;
 import com.codesquad.baseball.service.JwtBuilder;
 import com.codesquad.baseball.service.UserService;
 import com.codesquad.baseball.utils.ControllerUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,7 +45,6 @@ public class UserController {
         return userService.login(userInfoDTO);
     }
 
-    @Refresh
     @PostMapping("/refreshToken")
     public JwtTokenDTO refreshToken(HttpServletRequest request) {
         String userId = ControllerUtil.extractUserIdFromRequest(request);

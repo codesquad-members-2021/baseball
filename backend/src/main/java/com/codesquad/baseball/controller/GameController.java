@@ -25,20 +25,17 @@ public class GameController {
         return gameService.showGames();
     }
 
-    @Auth
     @PatchMapping("/{gameId}")
     public void joinIn(@PathVariable("gameId") int gameId, HttpServletRequest request) {
         String userId = ControllerUtil.extractUserIdFromRequest(request);
         gameService.joinIn(gameId, userId);
     }
 
-    @Auth
     @GetMapping("/{gameId}")
     public GameDetailDTO showGameDetail(@PathVariable("gameId") int gameId) {
         return gameService.gameDetail(gameId);
     }
 
-    @Auth
     @PostMapping("/{gameId}/pitch")
     public PitchDTO pitch(@PathVariable("gameId") int gameId, HttpServletRequest request) {
         String userId = ControllerUtil.extractUserIdFromRequest(request);
