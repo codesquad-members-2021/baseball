@@ -220,8 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				E4FE76E02643B0AC00151B35 /* GamePlay.storyboard */,
-				E4FE76F7264407E600151B35 /* TeamScoreView.swift */,
 				E4FE76F92644108900151B35 /* PitcherInfoView.swift */,
+				E4FE76F7264407E600151B35 /* TeamScoreView.swift */,
 				E4FE76FB2644136600151B35 /* BatterInfoView.swift */,
 				E4FE76DE26438ABC00151B35 /* PitchListTableViewCell.swift */,
 				E4DB1CE2264E204E00894DCB /* AlertFactory.swift */,
