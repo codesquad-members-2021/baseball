@@ -47,21 +47,15 @@ public class GameService {
 
 
     public List<TeamListDto> getInfoSelectedTeam(String title) throws Exception {
-
         List<TeamListDto> teamListDtos = new ArrayList<>();
-
         List<TeamTypeDto> teamTypeDtoList = findTeamListByTeamTitle(title);
 
         for (TeamTypeDto type : teamTypeDtoList) {
-
             String teamTitle = type.getName();
-
             TeamInfoDto teamInfoDto = findTeamInfoByTitle(teamTitle);
-
             List<PlayerInfoDto> playerInfoDto = findPlayerListByTeamTitle(teamTitle);
 
             teamListDtos.add(new TeamListDto(teamInfoDto, playerInfoDto));
-
         }
 
         return teamListDtos;
@@ -75,11 +69,11 @@ public class GameService {
         gameRepository.insertTeamScore(teamName, round, score);
     }
 
-    public Player findPlayerByName(String name){
+    public Player findPlayerByName(String name) {
         return gameRepository.findPlayerByName(name).orElseThrow(NotFoundException::new);
     }
 
-    public List<Integer> calculatePlayerScore(UpdatePlayerInfo updatePlayerInfo){
+    public List<Integer> calculatePlayerScore(UpdatePlayerInfo updatePlayerInfo) {
 
         Player findPlayer = findPlayerByName(updatePlayerInfo.getPlayerName());
         List<Integer> scores = new ArrayList<>();
@@ -134,7 +128,7 @@ public class GameService {
         return gameRepository.findGameById(gameId).orElseThrow(Exception::new);
     }
 
-    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName){
+    public NextPlayerInfoDto findNextPlayerByNumberAndTeamName(int nextUniformNumber, String teamName) {
         return gameRepository.findNextPlayerByNumberAndTeamName(nextUniformNumber, teamName).orElseThrow(NotFoundException::new);
     }
 
@@ -158,7 +152,7 @@ public class GameService {
 
     }
 
-    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo updatePlayerInfo){
+    public NextPlayerInfoDto updatePlayerInfo(UpdatePlayerInfo updatePlayerInfo) {
 
         List<Integer> scores = calculatePlayerScore(updatePlayerInfo);
 
