@@ -129,17 +129,17 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BallCounter.notiName)
             .sink { data in
-                if let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
-                   let count = data.userInfo?[BallCounter.UserInfo.count] as? Int {
-                    DispatchQueue.main.async {
-                        switch ballType {
-                        case .strike:
-                            self.ballCountView.fillStrike(upto: count)
-                        case .ball:
-                            self.ballCountView.fillBall(upto: count)
-                        case .out:
-                            self.ballCountView.fillOut(upto: count)
-                        }
+                guard let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
+                      let count = data.userInfo?[BallCounter.UserInfo.count] as? Int else { return }
+                      
+                DispatchQueue.main.async {
+                    switch ballType {
+                    case .strike:
+                        self.ballCountView.fillStrike(upto: count)
+                    case .ball:
+                        self.ballCountView.fillBall(upto: count)
+                    case .out:
+                        self.ballCountView.fillOut(upto: count)
                     }
                 }
             }.store(in: &cancelBag)
@@ -147,23 +147,24 @@ extension GamePlayViewController {
         NotificationCenter.default
             .publisher(for: BaseManager.notiName)
             .sink { data in
-                if let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement {
-                    self.totalDelay += self.delayAmount
-                    DispatchQueue.main.asyncAfter(deadline: .now() + self.totalDelay) {
-                        switch movementType {
-                        case .homeToFirst:
-                            self.groundView.homeTofirstBase()
-                        case .firstToSecond:
-                            self.groundView.firstBaseToSecondBase()
-                        case .secondToThird:
-                            self.groundView.secondBaseToThirdBase()
-                        case .thirdToHome:
-                            self.groundView.thirdBaseToHome()
-                        case .reset:
-                            self.groundView.reset()
-                        }
-                        self.totalDelay -= self.delayAmount
+                guard let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement else { return }
+                
+                self.totalDelay += self.delayAmount
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.totalDelay) {
+                    switch movementType {
+                    case .homeToFirst:
+                        self.groundView.homeTofirstBase()
+                    case .firstToSecond:
+                        self.groundView.firstBaseToSecondBase()
+                    case .secondToThird:
+                        self.groundView.secondBaseToThirdBase()
+                    case .thirdToHome:
+                        self.groundView.thirdBaseToHome()
+                    case .reset:
+                        self.groundView.reset()
                     }
+                    self.totalDelay -= self.delayAmount
                 }
             }.store(in: &cancelBag)
     }
