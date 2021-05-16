@@ -22,7 +22,7 @@ public class Team {
     }
 
     private void validateMembers(Set<Member> members) {
-        if (!members.isEmpty()) {
+        if (members.isEmpty()) {
             throw new MemberNotFoundException();
         }
     }
@@ -56,5 +56,10 @@ public class Team {
 
     public void deleteScores() {
         scores.clear();
+    }
+
+    public void deleteRecordOfMembers() {
+        members.stream()
+                .forEach(Member::deleteRecord);
     }
 }

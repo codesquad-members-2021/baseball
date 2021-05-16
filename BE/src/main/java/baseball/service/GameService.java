@@ -88,8 +88,7 @@ public class GameService {
         List<Team> teams = teamRepository.findAll().stream()
                 .map(team -> {
                     team.deleteScores();
-                    team.getMembers().stream()
-                            .forEach(Member::deleteRecord);
+                    team.deleteRecordOfMembers();
                     return team;
                 }).collect(Collectors.toList());
 
