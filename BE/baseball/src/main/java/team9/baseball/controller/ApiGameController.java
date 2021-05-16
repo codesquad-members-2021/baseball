@@ -29,21 +29,21 @@ public class ApiGameController {
     @PostMapping
     public ApiResult createGame(@RequestBody CreateGameDTO createGameDTO) {
         gameService.createNewGame(createGameDTO.getAwayTeamId(), createGameDTO.getHomeTeamId());
-        return ApiResult.succeed("OK");
+        return ApiResult.ok();
     }
 
     @PostMapping("/joining")
     public ApiResult joinGame(@Valid @RequestBody JoinGameDTO joinGameDTO, HttpServletRequest request) {
         long userId = (long) request.getAttribute("userId");
         gameService.joinGame(userId, joinGameDTO.getGameId(), joinGameDTO.getMyVenue());
-        return ApiResult.succeed("OK");
+        return ApiResult.ok();
     }
 
     @DeleteMapping("/joining")
     public ApiResult quitGame(HttpServletRequest request) {
         long userId = (long) request.getAttribute("userId");
         gameService.quitGame(userId);
-        return ApiResult.succeed("OK");
+        return ApiResult.ok();
     }
 
     @GetMapping("/status")
@@ -56,7 +56,7 @@ public class ApiGameController {
     public ApiResult pitch(@RequestBody PitchResultDTO pitchResultDTO, HttpServletRequest request) {
         long userId = (long) request.getAttribute("userId");
         gameService.applyPitchResult(userId, pitchResultDTO.getPitchResult());
-        return ApiResult.succeed("OK");
+        return ApiResult.ok();
     }
 
     @GetMapping("/history")
