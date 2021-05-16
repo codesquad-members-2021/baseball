@@ -54,9 +54,9 @@ public class ApiGameController {
         return gameService.updatePlayerInfo(updatePlayerInfo);
     }
 
-    @GetMapping("/detail-score/{gameID}")
-    private List<DetailScore> detailScore(@PathVariable Long gameID) {
-        return gameService.getDetailScoreOfEachTeam(gameID);
+    @GetMapping("/detail-score/{gameId}")
+    private List<DetailScore> detailScore(@PathVariable Long gameId) {
+        return gameService.getDetailScoreOfEachTeam(gameId);
     }
 
     @GetMapping("/player-list/{gameId}")
