@@ -1,6 +1,6 @@
 package com.codesquad.baseball.exceptions.oauth;
 
-public class InvalidJwtTokenException extends RuntimeException {
+public class InvalidJwtTokenException extends JwtTokenException {
     public static final String BAD_TOKEN = "Authorization의 값이 잘못되었습니다! 형식은 bearer TOKEN_STRING 이어야 합니다";
     public static final String EXPIRED_JWT_EXCEPTION = "만료된 토큰입니다";
     public static final String UNSUPPORTED_JWT_EXCEPTION = "지원되지 않는 토큰입니다";

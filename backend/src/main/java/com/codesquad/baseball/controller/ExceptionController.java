@@ -4,8 +4,11 @@ import com.codesquad.baseball.dto.etc.ErrorDTO;
 import com.codesquad.baseball.exceptions.game.GameAlreadyOccupiedException;
 import com.codesquad.baseball.exceptions.game.GameIsNotStartedException;
 import com.codesquad.baseball.exceptions.game.NotYourGameException;
-import com.codesquad.baseball.exceptions.notfound.*;
-import com.codesquad.baseball.exceptions.oauth.*;
+import com.codesquad.baseball.exceptions.notfound.NotFoundException;
+import com.codesquad.baseball.exceptions.oauth.InvalidAccessTokenException;
+import com.codesquad.baseball.exceptions.oauth.InvalidRefreshTokenException;
+import com.codesquad.baseball.exceptions.oauth.InvalidTokenException;
+import com.codesquad.baseball.exceptions.oauth.JwtTokenException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,8 +44,8 @@ public class ExceptionController {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({NoJwtTokenException.class, InvalidJwtTokenException.class})
-    public ErrorDTO handleNoJwtTokenException(RuntimeException exception) {
+    @ExceptionHandler(JwtTokenException.class)
+    public ErrorDTO handleNoJwtTokenException(JwtTokenException exception) {
         return new ErrorDTO(HttpStatus.BAD_REQUEST, exception.getMessage());
     }
 
