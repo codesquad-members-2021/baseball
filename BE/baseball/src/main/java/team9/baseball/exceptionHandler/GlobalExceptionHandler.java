@@ -15,19 +15,19 @@ import team9.baseball.exception.UnauthorizedException;
 public class GlobalExceptionHandler {
     @ExceptionHandler(BadStatusException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResult badStatusException(Exception ex) {
+    public ApiResult badStatusException(BadStatusException ex) {
         return ApiResult.failed(ex);
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResult notFoundException(Exception ex) {
+    public ApiResult notFoundException(NotFoundException ex) {
         return ApiResult.failed(ex);
     }
 
     @ExceptionHandler(JwtException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ApiResult signatureException() {
+    public ApiResult signatureException(JwtException exception) {
         return ApiResult.failed("유효한 access token 이 아닙니다.");
     }
 
