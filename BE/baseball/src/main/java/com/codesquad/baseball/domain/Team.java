@@ -3,8 +3,11 @@ package com.codesquad.baseball.domain;
 import com.codesquad.baseball.error.exception.PlayerNotFoundException;
 import org.springframework.data.annotation.Id;
 
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Team {
 
@@ -104,6 +107,12 @@ public class Team {
 
     public void addScore(Score score) {
         scores.add(score);
+    }
+
+    public List<Score> getSortedScores() {
+        return scores.stream()
+                .sorted(Comparator.comparingInt(Score::getInning))
+                .collect(Collectors.toList());
     }
 
     @Override

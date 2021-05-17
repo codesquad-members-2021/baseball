@@ -3,9 +3,7 @@ package com.codesquad.baseball.DTO.score;
 import com.codesquad.baseball.domain.Score;
 import com.codesquad.baseball.domain.Team;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TeamScoreDTO {
 
@@ -18,15 +16,11 @@ public class TeamScoreDTO {
     private List<Score> scores;
 
     public static TeamScoreDTO of(Team team) {
-        List<Score> scores = team.getScores().stream()
-                .sorted(Comparator.comparingInt(Score::getInning))
-                .collect(Collectors.toList());
-
         return new TeamScoreDTO(
                 team.getId(),
                 team.getName(),
                 team.isUserSelected(),
-                scores
+                team.getSortedScores()
         );
     }
 
