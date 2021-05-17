@@ -5,10 +5,7 @@ import com.codesquad.baseball.DTO.TeamDTO;
 import com.codesquad.baseball.DTO.record.TeamRecordDTO;
 import com.codesquad.baseball.DTO.record.request.PlayerRecordRequest;
 import com.codesquad.baseball.DTO.score.GameScoreDTO;
-import com.codesquad.baseball.DTO.score.TeamScoreDTO;
-import com.codesquad.baseball.domain.Game;
 import com.codesquad.baseball.domain.Score;
-import com.codesquad.baseball.domain.Team;
 import com.codesquad.baseball.service.GameService;
 import com.codesquad.baseball.service.TeamService;
 import org.springframework.http.HttpStatus;
@@ -40,10 +37,7 @@ public class GameController {
 
     @GetMapping("/play/{gameId}/players")
     public TeamRecordDTO browseTeamPlayers(@PathVariable Long gameId) {
-        Game game = gameService.findGameById(gameId);
-        Team homeTeam = teamService.browseTeamById(game.getHomeTeamId());
-        Team awayTeam = teamService.browseTeamById(game.getAwayTeamId());
-        return new TeamRecordDTO(homeTeam, awayTeam);
+        return gameService.browseTeamPlayersByGameId(gameId);
     }
 
     @PostMapping("/play/{teamId}/score")
@@ -54,10 +48,7 @@ public class GameController {
 
     @GetMapping("/play/{gameId}/score")
     public GameScoreDTO browseAllScore(@PathVariable Long gameId) {
-        Game game = gameService.findGameById(gameId);
-        TeamScoreDTO homeTeamScoreDTO = teamService.browseTeamScore(game.getHomeTeamId());
-        TeamScoreDTO awayTeamScoreDTO = teamService.browseTeamScore(game.getAwayTeamId());
-        return GameScoreDTO.of(game, homeTeamScoreDTO, awayTeamScoreDTO);
+        return gameService.browseGameScoreByGameId(gameId);
     }
 
     @PatchMapping("/play/{teamId}/record")
