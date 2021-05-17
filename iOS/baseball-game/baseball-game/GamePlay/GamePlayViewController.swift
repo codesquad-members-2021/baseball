@@ -22,6 +22,8 @@ class GamePlayViewController: UIViewController {
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var pitcherInfoView: PitcherInfoView!
     @IBOutlet weak var batterInfoView: PitcherInfoView!
+    @IBOutlet weak var ballCountView: BallCountView!
+    @IBOutlet weak var groundView: GroundView!
 
     enum ViewID {
         static let storyboard = "GamePlay"
@@ -42,19 +44,35 @@ class GamePlayViewController: UIViewController {
         gamePlayViewModel.requestGame()
         configureDataSource()
         bind()
+        addNotifications()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        ballCountView.configure()
+        groundView.configure()
+        ballCountView.reset()
+    }
+    
+    @IBAction func pitchButtonTouched(_ sender: Any) {
+        gamePlayViewModel.requestPitch()
+    }
+    
+    @IBAction func pitcherChangeTouched(_ sender: Any) {
+        performSegue(withIdentifier: ViewID.segue, sender: nil)
+    }
+
 }
 
 
 extension GamePlayViewController {
-
+    
     private func bind() {
-        gamePlayViewModel.$gameManager
+        gamePlayViewModel.$gameUpdator
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] gameManager in
-                guard let gameManager = gameManager else { return }
-                self?.updateViews(with: gameManager)
+            .sink { [weak self] gameUpdator in
+                guard let gameUpdator = gameUpdator else { return }
+                self?.updateViews(with: gameUpdator)
             }
             .store(in: &cancelBag)
         
@@ -72,18 +90,22 @@ extension GamePlayViewController {
                 guard let error = error else { return }
                 print(error) ///사용자에게 에러 표시하는 부분 미구현
             }.store(in: &cancelBag)
-    }
-
-    @IBAction func pitcherChangeTouched(_ sender: Any) {
-        performSegue(withIdentifier: ViewID.segue, sender: nil)
+        
+        gamePlayViewModel.$alertMessage
+            .receive(on: DispatchQueue.main)
+            .sink { message in
+                guard let message = message else { return }
+                let alert = AlertFactory.create(with: message)
+                self.present(alert, animated: true, completion: nil)
+            }.store(in: &cancelBag)
     }
     
-    private func updateViews(with gameManager: GameManagable) {
-        teamScoreView.updateTeamNames(from: gameManager.teams())
-        teamScoreView.updateScores(from: gameManager.scores())
-        inningLabel.text = gameManager.inning()
-        pitcherInfoView.updateLabels(from: gameManager.pitcher())
-        batterInfoView.updateLabels(from: gameManager.batter())
+    private func updateViews(with gameManager: GameInformable) {
+        teamScoreView.updateTeamNames(from: gameManager.teamInfo())
+        teamScoreView.updateScores(from: gameManager.scoreInfo())
+        inningLabel.text = gameManager.inningInfo()
+        pitcherInfoView.updateLabels(from: gameManager.pitcherInfo())
+        batterInfoView.updateLabels(from: gameManager.batterInfo())
         
         guard let isUserDefense = gameManager.isUserDefense() else { return }
         
@@ -100,6 +122,44 @@ extension GamePlayViewController {
         }
     }
     
+    private func addNotifications() {
+        NotificationCenter.default
+            .publisher(for: BallCounter.notiName)
+            .sink { data in
+                guard let ballType = data.userInfo?[BallCounter.UserInfo.ballType] as? BallCount,
+                      let count = data.userInfo?[BallCounter.UserInfo.count] as? Int else { return }
+                DispatchQueue.main.async {
+                    switch ballType {
+                    case .strike:
+                        self.ballCountView.fillStrike(upto: count)
+                    case .ball:
+                        self.ballCountView.fillBall(upto: count)
+                    case .out:
+                        self.ballCountView.fillOut(upto: count)
+                    }
+                }
+            }.store(in: &cancelBag)
+        
+        NotificationCenter.default
+            .publisher(for: BaseManager.notiName)
+            .sink { data in
+                guard let movementType = data.userInfo?[BaseManager.UserInfo.movement] as? BaseMovement else { return }
+                DispatchQueue.main.sync {
+                    switch movementType {
+                    case .homeToFirst:
+                        self.groundView.homeTofirstBase()
+                    case .firstToSecond:
+                        self.groundView.firstBaseToSecondBase()
+                    case .secondToThird:
+                        self.groundView.secondBaseToThirdBase()
+                    case .thirdToHome:
+                        self.groundView.thirdBaseToHome()
+                    case .reset:
+                        self.groundView.reset()
+                    }
+                }
+            }.store(in: &cancelBag)
+    }
 }
 
 
@@ -107,14 +167,13 @@ extension GamePlayViewController {
     
     private func configureDataSource() {
         self.dataSource = UITableViewDiffableDataSource.init(tableView: pitchListTableView) {
-            (tableView, indexPath, pitch) -> UITableViewCell in
+            [weak self] (tableView, indexPath, pitch) -> UITableViewCell in
             
-            guard let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
+            guard let self = self,
+                  let cell = self.pitchListTableView.dequeueReusableCell(withIdentifier: PitchListTableViewCell.reuseIdentifier) as? PitchListTableViewCell else {
                 return PitchListTableViewCell()
             }
-            
-            let index = indexPath.row
-            cell.updateLabels(count: index, result: pitch.result, log: pitch.log)
+            cell.updateLabels(count: pitch.count, result: pitch.result, log: pitch.log)
             
             return cell
         }

@@ -7,21 +7,42 @@
 
 import Foundation
 
-class GameManager: Decodable {
+class GameManager {
     
     private var userTeamSide: TeamSide?
-    var turn: Turn
+    private var teams: Teams
+    private var inning: Inning
+    private var score: Score
+    private var pitches: [Pitch]
+    private var ballCounter: BallCounter
+    private var baseManager: BaseManager
+    private var batter: Player
+    private var pitcher: Player
     
-    init(userTeamSide: TeamSide, turn: Turn) {
+    init(userTeamSide: TeamSide, teams: Teams, inning: Inning, score: Score, pitchList: [Pitch], ballCounter: BallCounter, baseManager: BaseManager, batter: Player, pitcher: Player) {
         self.userTeamSide = userTeamSide
-        self.turn = turn
+        self.teams = teams
+        self.inning = inning
+        self.score = score
+        self.pitches = pitchList
+        self.ballCounter = ballCounter
+        self.baseManager = baseManager
+        self.batter = batter
+        self.pitcher = pitcher
     }
     
-    enum CodingKeys: String, CodingKey {
-        case userTeamSide
-        case turn = "game"
+    convenience init(userTeamSide: TeamSide, teams: Teams, batter: Player, pitcher: Player) {
+        self.init(userTeamSide: userTeamSide,
+                  teams: teams,
+                  inning: Inning(),
+                  score: Score(),
+                  pitchList: [],
+                  ballCounter: BallCounter(),
+                  baseManager: BaseManager(),
+                  batter: batter,
+                  pitcher: pitcher)
     }
-    
+
     enum Side {
         static let home = "home"
         static let away = "away"
@@ -34,46 +55,87 @@ class GameManager: Decodable {
     
 }
 
-extension GameManager: GameManagable {
-    
-    func teams() -> [String: String] {
-        let homeTeam = turn.home.name
-        let awayTeam = turn.away.name
-        return [Side.home: homeTeam, Side.away: awayTeam]
-    }
-    
-    func scores() -> [String: Int] {
-        let homeScore = turn.home.score
-        let awayScore = turn.away.score
-        return [Side.home: homeScore, Side.away: awayScore]
-    }
-    
-    func inning() -> String {
-        let inningInfos = turn.inning
-        let topOrBottom = inningInfos[1] == 1 ? "초" : "말"
-        return "\(inningInfos[0])회 \(topOrBottom)"
+///View Controller 이하의 레벨에서 게임 정보 표시하기 위해 사용
+extension GameManager: GameInformable {
+
+    func teamInfo() -> [String: String] {
+        let home = Side.home, away = Side.away
+        let homeName = teams.home
+        let awayName = teams.away
+        return [home: homeName, away: awayName]
     }
 
-    func pitcher() -> Player {
-        return isHomeDefense() ? turn.home.player : turn.away.player
+    func scoreInfo() -> [String: Int] {
+        let homeScore = score.home
+        let awayScore = score.away
+        return [Side.home: homeScore, Side.away: awayScore]
+    }
+
+    func inningInfo() -> String {
+        return inning.description
     }
     
-    func batter() -> Player {
-        return isHomeDefense() ? turn.away.player : turn.home.player
+    func pitcherInfo() -> Player {
+        return pitcher
     }
     
+    func batterInfo() -> Player {
+        return batter
+    }
+    
+    func pitchInfo() -> [Pitch] {
+        return pitches
+    }
+
     private func isHomeDefense() -> Bool {
-        return turn.home.role == Role.defense
+        return inning.isHomeDefense()
     }
-    
+
     func isUserDefense() -> Bool? {
+
         guard let userTeamSide = userTeamSide else { return nil }
         
         if userTeamSide == TeamSide.home {
             return isHomeDefense()
         } else {
-            return turn.away.role == Role.defense
+            return !isHomeDefense()
         }
+    }
+    
+}
+
+///ViewModel 이상의 레벨에서 서버에서 받아온 데이터를 프로퍼티에 업데이트하기 위해 사용
+extension GameManager: GameUpdatable {
+    
+    func resetForNewInning(with newInning: Inning) {
+        self.inning = newInning
+        ballCounter.reset()
+        baseManager.reset()
+    }
+    
+    func updateScore(with newScore: Score) {
+        self.score = newScore
+    }
+    
+    func changePitcher(to newPitcher: Player) {
+        self.pitcher = newPitcher
+    }
+    
+    func changeBatter(to newBatter: Player) {
+        if self.batter.name != newBatter.name { self.ballCounter.reset() }
+        self.batter = newBatter
+    }
+    
+    func updateBallCount(with ballChanged: BallChanged) {
+        ballCounter.update(with: ballChanged)
+    }
+    
+    func updateBase(with baseChanged: BaseChanged) {
+        baseManager.update(with: baseChanged)
+    }
+    
+    func updatePitchList(with newPitch: Pitch) {
+        self.pitches.insert(newPitch, at: 0)
     }
     
 }
