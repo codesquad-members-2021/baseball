@@ -1,6 +1,7 @@
 package com.codesquad.baseball.controller;
 
-import com.codesquad.baseball.DTO.*;
+import com.codesquad.baseball.DTO.GameListDTO;
+import com.codesquad.baseball.DTO.TeamDTO;
 import com.codesquad.baseball.DTO.record.TeamRecordDTO;
 import com.codesquad.baseball.DTO.record.request.PlayerRecordRequest;
 import com.codesquad.baseball.DTO.score.GameScoreDTO;

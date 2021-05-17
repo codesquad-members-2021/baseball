@@ -12,7 +12,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e) {
-        return new ResponseEntity<>(ErrorResponse.of(e.getErrorCode()), response.getStatus());
+        ErrorResponse response = ErrorResponse.of(e.getErrorCode());
+        return new ResponseEntity<>(response, response.getStatus());
     }
 
     @ExceptionHandler(TeamNotPlayableException.class)

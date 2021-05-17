@@ -4,7 +4,6 @@ import com.codesquad.baseball.domain.Player;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class PlayerRecordDTO {
 
