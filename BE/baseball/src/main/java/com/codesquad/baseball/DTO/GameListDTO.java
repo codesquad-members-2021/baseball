@@ -1,23 +1,28 @@
 package com.codesquad.baseball.DTO;
 
-import org.springframework.data.relational.core.mapping.Column;
+import com.codesquad.baseball.domain.Team;
 
 public class GameListDTO {
 
-    @Column("gameId")
     private Long gameId;
 
-    @Column("homeTeamName")
     private String homeTeamName;
 
-    @Column("homeTeamId")
     private Long homeTeamId;
 
-    @Column("awayTeamName")
     private String awayTeamName;
 
-    @Column("awayTeamId")
     private Long awayTeamId;
+
+    public static GameListDTO of(Long gameId, Team homeTeam, Team awayTeam) {
+        return new GameListDTO(
+                gameId,
+                homeTeam.getName(),
+                homeTeam.getId(),
+                awayTeam.getName(),
+                awayTeam.getId()
+        );
+    }
 
     public GameListDTO(Long gameId, String homeTeamName, Long homeTeamId, String awayTeamName, Long awayTeamId) {
         this.gameId = gameId;

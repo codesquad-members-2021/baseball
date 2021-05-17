@@ -13,6 +13,7 @@ import com.codesquad.baseball.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,7 +33,13 @@ public class GameService {
     }
 
     public List<GameListDTO> browseAllGames() {
-        return gameRepository.browseAllGames();
+        Iterable<Game> games = gameRepository.findAll();
+        List<GameListDTO> gameList = new ArrayList<>();
+        for (Game game : games) {
+            Long id = game.getId();
+            gameList.add(GameListDTO.of(id, findHomeTeamByGameId(id), findAwayTeamByGameId(id)));
+        }
+        return gameList;
     }
 
     public Game findGameById(Long id) {
