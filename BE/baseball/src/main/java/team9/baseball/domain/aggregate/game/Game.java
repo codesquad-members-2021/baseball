@@ -55,6 +55,9 @@ public class Game {
     @MappedCollection(idColumn = "game_id", keyColumn = "key_in_game")
     private Map<String, Inning> inningMap = new HashMap<>();
 
+    private final int STRIKE_OUT_COUNT = 3;
+    private final int INNING_OUT_COUNT = 3;
+
     public Game(Team awayTeam, Team homeTeam) {
         this.awayTeamId = awayTeam.getId();
         this.homeTeamId = homeTeam.getId();
@@ -101,7 +104,7 @@ public class Game {
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
         //삼진 아웃 처리
-        if (strikeCount == 3) {
+        if (strikeCount == STRIKE_OUT_COUNT) {
             proceedOut(awayTeam, homeTeam);
         }
     }
@@ -209,7 +212,7 @@ public class Game {
         battingHistory.plusOut();
 
         //3회 아웃이면 다음이닝으로 변경
-        if (outCount == 3) {
+        if (outCount == INNING_OUT_COUNT) {
             goToNextInning(awayTeam, homeTeam);
             return;
         }
