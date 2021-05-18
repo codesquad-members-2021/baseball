@@ -7,8 +7,10 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import team9.baseball.domain.aggregate.team.Team;
+import team9.baseball.domain.enums.GameStatus;
 import team9.baseball.domain.enums.Halves;
 import team9.baseball.domain.enums.PitchResult;
+import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 
 import java.util.HashMap;
@@ -45,11 +47,16 @@ public class Game {
 
     private int outCount;
 
+    private GameStatus status;
+
     @MappedCollection(idColumn = "game_id", keyColumn = "key_in_game")
     private Map<String, BattingHistory> battingHistoryMap = new HashMap<>();
 
     @MappedCollection(idColumn = "game_id", keyColumn = "key_in_game")
     private Map<String, Inning> inningMap = new HashMap<>();
+
+    private final int STRIKE_OUT_COUNT = 3;
+    private final int INNING_OUT_COUNT = 3;
 
     public Game(Team awayTeam, Team homeTeam) {
         this.awayTeamId = awayTeam.getId();
@@ -63,6 +70,8 @@ public class Game {
         this.currentInning = 1;
         this.currentHalves = Halves.TOP;
         this.inningMap.put(Inning.acquireKeyInGame(currentInning, currentHalves), new Inning(currentInning, currentHalves));
+
+        this.status = GameStatus.WAITING;
     }
 
     private void initializeBattingHistory(Team team) {
@@ -73,30 +82,42 @@ public class Game {
         }
     }
 
+    public void checkWaiting() {
+        if (this.status != GameStatus.WAITING) {
+            throw new BadStatusException("대기중인 게임이 아닙니다.");
+        }
+    }
+
+    public void checkPlaying() {
+        if (this.status != GameStatus.PLAYING) {
+            throw new BadStatusException("진행중인 게임이 아닙니다.");
+        }
+    }
+
     public void proceedStrike(Team awayTeam, Team homeTeam) {
+        //카운트 증가
+        this.strikeCount++;
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
                 acquireAttackTeamId(), batterUniformNumber, PitchResult.STRIKE, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
-        //카운트 증가
-        this.strikeCount++;
         //삼진 아웃 처리
-        if (strikeCount == 3) {
+        if (strikeCount == STRIKE_OUT_COUNT) {
             proceedOut(awayTeam, homeTeam);
         }
     }
 
     public void proceedBall(Team awayTeam, Team homeTeam) {
+        //카운트 증가
+        this.ballCount++;
         //기록할 pitch history 생성
         PitchHistory pitchHistory = new PitchHistory(acquireDefenseTeamId(), pitcherUniformNumber,
                 acquireAttackTeamId(), batterUniformNumber, PitchResult.BALL, this.strikeCount, this.ballCount);
         //현재 이닝에 pitch history 기록
         acquireCurrentInning().pitchHistoryList.add(pitchHistory);
 
-        //카운트 증가
-        this.ballCount++;
         //볼넷일 경우 출루하고 다음 타자 등판
         if (ballCount == 4) {
             sendBatterOnBase();
@@ -191,7 +212,7 @@ public class Game {
         battingHistory.plusOut();
 
         //3회 아웃이면 다음이닝으로 변경
-        if (outCount == 3) {
+        if (outCount == INNING_OUT_COUNT) {
             goToNextInning(awayTeam, homeTeam);
             return;
         }
@@ -214,10 +235,19 @@ public class Game {
     }
 
     private void goToNextInning(Team awayTeam, Team homeTeam) {
+        //게임 종료 상황이면 다음이닝으로 넘어가지 않고 게임종료
+        if (isExited()) {
+            this.status = GameStatus.EXITED;
+            return;
+        }
+
         //카운트 초기화
         this.strikeCount = 0;
         this.ballCount = 0;
         this.outCount = 0;
+        this.base1UniformNumber = null;
+        this.base2UniformNumber = null;
+        this.base3UniformNumber = null;
 
         //다음 이닝으로 변경
         if (this.currentHalves == Halves.BOTTOM) {
@@ -238,6 +268,19 @@ public class Game {
         int nextBatterUniformNumber = attackTeam.getNextPlayerUniformNumber(pitcherUniformNumber);
         this.pitcherUniformNumber = nextPitcherUniformNumber;
         sendBatterOnPlate(attackTeam.getId(), nextBatterUniformNumber);
+    }
+
+    private boolean isScoreDifferent() {
+        return getTotalScore(Halves.TOP) != getTotalScore(Halves.BOTTOM);
+    }
+
+    private boolean isExited() {
+        if ((currentInning == 9 && currentHalves == Halves.BOTTOM && isScoreDifferent())
+                || (currentInning == 12 && currentHalves == Halves.BOTTOM)) {
+            return true;
+        }
+
+        return false;
     }
 
     private void sendBatterOnPlate(int batterTeamId, int nextBatterUniformNumber) {

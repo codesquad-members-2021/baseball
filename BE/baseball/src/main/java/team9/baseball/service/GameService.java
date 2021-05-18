@@ -8,8 +8,10 @@ import team9.baseball.DTO.response.GameStatusDTO;
 import team9.baseball.domain.aggregate.game.Game;
 import team9.baseball.domain.aggregate.team.Team;
 import team9.baseball.domain.aggregate.user.User;
+import team9.baseball.domain.enums.GameStatus;
 import team9.baseball.domain.enums.PitchResult;
 import team9.baseball.domain.enums.Venue;
+import team9.baseball.exception.BadStatusException;
 import team9.baseball.exception.NotFoundException;
 import team9.baseball.repository.GameRepository;
 import team9.baseball.repository.TeamRepository;
@@ -32,16 +34,17 @@ public class GameService {
 
     public void applyPitchResult(long userId, PitchResult pitchResult) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
+        game.checkPlaying();
+
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
 
         //현재 내가 공격팀이면 공을 던질 수 없다.
         if (game.getCurrentHalves() == user.getCurrentGameVenue().getHalves()) {
-            throw new RuntimeException(userId + "번 사용자는 현재 공격팀입니다.");
+            throw new BadStatusException(userId + "번 사용자는 현재 공격팀입니다.");
         }
 
         switch (pitchResult) {
@@ -60,9 +63,8 @@ public class GameService {
 
     public GameStatusDTO getCurrentGameStatus(long userId) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
@@ -72,9 +74,8 @@ public class GameService {
 
     public GameHistoryDTO getCurrentGameHistory(long userId) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() == null) {
-            throw new RuntimeException(userId + "사용자는 게임중이 아닙니다.");
-        }
+        user.checkUserJoining();
+
         Game game = getGame(user.getCurrentGameId());
         Team awayTeam = getTeam(game.getAwayTeamId());
         Team homeTeam = getTeam(game.getHomeTeamId());
@@ -82,8 +83,7 @@ public class GameService {
         return GameHistoryDTO.of(game, awayTeam, homeTeam);
     }
 
-    public void createNewGame(long userId, int awayTeamId, int homeTeamId) {
-        User user = getUser(userId);
+    public void createNewGame(int awayTeamId, int homeTeamId) {
         Team awayTeam = getTeam(awayTeamId);
         Team homeTeam = getTeam(homeTeamId);
 
@@ -93,17 +93,44 @@ public class GameService {
 
     public void joinGame(long userId, long gameId, Venue venue) {
         User user = getUser(userId);
-        if (user.getCurrentGameId() != null) {
-            throw new RuntimeException(userId + "사용자는 이미 게임중입니다.");
-        }
-        Game game = getGame(gameId);
+        user.checkUserNotJoining();
+
         if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue)) {
-            throw new RuntimeException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
+            throw new BadStatusException(gameId + "번 게임의 " + venue + "팀은 다른 사용자가 참가했습니다.");
         }
+
+        Game game = getGame(gameId);
+        game.checkWaiting();
 
         user.setCurrentGameId(gameId);
         user.setCurrentGameVenue(venue);
         userRepository.save(user);
+
+        //상대팀도 유저가 들어와있으면 게임 시작
+        if (userRepository.existsByCurrentGameIdAndCurrentGameVenue(gameId, venue.getOtherVenue())) {
+
+            game.setStatus(GameStatus.PLAYING);
+            gameRepository.save(game);
+        }
+    }
+
+    public void quitGame(long userId) {
+        User user = getUser(userId);
+        user.checkUserJoining();
+        long currentGameId = user.getCurrentGameId();
+
+        user.setCurrentGameId(null);
+        user.setCurrentGameVenue(null);
+        userRepository.save(user);
+
+        Game game = getGame(currentGameId);
+        game.setStatus(GameStatus.EXITED);
+        gameRepository.save(game);
+
+        //game에 참가중인 유저가 모두 나갔을 경우 게임방 삭제
+        if (!userRepository.existsByCurrentGameId(game.getId())) {
+            gameRepository.delete(game);
+        }
     }
 
     public List<GameDescriptionDTO> getAllGameList() {

@@ -5,9 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import team9.baseball.domain.aggregate.user.OauthAccessToken;
 import team9.baseball.domain.aggregate.user.User;
-import team9.baseball.domain.enums.ResourceOwner;
+import team9.baseball.domain.enums.ResourceServer;
 
 @SpringBootTest
 @Transactional
@@ -21,15 +20,12 @@ class UserRepositoryTest {
 
     @Test
     public void 유저생성조회테스트() {
-        OauthAccessToken oauthAccessToken = new OauthAccessToken(ResourceOwner.GITHUB, "TEST");
-        User user = new User("isaac56@naver.com", oauthAccessToken);
+        User user = new User("isaac56@naver.com", ResourceServer.GITHUB);
         User saved = userRepository.save(user);
 
         Assertions.assertThat(user.getEmail()).isEqualTo(saved.getEmail());
 
         User found = userRepository.findById(saved.getId()).get();
         Assertions.assertThat(found.getEmail()).isEqualTo(saved.getEmail());
-
-        Assertions.assertThat(found.getAccessToken(ResourceOwner.GITHUB)).isEqualTo(oauthAccessToken.getAccessToken());
     }
 }

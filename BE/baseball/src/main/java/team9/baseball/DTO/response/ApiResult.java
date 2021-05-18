@@ -1,10 +1,12 @@
 package team9.baseball.DTO.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResult<T> {
     private T data;
     private String error;
@@ -12,6 +14,10 @@ public class ApiResult<T> {
     private ApiResult(T data, String error) {
         this.data = data;
         this.error = error;
+    }
+
+    public static ApiResult<?> ok() {
+        return new ApiResult<>("OK", null);
     }
 
     public static <T> ApiResult<T> succeed(T data) {

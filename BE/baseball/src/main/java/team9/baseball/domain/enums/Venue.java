@@ -10,4 +10,11 @@ public enum Venue {
         }
         return Halves.BOTTOM;
     }
+
+    public Venue getOtherVenue() {
+        if (this == AWAY) {
+            return HOME;
+        }
+        return AWAY;
+    }
 }
