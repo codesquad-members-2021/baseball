@@ -13,17 +13,21 @@ const GameList = () => {
   const { data, loading, error } = gameState;
 
   useEffect(() => {
-    socket.on('selectedTeam', (baseballGames) => {
+    socket.on("selectedTeam", (baseballGames) => {
       setSelectTeamState(baseballGames);
     });
   }, []);
 
   useEffect(() => {
     if (!data) return;
-    const dataArray = Array.from(Object.entries(data), ([_, v]) => ({ ...v, home: null, away: null }));
-    const allTeam = dataArray.map(allGame => {
-      const selectedTeam = selectedTeamState.filter(selected => {
-        return (allGame.id === selected.gameId);
+    const dataArray = Array.from(Object.entries(data), ([_, v]) => ({
+      ...v,
+      home: null,
+      away: null,
+    }));
+    const allTeam = dataArray.map((allGame) => {
+      const selectedTeam = selectedTeamState.filter((selected) => {
+        return allGame.id === selected.gameId;
       });
       return selectedTeam.reduce((acc, cur) => {
         acc[cur.teamKind] = cur.playerId;
@@ -37,9 +41,10 @@ const GameList = () => {
     <GameBoxList>
       {loading && <>loading...</>}
 
-      {allTeamState.length && allTeamState.map((gameData, idx) => {
-        return <Game key={`Game-${idx}`} {...{ gameData }} />
-      })}
+      {allTeamState.length &&
+        allTeamState.map((gameData, idx) => {
+          return <Game key={`Game-${idx}`} {...{ gameData }} />;
+        })}
 
       {error && <>error...</>}
     </GameBoxList>

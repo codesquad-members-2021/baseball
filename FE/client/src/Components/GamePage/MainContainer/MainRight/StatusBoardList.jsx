@@ -1,12 +1,19 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import StatusBoard from "./StatusBoard";
 
 const StatusBoardList = () => {
+  const { playRecordsState } = useContext(GamePageContext);
+
   return (
     <div>
-      <StatusBoard currentPlayer name="류현진" />
-      <StatusBoard name="김제니" />
-      <StatusBoard name="김비모" />
+      {playRecordsState.length &&
+        playRecordsState.map(({ id, name, records, out, fourBall }, index) => {
+          return (<StatusBoard key={`statusBoard-${index}`}
+            currentPlayer={index === 0}
+            {...{ name, records, id, out, fourBall }}
+          />)
+        })}
     </div>
   );
 };

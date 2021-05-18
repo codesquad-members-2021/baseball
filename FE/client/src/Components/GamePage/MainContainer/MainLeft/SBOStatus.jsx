@@ -1,30 +1,41 @@
-import React from "react";
+import { GamePageContext } from "Components/GamePage";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 const SBOStatus = () => {
+  const { currentSBData, outState } = useContext(GamePageContext);
+
   return (
     <SBOBoard>
       <CircleListDiv>
         <SBOspan>S</SBOspan>
         <CircleList>
-          {Array.from({ length: 2 }).map((circle) => (
-            <SBOCircle color="yellow" />
+          {currentSBData && Array.from({ length: 2 }).map((_, index) => (
+            <SBOCircle key={`yellow-${index}`}
+              color="yellow"
+              background={currentSBData.strike >= index + 1}
+            />
           ))}
         </CircleList>
       </CircleListDiv>
       <CircleListDiv>
         <SBOspan>B</SBOspan>
         <CircleList>
-          {Array.from({ length: 3 }).map((circle) => (
-            <SBOCircle color="green" />
+          {currentSBData && Array.from({ length: 3 }).map((_, index) => (
+            <SBOCircle key={`green-${index}`}
+              color="green"
+              background={currentSBData.ball >= index + 1}
+            />
           ))}
         </CircleList>
       </CircleListDiv>
       <CircleListDiv>
         <SBOspan>O</SBOspan>
         <CircleList>
-          {Array.from({ length: 2 }).map((circle) => (
-            <SBOCircle color="red" />
+          {Array.from({ length: 2 }).map((_, index) => (
+            <SBOCircle key={`red-${index}`}
+              color="red"
+              background={outState >= index + 1} />
           ))}
         </CircleList>
       </CircleListDiv>
@@ -57,7 +68,7 @@ const SBOCircle = styled.li`
   border-radius: 70%;
   width: 1rem;
   height: 1rem;
-  /* background: ${({ color }) => color}; */
+  background: ${({ background, color }) => background && color};
   list-style: none;
   border: 0.1rem solid ${({ color }) => color};
 `;

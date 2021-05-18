@@ -28,13 +28,14 @@ const upDown = keyframes`
 `;
 
 const leftRight = keyframes`
-from {
-  margin-top:-10px; 
-}
-to {
-  margin-top:0;
-}
+  from {
+    margin-top:-10px; 
+  }
+  to {
+    margin-top:0;
+  }
 `;
+
 const move = (angle) => keyframes`
   0% {
     opacity:1;
@@ -74,15 +75,12 @@ const RunnerWrapper = styled.div`
   height:20%;
   position: absolute;
   animation: ${({ base }) => base === ('first' || 'third') ? upDown : leftRight} .15s linear infinite alternate,
-  ${({ base }) => moveLocation[base]} 2.5s;
-  top: 50%;
-  left: 55%;
-  transform: rotate(135deg) translateX(0px);
+  ${({ base }) => moveLocation[base]} 1.5s linear;
+  opacity:0;
   ${({ base }) => base && css`
     ${runnerLocation[base]}
   `
   }
- 
 `;
 
 const frontHand = keyframes`

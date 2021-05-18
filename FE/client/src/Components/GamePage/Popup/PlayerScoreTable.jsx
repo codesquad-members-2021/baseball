@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 const PlayerScoreTable = ({ records }) => {
   const scoreTitleArray = ['타자', '타석', '안타', '아웃', '평균'];
+  const total = records.reduce((acc, cur) => {
+    acc.atBat += cur.atBat;
+    acc.hit += cur.hit;
+    acc.out += cur.out;
+    return acc;
+  }, { atBat: 0, hit: 0, out: 0 });
 
   return (
     <div>
@@ -15,35 +21,14 @@ const PlayerScoreTable = ({ records }) => {
           </tr>
         </thead>
         <tbody>
+          {records.map(({ name, atBat, hit, out }, index) => {
+            return (<tr key={`record-${index}`}>
+              <td>{name}</td><td>{atBat}</td><td>{hit}</td><td>{out}</td><td>{getAverage({ hit, out })}</td>
+            </tr>)
+          })}
           <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>김광진</td><td>1</td><td>0</td><td>1</td><td>1.000</td>
-          </tr>
-          <tr>
-            <td>Totals</td><td>9</td><td>4</td><td>5</td>
+            <td>Totals</td><td>{total.atBat}</td><td>{total.hit}</td>
+            <td>{total.out}</td><td>{getAverage({ hit: total.hit, out: total.out })}</td>
           </tr>
         </tbody>
       </PlayerTable>
@@ -51,6 +36,11 @@ const PlayerScoreTable = ({ records }) => {
   );
 };
 
+const getAverage = ({ hit, out }) => {
+  const isZero = (hit + out) === 0;
+  const average = isZero ? '0.000' : (hit / (hit + out)).toFixed(3);
+  return average;
+}
 const PlayerTable = styled.table`
   width: 100%;
   height: 100%;
