@@ -1,0 +1,68 @@
+{
+  "user_team": {
+    "id": 1,
+    "isHome": true,
+    "players": [
+      {
+        "id": 1,
+          "name": "뿌꾸",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 1
+      },
+      {
+        "id": 2,
+          "name": "크롱",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2
+      },
+      {
+        "id": 3,
+          "name": "호눅스",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2
+      }
+    ]
+  },
+  "counter_team": {
+    "id": 2,
+    "isHome": false,
+    "players": [
+        {
+          "id": 3,
+          "name": "JK",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 1
+        },
+        {
+          "id": 4,
+          "name": "타미",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2
+        },
+        {
+          "id": 4,
+          "name": "아델라",
+          "pa": 1,
+          "hit": 1,
+          "out": 0,
+          "average": 1.000,
+          "batting_order": 2
+        }
+    ]
+  }
+}

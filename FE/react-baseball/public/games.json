@@ -1,0 +1,59 @@
+{
+  "games": [
+    {
+      "gameId": 1,
+      "home_team": {
+        "id": 1111,
+        "name": "captain"
+      },
+      "away_team": {
+        "id": 2222,
+        "name": "marvel"
+      }
+    },
+    {
+      "gameId": 2,
+      "home_team": {
+        "id": 3333,
+        "name": "twins"
+      },
+      "away_team": {
+        "id": 4444,
+        "name": "tigers"
+      }
+    },
+    {
+      "gameId": 3,
+      "home_team": {
+        "id": 5555,
+        "name": "rockets"
+      },
+      "away_team": {
+        "id": 6666,
+        "name": "dodgers"
+      }
+    },
+    {
+      "gameId": 4,
+      "home_team": {
+        "id": 7777,
+        "name": "tami"
+      },
+      "away_team": {
+        "id": 8888,
+        "name": "autumn"
+      }
+    },
+    {
+      "gameId": 5,
+      "home_team": {
+        "id": 9999,
+        "name": "tami2"
+      },
+      "away_team": {
+        "id": 10101010,
+        "name": "autumn2"
+      }
+    }
+  ]
+}

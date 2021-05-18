@@ -1,0 +1,40 @@
+[
+  {
+    "gameId": 1,
+    "homeTeamName": "Captain",
+    "homeTeamId": 1,
+    "awayTeamName": "Marvel",
+    "awayTeamId": 2
+  }, {
+    "gameId": 2,
+    "homeTeamName": "Tigers",
+    "homeTeamId": 3,
+    "awayTeamName": "Giants",
+    "awayTeamId": 4
+
+  }, {
+    "gameId": 3,
+    "homeTeamName": "tami",
+    "homeTeamId": 5,
+    "awayTeamName": "autumn",
+    "awayTeamId": 6
+  }, {
+    "gameId": 4,
+    "homeTeamName": "Jazz",
+    "homeTeamId": 1,
+    "awayTeamName": "Pop",
+    "awayTeamId": 2
+  }, {
+    "gameId": 5,
+    "homeTeamName": "Apple",
+    "homeTeamId": 3,
+    "awayTeamName": "Samsung",
+    "awayTeamId": 4
+  }, {
+    "gameId": 6,
+    "homeTeamName": "Crong",
+    "homeTeamId": 5,
+    "awayTeamName": "Honux",
+    "awayTeamId": 6
+  }
+]
