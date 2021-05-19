@@ -18,4 +18,4 @@ const StyldeMain = styled.main`
   width: 100%;
   height: 80%;
   border-top: 0.6rem solid #b4b4b4;
-`
+`;

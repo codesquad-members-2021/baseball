@@ -1,22 +1,24 @@
-import styled from 'styled-components'
-import BallCountItem from 'components/GamePlay/playScreen/BallCountItem'
+import styled from 'styled-components';
+
+import BallCountItem from 'components/GamePlay/playScreen/BallCountItem';
+
 const BallCount = () => {
   return (
     <StyledBallCount>
-      <BallCountItem type={'B'} count={3} />
-      <BallCountItem type={'S'} count={3} />
-      <BallCountItem type={'O'} count={2} />
+      <BallCountItem type={'B'} />
+      <BallCountItem type={'S'} />
+      <BallCountItem type={'O'} />
     </StyledBallCount>
-  )
-}
+  );
+};
 
-export default BallCount
+export default BallCount;
 
 const StyledBallCount = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
-  position:absolute;
+  position: absolute;
   left: 2%;
   top: 3%;
-`
+`;

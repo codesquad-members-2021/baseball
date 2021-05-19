@@ -1,23 +1,55 @@
-import styled from 'styled-components';
+import { useContext } from 'react'
+import styled from 'styled-components'
 
-const BoardItem = () => {
+import PutComponent from './PutComponent'
+import { gamePlayContext } from 'components/GamePlay/GamePlay'
+
+const BoardItem = ({ B, S, idx, type, playerName }) => {
+  const {
+    isAttacking,
+    round,
+    home,
+    away,
+    dispatchAwayCurrentPlayerState,
+    dispatchHomeCurrentPlayerState
+  } = useContext(gamePlayContext)
+
+  // 팀스코어 testData 수정해야함
+  const teamScore = 0
+  const teamName = isAttacking
+    ? home.team_info.team_name
+    : away.team_info.team_name
+
+  const hit = type === '안타'
+  const postPlayerData = { round, teamName, teamScore, playerName, hit }
+  if (type === '안타' || type === '아웃')
+    return (
+      <PutComponent
+        data={postPlayerData}
+        {...{
+          isAttacking,
+          dispatchHomeCurrentPlayerState,
+          dispatchAwayCurrentPlayerState
+        }}
+      />
+    )
+
   return (
     <Lists>
-      {/* 상태관리 해야함 */}
-      <Number>{1}</Number>
-      <span>{'스트라이크'}</span>
+      <Number>{idx + 1}</Number>
+      <span>{type}</span>
       <span>
-        S{1} B{0}
+        S{S} B{B}
       </span>
     </Lists>
-  );
-};
+  )
+}
 
-export default BoardItem;
+export default BoardItem
 
 const Lists = styled.li`
   display: flex;
-`;
+`
 
 const Number = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
@@ -28,4 +60,4 @@ const Number = styled.div`
   width: 1.5rem;
   height: 1.5rem;
   color: ${({ theme }) => theme.colors.black};
-`;
+`

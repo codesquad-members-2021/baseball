@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4b215d475988c16fb3cfe6d42f78872e3919ef49
 import HeaderNotice from 'components/GamePlay/playHeader/HeaderNotice';
 
 const HeaderRight = () => {

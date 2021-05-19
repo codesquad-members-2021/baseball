@@ -1,10 +1,20 @@
-const Hitter = ({ hitter }) => {
-  // 이 부분은 reducer로 만드는게 좋을 것 같다.
+import { useContext } from 'react';
+
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
+
+const Hitter = () => {
+  const { isAttacking, homeCurrentPlayerState, awayCurrentPlayerState } =
+    useContext(gamePlayContext);
+
+  const { playerName, turn, hits } = isAttacking
+    ? awayCurrentPlayerState
+    : homeCurrentPlayerState;
+
   return (
     <>
-      <span>류현진</span>
+      <span>{playerName}</span>
       <span>
-        {hitter.turn}타석 {hitter.hit}안타
+        {turn}타석 {hits}안타
       </span>
     </>
   );

@@ -8,7 +8,7 @@ const GameItem = ({ game_id, home, away, isStart }) => {
   return (
     <GameItemContext.Provider value={{ home, away, isStart }}>
       <ItemWrapper>
-        <GameTitle>GAME {game_id + 1}</GameTitle>
+        <GameTitle>GAME {game_id}</GameTitle>
         <GameSelect />
       </ItemWrapper>
     </GameItemContext.Provider>

@@ -1,11 +1,29 @@
-const Pitcher = ({ pitcher }) => {
-  // 이 부분은 reducer로 만드는게 좋을 것 같다.
+import { useContext } from 'react';
+import styled from 'styled-components';
+
+import { gamePlayContext } from 'components/GamePlay/GamePlay';
+
+const Pitcher = () => {
+  const {
+    ballCountState: { homeCount, awayCount },
+    pitcherName,
+    isAttacking,
+  } = useContext(gamePlayContext);
+
+  const pitchCount = isAttacking ? awayCount : homeCount;
+
   return (
-    <>
-      <span>최동원</span>
-      <span>#{pitcher.count}</span>
-    </>
+    <PitcherWrap>
+      <span>{pitcherName}</span>
+      <span>#{pitchCount}</span>
+    </PitcherWrap>
   );
 };
 
 export default Pitcher;
+
+const PitcherWrap = styled.div`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
