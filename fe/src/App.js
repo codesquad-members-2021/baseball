@@ -2,18 +2,23 @@ import styled from 'styled-components';
 import GameList from './components/game-list/GameList';
 import GamePlay from './components/game-play/GamePlay';
 import background from './images/background.png';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <StyleBackground src={background}></StyleBackground>
-      {/* <GameList /> */}
-      <GamePlay />
-    </>
+    <Router>
+      <StyledBackground src={background}></StyledBackground>
+      <Route exact={true} path='/'>
+        <GameList />
+      </Route>
+      <Route path='/games'>
+        <GamePlay />
+      </Route>
+    </Router>
   );
 }
 
-const StyleBackground = styled.div`
+const StyledBackground = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
   position: absolute;
@@ -34,3 +39,5 @@ const StyleBackground = styled.div`
 `;
 
 export default App;
+
+const DATA_LIST_URL = 'http://52.78.184.142/games';

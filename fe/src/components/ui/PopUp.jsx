@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const PopUp = ({ children, position }) => {
+const PopUp = ({ children, position, emptyText = '' }) => {
   const [active, setActive] = useState(false);
-  const handleClick = ({target}) => !target.closest('.childrenWrapper') && setActive(false);
-  return active ? <StylePopUp onClick={handleClick} className={active ? 'active' : ''} position={position}>
+  const handleClick = ({target}) => (target.className === 'childrenWrapper' || !target.closest('.childrenWrapper')) && setActive(false);
+  return active ? <StyledPopUp onClick={handleClick} className={active ? 'active' : ''} position={position}>
     <div className='childrenWrapper'>
       {children}
     </div>
-  </StylePopUp> : <StyleEmpty position={position} onMouseEnter={() => setActive(true)} />;
+  </StyledPopUp> : <StyledEmpty position={position} onClick={() => setActive(true)}>{emptyText}</StyledEmpty>;
 };
 
 const toBottom = keyframes`
@@ -29,12 +29,13 @@ const toTop = keyframes`
 }
 `;
 
-const StylePopUp = styled.div`
+const StyledPopUp = styled.div`
   position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
   z-index: 2;
+  text-align: center;
   &:before {
     background-color: rgba(0, 0, 0, 0.9);
     content: '';
@@ -50,22 +51,33 @@ const StylePopUp = styled.div`
   }
 `;
 
-const StyleEmpty = styled.div`
-  width:100vw;
-  height:5rem;
+const StyledEmpty = styled.div`
+  width: 10vw;
+  height: 3rem;
   position: absolute;
+  right: 30vw;
+  cursor: pointer;
+  color: #eee;
+  border-radius: ${props => props.position === 'top' ? '0 0 1rem 1rem' : '1rem 1rem 0 0' };
+  background-color: rgba(0, 0, 0, 0.5);
   top: ${props => props.position === 'top' && '0px'};
   bottom: ${props => props.position === 'bottom' && '0px'};
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.5rem 0;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 `
 
 
 export default PopUp;
 
 // const PopUp = ({ children }) => {
-//   return <StylePopUp>{children}</StylePopUp>;
+//   return <StyledPopUp>{children}</StyledPopUp>;
 // };
 
-// const StylePopUp = styled.div`
+// const StyledPopUp = styled.div`
 //   position: fixed;
 //   width: 100vw;
 //   height: 100vh;

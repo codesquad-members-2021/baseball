@@ -3,50 +3,43 @@ import styled from 'styled-components';
 const Player = ({ memberList, turn, pitchers }) => {
   const HOME = 'home';
   const AWAY = 'away';
-
-  const getMember = (id, members) => {
-    for (const member of members) {
-      if (member.id === id) return member;
+  const getPlayer = () => {
+    if (!memberList || !memberList[HOME] || !memberList[AWAY]) return;
+    const result = {};
+    const batterTeam = turn ? HOME : AWAY;
+    const pitcherTeam = turn ? AWAY : HOME;
+    for (const member of memberList[batterTeam]) {
+      if (member.status) result.batter = member;
     }
-    return null;
-  };
-
-  const getBatter = (members) => {
-    for (const member of members) {
-      if (member.state) return member;
+    for (const member of memberList[pitcherTeam]) {
+      if (member.id === pitchers[pitcherTeam]) result.pitcher = member;
     }
-    return null;
+    return result;
   };
-
-  const pitcher = turn
-    ? getMember(pitchers[HOME], memberList[HOME])
-    : getMember(pitchers[AWAY], memberList[AWAY]);
-
-  const batter = turn ? getBatter(memberList[HOME]) : getBatter(memberList[AWAY]);
-
+  const player = getPlayer();
   return (
-    <StylePlayer>
+    <StyledPlayer>
       <div className='player'>
         <div className='player-type'>투수</div>
         <div className='player-detail'>
-          <div className='name'>{pitcher.name}</div>
-          <div className='detail'>#{pitcher.id}</div>
+          <div className='name'>{player?.pitcher.name}</div>
+          <div className='detail'>#{player?.pitcher.id}</div>
         </div>
       </div>
       <div className='player'>
         <div className='player-type'>타자</div>
         <div className='player-detail'>
-          <div className='name'>{batter.name}</div>
+          <div className='name'>{player?.batter.name}</div>
           <div className='detail'>
-            {batter.at_bat}타석 {batter.safety}안타
+            {player?.batter.atBat || 0}타석 {player?.batter.plate_appearance || 0}안타
           </div>
         </div>
       </div>
-    </StylePlayer>
+    </StyledPlayer>
   );
 };
 
-const StylePlayer = styled.div`
+const StyledPlayer = styled.div`
   height: 100%;
   padding-bottom: 1.5rem;
   display: flex;

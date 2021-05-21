@@ -1,36 +1,42 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { ScoreNBaseContext } from '../GamePlay';
 
-const Score = ({ teamName, score, turn }) => {
+const Score = ({ teamName, selectTeam }) => {
+  const { score } = useContext(ScoreNBaseContext);
   const TITLE = 'BASEBALL GAME ONLINE';
   const TURN = 'Player';
+  const homeScore = score.home.reduce((acc, cur) => acc + cur, 0);
+  const awayScore = score.away.reduce((acc, cur) => acc + cur, 0);
+
   return (
-    <StyleScore>
+    <StyledScore>
       <div className='title'>{TITLE}</div>
       <div className='teams'>
         <div className='home'>
           <div className='teams-name'>
             {teamName.home}
-            {turn && <div className='turn'>{TURN}</div>}
+            {teamName.home == selectTeam && <div className='turn'>{TURN}</div>}
           </div>
 
-          <div className='teams-score'>{score.home}</div>
+          <div className='teams-score'>{homeScore}</div>
         </div>
         <div className='teams-vs'>vs</div>
         <div className='away'>
-          <div className='teams-score'>{score.away}</div>
+          <div className='teams-score'>{awayScore}</div>
           <div className='teams-name'>
             {teamName.away}
-            {!turn && <div className='turn'>{TURN}</div>}
+            {teamName.away == selectTeam && <div className='turn'>{TURN}</div>}
           </div>
         </div>
       </div>
-    </StyleScore>
+    </StyledScore>
   );
 };
 
-const StyleScore = styled.div`
+const StyledScore = styled.div`
   .title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
@@ -46,15 +52,15 @@ const StyleScore = styled.div`
     .home,
     .away {
       display: flex;
-      justify-content: center;
       align-items: center;
-      font-size: 5rem;
+      font-size: 3rem;
     }
     .teams-vs {
       font-size: 4rem;
       color: #777;
     }
     .teams-name {
+      font-size: 3rem;
       position: relative;
     }
     .turn {
@@ -66,13 +72,15 @@ const StyleScore = styled.div`
     }
   }
   .home {
+    justify-content: flex-end;
     .teams-score {
-      margin-left: 3rem;
+      margin: 0 3rem;
     }
   }
   .away {
+    justify-content: flex-start;
     .teams-score {
-      margin-right: 3rem;
+      margin: 0 3rem;
     }
   }
 `;

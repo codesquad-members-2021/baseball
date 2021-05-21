@@ -3,35 +3,35 @@ import styled from 'styled-components';
 
 const BallCount = ({ ballCount: { strike, ball, out } }) => {
   return (
-    <StyleBallCount>
-      <div className="couters strike">
+    <StyledBallCount>
+      <div className="counters strike">
         <div>S</div>
         {createBallCountTag(strike)}
       </div>
-      <div className="couters ball">
+      <div className="counters ball">
         <div>B</div>
         {createBallCountTag(ball)}
       </div>
-      <div className="couters out">
+      <div className="counters out">
         <div>O</div>
         {createBallCountTag(out)}
       </div>
-    </StyleBallCount>
+    </StyledBallCount>
   )
 }
 
 function createBallCountTag(count) {
   const result = [];
   for(let i = 0; i < count; i++) {
-    result.push(<div/>);
+    result.push(<div key={i}/>);
   }
   return result;
 }
 
-const StyleBallCount = styled.div`
+const StyledBallCount = styled.div`
   color:#fff;
   font-weight:600;
-  .couters {
+  .counters {
     display: flex;
     margin-bottom:0.5rem;
     & > div {

@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import useFetch from '../../hooks/useFetch';
 import GameListItem from './GameListItem';
+import { Link } from 'react-router-dom';
 
-const GameList = (props) => {
+const DATA_LIST_URL = 'http://52.78.184.142/games';
+
+const GameList = () => {
+  const game_id = localStorage.getItem('game_id');
+  if(game_id) {
+    window.location.href = 'games/' + game_id;
+  }
+  const { data: gameListData } = useFetch(DATA_LIST_URL, 'get');
   const TITLE = 'BASEBALL GAME ONLINE';
   const DESCRIPTION = '참가할 게임을 선택하세요!';
-  const gameList = game_list.map(({ home, away, game_id }, idx) => (
-    <GameListItem key={idx} {...{ home, away, game_id, idx }} />
+  const gameList = gameListData?.game_list.map(({ home, away, id }, idx) => (
+    <GameListItem key={idx} {...{ home, away, id, idx }} />
   ));
-
-  return (
-    <StyleGameList>
-      <StyleTitle>{TITLE}</StyleTitle>
-      <StyleDescription>{DESCRIPTION}</StyleDescription>
-      <StyleList>{gameList}</StyleList>
-    </StyleGameList>
+    
+  return game_id ? null : (
+    <StyledGameList>
+      <StyledTitle>{TITLE}</StyledTitle>
+      <StyledDescription>{DESCRIPTION}</StyledDescription>
+      <StyledList>{gameList}</StyledList>
+    </StyledGameList>
   );
 };
 
-const StyleGameList = styled.div`
+const StyledGameList = styled.div`
   padding: 0 15vw;
   margin-top: 2.5rem;
 `;
 
-const StyleTitle = styled.div`
+const StyledTitle = styled.div`
   margin-bottom: 5rem;
   font-size: 3rem;
   font-weight: 600;
@@ -31,14 +40,14 @@ const StyleTitle = styled.div`
   text-align: center;
 `;
 
-const StyleDescription = styled.div`
+const StyledDescription = styled.div`
   margin-bottom: 2rem;
   font-size: 2rem;
   color: #fff;
   text-align: center;
 `;
 
-const StyleList = styled.div`
+const StyledList = styled.div`
   max-width: 50rem;
   margin: 0 auto;
   padding-left: 1.0625rem;
@@ -66,38 +75,5 @@ const StyleList = styled.div`
     background-color: transparent;
   }
 `;
-
-const game_list = [
-  {
-    home: '베리베리 스트로베리',
-    away: '엄마는 외계인',
-    game_id: 0,
-  },
-  {
-    home: 'twins',
-    away: 'tigers',
-    game_id: 1,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-  {
-    home: 'rockets',
-    away: 'dodgers',
-    game_id: 2,
-  },
-];
 
 export default GameList;

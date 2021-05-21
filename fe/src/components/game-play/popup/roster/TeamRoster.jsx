@@ -1,32 +1,24 @@
 import styled from 'styled-components';
+import RosterPlayer from './RosterPlayer';
 
-const TeamRoster = ({ member_list, player_name, team_name = '베리베리 스트로베리', player = false }) => {
+const TeamRoster = ({ memberList, teamName, selectTeam }) => {
+  const player_name = 'abc';
   const HEADS = ['타자', '타석', '안타', '아웃', '평균'];
   const TOTALTEXT = 'Totals';
   const heads = HEADS.map((head, idx) => <div key={idx}>{head}</div>);
-  const getAverage = (at_bat, safety) => (safety / at_bat).toFixed(3);
   let [totalAtBat, totalSafety, totalOut] = [0, 0, 0];
   
-  const members = member_list.map(({ name, at_bat, safety, out }, idx) => {
-    totalAtBat += at_bat;
-    totalSafety += safety;
-    totalOut += out;
-    const class_name = 'roster--member' + (name === player_name ? ' active' : '');
-    return (
-      <li className={class_name} key={idx}>
-        <div>{name}</div>
-        <div>{at_bat}</div>
-        <div>{safety}</div>
-        <div>{out}</div>
-        <div>{getAverage(at_bat, safety)}</div>
-      </li>
-    );
-  }
-  );
+  const members = memberList.map((member, idx) => {
+    const { atBat, plate_appearance, outCount } = member;
+    totalAtBat += atBat;
+    totalSafety += plate_appearance;
+    totalOut += outCount;
+    return <RosterPlayer {...member} player_name={player_name} key={idx} />
+  });
 
   return (
-    <StyleTeamRoster>
-      <div className='title'>{team_name} {player && <div className='player'>Player</div>}</div>
+    <StyledTeamRoster>
+      <div className='title'>{teamName} {teamName === selectTeam && <div className='player'>Player</div>}</div>
       <ul className='roster'>
         <li className='roster--head'>
           {heads}
@@ -40,11 +32,11 @@ const TeamRoster = ({ member_list, player_name, team_name = '베리베리 스트
           <div></div>
         </li>
       </ul>
-    </StyleTeamRoster>
+    </StyledTeamRoster>
   );
 }
 
-const StyleTeamRoster = styled.div`
+const StyledTeamRoster = styled.div`
   .title {
     font-size: 1.5rem;
     font-weight: 600;
